@@ -26,7 +26,11 @@ def fingerprint(config_path,raw_root):
     files+=sorted(Path(raw_root).glob("*.tif"))
     files+=sorted(Path(raw_root).glob("*.json"))
     files+=sorted((root/"data/raw/ecoregions").glob("*.zip"))
-    files+=sorted((root/"data/raw/food_systems").glob("*"))
+    food_config=root/'configs/food_systems.json'
+    if food_config.exists():
+        food=json.loads(food_config.read_text())
+        files += [root/food[key]['path'] for key in ['forge','climate_transfer'] if key in food]
+
     files += [root/'pyproject.toml',root/'uv.lock',root/'reports/food_system_method.md']
     files+=sorted((root/"data/raw/documentation").glob("*"))
     if (root/"data/raw/seshat.zip").exists(): files.append(root/"data/raw/seshat.zip")

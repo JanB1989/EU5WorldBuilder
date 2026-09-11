@@ -30,6 +30,20 @@ def acquire(config, root):
             if digest(temporary)!=food['sha256']:raise ValueError('FORGE download version mismatch')
             temporary.replace(path)
         if digest(path)!=food['sha256']:raise ValueError('FORGE archive checksum mismatch')
+    if food_config.exists():
+        climate=json.loads(food_config.read_text()).get('climate_transfer')
+        if climate:
+            path=root/climate['path']
+            if not path.exists():
+                path.parent.mkdir(parents=True,exist_ok=True)
+                temporary=path.with_suffix('.partial')
+                with requests.get(climate['url'],stream=True,timeout=120) as response:
+                    response.raise_for_status()
+                    with temporary.open('wb') as f:
+                        for chunk in response.iter_content(1048576):f.write(chunk)
+                if digest(temporary)!=climate['sha256']:raise ValueError('WorldClim download version mismatch')
+                temporary.replace(path)
+            if digest(path)!=climate['sha256']:raise ValueError('WorldClim archive checksum mismatch')
     seshat=json.loads((root/'evidence/seshat_provenance.json').read_text())
     archive=root/'data/raw/seshat.zip'
     archive.parent.mkdir(parents=True,exist_ok=True)

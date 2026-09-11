@@ -45,7 +45,7 @@ All GeoTIFFs remain on the original GAEZ grid. Paired maps use common scales, wi
 
 ## Edit assumptions
 
-- `configs/food_systems.json`: food requirement, livelihood rules, pinned FORGE source and experimental livestock transfer.
+- `configs/food_systems.json`: food requirement, livelihood rules, pinned FORGE/WorldClim sources, climate-transfer candidates and experimental livestock transfer.
 - `configs/reconstruction.json`: crop conversions, scenario adjustments, calibration search ranges, management and sensitivity assumptions.
 - `configs/regions.json`: ordered regional crop rules, evidence and uncertainty.
 - `configs/sources.json`: source URLs, families and roles.
@@ -61,3 +61,14 @@ Modern climate and soil are retained as environmental proxies. Missing evidence,
 No EU5 modifiers, buildings, cultivation-area allocation, population fitting, game export or deployment are included. Generated rasters and downloaded sources remain ignored; source licenses must be checked before redistributing cached material.
 
 The food mask is a conditional reconstruction, not a complete historical observation. Non-crop numbers are research transfers: FORGE modern-environment outputs for terrestrial foraging and a provisional grazer-biomass-to-livestock conversion. They are not accepted historical minimum/maximum values. Fishing is identified but aquatic food is excluded from terrestrial per-hectare outputs. Missing numeric results remain explicit.
+
+
+### Non-crop grid-artifact repair
+
+The original 2-degree nearest-cell transfer is archived at `artifacts/experiments/forge_nearest_non_crop`. Non-crop patterns now use local temperature, rainfall and seasonality from WorldClim to condition transfers from nearby FORGE samples. The finite spatial kernel avoids square blocks and artificial source-centre peaks. This improves representation of the coarse model; it does not establish historical fine-scale accuracy. See [comparison results](reports/environmental_transfer_review.json) and the [method](reports/food_system_method.md).
+
+To repeat the numerical comparison after rebuilding:
+
+```bash
+uv run python scripts/compare_food_transfer.py artifacts/experiments/forge_nearest_non_crop/reconstruction artifacts/reconstruction
+```

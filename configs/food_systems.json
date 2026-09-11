@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "target_year": 1300,
   "daily_kcal_per_person": 2500,
   "days_per_year": 365,
@@ -117,8 +117,28 @@
   ],
   "classification_status": "complete conditional food-system mask; historical presence and dominance inferred, not measured for every cell",
   "spatial_fill_max_cells": 2,
-  "forage_resampling": "nearest source cell; bounded coastal gap fill at 2-degree source resolution; no claim of 5-arc-minute information",
+  "forage_resampling": "local climate-conditioned interpolation; source means use matched 2-degree climate aggregation; no rectangular nearest fill. Fine spatial detail inferred, not independently observed.",
   "hyde_role": "not used to assign food types or calculate per-hectare values: HYDE land extent does not identify staple crops and its population dependence is inappropriate here",
   "coastal_source": "northwest_coast_food",
-  "polar_zero_rule": "GAEZ land south of 60 S: Antarctic terrestrial-zero convention; marine food excluded. Reconciles gaps in the ecological ice geometry."
+  "polar_zero_rule": "GAEZ land south of 60 S: Antarctic terrestrial-zero convention; marine food excluded. Reconciles gaps in the ecological ice geometry.",
+  "climate_transfer": {
+    "path": "data/raw/food_systems/worldclim_bio_5m.zip",
+    "url": "https://geodata.ucdavis.edu/climate/worldclim/2_1/base/wc2.1_5m_bio.zip",
+    "sha256": "8099ed250162d4698b7dcbb1b85dd0c2a83e5db555ac76f626940cd4db2c2268",
+    "variables": [
+      1,
+      12,
+      15
+    ],
+    "neighbours": 12,
+    "radius_km": 600.0,
+    "candidate_climate_strengths": [
+      0.0,
+      0.25,
+      1.0,
+      4.0
+    ],
+    "license": "WorldClim attribution required; exact version-2.1 redistribution terms not verified; raw files not redistributed",
+    "status": "environmental interpolation experiment; modern climate covariates do not establish medieval micro-scale productivity"
+  }
 }

@@ -134,5 +134,19 @@
   "thule_food": {
     "url": "https://home.nps.gov/articles/aps-17-1-2.htm",
     "role": "Dated Arctic maritime subsistence and Thule chronology; supports coastal livelihood identification"
+  },
+  "worldclim_21": {
+    "url": "https://www.worldclim.org/data/worldclim21.html",
+    "license": "WorldClim attribution required; exact version-2.1 redistribution terms not verified; raw files not redistributed",
+    "role": "native-grid climate covariates; 1970-2000 environmental analogue"
+  },
+  "worldclim_bioclim": {
+    "url": "https://www.worldclim.org/data/bioclim.html",
+    "role": "BIO1 temperature, BIO12 precipitation, BIO15 seasonality definitions"
+  },
+  "grassland_anpp_2026": {
+    "url": "https://zenodo.org/records/18171957",
+    "license": "CC BY 4.0",
+    "role": "evaluated alternative; not adopted because grassland-only coverage omits desert test regions"
   }
 }

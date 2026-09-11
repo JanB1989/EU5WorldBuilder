@@ -1,13 +1,13 @@
 {
-  "stage": "food-system mask, per-hectare food equivalents and focused report delivered",
+  "stage": "climate-conditioned non-crop transfer and square-artifact review delivered",
   "food_mask_complete": true,
   "numeric_coverage_complete": false,
-  "numeric_cells": 3243564,
-  "unquantified_cells": 16256,
+  "numeric_cells": 3246040,
+  "unquantified_cells": 13780,
   "source_grid_cells": 3259820,
   "engineering_pass": true,
   "scientific_acceptance": false,
-  "tests_passed": 32,
+  "tests_passed": 37,
   "benchmark_results": {
     "rows": 23,
     "inside": 21,
@@ -23,7 +23,7 @@
   },
   "main_figures": 5,
   "maps": 16,
-  "fingerprint": "7bc4f06ad7530a9edf2c75c58dd55a990f75415d3f8d9fc822e09f4755c22c33",
+  "fingerprint": "5d498f4f4801ad67a4db7ac8a1eef8f1fb05a4ad3608ade1d05957338ee70a85",
   "gallery": "artifacts/reconstruction/index.html",
   "food_method": "artifacts/reconstruction/FOOD_METHOD.md",
   "numerical_basis": "artifacts/reconstruction/food_validation.json"

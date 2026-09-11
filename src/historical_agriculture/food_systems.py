@@ -96,18 +96,16 @@ def assign_food(root,config,out):
     write_json(out/'food_assignment_ledger.json',{'rules':ledger,'pastoral_overrides':cfg['pastoral_override_ecoregions'],'source':'configs/food_systems.json'})
     return result
 
-def forage_arrays(root,cfg,profile):
+def forage_arrays(root,cfg,profile,target_mask):
     path=root/cfg['forge']['path']
     if digest(path)!=cfg['forge']['sha256']:raise ValueError('FORGE source checksum mismatch')
-    x,y=coordinates(profile);outputs=[];stocks=[];fill_records=[]
+    outputs=[];stocks=[]
     with zipfile.ZipFile(path) as archive:
         for scenario in cfg['forge']['scenarios']:
             with Dataset('memory',memory=archive.read(f'SourceCode/OUTPUT/globe_{scenario}.nc')) as ds:
                 if ds['hum_popu'].units!='ind./m2':raise ValueError('Unexpected FORGE human units')
                 if ds['ani_popu'].units!='ind./(m2 PFT area)':raise ValueError('Unexpected FORGE grazer units')
                 lon=np.asarray(ds['lon'][:]);lat=np.asarray(ds['lat'][:])
-                ix=np.clip(np.rint((x-lon[0])/(lon[1]-lon[0])).astype(int),0,len(lon)-1)
-                iy=np.clip(np.rint((y-lat[0])/(lat[1]-lat[0])).astype(int),0,len(lat)-1)
                 def get(name,level=0):return ds[name][0,level].astype(float).filled(np.nan)
                 density=get('hum_popu');intake=get('intake_veg')+get('intake_ani')
                 # Annual mean product approximation: exact daily covariance unavailable.
@@ -116,11 +114,13 @@ def forage_arrays(root,cfg,profile):
                 grazer=get('ani_popu')
                 stock=grazer*10000*cfg['forge']['grazer_mass_kg']/cfg['pastoral']['tlu_kg']
                 stock[grazer<=1.001e-9]=0
-                energy,filled=bounded_fill(energy,1.5);stock,_=bounded_fill(stock,1.5)
-                outputs.append(energy[iy[:,None],ix[None,:]])
-                stocks.append(stock[iy[:,None],ix[None,:]])
-                fill_records.append({'scenario':scenario,'source_cells_nearest_filled':int(filled.sum())})
-    return outputs,stocks,fill_records
+                outputs.append(energy)
+                stocks.append(stock)
+    from .environmental_transfer import reconstruct
+    result, report = reconstruct(root,cfg['climate_transfer'],profile,lon,lat,
+                                 np.stack(outputs+stocks,axis=-1),target_mask)
+    n=len(outputs)
+    return [result[...,i] for i in range(n)], [result[...,i+n] for i in range(n)], report
 
 def calculate_food(root,config,out):
     cfg=settings(root);food,profile=read(out/'food_type.tif');eco,_=read(out/'food_ecoregion.tif')
@@ -146,7 +146,7 @@ def calculate_food(root,config,out):
                 _,_,net=annual_food(dm,config['crops'][crop],management['harvests'],management['cultivated_fraction'])
                 array[use]=people_from_kcal(net,cfg['daily_kcal_per_person'],cfg['days_per_year'])
             numeric[use]=1
-    forage,stocks,fill_records=forage_arrays(root,cfg,profile)
+    forage,stocks,fill_records=forage_arrays(root,cfg,profile,domain&np.isin(food,[19,20,21,22,23,25]))
     stack=np.stack(forage);complete=np.isfinite(stack).all(axis=0)
     lower=np.min(stack,axis=0);upper=np.max(stack,axis=0);current=forage[cfg['forge']['scenarios'].index(cfg['forge']['current'])]
     foraging=domain&np.isin(food,[21,22,25])&complete

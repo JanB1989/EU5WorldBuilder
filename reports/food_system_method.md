@@ -12,7 +12,7 @@ Historical crop preferences remain first, checked against GAEZ scenarios. RESOLV
 
 Where no represented crop fits, broad hunting/gathering or pastoral systems are inferred from ecological realm and biome. These are conditional food-system assignments, not proof of historical occupation or dominant diet in every cell. Rock/ice and Antarctic terrestrial-zero classes are explicit. GAEZ land south of 60 S is assigned the Antarctic terrestrial-zero convention even where ice polygons leave geometry gaps; marine production remains excluded. Source-mask water proximity identifies fishing-associated foraging possibilities, not observed dependence or fish yield. Remote/unmatched land is labelled wild-food potential with uncertain local history.
 
-Ecological shoreline mismatches may inherit the nearest ecological unit within two native cells, with an inference flag and a local GAEZ viability check before crop assignment. More distant gaps are not assigned a crop by distance. FORGE values are sampled from their original 2-degree cells, with at most 1.5 source-cell distances used to reconcile missing coastal values. This does not create new fine-resolution ecological information.
+Ecological shoreline mismatches may inherit the nearest ecological unit within two native cells, with an inference flag and a local GAEZ viability check before crop assignment. More distant gaps are not assigned a crop by distance. The old nearest-source-cell FORGE transfer is superseded by the climate-conditioned method below. Missing coastal source values are no longer filled before transfer.
 
 HYDE is deliberately not used as crop or livelihood identity: its land-use allocation is not a staple map, and population-derived cultivated extent has no role in this per-hectare calculation.
 
@@ -43,3 +43,15 @@ uv run pytest -q --junitxml=reports/tests.xml
 ```
 
 The main page contains the food-system map, three people-per-used-hectare maps and the converted Seshat graph. Additional diagnostics are collapsed. Engineering checks and historical/scientific acceptance remain separate. A complete categorical mask does not imply complete quantitative coverage or demonstrated historical accuracy.
+
+## Replacing the 2-degree squares (2026-09-11)
+
+The squares were a numerical sampling artifact: a single FORGE value was repeated across each 24-by-24 group of GAEZ cells. They were not historical region boundaries. The preserved checkpoint is `af63656`; its generated maps are archived in `artifacts/experiments/forge_nearest_non_crop`.
+
+The replacement uses [WorldClim 2.1](https://www.worldclim.org/data/worldclim21.html), 1970–2000, at the native 5-arc-minute grid. BIO1 is mean temperature (degrees C), BIO12 annual precipitation (mm), BIO15 precipitation seasonality (coefficient of variation). Precipitation and its seasonality enter as log(1+x). These covariates are aggregated to the original FORGE support for source comparisons. The target uses its local climate, so desert margins and mountains need not follow source-grid squares.
+
+At each non-crop target, up to 12 original, valid FORGE cells within 600 km contribute. Weights combine a finite spatial kernel (200 km) and standardized climate similarity. A finite kernel is important: original cells are area-support estimates, not exact point measurements that warrant bullseyes at their centres. We do not impute missing source cells, extrapolate beyond the radius, invent a regional bonus, or multiply support by cell area. All six FORGE channels use identical weights. Results are convex combinations of local values, including zeros. An isolated coarse zero can therefore be blended with positive neighbours; this is explicitly an interpolation uncertainty, not evidence that every fine hectare is productive.
+
+Climate-strength settings 0, 0.25, 1 and 4 are compared using five deterministic 10-degree geographical folds. Zero is the spatial-only comparison. The selected shared value minimizes log-scaled FORGE reconstruction error, with coverage reported. This validates transfer of a process model, **not medieval food productivity**. It does not resolve the provisional livestock conversion, terrestrial-only fishing values, or modern-climate assumptions. Detailed cross-validation and before/after distributions are saved with the result.
+
+A finer [natural-grassland ANPP dataset](https://zenodo.org/records/18171957) was also downloaded and inspected. Its 1/24-degree product excludes much of the Sahara, Arabia and Iceland. It is retained as a research candidate, but is not used to fill those deserts or treated as global potential grassland. A future feed-budget replacement must first resolve that coverage and verify dry-matter/product conversions. No ANPP-based numerical change has been adopted here.

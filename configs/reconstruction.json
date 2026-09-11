@@ -1,0 +1,859 @@
+{
+  "version": 2,
+  "target_year": 1300,
+  "status": "research_candidate",
+  "inputs": "data/raw/gaez",
+  "scenarios": [
+    "LRLM",
+    "HRLM",
+    "HILM"
+  ],
+  "crop_order": [
+    "WHE",
+    "BRL",
+    "RYE",
+    "OAT",
+    "BCK",
+    "MZE",
+    "RCW",
+    "RCD",
+    "FML",
+    "PML",
+    "SRG",
+    "TEF",
+    "WPO",
+    "SPO",
+    "YAM",
+    "CSV",
+    "TAROD",
+    "BAN"
+  ],
+  "crops": {
+    "WHE": {
+      "name": "Wheat",
+      "group": "cereal",
+      "kcal_kg": 3340,
+      "dry_fraction": 0.88,
+      "recovery": 1.0,
+      "seed_share": 0.08,
+      "loss_share": 0.15,
+      "labour_days": 60,
+      "labour_range": [
+        39.0,
+        90.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "ilca_labour",
+      "labour_transfer": "crop-specific modern analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "BRL": {
+      "name": "Barley",
+      "group": "cereal",
+      "kcal_kg": 3320,
+      "dry_fraction": 0.88,
+      "recovery": 0.9,
+      "seed_share": 0.08,
+      "loss_share": 0.15,
+      "labour_days": 50,
+      "labour_range": [
+        32.5,
+        75.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "ilca_labour",
+      "labour_transfer": "crop-specific modern analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "RYE": {
+      "name": "Rye",
+      "group": "cereal",
+      "kcal_kg": 3190,
+      "dry_fraction": 0.88,
+      "recovery": 1.0,
+      "seed_share": 0.08,
+      "loss_share": 0.15,
+      "labour_days": 60,
+      "labour_range": [
+        39.0,
+        90.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "OAT": {
+      "name": "Oats",
+      "group": "cereal",
+      "kcal_kg": 3850,
+      "dry_fraction": 0.88,
+      "recovery": 0.75,
+      "seed_share": 0.08,
+      "loss_share": 0.15,
+      "labour_days": 60,
+      "labour_range": [
+        39.0,
+        90.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "BCK": {
+      "name": "Buckwheat",
+      "group": "cereal",
+      "kcal_kg": 3300,
+      "dry_fraction": 0.88,
+      "recovery": 0.8,
+      "seed_share": 0.08,
+      "loss_share": 0.15,
+      "labour_days": 65,
+      "labour_range": [
+        42.25,
+        97.5
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "MZE": {
+      "name": "Maize",
+      "group": "maize",
+      "kcal_kg": 3560,
+      "dry_fraction": 0.88,
+      "recovery": 1.0,
+      "seed_share": 0.02,
+      "loss_share": 0.15,
+      "labour_days": 90,
+      "labour_range": [
+        58.5,
+        135.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "RCW": {
+      "name": "Wet rice",
+      "group": "rice",
+      "kcal_kg": 3600,
+      "dry_fraction": 0.87,
+      "recovery": 0.65,
+      "seed_share": 0.02,
+      "loss_share": 0.15,
+      "labour_days": 175,
+      "labour_range": [
+        113.75,
+        262.5
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_rice_labour",
+      "labour_transfer": "crop-specific modern analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "RCD": {
+      "name": "Dry rice",
+      "group": "rice",
+      "kcal_kg": 3600,
+      "dry_fraction": 0.87,
+      "recovery": 0.65,
+      "seed_share": 0.02,
+      "loss_share": 0.15,
+      "labour_days": 145,
+      "labour_range": [
+        94.25,
+        217.5
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "FML": {
+      "name": "Foxtail millet",
+      "group": "millet",
+      "kcal_kg": 3400,
+      "dry_fraction": 0.88,
+      "recovery": 0.85,
+      "seed_share": 0.02,
+      "loss_share": 0.15,
+      "labour_days": 70,
+      "labour_range": [
+        45.5,
+        105.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "PML": {
+      "name": "Pearl millet",
+      "group": "millet",
+      "kcal_kg": 3400,
+      "dry_fraction": 0.88,
+      "recovery": 0.85,
+      "seed_share": 0.02,
+      "loss_share": 0.15,
+      "labour_days": 70,
+      "labour_range": [
+        45.5,
+        105.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "SRG": {
+      "name": "Sorghum",
+      "group": "millet",
+      "kcal_kg": 3430,
+      "dry_fraction": 0.88,
+      "recovery": 0.9,
+      "seed_share": 0.02,
+      "loss_share": 0.15,
+      "labour_days": 70,
+      "labour_range": [
+        45.5,
+        105.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "TEF": {
+      "name": "Teff",
+      "group": "millet",
+      "kcal_kg": 3400,
+      "dry_fraction": 0.88,
+      "recovery": 1.0,
+      "seed_share": 0.02,
+      "loss_share": 0.15,
+      "labour_days": 68.75,
+      "labour_range": [
+        44.6875,
+        103.125
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "ilca_labour",
+      "labour_transfer": "crop-specific modern analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "WPO": {
+      "name": "Potato",
+      "group": "root",
+      "kcal_kg": 670,
+      "dry_fraction": 0.2,
+      "recovery": 0.9,
+      "seed_share": 0.05,
+      "loss_share": 0.15,
+      "labour_days": 120,
+      "labour_range": [
+        78.0,
+        180.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "SPO": {
+      "name": "Sweet potato",
+      "group": "root",
+      "kcal_kg": 920,
+      "dry_fraction": 0.3,
+      "recovery": 0.9,
+      "seed_share": 0.05,
+      "loss_share": 0.15,
+      "labour_days": 120,
+      "labour_range": [
+        78.0,
+        180.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "YAM": {
+      "name": "Yam",
+      "group": "root",
+      "kcal_kg": 1010,
+      "dry_fraction": 0.3,
+      "recovery": 0.9,
+      "seed_share": 0.05,
+      "loss_share": 0.15,
+      "labour_days": 150,
+      "labour_range": [
+        97.5,
+        225.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "CSV": {
+      "name": "Cassava",
+      "group": "root",
+      "kcal_kg": 1090,
+      "dry_fraction": 0.35,
+      "recovery": 0.85,
+      "seed_share": 0.05,
+      "loss_share": 0.15,
+      "labour_days": 100,
+      "labour_range": [
+        65.0,
+        150.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "TAROD": {
+      "name": "Dryland taro",
+      "group": "root",
+      "kcal_kg": 860,
+      "dry_fraction": 0.3,
+      "recovery": 0.85,
+      "seed_share": 0.05,
+      "loss_share": 0.15,
+      "labour_days": 150,
+      "labour_range": [
+        97.5,
+        225.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "Dry fractions, recovery, seed and loss shares are scenario assumptions; teff/banana commodity matching needs further review.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    },
+    "BAN": {
+      "name": "Banana/plantain proxy",
+      "group": "root",
+      "kcal_kg": 750,
+      "dry_fraction": 0.25,
+      "recovery": 1.0,
+      "seed_share": 0.05,
+      "loss_share": 0.15,
+      "labour_days": 100,
+      "labour_range": [
+        65.0,
+        150.0
+      ],
+      "parameter_status": "inferred research prior; not historically validated",
+      "food_source": "fao_food",
+      "conversion_source": "gaez_v4_conversion",
+      "labour_source": "fao_traditional",
+      "labour_transfer": "broad system analogue",
+      "parameter_note": "FAO plantain as-purchased energy; no second peel deduction. GAEZ BAN is an imperfect proxy.",
+      "scenario_adjustments": {
+        "LRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HRLM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        },
+        "HILM": {
+          "cultivar": 1.0,
+          "management": 1.0,
+          "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
+        }
+      }
+    }
+  },
+  "management": {
+    "extensive": {
+      "position": 0.2,
+      "range": [
+        0,
+        0.5
+      ],
+      "cultivated_fraction": 0.23,
+      "harvests": 1.0,
+      "maintenance_days": 0,
+      "source": "seshat",
+      "interpretation": "Shared agrarian-system prior; not an observed local management position"
+    },
+    "rotation": {
+      "position": 0.45,
+      "range": [
+        0.2,
+        0.7
+      ],
+      "cultivated_fraction": 0.5,
+      "harvests": 1.0,
+      "maintenance_days": 2,
+      "source": "seshat",
+      "interpretation": "Shared agrarian-system prior; not an observed local management position"
+    },
+    "managed": {
+      "position": 0.6,
+      "range": [
+        0.3,
+        0.85
+      ],
+      "cultivated_fraction": 0.75,
+      "harvests": 1.0,
+      "maintenance_days": 8,
+      "source": "seshat",
+      "interpretation": "Shared agrarian-system prior; not an observed local management position"
+    },
+    "intensive": {
+      "position": 0.75,
+      "range": [
+        0.5,
+        1.0
+      ],
+      "cultivated_fraction": 1.0,
+      "harvests": 1.0,
+      "maintenance_days": 15,
+      "source": "seshat",
+      "interpretation": "Shared agrarian-system prior; not an observed local management position"
+    }
+  },
+  "calibration": {
+    "low_factors": [
+      0.15,
+      0.25,
+      0.4,
+      0.6,
+      0.8,
+      1.0
+    ],
+    "high_factors": {
+      "cereal": [
+        0.2,
+        0.3,
+        0.4
+      ],
+      "maize": [
+        0.25,
+        0.35,
+        0.45
+      ],
+      "rice": [
+        0.25,
+        0.35,
+        0.45,
+        0.55,
+        0.65
+      ],
+      "millet": [
+        0.25,
+        0.4,
+        0.55
+      ],
+      "root": [
+        0.35,
+        0.5,
+        0.65
+      ]
+    },
+    "default_low": 0.8,
+    "default_high": {
+      "cereal": 0.3,
+      "maize": 0.35,
+      "rice": 0.35,
+      "millet": 0.4,
+      "root": 0.5
+    },
+    "width_penalty": 0.03,
+    "note": "All Seshat cases participate as authoritative calibration anchors. Former geographic holdouts are no longer independent validation. Independent English wheat remains excluded. Shared crop-family factors only; no cell-specific yield edits.",
+    "round": "3: all comparable Seshat estimates and propagated anchor intervals are mandatory enclosure constraints, user-authorized",
+    "policy": "hard_seshat_enclosure",
+    "anchor_margin_fraction": 1e-06,
+    "reference_parameters": {
+      "cereal": {
+        "low": 0.15,
+        "high": 0.3
+      },
+      "maize": {
+        "low": 0.25,
+        "high": 0.35
+      },
+      "millet": {
+        "low": 0.8,
+        "high": 0.4
+      },
+      "rice": {
+        "low": 0.8,
+        "high": 0.65
+      },
+      "root": {
+        "low": 0.4,
+        "high": 0.35
+      }
+    }
+  },
+  "units": {
+    "product": "YXX",
+    "mass": "kg dry weight/ha",
+    "area": "best occurring suitability class, not whole-cell mean",
+    "yield_period": "optimized crop cycle",
+    "annualization_status": "Inferred from Module II and separate Module V annual-production tabulations; exact product fallow flag unavailable",
+    "modern_environment": "2001-2020 climate and modern soil/terrain retained"
+  },
+  "acceptance": {
+    "independent_historical_validation_required": true,
+    "global_management_positions_validated": false,
+    "seasonal_labour_feasibility_validated": false
+  },
+  "loss_sensitivity": [
+    0.05,
+    0.15,
+    0.3
+  ],
+  "sensitivity": {
+    "yield_multiplier": [
+      0.75,
+      1.0,
+      1.25
+    ],
+    "cropping_frequency_multiplier": [
+      0.75,
+      1.0,
+      1.25
+    ],
+    "labour_multiplier": [
+      0.65,
+      1.0,
+      1.5
+    ],
+    "note": "One-at-a-time accounting sensitivity, not evidence that an extra crop is seasonally feasible."
+  }
+}

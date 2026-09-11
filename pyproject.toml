@@ -1,0 +1,24 @@
+[project]
+name = "historical-agriculture-1300"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy",
+    "rasterio",
+    "pandas",
+    "rdata",
+    "requests",
+    "matplotlib",
+    "pyshp>=3.1.6",
+    "scipy>=1.17.1",
+    "netcdf4>=1.7.4",
+]
+[project.scripts]
+ha1300 = "historical_agriculture.cli:main"
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+[tool.hatch.build.targets.wheel]
+packages = ["src/historical_agriculture"]
+[dependency-groups]
+dev = ["pytest"]

@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "target_year": 1300,
+  "status": "selection-only diagnostic; not a historical yield envelope",
+  "source": "https://osf.io/kjw8c/",
+  "crops": {
+    "WHE": {
+      "status": "diagnostic",
+      "mechanism": "Seshat artificial-selection ratio only; applying same ratio to both scenarios tests transfer, not full historic management",
+      "LRLM": {
+        "factor": 0.5,
+        "exponent": 1
+      },
+      "HILM": {
+        "factor": 0.5,
+        "exponent": 1
+      }
+    },
+    "MZE": {
+      "status": "diagnostic",
+      "mechanism": "Seshat artificial-selection ratio only; applying same ratio to both scenarios tests transfer, not full historic management",
+      "LRLM": {
+        "factor": 0.7272727272727273,
+        "exponent": 1
+      },
+      "HILM": {
+        "factor": 0.7272727272727273,
+        "exponent": 1
+      }
+    },
+    "RCW": {
+      "status": "diagnostic",
+      "mechanism": "Seshat artificial-selection ratio only; applying same ratio to both scenarios tests transfer, not full historic management",
+      "LRLM": {
+        "factor": 0.7692307692307693,
+        "exponent": 1
+      },
+      "HILM": {
+        "factor": 0.7692307692307693,
+        "exponent": 1
+      }
+    },
+    "RCD": {
+      "status": "diagnostic",
+      "mechanism": "Seshat artificial-selection ratio only; applying same ratio to both scenarios tests transfer, not full historic management",
+      "LRLM": {
+        "factor": 0.7692307692307693,
+        "exponent": 1
+      },
+      "HILM": {
+        "factor": 0.7692307692307693,
+        "exponent": 1
+      }
+    },
+    "BAN": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "BCK": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "BRL": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "CHK": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "CIT": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "COC": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "COF": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "CON": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "COT": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "COW": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "CSH": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "CST": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "CSV": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "FIML": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "FLX": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "FML": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "FONIO": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "GRD": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "GRM": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "MNG": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "OAT": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "OLV": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "PEA": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "PHB": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "PIG": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "PML": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "RYE": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "SOY": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "SPO": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "SRG": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "SUB": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "SUC": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "TANN": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "TAROD": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "TAROW": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "TEA": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "TEF": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "TOB": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "WMEL": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "WPO": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    },
+    "YAM": {
+      "status": "unresolved",
+      "reason": "Historical endpoint transformations need reviewed crop-specific evidence; no silent generic factor"
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "gaez_catalog": {
+    "url": "https://data.fao.org/catalog/dataset/2673f847-129f-4388-8bb0-0699e41c3e7c",
+    "family": "GAEZ",
+    "role": "Dry-weight units and best-suitability-class definition",
+    "license": "CC-BY-4.0"
+  },
+  "gaez_module2": {
+    "url": "https://github.com/un-fao/gaezv5/wiki/04.-Module-II-(Biomass-and-yield-calculation)",
+    "family": "GAEZ",
+    "role": "Input assumptions and crop-cycle calculation"
+  },
+  "gaez_module5": {
+    "url": "https://github.com/un-fao/gaezv5/wiki/07.-Module-V-(Integration-of-climatic-and-edaphic-evaluation)",
+    "family": "GAEZ",
+    "role": "Soil/terrain aggregation and annual production tabulations"
+  },
+  "seshat": {
+    "url": "https://osf.io/kjw8c/",
+    "family": "Seshat2021",
+    "role": "Historical model calibration and farming-system evidence"
+  },
+  "fao_food": {
+    "url": "https://www.fao.org/4/x9892e/X9892e05.htm",
+    "family": "FAO_food",
+    "role": "Energy at retail moisture, not dry weight"
+  },
+  "ilca_labour": {
+    "url": "https://www.fao.org/4/x5523e/x5523e04.htm",
+    "family": "ILCA_surveys",
+    "role": "1978-1980 traditional farming labour analogue, not medieval observations"
+  },
+  "fao_rice_labour": {
+    "url": "https://www.fao.org/4/T0715E/t0715e06.htm",
+    "family": "FAO_land_evaluation",
+    "role": "150-200 person-days/ha rice example, includes modern options"
+  },
+  "fao_traditional": {
+    "url": "https://www.fao.org/4/y4137e/y4137e04.htm",
+    "family": "FAO_traditional",
+    "role": "Traditional maize yield/labour analogues, not 1300 observations"
+  },
+  "fao_origins": {
+    "url": "https://www.fao.org/4/t0646e/t0646e.pdf",
+    "family": "FAO_history",
+    "role": "Pre-Columbian crops and colonial introductions"
+  },
+  "fao_millets": {
+    "url": "https://www.fao.org/4/T0818e/T0818E01.htm",
+    "family": "FAO_millets",
+    "role": "Sorghum and millet origins and dispersal"
+  },
+  "sweet_potato": {
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3568323/",
+    "family": "Roullier2013",
+    "role": "Pre-Columbian Polynesian dispersal, not crop dominance"
+  },
+  "song_yields": {
+    "url": "https://agri-history.ihns.ac.cn/scholars/gejinfang1.htm",
+    "family": "Song_history",
+    "role": "Historical-unit, rent and multiple-cropping interpretation"
+  },
+  "gaez_v4_conversion": {
+    "url": "https://gaez-v4-data.fao.org/data/documentation/GAEZ%20v4%20Model%20Documentation.pdf",
+    "family": "GAEZ_v4",
+    "role": "Dry/fresh conversion analogues; v4/v5 transfer is inferred"
+  },
+  "mediterranean": {
+    "url": "https://www.cambridge.org/core/journals/antiquity/article/rethinking-the-green-revolution-in-the-mediterranean-world/A3250D887FB6E91B45CA8BBFAD040265",
+    "family": "Antiquity_IGR",
+    "role": "Persistence of wheat/barley staples"
+  },
+  "india_history": {
+    "url": "https://www.cambridge.org/core/journals/antiquity/article/different-strategies-in-indus-agriculture-the-goals-and-outcomes-of-farming-choices/A155524D0EBBF3D631EEC620E9F98147",
+    "family": "Indus_archaeobotany",
+    "role": "Earlier crop availability, not 1300 dominance"
+  },
+  "english_wheat": {
+    "url": "https://cei.ier.hit-u.ac.jp/English/events/documents/BritishGDPLongRun.pdf",
+    "family": "Broadberry2010",
+    "role": "Independent 1300-1309 English wheat yield holdout; net seed, gross tithes, table 2"
+  },
+  "tibetan_barley": {
+    "url": "https://academic.oup.com/nsr/article/6/5/1005/5521923",
+    "family": "Li2019",
+    "role": "Primary archaeological/genetic evidence of established barley agriculture on the Tibetan Plateau; not 1300 yields"
+  },
+  "caribbean_starch": {
+    "url": "https://www.sciencedirect.com/science/article/pii/S0305440312000842",
+    "family": "Mickleburgh_PaganJimenez_2012",
+    "role": "Primary pre-Columbian starch evidence for diverse Caribbean maize and root foods; no uniform staple dominance"
+  },
+  "resolve_ecoregions": {
+    "url": "https://ecoregions.world/",
+    "role": "RESOLVE 2017 terrestrial ecological boundaries; geographic stratification only, not historical crop observations",
+    "license": "CC-BY-4.0"
+  },
+  "forge_2021": {
+    "url": "https://www.nature.com/articles/s41559-021-01548-3",
+    "role": "Published FORGE model and global S0-S2 outputs: conditional terrestrial foraging energy and grazer biomass; modern climate, 2-degree resolution; not historical population observations"
+  },
+  "fao_pastoral": {
+    "url": "https://www.fao.org/4/t0413e/T0413E15.htm",
+    "role": "Later traditional West African pastoral milk/meat per livestock unit and per grazing hectare; regional analogue, not 1300 global measurement"
+  },
+  "fao_mali": {
+    "url": "https://www.fao.org/4/x5531e/x5531e07.htm",
+    "role": "Livestock energy coefficients and pastoral/agropastoral distinctions; later Mali observations"
+  },
+  "steppe_dairy": {
+    "url": "https://www.nature.com/articles/s41559-020-1120-y",
+    "role": "Archaeological evidence for dairy pastoralism on the eastern Eurasian steppe over millennia"
+  },
+  "norse_livelihoods": {
+    "url": "https://natmus.dk/organisation/forskning-og-kulturarv/nyere-tid-og-verdens-kulturer/etnografisk-samling/arktisk-forskning/prehistory-of-greenland/norse/",
+    "role": "Museum synthesis of medieval Norse livestock and wild/marine food use; geographic analogue for North Atlantic systems"
+  },
+  "yak_traditional": {
+    "url": "https://www.fao.org/4/AD347E/ad347e0j.htm",
+    "role": "Traditional high-altitude yak management; supports system identification, not global productivity transfer"
+  },
+  "australia_food": {
+    "url": "https://museum.wa.gov.au/sites/default/files/THE%20FOOD%20RESOURCES%20OF%20THE%20ABORIGINES%20OF%20THE%20SOUTH-WEST%20OF%20WESTERN%20AUSTRALIA.pdf",
+    "role": "Regional historical and ethnographic evidence for wild-food use; broad Australian extension is inferred"
+  },
+  "australia_livestock_exclusion": {
+    "url": "https://digital-classroom.nma.gov.au/learning-modules/colonial-australia-defining-moments-1788-1900/13-merino-sheep-introduced-sheep-killed-kangaroos",
+    "role": "European sheep introduced in 1788; do not assign Old World domestic grazing to Australia in 1300"
+  },
+  "northwest_coast_food": {
+    "url": "https://ocean.si.edu/human-connections/history-cultures/raven-spirit-native-american-canoes-journey",
+    "role": "Smithsonian evidence for Pacific Northwest coastal resource use and salmon; broader ecological-unit assignment remains inferred"
+  },
+  "thule_food": {
+    "url": "https://home.nps.gov/articles/aps-17-1-2.htm",
+    "role": "Dated Arctic maritime subsistence and Thule chronology; supports coastal livelihood identification"
+  }
+}

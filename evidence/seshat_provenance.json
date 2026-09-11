@@ -1,0 +1,21 @@
+{
+  "url": "https://osf.io/kjw8c/",
+  "article": "https://doi.org/10.1177/0959683621994644",
+  "archive_sha256": "0916eb1d52bebfa68d75628be38e355532696546d911ec5a016efc9dc303fd82",
+  "archive_member_hashes": {
+    "Agri.Rdata": "291ed670ae03a864f9104a32cade59521b49b38e4978bf32cfb619793d9c3af7",
+    "FAOSTAT_yields_7-6-2018.csv": "81091825ae72035bc23b70b9d1286f1cc1a8d317eace4cd4da4b3ad4f69bc3b1",
+    "HistYield_out.csv": "351d6962470339b9119243e39cf6100d77ad75e0dbb321316c1ed26347a65836",
+    "Main_script.R": "0bc6ec25a4a88ef44448e2565385ba01d1339b483db31ecb73eebb2e6ebb5416"
+  },
+  "notes": [
+    "23 positive regional estimates at 1300, not 30 global pixels.",
+    "Regional crop labels are not a global historical crop map.",
+    "Southern China Hills is not Taihu; no reuse of earlier inaccurate locator coordinates.",
+    "Historical selection proxies are not independently validated GAEZ transformations.",
+    "Rice dry versus wet transfer is an explicitly provisional proxy."
+  ],
+  "license_status": "Source terms require verification before public redistribution.",
+  "download_url": "https://osf.io/download/nrmcv/",
+  "archive_name": "Agri_R_data.zip"
+}

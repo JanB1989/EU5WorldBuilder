@@ -1,0 +1,21 @@
+{
+  "source_sha256": "0916eb1d52bebfa68d75628be38e355532696546d911ec5a016efc9dc303fd82",
+  "version": 2,
+  "rows": 23,
+  "geographic_holdouts": [],
+  "former_geographic_holdouts_now_calibration": [
+    "Cahokia",
+    "Central Java",
+    "Cuzco",
+    "Kansai",
+    "Paris Basin"
+  ],
+  "policy": "All comparable Seshat cases are mandatory enclosure anchors; none are claimed as independent validation.",
+  "independent_source_holdout": false,
+  "notes": [
+    "Locators approximate; geography must not certify exact regional replication.",
+    "The model normalizes cropping relative to its anchor; undo that relative factor before harvested-hectare comparison.",
+    "Anchor area conventions still require source review; paddy is retained as the published rice proxy.",
+    "All model-derived Seshat rows share a source family."
+  ]
+}

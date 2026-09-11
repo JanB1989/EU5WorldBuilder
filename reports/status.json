@@ -1,0 +1,30 @@
+{
+  "stage": "food-system mask, per-hectare food equivalents and focused report delivered",
+  "food_mask_complete": true,
+  "numeric_coverage_complete": false,
+  "numeric_cells": 3243564,
+  "unquantified_cells": 16256,
+  "source_grid_cells": 3259820,
+  "engineering_pass": true,
+  "scientific_acceptance": false,
+  "tests_passed": 32,
+  "benchmark_results": {
+    "rows": 23,
+    "inside": 21,
+    "outside": 0,
+    "unresolved": 2,
+    "constraint_policy": "All comparable Seshat cases are mandatory calibration anchors, not holdouts",
+    "seshat_enclosure_pass": true,
+    "independent_historical_validation": {
+      "passed": 1,
+      "failed": 0,
+      "coverage": "English wheat only; not global validation"
+    }
+  },
+  "main_figures": 5,
+  "maps": 16,
+  "fingerprint": "7bc4f06ad7530a9edf2c75c58dd55a990f75415d3f8d9fc822e09f4755c22c33",
+  "gallery": "artifacts/reconstruction/index.html",
+  "food_method": "artifacts/reconstruction/FOOD_METHOD.md",
+  "numerical_basis": "artifacts/reconstruction/food_validation.json"
+}

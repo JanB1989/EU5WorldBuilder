@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "frozen_before_evaluation": true,
+  "observations": [
+    {
+      "id": "england_wheat_1300_1309",
+      "source": "https://cei.ier.hit-u.ac.jp/English/events/documents/BritishGDPLongRun.pdf",
+      "source_family": "Broadberry_Campbell_2010_Medieval_Accounts",
+      "page": 36,
+      "table": 2,
+      "date_from": 1300,
+      "date_to": 1309,
+      "crop": "WHE",
+      "reported_value": 7.99,
+      "reported_units": "bushels per acre, net of seed and gross of tithes",
+      "pounds_per_bushel_range": [56, 64],
+      "pounds_per_bushel_note": "Explicit approximate grain-weight conversion range; not an observed medieval bulk-density interval",
+      "acre_to_ha": 0.40468564224,
+      "pound_to_kg": 0.45359237,
+      "sample_bbox": [-4, 50.5, 1.5, 54.5],
+      "spatial_note": "Approximate English agricultural sampling window; neither national acreage weights nor exact English boundaries",
+      "role": "independent-source diagnostic; not used to select round-one parameters",
+      "coverage_limit": "English wheat only; passing does not establish global validation"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+id,crop,date_from,date_to,region,lower,upper,original_units,evidence_type,source_id,role,limitations
+england_wheat,WHE,1300,1309,English agricultural accounts,7.99,7.99,"bushels/acre; net seed, gross tithes",historical reconstruction,english_wheat,held out,"56-64 lb/bushel is a conversion scenario, not a measured medieval constant"
+jiangnan_grain,RCW,1041,1307,Taihu and neighbouring Jiangnan,2,3,shi of milled rice per historical mu,historical documentary reconstruction,song_yields,qualitative and original-unit evidence only,"Mu, shi, product and harvest conventions require reconciliation; no automatic metric calibration"
+chinampa_maize,MZE,1950,1959,Mexico chinampas,3.5,6.3,t grain/ha,later traditional-system analogue,fao_traditional,"analogue, not independent medieval validation",Water and nutrient recycling; published synthesis cites mid-1950s measurements
+guatemala_maize,MZE,,,Guatemala hand-labour farming,1066,1066,kg grain/ha,later traditional-system analogue,fao_traditional,analogue only,Observation date unspecified in synthesis; moisture and crop-year convention unresolved
+mayan_labour,MZE,,,Highland Mayan maize system,395,395,hours/ha,later traditional-system analogue,fao_traditional,labour comparison,"FAO also reports 4230692 calories per hectare; date unspecified, no 1300 claim"
+ethiopian_wheat_labour,WHE,1978,1980,ILCA small farms,425,480,hours/ha,farm survey analogue,ilca_labour,labour calibration analogue,Eight-hour worker-day conversion is explicit; animal traction separate
+ethiopian_barley_labour,BRL,1978,1980,ILCA small farms,395,395,hours/ha,farm survey analogue,ilca_labour,labour calibration analogue,Eight-hour worker-day conversion; not medieval field observations
+ethiopian_teff_labour,TEF,1978,1980,ILCA small farms,550,550,hours/ha,farm survey analogue,ilca_labour,labour calibration analogue,Eight-hour worker-day conversion; not medieval field observations
+rice_labour_example,RCW,,,FAO irrigated-land evaluation example,150,200,person-days/ha,technical example including modern systems,fao_rice_labour,wide labour analogue,Do not use associated modern yields as 1300 evidence

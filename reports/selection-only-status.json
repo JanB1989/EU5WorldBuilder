@@ -1,0 +1,79 @@
+{
+  "stage": "first diagnostic; overall task incomplete",
+  "gaez_crop_products": 62,
+  "gaez_crop_codes": [
+    "BAN",
+    "BCK",
+    "BRL",
+    "CHK",
+    "COC",
+    "CON",
+    "COW",
+    "CSV",
+    "FIML",
+    "FML",
+    "FONIO",
+    "GRD",
+    "GRM",
+    "MZE",
+    "OAT",
+    "PEA",
+    "PHB",
+    "PIG",
+    "PML",
+    "RCD",
+    "RCW",
+    "RYE",
+    "SOY",
+    "SPO",
+    "SRG",
+    "TAROD",
+    "TAROW",
+    "TEF",
+    "WHE",
+    "WPO",
+    "YAM"
+  ],
+  "criteria": [
+    {
+      "requirement": "Separate local repository",
+      "result": "passed"
+    },
+    {
+      "requirement": "GAEZ paired acquisition with source hashes",
+      "result": "passed"
+    },
+    {
+      "requirement": "Configurable per-crop per-scenario scaling",
+      "result": "passed"
+    },
+    {
+      "requirement": "Global diagnostic raster calculation for initial crops",
+      "result": "passed"
+    },
+    {
+      "requirement": "Historical lower and upper calibration for all relevant crops",
+      "result": "not_evaluated"
+    },
+    {
+      "requirement": "Global historical crop assignment",
+      "result": "not_evaluated"
+    },
+    {
+      "requirement": "Annual edible calories with verified product and fallow denominators",
+      "result": "not_evaluated"
+    },
+    {
+      "requirement": "Historically bounded labour demand",
+      "result": "not_evaluated"
+    },
+    {
+      "requirement": "Seshat regional position and independent holdouts",
+      "result": "not_evaluated"
+    },
+    {
+      "requirement": "Unit tests",
+      "result": "passed: 4"
+    }
+  ]
+}

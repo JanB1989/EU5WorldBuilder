@@ -75,3 +75,47 @@ uv run python scripts/validate_locations.py
 ```
 
 For a fresh private checkout, run `uv sync --group dev` and use `scripts/import_location_inputs.py --help` to import the licensed game geometry and the pinned historical source pack from an available archive/cache. The CLI never silently discovers another project or deploys to the game.
+
+
+## Equal-area comparison
+
+The viewer also offers a final game-unit comparison, initially selected, that removes
+absolute location size. For modelled land, the common reference area is
+sum(starting capacity) / sum(starting capacity / physical hectares).
+Multiply base and all improvement amounts, and their derived capacities, by
+reference area / physical location area. Keep the productivity multiplier unchanged.
+This preserves global starting support and each location's starting/maximum ratio;
+it does not preserve the global maximum. Starting population never enters this normalization.
+
+Physical hectares, source fractions and basin water allocations remain those of the
+original reconstruction. The comparison is not a new physical production estimate.
+A region with more location subdivisions now receives more game support at equal
+environmental conditions. Both versions use shared map colour scales. Nonsettlement
+zones retain zero capacity. Full comparison values are in locations_equal_area.csv;
+the four primary values are in location_values_equal_area.csv, and normalization
+metadata in area_comparison.json. Reproduce both with uv run ha1300 locations.
+
+
+## Settlement eligibility and usable-value gate
+
+Eligibility is derived independently from the imported vanilla default.map:
+template locations outside sea_zones, lakes, impassable_mountains and non_ownable
+are is_ownable=true. Starting ownership and population are not eligibility filters.
+The imported map definitions were checked byte-for-byte against the configured
+installed game on 2026-09-12. No game files were modified.
+
+settlement_validation.json and unresolved_settlements.csv distinguish row coverage
+from usable settlement support. Every ownable location must have finite, ordered
+primary values, positive multiplier and physical area, correct RGB and land/ownability
+classification, and positive starting and maximum support to pass the readiness gate.
+A finite zero placeholder is explicitly unresolved; this check never invents food or
+uses a population floor. At this audit there are 20,893 ownable locations, all present,
+but 132 zero-support cases (120 populated). These are scientific/input failures still
+requiring investigation, rather than omitted output rows. The 36 modelled non-ownable
+corridors retain physical estimates with is_ownable=false and display as excluded.
+
+The native and overview maps both include every ownable location. The 93 zones absent
+from the downsampled overview are all non-ownable; native geometry retains them.
+Run uv run python scripts/validate_locations.py to evaluate the actual generated
+physical-area and equal-area ledgers. It exits nonzero while settlement support is
+unresolved, even when all structural tests and pytest regressions pass.

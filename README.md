@@ -52,3 +52,10 @@ uv run pytest -q
 ```
 
 `ha1300 locations` generates the complete grid-to-location dataset and map from the owned input pack and supporting grid products. See the method for acquisition/import and supporting-product rebuild commands. No building implementation or deployment is performed.
+
+
+Settlement eligibility is now checked independently against EU5 default.map.
+All 20,893 ownable locations are present, but 132 currently have unresolved zero
+support. The delivery validator reports this as a failed readiness gate; numerical
+coverage is not historical acceptance. See artifacts/locations/settlement_validation.json
+and unresolved_settlements.csv. Non-ownable corridors are explicitly labelled.

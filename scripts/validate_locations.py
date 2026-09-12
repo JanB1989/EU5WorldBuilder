@@ -4,7 +4,7 @@ import argparse,json
 import numpy as np
 import pandas as pd
 from historical_agriculture.location_model import validate_frame,source_fingerprint,FIELDS
-from historical_agriculture.location_inventory import read_zone_inventory
+from historical_agriculture.location_inventory import read_zone_inventory,audit_settlement_values
 from historical_agriculture.provenance import digest,write_json
 
 def main():
@@ -17,8 +17,14 @@ def main():
     d=pd.read_csv(out/'locations.csv',keep_default_na=False)
     for k in FIELDS+['inert_capacity','starting_capacity','maximum_capacity','remaining_improvement_effective_cropland']:d[k]=pd.to_numeric(d[k],errors='raise')
     inv=read_zone_inventory(root/cfg['input_directory']);checks=validate_frame(d,inv)
+    settlement=audit_settlement_values(d,inv)
+    equal=pd.read_csv(out/'locations_equal_area.csv',keep_default_na=False)
+    validate_frame(equal,inv)
+    equal_settlement=audit_settlement_values(equal,inv)
     coverage=json.loads((out/'map_coverage.json').read_text())
     if coverage['native_locations']!=len(inv):raise ValueError('Map missing locations')
+    if coverage['ownable_locations']!=int(inv.is_ownable.sum()) or coverage['native_missing_ownable'] or coverage['overview_missing_ownable']:
+        raise ValueError('Map missing ownable locations')
     budget=np.load(out/'water_accounts.npz');down=budget['downstream'];outlets=np.flatnonzero(down<0)
     water_cfg=json.loads((root/'configs/water.json').read_text());reserve=water_cfg['irrigation']['protected_runoff_fraction']
     residuals={}
@@ -27,6 +33,7 @@ def main():
         residuals[mode]=float(np.max(np.abs(residual)))
         if residuals[mode]>1:raise ValueError('Water budget does not reconcile')
     # Partial ledgers, null values, changed maps or stale fingerprints cannot certify completion.
-    result={'pass':True,'location_count':len(d),'checks':checks,'native_map_coverage':coverage['native_locations'],'water_residual_m3':residuals,'fingerprint':fp}
-    write_json(out/'delivery_checks.json',result);print(json.dumps(result,indent=2))
+    result={'pass':settlement['passed'] and equal_settlement['passed'],'structural_pass':True,'settlement_readiness':settlement,'equal_area_unresolved_settlements':equal_settlement['unresolved_ownable_locations'],'location_count':len(d),'checks':checks,'native_map_coverage':coverage['native_locations'],'water_residual_m3':residuals,'fingerprint':fp}
+    write_json(out/'delivery_checks.json',result);print(json.dumps({**result,'settlement_readiness':{k:v for k,v in settlement.items() if k!='issues'}},indent=2))
+    if not result['pass']:raise SystemExit(1)
 if __name__=='__main__':main()

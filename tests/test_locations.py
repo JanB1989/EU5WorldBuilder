@@ -98,3 +98,57 @@ def test_location_lookup_encodes_every_pixel_without_image_readback():
         assert decoded==ids[y].tolist()
     assert 'getImageData' not in HTML
     assert '<script src="location_lookup.js"></script>' in HTML
+
+
+def test_ownability_is_independent_of_ownership_and_population(tmp_path):
+    from historical_agriculture.location_inventory import read_zone_inventory
+    (tmp_path/'game_default.map').write_text(
+        'sea_zones={sea sea} lakes={lake} impassable_mountains={mountain} '
+        'non_ownable={corridor} non_ownable={second_corridor}')
+    names=['uncolonized','nan','sea','lake','mountain','corridor','second_corridor']
+    (tmp_path/'game_templates.txt').write_text("\n".join(x+'={}' for x in names))
+    (tmp_path/'game_named_locations.txt').write_text("\n".join(f'{x}={i+1:06x}' for i,x in enumerate(names)))
+    d=read_zone_inventory(tmp_path).set_index('location_tag')
+    assert set(d.index[d.is_ownable])=={'uncolonized','nan'}
+    assert d.loc['sea','game_zone_class']=='sea_zones'
+
+def ownable_fixture():
+    d=frame().iloc[:1].copy()
+    d['modelled_land']=True;d['is_ownable']=True
+    d['map_color_rgb']='123456';d['physical_location_ha']=100.
+    d['eu5_start_population']=0.
+    inv=d[['location_tag','map_color_rgb','is_ownable']].copy()
+    return d,inv
+
+def test_ownable_delivery_positive_values_pass_even_without_starting_population():
+    from historical_agriculture.location_inventory import audit_settlement_values
+    d,inv=ownable_fixture()
+    assert audit_settlement_values(d,inv)['passed']
+
+@pytest.mark.parametrize('defect,issue',[
+    ('missing','missing_row'),('class','incorrect_ownability'),
+    ('placeholder','no_positive_maximum_capacity'),('nan','invalid_base_effective_cropland'),
+    ('colour','wrong_map_colour'),('area','missing_physical_area')])
+def test_ownable_gate_detects_missing_misclassified_and_zero_placeholder(defect,issue):
+    from historical_agriculture.location_inventory import audit_settlement_values
+    d,inv=ownable_fixture()
+    if defect=='missing':d=d.iloc[:0]
+    if defect=='class':d['is_ownable']=False
+    if defect=='placeholder':d['starting_capacity']=0.;d['maximum_capacity']=0.
+    if defect=='nan':d['base_effective_cropland']=np.nan
+    if defect=='colour':d['map_color_rgb']='ffffff'
+    if defect=='area':d['physical_location_ha']=0.
+    audit=audit_settlement_values(d,inv)
+    assert not audit['passed']
+    assert issue in audit['issues'][0]['issues']
+    if defect=='placeholder':
+        # Row completeness must never conceal an unusable settlement estimate.
+        assert audit['coverage_and_classification_pass']
+        assert audit['unresolved_ownable_locations']==1
+
+def test_non_ownable_physical_estimate_does_not_imply_settlement_eligibility():
+    from historical_agriculture.location_inventory import audit_settlement_values
+    d,inv=ownable_fixture();inv['is_ownable']=False;d['is_ownable']=False
+    assert audit_settlement_values(d,inv)['passed']
+    d['is_ownable']=True
+    assert audit_settlement_values(d,inv)['incorrectly_ownable_exclusions']==['a']

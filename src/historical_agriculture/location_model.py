@@ -325,9 +325,12 @@ def execute(config_path,output):
     for col in ['inert_capacity','starting_capacity','maximum_capacity']:
         d[col+'_low']=d[col]*(1-cfg['land_uncertainty_fraction'])*(1-cfg['yield_uncertainty_fraction'])
         d[col+'_high']=d[col]*(1+cfg['land_uncertainty_fraction'])*(1+cfg['yield_uncertainty_fraction'])
-    from .location_inventory import complete_zones
+    from .location_inventory import complete_zones,audit_settlement_values
     d,delivery_inventory,inventory_audit=complete_zones(d,raw,out)
     checks=validate_frame(d,delivery_inventory)
+    settlement=audit_settlement_values(d,delivery_inventory)
+    write_json(out/'settlement_validation.json',settlement)
+    pd.DataFrame(settlement['issues']).to_csv(out/'unresolved_settlements.csv',index=False)
     d.to_parquet(out/'locations.parquet',index=False)
     d.to_csv(out/'locations.csv',index=False,float_format='%.15g')
     roundtrip=pd.read_csv(out/'locations.csv',keep_default_na=False);validate_frame(roundtrip,delivery_inventory)
@@ -343,7 +346,7 @@ def execute(config_path,output):
         sensitivity.append({'yield_scale':scale,'starting_total':float(s.sum()),'maximum_total':float(mx.sum()),'locations_below_context_population':int(np.sum(s<d.eu5_start_population))})
     write_json(out/'sensitivity.json',{'status':'First-pass yield sensitivity; land-access uncertainty bands are scenario brackets, not probability intervals. Basin allocations unchanged.','comparisons':sensitivity})
     quantiles={k:d.loc[d.modelled_land,k].quantile([0,.1,.5,.9,.99,1]).to_dict() for k in FIELDS+['starting_capacity','maximum_capacity','starting_fill']}
-    audit={'iteration':cfg['iteration'],'engineering_pass':True,'iteration_complete':True,'scientific_acceptance':False,'location_count':len(d),'inventory':inventory_audit,'checks':checks,'zero_starting_capacity_locations':int(((d.starting_capacity==0)&d.modelled_land).sum()),'population_context_missing_locations':int((d.eu5_start_population.isna()&d.modelled_land).sum()),'below_starting_population_locations':int((d.starting_capacity<d.eu5_start_population).sum()),'total_starting_capacity':float(d.starting_capacity.sum()),'total_maximum_capacity':float(d.maximum_capacity.sum()),'total_context_population':float(d.eu5_start_population.sum()),'substantial_coastline_transfer_locations':int((d.coastline_transfer_share>.1).sum()),'quantiles':quantiles,'geometry':ga,'yield':ya,'land':la,'water':wa,'grid':grid_reports,
+    audit={'iteration':cfg['iteration'],'engineering_pass':True,'iteration_complete':True,'scientific_acceptance':False,'location_count':len(d),'inventory':inventory_audit,'settlement_readiness':settlement,'checks':checks,'zero_starting_capacity_locations':int(((d.starting_capacity==0)&d.modelled_land).sum()),'population_context_missing_locations':int((d.eu5_start_population.isna()&d.modelled_land).sum()),'below_starting_population_locations':int((d.starting_capacity<d.eu5_start_population).sum()),'total_starting_capacity':float(d.starting_capacity.sum()),'total_maximum_capacity':float(d.maximum_capacity.sum()),'total_context_population':float(d.eu5_start_population.sum()),'substantial_coastline_transfer_locations':int((d.coastline_transfer_share>.1).sum()),'quantiles':quantiles,'geometry':ga,'yield':ya,'land':la,'water':wa,'grid':grid_reports,
        'limitations':['Complete inferred iteration, not historically accepted balance.','Modern climate and runoff proxies; dated cropland evidence around 1300 compared to cached EU5 1337 population.','Shared access/clearing fractions and crop-season water demand are explicit priors, not surveyed hectares.','Drainage/flood protection beyond reconstructed cropland and retained crop-system effectiveness are not independently identified.','No separate improvement-building counts; no game export or deployment.','Aquatic food excluded; existing noncrop terrestrial transfers remain low-confidence.','No per-location population fitting or area-compression coefficient. Large physical locations can have large support.']}
     write_json(out/'validation.json',audit)
     # Manifest binds code, imported sources and supporting native-grid products.

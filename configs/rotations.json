@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "overrides": [
+    {
+      "id": 1,
+      "name": "Freshwater Amazonian varzea cassava rotation",
+      "crops": [
+        "CSV"
+      ],
+      "ecoregion_ids": [
+        469,
+        482,
+        496
+      ],
+      "crop_years": 1.0,
+      "fallow_years": 1.6,
+      "fraction_range": [
+        0.15,
+        0.65
+      ],
+      "harvests_per_active_year": 1.0,
+      "source": "amazon_manioc_soils_2012",
+      "status": "inferred historical analogue; not a measured 1300 rotation",
+      "interpretation": "One active cropping year is a conservative scenario assumption; 1.6 years is mean fallow from 59 modern middle-Madeira floodplain fields. Transfer only to named inland varzea ecological units. Do not transfer to uplands, dark earths without a mask, blackwater floodplains, or tidal/coastal units. Short-cycle low-starch cultivar transfer remains uncertain."
+    }
+  ],
+  "benchmark_annualization": {
+    "Kansai": {
+      "coefficient": 1.0,
+      "label": "Kansai (rice only)",
+      "status": "Single rice crop equivalent; winter cereal contribution unquantified. Published multi-cropping coefficient 2 is retained separately, not interpreted as two rice harvests. Yield anchor harvested-area convention remains uncertain.",
+      "source": "farris_medieval_japan"
+    }
+  }
+}

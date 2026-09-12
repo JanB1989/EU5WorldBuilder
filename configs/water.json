@@ -1,0 +1,49 @@
+{
+  "schema_version": "water_reference_v1",
+  "year": 1300,
+  "raw_directory": "data/raw/water",
+  "hyde_directory": "data/raw/location_inputs/hyde",
+  "hydrology_directory": "data/raw/location_inputs/hydrology",
+  "river_cache": "data/raw/location_inputs/hydrology/river_reaches.parquet",
+  "reference": {
+    "soil_storage_mm": 100,
+    "snow_threshold_c": 0,
+    "snow_melt_mm_per_degree_day": 3,
+    "spinup_years": 0,
+    "climate_start": 1970,
+    "climate_end": 2000
+  },
+  "irrigation": {
+    "efficiency": 0.4,
+    "protected_runoff_fraction": 0.6,
+    "river_min_mean_m3s": 1,
+    "reach_distance_km": 10,
+    "low_lift_m": 6,
+    "terrain_tolerance_m": 15,
+    "relief_taper_m": 100,
+    "maximum_command_fraction": 1,
+    "seasonal_storage": false,
+    "groundwater": false
+  },
+  "notes": [
+    "1300 dates irrigation extent only. Climate and runoff are 1970\u20132000 proxies, not a reconstructed 1300 climate.",
+    "All maps use the same land-surface hectare denominator. Area enters only the shared water budget, never food or population.",
+    "Upper scenario is a constrained surface-irrigation screening, not a proven medieval maximum. Qanats, wells, reservoir storage, engineered routes and natural inundation require additional evidence.",
+    "Technology parameters are globally shared screening assumptions informed by traditional low lifts and earthen-system efficiency, not universal historical limits.",
+    "The cached HYDE April 2025 reconstruction is a model reconstruction, not an archaeological survey. Historical demand has priority when extending infrastructure.",
+    "Soil storage uses an analytical annual fixed point; there is no arbitrary transient initial stock."
+  ],
+  "historical_connections": [
+    {
+      "id": "nile_delta_distributaries",
+      "recipient_basins": [
+        1060034170,
+        1060034270
+      ],
+      "source_basin": 1060034260,
+      "max_elevation_m": 30,
+      "source": "https://knowledge.uchicago.edu/record/1009/files/MSR_IV_2000-Borsch.pdf",
+      "interpretation": "Low delta land historically receives Nile distributary/canal water despite independent coastal drainage polygons. This changes withdrawal origin, not available water or irrigation extent. The elevation screen is approximate."
+    }
+  ]
+}

@@ -148,5 +148,29 @@
     "url": "https://zenodo.org/records/18171957",
     "license": "CC BY 4.0",
     "role": "evaluated alternative; not adopted because grassland-only coverage omits desert test regions"
+  },
+  "amazon_manioc_soils_2012": {
+    "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3430692/fullTextXML",
+    "family": "Fraser2012",
+    "role": "Modern field comparison of manioc systems by soil; explicit historical analogue, not 1300 observations",
+    "license": "See article open-access terms"
+  },
+  "farris_medieval_japan": {
+    "url": "https://religion-in-japan.univie.ac.at/k/img_auth.php/4/47/Farris_2006.pdf",
+    "family": "Farris2006",
+    "role": "Medieval Japanese crop sequences; multi-cropping includes winter wheat/barley, not automatically a second rice harvest",
+    "license": "Copyrighted research text; local reference only"
+  },
+  "traditional_fallow_fao": {
+    "url": "https://www.fao.org/4/y1860e/y1860e04.htm",
+    "role": "Later African farming-system analogue; supports diverse and sometimes long fallows, not universal 1300 rates"
+  },
+  "fao_spate_yemen": {
+    "url": "https://www.fao.org/4/i1680e/i1680e.pdf",
+    "role": "Traditional Tihama sorghum/spate irrigation; regional crop proxy, not medieval yield calibration"
+  },
+  "deccan_sorghum_history": {
+    "url": "https://www.asianagrihistory.org/pdf/articles/ak-singbh-series-xix-18-no-2.pdf",
+    "role": "Deccan sorghum farming history; regional crop-proxy rationale"
   }
 }

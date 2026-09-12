@@ -24,7 +24,7 @@ STAGE_OUTPUTS={
     'food-assign':['food_type.tif','food_evidence.tif','food_ecoregion.tif','food_geometry_inferred.tif','food_coverage.json','food_assignment_ledger.json'],
     'food-calculate':['*people.tif','food_numeric_basis.tif','food_validation.json','benchmark_people.csv'],
     'calculate':['*dm.tif','*kcal*.tif','labour*.tif','upper_system.tif','envelope_valid.tif',
-                 'management_position.tif','cultivated_fraction.tif','sensitivity.json',
+                 'management_position.tif','cultivated_fraction.tif','rotation_override.tif','rotation_overrides.json','sensitivity.json',
                  'controlled_sensitivity.json','regional_distributions.csv','coverage_gaps.json'],
     'compare':['benchmark_comparison.*','benchmark_summary.json','benchmark_denominator_sensitivity.csv','independent_holdouts.json'],
     'validate':['validation.json','failure_register.json'],
@@ -75,9 +75,12 @@ def compare(root,config,out):
             value['position']=float(historical_position(value['observed'],value['lower'],value['upper']))
             value['result']='inside' if value['inside'] else 'outside'
             dry=config['crops'][r.crop]['dry_fraction']
-            value['lower_annual_fresh_kg']=value['lower']/dry*r.cropping_coefficient
-            value['upper_annual_fresh_kg']=value['upper']/dry*r.cropping_coefficient
-            value['observed_annual_fresh_kg']=r.harvest_t_ha_inferred*r.cropping_coefficient*1000
+            from .rotations import benchmark_coefficient
+            annual,_,annual_status=benchmark_coefficient(root,r.region,r.cropping_coefficient)
+            value['annual_cropping_coefficient']=annual;value['annualization_status']=annual_status
+            value['lower_annual_fresh_kg']=value['lower']/dry*annual
+            value['upper_annual_fresh_kg']=value['upper']/dry*annual
+            value['observed_annual_fresh_kg']=r.harvest_t_ha_inferred*annual*1000
             for convention,observed_t in [('published_literal',r.published_yield_t_ha),('remove_relative_anchor_cropping',r.harvest_t_ha_inferred),('divide_cropping_only_diagnostic',r.published_yield_t_ha/r.cropping_coefficient)]:
                 observed_dm=observed_t*1000*dry
                 denominators.append({'region':r.region,'convention':convention,'observed_dm_kg_ha':observed_dm,

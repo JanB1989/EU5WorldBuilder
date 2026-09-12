@@ -66,18 +66,27 @@ def report(root,config,out):
     dest=mapdir/'coverage.png';fig.savefig(dest,dpi=140);plt.close(fig);paths.append(str(dest))
     paired(['confidence'],'Evidence confidence — ordinal labels only','1 low/inferred; 2 medium/regional evidence')
     benchmarks=pd.read_csv(out/'benchmark_people.csv')
-    fig,ax=plt.subplots(figsize=(12,9),layout='constrained')
+    fig,ax=plt.subplots(figsize=(14,11),layout='constrained')
     for i,(_,r) in enumerate(benchmarks.iterrows()):
         if bool(r['valid']):
-            ax.plot([r.lower,r.upper],[i,i],color='#7f9c8d',linewidth=4)
+            assumed=bool(r.get('assumed',False))
+            ax.plot([r.lower,r.upper],[i,i],color='#c08a42' if assumed else '#7f9c8d',linewidth=4,linestyle='--' if assumed else '-')
             ax.errorbar(r.observed,i,xerr=[[max(0,r.observed-r.observed_low)],[max(0,r.observed_high-r.observed)]],fmt='o',color='#b44b3e' if r.result=='outside' else '#263b53',capsize=3)
     for i,(_,r) in enumerate(benchmarks.iterrows()):
         if not bool(r['valid']):ax.text(0,i,'unresolved',va='center',fontsize=9,color='#777777')
     from matplotlib.lines import Line2D
-    ax.legend(handles=[Line2D([0],[0],color='#7f9c8d',lw=4,label='Modeled lower–upper range'),Line2D([0],[0],marker='o',color='#263b53',label='Seshat estimate and anchor uncertainty')],loc='lower right',fontsize=9)
+    ax.legend(handles=[Line2D([0],[0],color='#7f9c8d',lw=4,label='Modeled lower–upper range'),Line2D([0],[0],marker='o',color='#263b53',label='Seshat estimate and anchor uncertainty'),Line2D([0],[0],color='#c08a42',lw=4,ls='--',label='Assumed sorghum range; Seshat point remains wheat')],loc='lower right',fontsize=9)
     ax.set_xlim(left=0)
-    ax.set_yticks(range(len(benchmarks)),benchmarks.region);ax.invert_yaxis();ax.set_xlabel('People fed / hectare of the full agricultural rotation / year')
-    ax.set_title('Seshat constraints: modeled envelope and historical anchor interval\nNet edible energy; same crop losses and Seshat annual cropping coefficient for each comparison')
+    crop_labels=[]
+    for _,r in benchmarks.iterrows():
+        crop_name=config['crops'][r['crop']]['name']
+        label=r.get('display_label',r.region)
+        if bool(r.get('assumed',False)):
+            label+=f" — {config['crops'][r['range_crop']]['name']}* (point: {crop_name})"
+        else:label+=f' — {crop_name}'
+        crop_labels.append(label)
+    ax.set_yticks(range(len(benchmarks)),crop_labels,fontsize=9);ax.invert_yaxis();ax.set_xlabel('People fed / hectare of the full agricultural rotation / year')
+    ax.set_title('Seshat constraints: modeled envelope and historical anchor interval\nNet edible energy; documented annualization; Kansai excludes unquantified winter crops')
     dest=mapdir/'benchmarks.png';fig.savefig(dest,dpi=140);plt.close(fig);paths.append(str(dest))
     validation=json.loads((out/'validation.json').read_text());summary=json.loads((out/'benchmark_summary.json').read_text());coverage=json.loads((out/'coverage.json').read_text())
     paragraphs=['# Global agriculture 1300 — research candidate','',

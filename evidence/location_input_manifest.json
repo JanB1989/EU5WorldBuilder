@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "role": "Pinned imported source pack; no sibling runtime dependence. Source origins are provenance, not runtime paths.",
+  "sources": [
+    {
+      "path": "data/raw/location_inputs/game_default.map",
+      "sha256": "69530759cc2c511983109f144deeb31e6b1e583aa76488cd500fcc2e3c731499",
+      "bytes": 181443,
+      "origin": "/mnt/c/Games/steamapps/common/Europa Universalis V/game/in_game/map_data/default.map",
+      "role": "Local game zone classification; no redistribution"
+    },
+    {
+      "path": "data/raw/location_inputs/game_templates.txt",
+      "sha256": "cffefb6fd02eb8ff5ced9a8a9f1ce5dab5084d82de790c29acf7413e3354ab91",
+      "bytes": 3731059,
+      "origin": "/mnt/c/Games/steamapps/common/Europa Universalis V/game/in_game/map_data/location_templates.txt",
+      "role": "Local game template inventory; no redistribution"
+    },
+    {
+      "path": "data/raw/location_inputs/game_named_locations.txt",
+      "sha256": "c58a53355cf167ae6a1adf1353e228cbd725eee00272faad5b07da81e59af707",
+      "bytes": 939131,
+      "origin": "/mnt/c/Games/steamapps/common/Europa Universalis V/game/in_game/map_data/named_locations/00_default.txt",
+      "role": "Local game RGB identifier mapping; no redistribution"
+    },
+    {
+      "path": "data/raw/location_inputs/locations.png",
+      "sha256": "bfbb8840343560367240f2b29e1e0621292aaa81616c06827c7fe566e2ec2b83",
+      "bytes": 8737202,
+      "origin": "/mnt/c/Games/steamapps/common/Europa Universalis V/game/in_game/map_data/locations.png",
+      "role": "EU5 local licensed installation; no redistribution"
+    },
+    {
+      "path": "data/raw/location_inputs/inventory.parquet",
+      "sha256": "3a9bb68159e5cfcf5262ad48c795c06b6b9a4649977668d5c71415da1a8000a1",
+      "bytes": 2058866,
+      "origin": "/home/jan/development/ProsperOrPerishConstructor/artifacts/data/population_capacity/geometry_land_contract_candidate_v1/location_geometry_candidate.parquet",
+      "role": "Local game inventory; extraction snapshot, no capacity assignments imported"
+    },
+    {
+      "path": "data/raw/location_inputs/transform.json",
+      "sha256": "5ed80231ebcf6cccbf77ace05e8fc379fd6204715edb2f9ad710458ded33177a",
+      "bytes": 682,
+      "origin": "/home/jan/development/ProsperOrPerishConstructor/artifacts/data/population_capacity/geometry_land_contract_candidate_v1/coordinate_transform_candidate.json",
+      "role": "Existing robust map registration; approximate geographic reconstruction"
+    },
+    {
+      "path": "data/raw/location_inputs/starting_population_source.csv",
+      "sha256": "a00edb8e751ce78f1baccddf74b0ebe2623d63880755d87c6f0cebb1c858d02a",
+      "bytes": 11756111,
+      "origin": "/home/jan/development/ProsperOrPerishConstructor/artifacts/data/population_capacity/current_capacity_map/starting_population_locations.csv",
+      "role": "Cached game starting population; contextual only"
+    },
+    {
+      "path": "data/raw/location_inputs/luh1300.npz",
+      "sha256": "01f5dc8b6f1ed08eb7282ad6c569faa033062ef0abbdb17be08bcb1831ec83f6",
+      "bytes": 3433391,
+      "origin": "/home/jan/development/ProsperOrPerishConstructor/artifacts/data/population_capacity/landcover_sources/luh2/states_1300_v2.npz",
+      "role": "LUH2 v2h, https://luh.umd.edu/LUH2/LUH2_v2h/states.nc; HYDE-related evidence family"
+    },
+    {
+      "path": "data/raw/location_inputs/pnv.nc",
+      "sha256": "32475712f61614aa83d3a3f320bb0395456982b9cac6fa08dd271a5dbc56c921",
+      "bytes": 37351948,
+      "origin": "/home/jan/development/ProsperOrPerishConstructor/artifacts/data/population_capacity/landcover_sources/sage_pnv/vegtype_5min.nc",
+      "role": "SAGE potential vegetation, https://sage-public-files.s3.amazonaws.com/global-potential-vegetation/potveg_nc.tar.gz; source attribution required"
+    },
+    {
+      "path": "data/raw/location_inputs/pnv_README",
+      "sha256": "2df3e62b61f55e50b8e7e31e0613f4b3d8d911491ebfe2d64a9bf849e58bf082",
+      "bytes": 3609,
+      "origin": "/home/jan/development/ProsperOrPerishConstructor/artifacts/data/population_capacity/landcover_sources/sage_pnv/README",
+      "role": "Source legend and methodology"
+    },
+    {
+      "path": "data/raw/location_inputs/landcover_provenance.json",
+      "sha256": "dda45d580fd4f4537817d6cc9ca1b8d2978c4f58f359c6c9fbebdfa35e7c8263",
+      "bytes": 1179,
+      "origin": "/home/jan/development/ProsperOrPerishConstructor/artifacts/data/population_capacity/landcover_sources/landcover_source_manifest.json",
+      "role": "Preserved upstream extraction metadata"
+    },
+    {
+      "path": "data/raw/location_inputs/hyde/cropland.nc",
+      "sha256": "ea71b622de314bc79649cab79c8bc5587e50fe512ba1661b8115c9bb07ad9d26",
+      "bytes": 460859103,
+      "origin": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/input_data/hyde/cropland.nc",
+      "role": "HYDE cached April 2025; embedded 3.4 versus cache 3.5 disagreement; embedded CC BY 3.0"
+    },
+    {
+      "path": "data/raw/location_inputs/hyde/total_irrigated.nc",
+      "sha256": "8caf51fe08cf26bc6d9ed5a29eb56d325ba75c5a0353bc7b5bf7dceda53caeb5",
+      "bytes": 77161027,
+      "origin": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/input_data/hyde/total_irrigated.nc",
+      "role": "Same HYDE evidence family, https://doi.org/10.5194/essd-9-927-2017 methodology"
+    },
+    {
+      "path": "data/raw/location_inputs/hyde/definitions.md",
+      "sha256": "deebdc399ab903acf67b039b2ff42739da3be1dd979ba1204555698f2a16fa44",
+      "bytes": 3854,
+      "origin": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/input_data/hyde/definitions.md",
+      "role": "Preserve disputed source version labelling"
+    },
+    {
+      "path": "data/raw/location_inputs/hydrology/river_reaches.parquet",
+      "sha256": "5d4325e7c8e4de3fb0bea9cf0b7c8ddd48c6d14794eea036643fa0da82c8b0ac",
+      "bytes": 484603931,
+      "origin": "/home/jan/development/ProsperOrPerishConstructor/artifacts/data/population_capacity/hydrology_alignment/river_reaches.parquet",
+      "role": "HydroATLAS 1.0 source geometry/attributes, https://www.hydrosheds.org/hydroatlas; CC BY 4.0"
+    },
+    {
+      "path": "data/raw/location_inputs/hydrology/GRUN_v1_GSWP3_WGS84_05_1902_2014.nc",
+      "sha256": "5e1c475199aaff654802e501acf50b587871372a16b3536e72ebf400497a244d",
+      "bytes": 1405921496,
+      "origin": "/home/jan/development/ProsperOrPerishConstructor/artifacts/data/population_capacity/hydrology_sources/hydrology/GRUN_v1_GSWP3_WGS84_05_1902_2014.nc",
+      "role": "GRUN v1, https://doi.org/10.5194/essd-11-1655-2019; original licensing retained, cache not redistributed"
+    },
+    {
+      "path": "data/raw/location_inputs/hydrology/ETOPO_2022_v1_60s_N90W180_surface.tif",
+      "sha256": "9d27d4b8ea8e76977e2988bca667d7c8fa68b927355feffcddd6b4875a7fd08e",
+      "bytes": 465969062,
+      "origin": "/home/jan/development/ProsperOrPerishConstructor/artifacts/data/population_capacity/hydrology_sources/hydrology/ETOPO_2022_v1_60s_N90W180_surface.tif",
+      "role": "NOAA ETOPO 2022, https://www.ncei.noaa.gov/products/etopo-global-relief-model; attribution"
+    }
+  ]
+}

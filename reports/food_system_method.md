@@ -20,7 +20,7 @@ HYDE is deliberately not used as crop or livelihood identity: its land-use alloc
 
 The three crop maps use canonical lower, inferred historical and upper dry-product yields, converted to edible food through the same processing, seed, loss, fallow and cropping-frequency accounts. Neither cell area nor observed population enters.
 
-The bottom graph preserves the Seshat benchmark intervals, converted with each crop's energy accounting and the benchmark's own annual cropping coefficient. A coefficient below one is a rotation fraction; above one it is harvest frequency. Apply it once. Thus Kansai's coefficient of two is handled as two harvests, not an invalid 200% land share. Graph envelopes, observations and uncertainty intervals all receive the same conversion. The two already unresolved comparisons remain labelled; conversion does not manufacture a valid benchmark.
+The bottom graph preserves the Seshat benchmark intervals and uses each crop's energy accounting. Annualization is explicit in configs/rotations.json. Most comparisons retain their published cropping coefficient. Kansai is shown as a single rice-crop equivalent: its published multi-cropping coefficient of two is retained in the evidence, but no longer interpreted as two identical rice harvests. Winter crops remain unquantified, and the anchor's harvested-area denominator is still uncertain. All components of each comparison receive the same conversion; calibration yields are unchanged. The two already unresolved comparisons remain labelled.
 
 ## Non-crop numerical estimates: experimental
 
@@ -55,3 +55,25 @@ At each non-crop target, up to 12 original, valid FORGE cells within 600 km cont
 Climate-strength settings 0, 0.25, 1 and 4 are compared using five deterministic 10-degree geographical folds. Zero is the spatial-only comparison. The selected shared value minimizes log-scaled FORGE reconstruction error, with coverage reported. This validates transfer of a process model, **not medieval food productivity**. It does not resolve the provisional livestock conversion, terrestrial-only fishing values, or modern-climate assumptions. Detailed cross-validation and before/after distributions are saved with the result.
 
 A finer [natural-grassland ANPP dataset](https://zenodo.org/records/18171957) was also downloaded and inspected. Its 1/24-degree product excludes much of the Sahara, Arabia and Iceland. It is retained as a research candidate, but is not used to fill those deserts or treated as global potential grassland. A future feed-budget replacement must first resolve that coverage and verify dry-matter/product conversions. No ANPP-based numerical change has been adopted here.
+
+
+## Food-rank review (2026-09-11)
+
+The earlier estimates are preserved in `artifacts/experiments/pre_food_rank_review`. Three narrow changes replace unsupported assumptions:
+
+1. Cassava seed loss is zero for edible roots: planting material consists of stem cuttings. The previous 5% edible-root deduction was inappropriate. Processing recovery and other losses remain unchanged. This increases cassava net calories by 1/0.95 everywhere, not selectively by region.
+2. A separate temporal rotation override applies to cassava in inland Iquitos, Monte Alegre and Purus varzea ecological units (469, 482, 496). The candidate uses one active cropping year plus 1.6 fallow years, hence a 0.3846 rotation fraction instead of 0.23. The one-year duration is a conservative scenario assumption; mean fallow of 1.6 years comes from 59 modern floodplain fields in the [Fraser et al. study](https://pmc.ncbi.nlm.nih.gov/articles/PMC3430692/). Geographic and historical transfer is inferred. The recorded sensitivity range 0.15–0.65 is illustrative, not a statistical confidence interval. GAEZ yield, management position, crop identity and physical area remain unchanged. The same annualization applies to labour as well as food.
+3. Kansai's graph now shows a labelled rice-only equivalent. The Seshat table says multi-cropping, not two rice harvests. Farris's medieval Japanese farming discussion includes winter wheat/barley and other crops. No second-crop yield is manufactured. The original coefficient and unresolved anchor convention remain in comparison tables.
+
+No general yam, cassava-upland, pearl-millet, barley, rye or sorghum yield adjustment was adopted. Amazonian upland long fallows are documented, while [FAO's African farming-system review](https://www.fao.org/4/y1860e/y1860e04.htm) describes diverse crop/fallow cycles. Later African cassava intensification cannot establish a 1300 American rate. A universal root-crop boost would not follow from this evidence. Dark-earth intensification requires its own spatial evidence; tidal/coastal varzea and other floodplain types do not inherit this override.
+
+Matched-site cereal diagnostics hold sites and annualization fixed. They are agronomic comparisons, not historical crop-availability maps. Wheat/barley differences become much smaller than differences between their assigned-region medians. Sorghum/millet scaling still lacks direct calibration, so no rank-based tuning was applied.
+
+Reproduce the review with `uv run python scripts/review_food_ranking.py` after `uv run ha1300 run`. It writes food-rank distributions, matched-site comparisons and exact candidate-change checks. Historical acceptance remains unestablished; the narrowed rotation assumption is a transparent candidate, not a newly observed medieval productivity value.
+
+
+### Explicit Seshat chart proxies
+
+Every chart row names its crop. Yemeni Coastal Plain and Deccan retain the published wheat-based Seshat points, but use local sorghum scenario ranges because their sampled wheat envelopes are unavailable. These are labelled cross-crop energy comparisons, not repaired same-crop validation. Traditional Tihama sorghum/spate agriculture (FAO, Guidelines on Spate Irrigation) and Deccan sorghum traditions (A. K. Singh, 2014) motivate the assumptions; neither establishes exact local conditions in 1300.
+
+The proxy uses the same approximate one-degree box, 121 sample points, the original benchmark annual cropping coefficient, and each crop's own edible-energy conversion. It requires common valid lower/upper sorghum samples. Conditional irrigation feasibility remains unverified. `benchmark_people.csv` records `assumed`, `range_crop`, provenance and `source_comparison_valid`; its `valid` field means the chart can draw a comparison. Original calibration validity and scientific acceptance are unchanged. Proxy observations are never clipped into their ranges.

@@ -590,7 +590,7 @@
       "kcal_kg": 1090,
       "dry_fraction": 0.35,
       "recovery": 0.85,
-      "seed_share": 0.05,
+      "seed_share": 0.0,
       "loss_share": 0.15,
       "labour_days": 100,
       "labour_range": [
@@ -619,7 +619,9 @@
           "management": 1.0,
           "interpretation": "Residual adjustment to the shared calibrated factor; unity avoids double-counting cultivar changes already contained in that factor."
         }
-      }
+      },
+      "seed_source": "amazon_manioc_soils_2012",
+      "seed_note": "Vegetative propagation uses stem cuttings, not an edible-root seed reserve. Stem supply and planting labour remain separate; processing and other losses retained."
     },
     "TAROD": {
       "name": "Dryland taro",

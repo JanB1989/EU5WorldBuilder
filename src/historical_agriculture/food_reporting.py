@@ -31,7 +31,7 @@ def food_report(root,config,out,diagnostic_paths):
         fig,ax=plt.subplots(figsize=(14,6),layout='constrained')
         # Unquantified land must remain distinct from zero and ocean.
         ax.imshow(np.ma.masked_where(food.mask,np.ones(food.shape)),extent=(-180,180,-90,90),cmap=ListedColormap(['#d9b9d5']),vmin=0,vmax=1,interpolation='nearest')
-        im=ax.imshow(data,extent=(-180,180,-90,90),cmap='YlGn',norm=norm,interpolation='nearest')
+        im=ax.imshow(data,extent=(-180,180,-90,90),cmap='RdYlGn',norm=norm,interpolation='nearest')
         base(ax);ax.set_title(names[key]+' — people fed per used hectare\nCrop scenarios; experimental non-crop analogues; aquatic food excluded')
         ticks=[x for x in [0,.001,.01,.1,1,10,100] if x<=vmax]
         bar=fig.colorbar(im,ax=ax,label='People / used ha / year · shared nonlinear scale',shrink=.8,extend='max',ticks=ticks)

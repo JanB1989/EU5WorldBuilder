@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "proxies": {
+    "Yemeni Coastal Plain": {
+      "crop": "SRG",
+      "source": "fao_spate_yemen",
+      "reason": "Sorghum is a traditional Tihama crop; local wheat scenarios unavailable. Conditional water delivery remains unverified."
+    },
+    "Deccan": {
+      "crop": "SRG",
+      "source": "deccan_sorghum_history",
+      "reason": "Sorghum/jowar is a plausible dryland Deccan staple; local wheat scenarios unavailable."
+    }
+  },
+  "policy": "Display-only cross-crop energy comparison. Seshat points retain their original crop and mass-to-calorie conversion. Proxy ranges are not calibration anchors or validated same-crop comparisons."
+}

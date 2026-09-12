@@ -1,5 +1,5 @@
 {
-  "stage": "climate-conditioned non-crop transfer and square-artifact review delivered",
+  "stage": "crop-labelled Seshat chart with two explicit proxy comparisons delivered",
   "food_mask_complete": true,
   "numeric_coverage_complete": false,
   "numeric_cells": 3246040,
@@ -7,7 +7,7 @@
   "source_grid_cells": 3259820,
   "engineering_pass": true,
   "scientific_acceptance": false,
-  "tests_passed": 37,
+  "tests_passed": 41,
   "benchmark_results": {
     "rows": 23,
     "inside": 21,
@@ -23,8 +23,14 @@
   },
   "main_figures": 5,
   "maps": 16,
-  "fingerprint": "5d498f4f4801ad67a4db7ac8a1eef8f1fb05a4ad3608ade1d05957338ee70a85",
+  "fingerprint": "a69ac6f6c152f3607e3d3309a474fe49be29ddbf924073ab7100db08ed85d0b6",
   "gallery": "artifacts/reconstruction/index.html",
   "food_method": "artifacts/reconstruction/FOOD_METHOD.md",
-  "numerical_basis": "artifacts/reconstruction/food_validation.json"
+  "numerical_basis": "artifacts/reconstruction/food_validation.json",
+  "food_rank_review": "reports/food_rank_review.json",
+  "chart_comparisons": {
+    "total": 23,
+    "direct": 21,
+    "assumed_cross_crop": 2
+  }
 }

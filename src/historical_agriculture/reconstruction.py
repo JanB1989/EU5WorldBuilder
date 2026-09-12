@@ -103,6 +103,11 @@ def calculate(root,config,out):
         m=config['management'][r['management']]
         position[mask]=m['position'];poslo[mask]=m['range'][0];poshi[mask]=m['range'][1]
         frequency[mask]=m['harvests'];fraction[mask]=m['cultivated_fraction'];maintenance[mask]=m['maintenance_days']
+    from .rotations import apply
+    eco,_=read(out/'ecoregion.tif')
+    frequency,fraction,rotation_ids,rotation_records=apply(root,config,crop_map,eco,frequency,fraction)
+    write(out/'rotation_override.tif',np.where(state==2,rotation_ids,np.nan),profile,'rotation evidence identifier')
+    write_json(out/'rotation_overrides.json',{'records':rotation_records,'denominator':'time fraction of a complete crop/fallow rotation; no land-extent allocation'})
     names=['lower_dm','upper_dm','historical_dm','lower_kcal','upper_kcal','historical_kcal','gross_kcal','labour_days','kcal_per_worker_day','historical_kcal_low','historical_kcal_high','labour_low','labour_high','upper_system','envelope_valid']
     fields={k:np.full(shape,np.nan,dtype=np.float32) for k in names}
     sensitivity=[]

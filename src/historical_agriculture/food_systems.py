@@ -132,6 +132,12 @@ def calculate_food(root,config,out):
     system_lookup=np.zeros(848,dtype=np.int16)
     for r in rules:system_lookup[r['ecoregion_ids']]=r['id']
     local_system=system_lookup[np.where(np.isfinite(eco),eco,847).astype(int)]
+    frequency=np.full(food.shape,np.nan,dtype=np.float32);fraction=frequency.copy()
+    for r in rules:
+        m=config['management'][r['management']];mask=local_system==r['id']
+        frequency[mask]=m['harvests'];fraction[mask]=m['cultivated_fraction']
+    from .rotations import apply
+    frequency,fraction,_,_=apply(root,config,food,eco,frequency,fraction)
     for code,crop in enumerate(config['crop_order'],1):
         mask=food==code
         if not mask.any():continue
@@ -143,7 +149,7 @@ def calculate_food(root,config,out):
             management=config['management'][r['management']]
             cur=lo[use]+management['position']*(hi[use]-lo[use])
             for array,dm in zip(fields,[lo[use],cur,hi[use]]):
-                _,_,net=annual_food(dm,config['crops'][crop],management['harvests'],management['cultivated_fraction'])
+                _,_,net=annual_food(dm,config['crops'][crop],frequency[use],fraction[use])
                 array[use]=people_from_kcal(net,cfg['daily_kcal_per_person'],cfg['days_per_year'])
             numeric[use]=1
     forage,stocks,fill_records=forage_arrays(root,cfg,profile,domain&np.isin(food,[19,20,21,22,23,25]))
@@ -187,11 +193,22 @@ def benchmark_people(root,config,out):
     cfg=settings(root);observations=pd.read_csv(root/'evidence/benchmarks_1300.csv').set_index('region')
     comparison=pd.read_csv(out/'benchmark_comparison.csv');rows=[]
     for _,r in comparison.iterrows():
-        record={'region':r.region,'crop':r.crop,'result':r.result,'valid':bool(r.valid)}
-        coefficient=float(observations.loc[r.region,'cropping_coefficient'])
+        record={'region':r.region,'crop':r.crop,'range_crop':r.crop,'result':r.result,'valid':bool(r.valid),'assumed':False,'source_comparison_valid':bool(r.valid)}
+        published=float(observations.loc[r.region,'cropping_coefficient'])
+        from .rotations import benchmark_coefficient
+        coefficient,label,status=benchmark_coefficient(root,r.region,published)
+        record.update(published_cropping_coefficient=published,display_label=label,annualization_status=status)
         for name in ['lower','upper','observed','observed_low','observed_high']:
             _,_,net=annual_food(float(r[name]),config['crops'][r.crop],max(1,coefficient),min(1,coefficient))
             record[name]=float(people_from_kcal(net,cfg['daily_kcal_per_person'],cfg['days_per_year'])) if r.valid else np.nan
+        if not bool(r.valid):
+            from .benchmark_proxies import assumed_range
+            proxy=assumed_range(root,config,out,r.region,observations.loc[r.region],coefficient,cfg['daily_kcal_per_person'],cfg['days_per_year'])
+            if proxy is not None:
+                record.update(proxy,valid=True,assumed=True,result='assumed_cross_crop')
+                for name in ['observed','observed_low','observed_high']:
+                    _,_,net=annual_food(float(r[name]),config['crops'][r.crop],max(1,coefficient),min(1,coefficient))
+                    record[name]=float(people_from_kcal(net,cfg['daily_kcal_per_person'],cfg['days_per_year']))
         record['annual_cropping_coefficient']=coefficient;rows.append(record)
     pd.DataFrame(rows).to_csv(out/'benchmark_people.csv',index=False)
     return rows

@@ -1,0 +1,95 @@
+{
+  "fingerprint": "3969e4c89c6f723225abb55062204dc04dd6053bef7ea8eb583f1fd254269062",
+  "tests_passed": 40,
+  "engineering_pass": true,
+  "scientific_acceptance": false,
+  "changes": {
+    "changed_cells": 144843,
+    "only_cassava_changed": true,
+    "floodplain_cells": 4188,
+    "floodplain_previous_median": 0.4258415699005127,
+    "floodplain_candidate_median": 0.749589204788208,
+    "seed_only_ratio": 1.0526315789473684,
+    "previous_median": 0.6622304916381836,
+    "candidate_median": 0.7072138786315918,
+    "ratio": 1.0526316165924072,
+    "fraction_sensitivity": [
+      0.15,
+      0.65
+    ],
+    "floodplain_sensitivity_medians": {
+      "0.15": 0.2923398017883301,
+      "0.3846153846153846": 0.749589204788208,
+      "0.65": 1.266805648803711
+    },
+    "assumption_status": "explicit modern-system analogue transferred to 1300; not historical validation"
+  },
+  "matched_site_comparisons": [
+    {
+      "first": "WHE",
+      "second": "BRL",
+      "scenario": "lower",
+      "common_viable_cells": 875565,
+      "median_energy_ratio": 1.2328132390975952,
+      "interpretation": "same sites and one harvest; agronomic diagnostic, not historical crop availability or assigned-system rank"
+    },
+    {
+      "first": "WHE",
+      "second": "BRL",
+      "scenario": "upper",
+      "common_viable_cells": 1040551,
+      "median_energy_ratio": 1.1950008869171143,
+      "interpretation": "same sites and one harvest; agronomic diagnostic, not historical crop availability or assigned-system rank"
+    },
+    {
+      "first": "WHE",
+      "second": "RYE",
+      "scenario": "lower",
+      "common_viable_cells": 684056,
+      "median_energy_ratio": 1.5492596626281738,
+      "interpretation": "same sites and one harvest; agronomic diagnostic, not historical crop availability or assigned-system rank"
+    },
+    {
+      "first": "WHE",
+      "second": "RYE",
+      "scenario": "upper",
+      "common_viable_cells": 799285,
+      "median_energy_ratio": 1.7330127954483032,
+      "interpretation": "same sites and one harvest; agronomic diagnostic, not historical crop availability or assigned-system rank"
+    },
+    {
+      "first": "FML",
+      "second": "PML",
+      "scenario": "lower",
+      "common_viable_cells": 159493,
+      "median_energy_ratio": 2.6894116401672363,
+      "interpretation": "same sites and one harvest; agronomic diagnostic, not historical crop availability or assigned-system rank"
+    },
+    {
+      "first": "FML",
+      "second": "PML",
+      "scenario": "upper",
+      "common_viable_cells": 256625,
+      "median_energy_ratio": 1.6003975868225098,
+      "interpretation": "same sites and one harvest; agronomic diagnostic, not historical crop availability or assigned-system rank"
+    },
+    {
+      "first": "SRG",
+      "second": "WHE",
+      "scenario": "lower",
+      "common_viable_cells": 583366,
+      "median_energy_ratio": 7.759830951690674,
+      "interpretation": "same sites and one harvest; agronomic diagnostic, not historical crop availability or assigned-system rank"
+    },
+    {
+      "first": "SRG",
+      "second": "WHE",
+      "scenario": "upper",
+      "common_viable_cells": 768459,
+      "median_energy_ratio": 1.3207813501358032,
+      "interpretation": "same sites and one harvest; agronomic diagnostic, not historical crop availability or assigned-system rank"
+    }
+  ],
+  "kansai": "Single rice-crop equivalent; winter crops unquantified; published coefficient 2 preserved in evidence",
+  "retained": "No rank-driven yield tuning of other crops; uncertainty and historical source transfer remain explicit"
+}

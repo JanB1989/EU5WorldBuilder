@@ -1,0 +1,112 @@
+"""One focused EU5 location map; all location values remain inspectable."""
+import json
+from pathlib import Path
+import numpy as np
+from PIL import Image
+from matplotlib import colormaps
+from .provenance import write_json
+
+METRICS=[('starting_capacity','Starting capacity','people'),('maximum_capacity','Maximum capacity','people'),('base_effective_cropland','Base effective cropland','effective ha'),('capacity_multiplier','Location multiplier','people / effective ha'),('starting_improvement_effective_cropland','Starting improvements','effective ha'),('maximum_improvement_effective_cropland','Maximum improvements','effective ha'),('remaining_improvement_effective_cropland','Remaining improvements','effective ha'),('starting_fill','Starting population / capacity','ratio'),('inferred_area_share','Inferred input share','share')]
+
+def encode_location_lookup(ids):
+    """Lossless scanline runs; classic local script avoids canvas readback/CORS."""
+    ids=np.asarray(ids)
+    if ids.ndim!=2 or not np.issubdtype(ids.dtype,np.integer) or np.any(ids<0):
+        raise ValueError('Expected nonnegative 2D integer location IDs')
+    rows=[]
+    for row in ids:
+        ends=np.r_[np.flatnonzero(row[1:]!=row[:-1])+1,len(row)]
+        starts=np.r_[0,ends[:-1]]
+        rows.append(np.column_stack((ends,row[starts])).ravel().tolist())
+    return {'width':ids.shape[1],'height':ids.shape[0],'rows':rows}
+
+def report(out,d,raw,cfg,audit,fingerprint):
+    Image.MAX_IMAGE_PIXELS=None
+    src=np.asarray(Image.open(raw/'locations.png').convert('RGB'))
+    lut=np.zeros(2**24,dtype=np.uint32)
+    lut[[int(x,16) for x in d.map_color_rgb]]=np.arange(1,len(d)+1)
+    # Preserve a native-pixel ID raster for exact location geometry access.
+    native=np.zeros(src.shape,dtype=np.uint8)
+    for y in range(0,len(src),128):
+        a=src[y:y+128].astype(np.uint32);ids=lut[(a[...,0]<<16)|(a[...,1]<<8)|a[...,2]]
+        native[y:y+128, :,0]=(ids>>16)&255;native[y:y+128,:,1]=(ids>>8)&255;native[y:y+128,:,2]=ids&255
+    Image.fromarray(native).save(out/'location_ids_native.png')
+    idsimg=Image.fromarray(native).resize((4096,2048),Image.Resampling.NEAREST)
+    idsimg.save(out/'location_ids.png');a=np.asarray(idsimg).astype(np.uint32);ids=(a[...,0]<<16)|(a[...,1]<<8)|a[...,2]
+    (out/'location_lookup.js').write_text('window.LOCATION_LOOKUP='+json.dumps(encode_location_lookup(ids),separators=(',',':'))+';\n')
+    palette=(colormaps['RdYlGn'](np.linspace(0,1,256))[:,:3]*255).astype(np.uint8)
+    fields=['location_tag','province','region','eu5_start_population']+[m[0] for m in METRICS]+['inert_capacity','starting_improvement_capacity','physical_location_ha','coastline_transfer_share','evidence_status','modelled_land','game_zone_class','centroid_x','centroid_y']
+    data=json.loads(d[fields].to_json(orient='records'))
+    manifest=[]
+    for key,label,unit in METRICS:
+        vals=d[key].to_numpy(float);pos=vals[np.isfinite(vals)&(vals>0)]
+        # Starting and maximum maps use a common numerical display scale.
+        family=['starting_capacity','maximum_capacity'] if key in ['starting_capacity','maximum_capacity'] else ['base_effective_cropland','starting_improvement_effective_cropland','maximum_improvement_effective_cropland','remaining_improvement_effective_cropland'] if 'effective_cropland' in key else [key]
+        cap=max([float(d.loc[d.modelled_land & (d[k]>0),k].quantile(.99)) if (d.modelled_land & (d[k]>0)).any() else 1 for k in family])
+        cap=cap or 1
+        if key=='inferred_area_share':cap=1
+        if key=='starting_fill':cap=2
+        log=key not in ['starting_fill','inferred_area_share']
+        t=np.log1p(np.maximum(vals,0))/np.log1p(cap) if log else np.maximum(vals,0)/cap
+        colors=np.full((len(d)+1,3),[65,70,78],dtype=np.uint8);colors[0]=[13,24,36]
+        known=np.isfinite(vals);indices=(np.clip(t[known],0,1)*255).astype(int)
+        if key in ['starting_fill','inferred_area_share']:indices=255-indices
+        colors[1:][known]=palette[indices]
+        # Distinguish domain-zero seas/lakes/wastelands from low productive land.
+        for ix,row in enumerate(d.itertuples(),1):
+            if not row.modelled_land:colors[ix]=[13,24,36] if ('sea_zones' in row.game_zone_class or 'lakes' in row.game_zone_class) else [55,61,69]
+        rgb=colors[ids];Image.fromarray(rgb).save(out/(key+'.png'))
+        manifest.append({'key':key,'label':label,'unit':unit,'cap':cap,'log':log})
+    write_json(out/'map_coverage.json',{'native_locations':int(np.sum(np.unique(((native[...,0].astype(np.uint32)<<16)|(native[...,1].astype(np.uint32)<<8)|native[...,2]))>0)),'overview_locations':int(np.sum(np.unique(ids)>0)),'note':'Overview is a downsampled display, not an aggregation or inventory filter. Native ID raster preserves every location; search/table expose every value.'})
+    (out/'data.js').write_text('window.LOCATIONS='+json.dumps(data,separators=(',',':'))+';\nwindow.METRICS='+json.dumps(manifest)+';\n')
+    html=HTML.replace('__COUNT__',f'{len(d):,}').replace('__START__',f"{audit['total_starting_capacity']/1e6:,.1f} million").replace('__MAX__',f"{audit['total_maximum_capacity']/1e6:,.1f} million").replace('__HASH__',fingerprint[:16])
+    (out/'index.html').write_text(html)
+    lines=['# Location iteration 01 — complete inferred dataset','',f"All {len(d):,} inventory locations have all four required values. Engineering completion is separate from historical acceptance.",'',f"Starting support: {audit['total_starting_capacity']:,.0f} people. Maximum support: {audit['total_maximum_capacity']:,.0f} people.",'',f"{audit['below_starting_population_locations']:,} locations are below the cached starting population. This is reported, not corrected through population fitting.",'','## Required values and evidence','', 'See `location_values.csv`, `locations.csv`, `manifest.json`, `validation.json` and the native-grid TIFFs. The central maximum is the configured preindustrial clearing and seasonal surface-water scenario; it is not a measured universal maximum.','', '## Limitations','']+['- '+x for x in audit['limitations']]
+    (out/'REPORT.md').write_text('\n'.join(lines)+'\n')
+
+HTML=r"""<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EU5 location capacity · iteration 01</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#0c1420;color:#e0e8ef;font:15px system-ui}main{max-width:1550px;margin:auto;padding:24px}h1{margin:0;font-size:27px}p{color:#a9b9c9;line-height:1.5}header{display:flex;justify-content:space-between;gap:20px;align-items:center}.tag{color:#ecd59c;font-size:13px}.stats{display:flex;gap:36px;margin:20px 0}.stats strong{display:block;font-size:23px}.stats span{color:#9aacbd;font-size:13px}select,input,button{background:#1b2a3d;color:#e0e8ef;border:1px solid #405269;border-radius:6px;padding:9px;font:inherit}button{cursor:pointer}.controls{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px}.map{position:relative;overflow:hidden;border:1px solid #344357;border-radius:9px;background:#0d1824}canvas{display:block;width:100%;height:560px;touch-action:none;cursor:grab}aside{background:#142032;border:1px solid #344357;padding:17px;border-radius:9px}aside h2{font-size:20px;margin:0 0 15px}.row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #28384c;padding:9px 0}.row span{color:#a7b9ca}.row b{text-align:right}.legend{display:flex;align-items:center;gap:12px;margin:12px 0;font-size:12px;color:#b5c5d4}.bar{height:12px;width:240px;background:linear-gradient(90deg,#a50026,#f46d43,#ffffbf,#66bd63,#006837);border-radius:3px}a{color:#80c4f5}.links{display:flex;gap:20px;flex-wrap:wrap}small{color:#a8b9c9}#matches{display:none;max-height:180px;overflow:auto;background:#1b2a3d;border:1px solid #405269;padding:6px}#matches button{display:block;width:100%;text-align:left;border:0}footer{margin-top:18px;font-size:12px;color:#8c9eaf}.location-heading{margin-bottom:4px}aside .place{display:block;margin-bottom:18px;font-size:12px}.capacity-overview{background:#1c3046;border-radius:8px;padding:14px}.capacity-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.capacity-pair span,.maximum-summary span{display:block;font-size:12px;color:#b4c7d8}.capacity-pair strong{display:block;margin-top:3px;font-size:24px;font-variant-numeric:tabular-nums}.fill-summary{margin-top:10px;color:#b4d8ec;font-size:13px}.maximum-summary{margin-top:13px;padding-top:12px;border-top:1px solid #3b5065;display:flex;align-items:center;justify-content:space-between;gap:10px}.maximum-summary strong{font-size:21px;font-variant-numeric:tabular-nums}.input-heading{font-size:14px;margin:22px 0 5px}.model-input{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #28384c}.model-input span{font-size:14px}.model-input small{display:block;font-size:11px;margin-top:3px}.model-input b{font-size:16px;white-space:nowrap;font-variant-numeric:tabular-nums}.model-formula{font-size:13px;line-height:1.6;margin:13px 0 5px;color:#d7e7f4}.unit-note{font-size:11px;line-height:1.5;margin:0 0 16px}aside details{border-top:1px solid #344357;padding-top:13px}aside summary{cursor:pointer;color:#9cc9e9;font-size:13px}aside details .row{font-size:12px}aside details p{font-size:12px}.model-status{font-size:11px;color:#cfbf99;margin:8px 0 0}@media(max-width:950px){.layout{grid-template-columns:1fr}canvas{height:420px}.stats{gap:15px;flex-wrap:wrap}header{display:block}}</style>
+<main><header><div><h1>EU5 location capacity</h1><p>Four values per location · baseline, productivity, inherited improvements and feasible maximum</p></div><div class="tag">Iteration 01 · all map zones covered<br>Historical calibration remains provisional</div></header>
+<div class="stats"><div><strong>__COUNT__ / __COUNT__</strong><span>map zones with all four values</span></div><div><strong>__START__</strong><span>starting support</span></div><div><strong>__MAX__</strong><span>maximum scenario support</span></div></div>
+<div class="controls"><select id="metric"></select><input id="search" placeholder="Find a location…" aria-label="Find location"><button id="reset">World view</button><button id="plus">+</button><button id="minus">−</button></div><div id="matches"></div>
+<div class="layout"><section><div class="map"><canvas id="map"></canvas></div><div class="legend"><span>0</span><div class="bar"></div><span id="scale"></span></div><small>20,929 modelled land locations; 7,644 nonsettlement zones have explicit zero capacity. Drag to pan · scroll to zoom · click a location. Colour saturation is a display limit; values are not capped.</small></section><aside id="detail"><h2>Select a location</h2><p>Each location has all four required estimates. Search includes small islands that may disappear at world-view resolution.</p><p>Maximum improvements include existing improvements.</p></aside></div>
+<p>Capacity = multiplier × (base + improvements). Effective hectares are support equivalents; physical land and water are accounted separately. The maximum holds the crop system fixed and allows additional clearing and constrained surface-water investment.</p>
+<div class="links"><a href="location_values.csv">Four-value dataset</a><a href="locations.csv">Full location ledger</a><a href="REPORT.md">Iteration findings</a><a href="validation.json">Validation</a><a href="manifest.json">Source and parameter manifest</a><a href="location_ids_native.png">Native location geometry</a></div>
+<footer>Fingerprint __HASH__ · Modern environmental proxies, historical evidence around 1300. Starting population is context, not a fitted target. Water-management and land-access estimates carry uncertainty.</footer></main>
+<script src="data.js"></script><script src="location_lookup.js"></script><script>
+const canvas=document.getElementById('map'),ctx=canvas.getContext('2d'),select=document.getElementById('metric');
+METRICS.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=m.label;select.append(o)});
+let img=new Image(),z=1,ox=0,oy=0,selected=-1,drag=null,moved=false;
+function locationAt(x,y){const map=window.LOCATION_LOOKUP;if(!map||x<0||y<0||x>=map.width||y>=map.height)return 0;const row=map.rows[Math.floor(y)];let lo=0,hi=row.length/2;while(lo<hi){const mid=(lo+hi)>>>1;if(x<row[mid*2])hi=mid;else lo=mid+1}return lo<row.length/2?row[lo*2+1]:0}
+function fit(){canvas.width=canvas.clientWidth*devicePixelRatio;canvas.height=canvas.clientHeight*devicePixelRatio;draw()}
+function draw(){ctx.fillStyle='#0d1824';ctx.fillRect(0,0,canvas.width,canvas.height);if(!img.complete)return;let s=Math.min(canvas.width/4096,canvas.height/2048)*z;ctx.imageSmoothingEnabled=false;ctx.drawImage(img,ox,oy,4096*s,2048*s)}
+function load(){let m=METRICS[select.value];document.querySelector('.bar').style.transform=(m.key==='starting_fill'||m.key==='inferred_area_share')?'scaleX(-1)':'none';img=new Image();img.onload=draw;img.src=m.key+'.png';document.getElementById('scale').textContent=new Intl.NumberFormat('en',{maximumFractionDigits:2,notation:'compact'}).format(m.cap)+'+ '+m.unit+(m.log?' · logarithmic':' · linear');}
+function esc(x){return String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function fmt(x){return x===null?'Unavailable':new Intl.NumberFormat('en',{maximumFractionDigits:2}).format(x)}
+function whole(x){return x===null||x===undefined?'Unavailable':new Intl.NumberFormat('en',{maximumFractionDigits:0}).format(x)}
+function placeName(x){return String(x||'').replace(/_(province|region)$/,'').replaceAll('_',' ').replace(/\b\w/g,c=>c.toUpperCase())}
+function show(i){
+  selected=i;const d=LOCATIONS[i];if(!d)return;
+  const input=(label,value,hint='')=>'<div class="model-input"><div><span>'+label+'</span>'+(hint?'<small>'+hint+'</small>':'')+'</div><b>'+value+'</b></div>';
+  const factor=new Intl.NumberFormat('en',{maximumFractionDigits:3}).format(d.capacity_multiplier);
+  const fill=Number.isFinite(d.starting_fill)?whole(d.starting_fill*100)+'% of starting capacity occupied':'Starting fill unavailable';
+  const rows=[['Base contribution',whole(d.inert_capacity)+' people'],['Existing improvement contribution',whole(d.starting_improvement_capacity)+' people'],['Additional capacity still possible',whole(d.maximum_capacity-d.starting_capacity)+' people'],['Remaining improvement units',whole(d.remaining_improvement_effective_cropland)],['Physical location area',d.physical_location_ha===null?'Not evaluated':fmt(d.physical_location_ha/100)+' km²']];
+  document.getElementById('detail').innerHTML=
+    '<h2 class="location-heading">'+esc(placeName(d.location_tag))+'</h2><small class="place">'+esc(placeName(d.province))+' · '+esc(placeName(d.region))+'</small>'+
+    '<div class="capacity-overview"><div class="capacity-pair"><div><span>Starting population</span><strong>'+whole(d.eu5_start_population)+'</strong></div><div><span>Starting capacity</span><strong>'+whole(d.starting_capacity)+'</strong></div></div><div class="fill-summary">'+fill+'</div><div class="maximum-summary"><span>Maximum capacity</span><strong>'+whole(d.maximum_capacity)+'</strong></div></div>'+
+    '<h3 class="input-heading">The four model values</h3>'+
+    input('Base land',whole(d.base_effective_cropland),'Before represented improvements')+
+    input('Productivity','× '+factor,'People supported per effective land unit')+
+    input('Existing improvements',whole(d.starting_improvement_effective_cropland),'Already present at game start')+
+    input('Maximum improvements',whole(d.maximum_improvement_effective_cropland),'Total limit, including existing improvements')+
+    '<p class="model-formula">Capacity = (base + improvements)<br>× productivity</p><p class="unit-note">Land and improvements use effective units, not physical hectares. Display values are rounded.</p>'+
+    '<details><summary>Breakdown &amp; evidence</summary>'+rows.map(([k,v])=>'<div class="row"><span>'+k+'</span><b>'+v+'</b></div>').join('')+'<p>'+esc(d.evidence_status)+'<br>Coastline analogue: '+fmt(d.coastline_transfer_share*100)+'%</p></details>'+
+    '<p class="model-status">'+(d.modelled_land===false?'Non-settlement zone; capacity set to zero.':'First-iteration estimates; subject to refinement.')+'</p>';
+}
+function pick(e){let b=canvas.getBoundingClientRect(),s=Math.min(canvas.width/4096,canvas.height/2048)*z,x=Math.floor(((e.clientX-b.left)*devicePixelRatio-ox)/s),y=Math.floor(((e.clientY-b.top)*devicePixelRatio-oy)/s);const id=locationAt(x,y);if(id)show(id-1)}
+canvas.onpointerdown=e=>{drag=[e.clientX,e.clientY,ox,oy];moved=false;canvas.setPointerCapture(e.pointerId)};canvas.onpointermove=e=>{if(!drag)return;let dx=e.clientX-drag[0],dy=e.clientY-drag[1];if(Math.abs(dx)+Math.abs(dy)>3)moved=true;ox=drag[2]+dx*devicePixelRatio;oy=drag[3]+dy*devicePixelRatio;draw()};canvas.onpointerup=e=>{if(drag&&!moved)pick(e);drag=null};canvas.onpointercancel=()=>{drag=null};
+function zoom(f,x=canvas.width/2,y=canvas.height/2){let nz=Math.min(40,Math.max(.5,z*f));let r=nz/z;ox=x-(x-ox)*r;oy=y-(y-oy)*r;z=nz;draw()}
+canvas.onwheel=e=>{e.preventDefault();let b=canvas.getBoundingClientRect();zoom(e.deltaY<0?1.2:1/1.2,(e.clientX-b.left)*devicePixelRatio,(e.clientY-b.top)*devicePixelRatio)};
+document.getElementById('plus').onclick=()=>zoom(1.5);document.getElementById('minus').onclick=()=>zoom(1/1.5);document.getElementById('reset').onclick=()=>{z=1;ox=oy=0;draw()};select.onchange=load;
+const search=document.getElementById('search'),matches=document.getElementById('matches');search.oninput=()=>{matches.replaceChildren();let q=search.value.trim().toLowerCase().replaceAll(' ','_');matches.style.display=q?'block':'none';if(!q)return;LOCATIONS.map((d,i)=>[d,i]).filter(([d])=>d.location_tag.includes(q)||d.province.includes(q)).slice(0,15).forEach(([d,i])=>{let b=document.createElement('button');b.textContent=d.location_tag+' · '+d.province;b.onclick=()=>{show(i);matches.style.display='none';search.value=d.location_tag;if(d.centroid_x!==null){z=5;let s=Math.min(canvas.width/4096,canvas.height/2048)*z;ox=canvas.width/2-d.centroid_x/4*s;oy=canvas.height/2-d.centroid_y/4*s;draw()}};matches.append(b)})};window.onresize=fit;fit();load();
+</script></html>"""

@@ -1,0 +1,32 @@
+"""Independent delivery validation, including stale-input and map coverage gates."""
+from pathlib import Path
+import argparse,json
+import numpy as np
+import pandas as pd
+from historical_agriculture.location_model import validate_frame,source_fingerprint,FIELDS
+from historical_agriculture.location_inventory import read_zone_inventory
+from historical_agriculture.provenance import digest,write_json
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--output',type=Path,default=Path('artifacts/locations'));parser.add_argument('--config',type=Path,default=Path('configs/locations.json'));args=parser.parse_args()
+    root=Path.cwd();out=args.output;cfg=json.loads(args.config.read_text());manifest=json.loads((out/'manifest.json').read_text())
+    fp,_=source_fingerprint(root,args.config.resolve(),root/cfg['food_directory'],root/cfg['water_directory'])
+    if fp!=manifest['fingerprint']:raise ValueError('Stale inputs or code: rebuild locations')
+    for name,sha in manifest['outputs'].items():
+        if digest(out/name)!=sha:raise ValueError('Changed artifact: '+name)
+    d=pd.read_csv(out/'locations.csv',keep_default_na=False)
+    for k in FIELDS+['inert_capacity','starting_capacity','maximum_capacity','remaining_improvement_effective_cropland']:d[k]=pd.to_numeric(d[k],errors='raise')
+    inv=read_zone_inventory(root/cfg['input_directory']);checks=validate_frame(d,inv)
+    coverage=json.loads((out/'map_coverage.json').read_text())
+    if coverage['native_locations']!=len(inv):raise ValueError('Map missing locations')
+    budget=np.load(out/'water_accounts.npz');down=budget['downstream'];outlets=np.flatnonzero(down<0)
+    water_cfg=json.loads((root/'configs/water.json').read_text());reserve=water_cfg['irrigation']['protected_runoff_fraction']
+    residuals={}
+    for mode in ['historical','maximum']:
+        residual=budget['runoff_m3'].sum(axis=1)*(1-reserve)-budget[mode+'_withdrawal_m3'].sum(axis=1)-budget[mode+'_losses_m3'].sum(axis=1)-budget[mode+'_outflow_m3'][:,outlets].sum(axis=1)
+        residuals[mode]=float(np.max(np.abs(residual)))
+        if residuals[mode]>1:raise ValueError('Water budget does not reconcile')
+    # Partial ledgers, null values, changed maps or stale fingerprints cannot certify completion.
+    result={'pass':True,'location_count':len(d),'checks':checks,'native_map_coverage':coverage['native_locations'],'water_residual_m3':residuals,'fingerprint':fp}
+    write_json(out/'delivery_checks.json',result);print(json.dumps(result,indent=2))
+if __name__=='__main__':main()

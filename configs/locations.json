@@ -53,5 +53,10 @@
     ],
     "status": "Explicit low-confidence same-livelihood/ecoregion/climate analogue for wholly unsupported ownable locations. Uses existing terrestrial support, not fish or population. Lower donor decile excluded as near-zero interpolation tails; replacement is lower quartile of eight environmental neighbours."
   },
-  "multiplier_ceiling": 5.0
+  "multiplier_ceiling": 5.0,
+  "refinement_config": "configs/location_refinements.json",
+  "refinement_variant": "central",
+  "equal_reference_area_ha": 246651.09965447552,
+  "equal_area_base_land_floor": 1000.0,
+  "system_round_config": "configs/cultivated_systems.json"
 }

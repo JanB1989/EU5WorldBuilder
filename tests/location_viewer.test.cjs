@@ -34,14 +34,16 @@ assert.match(panel,/<details><summary>Breakdown &amp; evidence<\/summary>/);
 console.log('PASS: summary first, four inputs, percentage fill, secondary details collapsed');
 
 sandbox.AREA_DATA={physical:data,equal:data.map(d=>({...d,starting_capacity:90,maximum_capacity:150,starting_fill:1/9}))};
-sandbox.AREA_COMPARISON={reference_area_ha:150,starting_total:180,maximum_total:300,physical_maximum_total:300};
+sandbox.AREA_COMPARISON={reference_area_ha:150,starting_total:1800000,physical_starting_total:600000,maximum_total:3000000,physical_maximum_total:1200000};
 elements.areaMode.value='equal';elements.areaMode.onchange();
 assert.match(elements.detail.innerHTML,/11% of starting capacity occupied/);
+assert.equal(elements.startingTotal.textContent,'1.8 million');
 assert.match(elements.areaNote.textContent,/150 ha/);
 assert.equal(elements.valuesLink.href,'location_values_equal_area.csv');
 assert.equal(vm.runInContext('img.src',sandbox),'starting_capacity_equal.png');
 elements.areaMode.value='physical';elements.areaMode.onchange();
 assert.match(elements.detail.innerHTML,/33% of starting capacity occupied/);
+assert.equal(elements.startingTotal.textContent,'0.6 million');
 assert.equal(elements.valuesLink.href,'location_values.csv');
 console.log('PASS: area switch refreshes selected location, explanation and downloads');
 

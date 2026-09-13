@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "status": "evidence-guided candidate; numerical proxies are inferred, not measured medieval values",
+  "china": {
+    "ecoregion_ids": [
+      236,
+      268,
+      659
+    ],
+    "crop": "RCW",
+    "maximum_elevation_m": 400,
+    "maximum_relief_m": 100,
+    "minimum_reconstructed_cropland_fraction": 0.01,
+    "position": 0.6,
+    "rotation_fraction": 0.75,
+    "harvests": 1,
+    "source_ids": [
+      "sangyuanwei_icid"
+    ],
+    "interpretation": "Cultivated lowland wet-rice cells within the previous extensive-upland assignment receive the existing managed-system coefficients. Preserve old natural base and uplands; no new cropland or irrigation service."
+  },
+  "prairie": {
+    "ecoregion_ids": [
+      384,
+      387,
+      388,
+      389,
+      392,
+      395,
+      397,
+      402
+    ],
+    "pnv_groups": [
+      "grassland",
+      "savanna"
+    ],
+    "upland_access_fraction": 0.015,
+    "river_access_fraction": 0.05,
+    "river_decay_km": 2,
+    "source_ids": [
+      "plains_nps",
+      "prairie_sod_nps"
+    ],
+    "interpretation": "Replace automatic 10\u201315% open-land agriculture with a small accessible fraction increasing near rivers; preserve reconstructed cultivated area and physical maximum. Fractions are explicit uncertain analogues, not observations."
+  },
+  "andes": {
+    "ecoregion_ids": [
+      444,
+      448,
+      457,
+      460,
+      477,
+      486,
+      493,
+      499,
+      504,
+      513,
+      523,
+      526,
+      531,
+      538,
+      542,
+      549,
+      582,
+      608,
+      587,
+      588,
+      589,
+      590,
+      591,
+      593,
+      594,
+      595
+    ],
+    "minimum_elevation_m": 3300,
+    "maximum_elevation_m": 3800,
+    "from_crop": "MZE",
+    "to_crop": "WPO",
+    "source_ids": [
+      "andean_fao"
+    ],
+    "interpretation": "Prefer historically available potatoes over maize in the documented altitude band if adjusted potato scenarios are viable; preserve old baseline support and land/water budgets. Terraces remain embodied in reconstructed cultivation, with no invented additional hectares."
+  },
+  "sensitivity": {
+    "conservative": {
+      "china_position": 0.45,
+      "china_rotation_fraction": 0.5,
+      "prairie_upland_access_fraction": 0.03,
+      "prairie_river_access_fraction": 0.075,
+      "andes_minimum_elevation_m": 3400,
+      "andes_maximum_elevation_m": 3700,
+      "coldfields_fresh_potato_kg_per_harvest": 3000,
+      "coldfields_active_rotation_fraction": 0.375
+    },
+    "central": {},
+    "strong": {
+      "china_position": 0.6,
+      "china_rotation_fraction": 0.85,
+      "prairie_upland_access_fraction": 0.005,
+      "prairie_river_access_fraction": 0.025,
+      "andes_minimum_elevation_m": 3200,
+      "andes_maximum_elevation_m": 3900,
+      "coldfields_fresh_potato_kg_per_harvest": 6000,
+      "coldfields_active_rotation_fraction": 0.5
+    }
+  },
+  "selection": "Central values frozen before candidate comparisons; sensitivity ranges expose uncertainty and are not used to fit population.",
+  "coldfields": {
+    "ecoregion_ids": [
+      588,
+      589
+    ],
+    "minimum_elevation_m": 3800,
+    "maximum_elevation_m": 4200,
+    "maximum_relief_m": 100,
+    "minimum_cropland_fraction": 0.001,
+    "fresh_potato_kg_per_harvest": 4000,
+    "active_rotation_fraction": 0.5,
+    "harvests": 1,
+    "source_ids": [
+      "andean_fao",
+      "titicaca_potato_experiment"
+    ],
+    "interpretation": "Inferred cold-adapted field-system analogue only where HYDE records cultivation and standard potato upper yield is zero on relatively level puna. Four t fresh per harvested hectare and alternate-year cropping are conservative transfer assumptions, not historical observations. No additional hectares or water, no universal terrace/raised-field gain."
+  },
+  "improvement_reference": {
+    "ecoregion_ids": [
+      345,
+      348,
+      353,
+      354,
+      355,
+      356,
+      358,
+      361,
+      362,
+      366,
+      367,
+      368,
+      386,
+      394,
+      396,
+      398,
+      430,
+      434,
+      438
+    ],
+    "crop": "MZE",
+    "management": "rotation",
+    "source_ids": [
+      "plains_nps"
+    ],
+    "interpretation": "Conditional improvement productivity in non-crop Plains/Rockies systems, using the same maize/rotation reference as adjacent agricultural systems. Not a claim of historical cultivation. Reference normalization only: does not change actual food, land, irrigation service or total support. Irrigated yield is conditional per improved hectare, not permission to irrigate additional land. Missing scenario data remain excluded."
+  }
+}

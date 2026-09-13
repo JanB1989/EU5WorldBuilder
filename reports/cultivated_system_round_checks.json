@@ -1,0 +1,129 @@
+{
+  "baseline_fingerprint": "cc9d76f2a709a40d7fb7667d2fd819fb56c90b275432eef9d4463656dba77e2d",
+  "variants": {
+    "conservative": {
+      "fingerprint": "e398643caeaf5bf79551bcffe6e735e53f1eba7bbeb93729ea03f6c899480025",
+      "summary": {
+        "ownable": 20893,
+        "urban": 1014,
+        "urban_over_start": 435,
+        "unknown": 0,
+        "rural_or_unranked": 19879,
+        "rural_over_start": 7057,
+        "rural_over_max": 2969,
+        "rural_provinces": 3819,
+        "rural_province_categories": {
+          "within_start": 2676,
+          "within_maximum_only": 738,
+          "above_maximum": 405
+        },
+        "rural_starting_capacity": 660928454.8181019,
+        "rural_population": 336637547.0
+      },
+      "preserved": {
+        "base_effective_cropland": true,
+        "capacity_multiplier": true,
+        "physical_location_ha": true,
+        "starting_crop_ha": true,
+        "maximum_crop_ha": true,
+        "starting_served_ha": true,
+        "maximum_served_ha": true,
+        "baseline_crop_fraction.tif": true,
+        "starting_crop_fraction.tif": true,
+        "maximum_crop_fraction.tif": true,
+        "starting_served_fraction.tif": true,
+        "maximum_served_fraction.tif": true,
+        "water_accounts.npz": true
+      },
+      "outside_mask_unchanged": true,
+      "capacity_nondecreasing_from_baseline_and_weaker_variant": true,
+      "changed_starting_locations": 638
+    },
+    "central": {
+      "fingerprint": "08575cf03d23e4132c7bb93378917f192c081b1423f3185d634c99e4edd5615d",
+      "summary": {
+        "ownable": 20893,
+        "urban": 1014,
+        "urban_over_start": 432,
+        "unknown": 0,
+        "rural_or_unranked": 19879,
+        "rural_over_start": 7040,
+        "rural_over_max": 2946,
+        "rural_provinces": 3819,
+        "rural_province_categories": {
+          "within_start": 2685,
+          "within_maximum_only": 733,
+          "above_maximum": 401
+        },
+        "rural_starting_capacity": 664158214.0630507,
+        "rural_population": 336637547.0
+      },
+      "preserved": {
+        "base_effective_cropland": true,
+        "capacity_multiplier": true,
+        "physical_location_ha": true,
+        "starting_crop_ha": true,
+        "maximum_crop_ha": true,
+        "starting_served_ha": true,
+        "maximum_served_ha": true,
+        "baseline_crop_fraction.tif": true,
+        "starting_crop_fraction.tif": true,
+        "maximum_crop_fraction.tif": true,
+        "starting_served_fraction.tif": true,
+        "maximum_served_fraction.tif": true,
+        "water_accounts.npz": true
+      },
+      "outside_mask_unchanged": true,
+      "capacity_nondecreasing_from_baseline_and_weaker_variant": true,
+      "changed_starting_locations": 638
+    },
+    "strong": {
+      "fingerprint": "b44406b59ceff047551112b57bc9570df0d7081f656c1b5f05963663ae03852c",
+      "summary": {
+        "ownable": 20893,
+        "urban": 1014,
+        "urban_over_start": 430,
+        "unknown": 0,
+        "rural_or_unranked": 19879,
+        "rural_over_start": 7006,
+        "rural_over_max": 2921,
+        "rural_provinces": 3819,
+        "rural_province_categories": {
+          "within_start": 2688,
+          "within_maximum_only": 733,
+          "above_maximum": 398
+        },
+        "rural_starting_capacity": 668018530.0574509,
+        "rural_population": 336637547.0
+      },
+      "preserved": {
+        "base_effective_cropland": true,
+        "capacity_multiplier": true,
+        "physical_location_ha": true,
+        "starting_crop_ha": true,
+        "maximum_crop_ha": true,
+        "starting_served_ha": true,
+        "maximum_served_ha": true,
+        "baseline_crop_fraction.tif": true,
+        "starting_crop_fraction.tif": true,
+        "maximum_crop_fraction.tif": true,
+        "starting_served_fraction.tif": true,
+        "maximum_served_fraction.tif": true,
+        "water_accounts.npz": true
+      },
+      "outside_mask_unchanged": true,
+      "capacity_nondecreasing_from_baseline_and_weaker_variant": true,
+      "changed_starting_locations": 638
+    }
+  },
+  "base_floor": 1000,
+  "multiplier_bounds": [
+    0.25,
+    5.0
+  ],
+  "tests": {
+    "pytest_passed": 112,
+    "warnings": "6 existing Rasterio pending-deprecation warnings",
+    "viewer_tests_passed": true
+  }
+}

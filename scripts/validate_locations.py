@@ -21,6 +21,13 @@ def main():
     equal=pd.read_csv(out/'locations_equal_area.csv',keep_default_na=False)
     validate_frame(equal,inv)
     equal_settlement=audit_settlement_values(equal,inv)
+    if (equal.loc[equal.is_ownable,'base_effective_cropland']<cfg.get('equal_area_base_land_floor',0)-1e-9).any():raise ValueError('Base land below configured floor')
+    from historical_agriculture.location_area import equal_area
+    expected,_=equal_area(pd.read_csv(out/'locations.csv'),cfg.get('equal_reference_area_ha'),cfg.get('equal_area_base_land_floor',0))
+    for col in FIELDS+['starting_capacity','maximum_capacity','base_land_floor_added_capacity']:
+        if not np.allclose(equal[col],expected[col],rtol=1e-12,atol=1e-8):raise ValueError('Equal-area/floor calculation mismatch: '+col)
+    from historical_agriculture.improvement_audit import validate_components
+    validate_components(d);validate_components(equal)
     for version in [d,equal]:
         own=version.loc[version.is_ownable,'capacity_multiplier'].to_numpy(float)
         if np.any(own<cfg['multiplier_floor']) or np.any(own>cfg['multiplier_ceiling']):

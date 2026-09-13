@@ -35,14 +35,25 @@ def report(out,d,raw,cfg,audit,fingerprint):
     idsimg.save(out/'location_ids.png');a=np.asarray(idsimg).astype(np.uint32);ids=(a[...,0]<<16)|(a[...,1]<<8)|a[...,2]
     (out/'location_lookup.js').write_text('window.LOCATION_LOOKUP='+json.dumps(encode_location_lookup(ids),separators=(',',':'))+';\n')
     palette=(colormaps['RdYlGn'](np.linspace(0,1,256))[:,:3]*255).astype(np.uint8)
-    fields=['location_tag','province','region','eu5_start_population']+[m[0] for m in METRICS]+['inert_capacity','starting_improvement_capacity','physical_location_ha','coastline_transfer_share','terrestrial_analogue_share','unbounded_reference_multiplier','multiplier_bound_status','evidence_status','modelled_land','is_ownable','game_zone_class','centroid_x','centroid_y']
+    fields=['location_tag','province','region','eu5_start_population']+[m[0] for m in METRICS]+['inert_capacity','starting_improvement_capacity','physical_location_ha','coastline_transfer_share','terrestrial_analogue_share','unbounded_reference_multiplier','multiplier_bound_status','china_refinement_share','andes_refinement_share','prairie_refinement_share','improvement_reference_refinement_share','management_envelope_refinement_share','cultivated_system_refinement_share','starting_location_rank','settlement_context','starting_clearing_capacity','starting_management_capacity','starting_irrigation_capacity','remaining_clearing_capacity','remaining_management_capacity','remaining_irrigation_capacity','evidence_status','modelled_land','is_ownable','game_zone_class','centroid_x','centroid_y']
+    d=d.copy()
+    d['base_land_floor_added_units']=0.
+    d['base_land_floor_added_capacity']=0.
+    fields+=['base_land_floor_added_units','base_land_floor_added_capacity']
     data=json.loads(d[fields].to_json(orient='records'))
     from .location_area import equal_area
-    equal,comparison=equal_area(d)
+    equal,comparison=equal_area(d,cfg.get("equal_reference_area_ha"),cfg.get("equal_area_base_land_floor",0))
     equal.to_csv(out/'locations_equal_area.csv',index=False,float_format='%.15g')
     primary=['location_tag','base_effective_cropland','capacity_multiplier','starting_improvement_effective_cropland','maximum_improvement_effective_cropland']
     equal[primary].to_csv(out/'location_values_equal_area.csv',index=False,float_format='%.15g')
     write_json(out/'area_comparison.json',comparison)
+    from .improvement_audit import report as improvement_report
+    improvement_report(out,equal,fingerprint)
+    if cfg.get('refinement_config'):
+        from .regional_comparison import report as regional_report
+        regional_report(raw.parents[2],out,equal,cfg,fingerprint)
+    from .rural_pressure import report as rural_report
+    rural_report(raw.parents[2],out,equal,fingerprint)
     own=equal.loc[equal.is_ownable].copy()
     prior=own.unbounded_reference_multiplier.clip(lower=.01)
     comparison_bounds={
@@ -110,7 +121,7 @@ HTML=r"""<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewpo
 <div class="controls"><select id="areaMode" aria-label="Location area treatment"><option value="physical">Original · actual area</option><option value="equal">Comparison · equal area</option></select><select id="metric"></select><input id="search" placeholder="Find a location…" aria-label="Find location"><button id="reset">World view</button><button id="plus">+</button><button id="minus">−</button></div><div id="matches"></div>
 <p id="areaNote">Original: support scales with actual location area.</p><div class="layout"><section><div class="map"><canvas id="map"></canvas></div><div class="legend"><span>0</span><div class="bar"></div><span id="scale"></span></div><small>20,929 modelled land locations; 7,644 nonsettlement zones have explicit zero capacity. Drag to pan · scroll to zoom · click a location. Colour saturation is a display limit; values are not capped.</small></section><aside id="detail"><h2>Select a location</h2><p>Each location has all four required estimates. Search includes small islands that may disappear at world-view resolution.</p><p>Maximum improvements include existing improvements.</p></aside></div>
 <p>Capacity = multiplier × (base + improvements). Effective hectares are support equivalents; physical land and water are accounted separately. The maximum holds the crop system fixed and allows additional clearing and constrained surface-water investment.</p>
-<div class="links"><a id="valuesLink" href="location_values.csv">Four-value dataset</a><a id="ledgerLink" href="locations.csv">Full location ledger</a><a href="REPORT.md">Iteration findings</a><a href="validation.json">Validation</a><a href="manifest.json">Source and parameter manifest</a><a href="location_ids_native.png">Native location geometry</a></div>
+<div class="links"><a id="valuesLink" href="location_values.csv">Four-value dataset</a><a id="ledgerLink" href="locations.csv">Full location ledger</a><a href="REPORT.md">Iteration findings</a><a href="IMPROVEMENTS.md">Improvement audit</a><a href="rural_pressure.html">Rural pressure</a> · <a href="regional_comparison.html">Regional changes</a><a href="validation.json">Validation</a><a href="manifest.json">Source and parameter manifest</a><a href="location_ids_native.png">Native location geometry</a></div>
 <footer>Fingerprint __HASH__ · Modern environmental proxies, historical evidence around 1300. Starting population is context, not a fitted target. Water-management and land-access estimates carry uncertainty.</footer></main>
 <script src="data.js"></script><script src="location_lookup.js"></script><script>
 const canvas=document.getElementById('map'),ctx=canvas.getContext('2d'),select=document.getElementById('metric');
@@ -130,7 +141,7 @@ function show(i){
   const input=(label,value,hint='')=>'<div class="model-input"><div><span>'+label+'</span>'+(hint?'<small>'+hint+'</small>':'')+'</div><b>'+value+'</b></div>';
   const factor=new Intl.NumberFormat('en',{maximumFractionDigits:3}).format(d.capacity_multiplier);
   const fill=Number.isFinite(d.starting_fill)?whole(d.starting_fill*100)+'% of starting capacity occupied':'Starting fill unavailable';
-  const rows=[['Base contribution',whole(d.inert_capacity)+' people'],['Existing improvement contribution',whole(d.starting_improvement_capacity)+' people'],['Additional capacity still possible',whole(d.maximum_capacity-d.starting_capacity)+' people'],['Remaining improvement units',whole(d.remaining_improvement_effective_cropland)],['Reference productivity before game bounds',fmt(d.unbounded_reference_multiplier)],['Physical location area',d.physical_location_ha===null?'Not evaluated':fmt(d.physical_location_ha/100)+' km²']];
+  const rows=[['Starting settlement rank',d.starting_location_rank||'unknown'],['Base contribution',whole(d.inert_capacity)+' people'],['Capacity from minimum base land',whole(d.base_land_floor_added_capacity||0)+' people'],['Existing improvement contribution',whole(d.starting_improvement_capacity)+' people'],['Additional capacity still possible',whole(d.maximum_capacity-d.starting_capacity)+' people'],['Remaining improvement units',whole(d.remaining_improvement_effective_cropland)],['Regional refinement coverage',fmt(100*Math.max(d.china_refinement_share||0,d.andes_refinement_share||0,d.prairie_refinement_share||0,d.improvement_reference_refinement_share||0,d.management_envelope_refinement_share||0,d.cultivated_system_refinement_share||0))+'%'],['Existing clearing at low input',whole(d.starting_clearing_capacity)+' people'],['Existing management increment',whole(d.starting_management_capacity)+' people'],['Existing irrigation increment',whole(d.starting_irrigation_capacity)+' people'],['Remaining clearing + management',whole(d.remaining_clearing_capacity+d.remaining_management_capacity)+' people'],['Remaining irrigation',whole(d.remaining_irrigation_capacity)+' people'],['Reference productivity before game bounds',fmt(d.unbounded_reference_multiplier)],['Physical location area',d.physical_location_ha===null?'Not evaluated':fmt(d.physical_location_ha/100)+' km²']];
   document.getElementById('detail').innerHTML=
     '<h2 class="location-heading">'+esc(placeName(d.location_tag))+'</h2><small class="place">'+esc(placeName(d.province))+' · '+esc(placeName(d.region))+'</small>'+
     '<div class="capacity-overview"><div class="capacity-pair"><div><span>Starting population</span><strong>'+whole(d.eu5_start_population)+'</strong></div><div><span>Starting capacity</span><strong>'+whole(d.starting_capacity)+'</strong></div></div><div class="fill-summary">'+fill+'</div><div class="maximum-summary"><span>Maximum capacity</span><strong>'+whole(d.maximum_capacity)+'</strong></div></div>'+
@@ -140,16 +151,16 @@ function show(i){
     input('Existing improvements',whole(d.starting_improvement_effective_cropland),'Already present at game start')+
     input('Maximum improvements',whole(d.maximum_improvement_effective_cropland),'Total limit, including existing improvements')+
     '<p class="model-formula">Capacity = (base + improvements)<br>× productivity</p><p class="unit-note">Land and improvements use effective units, not physical hectares. Display values are rounded.</p>'+
-    '<details><summary>Breakdown &amp; evidence</summary>'+rows.map(([k,v])=>'<div class="row"><span>'+k+'</span><b>'+v+'</b></div>').join('')+'<p>'+esc(d.evidence_status)+'<br>Coastline analogue: '+fmt(d.coastline_transfer_share*100)+'%<br>Terrestrial support analogue: '+fmt((d.terrestrial_analogue_share||0)*100)+'%</p></details>'+
+    '<details><summary>Breakdown &amp; evidence</summary>'+rows.map(([k,v])=>'<div class="row"><span>'+k+'</span><b>'+v+'</b></div>').join('')+'<p>Components follow clearing → management → irrigation; interactions are counted once. Maximum holds cultivation practices fixed. Drainage and terraces are not separately quantified.</p><p>'+esc(d.evidence_status)+'<br>Coastline analogue: '+fmt(d.coastline_transfer_share*100)+'%<br>Terrestrial support analogue: '+fmt((d.terrestrial_analogue_share||0)*100)+'%</p></details>'+
     '<p class="model-status">'+(d.is_ownable===false?'Not ownable in EU5. Any physical estimates shown here are not settlement capacity.':d.maximum_capacity<=0?'Unresolved: ownable location has zero modeled food support.':'First-iteration estimates; subject to refinement.')+'</p>';
 }
 function changeArea(){
   areaMode=document.getElementById('areaMode').value;
   window.LOCATIONS=window.AREA_DATA[areaMode];
   const a=window.AREA_COMPARISON,equal=areaMode==='equal';
-  document.getElementById('startingTotal').textContent=(a.starting_total/1e6).toFixed(1)+' million';
+  document.getElementById('startingTotal').textContent=((equal?a.starting_total:a.physical_starting_total)/1e6).toFixed(1)+' million';
   document.getElementById('maximumTotal').textContent=((equal?a.maximum_total:a.physical_maximum_total)/1e6).toFixed(1)+' million';
-  document.getElementById('areaNote').textContent=equal?'Equal area: every land location represents '+whole(a.reference_area_ha)+' ha. Same global starting capacity; physical conditions and productivity unchanged. More subdivisions now mean more combined capacity.':'Original: support scales with actual location area.';
+  document.getElementById('areaNote').textContent=equal?'Equal area: every land location represents '+whole(a.reference_area_ha)+' ha. Fixed reference across candidates. Minimum base land: '+whole(a.base_land_floor||0)+' effective units per ownable location. More subdivisions mean more combined capacity.':'Original: support scales with actual location area.';
   document.getElementById('valuesLink').href=equal?'location_values_equal_area.csv':'location_values.csv';
   document.getElementById('ledgerLink').href=equal?'locations_equal_area.csv':'locations.csv';
   if(selected>=0)show(selected);

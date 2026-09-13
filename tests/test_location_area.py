@@ -37,3 +37,22 @@ def test_population_cannot_affect_equal_area_parameters():
 def test_missing_modelled_area_is_rejected():
     d=fixture();d.loc[0,"physical_location_ha"]=0
     with pytest.raises(ValueError,match="physical area"):equal_area(d)
+
+
+def test_base_land_floor_is_effective_units_and_adds_capacity_without_improvements():
+    d=fixture();d['is_ownable']=[True,True,False]
+    unfloored,_=equal_area(d,150)
+    e,m=equal_area(d,150,1000)
+    assert e.base_effective_cropland.tolist()==[1000,1000,0]
+    assert e.base_land_floor_added_units.tolist()==[985,985,0]
+    np.testing.assert_allclose(e.starting_capacity-unfloored.starting_capacity,[1970,1970,0])
+    np.testing.assert_allclose(e.maximum_capacity-unfloored.maximum_capacity,[1970,1970,0])
+    for col in ['starting_improvement_effective_cropland','maximum_improvement_effective_cropland','remaining_capacity','capacity_multiplier']:
+        np.testing.assert_allclose(e[col],unfloored[col])
+    assert m['base_land_floor_locations']==2
+    assert e.starting_fill.iloc[0]==pytest.approx(5/2060)
+    assert e.maximum_starting_ratio.iloc[0]==pytest.approx(2120/2060)
+    d.loc[0,'base_effective_cropland']=2000
+    e,_=equal_area(d,150,1000)
+    assert e.base_effective_cropland.iloc[0]==3000
+    with pytest.raises(ValueError,match='floor'):equal_area(d,150,-1)

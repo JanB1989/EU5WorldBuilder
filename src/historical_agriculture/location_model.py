@@ -53,6 +53,9 @@ def source_fingerprint(root,config_path,food,water):
     paths+=list((root/'data/processed/location_forage').glob('*'))
     paths+=[root/'configs/food_systems.json',root/'reports/location_iteration_01_method.md']
     paths+=list((root/'scripts').glob('*.py'))
+    paths+=[root/'configs/location_refinements.json',root/'evidence/location_refinements.json',root/'configs/cultivated_systems.json',root/'data/processed/system_round_before/locations_equal_area.csv']
+    paths+=list((root/'data/raw/regional_refinement_sources').glob('*'))
+    paths+=[root/'data/processed/regional_round_02_before/locations_equal_area.csv',root/'data/processed/rural_round_before/locations_equal_area.csv']
     details={str(p.relative_to(root)):digest(p) for p in sorted(set(paths)) if p.is_file()}
     return hashlib.sha256(json.dumps(details,sort_keys=True).encode()).hexdigest(),details
 
@@ -73,12 +76,13 @@ def crop_densities(root,cfg,out):
             if c in r['crops']:ranks[r['ecoregion_ids']]=r['crops'].index(c)
         rr=ranks[eco_f];use=domain&(rank>rr)&np.isfinite(lo)&np.isfinite(hi)&(hi>0)
         crop[use]=code;rank[use]=rr[use]
-    rf=np.zeros(ft.shape,dtype=np.float32);ir=rf.copy();reference=rf.copy();fraction=np.ones_like(rf);freq=np.ones_like(rf);position=np.full_like(rf,.45)
+    rf=np.zeros(ft.shape,dtype=np.float32);ir=rf.copy();reference=rf.copy();low_rf=rf.copy();rainfed_headroom=rf.copy();fraction=np.ones_like(rf);freq=np.ones_like(rf);position=np.full_like(rf,.45)
     for r in rules:
         use=np.isin(eco_f,r['ecoregion_ids']);m=rc['management'][r['management']]
         fraction[use]=m['cultivated_fraction'];freq[use]=m['harvests'];position[use]=m['position']
     freq,fraction,_,_=apply_rotations(root,rc,crop,eco_f,freq,fraction)
     inferred=np.zeros(ft.shape,dtype=bool);reversed_cells=0
+    envelope_changed=np.zeros(ft.shape,dtype=bool)
     for code,c in enumerate(rc['crop_order'],1):
         use=domain&(crop==code)
         if not use.any():continue
@@ -89,8 +93,11 @@ def crop_densities(root,cfg,out):
             if name=='lo':lo=filled
             elif name=='hr':hr=filled
             else:hi=filled
-        dry=(1-position)*lo+position*hr
-        wet=(1-position)*lo+position*hi
+        old_dry=(1-position)*lo+position*hr
+        old_wet=np.maximum(old_dry,(1-position)*lo+position*hi)
+        from .management_envelope import yields as management_yields
+        dry,wet=management_yields(lo,hr,hi,position)
+        envelope_changed|=use&((dry>old_dry+1e-5)|(wet>old_wet+1e-5))
         reversed_cells+=int(np.sum(use&(wet<dry)))
         # Voluntary intervention: choose rainfed when adjusted irrigation is inferior.
         wet=np.maximum(wet,dry)
@@ -98,6 +105,13 @@ def crop_densities(root,cfg,out):
         drycal=annual_food(dry,cr,freq,fraction)[2]/(2500*365)
         wetcal=annual_food(wet,cr,freq,fraction)[2]/(2500*365)
         rf[use]=drycal[use];ir[use]=wetcal[use];reference[use]=wetcal[use]
+        low_rf[use]=(annual_food(lo,cr,freq,fraction)[2]/(2500*365))[use]
+        rainfed_headroom[use]=np.maximum((annual_food(hr,cr,freq,fraction)[2]/(2500*365))[use]-drycal[use],0)
+    from .location_refinements import apply_food
+    crop,rf,ir,low_rf,rainfed_headroom,fraction,baseline_rf,baseline_crop,refinement_flags,refinement_audit=apply_food(root,cfg,rc,domain,profile,eco_f,crop,rf,ir,low_rf,rainfed_headroom,fraction,freq,position,fill_nearest)
+    envelope_changed|=(refinement_flags>0)
+    write(out/'management_envelope_refined.tif',envelope_changed.astype(float),profile,'Voluntary management envelope applied; raw GAEZ scenarios retained')
+    reference=np.maximum(rf,ir)
     historical,_=read(food/'historical_people.tif')
     # Baseline wild-food support also exists in crop-labelled cells. Omitting it
     # incorrectly turned dry, irrigation-dependent crop cells into terrestrial zero.
@@ -116,6 +130,7 @@ def crop_densities(root,cfg,out):
         livelihood[ft==24]=0
         write(cache/'people.tif',livelihood,profile,'terrestrial food-equivalent people per physical hectare')
         write_json(cache/'manifest.json',{'key':forage_key,'transfer':transfer_report,'inferred_missing_cells':int(np.sum(domain&missing&(ft!=24)))})
+    inferred|=domain&(refinement_flags>0)
     inferred|=domain&(ft<=18)  # FORGE transfer is an explicit baseline estimate.
     # Fill numeric livelihood gaps within their own food class, not from crop yields.
     for code in np.unique(ft[domain]).astype(int):
@@ -127,8 +142,13 @@ def crop_densities(root,cfg,out):
             known=domain&np.isin(ft,[21,22,25])&np.isfinite(historical)
             a,_=fill_nearest(historical,known);livelihood[use]=a[use];inferred|=use
     reference=np.maximum(reference,livelihood)
+    from .location_refinements import apply_reference
+    reference,reference_changed=apply_reference(root,cfg,rc,domain,eco_f,crop,reference)
+    inferred|=reference_changed
+    write(out/'improvement_reference_refined.tif',reference_changed.astype(float),profile,'Conditional crop reference only; total food and land support unchanged')
     write(out/'potential_crop.tif',np.where(domain,crop,np.nan),profile,'historically available representative crop code')
-    return domain,profile,ft,crop,rf,ir,reference,livelihood,inferred,{'irrigation_inferior_cells_using_rainfed':reversed_cells,'numeric_crop_or_livelihood_inferred_cells':int(inferred.sum()),'potential_crop_assigned_cells':int(np.sum(domain&(crop>0))),'no_compatible_historical_crop_cells':int(np.sum(domain&(crop==0)))}
+    diagnostics={'low_rf':low_rf,'rainfed_headroom':rainfed_headroom,'rotation_fraction':np.where(crop>0,fraction,0),'crop_candidate':(crop>0).astype(float),'pastoral':np.isin(ft,[19,20,23]).astype(float),'baseline_rf':baseline_rf,'baseline_crop':baseline_crop,'refinement_flags':refinement_flags,'refinement_audit':refinement_audit}
+    return domain,profile,ft,crop,rf,ir,reference,livelihood,inferred,diagnostics,{'irrigation_inferior_cells_using_rainfed':reversed_cells,'numeric_crop_or_livelihood_inferred_cells':int(inferred.sum()),'potential_crop_assigned_cells':int(np.sum(domain&(crop>0))),'no_compatible_historical_crop_cells':int(np.sum(domain&(crop==0)))}
 
 def land_inputs(root,cfg,domain,profile,rf,crop,out):
     raw=root/cfg['input_directory'];area=area_grid();meta={}
@@ -171,11 +191,25 @@ def land_inputs(root,cfg,domain,profile,rf,crop,out):
     terrain=np.exp(-relief/cfg['terrain_relief_scale_m'])
     b=np.array([cfg['baseline_access_by_pnv'][x] for x in labels])[group]*terrain*(rf>0)
     cap=np.array([cfg['maximum_rainfed_by_pnv'][x] for x in labels])[group]*terrain*(rf>0)
+    from .location_refinements import settings,prairie_access
+    ref_cfg=settings(root,cfg)
+    prairie_changed=np.zeros(domain.shape,dtype=bool)
+    if ref_cfg is not None:
+        eco,_=read(root/cfg['food_directory']/'food_ecoregion.tif')
+        river,_=read(root/cfg['water_directory']/'river_distance_km.tif')
+        b,prairie_changed=prairie_access(ref_cfg['prairie'],eco,group,terrain,river,b,rf)
+    write(out/'prairie_access_refined.tif',prairie_changed.astype(float),profile,'1 if natural agricultural access revised')
     # Dated cultivation is evidence of access even where the broad terrain proxy is pessimistic.
     cap=np.maximum.reduce([cap,current,b]);start=np.maximum(b,current)
+    # Reclassify the reconstructed cultivated overlap as inherited field preparation.
+    # Total starting/max cropped area is unchanged by this accounting step.
+    inherited_overlap=np.where(prairie_changed,np.minimum(b,current),0)
+    b=b-inherited_overlap
+    meta['prairie_reclassified_cropland_ha']=float(np.sum(np.where(domain,inherited_overlap,0)*area)*100)
     if np.any(cap>1+1e-8):raise ValueError('Land fraction exceeds cell')
-    inferred=invalid|ii|pm|tm
+    inferred=invalid|ii|pm|tm|prairie_changed
     meta.update({'cropland_inferred_cells':int(np.sum(domain&invalid)),'irrigation_inferred_cells':int(np.sum(domain&ii)),'source_note':'HYDE and LUH are related reconstructions. No population raster used. Natural access and maximum clearing fractions are shared explicit priors.'})
+    meta['prairie_access_changed_cells']=int(np.sum(domain&prairie_changed))
     return area,b,start,cap,irrigated,inferred,meta
 
 
@@ -265,16 +299,22 @@ def execute(config_path,output):
         if digest(root/item['path'])!=item['sha256']:raise ValueError('Changed imported source: '+item['path'])
     inventory=pd.read_parquet(raw/'inventory.parquet').sort_values('location_tag').reset_index(drop=True)
     log('Calculating crop, livelihood and land states on the native grid')
-    domain,profile,food_type,crop,rf,ir,reference,livelihood,yinf,ya=crop_densities(root,cfg,out)
-    area,b,start,maximum,irr,linf,la=land_inputs(root,cfg,domain,profile,rf,crop,out)
+    domain,profile,food_type,crop,rf,ir,reference,livelihood,yinf,diagnostics,ya=crop_densities(root,cfg,out)
+    area,b,start,maximum,irr,linf,la=land_inputs(root,cfg,domain,profile,diagnostics['baseline_rf'],diagnostics['baseline_crop'],out)
     log('Reallocating shared river water for seasonal crop-service requirements')
-    served,full,winf,wa=allocate_irrigation(root,cfg,domain,crop,start,maximum,irr,area,out)
+    served,full,winf,wa=allocate_irrigation(root,cfg,domain,np.where(diagnostics['refinement_flags']==3,diagnostics['baseline_crop'],crop),start,maximum,irr,area,out)
+    pre_system_rf,pre_system_ir=rf,ir
+    from .cultivated_systems import apply as apply_cultivated_systems
+    rf,ir,system_flags=apply_cultivated_systems(root,cfg,domain,profile,crop,rf,ir,diagnostics,out)
     max_land=np.maximum(maximum,full)
     dry_gain=np.maximum(rf-livelihood,0)
     water_gain=np.maximum(ir-np.maximum(rf,livelihood),0)
-    base=b*rf+(1-b)*livelihood
-    current=base+np.maximum(start-b,0)*dry_gain+served*water_gain
-    upper=base+np.maximum(max_land-b,0)*dry_gain+full*water_gain
+    base=b*diagnostics['baseline_rf']+(1-b)*livelihood
+    # Preserve irrigation on baseline land; only improved rainfed fields change system.
+    from .cultivated_systems import irrigation_corrections
+    base_irrigation_current,base_irrigation_max=irrigation_corrections(b,served,full,pre_system_rf,pre_system_ir,rf,ir,livelihood)
+    current=base+np.maximum(start-b,0)*dry_gain+served*water_gain+base_irrigation_current
+    upper=base+np.maximum(max_land-b,0)*dry_gain+full*water_gain+base_irrigation_max
     if not np.all(upper[domain]+1e-6>=current[domain]):raise ValueError('Grid capacity order failure')
     # Eligibility identifies output gaps; population is still absent at this stage.
     from .location_geometry import overlap_matrix
@@ -301,9 +341,12 @@ def execute(config_path,output):
     livelihood,completed,completion_records=estimate(livelihood,domain,target,climate,eco,food_type,profile,cfg['zero_support_completion'])
     dry_gain=np.maximum(rf-livelihood,0)
     water_gain=np.maximum(ir-np.maximum(rf,livelihood),0)
-    base=b*rf+(1-b)*livelihood
-    current=base+np.maximum(start-b,0)*dry_gain+served*water_gain
-    upper=base+np.maximum(max_land-b,0)*dry_gain+full*water_gain
+    base=b*diagnostics['baseline_rf']+(1-b)*livelihood
+    # Preserve irrigation on baseline land; only improved rainfed fields change system.
+    from .cultivated_systems import irrigation_corrections
+    base_irrigation_current,base_irrigation_max=irrigation_corrections(b,served,full,pre_system_rf,pre_system_ir,rf,ir,livelihood)
+    current=base+np.maximum(start-b,0)*dry_gain+served*water_gain+base_irrigation_current
+    upper=base+np.maximum(max_land-b,0)*dry_gain+full*water_gain+base_irrigation_max
     reference=np.maximum(reference,livelihood)
     mapped_completion=np.where(domain,completed,completed.ravel()[nearest_flat])
     write(out/'terrestrial_completion.tif',mapped_completion.astype(float),profile,'1 if explicit terrestrial analogue replaces unsupported ownable-location source cell')
@@ -313,6 +356,19 @@ def execute(config_path,output):
     write_json(out/'terrestrial_completion.json',completion_audit)
     arrays={'baseline_support_per_land_ha':base,'starting_support_per_land_ha':current,'maximum_support_per_land_ha':upper,'reference_people_per_effective_ha':reference,
        'baseline_crop_fraction':b,'starting_crop_fraction':start,'maximum_crop_fraction':max_land,'historical_irrigated_fraction':irr,'starting_served_fraction':served,'maximum_served_fraction':full}
+    from .improvement_audit import decompose,CAPACITY_COLUMNS,validate_components,reconcile_rounding
+    components=decompose(b,start,max_land,served,full,rf,ir,livelihood,diagnostics['low_rf'])
+    components['starting_irrigation_capacity']+=base_irrigation_current
+    components['remaining_irrigation_capacity']+=base_irrigation_max-base_irrigation_current
+    arrays.update(components)
+    arrays.update({k:diagnostics[k] for k in ['rainfed_headroom','rotation_fraction','crop_candidate','pastoral']})
+    arrays['china_refinement_fraction']=(diagnostics['refinement_flags']==1).astype(float)
+    arrays['andes_refinement_fraction']=np.isin(diagnostics['refinement_flags'],[2,3]).astype(float)
+    arrays['prairie_refinement_fraction']=read(out/'prairie_access_refined.tif')[0]
+    arrays['improvement_reference_refinement_fraction']=read(out/'improvement_reference_refined.tif')[0]
+    arrays['management_envelope_refinement_fraction']=read(out/'management_envelope_refined.tif')[0]
+    arrays['cultivated_system_refinement_fraction']=(system_flags>0).astype(float)
+    write_json(out/'regional_refinement.json',diagnostics['refinement_audit'])
     # Game coastlines and tiny islands do not match real raster masks exactly.
     # Full-grid completion is a labelled nearest terrestrial analogue, never omission.
     _,nearest=distance_transform_edt(~domain,return_indices=True)
@@ -324,7 +380,7 @@ def execute(config_path,output):
             a,missing=fill_nearest(a,finite);evidence_inferred|=domain&missing
         a=np.where(domain,a,a[tuple(nearest)]).astype(np.float32)
         arrays[name]=a
-        write(out/(name+'.tif'),a,profile,'people per physical land hectare' if 'support' in name else 'fraction' if 'fraction' in name else 'people per effective hectare',{'completion':'Outside source land uses flagged nearest terrestrial analogue for game-coastline registration only'})
+        write(out/(name+'.tif'),a,profile,'people per physical land hectare' if ('support' in name or name in CAPACITY_COLUMNS or name=='rainfed_headroom') else 'fraction' if (name.endswith('fraction') or name in ['crop_candidate','pastoral']) else 'people per effective hectare',{'completion':'Outside source land uses flagged nearest terrestrial analogue for game-coastline registration only'})
         grid_reports[name]={'min':float(a[domain].min()),'max':float(a[domain].max())}
     eco,_=read(food/'food_ecoregion.tif')
     write(out/'inference.tif',np.where(domain,evidence_inferred,True).astype(float),profile,'1 if any inferred input or coastline transfer')
@@ -343,6 +399,12 @@ def execute(config_path,output):
     d['starting_improvement_capacity']=d.starting_capacity-d.inert_capacity
     d['remaining_improvement_effective_cropland']=d.maximum_improvement_effective_cropland-d.starting_improvement_effective_cropland
     d['remaining_capacity']=d.maximum_capacity-d.starting_capacity
+    for name in CAPACITY_COLUMNS:d[name]=totals[name]
+    for rule in ['china','andes','prairie','improvement_reference','management_envelope','cultivated_system']:d[rule+'_refinement_share']=totals[rule+'_refinement_fraction']/area_ha
+    d['crop_candidate_area_ha']=totals['crop_candidate']
+    d['rotation_active_area_equivalent_ha']=totals['rotation_fraction']
+    d['pastoral_area_ha']=totals['pastoral']
+    d['rainfed_management_headroom_people_per_crop_ha']=np.divide(totals['rainfed_headroom'],totals['crop_candidate'],out=np.zeros(len(d)),where=totals['crop_candidate']>0)
     d['physical_location_ha']=area_ha
     for name in ['baseline_crop_fraction','starting_crop_fraction','maximum_crop_fraction','historical_irrigated_fraction','starting_served_fraction','maximum_served_fraction']:
         d[name.replace('_fraction','_ha')]=totals[name]
@@ -352,12 +414,18 @@ def execute(config_path,output):
     d['terrestrial_analogue_share']=np.clip(np.asarray(weights@mapped_completion.ravel()).ravel()*100/area_ha,0,1)
     d.loc[d.terrestrial_analogue_share>0,'evidence_status']='low: explicit terrestrial analogue for coarse-model zero support'
     d['source_rule']='iteration01:grid_food+HYDE_LUH+PNV_terrain+seasonal_basin_water'
+    for rule in ['china','andes','prairie','improvement_reference','management_envelope','cultivated_system']:
+        d.loc[d[rule+'_refinement_share']>0,'source_rule']+='+refinement:'+rule
+        d.loc[d[rule+'_refinement_share']>0,'evidence_status']='inferred: source-guided '+rule+' refinement; numerical assumptions uncertain'
     d.loc[d.terrestrial_analogue_share>0,'source_rule']+='+terrestrial_analogue'
     repaired=d.loc[zero,['location_tag','starting_capacity','maximum_capacity','capacity_multiplier','terrestrial_analogue_share']].copy()
     repaired['previous_starting_capacity']=before[zero]
     repaired.to_csv(out/'repaired_settlements.csv',index=False,float_format='%.15g')
     d['zero_support_reason']=np.where(d.starting_capacity==0,'No modeled terrestrial support after explicit crop and FORGE estimates; aquatic contribution excluded','not_zero')
     # Population is joined only after all model values have been computed.
+    ranks=pd.read_csv(raw/'starting_population_source.csv',usecols=['location_tag','starting_location_rank'],keep_default_na=False).set_index('location_tag')['starting_location_rank']
+    d['starting_location_rank']=d.location_tag.map(ranks).fillna('unknown')
+    d['settlement_context']=np.where(d.starting_location_rank.isin(['town','city','megalopolis']),'urban',np.where(d.starting_location_rank.isin(['rural_or_unranked','rural_settlement']),'rural_or_unranked','unknown'))
     pop=pd.read_csv(raw/'starting_population_source.csv',usecols=['location_tag','eu5_start_population'],keep_default_na=False)
     pop['eu5_start_population']=pd.to_numeric(pop.eu5_start_population,errors='coerce')
     if pop.location_tag.duplicated().any():raise ValueError('Duplicate contextual population')
@@ -373,6 +441,8 @@ def execute(config_path,output):
     from .location_inventory import complete_zones,audit_settlement_values
     d,delivery_inventory,inventory_audit=complete_zones(d,raw,out)
     checks=validate_frame(d,delivery_inventory)
+    d=reconcile_rounding(d)
+    checks['improvement_components']=validate_components(d)
     settlement=audit_settlement_values(d,delivery_inventory)
     write_json(out/'settlement_validation.json',settlement)
     pd.DataFrame(settlement['issues'],columns=['location_tag','issues','starting_population','starting_capacity','maximum_capacity','reason']).to_csv(out/'unresolved_settlements.csv',index=False)

@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "status": "inferred evidence-guided candidate; not measured medieval shares",
+  "variant": "central",
+  "china": {
+    "ecoregion_ids": [
+      236,
+      268,
+      659
+    ],
+    "minimum_cropland_fraction": 0.001,
+    "maximum_elevation_m": 1000,
+    "management_position": 0.45,
+    "active_rotation_fraction": 0.5,
+    "harvests": 1,
+    "source_ids": [
+      "chen_fu_wang_zhen"
+    ],
+    "interpretation": "Existing cultivated wet rice previously assigned extensive upland practices. Improved field management without creating terraces or irrigated hectares."
+  },
+  "india": {
+    "ecoregion_ids": [
+      295,
+      312,
+      314,
+      317,
+      318,
+      320
+    ],
+    "minimum_cropland_fraction": 0.001,
+    "maximum_rainfed_irrigated_ratio": 0.25,
+    "summer_crops": [
+      "PML",
+      "SRG"
+    ],
+    "summer_share": 0.5,
+    "management_position": 0.6,
+    "active_rotation_fraction": 0.75,
+    "harvests": 1,
+    "source_ids": [
+      "indus_seasonal_crops"
+    ],
+    "interpretation": "Mixed summer-cereal share on existing improved rainfed fields where the assigned winter cereal is water-limited. Equal weighting of feasible listed summer crops; a substitution, not an additional harvest. Existing irrigated cereal option retained."
+  },
+  "variants": {
+    "conservative": {
+      "china_management_position": 0.3,
+      "china_active_rotation_fraction": 0.375,
+      "india_summer_share": 0.25
+    },
+    "central": {},
+    "strong": {
+      "china_management_position": 0.6,
+      "china_active_rotation_fraction": 0.625,
+      "india_summer_share": 0.75
+    }
+  },
+  "frozen_before_comparison": true,
+  "preserved": [
+    "natural base support",
+    "reference multiplier",
+    "physical land",
+    "water accounts"
+  ],
+  "population_used": false
+}

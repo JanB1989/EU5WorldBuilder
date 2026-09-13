@@ -158,3 +158,58 @@ artifacts are byte-identical to the prior run. Total physical starting support c
 by about 61,418 people (0.0082%); this is a completion repair, not global rebalance.
 The strict delivery validator passes. New unit tests and a generated-data regression
 check zero cases, donor provenance, eligibility, both output variants and provinces.
+
+
+## Reconciled improvement audit (2026-09-13)
+
+The canonical location run now records starting and remaining contributions from clearing, management and irrigation. This is attribution of the existing estimates, with base capacity frozen. For opened fraction a, low-input food density L, assigned rainfed density R, assigned irrigated density W and displaced terrestrial livelihood density V:
+
+- Clearing = a * max(L - V, 0).
+- Management = a * (max(R - V, 0) - max(L - V, 0)).
+- Irrigation = reliably served fraction * max(W - max(R, V), 0).
+
+Remaining contributions use additional opened/served fractions. L, R and W have the same assigned crop rotation and annualization. The management term therefore measures the assigned input/yield increment, not all historical agricultural knowledge or all effects of fallow. It can be negative where adjusted scenarios reverse; negative values remain visible. Interactions are allocated sequentially, not independently added. Existing management on baseline-access land remains inside the frozen base.
+
+These components reconcile to the four-value interface after fine-grid overlap and after equal-area normalization. Native raster values and physical areas remain separate from equal-area support. All ownable locations receive component rows. Drainage and terraces are not independently identified and are labelled unquantified, not zero. Maximum capacity remains expansion under current management and rotation, not a maximum including all future technology. An additional per-crop-candidate-hectare rainfed headroom diagnostic compares the adjusted high-input endpoint with the current assignment; it does not activate capacity or assert medieval feasibility.
+
+`uv run ha1300 locations` generates `IMPROVEMENTS.md`, `improvement_components_equal_area.csv`, regional/provincial/macro audit tables and a fingerprint-bound `improvement_audit.json`. The map exposes the component breakdown in its existing collapsed evidence section. No new population-fitting or capacity coefficient is introduced.
+
+Subtraction of independently rounded float32 support rasters can create tiny component residuals. These are bounded by source precision and retained in explicit rounding-account columns; they are not hidden in a physical component or used to alter capacity.
+
+
+## Regional refinement candidate (2026-09-13)
+
+`configs/location_refinements.json` freezes evidence-guided rules and conservative/central/strong variants before comparison. Source URLs, applicability limits and downloaded-byte hashes are in `evidence/location_refinements.json`. Modern terrain and HYDE cultivated extent qualify physical analogues, never population. The four-value interface remains complete.
+
+- Chinese lowland wet-rice cells within the previous extensive upland ecological assignment qualify only with reconstructed cultivation >=1%, elevation <=400 m and within-cell relief <=100 m. The central candidate uses the existing managed coefficients (position 0.6, active rotation 0.75, one harvest). The numerical thresholds and coefficients are inferred; ICID establishes pre-1300 water-management presence without implying full 1396 polder completion. Uplands and other systems remain unchanged.
+- In selected North American prairie ecological units where potential vegetation is grassland/savanna, natural crop access becomes 1.5% away from rivers, tending toward 5% at rivers with a 2 km decay length, still reduced by terrain and never greater than the old allowance. These are uncertain access proxies supported qualitatively by sod barriers and river-valley agriculture. Reconstructed cultivation and the existing maximum land budget remain available. Terrestrial pastoral/gathering support is preserved; no fishing added.
+- Andean maize-priority cells from 3300 to 3800 m switch to historically available potatoes only when all adjusted potato scenarios are available and the upper is positive. FAO's traditional Peru altitude systems supply an approximate regional analogue, not an exact 1300 map. No new terrace hectares or yield bonus is invented.
+
+The Chinese and Andean crop changes act on improvement productivity while retaining the previous baseline-food density and baseline-access land. Prairie access is the explicitly authorized base exception. The equal-area reference is locked at 246651.09965447552 ha from the previous candidate so changes do not compensate through unrelated locations. Physical-area output remains a shelved comparison.
+
+
+The altitude-only Andean preference was evaluated and affected zero central-candidate cells: existing potato assignment already covered that band. A second diagnosed mechanism is recorded HYDE cultivation on relatively flat 3800–4200 m puna where standard GAEZ potato scenarios are zero. A conditional cold-adapted-field analogue is limited to ecoregions 588/589, relief <=100 m, and reconstructed cultivation >=0.1%. The central estimate is 4 t fresh potatoes per harvested hectare, converted with existing edible/seed/loss coefficients and active rotation fraction 0.5; sensitivity uses 3–6 t and 0.375–0.5. These are inferred historical transfers informed by a modern Altiplano experiment (not measured medieval yields). All support is attributed to maintained fields above the unchanged terrestrial base; there is no new cropland allowance or irrigation allocation. The experiment does not establish a universal yield benefit of raised fields, and this rule does not reconstruct all abandoned Tiwanaku works.
+
+For revised prairie cells, the overlap between reconstructed cultivated land and the residual naturally accessible crop allowance is reclassified as inherited field preparation. This lowers the base and raises starting improvements by matching support, without changing starting or maximum totals. This makes recorded human cultivation visible even where the natural-access allowance is larger than HYDE cropland.
+
+
+### Conditional improvement reference in Plains/Rockies (round 03)
+
+Selected non-crop ecoregions now evaluate maize under the same rotation-system assumptions as neighbouring maize regions, solely to normalize the four game values. Missing scenario triplets are excluded, true unsuitable zeros remain zero, and crop availability/actual livelihood classification are not rewritten. The upper of the rainfed/irrigated reference remains conditional productivity per improved hectare, consistent with existing agricultural reference cells; it does not grant water service. All physical land, food and water calculations and starting/maximum capacity remain unchanged. Base and improvement effective units adjust inversely to the new bounded multiplier. This repairs the artificial use of foraging density as improvement productivity, but does not establish new physical cultivation opportunities where the current opportunity model still has none. Configured ecoregion masks and shared coefficients are an inferred candidate, not measured medieval local productivity.
+
+
+### Minimum base effective land
+
+The active equal-area game dataset applies a user-selected minimum of 1,000 base effective-land units to each ownable location, after area normalization. It is a game floor, not reconstructed hectares or a population-derived estimate. Added units times the unchanged multiplier are added to base, starting and maximum capacity; infrastructure and remaining opportunities stay unchanged. Separate ledger fields disclose the added units/capacity. Physical inputs and the shelved physical-area variant remain untouched. Uncertainty bounds receive the same known game allowance.
+
+
+### Global voluntary-management envelope and rural diagnostics
+
+When adjusted high-input GAEZ yield is below the corresponding low-input yield, the location calculation retains the low-input option. For position p, rainfed yield is (1-p)*low + p*max(low, high_rainfed); the irrigated option similarly retains low and cannot displace a better rainfed option. Raw rasters are unchanged and reversals remain research diagnostics. This avoids treating optional management investment as compulsory loss of output. It is a scenario-choice rule, not newly observed productivity.
+
+Starting town/city/megalopolis ranks are excluded from rural pressure counts. Rural_or_unranked is retained with its source uncertainty, and unknown ranks remain explicit. Rank and population are joined after the capacity calculation and cannot affect the model. Rural province comparisons pool only rural locations. The report evaluates global beneficiaries and preserves residual failures; it cannot certify that the model resolves every rural shortfall.
+
+
+### Cultivated-system round: inherited field management
+
+The configured cultivated-system correction runs after land/water allocation. It preserves the original natural-base food density and reference multiplier. Additional support on improved land enters starting and maximum improvement contributions using the same crop-area and water budgets. Chinese wet-rice cells in the previous extensive upland class require reconstructed cultivation, viable complete crop scenarios and the configured elevation band. Their active rotation and management assumptions are raised conservatively; prior more intensive fields are preserved. Northwestern Indian winter-cereal cells with weak rainfed relative to irrigated output receive a partial summer-cereal substitution drawn from a fixed, historically available pearl-millet/sorghum basket, equally weighted among viable alternatives. Crop calories are converted before mixing, and no second harvest is added. These are dated-system analogues with uncertain adoption/share parameters, not observed 1300 fractions or population-fitted capacities. Conservative/central/strong variants are frozen in configs/cultivated_systems.json.

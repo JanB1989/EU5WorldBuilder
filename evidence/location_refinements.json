@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "sources": [
+    {
+      "id": "sangyuanwei_icid",
+      "url": "https://icid-ciid.org/award/his_details/129",
+      "retrieved": "2026-09-13",
+      "path": "data/raw/regional_refinement_sources/sangyuanwei_icid.html",
+      "sha256": "6e875beac14318d07cef63cf0af32375057b62b715b944fc8ea632347d28be1a",
+      "role": "Irrigation/drainage construction began 1102\u20131110; enclosure completed 1396. Supports pre-1300 management presence, not completed modern footprint.",
+      "license": "Not assumed open for redistribution; downloaded source cache excluded from Git."
+    },
+    {
+      "id": "andean_fao",
+      "url": "https://www.fao.org/giahs/giahs-around-the-world/peru-andean-agriculture/en",
+      "retrieved": "2026-09-13",
+      "path": "data/raw/regional_refinement_sources/andean_fao.html",
+      "sha256": "9da0bc0e7e1c84ef2fe4abe8c11b2235fc04d7466ce553e0aede6bc0ca3c330d",
+      "role": "Living traditional analogue: maize 2800\u20133300 m, potatoes 3300\u20133800 m, high-altitude mixed crops/livestock above. Not a measured 1300 crop map.",
+      "license": "Not assumed open for redistribution; downloaded source cache excluded from Git."
+    },
+    {
+      "id": "plains_nps",
+      "url": "https://www.nps.gov/articles/000/the-plains-indians.htm",
+      "retrieved": "2026-09-13",
+      "path": "data/raw/regional_refinement_sources/plains_nps.html",
+      "sha256": "262a16a4718acf4b40b13504ffe71d92d43d9ff7fcda2ffe0372f7ac07077f9f",
+      "role": "Documents mixed livelihoods including agriculture in fertile river valleys; later historical description is not a 1300 cultivated-area survey.",
+      "license": "Not assumed open for redistribution; downloaded source cache excluded from Git."
+    },
+    {
+      "id": "prairie_sod_nps",
+      "url": "https://www.nps.gov/tapr/learn/nature/a-complex-prairie-ecosystem.htm",
+      "retrieved": "2026-09-13",
+      "path": "data/raw/regional_refinement_sources/prairie_sod_nps.html",
+      "sha256": "f0aaefba7c313c6e1ee4b186fdd0aa8407bc798de77c14bcf94586d32781d1f6",
+      "role": "Dense interwoven root systems support a land-preparation barrier; supplies no numerical medieval accessible fraction.",
+      "license": "Not assumed open for redistribution; downloaded source cache excluded from Git."
+    },
+    {
+      "id": "titicaca_potato_experiment",
+      "url": "https://agris.fao.org/search/ar/records/67598223c7a957febdf9b852",
+      "retrieved": "2026-09-13",
+      "path": "data/raw/regional_refinement_sources/titicaca_potato_experiment.html",
+      "sha256": "913120f1413fa56e77ba214ac1433fd95bc92ee56615283d02a5f2cab71b71d1",
+      "license": "Abstract/source cache not redistributed",
+      "role": "Sanchez de Lozada et al. 2006 field experiment: potato yields 2.73\u201310.80 t/ha at one Altiplano site; comparable flat controls. Evidence of cultivation despite coarse crop-model zeros, not a measured 1300 yield or guaranteed raised-field bonus."
+    },
+    {
+      "id": "indus_seasonal_crops",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6991972/",
+      "retrieved": "2026-09-13",
+      "path": "data/raw/regional_refinement_sources/indus_seasonal_crops.html",
+      "sha256": "99a25d930245aabd0773a0dd5cd2d2b95602c4900bbc8103faf45e30067b5ebf",
+      "role": "Archaeobotanical evidence for summer and winter crops; supports historical availability and mixed strategies, not 1300 field shares.",
+      "license": "Source cache excluded from Git; consult publisher terms."
+    },
+    {
+      "id": "chen_fu_wang_zhen",
+      "url": "https://www.cambridge.org/core/journals/british-journal-for-the-history-of-science/article/science-technique-technology-passages-between-matter-and-knowledge-in-imperial-chinese-agriculture/F22BA6399312F5CCF611D66D987827F9",
+      "retrieved": "2026-09-13",
+      "path": "data/raw/regional_refinement_sources/chen_fu_wang_zhen.html",
+      "sha256": "b7714bf491a932a6a7aee2c39986d82d132a485a14a88b646f15630fa41702df",
+      "role": "Historical scholarship on Chen Fu 1149 and Wang Zhen 1313 wet-rice field management. Supports premodern managed fields, not uniform local adoption or surveyed hectares.",
+      "license": "Source cache excluded from Git; consult publisher terms."
+    }
+  ],
+  "crop_and_land_evidence": [
+    "configs/regions.json",
+    "configs/reconstruction.json",
+    "HYDE 1300 from evidence/location_input_manifest.json"
+  ],
+  "scope_notes": [
+    "FAO altitude transfer is approximate outside its documented Peru transect.",
+    "ICID establishes infrastructure presence, not a country-wide management coefficient.",
+    "River distance is an accessibility proxy, not floodplain extent.",
+    "No numerical parameter is inferred from population.",
+    "Altitude-only crop switching affected zero central-candidate cells; the first hypothesis was insufficient.",
+    "A separate cold-adapted cultivated-field analogue addresses recorded cropping on cool puna cells where standard WPO scenarios are zero. No blanket reconstruction of abandoned Tiwanaku raised fields."
+  ]
+}

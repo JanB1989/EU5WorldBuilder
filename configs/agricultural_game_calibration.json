@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "status": "Explicit shared game calibration, not historical food-production estimates. Population evaluates the candidate but is not a formula input or a location-specific target.",
+  "inheritance": {
+    "historical_extent_half_saturation": 0.01,
+    "maximum_opportunity_activation": {"extensive": 0.2, "rotation": 0.4, "managed": 0.55, "intensive": 0.7},
+    "unknown_system_activation": 0.2,
+    "interpretation": "Shared starting-infrastructure scenario on evidence of existing cultivation. Agricultural-system classes come from the existing historical regional assessments. Extent is HYDE/LUH-related evidence, not independent of historical demography. Fractions are game assignments, not surveyed 1300 adoption rates."
+  },
+  "support_conversion": {
+    "exponent": 0.3333333333333333,
+    "crop_reference_support": 1.0,
+    "noncrop_reference_support": 0.1,
+    "formula": "G(s;r) = max(s, r * (s/r)^exponent), G(0;r)=0",
+    "interpretation": "Compress the extreme low-support tail in game units. Reference values use the source density's units for dimensional consistency; they are calibration anchors, not measured crop or pastoral yields. Apply to baseline, inherited starting and maximum support on the native grid. Preserve ordering, unchanged high support and the bounded location multiplier."
+  },
+  "sensitivity": {"conservative_exponent": 0.4, "strong_exponent": 0.3},
+  "evaluation": {
+    "maximum_rural_starting_shortfalls": 500,
+    "maximum_new_rural_shortfalls": 0,
+    "interpretation": "Game coverage diagnostics, not a claim that residual shortages are historically justified or that population growth is balanced."
+  },
+  "limitations": [
+    "Raises base support as well as capacity from improvements; cannot be interpreted as literal new hectares or calories.",
+    "No population-type, population-count, rank, owner or individual location exception enters the calculation.",
+    "No groundwater, new crop yield, additional river runoff or land is added to the physical ledger.",
+    "Equal-area subdivision bias remains. Future integration must balance food coefficients against these game capacities.",
+    "Inherited opportunity is bounded by the simultaneous physical maximum; actual medieval infrastructure coverage remains uncertain."
+  ]
+}

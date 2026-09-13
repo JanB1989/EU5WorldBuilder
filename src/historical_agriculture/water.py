@@ -53,6 +53,12 @@ def basins(raw,out):
     (out/'basins.json').write_text(json.dumps(rows))
     return grid,down,rows
 
+def command_fraction(fine_fraction, distance_km, reach_km, same_basin):
+    """Fine elevation feasibility already accounts for terrain within the cell."""
+    if reach_km<=0:raise ValueError('Irrigation reach must be positive')
+    return np.clip(fine_fraction,0,1)*np.clip(1-distance_km/reach_km,0,1)*same_basin
+
+
 def river_access(cfg,raw,grid,domain,out):
     river=np.zeros(SHAPE,dtype='uint8')
     p=pq.ParquetFile(cfg['river_cache'])
@@ -86,8 +92,8 @@ def river_access(cfg,raw,grid,domain,out):
             eligible=(a>=-10)&(a<=source_low[row:row+h,:,None,None]+cfg['irrigation']['low_lift_m']+cfg['irrigation']['terrain_tolerance_m'])
             fraction[row:row+h]=eligible.mean(axis=(2,3))
             relief[row:row+h]=np.percentile(a,90,axis=(2,3))-np.percentile(a,10,axis=(2,3))
-    reach=np.clip(1-km/cfg['irrigation']['reach_distance_km'],0,1)
-    fraction*=reach*np.exp(-np.maximum(relief,0)/cfg['irrigation']['relief_taper_m'])*same_basin
+    # Do not discount an eligible valley a second time for neighbouring mountains.
+    fraction=command_fraction(fraction,km,cfg['irrigation']['reach_distance_km'],same_basin)
     fraction=np.where(domain,fraction,np.nan)
     save(out/'surface_command_fraction.tif',fraction)
     save(out/'river_distance_km.tif',np.where(domain,km,np.nan))

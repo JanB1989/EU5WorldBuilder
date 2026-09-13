@@ -5,6 +5,9 @@ import pandas as pd
 from .provenance import digest,write_json
 
 def report(root,out,current,cfg,fingerprint):
+    if cfg.get('terrain_access'):
+        from .land_repair_report import report as land_report
+        return land_report(root,out,current,cfg,fingerprint)
     baseline=root/'data/processed/regional_round_02_before/locations_equal_area.csv'
     if not baseline.exists():
         (out/'regional_comparison.html').write_text('<h1>Regional refinement</h1><p>The four-value dataset is complete. The optional archived baseline is unavailable for a before/after comparison.</p>')

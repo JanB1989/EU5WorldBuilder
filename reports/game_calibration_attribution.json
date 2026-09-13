@@ -1,0 +1,28 @@
+{
+  "current_fingerprint": "637f57edc6b251ab0ef818c4c3c2ab805300d4c285ce33903a469762ab83b46d",
+  "status": "Attribution using canonical conversion and published float32 native-grid rasters; not a population-based formula",
+  "comparisons": {
+    "source": {
+      "rural_above_start": 6209,
+      "rural_starting_capacity": 714399925.9297111
+    },
+    "inheritance_only": {
+      "rural_above_start": 4051,
+      "rural_starting_capacity": 1276621764.5742152
+    },
+    "conversion_only": {
+      "rural_above_start": 605,
+      "rural_starting_capacity": 1664833555.0647202
+    },
+    "combined": {
+      "rural_above_start": 483,
+      "rural_starting_capacity": 2150479125.583288
+    }
+  },
+  "source_hashes": {
+    "uncalibrated_starting_support.tif": "35d790682a82e01fb92f8c60751bc4e4f5da9fdf0e5218862fcddc849d632ab7",
+    "inherited_physical_starting_support.tif": "a75d1c06a25cc5f1c327900f9f2ab720596162ac75d2225af372560f31f12d3d",
+    "game_conversion_reference_support.tif": "4eaf6ef0733e22482235d15c95d21d9f7de19d1bc60c4e56fb1b4a54929425d3",
+    "overlap.npz": "0baff469c72461d6ac82bcd586ee01409c6bf9b340fda6ee469bd3faeb91143b"
+  }
+}

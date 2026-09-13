@@ -33,7 +33,13 @@
   "maximum_water_land_fraction": 0.8,
   "minimum_seasonal_irrigation_demand_mm": 100.0,
   "wet_rice_extra_water_mm_per_active_month": 60.0,
-  "irrigation_active_months": 6,
+  "crop_season_config": "configs/crop_seasons.json",
+  "inferred_cultivated_water_share": 1.0,
+  "dry_field_alternatives": {
+    "field_share": 1.0,
+    "status": "Inferred local adoption of an existing regionally documented crop on reconstructed cultivated land where the representative crop has zero rainfed yield and no water service. Does not enlarge cultivated land or apply to uncultivated frontiers. Regional availability, not proof of each cell's crop. Test 0 and 0.5 shares separately.",
+    "source": "Existing configs/regions.json historical crop availability and preference; GAEZ crop rasters with existing historical transformations. Independent Great Lakes check: https://pmc.ncbi.nlm.nih.gov/articles/PMC11335020/ (2024, CC BY 4.0); directly dated finger millet and sorghum before 1300, not a local field-share estimate."
+  },
   "seasonal_storage": false,
   "starting_crop_missing_luh_multiplier": 1.0,
   "land_uncertainty_fraction": 0.3,
@@ -58,5 +64,39 @@
   "refinement_variant": "central",
   "equal_reference_area_ha": 246651.09965447552,
   "equal_area_base_land_floor": 1000.0,
-  "system_round_config": "configs/cultivated_systems.json"
+  "system_round_config": "configs/cultivated_systems.json",
+  "terrain_access": {
+    "method": "fine_slope_classes",
+    "slope_boundaries_percent": [
+      2,
+      5,
+      8,
+      16,
+      30,
+      45
+    ],
+    "baseline_weights": [
+      1,
+      0.85,
+      0.6,
+      0.25,
+      0.05,
+      0,
+      0
+    ],
+    "maximum_weights": [
+      1,
+      1,
+      0.9,
+      0.65,
+      0.25,
+      0.05,
+      0
+    ],
+    "minimum_elevation_m": -10,
+    "status": "GAEZ class boundaries; conservative shared access weights inferred. ETOPO 60s smooths subpixel slopes; no new terraces assumed.",
+    "slope_multiplier": 1.0
+  },
+  "pressure_comparison_baseline": "data/processed/system_calibration_before.csv",
+  "agricultural_game_calibration": "configs/agricultural_game_calibration.json"
 }

@@ -53,7 +53,10 @@ def source_fingerprint(root,config_path,food,water):
     paths+=list((root/'data/processed/location_forage').glob('*'))
     paths+=[root/'configs/food_systems.json',root/'reports/location_iteration_01_method.md']
     paths+=list((root/'scripts').glob('*.py'))
-    paths+=[root/'configs/location_refinements.json',root/'evidence/location_refinements.json',root/'configs/cultivated_systems.json',root/'data/processed/system_round_before/locations_equal_area.csv']
+    paths+=[root/'evidence/land_repair.json',root/'configs/crop_seasons.json',root/'data/processed/water_season_before.csv',root/'configs/agricultural_game_calibration.json',root/'data/processed/system_calibration_before.csv']+list((root/'data/raw/land_repair_sources').glob('*'))
+    active_config=json.loads(Path(config_path).read_text())
+    if active_config.get('agricultural_game_calibration'):paths+=[root/active_config['agricultural_game_calibration']]
+    paths+=[root/'configs/location_refinements.json',root/'evidence/location_refinements.json',root/'configs/cultivated_systems.json',root/'data/processed/land_round_before.csv',root/'data/processed/system_round_before/locations_equal_area.csv']
     paths+=list((root/'data/raw/regional_refinement_sources').glob('*'))
     paths+=[root/'data/processed/regional_round_02_before/locations_equal_area.csv',root/'data/processed/rural_round_before/locations_equal_area.csv']
     details={str(p.relative_to(root)):digest(p) for p in sorted(set(paths)) if p.is_file()}
@@ -159,6 +162,12 @@ def land_inputs(root,cfg,domain,profile,rf,crop,out):
             dates=num2date(ds['time'][:],ds['time'].units,ds['time'].calendar)
             ix=[i for i,t in enumerate(dates) if t.year==cfg['evidence_year']]
             if len(ix)!=1:raise ValueError('HYDE date unavailable')
+            if ds[var].units!='km**2' or ds[var].shape[1:]!=domain.shape:
+                raise ValueError('Historical land units/grid mismatch')
+            expected_lat=90-(np.arange(domain.shape[0])+.5)/12
+            expected_lon=-180+(np.arange(domain.shape[1])+.5)/12
+            if not np.allclose(ds['lat'][:],expected_lat,atol=.002) or not np.allclose(ds['lon'][:],expected_lon,atol=.002):
+                raise ValueError('Historical land grid orientation mismatch')
             vals[var]=ds[var][ix[0]].filled(np.nan).astype(np.float32)/area
             meta[var]={'year':int(dates[ix[0]].year),'units':ds[var].units,'version':getattr(ds,'version','unknown')}
     z=np.load(raw/'luh1300.npz')
@@ -168,6 +177,7 @@ def land_inputs(root,cfg,domain,profile,rf,crop,out):
     invalid=~np.isfinite(vals['cropland'])|(vals['cropland']<0)
     lu,lu_missing=fill_nearest(np.where((luh>=0)&(luh<=1),luh,np.nan))
     current=np.clip(np.where(invalid,lu,vals['cropland']),0,1)
+    write(out/'historical_cultivated_fraction.tif',current,profile,'Dated HYDE/LUH cultivated land, before natural-access union')
     ii=~np.isfinite(vals['total_irrigated'])|(vals['total_irrigated']<0)
     # Unknown irrigation receives local irrigated/cropland-ratio analogue, explicitly flagged.
     ratio=np.divide(vals['total_irrigated'],np.maximum(vals['cropland'],1e-10))
@@ -180,17 +190,11 @@ def land_inputs(root,cfg,domain,profile,rf,crop,out):
     pnv,pm=fill_nearest(pnv);group=np.full(pnv.shape,7,dtype=np.int8)
     for codes,g in [([1,2,3,4,5,6,7,8],0),([9],1),([10],2),([11,12],3),([13],4),([14],5),([15],6)]:group[np.isin(pnv,codes)]=g
     labels=['forest','savanna','grassland','shrub','tundra','desert','ice','unknown']
-    # ETOPO relief is a terrain feasibility proxy, not measured arable fraction.
-    import rasterio
-    from rasterio.warp import reproject,Resampling
+    from .terrain_access import calculate as terrain_access
     dem=raw/'hydrology/ETOPO_2022_v1_60s_N90W180_surface.tif'
-    with rasterio.open(dem) as ds:
-        low=np.full(domain.shape,np.nan,dtype=np.float32);high=low.copy()
-        for a,method in [(low,Resampling.min),(high,Resampling.max)]:reproject(rasterio.band(ds,1),a,src_transform=ds.transform,src_crs=ds.crs,dst_transform=profile['transform'],dst_crs=profile['crs'],resampling=method,dst_nodata=np.nan)
-    relief=np.maximum(high-low,0);relief,tm=fill_nearest(relief)
-    terrain=np.exp(-relief/cfg['terrain_relief_scale_m'])
+    terrain,maximum_terrain,tm=terrain_access(dem,profile,cfg['terrain_access'],out)
     b=np.array([cfg['baseline_access_by_pnv'][x] for x in labels])[group]*terrain*(rf>0)
-    cap=np.array([cfg['maximum_rainfed_by_pnv'][x] for x in labels])[group]*terrain*(rf>0)
+    cap=np.array([cfg['maximum_rainfed_by_pnv'][x] for x in labels])[group]*maximum_terrain*(rf>0)
     from .location_refinements import settings,prairie_access
     ref_cfg=settings(root,cfg)
     prairie_changed=np.zeros(domain.shape,dtype=bool)
@@ -221,18 +225,20 @@ def allocate_irrigation(root,cfg,domain,crop,start,maximum,irr,area,out):
     for link in wc_cfg.get('historical_connections',[]):
         use=np.isin(grid,[ids[k] for k in link['recipient_basins']])&(elev<=link['max_elevation_m'])
         service[use]=ids[link['source_basin']]
-    command,_=read(water/'surface_command_fraction.tif');command_missing=~np.isfinite(command)
+    command,command_profile=read(water/'surface_command_fraction.tif');command_missing=~np.isfinite(command)
     command=np.nan_to_num(command)
     candidate=np.maximum(irr,np.minimum(command,cfg['maximum_water_land_fraction']))
     import rasterio
     with rasterio.open(water/'reference_et0_monthly_mm.tif') as d:et=d.read(masked=True).filled(np.nan)
     with rasterio.open(water/'natural_monthly_deficit_mm.tif') as d:deficit=d.read(masked=True).filled(np.nan)
-    # Six highest-ET months: explicit first-pass seasonal analogue. Paddy percolation is
-    # separate from reference shortage, so humid rice is not automatically water-free.
     et=np.nan_to_num(et);deficit=np.nan_to_num(deficit)
-    order=np.argsort(et,axis=0);active=np.zeros_like(et,dtype=bool)
-    np.put_along_axis(active,order[-cfg['irrigation_active_months']:],True,axis=0)
-    demand_mm=np.where(active,np.maximum(deficit,cfg['minimum_seasonal_irrigation_demand_mm']/cfg['irrigation_active_months'])+(crop==7)*cfg['wet_rice_extra_water_mm_per_active_month'],0)
+    from .crop_seasons import global_seasons,demand
+    calendar=json.loads((root/cfg['crop_season_config']).read_text())
+    active,season_start,season_unknown,season_records=global_seasons(root,calendar,crop,domain,et)
+    demand_mm=demand(active,deficit,crop,cfg['minimum_seasonal_irrigation_demand_mm'],cfg['wet_rice_extra_water_mm_per_active_month'])
+    write(out/'irrigation_season_start_month.tif',np.where(domain,season_start+1,np.nan),command_profile,'1 January through 12 December; 0 no crop')
+    write(out/'irrigation_season_conflict.tif',np.where(domain,season_unknown,np.nan),command_profile,'1 if thermal calendar conflict or missing climate')
+    write_json(out/'crop_seasons.json',{'configuration':calendar,'crops':season_records,'yields_or_area_changed':False})
     eligible=domain&(service>=0)&(crop>0)
     g=service[eligible];n=len(rows);eff=wc_cfg['irrigation']['efficiency']
     irr=np.where(eligible,irr,0);candidate=np.where(eligible,candidate,0)
@@ -250,11 +256,14 @@ def allocate_irrigation(root,cfg,domain,crop,start,maximum,irr,area,out):
         us[eligible]=np.minimum(us[eligible],np.where(act,ur[g],1))
         xs[eligible]=np.minimum(xs[eligible],np.where(act,er[g],1))
     served=irr*hs;full=irr*us+np.maximum(candidate-irr,0)*xs
+    write(out/'water_candidate_fraction.tif',candidate,command_profile,'Land within surface command screen before river-budget limitations')
     if np.any(full+1e-7<served):raise ValueError('Expansion removed existing water service')
     np.savez_compressed(out/'water_accounts.npz',runoff_m3=budget['runoff_m3'],historical_demand_m3=hd,maximum_demand_m3=md,historical_withdrawal_m3=h['allocated'],maximum_withdrawal_m3=u['allocated'],historical_outflow_m3=h['outflow'],maximum_outflow_m3=u['outflow'],historical_losses_m3=h['transmission_loss'],maximum_losses_m3=u['transmission_loss'],downstream=down)
     audit={'max_monthly_budget_residual_m3':float(max(np.abs(h['residual']).max(),np.abs(u['residual']).max())),'historical_withdrawal_km3_year':float(h['allocated'].sum()/1e9),'maximum_withdrawal_km3_year':float(u['allocated'].sum()/1e9),'historical_irrigation_requested_ha':float(np.sum(irr*area)*100),'historical_irrigation_reliably_served_ha':float(np.sum(served*area)*100),'maximum_irrigation_reliably_served_ha':float(np.sum(full*area)*100),'water_unknown_or_unmapped_cells':int(np.sum(domain&(command_missing|(service<0)))),'interpretation':'Conservative seasonal service uses worst active month; unused allocations are not converted to extra hectares. Expansion uses a simultaneous upstream-first allocation with current priority. Modern hydrology and shared seasonal/engineering priors.'}
     if audit['max_monthly_budget_residual_m3']>1:raise ValueError('Water account failed')
-    return served,full,command_missing|(service<0),audit
+    audit['seasonal_calendar']='crop-specific climate analogue; see crop_seasons.json'
+    audit['seasonal_calendar_flagged_cells']=int(np.sum(domain&season_unknown))
+    return served,full,command_missing|(service<0)|season_unknown,audit
 
 
 
@@ -301,20 +310,34 @@ def execute(config_path,output):
     log('Calculating crop, livelihood and land states on the native grid')
     domain,profile,food_type,crop,rf,ir,reference,livelihood,yinf,diagnostics,ya=crop_densities(root,cfg,out)
     area,b,start,maximum,irr,linf,la=land_inputs(root,cfg,domain,profile,diagnostics['baseline_rf'],diagnostics['baseline_crop'],out)
-    log('Reallocating shared river water for seasonal crop-service requirements')
-    served,full,winf,wa=allocate_irrigation(root,cfg,domain,np.where(diagnostics['refinement_flags']==3,diagnostics['baseline_crop'],crop),start,maximum,irr,area,out)
-    pre_system_rf,pre_system_ir=rf,ir
+    historical_cultivated=read(out/'historical_cultivated_fraction.tif')[0]
     from .cultivated_systems import apply as apply_cultivated_systems
     rf,ir,system_flags=apply_cultivated_systems(root,cfg,domain,profile,crop,rf,ir,diagnostics,out)
+    from .dry_field_alternatives import estimate as dry_alternatives,contributions as alternative_contributions,infer_water
+    alternative,alternative_crop=dry_alternatives(root,cfg,domain,profile,crop,rf,historical_cultivated,irr,out)
+    alternative_share=cfg['dry_field_alternatives']['field_share']
+    linf|=alternative_crop>0
+    recorded_irrigation=irr.copy()
+    command=np.clip(np.nan_to_num(read(water/'surface_command_fraction.tif')[0]),0,cfg['maximum_water_land_fraction'])
+    irr=infer_water(historical_cultivated,irr,command,rf,ir,alternative,cfg['inferred_cultivated_water_share'])
+    inferred_water=irr-recorded_irrigation
+    linf|=inferred_water>0
+    write(out/'recorded_historical_irrigation_fraction.tif',recorded_irrigation,profile,'HYDE/LUH historical irrigation before conditional inference')
+    write(out/'inferred_cultivated_water_fraction.tif',inferred_water,profile,'Additional water-access request on existing cultivated land; subject to river budget')
+    la['inferred_cultivated_water_requested_ha']=float(np.sum(np.where(domain,inferred_water,0)*area)*100)
+    la['inferred_cultivated_water_note']='Already cultivated; no viable listed rainfed crop; inside low-lift command. Inferred access, not observed irrigation. Same monthly river limits, no new land.'
+    log('Reallocating shared river water for seasonal crop-service requirements')
+    served,full,winf,wa=allocate_irrigation(root,cfg,domain,np.where(diagnostics['refinement_flags']==3,diagnostics['baseline_crop'],crop),start,maximum,irr,area,out)
     max_land=np.maximum(maximum,full)
     dry_gain=np.maximum(rf-livelihood,0)
     water_gain=np.maximum(ir-np.maximum(rf,livelihood),0)
     base=b*diagnostics['baseline_rf']+(1-b)*livelihood
-    # Preserve irrigation on baseline land; only improved rainfed fields change system.
-    from .cultivated_systems import irrigation_corrections
-    base_irrigation_current,base_irrigation_max=irrigation_corrections(b,served,full,pre_system_rf,pre_system_ir,rf,ir,livelihood)
-    current=base+np.maximum(start-b,0)*dry_gain+served*water_gain+base_irrigation_current
-    upper=base+np.maximum(max_land-b,0)*dry_gain+full*water_gain+base_irrigation_max
+    from .land_accounting import baseline_management
+    current_management,maximum_management,base_irrigation_current,base_irrigation_max=baseline_management(b,historical_cultivated,served,full,diagnostics['baseline_rf'],rf,ir,livelihood)
+    current=base+np.maximum(start-b,0)*dry_gain+served*water_gain+current_management+base_irrigation_current
+    upper=base+np.maximum(max_land-b,0)*dry_gain+full*water_gain+maximum_management+base_irrigation_max
+    alternative_gain,alternative_displaced=alternative_contributions(historical_cultivated,served,full,rf,ir,livelihood,alternative,alternative_share)
+    current+=alternative_gain;upper+=alternative_gain-alternative_displaced
     if not np.all(upper[domain]+1e-6>=current[domain]):raise ValueError('Grid capacity order failure')
     # Eligibility identifies output gaps; population is still absent at this stage.
     from .location_geometry import overlap_matrix
@@ -342,11 +365,12 @@ def execute(config_path,output):
     dry_gain=np.maximum(rf-livelihood,0)
     water_gain=np.maximum(ir-np.maximum(rf,livelihood),0)
     base=b*diagnostics['baseline_rf']+(1-b)*livelihood
-    # Preserve irrigation on baseline land; only improved rainfed fields change system.
-    from .cultivated_systems import irrigation_corrections
-    base_irrigation_current,base_irrigation_max=irrigation_corrections(b,served,full,pre_system_rf,pre_system_ir,rf,ir,livelihood)
-    current=base+np.maximum(start-b,0)*dry_gain+served*water_gain+base_irrigation_current
-    upper=base+np.maximum(max_land-b,0)*dry_gain+full*water_gain+base_irrigation_max
+    from .land_accounting import baseline_management
+    current_management,maximum_management,base_irrigation_current,base_irrigation_max=baseline_management(b,historical_cultivated,served,full,diagnostics['baseline_rf'],rf,ir,livelihood)
+    current=base+np.maximum(start-b,0)*dry_gain+served*water_gain+current_management+base_irrigation_current
+    upper=base+np.maximum(max_land-b,0)*dry_gain+full*water_gain+maximum_management+base_irrigation_max
+    alternative_gain,alternative_displaced=alternative_contributions(historical_cultivated,served,full,rf,ir,livelihood,alternative,alternative_share)
+    current+=alternative_gain;upper+=alternative_gain-alternative_displaced
     reference=np.maximum(reference,livelihood)
     mapped_completion=np.where(domain,completed,completed.ravel()[nearest_flat])
     write(out/'terrestrial_completion.tif',mapped_completion.astype(float),profile,'1 if explicit terrestrial analogue replaces unsupported ownable-location source cell')
@@ -358,9 +382,19 @@ def execute(config_path,output):
        'baseline_crop_fraction':b,'starting_crop_fraction':start,'maximum_crop_fraction':max_land,'historical_irrigated_fraction':irr,'starting_served_fraction':served,'maximum_served_fraction':full}
     from .improvement_audit import decompose,CAPACITY_COLUMNS,validate_components,reconcile_rounding
     components=decompose(b,start,max_land,served,full,rf,ir,livelihood,diagnostics['low_rf'])
+    components['starting_management_capacity']+=current_management
+    components['remaining_management_capacity']+=maximum_management-current_management
     components['starting_irrigation_capacity']+=base_irrigation_current
     components['remaining_irrigation_capacity']+=base_irrigation_max-base_irrigation_current
+    components['starting_management_capacity']+=alternative_gain
+    components['remaining_irrigation_capacity']-=alternative_displaced
     arrays.update(components)
+    arrays['dry_field_alternative_support']=alternative_gain
+    arrays['inferred_cultivated_water_fraction']=inferred_water
+    arrays['dry_field_alternative_fraction']=np.where(alternative>np.maximum(rf,livelihood),np.maximum(historical_cultivated-served,0)*alternative_share,0)
+    arrays['water_dependent_cultivation_fraction']=np.where((rf<=1e-6)&(ir>1e-6),start,0)
+    arrays['unserved_historical_irrigation_fraction']=np.maximum(irr-served,0)
+    arrays['unserved_water_opportunity_fraction']=np.maximum(read(out/'water_candidate_fraction.tif')[0]-full,0)
     arrays.update({k:diagnostics[k] for k in ['rainfed_headroom','rotation_fraction','crop_candidate','pastoral']})
     arrays['china_refinement_fraction']=(diagnostics['refinement_flags']==1).astype(float)
     arrays['andes_refinement_fraction']=np.isin(diagnostics['refinement_flags'],[2,3]).astype(float)
@@ -368,6 +402,8 @@ def execute(config_path,output):
     arrays['improvement_reference_refinement_fraction']=read(out/'improvement_reference_refined.tif')[0]
     arrays['management_envelope_refinement_fraction']=read(out/'management_envelope_refined.tif')[0]
     arrays['cultivated_system_refinement_fraction']=(system_flags>0).astype(float)
+    from .agricultural_game_calibration import apply as apply_game_calibration
+    arrays=apply_game_calibration(root,cfg,arrays,historical_cultivated,food_type,domain,out)
     write_json(out/'regional_refinement.json',diagnostics['refinement_audit'])
     # Game coastlines and tiny islands do not match real raster masks exactly.
     # Full-grid completion is a labelled nearest terrestrial analogue, never omission.
@@ -380,7 +416,10 @@ def execute(config_path,output):
             a,missing=fill_nearest(a,finite);evidence_inferred|=domain&missing
         a=np.where(domain,a,a[tuple(nearest)]).astype(np.float32)
         arrays[name]=a
-        write(out/(name+'.tif'),a,profile,'people per physical land hectare' if ('support' in name or name in CAPACITY_COLUMNS or name=='rainfed_headroom') else 'fraction' if (name.endswith('fraction') or name in ['crop_candidate','pastoral']) else 'people per effective hectare',{'completion':'Outside source land uses flagged nearest terrestrial analogue for game-coastline registration only'})
+        unit='fraction' if (name.endswith('fraction') or name in ['crop_candidate','pastoral']) else 'people per effective hectare'
+        if 'support' in name or name.endswith('_capacity') or name=='rainfed_headroom':
+            unit='game capacity per reference land hectare' if cfg.get('agricultural_game_calibration') and not name.startswith(('uncalibrated_','inherited_physical_')) and name!='rainfed_headroom' else 'physical food-support people per land hectare'
+        write(out/(name+'.tif'),a,profile,unit,{'completion':'Outside source land uses flagged nearest terrestrial analogue for game-coastline registration only'})
         grid_reports[name]={'min':float(a[domain].min()),'max':float(a[domain].max())}
     eco,_=read(food/'food_ecoregion.tif')
     write(out/'inference.tif',np.where(domain,evidence_inferred,True).astype(float),profile,'1 if any inferred input or coastline transfer')
@@ -399,8 +438,18 @@ def execute(config_path,output):
     d['starting_improvement_capacity']=d.starting_capacity-d.inert_capacity
     d['remaining_improvement_effective_cropland']=d.maximum_improvement_effective_cropland-d.starting_improvement_effective_cropland
     d['remaining_capacity']=d.maximum_capacity-d.starting_capacity
+    d['dry_field_alternative_capacity']=totals['dry_field_alternative_support']
+    d['dry_field_alternative_ha']=totals['dry_field_alternative_fraction']
+    d['inferred_cultivated_water_requested_ha']=totals['inferred_cultivated_water_fraction']
+    if cfg.get('agricultural_game_calibration'):
+        for field,grid in [('game_conversion_added_capacity','game_conversion_added_support'),('game_inheritance_capacity','game_inheritance_support'),('game_base_added_capacity','game_base_added_support'),('uncalibrated_base_capacity','uncalibrated_base_support'),('uncalibrated_starting_capacity','uncalibrated_starting_support'),('uncalibrated_maximum_capacity','uncalibrated_maximum_support')]:d[field]=totals[grid]
+        d['game_inheritance_activation_share']=totals['game_inheritance_activation_fraction']/area_ha
+        d['source_starting_crop_ha']=totals['source_starting_crop_fraction']
+        d['source_starting_served_ha']=totals['source_starting_served_fraction']
     for name in CAPACITY_COLUMNS:d[name]=totals[name]
     for rule in ['china','andes','prairie','improvement_reference','management_envelope','cultivated_system']:d[rule+'_refinement_share']=totals[rule+'_refinement_fraction']/area_ha
+    for name in ['water_dependent_cultivation','unserved_historical_irrigation','unserved_water_opportunity']:
+        d[name+'_ha']=totals[name+'_fraction']
     d['crop_candidate_area_ha']=totals['crop_candidate']
     d['rotation_active_area_equivalent_ha']=totals['rotation_fraction']
     d['pastoral_area_ha']=totals['pastoral']
@@ -418,6 +467,12 @@ def execute(config_path,output):
         d.loc[d[rule+'_refinement_share']>0,'source_rule']+='+refinement:'+rule
         d.loc[d[rule+'_refinement_share']>0,'evidence_status']='inferred: source-guided '+rule+' refinement; numerical assumptions uncertain'
     d.loc[d.terrestrial_analogue_share>0,'source_rule']+='+terrestrial_analogue'
+    d.loc[d.dry_field_alternative_ha>0,'source_rule']+='+inferred_dry_field_alternative'
+    d.loc[d.dry_field_alternative_ha>0,'evidence_status']='inferred: historically listed alternative on otherwise unsupported cultivated dry fields'
+    d.loc[d.inferred_cultivated_water_requested_ha>0,'source_rule']+='+inferred_cultivated_water_access'
+    if cfg.get('agricultural_game_calibration'):
+        d['source_rule']+='+shared_game_support_conversion+historical_system_inheritance'
+        d['evidence_status']='game calibrated; historical agricultural-system and extent priors; physical food estimates retained separately'
     repaired=d.loc[zero,['location_tag','starting_capacity','maximum_capacity','capacity_multiplier','terrestrial_analogue_share']].copy()
     repaired['previous_starting_capacity']=before[zero]
     repaired.to_csv(out/'repaired_settlements.csv',index=False,float_format='%.15g')
@@ -464,6 +519,9 @@ def execute(config_path,output):
     quantiles={k:d.loc[d.modelled_land,k].quantile([0,.1,.5,.9,.99,1]).to_dict() for k in FIELDS+['starting_capacity','maximum_capacity','starting_fill']}
     audit={'iteration':cfg['iteration'],'engineering_pass':True,'iteration_complete':True,'scientific_acceptance':False,'location_count':len(d),'inventory':inventory_audit,'settlement_readiness':settlement,'terrestrial_completion':{k:v for k,v in completion_audit.items() if k!='cells'},'checks':checks,'zero_starting_capacity_locations':int(((d.starting_capacity==0)&d.modelled_land).sum()),'population_context_missing_locations':int((d.eu5_start_population.isna()&d.modelled_land).sum()),'below_starting_population_locations':int((d.starting_capacity<d.eu5_start_population).sum()),'total_starting_capacity':float(d.starting_capacity.sum()),'total_maximum_capacity':float(d.maximum_capacity.sum()),'total_context_population':float(d.eu5_start_population.sum()),'substantial_coastline_transfer_locations':int((d.coastline_transfer_share>.1).sum()),'quantiles':quantiles,'geometry':ga,'yield':ya,'land':la,'water':wa,'grid':grid_reports,
        'limitations':['Complete inferred iteration, not historically accepted balance.','Modern climate and runoff proxies; dated cropland evidence around 1300 compared to cached EU5 1337 population.','Shared access/clearing fractions and crop-season water demand are explicit priors, not surveyed hectares.','Drainage/flood protection beyond reconstructed cropland and retained crop-system effectiveness are not independently identified.','No separate improvement-building counts; no game export or deployment.','Aquatic food excluded; existing noncrop terrestrial transfers remain low-confidence.','No per-location population fitting or area-compression coefficient. Large physical locations can have large support.']}
+    audit['game_calibration_applied']=bool(cfg.get('agricultural_game_calibration'))
+    if audit['game_calibration_applied']:
+        audit['limitations'].insert(0,'Main capacities use an explicit nonlinear game conversion and inferred starting-infrastructure scenario; they are not physical calorie-derived population limits. Raw food estimates are retained separately.')
     write_json(out/'validation.json',audit)
     # Manifest binds code, imported sources and supporting native-grid products.
     log('Hashing complete iteration and rendering location map')

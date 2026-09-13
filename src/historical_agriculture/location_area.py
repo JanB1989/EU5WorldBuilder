@@ -7,6 +7,9 @@ ABSOLUTES = [
     "maximum_improvement_effective_cropland", "remaining_improvement_effective_cropland",
     "inert_capacity", "starting_improvement_capacity", "starting_capacity",
     "maximum_capacity", "remaining_capacity",
+    "dry_field_alternative_capacity",
+    "game_conversion_added_capacity", "game_inheritance_capacity", "game_base_added_capacity",
+    "uncalibrated_base_capacity", "uncalibrated_starting_capacity", "uncalibrated_maximum_capacity",
 ]
 
 def equal_area(d,reference_area=None,base_land_floor=0.):
@@ -31,7 +34,13 @@ def equal_area(d,reference_area=None,base_land_floor=0.):
     result["base_land_floor_added_capacity"]=0.
     if base_land_floor>0:
         own=result.is_ownable.astype(bool)
-        added=np.where(own,np.maximum(base_land_floor-result.base_effective_cropland,0),0)
+        # The existing game allowance is measured against the raw baseline and
+        # retained when support is converted. Otherwise a stronger baseline could
+        # remove the allowance and perversely reduce total starting capacity.
+        floor_basis=result.base_effective_cropland
+        if 'uncalibrated_base_capacity' in result:
+            floor_basis=result.uncalibrated_base_capacity/result.capacity_multiplier
+        added=np.where(own,np.maximum(base_land_floor-floor_basis,0),0)
         gain=added*result.capacity_multiplier
         result["base_land_floor_added_units"]=added
         result["base_land_floor_added_capacity"]=gain

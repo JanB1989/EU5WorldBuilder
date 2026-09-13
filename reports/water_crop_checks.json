@@ -1,0 +1,258 @@
+{
+  "schema": 1,
+  "engineering_checks": "131 tests passed; independent complete-inventory, component, multiplier and water-budget checks; generated viewer tests passed",
+  "scientific_acceptance": false,
+  "cases": {
+    "before": {
+      "rural_above_start": 6249,
+      "rural_above_max": 1590,
+      "rural_provinces_above_start": 1010,
+      "rural_provinces_above_max": 217,
+      "ownable_start": 812991274.7798176,
+      "ownable_max": 4183214223.11909
+    },
+    "calendar_only": {
+      "rural_above_start": 6245,
+      "rural_above_max": 1563,
+      "rural_provinces_above_start": 1009,
+      "rural_provinces_above_max": 211,
+      "ownable_start": 813484820.5892663,
+      "ownable_max": 4238227725.221856
+    },
+    "calendar_and_dry_crops": {
+      "rural_above_start": 6222,
+      "rural_above_max": 1562,
+      "rural_provinces_above_start": 1006,
+      "rural_provinces_above_max": 211,
+      "ownable_start": 815846529.6348436,
+      "ownable_max": 4240260643.9269505
+    },
+    "conservative": {
+      "rural_above_start": 6225,
+      "rural_above_max": 1562,
+      "rural_provinces_above_start": 1004,
+      "rural_provinces_above_max": 211,
+      "ownable_start": 815973644.5256987,
+      "ownable_max": 4239569616.493368
+    },
+    "current": {
+      "rural_above_start": 6209,
+      "rural_above_max": 1562,
+      "rural_provinces_above_start": 1003,
+      "rural_provinces_above_max": 211,
+      "ownable_start": 817830589.1568633,
+      "ownable_max": 4240912916.092213
+    }
+  },
+  "sources": {
+    "before": {
+      "path": "data/processed/water_season_before.csv",
+      "sha256": "8f4e66034897e05e5e8a859fb36208580e036756658adf32f8b0ba34dd56b81e"
+    },
+    "calendar_only": {
+      "path": "data/processed/calendar_only.csv",
+      "sha256": "d6b7c13c04caf2dd3c9ffb39ac01b3610f140df4899c45b0bdaae34cb3ae983b"
+    },
+    "calendar_and_dry_crops": {
+      "path": "data/processed/alternatives_only.csv",
+      "sha256": "0ff29eceedb87192a2e47caaa1904ac00b8fa6dd8501ffee81d1881b10376e54"
+    },
+    "conservative": {
+      "path": "artifacts/water_crop_conservative/locations_equal_area.csv",
+      "sha256": "dbc8e6d8ffa7371a46bf0925e9c583f7f3f850485d928d13d9eee425a564fb0b"
+    },
+    "current": {
+      "path": "artifacts/locations/locations_equal_area.csv",
+      "sha256": "2933bc27ee4404b8a196d8a96c1b8bf8a231a7cbd4925ee29a523ff8a153c23e"
+    }
+  },
+  "resolved_rural": [
+    "ambovontany",
+    "an_nil",
+    "baodian",
+    "bashagard",
+    "biobio",
+    "buzanga",
+    "cauquen",
+    "cheongsong",
+    "dia",
+    "dingbian_shunning",
+    "el_bahnasa",
+    "ellur",
+    "fangcheng",
+    "goju",
+    "gucheng",
+    "gwadar",
+    "haeju",
+    "hwaju",
+    "hwangju",
+    "jangyeon",
+    "junghwa",
+    "khairpur",
+    "khusf",
+    "meli_pillan",
+    "menouf",
+    "naserpur",
+    "north_jeongju",
+    "pungcheon",
+    "rezoky",
+    "rudbar_sistan",
+    "rugombe",
+    "samanoud",
+    "samhwa",
+    "san",
+    "shahabad_kerman",
+    "suq_al_shuyukh",
+    "taft",
+    "talaky",
+    "uvira",
+    "zhenping"
+  ],
+  "new_rural_shortfalls": [],
+  "productivity_multipliers_unchanged": true,
+  "base_units_unchanged": true,
+  "current_fingerprint": "4fe38a0af0df37f7ff7a1d89e2378e25754bbe279fa30744a92a85ca10265270",
+  "conservative_fingerprint": "510b6a814ff73b7237fa213f0924d74a149047d6ad3b3bba1c68f9405c36efe2",
+  "region_comparison": {
+    "western_india_region": {
+      "before": {
+        "above_start": 135,
+        "above_max": 105,
+        "start": 2438951.91413261,
+        "max": 7198399.864639287
+      },
+      "conservative": {
+        "above_start": 134,
+        "above_max": 102,
+        "start": 2576919.592580978,
+        "max": 7534417.438214812
+      },
+      "current": {
+        "above_start": 134,
+        "above_max": 102,
+        "start": 2708204.0706996107,
+        "max": 7665517.5067163985
+      }
+    },
+    "hindustan_region": {
+      "before": {
+        "above_start": 229,
+        "above_max": 87,
+        "start": 15811601.980158623,
+        "max": 59292391.10465954
+      },
+      "conservative": {
+        "above_start": 229,
+        "above_max": 85,
+        "start": 16063745.237127632,
+        "max": 65851807.978223085
+      },
+      "current": {
+        "above_start": 228,
+        "above_max": 86,
+        "start": 16299097.651997749,
+        "max": 65838350.44893191
+      }
+    },
+    "egypt_region": {
+      "before": {
+        "above_start": 41,
+        "above_max": 36,
+        "start": 3066742.1080790637,
+        "max": 3252077.6681173583
+      },
+      "conservative": {
+        "above_start": 38,
+        "above_max": 33,
+        "start": 3334976.649184425,
+        "max": 3526440.3687162427
+      },
+      "current": {
+        "above_start": 38,
+        "above_max": 33,
+        "start": 3312957.4475155775,
+        "max": 3502972.6104324628
+      }
+    },
+    "nubia_region": {
+      "before": {
+        "above_start": 76,
+        "above_max": 47,
+        "start": 1280024.7383232543,
+        "max": 6549758.540861403
+      },
+      "conservative": {
+        "above_start": 76,
+        "above_max": 47,
+        "start": 1284059.6280331437,
+        "max": 6595989.702720223
+      },
+      "current": {
+        "above_start": 76,
+        "above_max": 47,
+        "start": 1287824.5010393052,
+        "max": 6596817.881495921
+      }
+    },
+    "great_lakes_region": {
+      "before": {
+        "above_start": 76,
+        "above_max": 7,
+        "start": 4771374.921403869,
+        "max": 43167121.29532373
+      },
+      "conservative": {
+        "above_start": 76,
+        "above_max": 6,
+        "start": 4863772.002673866,
+        "max": 43557864.42284095
+      },
+      "current": {
+        "above_start": 73,
+        "above_max": 6,
+        "start": 4955792.0060944185,
+        "max": 43646973.3004539
+      }
+    },
+    "east_china_region": {
+      "before": {
+        "above_start": 188,
+        "above_max": 13,
+        "start": 69372925.3144013,
+        "max": 264650986.4427453
+      },
+      "conservative": {
+        "above_start": 188,
+        "above_max": 13,
+        "start": 69426209.71531337,
+        "max": 265535084.68109772
+      },
+      "current": {
+        "above_start": 187,
+        "above_max": 13,
+        "start": 69479094.16480085,
+        "max": 265577446.02648902
+      }
+    },
+    "france_region": {
+      "before": {
+        "above_start": 19,
+        "above_max": 3,
+        "start": 63330122.61397272,
+        "max": 110140509.23434468
+      },
+      "conservative": {
+        "above_start": 19,
+        "above_max": 3,
+        "start": 63330122.61397272,
+        "max": 110142600.81241865
+      },
+      "current": {
+        "above_start": 19,
+        "above_max": 3,
+        "start": 63330122.61397272,
+        "max": 110142600.81241865
+      }
+    }
+  }
+}

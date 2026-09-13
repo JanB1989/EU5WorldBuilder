@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "status": "Inferred climate calendars, not observed 1300 sowing dates. FAO growing-period guidance informs durations; broad thermal screening bands and preferences are explicit shared priors. One annual harvest, as in current yield configuration. Modern climate retained.",
+  "selection": "Consecutive cyclic months; minimize thermal conflicts, then temperature departure, then reference moisture shortage. No river-supply or population optimization. Flag conflicting or missing climate; retain conservative fallback rather than remove land.",
+  "sources": [
+    "https://www.fao.org/4/s2022e/s2022e02.htm",
+    "https://www.fao.org/4/u3160e/u3160e04.htm",
+    "https://www.fao.org/4/i2800e/i2800e.pdf",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC6991972/"
+  ],
+  "crops": {
+    "1": {"crop":"WHE","months":5,"minimum_temperature_c":5,"maximum_temperature_c":32,"preferred_temperature_c":[12,22]},
+    "2": {"crop":"BRL","months":5,"minimum_temperature_c":5,"maximum_temperature_c":32,"preferred_temperature_c":[12,22]},
+    "3": {"crop":"RYE","months":5,"minimum_temperature_c":3,"maximum_temperature_c":30,"preferred_temperature_c":[10,20]},
+    "4": {"crop":"OAT","months":5,"minimum_temperature_c":5,"maximum_temperature_c":30,"preferred_temperature_c":[10,20]},
+    "5": {"crop":"BCK","months":4,"minimum_temperature_c":8,"maximum_temperature_c":32,"preferred_temperature_c":[15,25]},
+    "6": {"crop":"MZE","months":5,"minimum_temperature_c":10,"maximum_temperature_c":38,"preferred_temperature_c":[20,30]},
+    "7": {"crop":"RCW","months":5,"minimum_temperature_c":15,"maximum_temperature_c":38,"preferred_temperature_c":[22,30]},
+    "8": {"crop":"RCD","months":5,"minimum_temperature_c":15,"maximum_temperature_c":38,"preferred_temperature_c":[22,30]},
+    "9": {"crop":"FML","months":4,"minimum_temperature_c":12,"maximum_temperature_c":38,"preferred_temperature_c":[20,30]},
+    "10": {"crop":"PML","months":4,"minimum_temperature_c":15,"maximum_temperature_c":40,"preferred_temperature_c":[22,32]},
+    "11": {"crop":"SRG","months":4,"minimum_temperature_c":15,"maximum_temperature_c":40,"preferred_temperature_c":[22,32]},
+    "12": {"crop":"TEF","months":4,"minimum_temperature_c":8,"maximum_temperature_c":32,"preferred_temperature_c":[15,25]},
+    "13": {"crop":"WPO","months":5,"minimum_temperature_c":5,"maximum_temperature_c":28,"preferred_temperature_c":[10,20]},
+    "14": {"crop":"SPO","months":6,"minimum_temperature_c":15,"maximum_temperature_c":38,"preferred_temperature_c":[20,30]},
+    "15": {"crop":"YAM","months":9,"minimum_temperature_c":15,"maximum_temperature_c":38,"preferred_temperature_c":[22,30]},
+    "16": {"crop":"CSV","months":12,"minimum_temperature_c":15,"maximum_temperature_c":38,"preferred_temperature_c":[22,30]},
+    "17": {"crop":"TAROD","months":9,"minimum_temperature_c":15,"maximum_temperature_c":38,"preferred_temperature_c":[22,30]},
+    "18": {"crop":"BAN","months":12,"minimum_temperature_c":15,"maximum_temperature_c":38,"preferred_temperature_c":[22,30]}
+  }
+}

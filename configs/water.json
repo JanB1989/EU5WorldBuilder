@@ -20,7 +20,6 @@
     "reach_distance_km": 10,
     "low_lift_m": 6,
     "terrain_tolerance_m": 15,
-    "relief_taper_m": 100,
     "maximum_command_fraction": 1,
     "seasonal_storage": false,
     "groundwater": false
@@ -31,7 +30,8 @@
     "Upper scenario is a constrained surface-irrigation screening, not a proven medieval maximum. Qanats, wells, reservoir storage, engineered routes and natural inundation require additional evidence.",
     "Technology parameters are globally shared screening assumptions informed by traditional low lifts and earthen-system efficiency, not universal historical limits.",
     "The cached HYDE April 2025 reconstruction is a model reconstruction, not an archaeological survey. Historical demand has priority when extending infrastructure.",
-    "Soil storage uses an analytical annual fixed point; there is no arbitrary transient initial stock."
+    "Soil storage uses an analytical annual fixed point; there is no arbitrary transient initial stock.",
+    "Surface command uses the eligible fine-pixel elevation fraction once. Whole-cell relief no longer discounts already eligible valley land a second time."
   ],
   "historical_connections": [
     {

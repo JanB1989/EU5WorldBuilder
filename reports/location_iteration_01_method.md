@@ -213,3 +213,65 @@ Starting town/city/megalopolis ranks are excluded from rural pressure counts. Ru
 ### Cultivated-system round: inherited field management
 
 The configured cultivated-system correction runs after land/water allocation. It preserves the original natural-base food density and reference multiplier. Additional support on improved land enters starting and maximum improvement contributions using the same crop-area and water budgets. Chinese wet-rice cells in the previous extensive upland class require reconstructed cultivation, viable complete crop scenarios and the configured elevation band. Their active rotation and management assumptions are raised conservatively; prior more intensive fields are preserved. Northwestern Indian winter-cereal cells with weak rainfed relative to irrigated output receive a partial summer-cereal substitution drawn from a fixed, historically available pearl-millet/sorghum basket, equally weighted among viable alternatives. Crop calories are converted before mixing, and no second harvest is added. These are dated-system analogues with uncertain adoption/share parameters, not observed 1300 fractions or population-fitted capacities. Conservative/central/strong variants are frozen in configs/cultivated_systems.json.
+# Global land repair
+
+The current location calculation supersedes the whole-cell exponential relief penalty. It evaluates slope at the cached ETOPO 60-arc-second resolution, rates each fine pixel for natural access and improvement opportunity, and averages those ratings onto the GAEZ grid. GAEZ slope class boundaries are used with explicit inferred weights in `configs/locations.json`; coarse elevation smoothing and the absence of direct historical terrace maps remain limitations. Historical cultivated extent continues to take precedence over estimated access limits. Equal-area conversion, the 1,000-unit base floor and productivity bounds remain in force.
+
+Surface irrigation retains its fine-pixel elevation/lift screen, distance limit, basin restrictions and shared monthly water budgets. The additional whole-cell relief taper is removed because it discounted already eligible valley ground a second time. Historical irrigation extent is not increased by that correction. Winter crop calendars, seasonal storage and natural flood-recession systems are still incompletely represented and must not be inferred merely from a population deficit.
+
+The imported HYDE file identifies itself as HYDE3.4, April 2025, with square-kilometre areas; the published methodology reference is HYDE3.2. Shape, coordinates, orientation, units and the exact 1300 time slice are checked. Conversion to land fractions precedes the conversion of output areas to hectares. FAO cropland definitions include temporary fallow; a universal removal of the rotation coefficient is therefore not justified. Long-fallow shifting-cultivation denominators remain uncertain. `evidence/land_repair.json` records sources and access limitations. Crop annualization is unchanged in this round.
+
+Management benefits apply to historical cultivated fields even where those fields overlap the natural baseline. At maximum investment all baseline fields can receive that benefit. Irrigation adds only the increment above the applicable rainfed system. Changing the baseline/improvement partition therefore cannot alter the yield of an unchanged historical field system. This supersedes the earlier preservation of old irrigation increments on all baseline fields.
+
+Global corrections may raise or lower support. The old regional-only unchanged-base and voluntary-envelope monotonicity checks do not apply to revised physical land estimates. Their replacement reports every increase/decrease, holds productivity multipliers fixed, and retains full coverage, land ordering, component and river-budget checks.
+# Crop-season correction, September 2026
+
+The subsequent shared game-calibration pass is configured in
+`configs/agricultural_game_calibration.json`. It activates part of existing
+physical opportunity using historical-system classes and the cultivated footprint,
+then applies `G(s;r)=max(s,r*(s/r)^(1/3))` to baseline, starting and maximum support
+on the native grid. References 1.0 (crop systems) and 0.1 (noncrop systems) are game
+normalization anchors, not historical yield estimates. High support remains
+unchanged by the conversion; low support is compressed upward. Starting-inheritance
+activation has ceilings 0.2/0.4/0.55/0.7 for extensive/rotation/managed/intensive
+systems, multiplied by `h/(h+0.01)` for reconstructed cultivated fraction `h`.
+These numerical assignments are explicit game-balance assumptions. Resource
+use is a bounded interpolation between starting and simultaneously feasible
+maximum scenarios. The raw physical food and component rasters are retained with
+`uncalibrated_` prefixes. Scientific acceptance remains separate.
+
+Component attribution remains telescoping: first inherit the corresponding share
+of each remaining component, then convert the stage's net gain into game units.
+Base support can change. The bounded multiplier is preserved. The prior minimum
+base allowance is retained against the uncalibrated baseline during equal-area
+conversion. There are no population-based floors, crop assignments or exceptions.
+
+The irrigation allocation now uses `configs/crop_seasons.json`: consecutive cyclic
+crop-specific seasons inferred from temperature and reference moisture shortage.
+This supersedes the six highest-ET months. Thermal suitability is considered before
+moisture; river availability and population do not select the season. Durations are
+informed by FAO agronomic guidance, while thermal bands and transfers to 1300 remain
+explicit assumptions. Conflicting or missing climate is flagged, not treated as
+zero land. Current crop-yield configurations all use one annual harvest; changing
+that requires corresponding water-calendar changes. Dormant winter cereals,
+flood-recession root-zone storage and detailed crop coefficients are not resolved.
+The existing reference-water-deficit approximation and separate paddy percolation
+remain in use. No additional historical irrigation extent is inferred from population.
+
+Where a dated cultivated field has zero rainfed output from its representative
+crop, its unserved portion can use the first viable alternative in the existing
+regional historical crop list. Local adoption is inferred, not observed. Existing
+crop yields, management priors and annual rotations are reused. No new cultivated
+area is created. Already served fields retain their original system; future water
+service replaces rather than stacks with the alternative dry crop. The contribution
+is identified as inherited management and recorded separately. A 0.5 field-share
+scenario tests uncertainty against the full inferred substitution and no substitution.
+
+For the complementary case with no viable listed rainfed alternative, existing
+cultivation inside the same low-lift river command screen can imply maintained
+water access beyond HYDE's recorded irrigation. The inferred request is bounded by
+both cultivated extent and command area, never by population. It passes the same
+monthly basin allocation; unserved demand remains unproductive. The original
+recorded extent and added inference are separate rasters/ledger fields. This is an
+explicit reconciliation hypothesis, not newly discovered medieval irrigation data.
+Flood-recession timing, groundwater and location registration remain limitations.

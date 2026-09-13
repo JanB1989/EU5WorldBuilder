@@ -1,0 +1,180 @@
+{
+  "baseline_fingerprint": "08575cf03d23e4132c7bb93378917f192c081b1423f3185d634c99e4edd5615d",
+  "central": {
+    "fingerprint": "919bf468c69b554106b414b63a11c33c985daeed47f0bced5dd915b5e55f0413",
+    "rank_source_sha256": "a00edb8e751ce78f1baccddf74b0ebe2623d63880755d87c6f0cebb1c858d02a",
+    "baseline_sha256": "bea343a09c120cd05682b727dd5655c458f1ce647c4afe38a5b3ce52e92e0d33",
+    "before": {
+      "ownable": 20893,
+      "urban": 1014,
+      "urban_over_start": 432,
+      "unknown": 0,
+      "rural_or_unranked": 19879,
+      "rural_over_start": 7040,
+      "rural_over_max": 2946,
+      "rural_provinces": 3819,
+      "rural_province_categories": {
+        "within_start": 2685,
+        "within_maximum_only": 733,
+        "above_maximum": 401
+      },
+      "rural_starting_capacity": 664158214.0630507,
+      "rural_population": 336637547.0
+    },
+    "after": {
+      "ownable": 20893,
+      "urban": 1014,
+      "urban_over_start": 412,
+      "unknown": 0,
+      "rural_or_unranked": 19879,
+      "rural_over_start": 6249,
+      "rural_over_max": 1590,
+      "rural_provinces": 3819,
+      "rural_province_categories": {
+        "within_start": 2809,
+        "within_maximum_only": 793,
+        "above_maximum": 217
+      },
+      "rural_starting_capacity": 710003940.1867546,
+      "rural_population": 336637547.0
+    },
+    "urban_policy": "Towns, cities and megalopolises are excluded from rural acceptance counts. Rank is contextual, never a productivity predictor.",
+    "limitations": [
+      "Rural_or_unranked is the cached source classification, not independent proof every location is rural.",
+      "Province totals pool rural locations only; urban capacity is not treated as free surplus.",
+      "Static support comparisons do not establish actual employment, food output, trade or demographic equilibrium.",
+      "Unresolved rural shortfalls remain visible; no population-fit floor.",
+      "The base-land floor can offset additional natural support while the incremental irrigation contribution shrinks. Small post-floor decreases can therefore occur even when physical support rises."
+    ]
+  },
+  "slope_sensitivity": {
+    "fingerprint": "87e631cc0739ef6d1e3297dec23d178f15ac3e847d9ea30a1c7198e35eb4248e",
+    "rank_source_sha256": "a00edb8e751ce78f1baccddf74b0ebe2623d63880755d87c6f0cebb1c858d02a",
+    "baseline_sha256": "bea343a09c120cd05682b727dd5655c458f1ce647c4afe38a5b3ce52e92e0d33",
+    "before": {
+      "ownable": 20893,
+      "urban": 1014,
+      "urban_over_start": 432,
+      "unknown": 0,
+      "rural_or_unranked": 19879,
+      "rural_over_start": 7040,
+      "rural_over_max": 2946,
+      "rural_provinces": 3819,
+      "rural_province_categories": {
+        "within_start": 2685,
+        "within_maximum_only": 733,
+        "above_maximum": 401
+      },
+      "rural_starting_capacity": 664158214.0630507,
+      "rural_population": 336637547.0
+    },
+    "after": {
+      "ownable": 20893,
+      "urban": 1014,
+      "urban_over_start": 420,
+      "unknown": 0,
+      "rural_or_unranked": 19879,
+      "rural_over_start": 6676,
+      "rural_over_max": 1814,
+      "rural_provinces": 3819,
+      "rural_province_categories": {
+        "within_start": 2747,
+        "within_maximum_only": 824,
+        "above_maximum": 248
+      },
+      "rural_starting_capacity": 687651119.9452925,
+      "rural_population": 336637547.0
+    },
+    "urban_policy": "Towns, cities and megalopolises are excluded from rural acceptance counts. Rank is contextual, never a productivity predictor.",
+    "limitations": [
+      "Rural_or_unranked is the cached source classification, not independent proof every location is rural.",
+      "Province totals pool rural locations only; urban capacity is not treated as free surplus.",
+      "Static support comparisons do not establish actual employment, food output, trade or demographic equilibrium.",
+      "Unresolved rural shortfalls remain visible; no population-fit floor.",
+      "The base-land floor can offset additional natural support while the incremental irrigation contribution shrinks. Small post-floor decreases can therefore occur even when physical support rises."
+    ]
+  },
+  "central_delivery": {
+    "pass": true,
+    "structural_pass": true,
+    "settlement_readiness": {
+      "passed": true,
+      "coverage_and_classification_pass": true,
+      "ownable_locations": 20893,
+      "unresolved_ownable_locations": 0,
+      "populated_unresolved_locations": 0,
+      "incorrectly_ownable_exclusions": [],
+      "issues": [],
+      "definition": "Template locations excluding sea_zones, lakes, impassable_mountains and non_ownable in game default.map. Independent of starting ownership or population.",
+      "zero_policy": "Ownable zero-support rows fail readiness. No population floors; terrestrial analogue estimates must have explicit donor provenance."
+    },
+    "equal_area_unresolved_settlements": 0,
+    "location_count": 28573,
+    "checks": {
+      "complete_inventory": true,
+      "finite_primary_values": true,
+      "ordered_values": true,
+      "capacity_identities": true
+    },
+    "native_map_coverage": 28573,
+    "water_residual_m3": {
+      "historical": 0.00341796875,
+      "maximum": 0.00244140625
+    },
+    "fingerprint": "919bf468c69b554106b414b63a11c33c985daeed47f0bced5dd915b5e55f0413"
+  },
+  "resolved_rural": 797,
+  "new_rural_shortfalls": 6,
+  "new_rural_locations": [
+    "amoltepec",
+    "beryozovskoye",
+    "haeju",
+    "pushang",
+    "rawalakot",
+    "wonju"
+  ],
+  "tests_passed": 121,
+  "viewer_pass": true,
+  "global_starting_capacity": 812991274.7798176,
+  "global_maximum_capacity": 4183214223.11909,
+  "slope_sensitivity_start_increases": 627,
+  "water_flags": {
+    "water_dependent_cultivation_ha": 816,
+    "unserved_historical_irrigation_ha": 172,
+    "unserved_water_opportunity_ha": 5022
+  },
+  "sensitivity_delivery": {
+    "pass": true,
+    "structural_pass": true,
+    "settlement_readiness": {
+      "passed": true,
+      "coverage_and_classification_pass": true,
+      "ownable_locations": 20893,
+      "unresolved_ownable_locations": 0,
+      "populated_unresolved_locations": 0,
+      "incorrectly_ownable_exclusions": [],
+      "issues": [],
+      "definition": "Template locations excluding sea_zones, lakes, impassable_mountains and non_ownable in game default.map. Independent of starting ownership or population.",
+      "zero_policy": "Ownable zero-support rows fail readiness. No population floors; terrestrial analogue estimates must have explicit donor provenance."
+    },
+    "equal_area_unresolved_settlements": 0,
+    "location_count": 28573,
+    "checks": {
+      "complete_inventory": true,
+      "finite_primary_values": true,
+      "ordered_values": true,
+      "capacity_identities": true
+    },
+    "native_map_coverage": 28573,
+    "water_residual_m3": {
+      "historical": 0.00341796875,
+      "maximum": 0.00244140625
+    },
+    "fingerprint": "87e631cc0739ef6d1e3297dec23d178f15ac3e847d9ea30a1c7198e35eb4248e"
+  },
+  "sensitivity_pre_floor_increases": {
+    "locations": 42,
+    "largest_capacity_gain": 25.74833147319805,
+    "interpretation": "Small cropland/livelihood replacement effects; larger post-floor reversals arise from the mandated base floor."
+  }
+}

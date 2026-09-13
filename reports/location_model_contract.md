@@ -1,5 +1,29 @@
 # Complete EU5 location model contract
 
+## Shared game-calibration pass — 2026-09-13
+
+The user authorized a substantial recalibration, including a shared game layer
+where geographical and crop-system corrections alone could not resolve the
+majority of starting shortfalls. The delivered four values remain game-effective
+units. They now distinguish uncalibrated physical food support from game capacity.
+Population is evaluated globally and by region after calculation; no population,
+rank, owner or location-specific target enters the formula. This supersedes a
+requirement that game capacity numerically equal the raw physical food estimate.
+
+Historical cultivated footprint and existing agricultural-system classifications
+set a bounded starting-inheritance scenario within the simultaneous physical
+maximum. A shared monotone concave support conversion compresses the low tail in
+game units, including the base. It preserves zeros, ordering and sufficiently
+high source values. All crop yields, physical land and river budgets remain
+recorded independently. The location multiplier remains bounded to 0.25–5.
+The previous 1,000-unit minimum-base allowance is retained against the raw
+baseline, so conversion cannot remove an existing allowance and reduce support.
+
+Passing the rural-shortfall game target is separate from historical acceptance
+and downstream food/population simulation validation. Remaining rural cases are
+listed individually and are not automatically treated as justified exceptions.
+No building implementation or live deployment is included.
+
 Status: scope agreed 2026-09-12; first complete inferred iteration implemented. Historical balance remains provisional. See `location_iteration_01_method.md` and generated delivery checks.
 
 This contract supersedes earlier requirements that excluded cultivated support and EU5 location output, required separate food/water/labour deliverables, or made building implementation a prerequisite. The current objective is one complete location dataset and map owned by HistoricalAgriculture1300.

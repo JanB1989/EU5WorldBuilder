@@ -1,0 +1,26 @@
+{
+  "sources": [
+    {
+      "id": "gaez_slope",
+      "url": "https://gaez-v4-data.fao.org/data/documentation/GAEZ%20v4%20Model%20Documentation.pdf",
+      "role": "FAO/IIASA 2021 slope class boundaries; model access weights are inferred",
+      "access": "Read through web research; direct download returned HTTP 403",
+      "sha256": null
+    },
+    {
+      "id": "hyde_method",
+      "url": "https://essd.copernicus.org/articles/9/927/2017/essd-9-927-2017.pdf",
+      "role": "HYDE 3.2 published method; cached raster identifies HYDE3.4 April 2025",
+      "path": "data/raw/land_repair_sources/hyde_method.pdf",
+      "sha256": "57c2f9c48a0802387f90213486443d91f6d2737c3eaf3769c80637ed62d9fc32"
+    },
+    {
+      "id": "fao_land_denominator",
+      "url": "https://www.fao.org/4/a0135e/A0135E07.htm",
+      "role": "FAO census land-use definitions, including temporary fallow",
+      "access": "HTTP Error 403: Forbidden",
+      "sha256": null
+    }
+  ],
+  "interpretation": "No demonstrated universal fallow double-counting. Keep annualization; long-fallow extent remains uncertain. Terrain class boundaries sourced; slope weights and coarse-DEM applicability inferred."
+}

@@ -56,3 +56,19 @@ def test_base_land_floor_is_effective_units_and_adds_capacity_without_improvemen
     e,_=equal_area(d,150,1000)
     assert e.base_effective_cropland.iloc[0]==3000
     with pytest.raises(ValueError,match='floor'):equal_area(d,150,-1)
+
+
+def test_game_conversion_retains_original_minimum_base_allowance():
+    d=fixture();d['is_ownable']=[True,True,False]
+    original,_=equal_area(d,150,1000)
+    d['uncalibrated_base_capacity']=d.inert_capacity.copy()
+    # Raise baseline without changing unbounded starting totals: withdrawing the
+    # old allowance would otherwise make total support decrease.
+    d['base_effective_cropland']*=2;d['inert_capacity']*=2
+    d['starting_improvement_effective_cropland']-=d.uncalibrated_base_capacity/d.capacity_multiplier
+    d['maximum_improvement_effective_cropland']-=d.uncalibrated_base_capacity/d.capacity_multiplier
+    d['starting_improvement_capacity']-=d.uncalibrated_base_capacity
+    converted,_=equal_area(d,150,1000)
+    assert np.allclose(converted.starting_capacity,original.starting_capacity)
+    assert np.allclose(converted.maximum_capacity,original.maximum_capacity)
+    assert np.all(converted.loc[converted.is_ownable,'base_effective_cropland']>=1000)

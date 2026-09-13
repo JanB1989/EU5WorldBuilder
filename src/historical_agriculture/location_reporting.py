@@ -35,7 +35,7 @@ def report(out,d,raw,cfg,audit,fingerprint):
     idsimg.save(out/'location_ids.png');a=np.asarray(idsimg).astype(np.uint32);ids=(a[...,0]<<16)|(a[...,1]<<8)|a[...,2]
     (out/'location_lookup.js').write_text('window.LOCATION_LOOKUP='+json.dumps(encode_location_lookup(ids),separators=(',',':'))+';\n')
     palette=(colormaps['RdYlGn'](np.linspace(0,1,256))[:,:3]*255).astype(np.uint8)
-    fields=['location_tag','province','region','eu5_start_population']+[m[0] for m in METRICS]+['inert_capacity','starting_improvement_capacity','physical_location_ha','coastline_transfer_share','terrestrial_analogue_share','evidence_status','modelled_land','is_ownable','game_zone_class','centroid_x','centroid_y']
+    fields=['location_tag','province','region','eu5_start_population']+[m[0] for m in METRICS]+['inert_capacity','starting_improvement_capacity','physical_location_ha','coastline_transfer_share','terrestrial_analogue_share','unbounded_reference_multiplier','multiplier_bound_status','evidence_status','modelled_land','is_ownable','game_zone_class','centroid_x','centroid_y']
     data=json.loads(d[fields].to_json(orient='records'))
     from .location_area import equal_area
     equal,comparison=equal_area(d)
@@ -43,6 +43,22 @@ def report(out,d,raw,cfg,audit,fingerprint):
     primary=['location_tag','base_effective_cropland','capacity_multiplier','starting_improvement_effective_cropland','maximum_improvement_effective_cropland']
     equal[primary].to_csv(out/'location_values_equal_area.csv',index=False,float_format='%.15g')
     write_json(out/'area_comparison.json',comparison)
+    own=equal.loc[equal.is_ownable].copy()
+    prior=own.unbounded_reference_multiplier.clip(lower=.01)
+    comparison_bounds={
+        'lower':cfg['multiplier_floor'],'upper':cfg.get('multiplier_ceiling'),
+        'interpretation':'Hard game-unit bounds. Capacity components, land and water are conserved; raw reference remains in the ledger. Earlier normalization used a 0.01 floor.',
+        'ownable_locations':len(own),
+        'raised':int((own.capacity_multiplier>prior).sum()),
+        'lowered':int((own.capacity_multiplier<prior).sum()),
+        'unchanged':int((own.capacity_multiplier==prior).sum()),
+        'before_quantiles':prior.quantile([0,.1,.25,.5,.75,.9,.99,1]).to_dict(),
+        'after_quantiles':own.capacity_multiplier.quantile([0,.1,.25,.5,.75,.9,.99,1]).to_dict()}
+    write_json(out/'multiplier_comparison.json',comparison_bounds)
+    own['previous_multiplier']=prior
+    own['absolute_unit_rescale']=prior/own.capacity_multiplier
+    own[['location_tag','macro_region','previous_multiplier','capacity_multiplier','absolute_unit_rescale','starting_capacity','maximum_capacity']].to_csv(out/'multiplier_comparison.csv',index=False,float_format='%.15g')
+    own.groupby('macro_region').agg(locations=('location_tag','size'),before_median=('previous_multiplier','median'),after_median=('capacity_multiplier','median'),after_min=('capacity_multiplier','min'),after_max=('capacity_multiplier','max')).to_csv(out/'multiplier_regions.csv')
     versions={'physical':d,'equal':equal}
     caps={}
     for key,label,unit in METRICS:
@@ -80,7 +96,8 @@ def report(out,d,raw,cfg,audit,fingerprint):
     (out/'data.js').write_text('window.LOCATIONS='+json.dumps(data,separators=(',',':'))+';\nwindow.METRICS='+json.dumps(manifest)+';\nwindow.AREA_DATA='+json.dumps({'physical':data,'equal':json.loads(equal[fields].to_json(orient='records'))},separators=(',',':'))+';\nwindow.AREA_COMPARISON='+json.dumps(comparison)+';\n')
     html=HTML.replace('__COUNT__',f'{len(d):,}').replace('__START__',f"{audit['total_starting_capacity']/1e6:,.1f} million").replace('__MAX__',f"{audit['total_maximum_capacity']/1e6:,.1f} million").replace('__HASH__',fingerprint[:16])
     settlement=audit['settlement_readiness']
-    notice=f"<p class='tag'>Game eligibility checked: {settlement['ownable_locations']:,} ownable locations. {settlement['unresolved_ownable_locations']:,} have unresolved support values. <a href='repaired_settlements.csv'>See repaired locations</a> · <a href='settlement_validation.json'>Eligibility audit</a></p>"
+    notice=f"<p class='tag'>Game eligibility checked: {settlement['ownable_locations']:,} ownable locations. {settlement['unresolved_ownable_locations']:,} have unresolved support values. <a href='multiplier_comparison.csv'>Multiplier comparison</a> · <a href='repaired_settlements.csv'>See repaired locations</a> · <a href='settlement_validation.json'>Eligibility audit</a></p>"
+    notice+=f"<p class='tag'>Multiplier bounds: ×{cfg['multiplier_floor']:g}–×{cfg['multiplier_ceiling']:g}. Absolute units rescaled to preserve starting and maximum capacity.</p>"
     html=html.replace('<div class="controls">',notice+'<div class="controls">')
     (out/'index.html').write_text(html)
     lines=['# Location iteration 01 — complete inferred dataset','',f"All {len(d):,} inventory locations have all four required values. Engineering completion is separate from historical acceptance.",'',f"Starting support: {audit['total_starting_capacity']:,.0f} people. Maximum support: {audit['total_maximum_capacity']:,.0f} people.",'',f"{audit['below_starting_population_locations']:,} locations are below the cached starting population. This is reported, not corrected through population fitting.",'','## Required values and evidence','', 'See `location_values.csv`, `locations.csv`, `manifest.json`, `validation.json` and the native-grid TIFFs. The central maximum is the configured preindustrial clearing and seasonal surface-water scenario; it is not a measured universal maximum.','', '## Limitations','']+['- '+x for x in audit['limitations']]
@@ -113,7 +130,7 @@ function show(i){
   const input=(label,value,hint='')=>'<div class="model-input"><div><span>'+label+'</span>'+(hint?'<small>'+hint+'</small>':'')+'</div><b>'+value+'</b></div>';
   const factor=new Intl.NumberFormat('en',{maximumFractionDigits:3}).format(d.capacity_multiplier);
   const fill=Number.isFinite(d.starting_fill)?whole(d.starting_fill*100)+'% of starting capacity occupied':'Starting fill unavailable';
-  const rows=[['Base contribution',whole(d.inert_capacity)+' people'],['Existing improvement contribution',whole(d.starting_improvement_capacity)+' people'],['Additional capacity still possible',whole(d.maximum_capacity-d.starting_capacity)+' people'],['Remaining improvement units',whole(d.remaining_improvement_effective_cropland)],['Physical location area',d.physical_location_ha===null?'Not evaluated':fmt(d.physical_location_ha/100)+' km²']];
+  const rows=[['Base contribution',whole(d.inert_capacity)+' people'],['Existing improvement contribution',whole(d.starting_improvement_capacity)+' people'],['Additional capacity still possible',whole(d.maximum_capacity-d.starting_capacity)+' people'],['Remaining improvement units',whole(d.remaining_improvement_effective_cropland)],['Reference productivity before game bounds',fmt(d.unbounded_reference_multiplier)],['Physical location area',d.physical_location_ha===null?'Not evaluated':fmt(d.physical_location_ha/100)+' km²']];
   document.getElementById('detail').innerHTML=
     '<h2 class="location-heading">'+esc(placeName(d.location_tag))+'</h2><small class="place">'+esc(placeName(d.province))+' · '+esc(placeName(d.region))+'</small>'+
     '<div class="capacity-overview"><div class="capacity-pair"><div><span>Starting population</span><strong>'+whole(d.eu5_start_population)+'</strong></div><div><span>Starting capacity</span><strong>'+whole(d.starting_capacity)+'</strong></div></div><div class="fill-summary">'+fill+'</div><div class="maximum-summary"><span>Maximum capacity</span><strong>'+whole(d.maximum_capacity)+'</strong></div></div>'+

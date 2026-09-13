@@ -7,8 +7,8 @@
   "food_directory": "artifacts/reconstruction",
   "water_directory": "artifacts/water",
   "maximum_scenario": "Maintained preindustrial crop system with additional clearing and low-lift surface irrigation; current crop/rotation held fixed. No modern fertilizer, powered pumping or unlimited basin supply.",
-  "normalization": "Multiplier equals support-weighted local reference food density, with positive floor 0.01 people/effective ha. All support totals are preserved by inverse conversion.",
-  "multiplier_floor": 0.01,
+  "normalization": "Game multiplier is the local reference support density bounded to 0.25\u20135. Base and improvement effective units are inversely normalized to preserve every capacity contribution. These are game-design bounds, not historical yield limits.",
+  "multiplier_floor": 0.25,
   "baseline_access_by_pnv": {
     "forest": 0.015,
     "savanna": 0.1,
@@ -52,5 +52,6 @@
       1.0
     ],
     "status": "Explicit low-confidence same-livelihood/ecoregion/climate analogue for wholly unsupported ownable locations. Uses existing terrestrial support, not fish or population. Lower donor decile excluded as near-zero interpolation tails; replacement is lower quartile of eight environmental neighbours."
-  }
+  },
+  "multiplier_ceiling": 5.0
 }

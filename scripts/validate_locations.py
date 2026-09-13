@@ -21,6 +21,10 @@ def main():
     equal=pd.read_csv(out/'locations_equal_area.csv',keep_default_na=False)
     validate_frame(equal,inv)
     equal_settlement=audit_settlement_values(equal,inv)
+    for version in [d,equal]:
+        own=version.loc[version.is_ownable,'capacity_multiplier'].to_numpy(float)
+        if np.any(own<cfg['multiplier_floor']) or np.any(own>cfg['multiplier_ceiling']):
+            raise ValueError('Ownable multiplier outside configured bounds')
     coverage=json.loads((out/'map_coverage.json').read_text())
     if coverage['native_locations']!=len(inv):raise ValueError('Map missing locations')
     if coverage['ownable_locations']!=int(inv.is_ownable.sum()) or coverage['native_missing_ownable'] or coverage['overview_missing_ownable']:

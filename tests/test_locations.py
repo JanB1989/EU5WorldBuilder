@@ -152,3 +152,27 @@ def test_non_ownable_physical_estimate_does_not_imply_settlement_eligibility():
     assert audit_settlement_values(d,inv)['passed']
     d['is_ownable']=True
     assert audit_settlement_values(d,inv)['incorrectly_ownable_exclusions']==['a']
+
+
+def test_bounded_multiplier_preserves_each_component_and_equal_area_capacity():
+    from historical_agriculture.location_area import equal_area
+    ref=np.array([0.,.01,.2,.25,2.,5.,12.])
+    base=np.arange(1.,8.)*10;start=base+20;maximum=start+80
+    old=normalize_support(base,start,maximum,ref,.01)
+    new=normalize_support(base,start,maximum,ref,.25,5.)
+    np.testing.assert_allclose(new[1],[.25,.25,.25,.25,2.,5.,5.])
+    for idx,expected in [(0,base),(2,start-base),(3,maximum-base)]:
+        np.testing.assert_allclose(new[idx]*new[1],expected)
+        np.testing.assert_allclose(new[idx],old[idx]*old[1]/new[1])
+    def ledger(v):
+        b,m,i,x=v
+        return pd.DataFrame(dict(zip(FIELDS,v))|{'modelled_land':True,'physical_location_ha':np.arange(1.,8.)*100,'eu5_start_population':0.,'starting_capacity':start,'maximum_capacity':maximum,'inert_capacity':base,'starting_improvement_capacity':start-base,'remaining_capacity':maximum-start,'remaining_improvement_effective_cropland':x-i})
+    a,_=equal_area(ledger(old));b,_=equal_area(ledger(new))
+    np.testing.assert_allclose(a.starting_capacity,b.starting_capacity)
+    np.testing.assert_allclose(a.maximum_capacity,b.maximum_capacity)
+    for part in ['base_effective_cropland','starting_improvement_effective_cropland','maximum_improvement_effective_cropland']:
+        np.testing.assert_allclose(a[part]*a.capacity_multiplier,b[part]*b.capacity_multiplier)
+
+@pytest.mark.parametrize('floor,ceiling',[(0,5),(-1,5),(.25,.1),(float('nan'),5),(.25,float('inf'))])
+def test_reject_invalid_multiplier_bounds(floor,ceiling):
+    with pytest.raises(ValueError,match='bounds'):normalize_support(1,2,3,1,floor,ceiling)

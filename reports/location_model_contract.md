@@ -66,3 +66,11 @@ Preserve existing uncommitted work and evidence. Prior experiments can be archiv
 - Final reporting distinguishes numerical/engineering passes from historical support and uncertain assumptions.
 
 No iteration is finished with only selected regions or only a subset of the four values. Regional pilots are intermediate checks that inform the complete global run.
+
+## Bounded game multiplier comparison — 2026-09-13
+
+Use equal-area as the working game representation; the actual-area output remains a shelved comparison. Bound the full multiplier to **0.25–5** at final location normalization. Values inside the range stay unchanged. Divide each support component by the bounded multiplier to obtain its effective absolute units. This preserves inert, starting-improvement, starting-total and maximum capacities, and therefore population/capacity ratios. Fine-grid physical land, water and food estimates do not change.
+
+These bounds are a game-design normalization, not new historical yield evidence or a repair to crop/management rankings. The unbounded reference multiplier and bound status remain in the ledger. `multiplier_comparison.json`, `multiplier_comparison.csv` and `multiplier_regions.csv` compare with the previous 0.01-floor normalization. A fixed improvement unit now contributes between 0.25 and 5 capacity: a 20-fold extreme range. Building counts and limits must later reproduce the rescaled improvement targets.
+
+Reproduce with `uv run ha1300 locations`, then `uv run python scripts/validate_locations.py` and `uv run pytest -q`.

@@ -31,11 +31,14 @@ def validate_frame(d,inventory):
         if not np.allclose(d[name],target,rtol=1e-7,atol=1e-5):raise ValueError('Accounting mismatch: '+name)
     return {'complete_inventory':True,'finite_primary_values':True,'ordered_values':True,'capacity_identities':True}
 
-def normalize_support(base,start,maximum,reference,floor):
+def normalize_support(base,start,maximum,reference,floor,ceiling=None):
     base,start,maximum,reference=np.broadcast_arrays(base,start,maximum,reference)
     if not np.isfinite(np.stack([base,start,maximum,reference])).all():raise ValueError('Nonfinite support')
     if np.any(base<0) or np.any(start<base-1e-8) or np.any(maximum<start-1e-8):raise ValueError('Support order violation')
+    if not np.isfinite(floor) or floor<=0 or (ceiling is not None and (not np.isfinite(ceiling) or ceiling<floor)):
+        raise ValueError("Invalid multiplier bounds")
     m=np.maximum(reference,floor)
+    if ceiling is not None:m=np.minimum(m,ceiling)
     return base/m,m,np.maximum(start-base,0)/m,np.maximum(maximum-base,0)/m
 
 def source_fingerprint(root,config_path,food,water):
@@ -331,9 +334,11 @@ def execute(config_path,output):
     area_ha=np.asarray(weights.sum(axis=1)).ravel()*100
     totals={k:np.asarray(weights@v.ravel()).ravel()*100 for k,v in arrays.items()}
     ref=totals['reference_people_per_effective_ha']/area_ha
-    vals=normalize_support(totals['baseline_support_per_land_ha'],totals['starting_support_per_land_ha'],totals['maximum_support_per_land_ha'],ref,cfg['multiplier_floor'])
+    vals=normalize_support(totals['baseline_support_per_land_ha'],totals['starting_support_per_land_ha'],totals['maximum_support_per_land_ha'],ref,cfg['multiplier_floor'],cfg.get('multiplier_ceiling'))
     d=inventory[['location_tag','location_id','map_color_rgb','province','region','super_region','macro_region','calibrated_lon','calibrated_lat','centroid_x','centroid_y']].copy()
     for name,a in zip(FIELDS,vals):d[name]=a
+    d['unbounded_reference_multiplier']=ref
+    d['multiplier_bound_status']=np.where(ref<cfg['multiplier_floor'],'lower',np.where(ref>cfg.get('multiplier_ceiling',float('inf')),'upper','unchanged'))
     d['inert_capacity']=totals['baseline_support_per_land_ha'];d['starting_capacity']=totals['starting_support_per_land_ha'];d['maximum_capacity']=totals['maximum_support_per_land_ha']
     d['starting_improvement_capacity']=d.starting_capacity-d.inert_capacity
     d['remaining_improvement_effective_cropland']=d.maximum_improvement_effective_cropland-d.starting_improvement_effective_cropland

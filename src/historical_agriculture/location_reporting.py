@@ -35,7 +35,7 @@ def report(out,d,raw,cfg,audit,fingerprint):
     idsimg.save(out/'location_ids.png');a=np.asarray(idsimg).astype(np.uint32);ids=(a[...,0]<<16)|(a[...,1]<<8)|a[...,2]
     (out/'location_lookup.js').write_text('window.LOCATION_LOOKUP='+json.dumps(encode_location_lookup(ids),separators=(',',':'))+';\n')
     palette=(colormaps['RdYlGn'](np.linspace(0,1,256))[:,:3]*255).astype(np.uint8)
-    fields=['location_tag','province','region','eu5_start_population']+[m[0] for m in METRICS]+['inert_capacity','starting_improvement_capacity','physical_location_ha','coastline_transfer_share','evidence_status','modelled_land','is_ownable','game_zone_class','centroid_x','centroid_y']
+    fields=['location_tag','province','region','eu5_start_population']+[m[0] for m in METRICS]+['inert_capacity','starting_improvement_capacity','physical_location_ha','coastline_transfer_share','terrestrial_analogue_share','evidence_status','modelled_land','is_ownable','game_zone_class','centroid_x','centroid_y']
     data=json.loads(d[fields].to_json(orient='records'))
     from .location_area import equal_area
     equal,comparison=equal_area(d)
@@ -80,7 +80,7 @@ def report(out,d,raw,cfg,audit,fingerprint):
     (out/'data.js').write_text('window.LOCATIONS='+json.dumps(data,separators=(',',':'))+';\nwindow.METRICS='+json.dumps(manifest)+';\nwindow.AREA_DATA='+json.dumps({'physical':data,'equal':json.loads(equal[fields].to_json(orient='records'))},separators=(',',':'))+';\nwindow.AREA_COMPARISON='+json.dumps(comparison)+';\n')
     html=HTML.replace('__COUNT__',f'{len(d):,}').replace('__START__',f"{audit['total_starting_capacity']/1e6:,.1f} million").replace('__MAX__',f"{audit['total_maximum_capacity']/1e6:,.1f} million").replace('__HASH__',fingerprint[:16])
     settlement=audit['settlement_readiness']
-    notice=f"<p class='tag'>Game eligibility checked: {settlement['ownable_locations']:,} ownable locations. {settlement['unresolved_ownable_locations']:,} have unresolved support values. <a href='unresolved_settlements.csv'>See affected locations</a> · <a href='settlement_validation.json'>Eligibility audit</a></p>"
+    notice=f"<p class='tag'>Game eligibility checked: {settlement['ownable_locations']:,} ownable locations. {settlement['unresolved_ownable_locations']:,} have unresolved support values. <a href='repaired_settlements.csv'>See repaired locations</a> · <a href='settlement_validation.json'>Eligibility audit</a></p>"
     html=html.replace('<div class="controls">',notice+'<div class="controls">')
     (out/'index.html').write_text(html)
     lines=['# Location iteration 01 — complete inferred dataset','',f"All {len(d):,} inventory locations have all four required values. Engineering completion is separate from historical acceptance.",'',f"Starting support: {audit['total_starting_capacity']:,.0f} people. Maximum support: {audit['total_maximum_capacity']:,.0f} people.",'',f"{audit['below_starting_population_locations']:,} locations are below the cached starting population. This is reported, not corrected through population fitting.",'','## Required values and evidence','', 'See `location_values.csv`, `locations.csv`, `manifest.json`, `validation.json` and the native-grid TIFFs. The central maximum is the configured preindustrial clearing and seasonal surface-water scenario; it is not a measured universal maximum.','', '## Limitations','']+['- '+x for x in audit['limitations']]
@@ -123,7 +123,7 @@ function show(i){
     input('Existing improvements',whole(d.starting_improvement_effective_cropland),'Already present at game start')+
     input('Maximum improvements',whole(d.maximum_improvement_effective_cropland),'Total limit, including existing improvements')+
     '<p class="model-formula">Capacity = (base + improvements)<br>× productivity</p><p class="unit-note">Land and improvements use effective units, not physical hectares. Display values are rounded.</p>'+
-    '<details><summary>Breakdown &amp; evidence</summary>'+rows.map(([k,v])=>'<div class="row"><span>'+k+'</span><b>'+v+'</b></div>').join('')+'<p>'+esc(d.evidence_status)+'<br>Coastline analogue: '+fmt(d.coastline_transfer_share*100)+'%</p></details>'+
+    '<details><summary>Breakdown &amp; evidence</summary>'+rows.map(([k,v])=>'<div class="row"><span>'+k+'</span><b>'+v+'</b></div>').join('')+'<p>'+esc(d.evidence_status)+'<br>Coastline analogue: '+fmt(d.coastline_transfer_share*100)+'%<br>Terrestrial support analogue: '+fmt((d.terrestrial_analogue_share||0)*100)+'%</p></details>'+
     '<p class="model-status">'+(d.is_ownable===false?'Not ownable in EU5. Any physical estimates shown here are not settlement capacity.':d.maximum_capacity<=0?'Unresolved: ownable location has zero modeled food support.':'First-iteration estimates; subject to refinement.')+'</p>';
 }
 function changeArea(){

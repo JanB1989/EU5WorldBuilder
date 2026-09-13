@@ -109,9 +109,9 @@ from usable settlement support. Every ownable location must have finite, ordered
 primary values, positive multiplier and physical area, correct RGB and land/ownability
 classification, and positive starting and maximum support to pass the readiness gate.
 A finite zero placeholder is explicitly unresolved; this check never invents food or
-uses a population floor. At this audit there are 20,893 ownable locations, all present,
-but 132 zero-support cases (120 populated). These are scientific/input failures still
-requiring investigation, rather than omitted output rows. The 36 modelled non-ownable
+uses a population floor. The initial eligibility audit found 20,893 ownable locations, all present,
+but 132 zero-support cases (120 populated). The repair described below supersedes
+that failed readiness result. The 36 modelled non-ownable
 corridors retain physical estimates with is_ownable=false and display as excluded.
 
 The native and overview maps both include every ownable location. The 93 zones absent
@@ -119,3 +119,42 @@ from the downsampled overview are all non-ownable; native geometry retains them.
 Run uv run python scripts/validate_locations.py to evaluate the actual generated
 physical-area and equal-area ledgers. It exits nonzero while settlement support is
 unresolved, even when all structural tests and pytest regressions pass.
+
+
+## Zero-support repair — 2026-09-13
+
+Equal area is the working game version. The area-based comparison is shelved;
+fine-grid physical accounting is still needed before final normalization.
+
+The coarse FORGE-derived terrestrial model and its transfer can return zero support
+for small islands and cold/arid settings. These are model outputs, not field observations
+establishing that a game-ownable landscape has no terrestrial food. The repair treats
+wholly unsupported ownable locations as explicit estimation gaps. It does not change
+positive estimates simply because their population exceeds capacity.
+
+Before aggregation, identify the source grid cells serving those locations under
+the existing coastline registration. Estimate terrestrial support using eight nearby
+environmental analogues, prioritizing the same ecoregion and always separating pastoral
+and foraging donor pools. Similarity combines spherical distance (1,000 km scale),
+temperature (5 C scale), log rainfall and log seasonality (unit scales). Where island
+climate is absent, record a nearest same-livelihood climate donor. The lowest decile of
+positive donor values is excluded to avoid near-zero interpolation tails, and the
+replacement is the lower quartile of the selected donor estimates. These are shared
+explicit modelling choices, not published historical coefficients.
+
+No fixed population minimum is applied. Donor estimates scale with the existing food
+model. Population is joined only after this calculation. No fish, cultivation,
+irrigation service or extra water is added. Baseline, current and maximum food support
+are recomputed together, preserving resource accounting and the four-value identities.
+Replacement source cells, donor IDs, donor values, distances and missing-climate status
+are saved in terrestrial_completion.json. terrestrial_analogue_share marks affected
+locations; repaired_settlements.csv lists the former zero cases. Estimates remain
+low-confidence, especially on isolated islands and in highly seasonal environments.
+
+The completed run replaces 5,062 source cells serving the 132 zero-support cases.
+All 20,893 ownable locations and all 3,819 ownable provinces have positive starting and
+maximum support. Physical cropland fractions, irrigation service and water-account
+artifacts are byte-identical to the prior run. Total physical starting support changes
+by about 61,418 people (0.0082%); this is a completion repair, not global rebalance.
+The strict delivery validator passes. New unit tests and a generated-data regression
+check zero cases, donor provenance, eligibility, both output variants and provinces.

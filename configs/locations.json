@@ -40,5 +40,17 @@
   "yield_uncertainty_fraction": 0.25,
   "assumption_status": "First-iteration shared land-access and water-demand priors, not measured medieval fractions. PNV controls vegetation barriers; existing cultivation is retained as dated evidence. Refine without using population as predictor.",
   "noncrop_rule": "Existing FORGE terrestrial baseline on all land, with pastoral food-system estimates where assigned. Clearing displaces existing support. Aquatic food excluded and explicitly labelled.",
-  "output_precision": 15
+  "output_precision": 15,
+  "zero_support_completion": {
+    "neighbours": 8,
+    "donor_lower_quantile": 0.1,
+    "estimate_quantile": 0.25,
+    "distance_scale_km": 1000.0,
+    "climate_scales": [
+      5.0,
+      1.0,
+      1.0
+    ],
+    "status": "Explicit low-confidence same-livelihood/ecoregion/climate analogue for wholly unsupported ownable locations. Uses existing terrestrial support, not fish or population. Lower donor decile excluded as near-zero interpolation tails; replacement is lower quartile of eight environmental neighbours."
+  }
 }

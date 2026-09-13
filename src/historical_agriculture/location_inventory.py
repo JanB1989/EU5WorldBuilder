@@ -92,4 +92,4 @@ def audit_settlement_values(d, inventory):
         "populated_unresolved_locations":sum((x.get("starting_population") or 0)>0 for x in issues),
         "incorrectly_ownable_exclusions":extra_flags,"issues":issues,
         "definition":"Template locations excluding sea_zones, lakes, impassable_mountains and non_ownable in game default.map. Independent of starting ownership or population.",
-        "zero_policy":"Ownable zero-support rows remain explicit unresolved estimates. No population floors or invented food added to make this gate pass."}
+        "zero_policy":"Ownable zero-support rows fail readiness. No population floors; terrestrial analogue estimates must have explicit donor provenance."}

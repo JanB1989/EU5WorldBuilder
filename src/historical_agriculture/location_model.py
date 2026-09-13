@@ -273,12 +273,47 @@ def execute(config_path,output):
     current=base+np.maximum(start-b,0)*dry_gain+served*water_gain
     upper=base+np.maximum(max_land-b,0)*dry_gain+full*water_gain
     if not np.all(upper[domain]+1e-6>=current[domain]):raise ValueError('Grid capacity order failure')
+    # Eligibility identifies output gaps; population is still absent at this stage.
+    from .location_geometry import overlap_matrix
+    from .location_inventory import read_zone_inventory
+    from .terrestrial_completion import estimate
+    from .environmental_transfer import climate_layers
+    log('Checking ownable locations for coarse terrestrial-model gaps')
+    weights,ga=overlap_matrix(root,inventory,out)
+    zones=read_zone_inventory(raw).set_index('location_tag')
+    ownable=inventory.location_tag.map(zones.is_ownable).to_numpy(bool)
+    _,nearest=distance_transform_edt(~domain,return_indices=True)
+    nearest_flat=np.ravel_multi_index(tuple(nearest),domain.shape)
+    mapped_current=np.where(domain,current,current.ravel()[nearest_flat])
+    before=np.asarray(weights@mapped_current.ravel()).ravel()*100
+    zero=ownable&(before<=0)
+    columns=np.unique(weights[zero].indices)
+    target=np.zeros(domain.size,dtype=bool)
+    sources=np.where(domain.ravel()[columns],columns,nearest_flat.ravel()[columns])
+    target[sources]=True
+    target=target.reshape(domain.shape)
+    eco,_=read(food/'food_ecoregion.tif')
+    rc=json.loads((root/'configs/food_systems.json').read_text())
+    climate=climate_layers(root,rc['climate_transfer'],profile)
+    livelihood,completed,completion_records=estimate(livelihood,domain,target,climate,eco,food_type,profile,cfg['zero_support_completion'])
+    dry_gain=np.maximum(rf-livelihood,0)
+    water_gain=np.maximum(ir-np.maximum(rf,livelihood),0)
+    base=b*rf+(1-b)*livelihood
+    current=base+np.maximum(start-b,0)*dry_gain+served*water_gain
+    upper=base+np.maximum(max_land-b,0)*dry_gain+full*water_gain
+    reference=np.maximum(reference,livelihood)
+    mapped_completion=np.where(domain,completed,completed.ravel()[nearest_flat])
+    write(out/'terrestrial_completion.tif',mapped_completion.astype(float),profile,'1 if explicit terrestrial analogue replaces unsupported ownable-location source cell')
+    completion_audit={'previously_zero_ownable_locations':inventory.loc[zero,'location_tag'].tolist(),
+        'source_cells_completed':len(completion_records),'fish_included':False,'population_used':False,
+        'method':cfg['zero_support_completion'],'cells':completion_records}
+    write_json(out/'terrestrial_completion.json',completion_audit)
     arrays={'baseline_support_per_land_ha':base,'starting_support_per_land_ha':current,'maximum_support_per_land_ha':upper,'reference_people_per_effective_ha':reference,
        'baseline_crop_fraction':b,'starting_crop_fraction':start,'maximum_crop_fraction':max_land,'historical_irrigated_fraction':irr,'starting_served_fraction':served,'maximum_served_fraction':full}
     # Game coastlines and tiny islands do not match real raster masks exactly.
     # Full-grid completion is a labelled nearest terrestrial analogue, never omission.
     _,nearest=distance_transform_edt(~domain,return_indices=True)
-    evidence_inferred=yinf|linf|winf
+    evidence_inferred=yinf|linf|winf|completed
     grid_reports={}
     for name,a in arrays.items():
         finite=np.isfinite(a)&domain
@@ -293,7 +328,6 @@ def execute(config_path,output):
     write(out/'coastline_transfer.tif',(~domain).astype(float),profile,'1 if outside original terrestrial mask')
     from .location_geometry import overlap_matrix
     log('Aggregating exact registered game-pixel/grid-cell overlaps')
-    weights,ga=overlap_matrix(root,inventory,out)
     area_ha=np.asarray(weights.sum(axis=1)).ravel()*100
     totals={k:np.asarray(weights@v.ravel()).ravel()*100 for k,v in arrays.items()}
     ref=totals['reference_people_per_effective_ha']/area_ha
@@ -310,7 +344,13 @@ def execute(config_path,output):
     d['inferred_area_share']=np.clip(np.asarray(weights@np.where(domain,evidence_inferred,True).ravel()).ravel()*100/area_ha,0,1)
     d['coastline_transfer_share']=np.clip(np.asarray(weights@(~domain).ravel()).ravel()*100/area_ha,0,1)
     d['evidence_status']=np.where(d.coastline_transfer_share>.1,'low: substantial coastline analogue','inferred: shared physical and historical-system rules')
+    d['terrestrial_analogue_share']=np.clip(np.asarray(weights@mapped_completion.ravel()).ravel()*100/area_ha,0,1)
+    d.loc[d.terrestrial_analogue_share>0,'evidence_status']='low: explicit terrestrial analogue for coarse-model zero support'
     d['source_rule']='iteration01:grid_food+HYDE_LUH+PNV_terrain+seasonal_basin_water'
+    d.loc[d.terrestrial_analogue_share>0,'source_rule']+='+terrestrial_analogue'
+    repaired=d.loc[zero,['location_tag','starting_capacity','maximum_capacity','capacity_multiplier','terrestrial_analogue_share']].copy()
+    repaired['previous_starting_capacity']=before[zero]
+    repaired.to_csv(out/'repaired_settlements.csv',index=False,float_format='%.15g')
     d['zero_support_reason']=np.where(d.starting_capacity==0,'No modeled terrestrial support after explicit crop and FORGE estimates; aquatic contribution excluded','not_zero')
     # Population is joined only after all model values have been computed.
     pop=pd.read_csv(raw/'starting_population_source.csv',usecols=['location_tag','eu5_start_population'],keep_default_na=False)
@@ -330,7 +370,8 @@ def execute(config_path,output):
     checks=validate_frame(d,delivery_inventory)
     settlement=audit_settlement_values(d,delivery_inventory)
     write_json(out/'settlement_validation.json',settlement)
-    pd.DataFrame(settlement['issues']).to_csv(out/'unresolved_settlements.csv',index=False)
+    pd.DataFrame(settlement['issues'],columns=['location_tag','issues','starting_population','starting_capacity','maximum_capacity','reason']).to_csv(out/'unresolved_settlements.csv',index=False)
+    if not settlement['passed']:raise ValueError('Ownable settlement support gate failed; see settlement_validation.json')
     d.to_parquet(out/'locations.parquet',index=False)
     d.to_csv(out/'locations.csv',index=False,float_format='%.15g')
     roundtrip=pd.read_csv(out/'locations.csv',keep_default_na=False);validate_frame(roundtrip,delivery_inventory)
@@ -346,7 +387,7 @@ def execute(config_path,output):
         sensitivity.append({'yield_scale':scale,'starting_total':float(s.sum()),'maximum_total':float(mx.sum()),'locations_below_context_population':int(np.sum(s<d.eu5_start_population))})
     write_json(out/'sensitivity.json',{'status':'First-pass yield sensitivity; land-access uncertainty bands are scenario brackets, not probability intervals. Basin allocations unchanged.','comparisons':sensitivity})
     quantiles={k:d.loc[d.modelled_land,k].quantile([0,.1,.5,.9,.99,1]).to_dict() for k in FIELDS+['starting_capacity','maximum_capacity','starting_fill']}
-    audit={'iteration':cfg['iteration'],'engineering_pass':True,'iteration_complete':True,'scientific_acceptance':False,'location_count':len(d),'inventory':inventory_audit,'settlement_readiness':settlement,'checks':checks,'zero_starting_capacity_locations':int(((d.starting_capacity==0)&d.modelled_land).sum()),'population_context_missing_locations':int((d.eu5_start_population.isna()&d.modelled_land).sum()),'below_starting_population_locations':int((d.starting_capacity<d.eu5_start_population).sum()),'total_starting_capacity':float(d.starting_capacity.sum()),'total_maximum_capacity':float(d.maximum_capacity.sum()),'total_context_population':float(d.eu5_start_population.sum()),'substantial_coastline_transfer_locations':int((d.coastline_transfer_share>.1).sum()),'quantiles':quantiles,'geometry':ga,'yield':ya,'land':la,'water':wa,'grid':grid_reports,
+    audit={'iteration':cfg['iteration'],'engineering_pass':True,'iteration_complete':True,'scientific_acceptance':False,'location_count':len(d),'inventory':inventory_audit,'settlement_readiness':settlement,'terrestrial_completion':{k:v for k,v in completion_audit.items() if k!='cells'},'checks':checks,'zero_starting_capacity_locations':int(((d.starting_capacity==0)&d.modelled_land).sum()),'population_context_missing_locations':int((d.eu5_start_population.isna()&d.modelled_land).sum()),'below_starting_population_locations':int((d.starting_capacity<d.eu5_start_population).sum()),'total_starting_capacity':float(d.starting_capacity.sum()),'total_maximum_capacity':float(d.maximum_capacity.sum()),'total_context_population':float(d.eu5_start_population.sum()),'substantial_coastline_transfer_locations':int((d.coastline_transfer_share>.1).sum()),'quantiles':quantiles,'geometry':ga,'yield':ya,'land':la,'water':wa,'grid':grid_reports,
        'limitations':['Complete inferred iteration, not historically accepted balance.','Modern climate and runoff proxies; dated cropland evidence around 1300 compared to cached EU5 1337 population.','Shared access/clearing fractions and crop-season water demand are explicit priors, not surveyed hectares.','Drainage/flood protection beyond reconstructed cropland and retained crop-system effectiveness are not independently identified.','No separate improvement-building counts; no game export or deployment.','Aquatic food excluded; existing noncrop terrestrial transfers remain low-confidence.','No per-location population fitting or area-compression coefficient. Large physical locations can have large support.']}
     write_json(out/'validation.json',audit)
     # Manifest binds code, imported sources and supporting native-grid products.

@@ -54,8 +54,13 @@ uv run pytest -q
 `ha1300 locations` generates the complete grid-to-location dataset and map from the owned input pack and supporting grid products. See the method for acquisition/import and supporting-product rebuild commands. No building implementation or deployment is performed.
 
 
-Settlement eligibility is now checked independently against EU5 default.map.
-All 20,893 ownable locations are present, but 132 currently have unresolved zero
-support. The delivery validator reports this as a failed readiness gate; numerical
-coverage is not historical acceptance. See artifacts/locations/settlement_validation.json
-and unresolved_settlements.csv. Non-ownable corridors are explicitly labelled.
+Settlement eligibility is checked independently against EU5 default.map.
+All 20,893 ownable locations now have positive starting and maximum support.
+The former 132 zero-support cases use explicit conservative terrestrial analogues,
+with donor cells, climate matching and uncertainty recorded in
+artifacts/locations/terrestrial_completion.json and repaired_settlements.csv.
+No fishing or population floor is introduced. The build and delivery validator fail
+if an ownable location is missing or has unusable support. Numerical readiness
+remains separate from historical balance. Non-ownable corridors are explicitly labelled.
+Equal area is the working game version; the area-based output is retained as a
+shelved physical-accounting comparison.

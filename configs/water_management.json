@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "year": 1300,
+  "status": "Complete evidence-guided attribution, not surveyed building counts",
+  "source_directory": "data/raw/water_management",
+  "cache_directory": "data/processed/water_management",
+  "categories": {
+    "water_supply": "Water supply systems",
+    "paddy_control": "Paddy water control",
+    "flood_bunds": "Flood embankments",
+    "field_drainage": "Field drainage",
+    "polders": "Coastal drainage / reclamation"
+  },
+  "glwd_classes": {
+    "flood": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      30
+    ],
+    "wet": [
+      8,
+      9,
+      16,
+      17,
+      18,
+      19,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27
+    ],
+    "coastal": [
+      28,
+      29,
+      31
+    ],
+    "modern_paddy": [
+      33
+    ]
+  },
+  "transfers": {
+    "paddy_control": {
+      "clearing": 0.25,
+      "management": 0.5
+    },
+    "flood_bunds": {
+      "clearing": 0.4,
+      "management": 0.25
+    },
+    "field_drainage": {
+      "clearing": 0.5,
+      "management": 0.25
+    },
+    "polders": {
+      "clearing": 0.75,
+      "management": 0.4
+    }
+  },
+  "historical_system_weight": {
+    "unknown": 0.25,
+    "extensive": 0.35,
+    "rotation": 0.65,
+    "managed": 0.85,
+    "intensive": 1.0
+  },
+  "remaining_system_weight": 1.0,
+  "paddy_slope_access_floor": 0.25,
+  "coastal_lowland_elevation_m": 5.0,
+  "coastal_distance_km": 75.0,
+  "river_distance_km": 5.0,
+  "wetland_proxy_weight": 0.5,
+  "unmapped_wetness_weight": 0.15,
+  "sensitivity_factors": [
+    0.5,
+    1.0,
+    1.5
+  ],
+  "interpretation": [
+    "Coefficients are explicit shared attribution assumptions, not historical measured percentages. Freeze before examining capacity outcomes; test half and one-and-a-half transfer strength.",
+    "GLWD 1990-2020 and 1700 wetland reconstruction characterize physical settings, not infrastructure existing in 1300. HYDE/LUH cultivation and existing Seshat-guided crop/system assignments determine the inherited-budget context.",
+    "Wet-rice control is distinguished from supplementary water supply: bunded rainfed rice also requires control. Modern rice does not authorize a historically unavailable crop.",
+    "The modern and 1700 wetland layers are combined with max rather than added; overlapping paddy, polder, flood and drainage settings are partitioned once in that order.",
+    "No new capacity, water withdrawal, physical hectares, groundwater or seasonal storage is created. Natural base, starting and maximum total support remain unchanged.",
+    "Reservoirs and qanats are not separate chosen categories; their independently quantified opportunity is outside the present surface-water model. No zero-filled placeholder maps masquerade as those estimates.",
+    "Already reclaimed coastal land can be absent from modern and 1700 wetland inventories. Fine ETOPO subcells between -10 and 0m within the low coastal screen identify an inferred drainage/reclamation dependency; this is not a date of construction."
+  ],
+  "coastal_reclaimed_elevation_m": 0.0,
+  "coastal_minimum_elevation_m": -10.0
+}

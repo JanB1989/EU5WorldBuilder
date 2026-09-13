@@ -60,6 +60,9 @@ def source_fingerprint(root,config_path,food,water):
     paths+=list((root/'data/raw/regional_refinement_sources').glob('*'))
     if active_config.get('inheritance_review_baseline'):paths.append(root/active_config['inheritance_review_baseline'])
     paths+=[root/'data/processed/regional_round_02_before/locations_equal_area.csv',root/'data/processed/rural_round_before/locations_equal_area.csv']
+    if active_config.get('water_management_config'):
+        paths += [root/active_config['water_management_config'],root/'evidence/water_management.json',root/'reports/water_management_method.md']
+        paths += list((root/'data/raw/water_management').glob('*'))+list((root/'data/processed/water_management').glob('*'))
     details={str(p.relative_to(root)):digest(p) for p in sorted(set(paths)) if p.is_file()}
     return hashlib.sha256(json.dumps(details,sort_keys=True).encode()).hexdigest(),details
 
@@ -405,6 +408,9 @@ def execute(config_path,output):
     arrays['cultivated_system_refinement_fraction']=(system_flags>0).astype(float)
     from .agricultural_game_calibration import apply as apply_game_calibration
     arrays=apply_game_calibration(root,cfg,arrays,historical_cultivated,food_type,domain,out)
+    if cfg.get('water_management_config'):
+        from .water_management import native_attribution
+        arrays=native_attribution(root,cfg,arrays,domain,food_type,out)
     write_json(out/'regional_refinement.json',diagnostics['refinement_audit'])
     # Game coastlines and tiny islands do not match real raster masks exactly.
     # Full-grid completion is a labelled nearest terrestrial analogue, never omission.
@@ -448,6 +454,10 @@ def execute(config_path,output):
         d['source_starting_crop_ha']=totals['source_starting_crop_fraction']
         d['source_starting_served_ha']=totals['source_starting_served_fraction']
     for name in CAPACITY_COLUMNS:d[name]=totals[name]
+    if cfg.get('water_management_config'):
+        from .water_management import RAW_COLUMNS
+        for name in RAW_COLUMNS:d[name]=totals[name]
+        d['wm_inferred_fraction']=totals['wm_inferred_fraction']/area_ha
     for rule in ['china','andes','prairie','improvement_reference','management_envelope','cultivated_system']:d[rule+'_refinement_share']=totals[rule+'_refinement_fraction']/area_ha
     for name in ['water_dependent_cultivation','unserved_historical_irrigation','unserved_water_opportunity']:
         d[name+'_ha']=totals[name+'_fraction']
@@ -519,7 +529,7 @@ def execute(config_path,output):
     write_json(out/'sensitivity.json',{'status':'First-pass yield sensitivity; land-access uncertainty bands are scenario brackets, not probability intervals. Basin allocations unchanged.','comparisons':sensitivity})
     quantiles={k:d.loc[d.modelled_land,k].quantile([0,.1,.5,.9,.99,1]).to_dict() for k in FIELDS+['starting_capacity','maximum_capacity','starting_fill']}
     audit={'iteration':cfg['iteration'],'engineering_pass':True,'iteration_complete':True,'scientific_acceptance':False,'location_count':len(d),'inventory':inventory_audit,'settlement_readiness':settlement,'terrestrial_completion':{k:v for k,v in completion_audit.items() if k!='cells'},'checks':checks,'zero_starting_capacity_locations':int(((d.starting_capacity==0)&d.modelled_land).sum()),'population_context_missing_locations':int((d.eu5_start_population.isna()&d.modelled_land).sum()),'below_starting_population_locations':int((d.starting_capacity<d.eu5_start_population).sum()),'total_starting_capacity':float(d.starting_capacity.sum()),'total_maximum_capacity':float(d.maximum_capacity.sum()),'total_context_population':float(d.eu5_start_population.sum()),'substantial_coastline_transfer_locations':int((d.coastline_transfer_share>.1).sum()),'quantiles':quantiles,'geometry':ga,'yield':ya,'land':la,'water':wa,'grid':grid_reports,
-       'limitations':['Complete inferred iteration, not historically accepted balance.','Modern climate and runoff proxies; dated cropland evidence around 1300 compared to cached EU5 1337 population.','Shared access/clearing fractions and crop-season water demand are explicit priors, not surveyed hectares.','Drainage/flood protection beyond reconstructed cropland and retained crop-system effectiveness are not independently identified.','No separate improvement-building counts; no game export or deployment.','Aquatic food excluded; existing noncrop terrestrial transfers remain low-confidence.','No per-location population fitting or area-compression coefficient. Large physical locations can have large support.']}
+       'limitations':['Complete inferred iteration, not historically accepted balance.','Modern climate and runoff proxies; dated cropland evidence around 1300 compared to cached EU5 1337 population.','Shared access/clearing fractions and crop-season water demand are explicit priors, not surveyed hectares.','Water-management subtypes redistribute existing support using wetland settings and historical crop systems; numerical causal shares are inferred, not independently measured.','No separate improvement-building counts; no game export or deployment.','Aquatic food excluded; existing noncrop terrestrial transfers remain low-confidence.','No per-location population fitting or area-compression coefficient. Large physical locations can have large support.']}
     audit['game_calibration_applied']=bool(cfg.get('agricultural_game_calibration'))
     if audit['game_calibration_applied']:
         audit['limitations'].insert(0,'Main capacities use an explicit nonlinear game conversion and inferred starting-infrastructure scenario; they are not physical calorie-derived population limits. Raw food estimates are retained separately.')

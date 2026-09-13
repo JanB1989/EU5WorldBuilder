@@ -1,6 +1,7 @@
 """Final game-unit area comparison; physical accounts stay untouched."""
 import numpy as np
 from .improvement_audit import CAPACITY_COLUMNS,ROUNDING_COLUMNS
+from .water_management import RAW_COLUMNS
 
 ABSOLUTES = [
     "base_effective_cropland", "starting_improvement_effective_cropland",
@@ -27,7 +28,7 @@ def equal_area(d,reference_area=None,base_land_floor=0.):
     scale=np.ones(len(d))
     scale[land]=reference/area[land]
     result=d.copy()
-    for name in ABSOLUTES + CAPACITY_COLUMNS + ROUNDING_COLUMNS + [c for c in d if c.endswith(("_capacity_low","_capacity_high"))]:
+    for name in ABSOLUTES + CAPACITY_COLUMNS + ROUNDING_COLUMNS + RAW_COLUMNS + [c for c in d if c.endswith(("_capacity_low","_capacity_high"))]:
         if name in result:result[name]=result[name]*scale
     if not np.isfinite(base_land_floor) or base_land_floor<0:raise ValueError("Invalid base land floor")
     result["base_land_floor_added_units"]=0.

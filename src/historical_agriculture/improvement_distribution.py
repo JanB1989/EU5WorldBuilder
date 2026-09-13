@@ -13,6 +13,9 @@ FIELDS = [f'{s}_{k}_improvement_{v}' for s in STAGES for k in KINDS
           for v in ('units', 'share', 'capacity')]
 FIELDS += [f'{s}_distribution_status' for s in STAGES]
 FIELDS += ['maximum_improvement_capacity']
+from .water_management import FIELDS as WATER_FIELDS, allocate_locations
+FIELDS += WATER_FIELDS
+DISPLAY_KINDS = ('clearing', 'management', 'water_management')
 
 
 def allocate(d):
@@ -62,7 +65,7 @@ def allocate(d):
             result[f'{stage}_{kind}_improvement_capacity'] = amounts[stage][:, j] * multiplier
         result[f'{stage}_distribution_status'] = np.where(total > 0, 'allocated', 'no_improvement_budget')
     result['maximum_improvement_capacity'] = totals['maximum'] * multiplier
-    return result
+    return allocate_locations(result)
 
 
 def report(out, d, fingerprint, mode='equal_area'):
@@ -78,10 +81,10 @@ def report(out, d, fingerprint, mode='equal_area'):
             total = float(own[f'{stage}_improvement_effective_cropland'].sum())
             summary[stage] = {
                 'total_units': total,
-                'total_capacity': float(sum(own[f'{stage}_{k}_improvement_capacity'].sum() for k in KINDS)),
-                'capacity_by_type': {k: float(own[f'{stage}_{k}_improvement_capacity'].sum()) for k in KINDS},
+                'total_capacity': float(sum(own[f'{stage}_{k}_improvement_capacity'].sum() for k in DISPLAY_KINDS)),
+                'capacity_by_type': {k: float(own[f'{stage}_{k}_improvement_capacity'].sum()) for k in DISPLAY_KINDS},
                 'locations_without_budget': int((own[f'{stage}_distribution_status'] == 'no_improvement_budget').sum()),
-                'shares': {k: float(own[f'{stage}_{k}_improvement_units'].sum()/total) if total else 0. for k in KINDS}}
+                'shares': {k: float(own[f'{stage}_{k}_improvement_units'].sum()/total) if total else 0. for k in DISPLAY_KINDS}}
         write_json(out/'improvement_distribution.json', {
             'schema': 1, 'fingerprint': fingerprint, 'map_locations': len(d),
             'ownable_locations': len(own), 'totals_changed': False,
@@ -89,7 +92,7 @@ def report(out, d, fingerprint, mode='equal_area'):
             'map_quantity': 'Population capacity contributed: improvement units multiplied by the location multiplier. Units remain available for building balancing.',
             'summary': summary,
             'evidence': 'Fine-grid clearing, management and surface-water component ledger, aggregated by location overlap, including the shared game conversion and inherited-system scenario.',
-            'uncertainty': 'Model attribution, not observed infrastructure percentages. Management depends on sequential attribution. Drainage, terraces and groundwater are not separately estimated.',
+            'uncertainty': 'Model attribution, not observed infrastructure percentages. Management depends on sequential attribution. Water subtypes use global wet settings and dated crop systems; numerical shares inferred. Terraces and groundwater are not separate types.',
             'rounding': 'Negative float32-scale residues are removed and positive components renormalized to the existing budget. Substantive negative components fail.',
-            'zero_budget': 'All three shares are zero; no_improvement_budget is explicit, not missing data.'})
+            'zero_budget': 'All component shares are zero; no_improvement_budget is explicit, not missing data.'})
     return allocated

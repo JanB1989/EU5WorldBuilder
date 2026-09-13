@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "year": 1300,
+  "status": "Complete inferred attribution; observational geography and explicit numerical assumptions separated",
+  "sources": [
+    {
+      "file": "data/raw/water_management/GLWD_v2_0_area_by_class_pct_tif.zip",
+      "url": "https://ndownloader.figshare.com/files/54001775",
+      "version": "GLWD v2.0; figshare record 28519994",
+      "license": "CC BY 4.0",
+      "sha256": "5b24087854606d511009034eed077bfa9b771d622dbc37d6942d33c92f645134",
+      "bytes": 1607115786,
+      "role": "Contemporary fractional wet settings, not 1300 infrastructure",
+      "evidence_family": "GLWD"
+    },
+    {
+      "file": "data/raw/water_management/wetland_loss.zip",
+      "url": "https://zenodo.org/api/records/7616651/files/wetland_loss.zip/content",
+      "version": "Zenodo 7616651; ensemblemean v10; 1700 slice",
+      "license": "CC BY 4.0",
+      "sha256": "ed8b0579a912229204ee35f6e1e811d631d4b0e7e54c9a7e0fdca25a63ff8896",
+      "bytes": 306991260,
+      "role": "Former wetland settings at 0.5 degrees; not 1300 construction",
+      "evidence_family": "Wetland reconstruction, related HYDE/GLWD"
+    }
+  ],
+  "historical_context": [
+    "Existing HYDE1300/LUH cultivated and irrigated area ledger (related reconstructions)",
+    "Seshat-guided regions.json crop availability and management classifications",
+    "Previously sourced location_refinements and cultivated_systems assessments",
+    "Existing ETOPO2022 60-second DEM: modern coastal below-sea-level terrain is an inferred dependency proxy, not a medieval reclamation date. Source hash in canonical location-input manifest."
+  ],
+  "mechanism_sources": [
+    {
+      "url": "https://www.fao.org/4/s8684e/s8684e03.htm",
+      "role": "Basin and bund irrigation mechanisms, not medieval effect percentages"
+    },
+    {
+      "url": "https://www.fao.org/4/ai408e/ai408E05.htm",
+      "role": "Rainfed lowland rice water control, not medieval global extent"
+    },
+    {
+      "url": "https://www.fao.org/4/R4082E/r4082e07.htm",
+      "role": "Drainage mechanism"
+    },
+    {
+      "url": "https://whc.unesco.org/en/list/818/",
+      "role": "Dated reclamation example; later infrastructure must not be backdated"
+    },
+    {
+      "url": "https://icid-ciid.org/award/his_details/129",
+      "role": "Sangyuanwei historical enclosure, staged development rather than complete modern footprint"
+    }
+  ],
+  "parameters": "configs/water_management.json",
+  "method": "reports/water_management_method.md",
+  "calibration_target": null,
+  "population_used": false,
+  "total_capacity_changes": false
+}

@@ -64,3 +64,25 @@ if an ownable location is missing or has unusable support. Numerical readiness
 remains separate from historical balance. Non-ownable corridors are explicitly labelled.
 Equal area is the working game version; the area-based output is retained as a
 shelved physical-accounting comparison.
+
+
+### Water-management maps
+
+The location viewer has a **Water management** tab with starting/maximum maps
+for water supply, paddy control, flood embankments, field drainage and coastal
+reclamation. All values are multiplied capacity contributions. The allocation
+conserves existing base and total capacity and is performed on the native grid.
+See [method and sources](reports/water_management_method.md).
+
+```sh
+uv run python scripts/prepare_water_management.py
+uv run ha1300 locations
+uv run python scripts/validate_locations.py
+uv run pytest -q
+```
+
+The first command acquires the versioned global fractional wetland and historic
+wetland-reconstruction archives (about 1.9 GB combined) and verifies checksums.
+The new sources provide wet settings; medieval effect shares remain explicitly
+inferred. Ten complete subtype maps and their ledger are produced by the normal
+location build, not a separate experimental implementation.

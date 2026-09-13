@@ -40,6 +40,12 @@ def main():
             else:
                 passed=np.allclose(distribution[col],expected_distribution[col],rtol=1e-12,atol=1e-8)
             if not passed:raise ValueError('Improvement distribution mismatch: '+col)
+    from historical_agriculture.water_management import validate as validate_water, KINDS as WATER_KINDS
+    validate_water(equal)
+    for stage in ('starting','maximum'):
+        for kind in WATER_KINDS:
+            if not (out/f'{stage}_{kind}_improvement_capacity_equal.png').is_file():
+                raise ValueError('Missing required water map: '+stage+' '+kind)
     for version in [d,equal]:
         own=version.loc[version.is_ownable,'capacity_multiplier'].to_numpy(float)
         if np.any(own<cfg['multiplier_floor']) or np.any(own>cfg['multiplier_ceiling']):

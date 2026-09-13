@@ -58,6 +58,7 @@ def source_fingerprint(root,config_path,food,water):
     if active_config.get('agricultural_game_calibration'):paths+=[root/active_config['agricultural_game_calibration']]
     paths+=[root/'configs/location_refinements.json',root/'evidence/location_refinements.json',root/'configs/cultivated_systems.json',root/'data/processed/land_round_before.csv',root/'data/processed/system_round_before/locations_equal_area.csv']
     paths+=list((root/'data/raw/regional_refinement_sources').glob('*'))
+    if active_config.get('inheritance_review_baseline'):paths.append(root/active_config['inheritance_review_baseline'])
     paths+=[root/'data/processed/regional_round_02_before/locations_equal_area.csv',root/'data/processed/rural_round_before/locations_equal_area.csv']
     details={str(p.relative_to(root)):digest(p) for p in sorted(set(paths)) if p.is_file()}
     return hashlib.sha256(json.dumps(details,sort_keys=True).encode()).hexdigest(),details
@@ -442,7 +443,7 @@ def execute(config_path,output):
     d['dry_field_alternative_ha']=totals['dry_field_alternative_fraction']
     d['inferred_cultivated_water_requested_ha']=totals['inferred_cultivated_water_fraction']
     if cfg.get('agricultural_game_calibration'):
-        for field,grid in [('game_conversion_added_capacity','game_conversion_added_support'),('game_inheritance_capacity','game_inheritance_support'),('game_base_added_capacity','game_base_added_support'),('uncalibrated_base_capacity','uncalibrated_base_support'),('uncalibrated_starting_capacity','uncalibrated_starting_support'),('uncalibrated_maximum_capacity','uncalibrated_maximum_support')]:d[field]=totals[grid]
+        for field,grid in [('game_conversion_added_capacity','game_conversion_added_support'),('game_inheritance_capacity','game_inheritance_support'),('game_base_added_capacity','game_base_added_support'),('game_inheritance_removed_capacity','game_inheritance_removed_support'),('uncalibrated_base_capacity','uncalibrated_base_support'),('uncalibrated_starting_capacity','uncalibrated_starting_support'),('uncalibrated_maximum_capacity','uncalibrated_maximum_support')]:d[field]=totals[grid]
         d['game_inheritance_activation_share']=totals['game_inheritance_activation_fraction']/area_ha
         d['source_starting_crop_ha']=totals['source_starting_crop_fraction']
         d['source_starting_served_ha']=totals['source_starting_served_fraction']

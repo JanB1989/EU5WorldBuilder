@@ -98,5 +98,6 @@
     "slope_multiplier": 1.0
   },
   "pressure_comparison_baseline": "data/processed/system_calibration_before.csv",
-  "agricultural_game_calibration": "configs/agricultural_game_calibration.json"
+  "agricultural_game_calibration": "configs/agricultural_game_calibration.json",
+  "inheritance_review_baseline": "data/processed/inheritance_review_before.csv"
 }

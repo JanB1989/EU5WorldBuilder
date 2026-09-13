@@ -5,6 +5,13 @@
     "historical_extent_half_saturation": 0.01,
     "maximum_opportunity_activation": {"extensive": 0.2, "rotation": 0.4, "managed": 0.55, "intensive": 0.7},
     "unknown_system_activation": 0.2,
+    "extent_guard": {
+      "eligible_systems": ["unknown", "extensive", "rotation"],
+      "full_guard_below_cultivated_fraction": 0.01,
+      "no_guard_above_cultivated_fraction": 0.05,
+      "extra_extent_ratio": 1.0,
+      "interpretation": "Conservative uncertainty allowance for extra inferred works in sparsely cultivated systems. Below 1% reconstructed cultivation, additional cultivated and water-served extent may each expand by at most the existing cultivated extent. The guard tapers to no restriction at 5%. Managed and intensive classifications retain their previous allowance. These thresholds are scenario assumptions, not observed medieval rates. Source-supported land and water works remain intact; population and fill are reporting only."
+    },
     "interpretation": "Shared starting-infrastructure scenario on evidence of existing cultivation. Agricultural-system classes come from the existing historical regional assessments. Extent is HYDE/LUH-related evidence, not independent of historical demography. Fractions are game assignments, not surveyed 1300 adoption rates."
   },
   "support_conversion": {

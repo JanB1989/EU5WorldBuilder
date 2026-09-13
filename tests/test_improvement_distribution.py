@@ -61,3 +61,16 @@ def test_area_scaling_leaves_shares_unchanged():
     for s in ('starting', 'remaining', 'maximum'):
         for k in KINDS:
             assert np.allclose(a[f'{s}_{k}_improvement_share'], b[f'{s}_{k}_improvement_share'])
+
+
+def test_same_improvement_units_have_different_capacity_when_multiplier_differs():
+    low=frame();high=low.copy()
+    for col in high:
+        if col.endswith('_capacity') or col=='capacity_multiplier':high[col]*=3
+    low,high=allocate(low),allocate(high)
+    for stage in ('starting','remaining','maximum'):
+        for kind in KINDS:
+            key=f'{stage}_{kind}_improvement_'
+            assert low[key+'units'].iloc[0]==high[key+'units'].iloc[0]
+            assert high[key+'capacity'].iloc[0]==pytest.approx(3*low[key+'capacity'].iloc[0])
+    assert high.maximum_improvement_capacity.iloc[0]==pytest.approx(high.maximum_capacity.iloc[0]-high.inert_capacity.iloc[0])

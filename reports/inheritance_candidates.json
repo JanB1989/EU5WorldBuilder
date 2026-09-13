@@ -1,0 +1,282 @@
+{
+  "candidates": [
+    {
+      "name": "all_1",
+      "settings": {
+        "full_guard_below_cultivated_fraction": 0.01,
+        "no_guard_above_cultivated_fraction": 0.05,
+        "extra_extent_ratio": 1.0
+      },
+      "starting_capacity": 2067037338.1794224,
+      "rural_over_start": 512,
+      "new_rural_shortfalls": 29,
+      "changed_locations": 14636,
+      "small_capacity_removed": 58380714.70278849,
+      "small_before_median": 40435.895173409,
+      "small_after_median": 38253.727731935374,
+      "worst_new": [
+        {
+          "location_tag": "chhmuoh_thmei",
+          "region": "indochina_region",
+          "eu5_start_population": 242319.0,
+          "starting_capacity": 524697.536825117,
+          "after": 205233.92014478717
+        },
+        {
+          "location_tag": "deo",
+          "region": "bengal_region",
+          "eu5_start_population": 221990.0,
+          "starting_capacity": 238874.164316776,
+          "after": 197487.32121469878
+        },
+        {
+          "location_tag": "makanpur",
+          "region": "hindustan_region",
+          "eu5_start_population": 211593.0,
+          "starting_capacity": 217657.882896266,
+          "after": 205557.01090055864
+        },
+        {
+          "location_tag": "sasaram",
+          "region": "hindustan_region",
+          "eu5_start_population": 211040.0,
+          "starting_capacity": 250504.522850384,
+          "after": 210704.23644215055
+        },
+        {
+          "location_tag": "barabhum",
+          "region": "bengal_region",
+          "eu5_start_population": 192703.0,
+          "starting_capacity": 205921.491250227,
+          "after": 189282.3689945273
+        },
+        {
+          "location_tag": "tamluk",
+          "region": "bengal_region",
+          "eu5_start_population": 172959.0,
+          "starting_capacity": 208618.154048416,
+          "after": 157332.5696879366
+        },
+        {
+          "location_tag": "kantit",
+          "region": "hindustan_region",
+          "eu5_start_population": 159234.0,
+          "starting_capacity": 175992.640342615,
+          "after": 151317.61523443347
+        },
+        {
+          "location_tag": "devgarh",
+          "region": "central_india_region",
+          "eu5_start_population": 158090.0,
+          "starting_capacity": 176638.757710532,
+          "after": 157356.48490789148
+        },
+        {
+          "location_tag": "pangguyangan",
+          "region": "indonesia_region",
+          "eu5_start_population": 157789.0,
+          "starting_capacity": 296512.496529616,
+          "after": 128324.2514063523
+        },
+        {
+          "location_tag": "launggyet",
+          "region": "indochina_region",
+          "eu5_start_population": 141841.0,
+          "starting_capacity": 141944.543759362,
+          "after": 92225.68935893296
+        }
+      ]
+    },
+    {
+      "name": "sparse_extensive_rotation_0.5",
+      "settings": {
+        "full_guard_below_cultivated_fraction": 0.01,
+        "no_guard_above_cultivated_fraction": 0.05,
+        "extra_extent_ratio": 0.5
+      },
+      "starting_capacity": 2283672460.195784,
+      "rural_over_start": 492,
+      "new_rural_shortfalls": 9,
+      "changed_locations": 9073,
+      "small_capacity_removed": 31769128.9587555,
+      "small_before_median": 40435.895173409,
+      "small_after_median": 38672.02266919086,
+      "worst_new": [
+        {
+          "location_tag": "launggyet",
+          "region": "indochina_region",
+          "eu5_start_population": 141841.0,
+          "starting_capacity": 141944.543759362,
+          "after": 138575.30388017397
+        },
+        {
+          "location_tag": "sikasingo",
+          "region": "great_lakes_region",
+          "eu5_start_population": 85784.0,
+          "starting_capacity": 87698.903703574,
+          "after": 82550.26393644362
+        },
+        {
+          "location_tag": "xianyou",
+          "region": "east_china_region",
+          "eu5_start_population": 81961.0,
+          "starting_capacity": 87858.2428797701,
+          "after": 71734.18331157093
+        },
+        {
+          "location_tag": "houguan",
+          "region": "east_china_region",
+          "eu5_start_population": 73356.0,
+          "starting_capacity": 96972.8503978671,
+          "after": 72736.719528439
+        },
+        {
+          "location_tag": "yongfu",
+          "region": "south_china_region",
+          "eu5_start_population": 64930.0,
+          "starting_capacity": 66174.6935291401,
+          "after": 63854.96081978307
+        },
+        {
+          "location_tag": "pinghe",
+          "region": "east_china_region",
+          "eu5_start_population": 59953.0,
+          "starting_capacity": 69195.0200909682,
+          "after": 59441.328440859994
+        },
+        {
+          "location_tag": "lavagna",
+          "region": "italy_region",
+          "eu5_start_population": 56849.0,
+          "starting_capacity": 62878.1684288796,
+          "after": 56069.22294582161
+        },
+        {
+          "location_tag": "fuan",
+          "region": "east_china_region",
+          "eu5_start_population": 56444.0,
+          "starting_capacity": 61868.9413968637,
+          "after": 53935.38090676542
+        },
+        {
+          "location_tag": "uttarkashi",
+          "region": "hindustan_region",
+          "eu5_start_population": 30902.0,
+          "starting_capacity": 34368.7320839252,
+          "after": 30644.89639596591
+        }
+      ]
+    },
+    {
+      "name": "sparse_extensive_rotation_1",
+      "settings": {
+        "full_guard_below_cultivated_fraction": 0.01,
+        "no_guard_above_cultivated_fraction": 0.05,
+        "extra_extent_ratio": 1.0
+      },
+      "starting_capacity": 2290660961.8482904,
+      "rural_over_start": 488,
+      "new_rural_shortfalls": 5,
+      "changed_locations": 9044,
+      "small_capacity_removed": 29396676.90229108,
+      "small_before_median": 40435.895173409,
+      "small_after_median": 38874.720052425866,
+      "worst_new": [
+        {
+          "location_tag": "launggyet",
+          "region": "indochina_region",
+          "eu5_start_population": 141841.0,
+          "starting_capacity": 141944.543759362,
+          "after": 138840.29569658078
+        },
+        {
+          "location_tag": "sikasingo",
+          "region": "great_lakes_region",
+          "eu5_start_population": 85784.0,
+          "starting_capacity": 87698.903703574,
+          "after": 83204.06016706236
+        },
+        {
+          "location_tag": "xianyou",
+          "region": "east_china_region",
+          "eu5_start_population": 81961.0,
+          "starting_capacity": 87858.2428797701,
+          "after": 74079.16930275102
+        },
+        {
+          "location_tag": "yongfu",
+          "region": "south_china_region",
+          "eu5_start_population": 64930.0,
+          "starting_capacity": 66174.6935291401,
+          "after": 64381.93268250374
+        },
+        {
+          "location_tag": "fuan",
+          "region": "east_china_region",
+          "eu5_start_population": 56444.0,
+          "starting_capacity": 61868.9413968637,
+          "after": 55297.176018159334
+        }
+      ]
+    },
+    {
+      "name": "sparse_extensive_rotation_2",
+      "settings": {
+        "full_guard_below_cultivated_fraction": 0.01,
+        "no_guard_above_cultivated_fraction": 0.05,
+        "extra_extent_ratio": 2.0
+      },
+      "starting_capacity": 2302929492.9756136,
+      "rural_over_start": 486,
+      "new_rural_shortfalls": 3,
+      "changed_locations": 8928,
+      "small_capacity_removed": 25187028.84202797,
+      "small_before_median": 40435.895173409,
+      "small_after_median": 39121.591633798,
+      "worst_new": [
+        {
+          "location_tag": "launggyet",
+          "region": "indochina_region",
+          "eu5_start_population": 141841.0,
+          "starting_capacity": 141944.543759362,
+          "after": 139292.98723896898
+        },
+        {
+          "location_tag": "sikasingo",
+          "region": "great_lakes_region",
+          "eu5_start_population": 85784.0,
+          "starting_capacity": 87698.903703574,
+          "after": 84399.38027852913
+        },
+        {
+          "location_tag": "xianyou",
+          "region": "east_china_region",
+          "eu5_start_population": 81961.0,
+          "starting_capacity": 87858.2428797701,
+          "after": 77966.50075765062
+        }
+      ]
+    }
+  ],
+  "source_hashes": {
+    "data/processed/inheritance_review_before.csv": "d18c0231458821effcaeccbbf624ba4faa22bb191e8d7c81d00cf07fa32da5ac",
+    "data/raw/location_inputs/inventory.parquet": "3a9bb68159e5cfcf5262ad48c795c06b6b9a4649977668d5c71415da1a8000a1",
+    "artifacts/locations/overlap.npz": "0baff469c72461d6ac82bcd586ee01409c6bf9b340fda6ee469bd3faeb91143b",
+    "artifacts/locations/uncalibrated_starting_support.tif": "35d790682a82e01fb92f8c60751bc4e4f5da9fdf0e5218862fcddc849d632ab7",
+    "artifacts/locations/uncalibrated_maximum_support.tif": "74eb190a8aa8125fdd6fec647a13fdcf655e7ae30acd8b9e748a4c1c58d86cae",
+    "artifacts/locations/starting_support_per_land_ha.tif": "353ef257a61b96d0b461a2430bc832f6cca1dafc109ecb7ed28d0ce6a63578d5",
+    "artifacts/locations/game_inheritance_activation_fraction.tif": "28579f50bd00da92aabbc6ae953fd5228a0a8b890995245a0945c9f498c9ed03",
+    "artifacts/locations/game_conversion_reference_support.tif": "4eaf6ef0733e22482235d15c95d21d9f7de19d1bc60c4e56fb1b4a54929425d3",
+    "artifacts/locations/historical_cultivated_fraction.tif": "c4260920ef54668330b6ebd04da7c4608e4429cdb22a915dcb2f23d7cc69c19a",
+    "artifacts/reconstruction/food_type.tif": "32d92499c8da562732dbbcd0d8a231ccc19f73f08566de658df83763dbe14183",
+    "artifacts/reconstruction/food_ecoregion.tif": "ea4cecd4314230e17cc48ccc371b316ffef55c8199293777d0b5296598d7c1d8",
+    "configs/regions.json": "e52551f4dda7f9dbdb0627aae9cd89319de8ac01d1847700efa6e7fe9ee3cc23",
+    "artifacts/locations/maximum_crop_fraction.tif": "7f4085949d51034a5f605ab094873cd1e6e3ea11f7fd29fdc2b02ff22e0d0f93",
+    "artifacts/locations/source_starting_crop_fraction.tif": "c5ef3df1dd685b60204562a5630cdec6d4e6119f848a58eac2098203854d779f",
+    "artifacts/locations/maximum_served_fraction.tif": "6de37829b469ebf554ea687c2d2a55d0af997f5764df7be827ed4fbf9651d032",
+    "artifacts/locations/source_starting_served_fraction.tif": "b1035eb0a1bf2c3594243ee811bbbe830dc66d53b41225b4965aeeb5e0e18fae",
+    "configs/agricultural_game_calibration.json": "9da2972fba4481ef14c602108a5fbb374ec600c7fb2e11ea40f60a4bcffe832d"
+  },
+  "model_code_hash": "2412f1c904d31768f27bb897dade1dab8b333cafda841063f7ed1f64351a5cf5",
+  "method": "Same native-grid support conversion and overlap geometry; frozen maximum and base. Published float32 caches can differ at rounding precision from a full rebuild."
+}

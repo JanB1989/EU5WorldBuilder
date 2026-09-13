@@ -275,3 +275,18 @@ monthly basin allocation; unserved demand remains unproductive. The original
 recorded extent and added inference are separate rasters/ledger fields. This is an
 explicit reconciliation hypothesis, not newly discovered medieval irrigation data.
 Flood-recession timing, groundwater and location registration remain limitations.
+# Evidence-limited starting inheritance — 2026-09-13
+
+The inherited-improvement scenario now limits its extra, unobserved expansion
+on sparsely cultivated extensive, rotation-based and unknown systems. Below 1%
+HYDE/LUH cultivated extent, additional crop and water-served extent are each
+bounded to the reconstructed cultivated extent. The guard tapers linearly away
+between 1% and 5%; managed and intensive classifications are unchanged. These
+are conservative uncertainty assumptions, not observations of medieval works.
+Extensive agriculture does not imply absence of agricultural history.
+
+The guard never removes source-supported starting cultivation or irrigation,
+never changes the natural base, multiplier or maximum, and never reads population
+or fill. Reduced starting support becomes remaining opportunity. A frozen
+pre-review comparison records all beneficiaries and newly exposed shortfalls.
+See `reports/inheritance_review.md` and generated `INHERITANCE_REVIEW.md`.

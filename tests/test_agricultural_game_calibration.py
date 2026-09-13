@@ -45,6 +45,7 @@ def test_native_grid_inheritance_keeps_source_and_resource_limits(tmp_path,monke
     from pathlib import Path
     import historical_agriculture.agricultural_game_calibration as model
     c=json.loads((Path(__file__).parents[1]/'configs/agricultural_game_calibration.json').read_text())
+    c['inheritance'].pop('extent_guard',None)  # Explicit legacy scenario remains reproducible.
     (tmp_path/'configs').mkdir()
     (tmp_path/'configs/game.json').write_text(json.dumps(c))
     (tmp_path/'configs/regions.json').write_text(json.dumps({'regions':[{'ecoregion_ids':[1],'management':'managed'}]}))
@@ -66,3 +67,30 @@ def test_native_grid_inheritance_keeps_source_and_resource_limits(tmp_path,monke
     assert np.all(arr['starting_crop_fraction']==.02)  # input untouched
     assert np.all(result['starting_crop_fraction']<=result['maximum_crop_fraction'])
     assert np.all(result['starting_served_fraction']<=result['maximum_served_fraction'])
+
+
+def test_sparse_extent_guard_keeps_managed_systems_and_dense_cultivation():
+    from historical_agriculture.agricultural_game_calibration import review_inheritance
+    settings={'full_guard_below_cultivated_fraction':.01,'no_guard_above_cultivated_fraction':.05,'extra_extent_ratio':1.}
+    h=np.array([.005,.005,.08,.03])
+    a=np.full(4,.3);gap=np.full(4,.5)
+    result=review_inheritance(a,h,gap,gap/2,np.array([True,False,True,True]),settings)
+    assert result[0]==pytest.approx(.01)
+    assert result[1]==.3  # Managed/intensive evidence is ineligible for the guard.
+    assert result[2]==.3  # Substantial cultivation unchanged.
+    assert result[3]==pytest.approx(.18)  # Smooth transition, not a boundary jump.
+    assert np.all(result<=a)
+
+
+def test_sparse_guard_preserves_sourced_support_and_maximum_and_releases_opportunity():
+    from historical_agriculture.agricultural_game_calibration import bound_inheritance
+    a=bound_inheritance(np.array([.3]),np.array([.005]),np.array([.5]),np.array([.1]),1.)
+    comp={f'{stage}_{kind}_capacity':np.array([amount/3]) for stage,amount in [('starting',.1),('remaining',.9)] for kind in ['clearing','management','irrigation']}
+    b=np.array([.1]);s=np.array([.2]);u=np.array([1.1])
+    old=transform(b,s,u,comp,np.array([.3]),1.,1/3)
+    new=transform(b,s,u,comp,a,1.,1/3)
+    assert np.array_equal(new[0],old[0]) and np.array_equal(new[2],old[2])
+    assert np.all(new[1]<old[1]) and np.all(new[1]>=convert(s,1.,1/3))
+    assert .02+a[0]*.5==pytest.approx(.025)  # Recorded .02 retained; only extra .005.
+    assert np.allclose(sum(new[3][f'remaining_{k}_capacity'] for k in ['clearing','management','irrigation']),new[2]-new[1])
+    with pytest.raises(ValueError):bound_inheritance(.2,.01,.2,.1,-1)

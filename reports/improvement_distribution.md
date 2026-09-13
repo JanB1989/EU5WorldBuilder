@@ -1,7 +1,7 @@
 # Starting and maximum improvement distributions
 
 Run `uv run ha1300 locations`, followed by `uv run python scripts/validate_locations.py`
-and `uv run pytest -q`. The third map tab shows absolute starting and maximum effective improvement units on one shared linear colour scale. The location panel shows these amounts with percentages underneath.
+and `uv run pytest -q`. The third map tab shows starting and maximum population-capacity contributions (effective improvement units × location multiplier) on one shared linear colour scale. The location panel shows these contributions with percentages underneath; raw units remain in the detailed breakdown.
 `artifacts/locations/improvement_distribution_equal_area.csv` contains every map
 location, including explicit ownability, starting/remaining/maximum units and shares.
 Shares are fractions (0–1) in data and percentages in the map.

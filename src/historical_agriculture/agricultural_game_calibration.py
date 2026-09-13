@@ -26,6 +26,33 @@ def activation(extent,maximum,half_saturation):
     return m*h/(h+half_saturation)
 
 
+def bound_inheritance(active, historical_extent, crop_gap, water_gap, extra_extent_ratio):
+    """Limit unobserved expansion to a multiple of evidenced cultivated extent.
+
+    Crop and water opportunities can overlap, so each is bounded rather than
+    adding their hectares. No recorded starting land or irrigation is removed.
+    The ratio is an explicit uncertainty allowance, not observed infrastructure.
+    """
+    if not np.isfinite(extra_extent_ratio) or extra_extent_ratio < 0:
+        raise ValueError('Invalid extra historical extent allowance')
+    a,h,c,w=np.broadcast_arrays(active,historical_extent,crop_gap,water_gap)
+    if any(not np.isfinite(x).all() for x in (a,h,c,w)) or np.any((a<0)|(a>1)|(h<0)|(h>1)|(c<0)|(w<0)):
+        raise ValueError('Invalid inherited resource extent')
+    gap=np.maximum(c,w)
+    cap=np.divide(extra_extent_ratio*h,gap,out=np.ones_like(gap,dtype=float),where=gap>0)
+    return np.minimum(a,cap)
+
+
+def review_inheritance(active, historical_extent, crop_gap, water_gap, eligible, settings):
+    """Taper a conservative extent guard on sparsely cultivated farming systems."""
+    low=settings['full_guard_below_cultivated_fraction']
+    high=settings['no_guard_above_cultivated_fraction']
+    if not 0 <= low < high <= 1:raise ValueError('Invalid sparse-cultivation interval')
+    capped=bound_inheritance(active,historical_extent,crop_gap,water_gap,settings['extra_extent_ratio'])
+    strength=np.asarray(eligible,float)*np.clip((high-historical_extent)/(high-low),0,1)
+    return active-strength*(active-capped)
+
+
 def transform(base,start,maximum,components,active,reference,exponent):
     """Telescoping component attribution preserves both capacity identities.
 
@@ -56,11 +83,20 @@ def apply(root,cfg,arrays,historical_extent,food_type,domain,out):
     eco,_=read(root/cfg['food_directory']/'food_ecoregion.tif')
     rules=json.loads((root/'configs/regions.json').read_text())['regions']
     ceiling=np.full(domain.shape,ic['unknown_system_activation'],float)
+    system=np.full(domain.shape,'unknown',dtype='U10')
     for rule in rules:
         ceiling[np.isin(eco,rule['ecoregion_ids'])]=ic['maximum_opportunity_activation'][rule['management']]
+        system[np.isin(eco,rule['ecoregion_ids'])]=rule['management']
     h=np.clip(np.nan_to_num(historical_extent),0,1)
     active=activation(h,ceiling,ic['historical_extent_half_saturation'])
     active=np.where(domain,active,0)
+    unrestricted=active.copy()
+    guard=ic.get('extent_guard')
+    if guard:
+        eligible=np.isin(system,guard['eligible_systems'])
+        crop_gap=np.maximum(arrays['maximum_crop_fraction']-arrays['starting_crop_fraction'],0)
+        water_gap=np.maximum(arrays['maximum_served_fraction']-arrays['starting_served_fraction'],0)
+        active=review_inheritance(active,h,crop_gap,water_gap,eligible,guard)
     reference=np.where((food_type>=1)&(food_type<=18),gc['crop_reference_support'],gc['noncrop_reference_support'])
     b=arrays['baseline_support_per_land_ha'];s=arrays['starting_support_per_land_ha'];u=arrays['maximum_support_per_land_ha']
     components={name:arrays[name] for name in CAPACITY_COLUMNS}
@@ -72,6 +108,8 @@ def apply(root,cfg,arrays,historical_extent,food_type,domain,out):
     result.update(converted)
     result['baseline_support_per_land_ha']=gb;result['starting_support_per_land_ha']=gs;result['maximum_support_per_land_ha']=gu
     result['game_inheritance_activation_fraction']=active
+    result['game_inheritance_unrestricted_activation_fraction']=unrestricted
+    result['game_inheritance_removed_support']=convert(s+unrestricted*(u-s),reference,gc['exponent'])-gs
     result['game_conversion_reference_support']=reference
     # Retain reconstructed source extents separately from the inherited scenario.
     for current,limit in [('starting_crop_fraction','maximum_crop_fraction'),('starting_served_fraction','maximum_served_fraction')]:
@@ -91,6 +129,8 @@ def apply(root,cfg,arrays,historical_extent,food_type,domain,out):
         'inherits_from_existing_simultaneous_maximum':True,'physical_water_or_land_created':False,
         'base_can_change':True,'productivity_multiplier_changes':False,
         'inherited_cells':int(np.sum(domain&(active>0))),
+        'extent_guard_changed_cells':int(np.sum(domain&(active<unrestricted-1e-12))),
+        'source_starting_works_preserved':True,
         'inherited_fraction_quantiles':np.quantile(active[domain],[0,.25,.5,.75,.95,1]).tolist(),
         'conversion_changed_cells':int(np.sum(domain&(gs>inherited+1e-9))),
         'units':'Converted support is game capacity density. Uncalibrated rasters retain physical food-support estimates.',

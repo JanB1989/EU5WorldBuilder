@@ -10,8 +10,9 @@ from .provenance import write_json
 KINDS = ('clearing', 'management', 'irrigation')
 STAGES = ('starting', 'remaining', 'maximum')
 FIELDS = [f'{s}_{k}_improvement_{v}' for s in STAGES for k in KINDS
-          for v in ('units', 'share')]
+          for v in ('units', 'share', 'capacity')]
 FIELDS += [f'{s}_distribution_status' for s in STAGES]
+FIELDS += ['maximum_improvement_capacity']
 
 
 def allocate(d):
@@ -58,7 +59,9 @@ def allocate(d):
         for j, kind in enumerate(KINDS):
             result[f'{stage}_{kind}_improvement_units'] = amounts[stage][:, j]
             result[f'{stage}_{kind}_improvement_share'] = shares[:, j]
+            result[f'{stage}_{kind}_improvement_capacity'] = amounts[stage][:, j] * multiplier
         result[f'{stage}_distribution_status'] = np.where(total > 0, 'allocated', 'no_improvement_budget')
+    result['maximum_improvement_capacity'] = totals['maximum'] * multiplier
     return result
 
 
@@ -75,12 +78,15 @@ def report(out, d, fingerprint, mode='equal_area'):
             total = float(own[f'{stage}_improvement_effective_cropland'].sum())
             summary[stage] = {
                 'total_units': total,
+                'total_capacity': float(sum(own[f'{stage}_{k}_improvement_capacity'].sum() for k in KINDS)),
+                'capacity_by_type': {k: float(own[f'{stage}_{k}_improvement_capacity'].sum()) for k in KINDS},
                 'locations_without_budget': int((own[f'{stage}_distribution_status'] == 'no_improvement_budget').sum()),
                 'shares': {k: float(own[f'{stage}_{k}_improvement_units'].sum()/total) if total else 0. for k in KINDS}}
         write_json(out/'improvement_distribution.json', {
             'schema': 1, 'fingerprint': fingerprint, 'map_locations': len(d),
             'ownable_locations': len(own), 'totals_changed': False,
             'shares_are_fractions': True, 'maximum_includes_starting': True,
+            'map_quantity': 'Population capacity contributed: improvement units multiplied by the location multiplier. Units remain available for building balancing.',
             'summary': summary,
             'evidence': 'Fine-grid clearing, management and surface-water component ledger, aggregated by location overlap, including the shared game conversion and inherited-system scenario.',
             'uncertainty': 'Model attribution, not observed infrastructure percentages. Management depends on sequential attribution. Drainage, terraces and groundwater are not separately estimated.',

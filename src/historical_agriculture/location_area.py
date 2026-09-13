@@ -8,7 +8,7 @@ ABSOLUTES = [
     "inert_capacity", "starting_improvement_capacity", "starting_capacity",
     "maximum_capacity", "remaining_capacity",
     "dry_field_alternative_capacity",
-    "game_conversion_added_capacity", "game_inheritance_capacity", "game_base_added_capacity",
+    "game_conversion_added_capacity", "game_inheritance_capacity", "game_base_added_capacity", "game_inheritance_removed_capacity",
     "uncalibrated_base_capacity", "uncalibrated_starting_capacity", "uncalibrated_maximum_capacity",
 ]
 

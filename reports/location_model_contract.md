@@ -30,6 +30,12 @@ This contract supersedes earlier requirements that excluded cultivated support a
 
 ## Four primary outputs
 
+Primary maps compare population-capacity contributions: multiply every base or
+improvement amount by the location multiplier before colouring or comparing
+locations. Raw effective units remain in detailed ledgers for building balancing.
+Within-location composition percentages remain valid because the multiplier is
+shared; regional/global contribution totals must sum the multiplied values.
+
 For every location in an explicitly versioned EU5 location inventory:
 
 - B = `base_effective_cropland`, finite and nonnegative.

@@ -21,9 +21,12 @@ def main():
     equal=pd.read_csv(out/'locations_equal_area.csv',keep_default_na=False)
     validate_frame(equal,inv)
     equal_settlement=audit_settlement_values(equal,inv)
+    if cfg.get('rural_balance'):
+        from historical_agriculture.rural_balance import validate as validate_rural_balance
+        checks['rural_balance']=validate_rural_balance(equal,cfg['rural_balance'])
     if (equal.loc[equal.is_ownable,'base_effective_cropland']<cfg.get('equal_area_base_land_floor',0)-1e-9).any():raise ValueError('Base land below configured floor')
     from historical_agriculture.location_area import equal_area
-    expected,_=equal_area(pd.read_csv(out/'locations.csv'),cfg.get('equal_reference_area_ha'),cfg.get('equal_area_base_land_floor',0))
+    expected,_=equal_area(pd.read_csv(out/'locations.csv'),cfg.get('equal_reference_area_ha'),cfg.get('equal_area_base_land_floor',0),cfg.get('rural_balance'))
     for col in FIELDS+['starting_capacity','maximum_capacity','base_land_floor_added_capacity']:
         if not np.allclose(equal[col],expected[col],rtol=1e-12,atol=1e-8):raise ValueError('Equal-area/floor calculation mismatch: '+col)
     from historical_agriculture.improvement_audit import validate_components
@@ -42,6 +45,10 @@ def main():
             if not passed:raise ValueError('Improvement distribution mismatch: '+col)
     from historical_agriculture.water_management import validate as validate_water, KINDS as WATER_KINDS
     validate_water(equal)
+    from historical_agriculture.water_boundary import report as boundary_report
+    from tempfile import TemporaryDirectory
+    with TemporaryDirectory() as checked:
+        boundary_report(root,Path(checked),equal,fp,cfg.get('water_boundary_historical_comparison',True))
     for stage in ('starting','maximum'):
         for kind in WATER_KINDS:
             if not (out/f'{stage}_{kind}_improvement_capacity_equal.png').is_file():

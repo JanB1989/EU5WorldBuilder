@@ -42,6 +42,7 @@ def report(root,out,current,cfg,fingerprint):
     write_json(out/'game_calibration_evaluation.json',{'fingerprint':fingerprint,'baseline_sha256':digest(baseline),
         'before':sa,'after':sb,'checks':checks,'game_coverage_target_passed':all(checks.values()),
         'scientific_acceptance':False,'population_simulation_validated':False,
+        'comparison_scope':'Historical game conversion experiment; new physical crop inputs also change multipliers' if cfg.get('agricultural_system_repair') else 'Same-physical-input game conversion',
         'resolved_rural_shortfalls':int(resolved.sum()),'new_rural_shortfalls':int(new.sum()),
         'subsets':subsets,'limitations':c['limitations'],
         'remaining_cases':'All remaining rural shortages retained in remaining_rural_shortfalls.csv; no automatic exclusions.'})
@@ -51,7 +52,7 @@ def report(root,out,current,cfg,fingerprint):
         f"| Above starting capacity | {sa['rural_over_start']:,} | {sb['rural_over_start']:,} |",
         f"| Above maximum capacity | {sa['rural_over_max']:,} | {sb['rural_over_max']:,} |",'',
         f'Resolved {int(resolved.sum()):,}; new rural shortfalls {int(new.sum()):,}.', '',
-        'Starting inheritance uses historical crop-system classes and reconstructed cultivated extent to activate a bounded share of existing physical opportunity. A shared concave conversion compresses very low support values in game units. It can raise base support; productivity multipliers remain unchanged.', '',
+        'Starting inheritance uses historical crop-system classes and reconstructed cultivated extent to activate a bounded share of existing physical opportunity. A shared concave conversion compresses very low support values in game units. It can raise base support; the game conversion itself does not change productivity multipliers. Separate crop-input repairs can change their physical reference.', '',
         'This is an explicit game calibration, not evidence for previously unmeasured hectares, yields or river water. Growing populations, employment and food consumption still require integration testing in the downstream game.', '',
         '[Every location](game_calibration_locations.csv) · [Regions](game_calibration_regions.csv) · [Remaining cases](remaining_rural_shortfalls.csv) · [Checks and frontier distributions](game_calibration_evaluation.json)', '',
         f'Fingerprint: `{fingerprint}`']

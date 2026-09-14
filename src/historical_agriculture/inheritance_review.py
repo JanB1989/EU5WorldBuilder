@@ -13,6 +13,11 @@ def report(root,out,current,cfg,fingerprint):
     for col in ['base_effective_cropland','capacity_multiplier','maximum_improvement_effective_cropland','maximum_capacity','source_starting_crop_ha','source_starting_served_ha','uncalibrated_starting_capacity']:
         old=pd.to_numeric(before[col],errors='coerce').to_numpy(float)
         new=pd.to_numeric(after[col],errors='coerce').to_numpy(float)
+        # Restore only the separately audited water-boundary reclassification
+        # when checking the earlier inheritance experiment's protected inputs.
+        moved=after.get('base_water_transferred_capacity',0)/after.capacity_multiplier
+        if col=='base_effective_cropland':new=new+moved
+        if col=='maximum_improvement_effective_cropland':new=new-moved
         own=after.is_ownable.to_numpy(bool)
         if not np.isfinite(old[own]).all() or not np.isfinite(new[own]).all():
             raise ValueError('Missing protected value for an ownable location: '+col)

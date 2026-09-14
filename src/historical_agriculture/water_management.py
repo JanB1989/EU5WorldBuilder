@@ -47,7 +47,7 @@ def transfers(clearing, management, settings, cfg, weight=1., strength=1.):
     return result, ct, mt
 
 
-def native_attribution(root, location_cfg, arrays, domain, crop, out):
+def native_attribution(root, location_cfg, arrays, domain, crop, out, historical_cultivated=None):
     from .water_management_inputs import prepare
     from .water import wc
     cfg = json.loads((root/location_cfg['water_management_config']).read_text())
@@ -123,12 +123,16 @@ def native_attribution(root, location_cfg, arrays, domain, crop, out):
         for suffix, factor in [('low', cfg['sensitivity_factors'][0]), ('high', cfg['sensitivity_factors'][-1])]:
             _, a, b = transfers(c, m, settings, cfg, w, factor)
             arrays[f'{stage}_wm_{suffix}_capacity'] = (a+b).astype(np.float32)
+    from .water_boundary import requests, REQUESTS
+    if historical_cultivated is None:raise ValueError('Historical cultivation required for baseline-water attribution')
+    base_requests=requests(arrays['baseline_support_per_land_ha'],arrays['baseline_cultivation_gain_share'],arrays['baseline_crop_fraction'],historical_cultivated,settings,cfg)
+    for k,a in base_requests.items():arrays[f'base_water_{k}_requested_capacity']=np.asarray(a,dtype=np.float32)
     arrays['wm_inferred_fraction'] = unknown.astype(np.float32)
     write_json(out/'water_management_native.json', {
         'schema': 1, 'categories': dict(zip(KINDS, LABELS)), 'configuration': cfg,
         'native_land_cells': int(domain.sum()), 'source_gap_analogue_cells': int(unknown.sum()),
         'setting_cells': {k: int(np.sum(domain & (v > 0))) for k,v in settings.items()},
-        'accounting': 'Transfers from existing game-calibrated clearing/management per native cell; all prior surface-water contribution retained as supply. Base and total support unchanged.',
+        'accounting': 'Transfers from existing game-calibrated clearing/management per native cell; all prior surface-water contribution retained as supply. Total support unchanged; positive baseline cultivation gain can transfer to maintained works.',
         'confidence': 'All numerical transfers inferred. Historical-system weights, physical overlap and effect shares are not observed infrastructure fractions.',
         'not_separate_categories': ['reservoirs', 'qanats', 'aqueducts', 'regional hydraulic monuments'],
         'coastal_screen_cells':int(np.sum(domain & low_coast)),
@@ -236,9 +240,10 @@ def report(out,d,fingerprint):
     for k in ('clearing','management',*KINDS,'water_management'):
         a=table[(table.scope=='World') & (table.type==k)].set_index('stage').capacity
         text+=f'| {k} | {a["starting"]:,.0f} | {a["maximum"]:,.0f} |\n'
-    text+=f'\nAll {len(own):,} ownable locations have all five starting and maximum values. Base and total capacities are unchanged.\n'
+    text+=f'\nAll {len(own):,} ownable locations have all five starting and maximum values. Total capacities are unchanged; the baseline transfer is recorded separately.\n'
     (out/'WATER_MANAGEMENT.md').write_text(text)
-    d[['location_tag','province','region','super_region','is_ownable','capacity_multiplier']+FIELDS].to_csv(out/'water_management_ledger.csv',index=False,float_format='%.15g')
+    from .water_boundary import FIELDS as BOUNDARY_FIELDS
+    d[['location_tag','province','region','super_region','is_ownable','capacity_multiplier']+FIELDS+[c for c in BOUNDARY_FIELDS if c in d]].to_csv(out/'water_management_ledger.csv',index=False,float_format='%.15g')
     write_json(out/'water_management_validation.json',{'fingerprint':fingerprint,'passed':True,
         'map_locations':len(d),'ownable_locations':len(own),'complete_chosen_types':list(KINDS),
         'checks':['all type values finite and nonnegative','units times multiplier equals capacity',

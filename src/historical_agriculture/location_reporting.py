@@ -51,13 +51,23 @@ def report(out,d,raw,cfg,audit,fingerprint):
     d['base_land_floor_added_capacity']=0.
     fields+=['base_land_floor_added_units','base_land_floor_added_capacity','base_effective_cropland','starting_improvement_effective_cropland','maximum_improvement_effective_cropland','remaining_improvement_effective_cropland']
     from .location_area import equal_area
-    equal,comparison=equal_area(d,cfg.get("equal_reference_area_ha"),cfg.get("equal_area_base_land_floor",0))
+    equal,comparison=equal_area(d,cfg.get("equal_reference_area_ha"),cfg.get("equal_area_base_land_floor",0),cfg.get("rural_balance"))
     from .improvement_distribution import report as distribution_report, FIELDS as distribution_fields
     d=distribution_report(out,d,fingerprint,'physical')
     equal=distribution_report(out,equal,fingerprint)
     from .water_management import report as water_report
     water_report(out,equal,fingerprint)
+    from .water_boundary import report as boundary_report
+    boundary_report(raw.parents[2],out,equal,fingerprint,cfg.get('water_boundary_historical_comparison',True))
+    if cfg.get('agricultural_system_repair'):
+        from .agricultural_system_repair import report as repair_report
+        repair_report(raw.parents[2],out,equal,fingerprint)
+    if cfg.get('rural_balance'):
+        from .rural_balance import report as rural_balance_report
+        rural_balance_report(out,equal,cfg['rural_balance'],fingerprint)
+        fields+=['rural_balance_added_capacity','rural_balance_added_units','pre_rural_balance_starting_capacity','rural_balance_status']
     fields+=distribution_fields
+    fields+=['base_water_transferred_capacity']
     fields=list(dict.fromkeys(fields))
     data=json.loads(equal[fields].to_json(orient='records'))
     equal.to_csv(out/'locations_equal_area.csv',index=False,float_format='%.15g')
@@ -66,7 +76,7 @@ def report(out,d,raw,cfg,audit,fingerprint):
     write_json(out/'area_comparison.json',comparison)
     from .improvement_audit import report as improvement_report
     improvement_report(out,equal,fingerprint)
-    if cfg.get('refinement_config'):
+    if cfg.get('refinement_config') and not cfg.get('agricultural_system_repair'):
         from .regional_comparison import report as regional_report
         regional_report(raw.parents[2],out,equal,cfg,fingerprint)
     from .rural_pressure import report as rural_report
@@ -157,8 +167,8 @@ HTML=r"""<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewpo
 <nav class="map-tabs" aria-label="Map views"><button id="tabCapacity" aria-pressed="true">Capacity</button><button id="tabPressure" aria-pressed="false">Population pressure</button><button id="tabImprovements" aria-pressed="false">Improvement mix</button><button id="tabWater" aria-pressed="false">Water management</button></nav><p id="viewNote">Starting support and the opportunity to expand it.</p><div class="controls"><select id="metric"></select><input id="search" placeholder="Find a location…" aria-label="Find location"><button id="reset">World view</button><button id="plus">+</button><button id="minus">−</button></div><div id="matches"></div>
 <p id="areaNote">Equal-area model: every land location uses the same __REFERENCE_AREA__ ha reference. Minimum base land: __BASE_FLOOR__ effective units per ownable location. Location size does not scale capacity.</p><div class="layout"><section><div class="map"><canvas id="map"></canvas></div><div class="legend"><span>0</span><div class="bar"></div><span id="scale"></span></div><small>20,929 modelled land locations; 7,644 nonsettlement zones have explicit zero capacity. Drag to pan · scroll to zoom · click a location. Colour saturation is a display limit; values are not capped.</small></section><aside id="detail"><h2>Select a location</h2><p>Each location has all four required estimates. Search includes small islands that may disappear at world-view resolution.</p><p>Maximum improvements include existing improvements.</p></aside></div>
 <p>Capacity = multiplier × (base + improvements). Effective hectares are support equivalents; physical land and water are accounted separately. The maximum holds the crop system fixed and allows additional clearing and constrained surface-water investment.</p>
-<div class="links"><a id="valuesLink" href="location_values_equal_area.csv">Four-value dataset</a><a id="ledgerLink" href="locations_equal_area.csv">Full location ledger</a><a href="REPORT.md">Iteration findings</a><a href="IMPROVEMENTS.md">Improvement audit</a><a href="WATER_MANAGEMENT.md">Water-management evidence</a><a href="water_management_ledger.csv">Water ledger</a><a href="improvement_distribution_equal_area.csv">Improvement shares</a><a href="rural_pressure.html">Rural pressure</a> · <a href="regional_comparison.html">Regional changes</a><a href="validation.json">Validation</a><a href="manifest.json">Source and parameter manifest</a><a href="location_ids_native.png">Native location geometry</a></div>
-<footer>Fingerprint __HASH__ · Modern environmental proxies, historical evidence around 1300. Starting population is context, not a fitted target. Water-management and land-access estimates carry uncertainty.</footer></main>
+<div class="links"><a id="valuesLink" href="location_values_equal_area.csv">Four-value dataset</a><a id="ledgerLink" href="locations_equal_area.csv">Full location ledger</a><a href="REPORT.md">Iteration findings</a><a href="IMPROVEMENTS.md">Improvement audit</a><a href="WATER_MANAGEMENT.md">Water-management evidence</a><a href="water_management_ledger.csv">Water ledger</a><a href="improvement_distribution_equal_area.csv">Improvement shares</a><a href="rural_pressure.html">Rural pressure</a> · <a href="regional_comparison.html">Regional changes</a><a href="RURAL_BALANCE.md">Rural game allowance</a><a href="validation.json">Validation</a><a href="manifest.json">Source and parameter manifest</a><a href="location_ids_native.png">Native location geometry</a></div>
+<footer>Fingerprint __HASH__ · Modern environmental proxies, historical evidence around 1300. Historical estimates are population-independent. A separately recorded rural game allowance limits starting fill to 150%. Water-management and land-access estimates carry uncertainty.</footer></main>
 <script src="data.js"></script><script src="location_lookup.js"></script><script>
 const canvas=document.getElementById('map'),ctx=canvas.getContext('2d'),select=document.getElementById('metric');
 const metricOptions=[];
@@ -203,7 +213,7 @@ function show(i){
   const input=(label,value,hint='')=>'<div class="model-input"><div><span>'+label+'</span>'+(hint?'<small>'+hint+'</small>':'')+'</div><b>'+value+'</b></div>';
   const factor=new Intl.NumberFormat('en',{maximumFractionDigits:3}).format(d.capacity_multiplier);
   const fill=Number.isFinite(d.starting_fill)?whole(d.starting_fill*100)+'% of starting capacity occupied':'Starting fill unavailable';
-  const rows=[['Starting settlement rank',d.starting_location_rank||'unknown'],['Base contribution',whole(d.inert_capacity)+' people'],['Capacity from minimum base land',whole(d.base_land_floor_added_capacity||0)+' people'],['Existing improvement contribution',whole(d.starting_improvement_capacity)+' people'],['Additional capacity still possible',whole(d.maximum_capacity-d.starting_capacity)+' people'],['Remaining improvement units',whole(d.remaining_improvement_effective_cropland)],['Regional refinement coverage',fmt(100*Math.max(d.china_refinement_share||0,d.andes_refinement_share||0,d.prairie_refinement_share||0,d.improvement_reference_refinement_share||0,d.management_envelope_refinement_share||0,d.cultivated_system_refinement_share||0))+'%'],['Original clearing attribution',whole(d.starting_clearing_capacity)+' people'],['Original management attribution',whole(d.starting_management_capacity)+' people'],['Original water-supply attribution',whole(d.starting_irrigation_capacity)+' people'],['Remaining clearing + management',whole(d.remaining_clearing_capacity+d.remaining_management_capacity)+' people'],['Remaining irrigation',whole(d.remaining_irrigation_capacity)+' people'],['Reference productivity before game bounds',fmt(d.unbounded_reference_multiplier)],['Physical location area',d.physical_location_ha===null?'Not evaluated':fmt(d.physical_location_ha/100)+' km²']];
+  const rows=[['Starting settlement rank',d.starting_location_rank||'unknown'],['Base contribution',whole(d.inert_capacity)+' people'],['Base support reassigned to water works',whole(d.base_water_transferred_capacity||0)+' people'],['Capacity from minimum base land',whole(d.base_land_floor_added_capacity||0)+' people'],['Explicit rural game allowance',whole(d.rural_balance_added_capacity||0)+' people'],['Existing improvement contribution',whole(d.starting_improvement_capacity)+' people'],['Additional capacity still possible',whole(d.maximum_capacity-d.starting_capacity)+' people'],['Remaining improvement units',whole(d.remaining_improvement_effective_cropland)],['Regional refinement coverage',fmt(100*Math.max(d.china_refinement_share||0,d.andes_refinement_share||0,d.prairie_refinement_share||0,d.improvement_reference_refinement_share||0,d.management_envelope_refinement_share||0,d.cultivated_system_refinement_share||0))+'%'],['Original clearing attribution',whole(d.starting_clearing_capacity)+' people'],['Original management attribution',whole(d.starting_management_capacity)+' people'],['Original water-supply attribution',whole(d.starting_irrigation_capacity)+' people'],['Remaining clearing + management',whole(d.remaining_clearing_capacity+d.remaining_management_capacity)+' people'],['Remaining irrigation',whole(d.remaining_irrigation_capacity)+' people'],['Reference productivity before game bounds',fmt(d.unbounded_reference_multiplier)],['Physical location area',d.physical_location_ha===null?'Not evaluated':fmt(d.physical_location_ha/100)+' km²']];
   for(const [kind,label] of [['clearing','Clearing'],['management','Field management'],['water_management','Water management']]){
     rows.push([label+' raw units · starting / maximum',whole(d['starting_'+kind+'_improvement_units'])+' / '+whole(d['maximum_'+kind+'_improvement_units'])]);
   }
@@ -211,13 +221,13 @@ function show(i){
     '<h2 class="location-heading">'+esc(placeName(d.location_tag))+'</h2><small class="place">'+esc(placeName(d.province))+' · '+esc(placeName(d.region))+'</small>'+
     '<div class="capacity-overview"><div class="capacity-pair"><div><span>Starting population</span><strong>'+whole(d.eu5_start_population)+'</strong></div><div><span>Starting capacity</span><strong>'+whole(d.starting_capacity)+'</strong></div></div><div class="fill-summary">'+fill+'</div><div class="maximum-summary"><span>Maximum capacity</span><strong>'+whole(d.maximum_capacity)+'</strong></div></div>'+
     '<h3 class="input-heading">The four model values</h3>'+
-    input('Base land',whole(d.base_effective_cropland),'Before represented improvements')+
+    input('Base land',whole(d.base_effective_cropland),(d.rural_balance_added_capacity>0?'Includes '+whole(d.rural_balance_added_capacity)+' capacity of explicit rural game allowance':'Before represented improvements'))+
     input('Productivity','× '+factor,'People supported per effective land unit')+
     input('Existing improvements',whole(d.starting_improvement_effective_cropland),'Already present at game start')+
     input('Maximum improvements',whole(d.maximum_improvement_effective_cropland),'Total limit, including existing improvements')+
     '<p class="model-formula">Capacity = (base + improvements)<br>× productivity</p><p class="unit-note">Land and improvements use effective units, not physical hectares. Display values are rounded.</p>'+
     improvementDistribution(d)+waterDistribution(d)+
-    '<details><summary>Breakdown &amp; evidence</summary>'+rows.map(([k,v])=>'<div class="row"><span>'+k+'</span><b>'+v+'</b></div>').join('')+'<p>The raw source ledger follows clearing → management → water supply. The displayed breakdown reassigns wet-field benefits to water management without changing totals. Maximum holds cultivation practices fixed. Drainage and flood-control attribution is inferred from wet settings; terraces are not separate.</p><p>'+esc(d.evidence_status)+'<br>Coastline analogue: '+fmt(d.coastline_transfer_share*100)+'%<br>Terrestrial support analogue: '+fmt((d.terrestrial_analogue_share||0)*100)+'%</p></details>'+
+    '<details><summary>Breakdown &amp; evidence</summary>'+rows.map(([k,v])=>'<div class="row"><span>'+k+'</span><b>'+v+'</b></div>').join('')+'<p>The raw source ledger follows clearing → management → water supply. The displayed breakdown reassigns wet-field benefits and evidenced water-dependent baseline cultivation to water management without changing totals. Maximum holds cultivation practices fixed. Drainage and flood-control attribution is inferred from wet settings; terraces are not separate.</p><p>'+esc(d.evidence_status)+'<br>Coastline analogue: '+fmt(d.coastline_transfer_share*100)+'%<br>Terrestrial support analogue: '+fmt((d.terrestrial_analogue_share||0)*100)+'%</p></details>'+
     '<p class="model-status">'+(d.is_ownable===false?'Not ownable in EU5. Any physical estimates shown here are not settlement capacity.':d.maximum_capacity<=0?'Unresolved: ownable location has zero modeled food support.':'First-iteration estimates; subject to refinement.')+'</p>';
 }
 function pick(e){let b=canvas.getBoundingClientRect(),s=Math.min(canvas.width/4096,canvas.height/2048)*z,x=Math.floor(((e.clientX-b.left)*devicePixelRatio-ox)/s),y=Math.floor(((e.clientY-b.top)*devicePixelRatio-oy)/s);const id=locationAt(x,y);if(id)show(id-1)}

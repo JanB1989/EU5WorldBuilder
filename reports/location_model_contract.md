@@ -104,3 +104,17 @@ Use equal-area as the working game representation; the actual-area output remain
 These bounds are a game-design normalization, not new historical yield evidence or a repair to crop/management rankings. The unbounded reference multiplier and bound status remain in the ledger. `multiplier_comparison.json`, `multiplier_comparison.csv` and `multiplier_regions.csv` compare with the previous 0.01-floor normalization. A fixed improvement unit now contributes between 0.25 and 5 capacity: a 20-fold extreme range. Building counts and limits must later reproduce the rescaled improvement targets.
 
 Reproduce with `uv run ha1300 locations`, then `uv run python scripts/validate_locations.py` and `uv run pytest -q`.
+
+## Authorized rural game-balance exception — 2026-09-14
+
+The user approved the proposed final 150% rural-fill ceiling. In the equal-area
+game calculation only, add `max(P / 1.5 - S, 0)` to ownable rural/unranked
+locations. Add the same capacity to base, starting and maximum totals, dividing
+by the existing multiplier for base units. Keep remaining improvement capacity
+and every historical improvement type unchanged. Preserve pre-allowance values
+and a separate allowance ledger. Urban/nonownable locations are excluded.
+
+This explicitly supersedes population independence for this final game allowance
+only. It does not change physical land, water, yields, or historical assignments,
+and must never be presented as evidence for those quantities. Food/population
+simulation acceptance is separate from passing this game-map pressure ceiling.

@@ -71,7 +71,7 @@ shelved physical-accounting comparison.
 The location viewer has a **Water management** tab with starting/maximum maps
 for water supply, paddy control, flood embankments, field drainage and coastal
 reclamation. All values are multiplied capacity contributions. The allocation
-conserves existing base and total capacity and is performed on the native grid.
+conserves total capacity while explicitly reclassifying water-dependent baseline cultivation and is performed on the native grid.
 See [method and sources](reports/water_management_method.md).
 
 ```sh
@@ -86,3 +86,42 @@ wetland-reconstruction archives (about 1.9 GB combined) and verifies checksums.
 The new sources provide wet settings; medieval effect shares remain explicitly
 inferred. Ten complete subtype maps and their ledger are produced by the normal
 location build, not a separate experimental implementation.
+
+
+The water-boundary comparison uses the complete output of commit `87eef4a` as
+its frozen reference. It is cached at
+`data/processed/water_boundary_before.csv`. To recreate that cache, build the
+location map at that commit with the same source pack and copy its
+`artifacts/locations/locations_equal_area.csv` byte-for-byte to the cache before
+building the current version. Do not round-trip that baseline through a CSV
+parser: some valid location identifiers resemble missing-value markers.
+The normal validator checks every location against this reference while leaving
+certified map artifacts unchanged.
+
+## Current rural-system correction
+
+The location model now repairs conditional historical crop eligibility and
+crop-stage irrigation demand. The complete map is in `artifacts/locations/index.html`;
+`RURAL_SYSTEM_REPAIR.md`, `rural_system_comparison.csv`, and
+`rural_extreme_residuals.csv` in that directory record the evaluated changes.
+167 tests and the delivery checks pass. The no-extreme-rural-shortfall objective
+still fails: 122 rural/unranked locations exceed twice starting capacity (149
+before), including 17 above five times (24 before). Population-dependent
+capacity allowances have not been introduced.
+
+Reproduce with `uv run ha1300 locations`,
+`uv run python scripts/validate_locations.py`, and `uv run pytest -q`.
+The byte-preserved prior location table is
+`data/processed/rural_system_before.csv` (source fingerprint 201a7273c1d65580).
+The crop/water repair method is in `reports/rural_system_repair.md`.
+
+## Authorized 150% rural pressure ceiling
+
+The final equal-area model now adds an explicit game allowance where an ownable
+rural/unranked location would exceed 150% starting population/capacity. This
+user-authorized exception uses population; the historical/physical model does
+not. Urban/nonownable locations, multipliers, typed improvements and remaining
+improvement capacity are preserved. The allowance enters base effective units
+and is separately visible in the map detail and `rural_balance_ledger.csv`.
+`rural_balance_validation.json` tests the complete map and export identities.
+The earlier residual counts above describe the pre-allowance experiment.

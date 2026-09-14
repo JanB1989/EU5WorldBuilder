@@ -1,5 +1,5 @@
 {
-  "schema": 1,
+  "schema": 2,
   "year": 1300,
   "status": "Complete evidence-guided attribution, not surveyed building counts",
   "source_directory": "data/raw/water_management",
@@ -47,19 +47,19 @@
   "transfers": {
     "paddy_control": {
       "clearing": 0.25,
-      "management": 0.5
+      "management": 0.7
     },
     "flood_bunds": {
       "clearing": 0.4,
-      "management": 0.25
+      "management": 0.35
     },
     "field_drainage": {
       "clearing": 0.5,
-      "management": 0.25
+      "management": 0.4
     },
     "polders": {
       "clearing": 0.75,
-      "management": 0.4
+      "management": 0.6
     }
   },
   "historical_system_weight": {
@@ -86,10 +86,18 @@
     "GLWD 1990-2020 and 1700 wetland reconstruction characterize physical settings, not infrastructure existing in 1300. HYDE/LUH cultivation and existing Seshat-guided crop/system assignments determine the inherited-budget context.",
     "Wet-rice control is distinguished from supplementary water supply: bunded rainfed rice also requires control. Modern rice does not authorize a historically unavailable crop.",
     "The modern and 1700 wetland layers are combined with max rather than added; overlapping paddy, polder, flood and drainage settings are partitioned once in that order.",
-    "No new capacity, water withdrawal, physical hectares, groundwater or seasonal storage is created. Natural base, starting and maximum total support remain unchanged.",
+    "No new capacity, water withdrawal, physical hectares, groundwater or seasonal storage is created. Starting and maximum total support remain unchanged. Evidenced water-dependent cultivation may move from base to starting and maximum works, retaining natural livelihood support and the game base floor.",
     "Reservoirs and qanats are not separate chosen categories; their independently quantified opportunity is outside the present surface-water model. No zero-filled placeholder maps masquerade as those estimates.",
-    "Already reclaimed coastal land can be absent from modern and 1700 wetland inventories. Fine ETOPO subcells between -10 and 0m within the low coastal screen identify an inferred drainage/reclamation dependency; this is not a date of construction."
+    "Already reclaimed coastal land can be absent from modern and 1700 wetland inventories. Fine ETOPO subcells between -10 and 0m within the low coastal screen identify an inferred drainage/reclamation dependency; this is not a date of construction.",
+    "Base transfers require reconstructed cultivation overlapping baseline-access cropland, the positive crop-over-livelihood support share, and an exclusive paddy/drainage/coastal setting. No base transfer for natural floodplain wetness or water-supply scenarios. Base-dependency coefficients are shared scenario assumptions, not observed historical percentages."
   ],
   "coastal_reclaimed_elevation_m": 0.0,
-  "coastal_minimum_elevation_m": -10.0
+  "coastal_minimum_elevation_m": -10.0,
+  "base_dependency": {
+    "water_supply": 0.0,
+    "paddy_control": 0.65,
+    "flood_bunds": 0.0,
+    "field_drainage": 0.5,
+    "polders": 0.8
+  }
 }

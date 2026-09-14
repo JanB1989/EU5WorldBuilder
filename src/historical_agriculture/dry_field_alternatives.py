@@ -49,7 +49,8 @@ def infer_water(cultivated,recorded,command,rf,ir,alternative,share=1):
 
 def estimate(root,cfg,domain,profile,crop,rf,historical,served,out):
     rc=json.loads((root/'configs/reconstruction.json').read_text())
-    rules=json.loads((root/'configs/regions.json').read_text())['regions']
+    from .agricultural_system_repair import rules as system_rules
+    rules=system_rules(root,cfg)
     eco=read(root/cfg['food_directory']/'food_ecoregion.tif')[0]
     target=domain&(rf<=1e-6)&(historical>1e-8)
     cells=np.flatnonzero(target);ec=eco.ravel()[cells];original=crop.ravel()[cells]

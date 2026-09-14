@@ -71,11 +71,11 @@ def report(out,d,fingerprint):
     case.to_csv(out/'improvement_focus_cases.csv',float_format='%.15g')
     report={
         'schema':1,'fingerprint':fingerprint,'coverage':len(own),
-        'capacity_changed_by_attribution':False,'base_capacity_frozen':True,
+        'capacity_changed_by_attribution':False,'base_capacity_frozen':not bool(d.get('base_water_transferred_capacity',0).sum() if 'base_water_transferred_capacity' in d else 0),
         'component_accounts_reconcile':True,
         'allocation_order':['clearing at low-input yield with the assigned rotation','management increment on that improved land','irrigation after assigned management'],
         'maximum_definition':'Expansion of clearing and irrigation with existing crop, rotation and management held fixed. Not a full technology/management maximum.',
-        'not_independently_quantified':['drainage','terraces','management improvements on baseline-access land','future changes in rotations and management'],
+        'not_independently_quantified':['terraces','future changes in rotations and management'],
         'maximum_absolute_component_rounding_people':float(own[ROUNDING_COLUMNS].abs().max().max()),
         'negative_management_locations':int((own.starting_management_capacity<-.0001).sum()),
         'high_multiplier_no_remaining_capacity':int(((own.capacity_multiplier>=4)&(own.remaining_capacity<=.0001)).sum()),
@@ -83,9 +83,9 @@ def report(out,d,fingerprint):
         'scientific_acceptance':False}
     write_json(out/'improvement_audit.json',report)
     lines=['# Improvement audit','',f'Fingerprint: `{fingerprint}`','',
-        'All ownable locations have a reconciled starting and remaining component ledger. Base and total capacities are unchanged by this attribution.',
+        'All ownable locations have a reconciled starting and remaining component ledger. Total capacities are unchanged. Water-dependent baseline cultivation may be reclassified into starting works; see water_boundary_validation.json.',
         '', '## Interpretation','',report['maximum_definition'],'',report['method_note'],'',
-        'Drainage and terraces may be embedded in existing land and yield assumptions, but are not separately quantified; they are not assumed to be zero.',
+        'This is the intermediate three-component ledger. The final water-management attribution, including baseline transfers, is in WATER_MANAGEMENT.md and water_management_ledger.csv. Terraces are not separately quantified.',
         '', '## Focus cases','',
         '| Region | Starting support (million) | Clearing | Management | Irrigation | Remaining support | Max/start |',
         '|---|---:|---:|---:|---:|---:|---:|']

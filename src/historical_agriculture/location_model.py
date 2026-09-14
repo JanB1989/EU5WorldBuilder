@@ -51,6 +51,7 @@ def source_fingerprint(root,config_path,food,water):
     paths+=list((root/'data/raw/water').glob('*.zip'))
     paths+=list((root/'data/raw/food_systems').glob('*'))
     paths+=list((root/'data/processed/location_forage').glob('*'))
+    paths+=[root/'reports/location_model_contract.md',root/'configs/agricultural_system_repair.json',root/'data/processed/rural_system_before.csv',root/'reports/rural_system_repair.md']
     paths+=[root/'configs/food_systems.json',root/'reports/location_iteration_01_method.md']
     paths+=list((root/'scripts').glob('*.py'))
     paths+=[root/'evidence/land_repair.json',root/'configs/crop_seasons.json',root/'data/processed/water_season_before.csv',root/'configs/agricultural_game_calibration.json',root/'data/processed/system_calibration_before.csv']+list((root/'data/raw/land_repair_sources').glob('*'))
@@ -61,7 +62,7 @@ def source_fingerprint(root,config_path,food,water):
     if active_config.get('inheritance_review_baseline'):paths.append(root/active_config['inheritance_review_baseline'])
     paths+=[root/'data/processed/regional_round_02_before/locations_equal_area.csv',root/'data/processed/rural_round_before/locations_equal_area.csv']
     if active_config.get('water_management_config'):
-        paths += [root/active_config['water_management_config'],root/'evidence/water_management.json',root/'reports/water_management_method.md']
+        paths += [root/active_config['water_management_config'],root/'evidence/water_management.json',root/'reports/water_management_method.md',root/'data/processed/water_boundary_before.csv']
         paths += list((root/'data/raw/water_management').glob('*'))+list((root/'data/processed/water_management').glob('*'))
     details={str(p.relative_to(root)):digest(p) for p in sorted(set(paths)) if p.is_file()}
     return hashlib.sha256(json.dumps(details,sort_keys=True).encode()).hexdigest(),details
@@ -71,9 +72,15 @@ def crop_densities(root,cfg,out):
     ft,profile=read(food/'food_type.tif');eco,_=read(food/'food_ecoregion.tif')
     domain=np.isfinite(ft);eco_f,eco_missing=fill_nearest(eco)
     eco_f=eco_f.astype(int)
-    rules=json.loads((root/'configs/regions.json').read_text())['regions']
+    from .agricultural_system_repair import rules as system_rules
+    rules=system_rules(root,cfg)
     crop=np.where((ft>0)&(ft<=len(rc['crop_order'])),ft,0).astype(np.int16)
-    rank=np.where(crop>0,-1,100).astype(np.int16)
+    rank=np.full(crop.shape,200,dtype=np.int16)
+    # Lock only viable rainfed representatives; irrigated suitability alone
+    # must not exclude an historically available dry crop.
+    for code,c in enumerate(rc['crop_order'],1):
+        lo,_=read(food/'crops'/f'{c}_lower.tif');hr,_=read(food/'crops'/f'{c}_high_rainfed.tif')
+        rank[(crop==code)&(np.maximum(lo,hr)>0)]=-1
     # Extend only with historically listed candidates, in evidence preference order.
     # This is potential for future cultivation, not a claim of historic presence per cell.
     for code,c in enumerate(rc['crop_order'],1):
@@ -81,8 +88,11 @@ def crop_densities(root,cfg,out):
         ranks=np.full(int(eco_f.max())+1,100,dtype=np.int16)
         for r in rules:
             if c in r['crops']:ranks[r['ecoregion_ids']]=r['crops'].index(c)
-        rr=ranks[eco_f];use=domain&(rank>rr)&np.isfinite(lo)&np.isfinite(hi)&(hi>0)
-        crop[use]=code;rank[use]=rr[use]
+        hr,_=read(food/'crops'/f'{c}_high_rainfed.tif')
+        from .agricultural_system_repair import select_candidate
+        rr=ranks[eco_f]
+        use,new_rank=select_candidate(np.maximum(lo,hr),hi,rr,rank,domain)
+        crop[use]=code;rank=new_rank
     rf=np.zeros(ft.shape,dtype=np.float32);ir=rf.copy();reference=rf.copy();low_rf=rf.copy();rainfed_headroom=rf.copy();fraction=np.ones_like(rf);freq=np.ones_like(rf);position=np.full_like(rf,.45)
     for r in rules:
         use=np.isin(eco_f,r['ecoregion_ids']);m=rc['management'][r['management']]
@@ -240,6 +250,12 @@ def allocate_irrigation(root,cfg,domain,crop,start,maximum,irr,area,out):
     calendar=json.loads((root/cfg['crop_season_config']).read_text())
     active,season_start,season_unknown,season_records=global_seasons(root,calendar,crop,domain,et)
     demand_mm=demand(active,deficit,crop,cfg['minimum_seasonal_irrigation_demand_mm'],cfg['wet_rice_extra_water_mm_per_active_month'])
+    response=None
+    if cfg.get('agricultural_system_repair'):
+        response=json.loads((root/cfg['agricultural_system_repair']).read_text()).get('water_response')
+    if response:
+        from .crop_water_response import requirements
+        demand_mm=requirements(active,et,deficit,crop,response['stage_coefficients'],cfg['minimum_seasonal_irrigation_demand_mm'],cfg['wet_rice_extra_water_mm_per_active_month'])
     write(out/'irrigation_season_start_month.tif',np.where(domain,season_start+1,np.nan),command_profile,'1 January through 12 December; 0 no crop')
     write(out/'irrigation_season_conflict.tif',np.where(domain,season_unknown,np.nan),command_profile,'1 if thermal calendar conflict or missing climate')
     write_json(out/'crop_seasons.json',{'configuration':calendar,'crops':season_records,'yields_or_area_changed':False})
@@ -251,20 +267,36 @@ def allocate_irrigation(root,cfg,domain,crop,start,maximum,irr,area,out):
     h=route(budget['runoff_m3'],hd,down,wc_cfg['irrigation']['protected_runoff_fraction'],survival=budget['transmission_survival'])
     u=route(budget['runoff_m3'],md,down,wc_cfg['irrigation']['protected_runoff_fraction'],baseline=h['allocated'],survival=budget['transmission_survival'])
     hs=np.ones(domain.shape,dtype=np.float32);us=hs.copy();xs=hs.copy()
+    weighted_h=np.zeros(domain.shape);weighted_u=weighted_h.copy();weighted_x=weighted_h.copy()
     for m in range(12):
         hr=np.divide(h['allocated'][m],hd[m],out=np.ones(n),where=hd[m]>0)
         ub=np.minimum(u['allocated'][m],hd[m]);ur=np.divide(ub,hd[m],out=np.ones(n),where=hd[m]>0)
         er=np.divide(np.maximum(u['allocated'][m]-ub,0),np.maximum(md[m]-hd[m],0),out=np.ones(n),where=md[m]>hd[m])
+        weighted_h[eligible]+=demand_mm[m][eligible]*hr[g]
+        weighted_u[eligible]+=demand_mm[m][eligible]*ur[g]
+        weighted_x[eligible]+=demand_mm[m][eligible]*er[g]
         act=active[m][eligible]
         hs[eligible]=np.minimum(hs[eligible],np.where(act,hr[g],1))
         us[eligible]=np.minimum(us[eligible],np.where(act,ur[g],1))
         xs[eligible]=np.minimum(xs[eligible],np.where(act,er[g],1))
+    strict_h=hs.copy();strict_u=us.copy();strict_x=xs.copy()
+    if response:
+        from .crop_water_response import seasonal_response
+        total=demand_mm.sum(axis=0)
+        hs=seasonal_response(weighted_h,total,hs,response['critical_month_weight'])
+        us=seasonal_response(weighted_u,total,us,response['critical_month_weight'])
+        xs=seasonal_response(weighted_x,total,xs,response['critical_month_weight'])
     served=irr*hs;full=irr*us+np.maximum(candidate-irr,0)*xs
+    write(out/'strict_starting_served_fraction.tif',irr*strict_h,command_profile,'Worst-month sensitivity, same crop requirements and monthly water budget')
+    write(out/'strict_maximum_served_fraction.tif',irr*strict_u+np.maximum(candidate-irr,0)*strict_x,command_profile,'Worst-month sensitivity, same crop requirements and monthly water budget')
     write(out/'water_candidate_fraction.tif',candidate,command_profile,'Land within surface command screen before river-budget limitations')
     if np.any(full+1e-7<served):raise ValueError('Expansion removed existing water service')
     np.savez_compressed(out/'water_accounts.npz',runoff_m3=budget['runoff_m3'],historical_demand_m3=hd,maximum_demand_m3=md,historical_withdrawal_m3=h['allocated'],maximum_withdrawal_m3=u['allocated'],historical_outflow_m3=h['outflow'],maximum_outflow_m3=u['outflow'],historical_losses_m3=h['transmission_loss'],maximum_losses_m3=u['transmission_loss'],downstream=down)
     audit={'max_monthly_budget_residual_m3':float(max(np.abs(h['residual']).max(),np.abs(u['residual']).max())),'historical_withdrawal_km3_year':float(h['allocated'].sum()/1e9),'maximum_withdrawal_km3_year':float(u['allocated'].sum()/1e9),'historical_irrigation_requested_ha':float(np.sum(irr*area)*100),'historical_irrigation_reliably_served_ha':float(np.sum(served*area)*100),'maximum_irrigation_reliably_served_ha':float(np.sum(full*area)*100),'water_unknown_or_unmapped_cells':int(np.sum(domain&(command_missing|(service<0)))),'interpretation':'Conservative seasonal service uses worst active month; unused allocations are not converted to extra hectares. Expansion uses a simultaneous upstream-first allocation with current priority. Modern hydrology and shared seasonal/engineering priors.'}
     if audit['max_monthly_budget_residual_m3']>1:raise ValueError('Water account failed')
+    audit['water_response']=response or {'method':'worst_active_month'}
+    audit['strict_historical_served_ha']=float(np.sum(irr*strict_h*area)*100)
+    audit['served_hectare_interpretation']='Full-demand-equivalent productive hectares under the configured crop response, not surveyed irrigation extent'
     audit['seasonal_calendar']='crop-specific climate analogue; see crop_seasons.json'
     audit['seasonal_calendar_flagged_cells']=int(np.sum(domain&season_unknown))
     return served,full,command_missing|(service<0)|season_unknown,audit
@@ -393,6 +425,7 @@ def execute(config_path,output):
     components['starting_management_capacity']+=alternative_gain
     components['remaining_irrigation_capacity']-=alternative_displaced
     arrays.update(components)
+    arrays['baseline_cultivation_gain_share']=np.divide(b*np.maximum(diagnostics['baseline_rf']-livelihood,0),base,out=np.zeros_like(base),where=base>0)
     arrays['dry_field_alternative_support']=alternative_gain
     arrays['inferred_cultivated_water_fraction']=inferred_water
     arrays['dry_field_alternative_fraction']=np.where(alternative>np.maximum(rf,livelihood),np.maximum(historical_cultivated-served,0)*alternative_share,0)
@@ -410,7 +443,7 @@ def execute(config_path,output):
     arrays=apply_game_calibration(root,cfg,arrays,historical_cultivated,food_type,domain,out)
     if cfg.get('water_management_config'):
         from .water_management import native_attribution
-        arrays=native_attribution(root,cfg,arrays,domain,food_type,out)
+        arrays=native_attribution(root,cfg,arrays,domain,food_type,out,historical_cultivated=historical_cultivated)
     write_json(out/'regional_refinement.json',diagnostics['refinement_audit'])
     # Game coastlines and tiny islands do not match real raster masks exactly.
     # Full-grid completion is a labelled nearest terrestrial analogue, never omission.
@@ -423,7 +456,7 @@ def execute(config_path,output):
             a,missing=fill_nearest(a,finite);evidence_inferred|=domain&missing
         a=np.where(domain,a,a[tuple(nearest)]).astype(np.float32)
         arrays[name]=a
-        unit='fraction' if (name.endswith('fraction') or name in ['crop_candidate','pastoral']) else 'people per effective hectare'
+        unit='fraction' if (name.endswith(('fraction','share')) or name in ['crop_candidate','pastoral']) else 'people per effective hectare'
         if 'support' in name or name.endswith('_capacity') or name=='rainfed_headroom':
             unit='game capacity per reference land hectare' if cfg.get('agricultural_game_calibration') and not name.startswith(('uncalibrated_','inherited_physical_')) and name!='rainfed_headroom' else 'physical food-support people per land hectare'
         write(out/(name+'.tif'),a,profile,unit,{'completion':'Outside source land uses flagged nearest terrestrial analogue for game-coastline registration only'})
@@ -458,6 +491,8 @@ def execute(config_path,output):
         from .water_management import RAW_COLUMNS
         for name in RAW_COLUMNS:d[name]=totals[name]
         d['wm_inferred_fraction']=totals['wm_inferred_fraction']/area_ha
+        from .water_boundary import REQUESTS
+        for name in REQUESTS:d[name]=totals[name]
     for rule in ['china','andes','prairie','improvement_reference','management_envelope','cultivated_system']:d[rule+'_refinement_share']=totals[rule+'_refinement_fraction']/area_ha
     for name in ['water_dependent_cultivation','unserved_historical_irrigation','unserved_water_opportunity']:
         d[name+'_ha']=totals[name+'_fraction']
@@ -466,6 +501,9 @@ def execute(config_path,output):
     d['pastoral_area_ha']=totals['pastoral']
     d['rainfed_management_headroom_people_per_crop_ha']=np.divide(totals['rainfed_headroom'],totals['crop_candidate'],out=np.zeros(len(d)),where=totals['crop_candidate']>0)
     d['physical_location_ha']=area_ha
+    if cfg.get('water_management_config'):
+        from .water_boundary import apply as apply_water_boundary
+        d=apply_water_boundary(d,cfg)
     for name in ['baseline_crop_fraction','starting_crop_fraction','maximum_crop_fraction','historical_irrigated_fraction','starting_served_fraction','maximum_served_fraction']:
         d[name.replace('_fraction','_ha')]=totals[name]
     d['inferred_area_share']=np.clip(np.asarray(weights@np.where(domain,evidence_inferred,True).ravel()).ravel()*100/area_ha,0,1)
@@ -506,6 +544,7 @@ def execute(config_path,output):
         d[col+'_high']=d[col]*(1+cfg['land_uncertainty_fraction'])*(1+cfg['yield_uncertainty_fraction'])
     from .location_inventory import complete_zones,audit_settlement_values
     d,delivery_inventory,inventory_audit=complete_zones(d,raw,out)
+    d=d.copy()
     checks=validate_frame(d,delivery_inventory)
     d=reconcile_rounding(d)
     checks['improvement_components']=validate_components(d)
@@ -539,6 +578,10 @@ def execute(config_path,output):
     fingerprint,inputs=source_fingerprint(root,config_path,food,water)
     from .location_reporting import report
     report(out,d,raw,cfg,audit,fingerprint)
+    if cfg.get('rural_balance'):
+        audit['equal_area_rural_balance']=json.loads((out/'rural_balance_validation.json').read_text())
+        audit['limitations'].insert(0,'Final equal-area game output includes a user-authorized population-informed rural allowance. Raw physical location totals above exclude this allowance. See rural_balance_ledger.csv for pre/post values.')
+        write_json(out/'validation.json',audit)
     outputs={str(f.relative_to(out)):digest(f) for f in out.iterdir() if f.is_file() and f.name not in ['manifest.json','overlap.npz','overlap_manifest.json','delivery_checks.json','viewer_syntax.js']}
     write_json(out/'manifest.json',{'schema':1,'iteration':cfg['iteration'],'fingerprint':fingerprint,'config':cfg,'inputs':inputs,'outputs':outputs,'completion':audit['iteration_complete'],'scientific_acceptance':False})
     return {k:audit[k] for k in ['iteration','engineering_pass','iteration_complete','scientific_acceptance','location_count','zero_starting_capacity_locations','below_starting_population_locations','total_starting_capacity','total_maximum_capacity']}

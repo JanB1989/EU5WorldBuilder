@@ -1,0 +1,118 @@
+{
+  "schema": 1,
+  "interpretation": "Historical crop availability and selection repair. Subsidiary agriculture is possible within a predominantly non-cropping ecological polygon. No population, rank or location identifiers enter these assignments; land and shared water limits still apply.",
+  "crop_systems": [
+    {
+      "name": "Northwestern Indian summer and winter cereals",
+      "ecoregion_ids": [
+        312,
+        314,
+        317,
+        318,
+        320
+      ],
+      "crops": [
+        "PML",
+        "SRG",
+        "WHE",
+        "BRL"
+      ],
+      "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6394749/"
+    },
+    {
+      "name": "Gujarat mixed seasonal cereals",
+      "ecoregion_ids": [
+        295
+      ],
+      "crops": [
+        "SRG",
+        "PML",
+        "RCW",
+        "WHE",
+        "BRL"
+      ],
+      "source": "https://www.cambridge.org/core/journals/antiquity/article/different-strategies-in-indus-agriculture-the-goals-and-outcomes-of-farming-choices/A155524D0EBBF3D631EEC620E9F98147"
+    },
+    {
+      "name": "Saharan and Arabian conditional oasis cereals",
+      "ecoregion_ids": [
+        822,
+        823,
+        831,
+        833
+      ],
+      "crops": [
+        "WHE",
+        "BRL"
+      ],
+      "source": "https://knowledge.uchicago.edu/record/1009/files/MSR_IV_2000-Borsch.pdf"
+    }
+  ],
+  "limitations": [
+    "Crop availability is historical evidence; transferring regional preferences to each ecoregion is inferred.",
+    "Oasis crops require positive local modeled yield and actual land/water opportunity; listing wheat does not irrigate a desert.",
+    "No modern crop, groundwater or unlimited water storage is introduced."
+  ],
+  "water_response": {
+    "critical_month_weight": 0.25,
+    "sensitivity": [
+      0.0,
+      0.25,
+      1.0
+    ],
+    "stage_coefficients": {
+      "1": [
+        0.35,
+        0.75,
+        1.15,
+        0.45
+      ],
+      "2": [
+        0.35,
+        0.75,
+        1.15,
+        0.45
+      ],
+      "3": [
+        0.35,
+        0.75,
+        1.15,
+        0.45
+      ],
+      "4": [
+        0.35,
+        0.75,
+        1.15,
+        0.45
+      ],
+      "6": [
+        0.4,
+        0.8,
+        1.15,
+        0.7
+      ],
+      "9": [
+        0.35,
+        0.75,
+        1.1,
+        0.65
+      ],
+      "10": [
+        0.35,
+        0.75,
+        1.1,
+        0.65
+      ],
+      "11": [
+        0.35,
+        0.75,
+        1.1,
+        0.65
+      ]
+    },
+    "source": "https://www.fao.org/4/s2022e/s2022e07.htm",
+    "analogue": "Rye uses small-grain coefficients; millets use sorghum. Other crops retain reference demand. Four equal-duration stage bins are an approximation.",
+    "response_source": "https://www.fao.org/4/y3655e/y3655e04.htm",
+    "interpretation": "Seasonal delivered irrigation fraction with 25% weight on worst-month satisfaction. This is a transparent conservative screening prior, not FAO Ky or simulated daily crop growth. Output served hectares are full-demand-equivalent productive hectares; not a survey of watered acreage. No extra withdrawals or stored water."
+  }
+}

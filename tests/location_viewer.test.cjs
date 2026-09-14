@@ -89,3 +89,9 @@ assert.equal(vm.runInContext('img.src',sandbox),'starting_paddy_control_improvem
 assert.match(elements.viewNote.textContent,/Five complete water-management layers/);
 assert.match(elements.detail.innerHTML,/Five water-management types/);
 console.log('PASS: fourth water tab selects subtypes and preserves location detail');
+
+data[0].rural_balance_added_capacity=12;
+vm.runInContext('show(0)',sandbox);
+assert.match(elements.detail.innerHTML,/Includes 12 capacity of explicit rural game allowance/);
+assert.match(elements.detail.innerHTML,/Explicit rural game allowance/);
+console.log('PASS: population-based allowance is visible in base hint and detailed breakdown');

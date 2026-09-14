@@ -56,5 +56,17 @@
   "method": "reports/water_management_method.md",
   "calibration_target": null,
   "population_used": false,
-  "total_capacity_changes": false
+  "total_capacity_changes": false,
+  "boundary_refinement": {
+    "baseline_commit": "87eef4a",
+    "mechanism": "Maintained cultivated fields can be misclassified as natural baseline support; only positive crop-over-natural-livelihood gain on historically cultivated baseline land is eligible.",
+    "population_target": false,
+    "natural_flooding_transferred": false,
+    "numerical_shares": "Shared inferred coefficients, not percentages measured by the cited sources",
+    "references": [
+      "https://www.fao.org/4/s8684e/s8684e03.htm",
+      "https://www.fao.org/4/ai408e/ai408e05.htm",
+      "https://whc.unesco.org/en/list/818/"
+    ]
+  }
 }

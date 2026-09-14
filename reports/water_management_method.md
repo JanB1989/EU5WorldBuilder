@@ -88,8 +88,7 @@ resampling. Native ETOPO 60-second subcells between −10 and 0 m, screened by l
 
 The five subtypes sum to water management. Remaining clearing + remaining field
 management + water management sum to the original improvement contribution at
-each stage. Base, multiplier, total starting support and total maximum support
-are unchanged. No new water withdrawal or physical land is created.
+each stage. Multiplier and total starting/maximum support remain unchanged; see the superseding boundary refinement below for base reclassification. No new water withdrawal or physical land is created.
 
 The numerical division between clearing, management and water control is **inferred**.
 Modern wetland geography and 1700 reconstruction cannot establish the location
@@ -126,3 +125,52 @@ are delivered alongside the HTML. Engineering completion means every selected
 type is mapped and accounts reconcile. It does not turn these inferred causal
 shares into observed medieval infrastructure inventories. Building counts,
 costs, limits and game deployment remain deferred.
+
+
+## Superseding boundary refinement (baseline commit 87eef4a)
+
+The base is no longer frozen. A transfer requires all three signals: positive
+baseline crop support over displaced natural livelihoods, reconstructed 1300
+cultivation overlapping that baseline-access cropland, and a paddy, drainage or
+coastal dependency setting. The eligible share is calculated on the native grid
+and applied to the same share of the converted game baseline. Natural livelihood
+support stays in base. Natural floodplain wetness alone and the hypothetical
+irrigated-yield scenario cause no baseline transfer.
+
+Dependency shares are explicitly inferred: paddy control 65%, inland drainage
+50%, coastal drainage/reclamation 80% of their exclusive eligible setting.
+Water supply and flood embankments receive zero base transfers. FAO's basin and
+rainfed-lowland rice descriptions support the distinction between cultivated
+bunded fields and naturally wet land; UNESCO's Kinderdijk account supports
+maintained drainage as part of agricultural access. Neither source provides the
+numerical coefficients used here. Modern subsidence remains a limitation.
+
+The field-management transfer shares also change from 50% to 70% for paddy
+control, 25% to 35% for flood control, 25% to 40% for drainage, and 40% to 60% for
+coastal reclamation. Clearing transfer shares stay fixed. These are shared
+attribution candidates, not population fits or a targeted global percentage.
+
+Base transfers are clipped proportionally only at final location normalization
+to preserve the existing 1,000-unit equal-area base floor. The original physical
+baseline used to calculate the game's floor allowance is retained, so this
+cannot create extra capacity. The same amount leaves base and enters both
+starting and maximum improvements; remaining opportunity and the multiplier
+stay fixed. Raw base requests, applied amounts and the pre-transfer baseline
+are retained in the ledger. In the intermediate three-component ledger, the
+transfer passes through management before being fully assigned to its water
+subtype; it must not be counted as extra field-management support.
+
+The half/1.5x attribution sensitivity brackets vary transfers from improvements;
+they hold this base-boundary candidate fixed. They are not confidence intervals
+for the historical base split. `water_boundary_comparison.csv` and
+`water_boundary_validation.json` compare every location to the pushed baseline,
+checking preserved capacities, unchanged remaining opportunity and exact
+component transfer identities. The older inheritance audit restores these
+recorded transfers before testing its original protected base/maximum values;
+unexplained changes still fail.
+
+
+This pass does not rebrand modeled natural livelihood support as irrigation.
+Consequently, locations whose baseline is almost entirely non-crop support can
+remain base-heavy. Resolving that would require reviewing the underlying
+livelihood estimate/game conversion, not another transfer coefficient.

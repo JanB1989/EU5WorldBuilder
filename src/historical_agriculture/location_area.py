@@ -2,6 +2,7 @@
 import numpy as np
 from .improvement_audit import CAPACITY_COLUMNS,ROUNDING_COLUMNS
 from .water_management import RAW_COLUMNS
+from .water_boundary import FIELDS as BOUNDARY_FIELDS
 
 ABSOLUTES = [
     "base_effective_cropland", "starting_improvement_effective_cropland",
@@ -13,7 +14,7 @@ ABSOLUTES = [
     "uncalibrated_base_capacity", "uncalibrated_starting_capacity", "uncalibrated_maximum_capacity",
 ]
 
-def equal_area(d,reference_area=None,base_land_floor=0.):
+def equal_area(d,reference_area=None,base_land_floor=0.,rural_balance=None):
     """Normalize density to one reference area while preserving global starting support."""
     land=d.modelled_land.astype(bool)
     area=d.physical_location_ha.to_numpy(float)
@@ -28,7 +29,7 @@ def equal_area(d,reference_area=None,base_land_floor=0.):
     scale=np.ones(len(d))
     scale[land]=reference/area[land]
     result=d.copy()
-    for name in ABSOLUTES + CAPACITY_COLUMNS + ROUNDING_COLUMNS + RAW_COLUMNS + [c for c in d if c.endswith(("_capacity_low","_capacity_high"))]:
+    for name in ABSOLUTES + CAPACITY_COLUMNS + ROUNDING_COLUMNS + RAW_COLUMNS + BOUNDARY_FIELDS + [c for c in d if c.endswith(("_capacity_low","_capacity_high"))]:
         if name in result:result[name]=result[name]*scale
     if not np.isfinite(base_land_floor) or base_land_floor<0:raise ValueError("Invalid base land floor")
     result["base_land_floor_added_units"]=0.
@@ -46,9 +47,13 @@ def equal_area(d,reference_area=None,base_land_floor=0.):
         result["base_land_floor_added_units"]=added
         result["base_land_floor_added_capacity"]=gain
         result["base_effective_cropland"]+=added
+        if "pre_water_base_capacity" in result:result["pre_water_base_capacity"]+=gain
         for name in ["inert_capacity","starting_capacity","maximum_capacity"]+[c for c in result if c.endswith(("_capacity_low","_capacity_high"))]:
             result[name]+=gain
         result["maximum_starting_ratio"]=result.maximum_capacity/result.starting_capacity.replace(0,np.nan)
+    if rural_balance:
+        from .rural_balance import apply as apply_rural_balance
+        result=apply_rural_balance(result,rural_balance)
     result["starting_fill"]=np.divide(result.eu5_start_population, result.starting_capacity,
         out=np.full(len(d),np.nan),where=result.starting_capacity>0)
     # These are game support densities after rescaling, not changed physical productivity.
@@ -68,4 +73,8 @@ def equal_area(d,reference_area=None,base_land_floor=0.):
         "physical_starting_total":float(d.starting_capacity.sum()),
         "physical_maximum_total":float(d.maximum_capacity.sum()),
         "limitations":"Final game-unit comparison only. Physical hectares and water accounts remain unchanged. More location subdivisions produce more combined game capacity."}
+    if rural_balance:
+        from .rural_balance import validate as validate_rural_balance
+        meta['rural_balance']=validate_rural_balance(result,rural_balance)
+        meta['normalization']+=' A separately recorded population-informed rural game allowance follows normalization.'
     return result,meta

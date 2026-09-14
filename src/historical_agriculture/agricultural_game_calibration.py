@@ -81,7 +81,8 @@ def apply(root,cfg,arrays,historical_extent,food_type,domain,out):
     if not path:return arrays
     c=json.loads((root/path).read_text());ic=c['inheritance'];gc=c['support_conversion']
     eco,_=read(root/cfg['food_directory']/'food_ecoregion.tif')
-    rules=json.loads((root/'configs/regions.json').read_text())['regions']
+    from .agricultural_system_repair import rules as system_rules
+    rules=system_rules(root,cfg)
     ceiling=np.full(domain.shape,ic['unknown_system_activation'],float)
     system=np.full(domain.shape,'unknown',dtype='U10')
     for rule in rules:

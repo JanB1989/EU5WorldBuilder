@@ -1,0 +1,150 @@
+{
+  "hammond": {
+    "id": "cd817a746aa7437cbd72a6d39cdb4559",
+    "owner": "esri_landscape2",
+    "ownerId": "28cfe7e9b21635131bfc040798ac720d",
+    "orgId": "P3ePLMYs2RVChkJx",
+    "created": 1436907953000,
+    "modified": 1785267134000,
+    "guid": null,
+    "name": null,
+    "title": "World Ecological Facets Landform Classes",
+    "type": "Image Service",
+    "typeKeywords": [
+      "ArcGIS Server",
+      "Data",
+      "Image Service",
+      "Requires Subscription",
+      "Service",
+      "Singlelayer"
+    ],
+    "description": "<div>Landforms are large recognizable features such as mountains, hills and plains; they are an important determinant of ecological character, habitat definition and terrain analysis. Landforms are important to the distribution of life in natural systems and are the basis for opportunities in built systems, and therefore landforms play a useful role in all natural science&nbsp;<span style='line-height:1.38461538461538;'>fields of study&nbsp;and planning disciplines.</span></div><div>&nbsp;</div><div><span style='font-size:18px;'><strong>Dataset Summary</strong></span></div><div><strong>Phenomenon Mapped</strong>:&nbsp;Landforms</div><div><strong>Geographic Extent</strong>: Global</div><div><strong>Projection</strong>:&nbsp;WGS 1984</div><div><strong>Mosaic Projection</strong>:&nbsp;Web Mercator Auxiliary Sphere Units:&nbsp;Meters</div><div><strong>Cell Size</strong>:&nbsp;231.91560581932&nbsp;meters</div><div><strong>Pixel Depth</strong>:&nbsp;8-bit unsigned integer</div><div><strong>Analysis</strong>: Restricted single source analysis. Maximum size of analysis is 30,000 x 30,000 pixels.</div><div><strong>Source</strong>:&nbsp;Esri</div><div><strong>Publication Date</strong>:&nbsp;May 2016</div><div>&nbsp;</div><div><div style='font-family:&quot;Avenir Next W01&quot;, &quot;Avenir Next W00&quot;, &quot;Avenir Next&quot;, Avenir, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size:17px; margin:0px; padding:0px;'><span style='line-height:1.38462;'>In February 2017, Esri updated the&nbsp;</span><span style='font-family:Helvetica, sans-serif; font-size:13pt;'><span style='line-height:1.38462; text-decoration:none;'>World Landforms - Improved Hammond Method&nbsp;</span></span><span style='line-height:1.38462;'>service with two display functions: Ecological Land Units landform classes and Ecological Facets landform classes. This layer represents Ecological Facets landform classes. You can view the Ecological Land Units landform classes by choosing Image Display, and changing the Renderer.&nbsp;</span></div><div style='font-family:&quot;Avenir Next W01&quot;, &quot;Avenir Next W00&quot;, &quot;Avenir Next&quot;, Avenir, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size:17px; margin:0px; padding:0px;'>&nbsp;</div><div style='font-family:&quot;Avenir Next W01&quot;, &quot;Avenir Next W00&quot;, &quot;Avenir Next&quot;, Avenir, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size:17px; margin:0px; padding:0px;'>This layer was produced using the I<span style='color:rgb(77,77,77);'>mproved Hammond Landform Classification Algorithm produced by Esri in 2016.&nbsp;</span></div><div style='margin:0px; padding:0px;'><span style='color:#4d4d4d; font-family:Avenir Next W01, Avenir Next W00, Avenir Next, Avenir, Helvetica Neue, Helvetica, Arial, sans-serif; font-size:17px;'>This algorithm published and described by Karagulle et al. 2017: Modeling global Hammond landform regions from 250-m elevation data in&nbsp;</span>Transactions in GIS<span style='color:#4d4d4d; font-family:Avenir Next W01, Avenir Next W00, Avenir Next, Avenir, Helvetica Neue, Helvetica, Arial, sans-serif; font-size:17px;'>.</span><br />&nbsp;</div><div style='font-family:&quot;Avenir Next W01&quot;, &quot;Avenir Next W00&quot;, &quot;Avenir Next&quot;, Avenir, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size:17px; margin:0px; padding:0px;'><span style='color:rgb(77,77,77);'>The algorithm, which is based on the most recent work in this area by&nbsp;</span><span style='background-color:rgb(255,255,255); color:#4d4d4d;'>Morgan, J. &amp; &nbsp;Lesh, A. 2005:&nbsp;<i>Developing Landform Maps Using Esri\u2019s Model Builder</i>.,&nbsp;</span><span style='color:#4d4d4d;'>Esri converted Morgan\u2019s model into a Python script and revised it to work on global 250-meter resolution&nbsp;</span>GMTED2010<span style='color:#4d4d4d;'>&nbsp;elevation data.&nbsp;</span><span style='background-color:rgb(255,255,255); color:#4d4d4d;'>Hammond\u2019s landform classification characterizes regions rather than identifying individual features, thus, this layer contains sixteen classes of landforms:</span></div></div><div><div><ul><li><span style='line-height:1.38461538461538;'>Nearly flat plains</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Smooth plains with some local relief</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Irregular plains with moderate relief&nbsp;</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Irregular plains with low hills</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Scattered moderate hills</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Scattered high hills</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Scattered low mountains</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Scattered high mountains</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Moderate hills</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>High hills&nbsp;</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Tablelands with moderate relief</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Tablelands with considerable relief</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Tablelands with high relief&nbsp;</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Tablelands with very high relief&nbsp;</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>Low mountains</span><br />&nbsp;</li><li><span style='line-height:1.38461538461538;'>High mountains</span><br />&nbsp;</li></ul></div></div><div>To produce these classes, Esri staff first projected the 250-meter resolution GMTED elevation data to the World Equidistant Cylindrical coordinate system. Each cell in this dataset was assigned three characteristics: &nbsp;slope based on 3-km neighborhood, relief based on 6 km neighborhood, and profile based on 6-km neighborhood. The last step was to overlay the combination of these three characteristics with areas that are exclusively plains.&nbsp;&nbsp;</div><div>&nbsp;</div><div><strong>Slope </strong>is the percentage of the 3-km neighborhood occupied by gentle slope. Hammond specified 8% as the threshold for gentle slope. Slope is used to define how flat or steep the terrain is. Slope was classified into one of four classes:&nbsp;&nbsp;</div><div><figure><table style='border-collapse:collapse;' cellpadding='0' cellspacing='0' border='1'><tbody><tr><td style='border:1.0pt solid windowtext; padding:0in 5.4pt; width:125.75pt;' width='210'><p style='line-height:16.5pt; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>Percent of neighborhood over 8% of slope</span></p></td><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:none; border-right-style:solid; border-top-style:solid; border-width:1.0pt; padding:0in 5.4pt; width:.75in;' width='90'><p style='line-height:16.5pt; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>Slope Classes</span></p></td></tr><tr><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; padding:0in 5.4pt; width:125.75pt;' width='210'><p style='line-height:16.5pt; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>0 - 20%</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; padding:0in 5.4pt; width:.75in;' width='90'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>400</span></p></td></tr><tr><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; padding:0in 5.4pt; width:125.75pt;' width='210'><p style='line-height:16.5pt; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>21% -50%</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; padding:0in 5.4pt; width:.75in;' width='90'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>300</span></p></td></tr><tr><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; padding:0in 5.4pt; width:125.75pt;' width='210'><p style='line-height:16.5pt; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>51% - 80%</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; padding:0in 5.4pt; width:.75in;' width='90'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>200</span></p></td></tr><tr><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; padding:0in 5.4pt; width:125.75pt;' width='210'><p style='line-height:16.5pt; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>&gt;81%&nbsp;</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; padding:0in 5.4pt; width:.75in;' width='90'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>100</span></p></td></tr></tbody></table></figure><p><strong>Local Relief</strong> is the difference between the maximum and minimum elevation within in the 6-km neighborhood. Local relief is used to define terrain how rugged or the complexity of the terrain\"s texture. Relief was assigned one of six classes:</p></div><div><figure><table style='border-collapse:collapse;' cellpadding='0' cellspacing='0' border='1'><tbody><tr style='height:17.1pt;'><td style='border:1.0pt solid windowtext; height:17.1pt; padding:0in 5.4pt; width:149.95pt;' width='250'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:justify;'><span style='color:rgb(77,77,77); font-size:small;'>Change in elevation</span></p></td><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:none; border-right-style:solid; border-top-style:solid; border-width:1.0pt; height:17.1pt; padding:0in 5.4pt; width:93.95pt;' width='157'><p style='line-height:16.5pt; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>Relief Class ID</span></p></td></tr><tr style='height:13.45pt;'><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; height:13.45pt; padding:0in 5.4pt; width:149.95pt;' width='250'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:justify;'><span style='color:rgb(77,77,77); font-size:small;'>0 \u2013 30 meters</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; height:13.45pt; padding:0in 5.4pt; width:93.95pt;' width='157'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>10</span></p></td></tr><tr style='height:17.1pt;'><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; height:17.1pt; padding:0in 5.4pt; width:149.95pt;' width='250'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:justify;'><span style='color:rgb(77,77,77); font-size:small;'>31 meter \u2013 90 meters</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; height:17.1pt; padding:0in 5.4pt; width:93.95pt;' width='157'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>20</span></p></td></tr><tr style='height:17.1pt;'><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; height:17.1pt; padding:0in 5.4pt; width:149.95pt;' width='250'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:justify;'><span style='color:rgb(77,77,77); font-size:small;'>91 meter \u2013 150 meters</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; height:17.1pt; padding:0in 5.4pt; width:93.95pt;' width='157'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>30</span></p></td></tr><tr style='height:17.1pt;'><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; height:17.1pt; padding:0in 5.4pt; width:149.95pt;' width='250'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:justify;'><span style='color:rgb(77,77,77); font-size:small;'>151 meter \u2013 300 meters</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; height:17.1pt; padding:0in 5.4pt; width:93.95pt;' width='157'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>40</span></p></td></tr><tr style='height:17.1pt;'><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; height:17.1pt; padding:0in 5.4pt; width:149.95pt;' width='250'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:justify;'><span style='color:rgb(77,77,77); font-size:small;'>301 meter \u2013 900 meters</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; height:17.1pt; padding:0in 5.4pt; width:93.95pt;' width='157'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>50</span></p></td></tr><tr style='height:17.1pt;'><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; height:17.1pt; padding:0in 5.4pt; width:149.95pt;' width='250'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:justify;'><span style='color:rgb(77,77,77); font-size:small;'>&gt;900 meters</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; height:17.1pt; padding:0in 5.4pt; width:93.95pt;' width='157'><p style='line-height:16.5pt; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>60</span></p></td></tr></tbody></table></figure></div><div>The combination of slope and relief begin to define terrain as mountains, hills and plains. However, the difference between mountains or hills and tablelands cannot be distinguished using only these parameters.&nbsp;</div><div>&nbsp;</div><div><strong>Profile</strong> is used to determine tableland areas. Profile identifies neighborhoods with upland and lowland areas, and calculates the percent area of gently sloping terrain within those upland and lowland areas. A 6-km circular neighborhood was used to calculate the profile parameter. Upland/lowland is determined by the difference between average local relief and elevation. In the 6-km neighborhood window, if the difference between maximum elevation and cell\u2019s elevation is smaller than half of the local relief it\u2019s an upland. If the difference between maximum elevation and cell\u2019s elevation is larger than half of the local relief it\u2019s a lowland. &nbsp;Profile was assigned one of five classes:</div><div><figure><table style='border-collapse:collapse;' cellpadding='0' cellspacing='0' border='1'><tbody><tr><td style='border:1.0pt solid windowtext; padding:0in 5.4pt; width:233.75pt;' width='390'><p style='line-height:normal; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>Percent of neighborhood over 8% slope in upland or lowland areas</span></p></td><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:none; border-right-style:solid; border-top-style:solid; border-width:1.0pt; padding:0in 5.4pt; width:77.65pt;' width='129'><p style='line-height:normal; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>Profile Class</span></p></td></tr><tr><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; padding:0in 5.4pt; width:233.75pt;' width='390'><p style='line-height:normal; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>Less than 50% gentle slope is in upland or lowland</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; padding:0in 5.4pt; width:77.65pt;' width='129'><p style='line-height:normal; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>0</span></p></td></tr><tr><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; padding:0in 5.4pt; width:233.75pt;' width='390'><p style='line-height:normal; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>More than 75% of gentle slope is in lowland</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; padding:0in 5.4pt; width:77.65pt;' width='129'><p style='line-height:normal; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>1</span></p></td></tr><tr><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; padding:0in 5.4pt; width:233.75pt;' width='390'><p style='line-height:normal; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>50%-75% of gentle slope is in lowland</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; padding:0in 5.4pt; width:77.65pt;' width='129'><p style='line-height:normal; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>2</span></p></td></tr><tr><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; padding:0in 5.4pt; width:233.75pt;' width='390'><p style='line-height:normal; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>50-75% of gentle slope is in upland</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; padding:0in 5.4pt; width:77.65pt;' width='129'><p style='line-height:normal; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>3</span></p></td></tr><tr><td style='border-bottom-style:solid; border-color:windowtext; border-left-style:solid; border-right-style:solid; border-top-style:none; border-width:1.0pt; padding:0in 5.4pt; width:233.75pt;' width='390'><p style='line-height:normal; margin-bottom:.0001pt;'><span style='color:rgb(77,77,77); font-size:small;'>More than 75% of gentle slope is in upland</span></p></td><td style='border-bottom:1.0pt solid windowtext; border-left-style:none; border-right:1.0pt solid windowtext; border-top-style:none; padding:0in 5.4pt; width:77.65pt;' width='129'><p style='line-height:normal; margin-bottom:.0001pt; text-align:center;'><span style='color:rgb(77,77,77); font-size:small;'>4</span></p></td></tr></tbody></table></figure></div><div><span style='line-height:1.38461538461538;'>Early reviewers of the&nbsp;resulting classes noted one confusing outcome, which was that&nbsp;areas were classified as \"plains with low mountains\", or \"plains with hills\" were often mostly plains, and the hills or mountains were part of an adjacent set of exclusively identified hills or mountains. To address this areas that are exclusively plains were produced, and used to override these confusing areas. The hills and mountains within those areas were converted to their respective landform class.</span><br />&nbsp;</div><div>The combination of slope, relief and profile merged with the areas of plains, can be better understood using the following diagram, which uses the colors in this layer to show which classes are present and what parameter values produced them:<br />&nbsp;</div><div>&nbsp;</div><div><img src='https://downloads2.esri.com/esri_content_doc/landscape/hammondclasses.gif' alt='Hammond Classification by parameter' /><br />&nbsp;</div><div><span style='font-size:18px;'><strong>What can you do with this layer?</strong></span></div><div><div style='margin:0px; padding:0px;'>This layer is suitable for both visualization and analysis. It can&nbsp;be used in ArcGIS Online in web maps and applications and can be used in ArcGIS Desktop. Restricted single source analysis means this layer has size constraints for analysis and it is not recommended for use with other layers in multisource analysis.</div></div>",
+    "tags": [
+      "esri_landscape",
+      "landscape7",
+      "ecophysiography",
+      "landscape",
+      "elevation",
+      "ExU"
+    ],
+    "snippet": "This layer classifies the global landscape into 16 classes of landform types and regions, produced by Esri in 2016.",
+    "thumbnail": "thumbnail/thumbnail1564519604520.jpeg",
+    "documentation": null,
+    "extent": [
+      [
+        -180,
+        -56.001
+      ],
+      [
+        180,
+        83.6249
+      ]
+    ],
+    "categories": [
+      "/Categories/Status/General Availability"
+    ],
+    "spatialReference": "102100",
+    "accessInformation": "Esri",
+    "classification": null,
+    "licenseInfo": "<img alt='' src='https://downloads.esri.com/blogs/arcgisonline/esrilogo_new.png' />This work is licensed under the Esri Master License Agreement. <br /><div><a href='https://goto.arcgis.com/termsofuse/viewsummary' target='_blank' rel='nofollow ugc noopener noreferrer'><b>View Summary</b></a> | <a href='https://goto.arcgis.com/termsofuse/viewtermsofuse' target='_blank' rel='nofollow ugc noopener noreferrer'><b>View Terms of Use</b></a> </div><div><span style='line-height: 16.05px;'><br /></span></div><div><font color='#b22222'>Important Note:</font> This item requires an ArcGIS Online organizational subscription or an ArcGIS Developer account and does not consume credits. To access this item, you'll need to do one of the following: </div><div><ul><li>Sign in with an account that is a member of an organizational subscription </li><li>Sign in with a developer account </li><li><a href='https://goto.arcgis.com/termsofuse/registeranapplication' target='_blank' rel='nofollow ugc noopener noreferrer'>Register an application</a> and use your application's credentials.</li></ul>If you don't have an account, you can sign up for a <a href='https://goto.arcgis.com/features/trial' target='_blank' rel='nofollow ugc noopener noreferrer'>free trial of ArcGIS</a> or a <a href='https://goto.arcgis.com/developers/signup' target='_blank' rel='nofollow ugc noopener noreferrer'>free ArcGIS Developer account</a>.</div>",
+    "culture": "en-us",
+    "properties": null,
+    "advancedSettings": null,
+    "url": "https://landscape7.arcgis.com/arcgis/rest/services/World_Landforms_Improved_Hammond_Method/ImageServer",
+    "proxyFilter": null,
+    "access": "public",
+    "size": 101,
+    "subInfo": 0,
+    "appCategories": [],
+    "industries": [],
+    "languages": [],
+    "largeThumbnail": null,
+    "banner": null,
+    "screenshots": [],
+    "listed": false,
+    "commentsEnabled": true,
+    "numComments": 3,
+    "numRatings": 2,
+    "avgRating": 3.5,
+    "numViews": 82800,
+    "contentStatus": "public_authoritative",
+    "scoreCompleteness": 100,
+    "groupDesignations": "livingatlas",
+    "apiToken1ExpirationDate": -1,
+    "apiToken2ExpirationDate": -1,
+    "lastViewed": 1789412400000
+  },
+  "hammond_service": {
+    "error": {
+      "code": 499,
+      "message": "Token Required",
+      "details": []
+    }
+  },
+  "hammond_package": {
+    "id": "e9a9ac749bc44c80baecf3e320078435",
+    "owner": "Deniz_Landscape",
+    "ownerId": "035e19467f080ea87412e5e159af59c6",
+    "orgId": "pf6KDbd8NVL1IUHa",
+    "created": 1517856669000,
+    "modified": 1517856670000,
+    "guid": "20071516-EFB6-4757-AE4D-25DE40DDC13F",
+    "name": "World_Landforms.tif.lpkx",
+    "title": "World_Landforms.tif",
+    "type": "Layer Package",
+    "typeKeywords": [
+      "ArcGIS Explorer",
+      "ArcGIS Pro",
+      "Data",
+      "Layer Package",
+      "lpkx"
+    ],
+    "description": "World_Landforms.tif",
+    "tags": [
+      "landforms"
+    ],
+    "snippet": "Landforms",
+    "thumbnail": "thumbnail/thumbnail.png",
+    "documentation": null,
+    "extent": [
+      [
+        -179.999988540844,
+        -55.9995302053256
+      ],
+      [
+        180.002348320089,
+        83.6248432669313
+      ]
+    ],
+    "categories": [],
+    "spatialReference": "GCS_WGS_1984",
+    "accessInformation": "",
+    "classification": null,
+    "licenseInfo": "",
+    "culture": "en-us",
+    "properties": null,
+    "advancedSettings": null,
+    "url": "",
+    "proxyFilter": null,
+    "access": "public",
+    "size": 85093473,
+    "subInfo": 0,
+    "appCategories": [],
+    "industries": [],
+    "languages": [],
+    "largeThumbnail": null,
+    "banner": null,
+    "screenshots": [],
+    "listed": false,
+    "commentsEnabled": true,
+    "numComments": 0,
+    "numRatings": 0,
+    "avgRating": 0,
+    "numViews": 29,
+    "scoreCompleteness": 35,
+    "groupDesignations": null,
+    "apiToken1ExpirationDate": -1,
+    "apiToken2ExpirationDate": -1,
+    "lastViewed": 1788616800000
+  }
+}

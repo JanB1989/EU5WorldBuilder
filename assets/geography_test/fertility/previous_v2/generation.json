@@ -1,0 +1,53 @@
+{
+  "generator": "built-in image_gen",
+  "revision": 2,
+  "style_reference": "native EU5 geography icons",
+  "background_cleanup_prompt": "Use case: background-extraction. Production cleanup of this exact game icon: REPLACE ONLY the entire gray/white checkerboard background (including gaps between leaves) with a perfectly flat solid pure magenta RGB(255,0,255) #FF00FF background. Preserve the complete plant and soil illustration, exact colors, silhouette, outlines, brushwork and composition unchanged. No checkerboard, no patterns, no shadows outside the object. Do not recolor any leaves or soil; preserve the dark outline. This magenta production matte will be mechanically removed to create the game alpha channel. One square icon, no text.",
+  "assets": [
+    {
+      "name": "very_low",
+      "prompt": "Use case: stylized-concept. Generate ONE original fertility attribute icon for Europa Universalis V. The reference sheet is ONLY the style reference: hand-painted historical strategy-game miniature with warm edge highlights and strong dark outlines, not a flat vector. No sheet or text. This is revision 2 to fix tiny icons that looked too alike. Design for immediate recognition at 30x30 pixels: very few large shapes, pronounced silhouette, strong distinctive COLOR BLOCKS, no fine veins, no speckled textures. Simple shallow small oval brown soil clod at bottom, vegetation occupies 80 percent of the silhouette. Front three-quarter view. Object centered and fills the square. Genuine transparent alpha background; never a checkerboard. No enclosing frame, badges, lettering, numerals, tools, decorative rays or glow. All shapes separated by strong dark outlines with pale edge highlights so they contrast with a dark green game UI. VERY LOW fertility: RUST-RED and BURNT ORANGE, no green or pale yellow. One stunted hooked stalk bent completely sideways, with TWO shrivelled downward-pointing reddish-brown leaves. A low crooked drooping silhouette, not an upright plant. Dry light tan soil clod. Broad readable red-brown leaves, not wispy lines.",
+      "generation_filename": "exec-7c8e9493-b7b9-4c32-95ff-13150ebd8010.png",
+      "source_filename": "exec-93e88ceb-b832-41de-a66f-78e3c9b94954.png",
+      "chroma_key": true,
+      "original_sha256": "71c635c54675569c12b4528335d0172c62883350facfc97ddc9303f85fd532a7",
+      "prepared_sha256": "801a0d9ecf58c00c7ebe44fb226f9e7c36f0bddc6db72a39d6408a9cd1afe1dc"
+    },
+    {
+      "name": "low",
+      "prompt": "Use case: stylized-concept. Generate ONE original fertility attribute icon for Europa Universalis V. The reference sheet is ONLY the style reference: hand-painted historical strategy-game miniature with warm edge highlights and strong dark outlines, not a flat vector. No sheet or text. This is revision 2 to fix tiny icons that looked too alike. Design for immediate recognition at 30x30 pixels: very few large shapes, pronounced silhouette, strong distinctive COLOR BLOCKS, no fine veins, no speckled textures. Simple shallow small oval brown soil clod at bottom, vegetation occupies 80 percent of the silhouette. Front three-quarter view. Object centered and fills the square. Genuine transparent alpha background; never a checkerboard. No enclosing frame, badges, lettering, numerals, tools, decorative rays or glow. All shapes separated by strong dark outlines with pale edge highlights so they contrast with a dark green game UI. LOW fertility: STRAW YELLOW and pale cream, no olive-green overall cast. One tiny upright forked seedling with exactly TWO rounded pale yellow leaves pointing diagonally outward in a wide V on a short central stem. Sparse, simple, weak growth but NOT drooping. Ochre soil clod. Use large rounded leaves so it reads as a pale V, distinct from green bush icons.",
+      "generation_filename": "exec-1973bf4e-86e9-448e-ac75-606b6b3d3561.png",
+      "source_filename": "exec-89651967-dd51-4226-b45e-7de6cec828b9.png",
+      "chroma_key": true,
+      "original_sha256": "abc277e5ed780c1d654cc3d5e015b9db50af3d05be6732623b005f000ff4705d",
+      "prepared_sha256": "5ac1497eb42120667c3948861e5af5281c30b6123e974fcb6b8258b7dc33f94f"
+    },
+    {
+      "name": "moderate",
+      "prompt": "Use case: stylized-concept. Generate ONE original fertility attribute icon for Europa Universalis V. The reference sheet is ONLY the style reference: hand-painted historical strategy-game miniature with warm edge highlights and strong dark outlines, not a flat vector. No sheet or text. This is revision 2 to fix tiny icons that looked too alike. Design for immediate recognition at 30x30 pixels: very few large shapes, pronounced silhouette, strong distinctive COLOR BLOCKS, no fine veins, no speckled textures. Simple shallow small oval brown soil clod at bottom, vegetation occupies 80 percent of the silhouette. Front three-quarter view. Object centered and fills the square. Genuine transparent alpha background; never a checkerboard. No enclosing frame, badges, lettering, numerals, tools, decorative rays or glow. All shapes separated by strong dark outlines with pale edge highlights so they contrast with a dark green game UI. MODERATE fertility: clear medium GRASS GREEN, not olive-brown or teal. A single tall slim upright shoot with exactly THREE simple lance-shaped leaves: one pointed vertical leaf at the top and two side leaves at midheight. Distinct narrow arrow-like silhouette, with noticeable empty space around the stalk. Medium-brown tiny soil clod. Healthy but modest, not bushy.",
+      "generation_filename": "exec-e6733e07-e161-43e2-9d2c-4d36f54454c5.png",
+      "source_filename": "exec-2e7e266a-b89c-446e-8058-eff243ad5760.png",
+      "chroma_key": true,
+      "original_sha256": "95b83cd0392a050996069235d1dc131a88fbebf9b36806c0e34821602cac5c17",
+      "prepared_sha256": "e897b5f24c3141c5f52f1ea11e08e5542d2ab7289c0f98a22c0dc74068749152"
+    },
+    {
+      "name": "high",
+      "prompt": "Use case: stylized-concept. Generate ONE original fertility attribute icon for Europa Universalis V. The reference sheet is ONLY the style reference: hand-painted historical strategy-game miniature with warm edge highlights and strong dark outlines, not a flat vector. No sheet or text. This is revision 2 to fix tiny icons that looked too alike. Design for immediate recognition at 30x30 pixels: very few large shapes, pronounced silhouette, strong distinctive COLOR BLOCKS, no fine veins, no speckled textures. Simple shallow small oval brown soil clod at bottom, vegetation occupies 80 percent of the silhouette. Front three-quarter view. Object centered and fills the square. Genuine transparent alpha background; never a checkerboard. No enclosing frame, badges, lettering, numerals, tools, decorative rays or glow. All shapes separated by strong dark outlines with pale edge highlights so they contrast with a dark green game UI. HIGH fertility: rich BLUE-GREEN / EMERALD-TEAL foliage with cool mint edge highlights, no yellow foliage. A low, broad, vigorous plant with exactly FIVE large rounded overlapping leaves forming a wide dome/fan silhouette, short stem mostly hidden. Very noticeably WIDER than tall above the soil; NOT a slim upright stem. Dark brown small soil clod. Clear bold broad teal color mass.",
+      "generation_filename": "exec-246cd106-5038-4082-b0e5-be765852c118.png",
+      "source_filename": "exec-dbeabdf9-9517-461a-a691-3e3631fce36e.png",
+      "chroma_key": true,
+      "original_sha256": "77f436f303c95053096aeb2aed7dab1dbf219f3c987abc8b91a5741917e82655",
+      "prepared_sha256": "217cfa48addf27b9da61cbaf5d289f06ac9dcd71ad225178af25255d61fcaae4"
+    },
+    {
+      "name": "very_high",
+      "prompt": "Use case: stylized-concept. Generate ONE original fertility attribute icon for Europa Universalis V. The reference sheet is ONLY the style reference: hand-painted historical strategy-game miniature with warm edge highlights and strong dark outlines, not a flat vector. No sheet or text. This is revision 2 to fix tiny icons that looked too alike. Design for immediate recognition at 30x30 pixels: very few large shapes, pronounced silhouette, strong distinctive COLOR BLOCKS, no fine veins, no speckled textures. Simple shallow small oval brown soil clod at bottom, vegetation occupies 80 percent of the silhouette. Front three-quarter view. Object centered and fills the square. Genuine transparent alpha background; never a checkerboard. No enclosing frame, badges, lettering, numerals, tools, decorative rays or glow. All shapes separated by strong dark outlines with pale edge highlights so they contrast with a dark green game UI. VERY HIGH fertility: rich GOLD and warm amber ripe grain heads above a small dark emerald-green leaf base. Exactly THREE thick upright golden grain ears splayed like a broad crown, central ear tallest, left and right tilted outward. Each ear is ONE chunky readable pointed shape with only 2-3 broad painted notches, not many tiny kernels. The strong three-pronged golden crown silhouette must read at 30 pixels and clearly differ from all leafy seedlings. Tiny dark soil clod. Conventional abundant harvest symbol, not an elaborate wheat bouquet.",
+      "generation_filename": "exec-9e8b1aa6-76a1-440c-a435-b58e6625f551.png",
+      "source_filename": "exec-142cf53e-358a-498a-b2e8-62a592397feb.png",
+      "chroma_key": true,
+      "original_sha256": "b56569adc8d087f0be5f4124a68705e8749353a411c354165b9f3929014f1166",
+      "prepared_sha256": "28b9998074cd6f7d067820924ef651105fe28294288fbd327dbb58ea1f48307d"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "research_date": "2026-09-14",
+  "files": {
+    "pnv.nc": "32475712f61614aa83d3a3f320bb0395456982b9cac6fa08dd271a5dbc56c921",
+    "pnv_README": "2df3e62b61f55e50b8e7e31e0613f4b3d8d911491ebfe2d64a9bf849e58bf082",
+    "luh1300.npz": "01f5dc8b6f1ed08eb7282ad6c569faa033062ef0abbdb17be08bcb1831ec83f6",
+    "landcover_provenance.json": "dda45d580fd4f4537817d6cc9ca1b8d2978c4f58f359c6c9fbebdfa35e7c8263"
+  },
+  "scope": "Metadata and cached input audit; no new global rasters downloaded; no game changes."
+}

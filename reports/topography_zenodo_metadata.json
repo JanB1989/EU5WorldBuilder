@@ -1,0 +1,363 @@
+{
+  "created": "2018-10-17T15:10:38.448757+00:00",
+  "modified": "2024-08-02T02:36:45.362124+00:00",
+  "id": 1464846,
+  "conceptrecid": "1447198",
+  "doi": "10.5281/zenodo.1464846",
+  "conceptdoi": "10.5281/zenodo.1447198",
+  "doi_url": "https://doi.org/10.5281/zenodo.1464846",
+  "metadata": {
+    "title": "Global landform and lithology class at 250 m based on the USGS global ecosystem map",
+    "doi": "10.5281/zenodo.1464846",
+    "publication_date": "2018-10-05",
+    "description": "<p>Layers include: lithology (15) and landform (7) indicator maps (0-100%). Derived from the <a href=\"https://rmgsc.cr.usgs.gov/outgoing/ecosystems/Global/\">USGS Global Ecosystem Map</a>,&nbsp;i.e. the EcoTapestry map. Water bodies masked out. Antarctica is not included.</p>\n\n<p>To access and visualize maps use:&nbsp;<a href=\"http://www.openlandmap.org/\">OpenLandMap.org</a></p>\n\n<p>If you discover a bug, artifact or inconsistency in the maps, or if you have a question please use some of the following channels:</p>\n\n<ul>\n\t<li>Technical issues and questions about the code:&nbsp;<a href=\"https://gitlab.com/openlandmap/global-layers/issues\">https://gitlab.com/openlandmap/global-layers/issues</a>&nbsp;</li>\n\t<li>General questions and comments:&nbsp;<a href=\"https://disqus.com/home/forums/landgis/\">https://disqus.com/home/forums/landgis/</a></li>\n</ul>\n\n<p>All files internally compressed using &quot;COMPRESS=DEFLATE&quot; creation&nbsp;option in GDAL. File naming convention:</p>\n\n<ul>\n\t<li>dtm = theme: digital terrain models / relief and soil,</li>\n\t<li>lithology = variable: lithological class,</li>\n\t<li>usgs.ecotapestry = determination method: USGS Global Ecosystem Map,</li>\n\t<li>p = probability 0-100%,</li>\n\t<li>250m = spatial resolution / block support: 1 km,</li>\n\t<li>s0..0cm = vertical reference: land surface,</li>\n\t<li>2014 = time reference: year 2014,</li>\n\t<li>v1.0 = version number: 1.0,</li>\n</ul>",
+    "access_right": "open",
+    "creators": [
+      {
+        "name": "Tomislav Hengl",
+        "affiliation": "Envirometrix Ltd"
+      }
+    ],
+    "keywords": [
+      "LandGIS",
+      "landform",
+      "lithology",
+      "terrain"
+    ],
+    "version": "1.0",
+    "references": [
+      "Sayre, R., J. Dangermond, C. Frye, R. Vaughan, P. Aniello, S. Breyer, D. Cribbs, D. Hopkins, R. Nauman, W. Derrenbacher, D.Wright, C. Brown, C. Convis, J. Smith, L. Benson, D. Paco VanSistine, H. Warner, J. Cress, J. Danielson, S. Hamann, T. Cecere, A. Reddy, D. Burton, A. Grosse, D. True, M. Metzger, J. Hartmann, N. Moosdorf, H. D\u00fcrr, M. Paganini, P. DeFourny, O. Arino, S. Maynard, M. Anderson, and P. Comer, 2014, A New Map of Global Ecological Land Units \u2013 An Ecophysiographic Stratification Approach. Washington, DC: Association of American Geographers. 46 pages.",
+      "Hartmann, J., & Moosdorf, N. (2012). The new global lithological map database GLiM: A representation of rock properties at the Earth surface. Geochemistry, Geophysics, Geosystems, 13(12)."
+    ],
+    "language": "eng",
+    "resource_type": {
+      "title": "Dataset",
+      "type": "dataset"
+    },
+    "license": {
+      "id": "cc-by-sa-4.0"
+    },
+    "relations": {
+      "version": [
+        {
+          "index": 2,
+          "is_last": true,
+          "parent": {
+            "pid_type": "recid",
+            "pid_value": "1447198"
+          }
+        }
+      ]
+    }
+  },
+  "title": "Global landform and lithology class at 250 m based on the USGS global ecosystem map",
+  "links": {
+    "self": "https://zenodo.org/api/records/1464846",
+    "self_html": "https://zenodo.org/records/1464846",
+    "preview_html": "https://zenodo.org/records/1464846?preview=1",
+    "doi": "https://doi.org/10.5281/zenodo.1464846",
+    "self_doi": "https://doi.org/10.5281/zenodo.1464846",
+    "self_doi_html": "https://zenodo.org/doi/10.5281/zenodo.1464846",
+    "reserve_doi": "https://zenodo.org/api/records/1464846/draft/pids/doi",
+    "parent": "https://zenodo.org/api/records/1447198",
+    "parent_html": "https://zenodo.org/records/1447198",
+    "parent_doi": "https://doi.org/10.5281/zenodo.1447198",
+    "parent_doi_html": "https://zenodo.org/doi/10.5281/zenodo.1447198",
+    "self_iiif_manifest": "https://zenodo.org/api/iiif/record:1464846/manifest",
+    "self_iiif_sequence": "https://zenodo.org/api/iiif/record:1464846/sequence/default",
+    "files": "https://zenodo.org/api/records/1464846/files",
+    "media_files": "https://zenodo.org/api/records/1464846/media-files",
+    "thumbnails": {
+      "10": "https://zenodo.org/api/iiif/record:1464846:dtm_lithology_usgs.ecotapestry.pyroclastics_p_250m_s0..0cm_2014_v1.0.tif/full/%5E10,/0/default.jpg",
+      "50": "https://zenodo.org/api/iiif/record:1464846:dtm_lithology_usgs.ecotapestry.pyroclastics_p_250m_s0..0cm_2014_v1.0.tif/full/%5E50,/0/default.jpg",
+      "100": "https://zenodo.org/api/iiif/record:1464846:dtm_lithology_usgs.ecotapestry.pyroclastics_p_250m_s0..0cm_2014_v1.0.tif/full/%5E100,/0/default.jpg",
+      "250": "https://zenodo.org/api/iiif/record:1464846:dtm_lithology_usgs.ecotapestry.pyroclastics_p_250m_s0..0cm_2014_v1.0.tif/full/%5E250,/0/default.jpg",
+      "750": "https://zenodo.org/api/iiif/record:1464846:dtm_lithology_usgs.ecotapestry.pyroclastics_p_250m_s0..0cm_2014_v1.0.tif/full/%5E750,/0/default.jpg",
+      "1200": "https://zenodo.org/api/iiif/record:1464846:dtm_lithology_usgs.ecotapestry.pyroclastics_p_250m_s0..0cm_2014_v1.0.tif/full/%5E1200,/0/default.jpg"
+    },
+    "archive": "https://zenodo.org/api/records/1464846/files-archive",
+    "archive_media": "https://zenodo.org/api/records/1464846/media-files-archive",
+    "latest": "https://zenodo.org/api/records/1464846/versions/latest",
+    "latest_html": "https://zenodo.org/records/1464846/latest",
+    "versions": "https://zenodo.org/api/records/1464846/versions",
+    "draft": "https://zenodo.org/api/records/1464846/draft",
+    "access_links": "https://zenodo.org/api/records/1464846/access/links",
+    "access_grants": "https://zenodo.org/api/records/1464846/access/grants",
+    "access_users": "https://zenodo.org/api/records/1464846/access/users",
+    "access_request": "https://zenodo.org/api/records/1464846/access/request",
+    "access": "https://zenodo.org/api/records/1464846/access",
+    "communities": "https://zenodo.org/api/records/1464846/communities",
+    "communities-suggestions": "https://zenodo.org/api/records/1464846/communities-suggestions",
+    "request_deletion": "https://zenodo.org/api/records/1464846/request-deletion",
+    "file_modification": "https://zenodo.org/api/records/1464846/file-modification",
+    "quota_increase": "https://zenodo.org/api/records/1464846/quota-increase",
+    "requests": "https://zenodo.org/api/records/1464846/requests"
+  },
+  "updated": "2024-08-02T02:36:45.362124+00:00",
+  "recid": "1464846",
+  "revision": 14,
+  "files": [
+    {
+      "id": "6a14b39b-90e0-41b0-9174-04487124241e",
+      "key": "dtm_lithology_usgs.ecotapestry.pyroclastics_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 95189714,
+      "checksum": "md5:826b58bbcfa3c00da9584dd9ac08fb95",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.pyroclastics_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "e068cb02-d654-4acd-912f-31144d973aa2",
+      "key": "dtm_landform_usgs.ecotapestry_c_250m_s0..0cm_2014_v1.0.tif.csv",
+      "size": 758,
+      "checksum": "md5:ef938db02fdea2963504fc5d78ea0271",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_landform_usgs.ecotapestry_c_250m_s0..0cm_2014_v1.0.tif.csv/content"
+      }
+    },
+    {
+      "id": "956bdcd3-1d66-46bc-b40e-ad964257dc75",
+      "key": "dtm_lithology_usgs.ecotapestry_c_250m_s0..0cm_2014_v1.0.tif.csv",
+      "size": 1733,
+      "checksum": "md5:1f6e9c4f09bd94c786e53e98deb8aadf",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry_c_250m_s0..0cm_2014_v1.0.tif.csv/content"
+      }
+    },
+    {
+      "id": "b380df30-9a6c-414b-932f-6e2f2c78c402",
+      "key": "dtm_landform_usgs.ecotapestry.smooth.plains_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 391442314,
+      "checksum": "md5:9a8572475d0a191f61e53a98e58576de",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_landform_usgs.ecotapestry.smooth.plains_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "16677b39-e03c-4b23-b2ad-923013850be2",
+      "key": "dtm_lithology_usgs.ecotapestry.intermediate.plutonics_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 94620853,
+      "checksum": "md5:58de55959045daf0d82d1f3279cbb880",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.intermediate.plutonics_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "a12d1733-2364-48cf-99a0-b2fc0adc6974",
+      "key": "dtm_lithology_usgs.ecotapestry.ice.and.glaciers_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 92289313,
+      "checksum": "md5:83ebce383fb4358f72de33190def62e8",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.ice.and.glaciers_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "1a2647d5-0ade-4916-93c3-98ace09914e4",
+      "key": "dtm_lithology_usgs.ecotapestry.carbonate.sedimentary.rock_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 117114354,
+      "checksum": "md5:58b1e876a6f16df5faf170a98725887f",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.carbonate.sedimentary.rock_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "ab951370-5e51-412d-aaa4-eb7a6c4271e1",
+      "key": "dtm_lithology_usgs.ecotapestry.undefined_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 97898921,
+      "checksum": "md5:3e9d245caa4f12117f13f182678a0d9b",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.undefined_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "654c4b94-6485-4a54-be8f-f99e0061a632",
+      "key": "dtm_lithology_usgs.ecotapestry.unconsolidated.sediment_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 142126638,
+      "checksum": "md5:147f3e6504c08e1ffc0c57b49e642913",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.unconsolidated.sediment_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "39ed2626-adac-4245-8347-76f9b72d51b4",
+      "key": "dtm_landform_usgs.ecotapestry_c.png",
+      "size": 708145,
+      "checksum": "md5:ae1b1a9c576943b7a2db8b360c6b4cfb",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_landform_usgs.ecotapestry_c.png/content"
+      }
+    },
+    {
+      "id": "ea7a0a1a-cf8d-4fb5-9367-93c657cd6fde",
+      "key": "dtm_lithology_usgs.ecotapestry.basic.volcanics_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 104154139,
+      "checksum": "md5:badaf04bdbede7643c9502340ddb78ca",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.basic.volcanics_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "01618927-b764-4759-8c9c-c4a01e339d1a",
+      "key": "dtm_lithology_usgs.ecotapestry.basic.plutonics_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 96778591,
+      "checksum": "md5:afda2ccf3b53bb030c1ae4111d7a4403",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.basic.plutonics_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "17c9c9d3-cea0-4035-9b73-137e3854be27",
+      "key": "dtm_landform_usgs.ecotapestry.flat.plains_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 331618518,
+      "checksum": "md5:36e8d3406e878ba440e0b6f8541d9d85",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_landform_usgs.ecotapestry.flat.plains_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "518c757e-075b-46dc-84dc-769b8699ab8f",
+      "key": "dtm_landform_usgs.ecotapestry.high.mountains.deep.canyons_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 98084635,
+      "checksum": "md5:22856d0becf5dc2c9eee49df6a70eb57",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_landform_usgs.ecotapestry.high.mountains.deep.canyons_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "7cf6c04d-036b-4e47-a6fb-60d39366e40f",
+      "key": "dtm_lithology_usgs.ecotapestry.metamorphics_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 117226502,
+      "checksum": "md5:5505457a337251f01e4691a796b1f999",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.metamorphics_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "0a1b7a9e-3f39-4748-97a9-25f8c5caab81",
+      "key": "dtm_lithology_usgs.ecotapestry.acid.volcanic_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 97667284,
+      "checksum": "md5:b7a54b7aaf94d81f29358333066c79d2",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.acid.volcanic_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "890e61e6-84df-4144-8d58-1139aa4b6652",
+      "key": "dtm_lithology_usgs.ecotapestry.siliciclastic.sedimentary_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 138243770,
+      "checksum": "md5:decafab68b45ec9a60f12e5d38f01e3b",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.siliciclastic.sedimentary_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "70621f96-96ba-4002-8fbe-98b0d71bae47",
+      "key": "dtm_lithology_usgs.ecotapestry_c_250m_s0..0cm_2014_v1.0.tif",
+      "size": 232432131,
+      "checksum": "md5:45575534e0e8e4d008ebc6a94d77bca5",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry_c_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "7bff3a24-2e38-4123-b74d-f897f0133381",
+      "key": "dtm_landform_usgs.ecotapestry.hills_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 271189973,
+      "checksum": "md5:b015060ab97a85c999562c4869a1fe48",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_landform_usgs.ecotapestry.hills_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "e725c3d0-eee8-49db-9e1c-fc4e2dd8bc9c",
+      "key": "dtm_landform_usgs.ecotapestry.low.hills_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 301807947,
+      "checksum": "md5:dab429d0d5ab6e059a880850d1614ba1",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_landform_usgs.ecotapestry.low.hills_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "1c82d8e7-41aa-4e02-8cb0-82eb11823a8d",
+      "key": "dtm_landform_usgs.ecotapestry.low.mountains_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 181283960,
+      "checksum": "md5:4c3b3dcbf185884bbd4f7da92efd01d2",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_landform_usgs.ecotapestry.low.mountains_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "e0e234cb-d49d-4e7f-9551-763ac78772ff",
+      "key": "dtm_lithology_usgs.ecotapestry.acid.plutonics_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 115338930,
+      "checksum": "md5:355d4cf4525c3488ed475de05cd52ae7",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.acid.plutonics_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "46c8a7e6-5974-4cc2-82b0-22aa266c2e83",
+      "key": "dtm_lithology_usgs.ecotapestry.intermediate.volcanics_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 99313538,
+      "checksum": "md5:8b4b5799a38088fee372ae06953f0d32",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.intermediate.volcanics_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "91f4a8d4-1fc2-42d6-9e30-7a4f69b8ba51",
+      "key": "dtm_lithology_usgs.ecotapestry.evaporite_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 93206405,
+      "checksum": "md5:e416045afbad6ae31cd499f766af5fd8",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.evaporite_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "fcad39c9-b705-4b6a-adca-32b9e44c6701",
+      "key": "dtm_lithology_usgs.ecotapestry.mixed.sedimentary.rock_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 132226135,
+      "checksum": "md5:df70f71720c73878661d6cf35668b86b",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_lithology_usgs.ecotapestry.mixed.sedimentary.rock_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "b9f0ca55-5e6f-4bd8-b915-ca16d4ada529",
+      "key": "dtm_landform_usgs.ecotapestry.breaks.foothills_p_250m_s0..0cm_2014_v1.0.tif",
+      "size": 240328675,
+      "checksum": "md5:f8d52746e72378b049b480b6a4320083",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_landform_usgs.ecotapestry.breaks.foothills_p_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    },
+    {
+      "id": "ab246450-ed88-4fe8-b28b-1cb2af58b56b",
+      "key": "dtm_landform_usgs.ecotapestry_c_250m_s0..0cm_2014_v1.0.tif",
+      "size": 682569316,
+      "checksum": "md5:08fb48905aaf7dc3ea66a9d6fd18edf4",
+      "links": {
+        "self": "https://zenodo.org/api/records/1464846/files/dtm_landform_usgs.ecotapestry_c_250m_s0..0cm_2014_v1.0.tif/content"
+      }
+    }
+  ],
+  "swh": {},
+  "owners": [
+    {
+      "id": "43652"
+    }
+  ],
+  "status": "published",
+  "stats": {
+    "downloads": 22864,
+    "unique_downloads": 12900,
+    "views": 6069,
+    "unique_views": 5276,
+    "version_downloads": 20243,
+    "version_unique_downloads": 10956,
+    "version_unique_views": 4457,
+    "version_views": 5218
+  },
+  "state": "done",
+  "submitted": true
+}

@@ -1,0 +1,78 @@
+{
+  "generator": "built-in image_gen",
+  "normalization": "fit_alpha_bbox",
+  "assets": [
+    {
+      "name": "scrubland",
+      "prompt": "Use case: stylized-concept. ONE new Europa Universalis V vegetation attribute icon: scrubland. Attached reference sheet shows ACTUAL native game icons. Match their exact visual language: small antique painted natural-history miniatures, desaturated earthy cream/tan/olive/brown, broad carved-looking highlights, strong dark edges, clearly separated silhouette, shallow three-quarter view. Not photoreal, not flat vector, not modern bright cartoon.\nSubject: Three SEPARATED low rounded woody shrubs, obvious empty gaps, dusty olive leaves and short crooked twigs over a tiny dry ochre ground patch. Low wide outline, not tall trees.\nDesign for a 30-pixel native geography slot, recognizable from large forms; avoid fine decoration. Subject fills roughly80percent of square512canvas. Isolated cutout, tiny soil base only, no landscape scene. NO icon frame, circle, border, labels, legend, lettering, watermarks or symbols. Output ONE icon ONLY, not a sheet.\nBackground: completely uniform solid magenta #FF00FF production matte, no checkerboard, no gradient or cast shadow outside the subject. This is removed through our established native DDS conversion.",
+      "source_filename": "exec-3b7f77b8-9dba-4a17-bcb5-18d1e07a67c2.png",
+      "chroma_key": true,
+      "original_sha256": "575b49ed38d1926333da3c5ee986141053f861e11e09980628eea5771705ba9a",
+      "prepared_sha256": "be07792e2120017a780e20a36e198f0a3f22cec78061ba5af476019074f2ae20"
+    },
+    {
+      "name": "thicket",
+      "prompt": "Use case: stylized-concept. ONE new Europa Universalis V vegetation attribute icon: thicket. Attached reference sheet shows ACTUAL native game icons. Match their exact visual language: small antique painted natural-history miniatures, desaturated earthy cream/tan/olive/brown, broad carved-looking highlights, strong dark edges, clearly separated silhouette, shallow three-quarter view. Not photoreal, not flat vector, not modern bright cartoon.\nSubject: One DENSE compact tangled mass of interlocking thorny bushes, packed woody branches, bronze-olive foliage, thick dark center. Low dense dome, clearly much denser than separated scrub bushes.\nDesign for a 30-pixel native geography slot, recognizable from large forms; avoid fine decoration. Subject fills roughly80percent of square512canvas. Isolated cutout, tiny soil base only, no landscape scene. NO icon frame, circle, border, labels, legend, lettering, watermarks or symbols. Output ONE icon ONLY, not a sheet.\nBackground: completely uniform solid magenta #FF00FF production matte, no checkerboard, no gradient or cast shadow outside the subject. This is removed through our established native DDS conversion.",
+      "source_filename": "exec-babd3e52-2eff-4ab0-8564-6e5f20412e60.png",
+      "chroma_key": true,
+      "original_sha256": "fa744eb6ef051db9f68b4a67b4b8d4eaff95a3f2e0d70979445c402742c84bd5",
+      "prepared_sha256": "38b0a3407f39cb69e0529f8c0a409a6628fb06456f22f3ab2730a2560661fd06"
+    },
+    {
+      "name": "savanna",
+      "prompt": "Use case: stylized-concept. ONE new Europa Universalis V vegetation attribute icon: savanna. Attached reference sheet shows ACTUAL native game icons. Match their exact visual language: small antique painted natural-history miniatures, desaturated earthy cream/tan/olive/brown, broad carved-looking highlights, strong dark edges, clearly separated silhouette, shallow three-quarter view. Not photoreal, not flat vector, not modern bright cartoon.\nSubject: One unmistakable FLAT-TOPPED ACACIA tree with a wide umbrella crown on a slender forked trunk, with two small straw-coloured grass clumps. Open space beneath canopy; tall sparse silhouette.\nDesign for a 30-pixel native geography slot, recognizable from large forms; avoid fine decoration. Subject fills roughly80percent of square512canvas. Isolated cutout, tiny soil base only, no landscape scene. NO icon frame, circle, border, labels, legend, lettering, watermarks or symbols. Output ONE icon ONLY, not a sheet.\nBackground: completely uniform solid magenta #FF00FF production matte, no checkerboard, no gradient or cast shadow outside the subject. This is removed through our established native DDS conversion.",
+      "source_filename": "exec-48fe7080-00f0-4306-a587-b0351d233c82.png",
+      "chroma_key": true,
+      "original_sha256": "92ff45e5e68714caee7cd8c69a873f889365ed3b88c6343720f6fb0a4afb25d7",
+      "prepared_sha256": "da6408bbccfcc2053065f418c3221719dcf482aa2e43e3b3c1037e92687a7377"
+    },
+    {
+      "name": "tundra",
+      "prompt": "Use case: stylized-concept. ONE new Europa Universalis V vegetation attribute icon: tundra. Attached reference sheet shows ACTUAL native game icons. Match their exact visual language: small antique painted natural-history miniatures, desaturated earthy cream/tan/olive/brown, broad carved-looking highlights, strong dark edges, clearly separated silhouette, shallow three-quarter view. Not photoreal, not flat vector, not modern bright cartoon.\nSubject: A very LOW mat of pale sage moss and lichen with TWO small cream-grey stones and tiny ground-hugging dwarf leaves. Cold pale grey-olive palette. No trees, no large bush, no snowflake symbol.\nDesign for a 30-pixel native geography slot, recognizable from large forms; avoid fine decoration. Subject fills roughly80percent of square512canvas. Isolated cutout, tiny soil base only, no landscape scene. NO icon frame, circle, border, labels, legend, lettering, watermarks or symbols. Output ONE icon ONLY, not a sheet.\nBackground: completely uniform solid magenta #FF00FF production matte, no checkerboard, no gradient or cast shadow outside the subject. This is removed through our established native DDS conversion.",
+      "source_filename": "exec-eed34fa6-e0c4-4ea5-91c7-077bfdb56748.png",
+      "chroma_key": true,
+      "original_sha256": "399f8ebb3d700b8179410078cd31a117103c8689b84f533a7d58488edb3c2021",
+      "prepared_sha256": "b2044dda2070a2ec97b79844c51c4c1b5fab72763a176e91aca763b9470ecc09"
+    },
+    {
+      "name": "coniferous_forest",
+      "prompt": "Use case: stylized-concept. ONE new Europa Universalis V vegetation attribute icon: coniferous forest. Attached reference sheet shows ACTUAL native game icons. Match their exact visual language: small antique painted natural-history miniatures, desaturated earthy cream/tan/olive/brown, broad carved-looking highlights, strong dark edges, clearly separated silhouette, shallow three-quarter view. Not photoreal, not flat vector, not modern bright cartoon.\nSubject: THREE tall slender evergreen conifers, strong pointed triangular tiered silhouettes, one tall center and two shorter side trees. Muted deep olive shadows, warm pale cream highlights, visible narrow brown trunks.\nDesign for a 30-pixel native geography slot, recognizable from large forms; avoid fine decoration. Subject fills roughly80percent of square512canvas. Isolated cutout, tiny soil base only, no landscape scene. NO icon frame, circle, border, labels, legend, lettering, watermarks or symbols. Output ONE icon ONLY, not a sheet.\nBackground: completely uniform solid magenta #FF00FF production matte, no checkerboard, no gradient or cast shadow outside the subject. This is removed through our established native DDS conversion.",
+      "source_filename": "exec-4befc8d3-cfca-42f8-ad48-ba1ddb03369d.png",
+      "chroma_key": true,
+      "original_sha256": "6fcf762df1c24ea570cb4884338aa1459cdc5b2c18478ee65ac10c6f7a8c96a0",
+      "prepared_sha256": "06d446370cb0f48123c96bc79801121fc93c8aef478b8e2cc87e5267e6c62a25"
+    },
+    {
+      "name": "mixed_forest",
+      "prompt": "Use case: stylized-concept. ONE new Europa Universalis V vegetation attribute icon: mixed forest. Attached reference sheet shows ACTUAL native game icons. Match their exact visual language: small antique painted natural-history miniatures, desaturated earthy cream/tan/olive/brown, broad carved-looking highlights, strong dark edges, clearly separated silhouette, shallow three-quarter view. Not photoreal, not flat vector, not modern bright cartoon.\nSubject: A compact cluster of THREE trees: pointed conifer in the center, rounded broadleaf tree to the left, smaller rounded broadleaf tree to the right. Distinct contrasting canopy SHAPES. Muted olive and warm bronze leaves, pale cream highlights.\nDesign for a 30-pixel native geography slot, recognizable from large forms; avoid fine decoration. Subject fills roughly80percent of square512canvas. Isolated cutout, tiny soil base only, no landscape scene. NO icon frame, circle, border, labels, legend, lettering, watermarks or symbols. Output ONE icon ONLY, not a sheet.\nBackground: completely uniform solid magenta #FF00FF production matte, no checkerboard, no gradient or cast shadow outside the subject. This is removed through our established native DDS conversion.",
+      "source_filename": "exec-9557cf32-8637-49c6-bf85-368dd8df2d2d.png",
+      "chroma_key": true,
+      "original_sha256": "53362c47ff36de7405cffb3de4b0a93742617c790c18cd0eb375cf0f2906c777",
+      "prepared_sha256": "c2c15432b9abe2ed5c4d169a54c5b6a22d6d54cab2fa4b91705e58d464910451"
+    },
+    {
+      "name": "dry_forest",
+      "prompt": "Use case: stylized-concept. ONE new Europa Universalis V vegetation attribute icon: dry forest. Attached reference sheet shows ACTUAL native game icons. Match their exact visual language: small antique painted natural-history miniatures, desaturated earthy cream/tan/olive/brown, broad carved-looking highlights, strong dark edges, clearly separated silhouette, shallow three-quarter view. Not photoreal, not flat vector, not modern bright cartoon.\nSubject: THREE branching dry-season broadleaf trees, sparse small tawny-brown leaf clusters and clearly exposed forked trunks/branches. Open irregular crowns, warm ochre/russet palette. Not conifers, no lush tropical canopy.\nDesign for a 30-pixel native geography slot, recognizable from large forms; avoid fine decoration. Subject fills roughly80percent of square512canvas. Isolated cutout, tiny soil base only, no landscape scene. NO icon frame, circle, border, labels, legend, lettering, watermarks or symbols. Output ONE icon ONLY, not a sheet.\nBackground: completely uniform solid magenta #FF00FF production matte, no checkerboard, no gradient or cast shadow outside the subject. This is removed through our established native DDS conversion.",
+      "source_filename": "exec-325f94b5-27e4-4c38-a3a3-aefc731313f0.png",
+      "chroma_key": true,
+      "original_sha256": "d5333c7dd1e92f157eae7cb2f86e14556fbdecaebfc593d626f0fdd5b3fcde4e",
+      "prepared_sha256": "a89e4c38e4deb501e96f581eefc93e3fdb8dc2b0a596b27ba23f46aa0e3aeca1"
+    },
+    {
+      "name": "marsh",
+      "prompt": "Create ONE new Europa Universalis V vegetation icon for marsh. Attached sheet shows native game vegetation icons: match their antique painted miniature style, earthy muted tan/olive/cream palette, dark outlines and broad pale highlights. One clump of tall straw-coloured REEDS and sedges rising from a shallow blue-grey water patch. A few bold vertical stems and broad arching leaves, NO tree. Readable at30px, simple bold silhouette, roughly80percent of square512canvas. No frame, badge, text, scene, labels or surrounding shadow. Uniform solid magenta #FF00FF background for later alpha removal; no checkerboard.",
+      "source_filename": "exec-23557750-edf1-4f62-bc29-2196106f9f75.png",
+      "chroma_key": true,
+      "original_sha256": "87c57e74154171859a0ed5abedd83ab067765e744e7f19448920a5f0a9a75f84",
+      "prepared_sha256": "9f4cb96db0e3df4d51c6e6e5426a0c0328ea77a2c521e9e635fac2acb5c49c56"
+    },
+    {
+      "name": "swamp",
+      "prompt": "Create ONE new Europa Universalis V vegetation icon for swamp. Attached sheet shows native game vegetation icons: match their antique painted miniature style, earthy muted tan/olive/cream palette, dark outlines and broad pale highlights. Two gnarled broadleaf TREES with exposed roots standing in a small blue-grey water patch. Visible thick roots and water below rounded muted olive crowns. Clearly a wooded wetland. Readable at30px, simple bold silhouette, roughly80percent of square512canvas. No frame, badge, text, scene, labels or surrounding shadow. Uniform solid magenta #FF00FF background for later alpha removal; no checkerboard.",
+      "source_filename": "exec-c785a56a-2d09-4053-82ff-45e439d314b7.png",
+      "chroma_key": true,
+      "original_sha256": "64b2e3300f1d5e7d31068d9c36be87920343ead4c473feaba8edff9fddc28196",
+      "prepared_sha256": "9feddba36d8ccb8eb9c39d68881b839e3e2d20b94a43f24c4efacb5fe39ae4eb"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "generator": "built-in image_gen",
+  "style_reference": "native EU5 geography icons",
+  "assets": [
+    {
+      "name": "very_low",
+      "prompt": "Use case: stylized-concept. Create ONE tiny Europa Universalis V geography attribute icon for soil FERTILITY. Reference image is ONLY a style reference for the existing game's painterly earth-toned geography icons; do not reproduce the sheet, text or other icons. A single broadleaf crop seedling growing from a shallow oval clod of soil, centered and viewed slightly from above/front. Compact hand-painted strategy-game inventory art, muted natural colors, warm ivory highlights, dark crisp silhouette, simple chunky leaves and large readable forms. Must remain readable at 30 by 30 pixels. Plants are generic, no specific crop, no flowers, no fruit, no tools, no water drops, no numbers, text, border or circle. Soil occupies bottom quarter, plant dominates. The same subject and consistent viewing angle across a five-grade set. Genuine transparent alpha background, no baked checkerboard and no background shadow. Square canvas. Grade 1 of 5: one short bent seedling with just TWO limp ochre leaves, desaturated straw yellow and dull olive. The plant is struggling but recognizable, not dead. Pale tan small clod.",
+      "source_filename": "exec-b97e0712-e019-4b48-97e2-17eccf1c830c.png",
+      "chroma_key": false,
+      "original_sha256": "b2d6b3cc30184cee66ff0aa5c47bfd4600bc8c77fd3af36a8ba22d58992d9f29",
+      "prepared_sha256": "f3c23fc90747b0d207ab87eeeffaffac47363b2e32bf5d28637d7471716f5eeb"
+    },
+    {
+      "name": "low",
+      "prompt": "Use case: stylized-concept. Create ONE tiny Europa Universalis V geography attribute icon for soil FERTILITY. Reference image is ONLY a style reference for the existing game's painterly earth-toned geography icons; do not reproduce the sheet, text or other icons. A single broadleaf crop seedling growing from a shallow oval clod of soil, centered and viewed slightly from above/front. Compact hand-painted strategy-game inventory art, muted natural colors, warm ivory highlights, dark crisp silhouette, simple chunky leaves and large readable forms. Must remain readable at 30 by 30 pixels. Plants are generic, no specific crop, no flowers, no fruit, no tools, no water drops, no numbers, text, border or circle. Soil occupies bottom quarter, plant dominates. The same subject and consistent viewing angle across a five-grade set. Genuine transparent alpha background, no baked checkerboard and no background shadow. Square canvas. Grade 2 of 5: a small upright seedling with TWO broad pale olive-green leaves and a short stem, sparse and modest. Tan-brown small clod.",
+      "source_filename": "exec-e1fdd7e4-b572-445b-b93b-99ce0d98ed42.png",
+      "chroma_key": false,
+      "original_sha256": "4f1483f366595a32a7c5556d77843e7e009a1af8d38a96479ba680558a5d8c29",
+      "prepared_sha256": "83887818165f849d524e5380386d935672457bfacf0caaddec3398027094af90"
+    },
+    {
+      "name": "moderate",
+      "prompt": "Use case: stylized-concept. Create ONE tiny Europa Universalis V geography attribute icon for soil FERTILITY. Reference image is ONLY a style reference for the existing game's painterly earth-toned geography icons; do not reproduce the sheet, text or other icons. A single broadleaf crop seedling growing from a shallow oval clod of soil, centered and viewed slightly from above/front. Compact hand-painted strategy-game inventory art, muted natural colors, warm ivory highlights, dark crisp silhouette, simple chunky leaves and large readable forms. Must remain readable at 30 by 30 pixels. Plants are generic, no specific crop, no flowers, no fruit, no tools, no water drops, no numbers, text, border or circle. Soil occupies bottom quarter, plant dominates. The same subject and consistent viewing angle across a five-grade set. Genuine transparent alpha background, no baked checkerboard and no background shadow. Square canvas. Grade 3 of 5: one sturdy upright seedling with FOUR distinct broad medium-green leaves, symmetrical enough to read clearly, modest healthy growth. Warm brown small clod.",
+      "source_filename": "exec-dc630bfa-b1c6-4989-b9ea-d2a21c4adf89.png",
+      "chroma_key": false,
+      "original_sha256": "b17b16b0065e6baa6c6011ae26dde95423c1024478a776a3cdb8126adb73f8fd",
+      "prepared_sha256": "8a1b07b9cd8179cad573c9f28942e35ac482a1580da8f37ac09c3add32c08bc9"
+    },
+    {
+      "name": "high",
+      "prompt": "Use case: stylized-concept. Create ONE tiny Europa Universalis V geography attribute icon for soil FERTILITY. Reference image is ONLY a style reference for the existing game's painterly earth-toned geography icons; do not reproduce the sheet, text or other icons. A single broadleaf crop seedling growing from a shallow oval clod of soil, centered and viewed slightly from above/front. Compact hand-painted strategy-game inventory art, muted natural colors, warm ivory highlights, dark crisp silhouette, simple chunky leaves and large readable forms. Must remain readable at 30 by 30 pixels. Plants are generic, no specific crop, no flowers, no fruit, no tools, no water drops, no numbers, text, border or circle. Soil occupies bottom quarter, plant dominates. The same subject and consistent viewing angle across a five-grade set. Genuine transparent alpha background, no baked checkerboard and no background shadow. Square canvas. Grade 4 of 5: a robust upright small plant with SIX broad healthy deep olive-green leaves forming a full compact branching silhouette. Rich brown small clod.",
+      "source_filename": "exec-afb8c036-86f6-4d7b-87bc-7a849c005d20.png",
+      "chroma_key": false,
+      "original_sha256": "2b3f70f99284621a7e046af0a2afc4f5647cea698fd351c7024b5ce35aed67fd",
+      "prepared_sha256": "8d1283c29fb51ebf75b612606a4fe6dfcd66fbe8c9eca6b3dfcfd0fee4c5afa9"
+    },
+    {
+      "name": "very_high",
+      "prompt": "Use case: stylized-concept. Create ONE tiny Europa Universalis V geography attribute icon for soil FERTILITY. Reference image is ONLY a style reference for the existing game's painterly earth-toned geography icons; do not reproduce the sheet, text or other icons. A single broadleaf crop seedling growing from a shallow oval clod of soil, centered and viewed slightly from above/front. Compact hand-painted strategy-game inventory art, muted natural colors, warm ivory highlights, dark crisp silhouette, simple chunky leaves and large readable forms. Must remain readable at 30 by 30 pixels. Plants are generic, no specific crop, no flowers, no fruit, no tools, no water drops, no numbers, text, border or circle. Soil occupies bottom quarter, plant dominates. The same subject and consistent viewing angle across a five-grade set. Genuine transparent alpha background, no baked checkerboard and no background shadow. Square canvas. Grade 5 of 5: one lush compact plant with EIGHT broad vigorous rich-green leaves in a tiered full silhouette, taller and fuller than an ordinary four-leaf seedling. Golden-green highlights on upper leaves. Deep brown small clod. Keep leaves large and avoid tiny detailing.",
+      "source_filename": "exec-84fce4ce-4216-40b2-ba05-c391c8dc978c.png",
+      "chroma_key": false,
+      "original_sha256": "909bb273d314908c665b08061740c06a31f38a63251c51650c79cd2a990123eb",
+      "prepared_sha256": "dd3a3b4c00996830b8099347da4cde38642c83dd878a7aeccfcc5ef5d55bd9db"
+    }
+  ]
+}

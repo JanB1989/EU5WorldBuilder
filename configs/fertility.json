@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "source_directory": "data/raw/documentation/soil_audit",
+  "output_directory": "artifacts/fertility",
+  "sources": [
+    {
+      "url": "https://www.fao.org/land-water/resources/tools/databases/hwsd/en",
+      "role": "HWSD2 topsoil chemistry, D1 (0-20 cm); cached database and native raster"
+    },
+    {
+      "url": "https://www.fao.org/fileadmin/templates/nr/documents/HWSD/HWSD_Documentation.pdf",
+      "role": "pH and CEC interpretation, base saturation correlation; pp. 13-15"
+    },
+    {
+      "url": "https://www.fao.org/soils-portal/data-hub/soil-maps-and-databases/harmonized-world-soil-database-v12/soil-qualities-description/en/",
+      "role": "Separate nutrient availability/retention from rooting, oxygen, workability; limiting-factor principle"
+    }
+  ],
+  "cec_breaks": [
+    4,
+    10,
+    20,
+    40
+  ],
+  "ph_breaks": [
+    4.5,
+    5.5,
+    7.2,
+    8.5
+  ],
+  "ph_scores": [
+    1,
+    3,
+    5,
+    4,
+    1
+  ],
+  "base_saturation_breaks": [
+    20,
+    50
+  ],
+  "base_saturation_scores": [
+    1,
+    3,
+    5
+  ],
+  "constraint_caps": {
+    "ELEC_COND": [
+      [
+        4,
+        3
+      ],
+      [
+        8,
+        2
+      ],
+      [
+        16,
+        1
+      ]
+    ],
+    "ESP": [
+      [
+        15,
+        2
+      ],
+      [
+        30,
+        1
+      ]
+    ],
+    "ALUM_SAT": [
+      [
+        50,
+        2
+      ],
+      [
+        80,
+        1
+      ]
+    ]
+  },
+  "chemistry_valid_ranges": {
+    "PH_WATER": [
+      1,
+      14
+    ],
+    "CEC_SOIL": [
+      0,
+      200
+    ],
+    "BSAT": [
+      0,
+      100
+    ],
+    "ELEC_COND": [
+      0,
+      100
+    ],
+    "ESP": [
+      0,
+      100
+    ],
+    "ALUM_SAT": [
+      0,
+      100
+    ]
+  },
+  "limiting_factor_weight": 0.5,
+  "levels": {
+    "very_low": {
+      "id": 1,
+      "label": "Very low",
+      "color": [
+        168,
+        64,
+        59
+      ],
+      "description": "Strong chemical limitations restrict the soil's ability to supply or retain plant nutrients."
+    },
+    "low": {
+      "id": 2,
+      "label": "Low",
+      "color": [
+        215,
+        125,
+        64
+      ],
+      "description": "Limited nutrient supply or retention makes cultivation more demanding."
+    },
+    "moderate": {
+      "id": 3,
+      "label": "Moderate",
+      "color": [
+        219,
+        191,
+        100
+      ],
+      "description": "The soil offers a reasonable balance of nutrient availability and retention."
+    },
+    "high": {
+      "id": 4,
+      "label": "High",
+      "color": [
+        139,
+        182,
+        94
+      ],
+      "description": "Favourable soil chemistry provides a strong foundation for cultivation."
+    },
+    "very_high": {
+      "id": 5,
+      "label": "Very high",
+      "color": [
+        55,
+        139,
+        80
+      ],
+      "description": "Exceptionally favourable nutrient availability and retention support demanding cultivation."
+    }
+  }
+}

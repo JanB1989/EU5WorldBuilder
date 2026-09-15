@@ -1,0 +1,4 @@
+# Copy to geography_test.local.toml; native WSL/Linux paths.
+[paths]
+game_root = "/mnt/c/Games/steamapps/common/Europa Universalis V"
+live_mod_parent = "/mnt/c/Users/YOUR_USER/Documents/Paradox Interactive/Europa Universalis V/mod"

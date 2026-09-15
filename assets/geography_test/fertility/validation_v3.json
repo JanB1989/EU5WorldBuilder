@@ -1,0 +1,40 @@
+{
+  "revision": 3,
+  "checks": {
+    "all_five_rgba_dds": true,
+    "ordered_silhouette_heights": true,
+    "fertility_data_unchanged": true,
+    "deployed_byte_parity": true,
+    "verified_deployed_files": 50,
+    "relevant_tests_passed": 14
+  },
+  "silhouettes": [
+    {
+      "name": "very_low",
+      "silhouette_top_px": 220,
+      "silhouette_bottom_px": 480
+    },
+    {
+      "name": "low",
+      "silhouette_top_px": 156,
+      "silhouette_bottom_px": 463
+    },
+    {
+      "name": "moderate",
+      "silhouette_top_px": 131,
+      "silhouette_bottom_px": 480
+    },
+    {
+      "name": "high",
+      "silhouette_top_px": 84,
+      "silhouette_bottom_px": 480
+    },
+    {
+      "name": "very_high",
+      "silhouette_top_px": 25,
+      "silhouette_bottom_px": 488
+    }
+  ],
+  "fertility_csv_sha256": "d2dd938b3400af399eaa8a0d3168b285de100861a61c3c47d75e33914e1268d7",
+  "in_game_visual_status": "Awaiting user restart/reload; actual30px native-frame preview inspected."
+}

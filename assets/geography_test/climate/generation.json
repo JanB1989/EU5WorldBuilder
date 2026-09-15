@@ -1,0 +1,66 @@
+{
+  "tool": "built-in image_gen",
+  "processing": "Original RGBA alpha preserved; crop transparent margins and scale to 464px within 512px canvas. Native 60px frames are copied unchanged.",
+  "icons": {
+    "tropical_monsoon": {
+      "prompt": "Create ONE small EU5 historical strategy game climate icon. a small strong ivory sun partly hidden behind a large dark warm-grey raincloud, five thick heavy rain drops beneath, warm humid monsoon. Hand-painted antique ivory, muted gold and taupe weather emblem, subtle shaded relief and dark fine outline, matching Europa Universalis geography weather symbols. Readable at 30 pixels: bold silhouette, only 2-3 main forms, sparse large details. Centered compact square composition occupying 70 percent of canvas with generous margins. No text, no border, no badge, no scenery, no gradients in background. Genuinely transparent background, no checkerboard. One icon only.",
+      "original": "originals/tropical_monsoon.png",
+      "original_sha256": "3f9365fa3ff34e7068828ebf98ce5482b1e150408dcfdd44b2385943cb72b1c9",
+      "master_sha256": "200ebaa8a59ec88eb02ca61f3693c1c8e6e1d54c73b46c7011bf92f7ba4f8954"
+    },
+    "savanna": {
+      "prompt": "Create ONE small EU5 historical strategy game climate icon. a large warm ivory sun with a tiny pale cloud beside it and two sparse rain drops, strong contrast of sun and scarce seasonal rain. Hand-painted antique ivory, muted gold and taupe weather emblem, subtle shaded relief and dark fine outline, matching Europa Universalis geography weather symbols. Readable at 30 pixels: bold silhouette, only 2-3 main forms, sparse large details. Centered compact square composition occupying 70 percent of canvas with generous margins. No text, no border, no badge, no scenery, no gradients in background. Genuinely transparent background, no checkerboard. One icon only.",
+      "original": "originals/savanna.png",
+      "original_sha256": "9311812ccd508473e108fe10276f6de7110671c6825d0ad95a3956efb1e0748e",
+      "master_sha256": "2a24bba3ceccaceb28972c34e555e3ed27371296e48f4beb3f1751d22b34bacf"
+    },
+    "hot_steppe": {
+      "prompt": "Create ONE small EU5 historical strategy game climate icon. large warm ivory sun above a very small dry ochre wind curl, tiny soft cloud at edge; semi-arid warmth. Hand-painted antique ivory, muted gold and taupe weather emblem, subtle shaded relief and dark fine outline, matching Europa Universalis geography weather symbols. Readable at 30 pixels: bold silhouette, only 2-3 main forms, sparse large details. Centered compact square composition occupying 70 percent of canvas with generous margins. No text, no border, no badge, no scenery, no gradients in background. Genuinely transparent background, no checkerboard. One icon only.",
+      "original": "originals/hot_steppe.png",
+      "original_sha256": "76c53c8f1449fc857365ca55463539acd577dbfacbc05a5fbe56b7ccb608ad83",
+      "master_sha256": "fd744f2c7a0da2e5f2ed923370b9e0cd09b51ca95733701a7d3bb2cd95599605"
+    },
+    "cold_steppe": {
+      "prompt": "Create ONE small EU5 historical strategy game climate icon. a modest ivory sun beside a small ivory snowflake and a dry ochre wind curl; cold semi-arid weather. Hand-painted antique ivory, muted gold and taupe weather emblem, subtle shaded relief and dark fine outline, matching Europa Universalis geography weather symbols. Readable at 30 pixels: bold silhouette, only 2-3 main forms, sparse large details. Centered compact square composition occupying 70 percent of canvas with generous margins. No text, no border, no badge, no scenery, no gradients in background. Genuinely transparent background, no checkerboard. One icon only.",
+      "original": "originals/cold_steppe.png",
+      "original_sha256": "9f81858a6831c2d0f98e1c845dc64349e2168c7ef56bb96d749d92fcbe39b811",
+      "master_sha256": "e02f3607133eead5326f3905707f027188fed7f7d981878566b29fbf138aba8d"
+    },
+    "subtropical_monsoon": {
+      "prompt": "Create ONE small EU5 historical strategy game climate icon. a partly concealed medium sun behind a thick rain cloud, three thick drops beneath; cooler than tropical monsoon. Hand-painted antique ivory, muted gold and taupe weather emblem, subtle shaded relief and dark fine outline, matching Europa Universalis geography weather symbols. Readable at 30 pixels: bold silhouette, only 2-3 main forms, sparse large details. Centered compact square composition occupying 70 percent of canvas with generous margins. No text, no border, no badge, no scenery, no gradients in background. Genuinely transparent background, no checkerboard. One icon only.",
+      "original": "originals/subtropical_monsoon.png",
+      "original_sha256": "1a15f018acf2c31d8ecd082046788ee3231f1b00bd79dd82bf10bf711d96754c",
+      "master_sha256": "b5cf57515e2e81143bd7ff1e3be12568186283be114bbae19e36fd7a3e2e6370"
+    },
+    "highland_monsoon": {
+      "prompt": "Create ONE small EU5 historical strategy game climate icon. small muted sun and raincloud with three heavy drops above a very small single rocky peak silhouette; cool rainy highland. Hand-painted antique ivory, muted gold and taupe weather emblem, subtle shaded relief and dark fine outline, matching Europa Universalis geography weather symbols. Readable at 30 pixels: bold silhouette, only 2-3 main forms, sparse large details. Centered compact square composition occupying 70 percent of canvas with generous margins. No text, no border, no badge, no scenery, no gradients in background. Genuinely transparent background, no checkerboard. One icon only.",
+      "original": "originals/highland_monsoon.png",
+      "original_sha256": "ad6e1b8e9fa83b46fb1f27c02ba1f35bc5b3ce35e1324d45cf0b774618874746",
+      "master_sha256": "4ef4ffbf46609a5d789495f95cd8b793cc8fe44a579f7c3d5967abf23fca205d"
+    },
+    "subpolar_oceanic": {
+      "prompt": "Create ONE small EU5 historical strategy game climate icon. large pale grey cloud with two thick drops and one small snowflake beneath, no sun; chilly maritime weather. Hand-painted antique ivory, muted gold and taupe weather emblem, subtle shaded relief and dark fine outline, matching Europa Universalis geography weather symbols. Readable at 30 pixels: bold silhouette, only 2-3 main forms, sparse large details. Centered compact square composition occupying 70 percent of canvas with generous margins. No text, no border, no badge, no scenery, no gradients in background. Genuinely transparent background, no checkerboard. One icon only.",
+      "original": "originals/subpolar_oceanic.png",
+      "original_sha256": "0883416eb30436477df3a1ea11509dcf440d949da0493af54783717356cb1712",
+      "master_sha256": "68cbabd55a70eb7dd3bd23aa1b06bc153ad32675fceff4c600d8710a48febdfb"
+    },
+    "dry_summer_continental": {
+      "prompt": "Create ONE small EU5 historical strategy game climate icon. large ivory sun beside a single medium ivory snowflake, tiny cloud low beneath; dry summer cold winter. Hand-painted antique ivory, muted gold and taupe weather emblem, subtle shaded relief and dark fine outline, matching Europa Universalis geography weather symbols. Readable at 30 pixels: bold silhouette, only 2-3 main forms, sparse large details. Centered compact square composition occupying 70 percent of canvas with generous margins. No text, no border, no badge, no scenery, no gradients in background. Genuinely transparent background, no checkerboard. One icon only.",
+      "original": "originals/dry_summer_continental.png",
+      "original_sha256": "c29d2c8bc74bfbe8fd45fdbae647e461dadb7a6b57ecafb174c84a74d582cfd7",
+      "master_sha256": "fcafe672516e0eb2f627b6313261cc5e6ae50a6c676942eacb0aca74ca013148"
+    },
+    "continental_monsoon": {
+      "prompt": "Create ONE small EU5 historical strategy game climate icon. thick raincloud with three heavy rain drops and a medium ivory snowflake to its right, small sun behind cloud; rainy summer cold winter. Hand-painted antique ivory, muted gold and taupe weather emblem, subtle shaded relief and dark fine outline, matching Europa Universalis geography weather symbols. Readable at 30 pixels: bold silhouette, only 2-3 main forms, sparse large details. Centered compact square composition occupying 70 percent of canvas with generous margins. No text, no border, no badge, no scenery, no gradients in background. Genuinely transparent background, no checkerboard. One icon only.",
+      "original": "originals/continental_monsoon.png",
+      "original_sha256": "67793c0ac0780701f41b1b974384c226b113b2bce4223c49dfc055de4dbf1237",
+      "master_sha256": "4f8606c0fb6300e9ee208f432d4bbb65d96a8e7405e52f73edbac06a99a4127c"
+    },
+    "subarctic": {
+      "prompt": "Create ONE small EU5 historical strategy game climate icon. large ivory snowflake and a pale grey small cloud above it, tiny weak sun peeking behind; long cold winter short summer. Hand-painted antique ivory, muted gold and taupe weather emblem, subtle shaded relief and dark fine outline, matching Europa Universalis geography weather symbols. Readable at 30 pixels: bold silhouette, only 2-3 main forms, sparse large details. Centered compact square composition occupying 70 percent of canvas with generous margins. No text, no border, no badge, no scenery, no gradients in background. Genuinely transparent background, no checkerboard. One icon only.",
+      "original": "originals/subarctic.png",
+      "original_sha256": "770dd79faba69510bfb927262ba242d25e2de728be40d191dea57b4b20e89a89",
+      "master_sha256": "5bad4afb1f402b2bf6d099aafd6d17e7c1c5507f734f9aad96c0a02ddd109780"
+    }
+  }
+}

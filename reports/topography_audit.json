@@ -1,0 +1,27 @@
+{
+  "engineering_pass": true,
+  "ownable_locations": 20893,
+  "total_zones": 28573,
+  "missing": 0,
+  "native_types_retained": 22,
+  "added_types": 4,
+  "vegetation_climate_and_other_template_fields_unchanged": true,
+  "dds_rgba": true,
+  "native_parent_mechanics_preserved": true,
+  "no_retired_debug_topography": true,
+  "distribution": {
+    "flatland": 7529,
+    "hills": 4327,
+    "plateau": 2465,
+    "mountains": 2390,
+    "floodplains": 1701,
+    "wetlands": 1268,
+    "valleys": 571,
+    "rolling": 382,
+    "deltas": 173,
+    "atoll": 83,
+    "mountain_wasteland": 4
+  },
+  "engine_visual_status": "Requires restart/new campaign and user check",
+  "scientific_status": "Evidence-guided geographic prototype; modern broad landforms extrapolated to 1300, not surveyed medieval boundaries."
+}

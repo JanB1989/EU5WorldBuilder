@@ -1,0 +1,74 @@
+{
+  "revision": 3,
+  "plant": "Same generic broadleaf seedling, four oval leaves in two opposite pairs, same age and species",
+  "invariants": [
+    "same soil patch and ground line",
+    "same leaf shape",
+    "same viewpoint and painted style",
+    "no grain, fruits or different species"
+  ],
+  "research": [
+    {
+      "url": "https://www.extension.umd.edu/resource/nutrient-deficiency-trees-and-shrubs",
+      "finding": "Reduced shoot growth and leaf size are useful nutrition cues; exact symptoms and colour depend on deficiency."
+    },
+    {
+      "url": "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html",
+      "finding": "Colour should be accompanied by another visible distinction; use ordered size/fullness and posture here."
+    }
+  ],
+  "colour_interpretation": "Semantic map legend colours, not a claim that all nutrient-starved plants turn red.",
+  "normalization": "Fixed soil width and bottom ground line. Increasing foliage size is retained; do not fit each icon to identical overall bounds.",
+  "levels": [
+    {
+      "name": "very_low",
+      "legend_rgb": [
+        168,
+        64,
+        59
+      ],
+      "relative_plant_height": 0.42,
+      "posture": "stunted, contracted, strongly drooping"
+    },
+    {
+      "name": "low",
+      "legend_rgb": [
+        215,
+        125,
+        64
+      ],
+      "relative_plant_height": 0.56,
+      "posture": "short, small leaves, partly drooping"
+    },
+    {
+      "name": "moderate",
+      "legend_rgb": [
+        219,
+        191,
+        100
+      ],
+      "relative_plant_height": 0.7,
+      "posture": "medium plant with open level leaves"
+    },
+    {
+      "name": "high",
+      "legend_rgb": [
+        139,
+        182,
+        94
+      ],
+      "relative_plant_height": 0.85,
+      "posture": "upright vigorous plant with large open leaves"
+    },
+    {
+      "name": "very_high",
+      "legend_rgb": [
+        55,
+        139,
+        80
+      ],
+      "relative_plant_height": 1.0,
+      "posture": "fullest upright plant with the broadest leaves"
+    }
+  ]
+}

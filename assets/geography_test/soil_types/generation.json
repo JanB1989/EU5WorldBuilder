@@ -1,0 +1,71 @@
+{
+  "style_reference": "Vanilla EU5 geography icons: farmland, grasslands, desert, sparse, woods, forest, flatland, hills, mountains and wetlands.",
+  "assets": [
+    {
+      "name": "sand",
+      "chroma_key": true,
+      "prompt": "Use case: stylized-concept. Asset: a single small EU5 location-geography SOIL TYPE icon, a painterly raster cutout, designed to remain legible at 30x30 pixels and delivered on a genuinely transparent background. The attached sheet is ONLY a style reference, not an edit target: match its restrained antique parchment/ivory/ochre/umber palette, dark brown outlines, hand-painted shaded relief, simple strong silhouette, slightly elevated three-quarter view, and compact isolated natural object. Do not copy the green sheet background or the labels. One icon only, centered square canvas, roughly 80% width and 75% height occupied. No circle, shield, frame, UI container, writing, label, badge, people, tools or scene. Make the soil material itself the recognizable symbol. No glossy 3D, no vector flat design, no colorful clipart, no surrounding cast shadow. Preserve real transparent alpha around the subject. \nSubject: SAND: a small pale golden-beige mound of loose sand with two flowing ridges, soft granular slopes and a few coarse grains along its base. Distinctively loose and flowing, in the same small terrain-emblem style as the reference desert icon.",
+      "tool": "built-in image_gen",
+      "background_correction": "Image-gen edit to solid magenta; deterministic alpha extraction during texture preparation",
+      "generated_asset": "exec-595b51cb-0139-404f-adc6-78eba9a328f9.png",
+      "original_file": "originals/sand.png",
+      "original_sha256": "a34334169c40041c3c32f6f9963b66b15a4f9fcd398e8b8916da87ee9dd546f9",
+      "prepared_sha256": "5342552db5c617851112eee8448a905353733227e9cea4a3a443e85f01e1117c"
+    },
+    {
+      "name": "loam",
+      "chroma_key": false,
+      "prompt": "Use case: stylized-concept. Asset: a single small EU5 location-geography SOIL TYPE icon, a painterly raster cutout, designed to remain legible at 30x30 pixels and delivered on a genuinely transparent background. The attached sheet is ONLY a style reference, not an edit target: match its restrained antique parchment/ivory/ochre/umber palette, dark brown outlines, hand-painted shaded relief, simple strong silhouette, slightly elevated three-quarter view, and compact isolated natural object. Do not copy the green sheet background or the labels. One icon only, centered square canvas, roughly 80% width and 75% height occupied. No circle, shield, frame, UI container, writing, label, badge, people, tools or scene. Make the soil material itself the recognizable symbol. No glossy 3D, no vector flat design, no colorful clipart, no surrounding cast shadow. Preserve real transparent alpha around the subject. \nSubject: LOAM: a compact mound of friable, crumbly medium-brown earth, three or four rounded irregular soil clods and clearly granular broken edges. Balanced warm earth colors with parchment highlights. No plants or crops; recognizable loose crumb structure, not smooth clay and not rocks.",
+      "tool": "built-in image_gen",
+      "background_correction": null,
+      "generated_asset": "exec-368cd139-8762-4cda-83be-4acfbc2d7023.png",
+      "original_file": "originals/loam.png",
+      "original_sha256": "164670f707642df3104413bf9d870807ce766a35d2ee54d7ef8a7e6691e9a4ed",
+      "prepared_sha256": "437c4ef91f003bf6731b2f8e554cc1bee4ffdee9db4a2b272e5ce755b4b4be5b"
+    },
+    {
+      "name": "silt",
+      "chroma_key": true,
+      "prompt": "Use case: stylized-concept. Asset: a single small EU5 location-geography SOIL TYPE icon, a painterly raster cutout, designed to remain legible at 30x30 pixels and delivered on a genuinely transparent background. The attached sheet is ONLY a style reference, not an edit target: match its restrained antique parchment/ivory/ochre/umber palette, dark brown outlines, hand-painted shaded relief, simple strong silhouette, slightly elevated three-quarter view, and compact isolated natural object. Do not copy the green sheet background or the labels. One icon only, centered square canvas, roughly 80% width and 75% height occupied. No circle, shield, frame, UI container, writing, label, badge, people, tools or scene. Make the soil material itself the recognizable symbol. No glossy 3D, no vector flat design, no colorful clipart, no surrounding cast shadow. Preserve real transparent alpha around the subject. \nSubject: SILT: a low rounded cutaway patch of fine pale grey-tan sediment, smooth broad top and three thin horizontal sediment layers exposed along its front edge, softly eroded edges. Distinct smooth fine powdery material, no visible stones or granular sand dunes, no water or plants.",
+      "tool": "built-in image_gen",
+      "background_correction": "Image-gen edit to solid magenta; deterministic alpha extraction during texture preparation",
+      "generated_asset": "exec-84aede21-7a7e-414e-a04a-bbcc5cf7a45c.png",
+      "original_file": "originals/silt.png",
+      "original_sha256": "dde1eeacc0c4cf6ec68eb062e560083fc9feffcba16e64f8d51adc5d7e97807a",
+      "prepared_sha256": "7b1fc38d2fb2315e1647d080113ef13bf129fc862c53f7ec62e3dbfab405a74c"
+    },
+    {
+      "name": "clay",
+      "chroma_key": true,
+      "prompt": "Use case: stylized-concept. Asset: a single small EU5 location-geography SOIL TYPE icon, a painterly raster cutout, designed to remain legible at 30x30 pixels and delivered on a genuinely transparent background. The attached sheet is ONLY a style reference, not an edit target: match its restrained antique parchment/ivory/ochre/umber palette, dark brown outlines, hand-painted shaded relief, simple strong silhouette, slightly elevated three-quarter view, and compact isolated natural object. Do not copy the green sheet background or the labels. One icon only, centered square canvas, roughly 80% width and 75% height occupied. No circle, shield, frame, UI container, writing, label, badge, people, tools or scene. Make the soil material itself the recognizable symbol. No glossy 3D, no vector flat design, no colorful clipart, no surrounding cast shadow. Preserve real transparent alpha around the subject. \nSubject: CLAY: a compact ochre-brown cohesive lump with a broad top divided into three or four large polygonal drying cracks, smooth dense side surfaces and a few angular broken edges. Muted terracotta only within the native sepia palette; bold cracks remain readable at 30 pixels. Not a brick, pot, tiled floor or building.",
+      "tool": "built-in image_gen",
+      "background_correction": "Image-gen edit to solid magenta; deterministic alpha extraction during texture preparation",
+      "generated_asset": "exec-9ac459bb-0b40-4185-b2cb-d6ec82939a96.png",
+      "original_file": "originals/clay.png",
+      "original_sha256": "5d5be7a077c029fff07e83b2bdc2f3d8922ca891eacaa6506b05294a97a695df",
+      "prepared_sha256": "57d3c7bddfa0d00358d0d73d0ca10a76c0a9be9bc2ab38be42e36fb6f6709e08"
+    },
+    {
+      "name": "peat",
+      "chroma_key": true,
+      "prompt": "Use case: stylized-concept. Asset: a single small EU5 location-geography SOIL TYPE icon, a painterly raster cutout, designed to remain legible at 30x30 pixels and delivered on a genuinely transparent background. The attached sheet is ONLY a style reference, not an edit target: match its restrained antique parchment/ivory/ochre/umber palette, dark brown outlines, hand-painted shaded relief, simple strong silhouette, slightly elevated three-quarter view, and compact isolated natural object. Do not copy the green sheet background or the labels. One icon only, centered square canvas, roughly 80% width and 75% height occupied. No circle, shield, frame, UI container, writing, label, badge, people, tools or scene. Make the soil material itself the recognizable symbol. No glossy 3D, no vector flat design, no colorful clipart, no surrounding cast shadow. Preserve real transparent alpha around the subject. \nSubject: PEAT: an irregular low clump of dark umber organic peat, a torn fibrous edge and a few prominent woven root strands, layered organic material with pale tan highlights. Very restrained two short dry straw strands at the edge if needed for recognition; no living crop or swamp scene. Bold dark fibrous silhouette.",
+      "tool": "built-in image_gen",
+      "background_correction": "Image-gen edit to solid magenta; deterministic alpha extraction during texture preparation",
+      "generated_asset": "exec-143c96f7-6aec-4196-8688-7fb9f63048a7.png",
+      "original_file": "originals/peat.png",
+      "original_sha256": "2abc56ec20835eaba6e14847af6523957dc9908003fdfad12acf32e60fd07fe8",
+      "prepared_sha256": "8a00ee64f2760d24efcdaa24f2dbb76eff61afeb3a5c1752542d6ac9935e2578"
+    },
+    {
+      "name": "stony",
+      "chroma_key": false,
+      "prompt": "Use case: stylized-concept. Asset: a single small EU5 location-geography SOIL TYPE icon, a painterly raster cutout, designed to remain legible at 30x30 pixels and delivered on a genuinely transparent background. The attached sheet is ONLY a style reference, not an edit target: match its restrained antique parchment/ivory/ochre/umber palette, dark brown outlines, hand-painted shaded relief, simple strong silhouette, slightly elevated three-quarter view, and compact isolated natural object. Do not copy the green sheet background or the labels. One icon only, centered square canvas, roughly 80% width and 75% height occupied. No circle, shield, frame, UI container, writing, label, badge, people, tools or scene. Make the soil material itself the recognizable symbol. No glossy 3D, no vector flat design, no colorful clipart, no surrounding cast shadow. Preserve real transparent alpha around the subject. \nSubject: STONY: a low patch of earth largely occupied by five or six clearly separate irregular grey-beige stones and rounded pebbles of varied sizes, dark gaps between the stones and a little fine earth at the base. Muted parchment highlights, robust dark contour; not a mountain or rock cliff.",
+      "tool": "built-in image_gen",
+      "background_correction": null,
+      "generated_asset": "exec-9bea166e-bcc0-4579-aace-07690f74474e.png",
+      "original_file": "originals/stony.png",
+      "original_sha256": "4a1d121b8e1aabbed5df62d375127acf63b1d95f9465028b20ded2011831c9dd",
+      "prepared_sha256": "4d93942aaab192544abe1972f61938f632d192b8f21223e27dc9ff5ba69fff96"
+    }
+  ]
+}

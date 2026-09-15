@@ -1,0 +1,13 @@
+{
+  "pass": true,
+  "ownable_locations": 20893,
+  "all_zones": 28573,
+  "climate_definitions": 18,
+  "native_climates_preserved": 8,
+  "new_icons_verified": 10,
+  "maximum_winter_map_uses_climate_limits": true,
+  "native_fallbacks": 8,
+  "topography_and_vegetation_preserved": true,
+  "deployed_files_verified": 98,
+  "engine_visual_check": "Requires game restart and new campaign; not automatically verified"
+}

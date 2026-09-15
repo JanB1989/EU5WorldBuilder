@@ -1,0 +1,1 @@
+Land Clearance artwork imported from the user-owned Prosper or Perish mod. This local test uses the existing icon; no new artwork generated. Vanilla geography icons are copied from the locally configured game installation during builds and are not committed.

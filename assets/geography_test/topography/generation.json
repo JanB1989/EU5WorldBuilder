@@ -1,0 +1,39 @@
+{
+  "generator": "built-in image_gen",
+  "normalization": "fit_alpha_bbox",
+  "background_removal": "edge-connected neutral checker background, deterministic alpha extraction",
+  "assets": [
+    {
+      "name": "rolling",
+      "prompt": "Create ONE isolated EU5 topography attribute icon, matching the supplied reference sheet's antique hand-painted small terrain relief symbols. Reference is STYLE ONLY, do not copy the sheet or any labels. Rolling Terrain: three very low broad rounded undulations in a single earth terrain tile. GENTLE waves, not high hills or peaks. Cream tan earth with subtle olive grass on ridges. Viewed obliquely from above, compact bold silhouette, earthy ivory/tan with dark brown outlines and painted shadows; blue water only where specified. Must be readable at 30 pixels. No text, no frame, no circles, no buildings, no trees, no decorative details. Subject centered and fills 80% of square canvas. Genuinely transparent background, clean alpha edges. Return one square PNG icon.",
+      "source_filename": "exec-c2457e31-8698-4c85-943a-0266f980848f.png",
+      "chroma_key": false,
+      "original_sha256": "eddfd3095c40ffee2fa8fc9b32bc5a0c8a700ddfc05e7ae6c81036318b8de738",
+      "prepared_sha256": "58e295361218cfd0a49ef4a7604e8b1c35a7cef528b3aa529107c8614f1c59ee"
+    },
+    {
+      "name": "valleys",
+      "prompt": "Create ONE isolated EU5 topography attribute icon, matching the supplied reference sheet's antique hand-painted small terrain relief symbols. Reference is STYLE ONLY, do not copy the sheet or any labels. Valleys: one broad flat cream-colored valley floor running front to back, enclosed by two higher sloping rocky sides. Clear wide central U-shaped opening, no river required. Viewed obliquely from above, compact bold silhouette, earthy ivory/tan with dark brown outlines and painted shadows; blue water only where specified. Must be readable at 30 pixels. No text, no frame, no circles, no buildings, no trees, no decorative details. Subject centered and fills 80% of square canvas. Genuinely transparent background, clean alpha edges. Return one square PNG icon.",
+      "source_filename": "exec-b5fa38cb-af41-43b9-96aa-6d5fd556af2e.png",
+      "chroma_key": false,
+      "original_sha256": "544bda9fa7db222fd2d074f92782d75b825ad498f47e011498c16b1790069627",
+      "prepared_sha256": "4d9d9f50c33ebe4cc7c4bf7befe4b04b9303cf294771bb772e9d85f6ac7f55a2"
+    },
+    {
+      "name": "floodplains",
+      "prompt": "Create ONE isolated EU5 topography attribute icon, matching the supplied reference sheet's antique hand-painted small terrain relief symbols. Reference is STYLE ONLY, do not copy the sheet or any labels. Floodplains: a broad nearly flat tan silt land tile with one winding blue river meander through its middle. Slight olive green low banks, visually dominant wide flat land. No mountains, no branching river. Viewed obliquely from above, compact bold silhouette, earthy ivory/tan with dark brown outlines and painted shadows; blue water only where specified. Must be readable at 30 pixels. No text, no frame, no circles, no buildings, no trees, no decorative details. Subject centered and fills 80% of square canvas. Genuinely transparent background, clean alpha edges. Return one square PNG icon.",
+      "source_filename": "exec-d943d435-a5fc-42f4-94d7-57f1fe1fb2da.png",
+      "chroma_key": false,
+      "original_sha256": "95b264cb6af771b946a454a3f7a81366e82327129d402a9307b37155100a9172",
+      "prepared_sha256": "f2de94165647a5a41941b59111c27cd8257bf5b8c0c2e9f5eaeaffe234afbc8a"
+    },
+    {
+      "name": "deltas",
+      "prompt": "Create ONE isolated EU5 topography attribute icon, matching the supplied reference sheet's antique hand-painted small terrain relief symbols. Reference is STYLE ONLY, do not copy the sheet or any labels. Deltas: a triangular fan-shaped flat tan sediment land tile with ONE blue river entering from top and splitting into THREE clear blue distributary channels toward the wide foreground coast. Recognizable delta fan shape, simple channels. Viewed obliquely from above, compact bold silhouette, earthy ivory/tan with dark brown outlines and painted shadows; blue water only where specified. Must be readable at 30 pixels. No text, no frame, no circles, no buildings, no trees, no decorative details. Subject centered and fills 80% of square canvas. Genuinely transparent background, clean alpha edges. Return one square PNG icon.",
+      "source_filename": "exec-eb81bac1-2686-4363-b815-306e77205f33.png",
+      "chroma_key": false,
+      "original_sha256": "9503d135102b2cba80d7ee002f4283e0331681dc0dfde247f562052f50f29698",
+      "prepared_sha256": "3d4f4991dbc6cb63d30d2d004fed148e732082e615a3fdc281a2cdc5703e4600"
+    }
+  ]
+}

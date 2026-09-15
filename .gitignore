@@ -6,3 +6,4 @@ data/processed/
 artifacts/
 .pytest_cache/
 reports/tests.xml
+geography_test.local.toml

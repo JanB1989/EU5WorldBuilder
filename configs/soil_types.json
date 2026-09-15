@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "source_directory": "data/raw/documentation/soil_audit",
+  "output_directory": "artifacts/soils",
+  "coarse_fragment_threshold_percent": 35,
+  "stony_phases": [1, 18, 20, 25, 26],
+  "texture_groups": {
+    "sand": [11, 12, 13],
+    "loam": [5, 9, 10],
+    "silt": [6, 7],
+    "clay": [1, 2, 3, 4, 8]
+  },
+  "types": {
+    "sand": {"id": 1, "label": "Sand", "color": [226, 190, 91], "description": "Sand-rich mineral soil. Its coarse texture influences water retention and cultivation."},
+    "loam": {"id": 2, "label": "Loam", "color": [105, 160, 83], "description": "Mixed mineral soil containing sand, silt and clay."},
+    "silt": {"id": 3, "label": "Silt", "color": [85, 176, 195], "description": "Silt-rich mineral soil. Fine particles influence water storage and soil stability."},
+    "clay": {"id": 4, "label": "Clay", "color": [200, 108, 80], "description": "Clay-rich mineral soil. Heavy texture influences cultivation and water management."},
+    "peat": {"id": 5, "label": "Peat", "color": [137, 105, 178], "description": "Organic soil formed through the accumulation of plant remains. Organic content alone does not establish fertility."},
+    "stony": {"id": 6, "label": "Stony", "color": [155, 163, 171], "description": "Substantial gravel, stones or concretions reduce the volume of fine soil available for cultivation."}
+  }
+}

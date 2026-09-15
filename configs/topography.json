@@ -1,0 +1,70 @@
+{
+  "year": 1300,
+  "output_directory": "artifacts/topography",
+  "minimum_new_type_locations": 25,
+  "thresholds": {
+    "rolling_share": 0.5,
+    "rolling_min_relief_m": 15,
+    "rolling_max_relief_m": 180,
+    "valleys_share": 0.22,
+    "valleys_min_relief_m": 80,
+    "floodplains_share": 0.35,
+    "deltas_share": 0.35,
+    "delta_max_elevation_m": 100
+  },
+  "types": {
+    "rolling": {
+      "label": "Rolling Terrain",
+      "game_key": "ha1300_topo_rolling",
+      "parent": "flatland",
+      "color": [
+        184,
+        162,
+        95
+      ],
+      "description": "Gently undulating ground with broad, low rises and shallow hollows."
+    },
+    "valleys": {
+      "label": "Valleys",
+      "game_key": "ha1300_topo_valleys",
+      "parent": "flatland",
+      "color": [
+        143,
+        175,
+        103
+      ],
+      "description": "Broad valley floors enclosed by higher ground. The surrounding slopes constrain usable space and routes."
+    },
+    "floodplains": {
+      "label": "Floodplains",
+      "game_key": "ha1300_topo_floodplains",
+      "parent": "flatland",
+      "color": [
+        60,
+        160,
+        167
+      ],
+      "description": "Low river plains shaped by flooding and deposited sediment. Water control and soil fertility are separate conditions."
+    },
+    "deltas": {
+      "label": "Deltas",
+      "game_key": "ha1300_topo_deltas",
+      "parent": "flatland",
+      "color": [
+        78,
+        118,
+        204
+      ],
+      "description": "Low coastal plains built by river sediment, crossed by distributary channels and exposed to changing water levels."
+    }
+  },
+  "assumptions": [
+    "All 22 native topography definitions are retained. New values refine ordinary terrestrial locations; mapped deltas may also refine wetlands. Salt pans, atolls, wastelands, water and non-ownable locations retain their native class.",
+    "Global modern geomorphology is an approximation for 1300. Deltas and floodplain courses have greater historical uncertainty; no claim of exact medieval coastlines.",
+    "Rolling terrain uses EcoTapestry smooth plains/low hills with 15-180m local relief on ETOPO 1 arc-minute elevation. Valleys use Geomorpho90m valley pixels plus adjacent flat floor within 1km, with at least 80m surrounding relief.",
+    "Floodplains use GFPLAIN geomorphic extent supplemented by mapped GLWD riverine settings. GFPLAIN missing background is not proof of no floodplain; small rivers, arid areas and high latitudes have weaker evidence.",
+    "Deltas use the convex hull of five published Edmonds et al. points, clipped to ETOPO land below 100m. This is a simplified elevation screen, not an exact reproduction of the authors elevation mask.",
+    "Classification priority: deltas, floodplains, valleys, rolling; all source fractions are retained independently. Thresholds are shared global representation rules, not historical measurements.",
+    "New values inherit flatland mechanics for this geography prototype. Exact-key vanilla scripts require later integration; no new agricultural balance is asserted."
+  ]
+}

@@ -1,0 +1,319 @@
+{
+  "year": 1300,
+  "output_directory": "artifacts/climate",
+  "source_period": "1901_1930",
+  "source_article": 21789074,
+  "source_file_id": 61012822,
+  "archive_md5": "7fc2f5a15d4f5fe0ce59c9a9b502aa09",
+  "types": {
+    "tropical": {
+      "label": "Tropical",
+      "game_key": "tropical",
+      "parent": "tropical",
+      "native": true,
+      "winter": "none",
+      "color": [
+        45,
+        106,
+        67
+      ],
+      "koppen_codes": [
+        1
+      ],
+      "description": "Hot throughout the year, with abundant rainfall and no pronounced dry season."
+    },
+    "tropical_monsoon": {
+      "label": "Tropical Monsoon",
+      "game_key": "ha1300_climate_tropical_monsoon",
+      "parent": "tropical",
+      "native": false,
+      "winter": "none",
+      "color": [
+        23,
+        135,
+        133
+      ],
+      "koppen_codes": [
+        2
+      ],
+      "description": "Hot throughout the year, with a very wet monsoon and a shorter dry season."
+    },
+    "savanna": {
+      "label": "Savanna",
+      "game_key": "ha1300_climate_savanna",
+      "parent": "tropical",
+      "native": false,
+      "winter": "none",
+      "color": [
+        173,
+        171,
+        74
+      ],
+      "koppen_codes": [
+        3
+      ],
+      "description": "Hot throughout the year, with alternating wet and dry seasons."
+    },
+    "arid": {
+      "label": "Arid",
+      "game_key": "arid",
+      "parent": "arid",
+      "native": true,
+      "winter": "none",
+      "color": [
+        205,
+        135,
+        74
+      ],
+      "koppen_codes": [
+        4
+      ],
+      "description": "Hot desert conditions with very little rainfall."
+    },
+    "cold_arid": {
+      "label": "Cold Arid",
+      "game_key": "cold_arid",
+      "parent": "cold_arid",
+      "native": true,
+      "winter": "mild",
+      "color": [
+        189,
+        163,
+        127
+      ],
+      "koppen_codes": [
+        5
+      ],
+      "description": "Dry desert conditions with a colder annual temperature regime. Winter cold varies substantially within this broad class."
+    },
+    "hot_steppe": {
+      "label": "Hot Steppe",
+      "game_key": "ha1300_climate_hot_steppe",
+      "parent": "arid",
+      "native": false,
+      "winter": "none",
+      "color": [
+        211,
+        182,
+        91
+      ],
+      "koppen_codes": [
+        6
+      ],
+      "description": "Warm semi-arid conditions with limited, variable rainfall."
+    },
+    "cold_steppe": {
+      "label": "Cold Steppe",
+      "game_key": "ha1300_climate_cold_steppe",
+      "parent": "cold_arid",
+      "native": false,
+      "winter": "normal",
+      "color": [
+        174,
+        170,
+        112
+      ],
+      "koppen_codes": [
+        7
+      ],
+      "description": "Cool semi-arid conditions with limited rainfall and a cold season."
+    },
+    "mediterranean": {
+      "label": "Mediterranean",
+      "game_key": "mediterranean",
+      "parent": "mediterranean",
+      "native": true,
+      "winter": "none",
+      "color": [
+        229,
+        197,
+        105
+      ],
+      "koppen_codes": [
+        8,
+        9,
+        10
+      ],
+      "description": "Dry summers and wetter winters. Cooler upland and coastal variants are included."
+    },
+    "subtropical_monsoon": {
+      "label": "Subtropical Monsoon",
+      "game_key": "ha1300_climate_subtropical_monsoon",
+      "parent": "subtropical",
+      "native": false,
+      "winter": "mild",
+      "color": [
+        70,
+        156,
+        163
+      ],
+      "koppen_codes": [
+        11
+      ],
+      "description": "Hot, wet summers and a distinctly drier, cooler winter."
+    },
+    "highland_monsoon": {
+      "label": "Highland Monsoon",
+      "game_key": "ha1300_climate_highland_monsoon",
+      "parent": "oceanic",
+      "native": false,
+      "winter": "mild",
+      "color": [
+        117,
+        154,
+        176
+      ],
+      "koppen_codes": [
+        12,
+        13
+      ],
+      "description": "Moderate to cool summers, with summer rains and a dry winter. Common in elevated tropical and subtropical regions."
+    },
+    "subtropical": {
+      "label": "Subtropical",
+      "game_key": "subtropical",
+      "parent": "subtropical",
+      "native": true,
+      "winter": "none",
+      "color": [
+        103,
+        163,
+        84
+      ],
+      "koppen_codes": [
+        14
+      ],
+      "description": "Hot summers and rainfall in every season, with a generally mild cold season."
+    },
+    "oceanic": {
+      "label": "Oceanic",
+      "game_key": "oceanic",
+      "parent": "oceanic",
+      "native": true,
+      "winter": "mild",
+      "color": [
+        82,
+        150,
+        111
+      ],
+      "koppen_codes": [
+        15
+      ],
+      "description": "Moderate summers, mild winters and rainfall without a pronounced dry season."
+    },
+    "subpolar_oceanic": {
+      "label": "Subpolar Oceanic",
+      "game_key": "ha1300_climate_subpolar_oceanic",
+      "parent": "oceanic",
+      "native": false,
+      "winter": "normal",
+      "color": [
+        98,
+        149,
+        170
+      ],
+      "koppen_codes": [
+        16
+      ],
+      "description": "Short, cool summers and a maritime cold season, with rainfall throughout the year."
+    },
+    "dry_summer_continental": {
+      "label": "Dry-summer Continental",
+      "game_key": "ha1300_climate_dry_summer_continental",
+      "parent": "continental",
+      "native": false,
+      "winter": "normal",
+      "color": [
+        169,
+        137,
+        168
+      ],
+      "koppen_codes": [
+        17,
+        18
+      ],
+      "description": "Warm summers with a dry season, followed by cold winters. Rain and snow fall mainly outside summer."
+    },
+    "continental_monsoon": {
+      "label": "Continental Monsoon",
+      "game_key": "ha1300_climate_continental_monsoon",
+      "parent": "continental",
+      "native": false,
+      "winter": "normal",
+      "color": [
+        97,
+        113,
+        187
+      ],
+      "koppen_codes": [
+        21,
+        22
+      ],
+      "description": "Warm to hot, wet summers and cold, comparatively dry winters."
+    },
+    "continental": {
+      "label": "Continental",
+      "game_key": "continental",
+      "parent": "continental",
+      "native": true,
+      "winter": "normal",
+      "color": [
+        102,
+        164,
+        191
+      ],
+      "koppen_codes": [
+        25,
+        26
+      ],
+      "description": "Warm to hot summers, cold winters and no pronounced dry season."
+    },
+    "subarctic": {
+      "label": "Subarctic",
+      "game_key": "ha1300_climate_subarctic",
+      "parent": "continental",
+      "native": false,
+      "winter": "severe",
+      "color": [
+        99,
+        118,
+        151
+      ],
+      "koppen_codes": [
+        19,
+        20,
+        23,
+        24,
+        27,
+        28
+      ],
+      "description": "Short, cool summers and long, severe winters. Regional differences in the season of rainfall are included."
+    },
+    "arctic": {
+      "label": "Arctic",
+      "game_key": "arctic",
+      "parent": "arctic",
+      "native": true,
+      "winter": "severe",
+      "color": [
+        191,
+        204,
+        211
+      ],
+      "koppen_codes": [
+        29,
+        30
+      ],
+      "description": "Very cold conditions with little summer warmth, ranging from tundra to permanent ice."
+    }
+  },
+  "assumptions": [
+    "Early twentieth-century (1901-1930) climate is used as a spatial proxy for 1300. This is not a medieval climate reconstruction. No unsupported uniform cooling or rainfall correction is applied.",
+    "All 30 published Koppen-Geiger classes map to 18 readable climate values. Rare cool-summer Mediterranean/highland and subarctic precipitation variants are merged; original source fractions remain available.",
+    "Winter is the native fixed climate property, not a new attribute. The eight existing keys retain their native winter levels and effects; new types use documented representative levels. These four gameplay levels are not measured winter severity and cannot reproduce all local winter variability.",
+    "Climate and winter are coupled in the game. No hidden climate variants, duplicate legend labels, extra moisture attribute or monthly events are introduced.",
+    "One-kilometre categorical pixels are counted into class fractions on the native 5-minute analysis grid before area-weighted EU5 overlap aggregation. Modal full climate classes are chosen only at the last step.",
+    "Locations with no source land overlap retain their native climate, explicitly flagged as inferred. Non-ownable zones retain their native values.",
+    "Parent effects are prototype defaults, not agricultural calibration. New semi-arid values permit precipitation; subarctic is not always-winter. Exact-key game scripts require integration before production use."
+  ]
+}

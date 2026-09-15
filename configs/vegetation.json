@@ -1,0 +1,282 @@
+{
+  "schema": 1,
+  "year": 1300,
+  "minimum_new_type_locations": 25,
+  "output_directory": "artifacts/vegetation",
+  "wooded_landscape_forest_share_threshold": 0.65,
+  "farmland_location_share_threshold": 0.35,
+  "wetland_location_share_threshold": 0.3,
+  "types": {
+    "desert": {
+      "id": 1,
+      "label": "Desert",
+      "parent": "desert",
+      "color": [
+        211,
+        183,
+        127
+      ],
+      "description": "Bare desert with little persistent vegetation.",
+      "native": true,
+      "game_key": "desert"
+    },
+    "sparse": {
+      "id": 2,
+      "label": "Sparse",
+      "parent": "sparse",
+      "color": [
+        183,
+        176,
+        142
+      ],
+      "description": "Thin, discontinuous vegetation over exposed ground.",
+      "native": true,
+      "game_key": "sparse"
+    },
+    "grasslands": {
+      "id": 3,
+      "label": "Grasslands",
+      "parent": "grasslands",
+      "color": [
+        181,
+        196,
+        102
+      ],
+      "description": "Open land dominated by grasses and herbs.",
+      "native": true,
+      "game_key": "grasslands"
+    },
+    "farmland": {
+      "id": 4,
+      "label": "Farmland",
+      "parent": "farmland",
+      "color": [
+        229,
+        205,
+        105
+      ],
+      "description": "A landscape with extensive cultivated fields.",
+      "native": true,
+      "game_key": "farmland"
+    },
+    "woods": {
+      "id": 5,
+      "label": "Woods",
+      "parent": "woods",
+      "color": [
+        128,
+        157,
+        95
+      ],
+      "description": "An open wooded landscape with substantial clearings.",
+      "native": true,
+      "game_key": "woods"
+    },
+    "forest": {
+      "id": 6,
+      "label": "Forest",
+      "parent": "forest",
+      "color": [
+        54,
+        109,
+        64
+      ],
+      "description": "Predominantly broadleaf forest.",
+      "native": true,
+      "game_key": "forest"
+    },
+    "jungle": {
+      "id": 7,
+      "label": "Jungle",
+      "parent": "jungle",
+      "color": [
+        20,
+        91,
+        73
+      ],
+      "description": "Humid tropical forest with dense evergreen growth.",
+      "native": true,
+      "game_key": "jungle"
+    },
+    "scrubland": {
+      "id": 8,
+      "label": "Scrubland",
+      "parent": "sparse",
+      "color": [
+        180,
+        151,
+        108
+      ],
+      "description": "Scattered woody shrubs with open ground between them.",
+      "native": false,
+      "game_key": "ha1300_veg_scrubland"
+    },
+    "thicket": {
+      "id": 9,
+      "label": "Thicket",
+      "parent": "woods",
+      "color": [
+        139,
+        113,
+        77
+      ],
+      "description": "Dense shrubs and tangled woody growth.",
+      "native": false,
+      "game_key": "ha1300_veg_thicket"
+    },
+    "savanna": {
+      "id": 10,
+      "label": "Savanna",
+      "parent": "grasslands",
+      "color": [
+        204,
+        157,
+        72
+      ],
+      "description": "Grassland with scattered trees and open woodland.",
+      "native": false,
+      "game_key": "ha1300_veg_savanna"
+    },
+    "tundra": {
+      "id": 11,
+      "label": "Tundra",
+      "parent": "sparse",
+      "color": [
+        174,
+        191,
+        188
+      ],
+      "description": "Low mosses, lichens, herbs and dwarf shrubs.",
+      "native": false,
+      "game_key": "ha1300_veg_tundra"
+    },
+    "coniferous_forest": {
+      "id": 12,
+      "label": "Coniferous Forest",
+      "parent": "forest",
+      "color": [
+        44,
+        81,
+        91
+      ],
+      "description": "Forest dominated by needleleaved trees.",
+      "native": false,
+      "game_key": "ha1300_veg_coniferous_forest"
+    },
+    "mixed_forest": {
+      "id": 13,
+      "label": "Mixed Forest",
+      "parent": "forest",
+      "color": [
+        83,
+        129,
+        106
+      ],
+      "description": "Forest with a mixture of evergreen and deciduous trees.",
+      "native": false,
+      "game_key": "ha1300_veg_mixed_forest"
+    },
+    "dry_forest": {
+      "id": 14,
+      "label": "Dry Forest",
+      "parent": "woods",
+      "color": [
+        155,
+        127,
+        67
+      ],
+      "description": "Seasonal forest whose trees shed much of their foliage in the dry season.",
+      "native": false,
+      "game_key": "ha1300_veg_dry_forest"
+    },
+    "marsh": {
+      "id": 15,
+      "label": "Marsh",
+      "parent": "grasslands",
+      "color": [
+        89,
+        168,
+        163
+      ],
+      "description": "Wet ground dominated by reeds, sedges and other low vegetation.",
+      "native": false,
+      "game_key": "ha1300_veg_marsh"
+    },
+    "swamp": {
+      "id": 16,
+      "label": "Swamp",
+      "parent": "forest",
+      "color": [
+        49,
+        114,
+        122
+      ],
+      "description": "Wet ground with substantial tree cover.",
+      "native": false,
+      "game_key": "ha1300_veg_swamp"
+    },
+    "saltmarsh": {
+      "id": 17,
+      "label": "Saltmarsh",
+      "parent": "sparse",
+      "color": [
+        149,
+        170,
+        183
+      ],
+      "description": "Coastal saline wetland with low salt-tolerant vegetation.",
+      "native": false,
+      "game_key": "ha1300_veg_saltmarsh"
+    },
+    "mangroves": {
+      "id": 18,
+      "label": "Mangroves",
+      "parent": "jungle",
+      "color": [
+        46,
+        137,
+        132
+      ],
+      "description": "Coastal woodland with trees adapted to tidal water and saline conditions.",
+      "native": false,
+      "game_key": "ha1300_veg_mangroves"
+    }
+  },
+  "pnv_classes": {
+    "1": "jungle",
+    "2": "dry_forest",
+    "3": "forest",
+    "4": "coniferous_forest",
+    "5": "forest",
+    "6": "coniferous_forest",
+    "7": "coniferous_forest",
+    "8": "mixed_forest",
+    "9": "savanna",
+    "10": "grasslands",
+    "11": "thicket",
+    "12": "scrubland",
+    "13": "tundra",
+    "14": "desert",
+    "15": "sparse"
+  },
+  "rare_type_fallback": {
+    "saltmarsh": "marsh",
+    "mangroves": "swamp",
+    "swamp": "forest",
+    "marsh": "grasslands",
+    "thicket": "scrubland",
+    "scrubland": "sparse",
+    "savanna": "grasslands",
+    "tundra": "sparse",
+    "coniferous_forest": "forest",
+    "mixed_forest": "forest",
+    "dry_forest": "woods"
+  },
+  "assumptions": [
+    "Historical canopy closure is inferred from LUH2 wooded landscape fraction; not measured within-stand tree density.",
+    "HYDE3.4 year1300 cropland is primary; LUH2 v2h year1300 supplies fallbacks, grazing and forest fraction. They share historical data and are not independent.",
+    "GLWD 1990-2020 supplies wetland vegetation types. Wetland loss between 1700 and 2020, computed within the same reconstruction, restores plausible wet ground with its half-degree budget conserved. Location and type of lost wetland are inferred; this is not dated 1300 evidence.",
+    "Type thresholds are shared classification rules, not population or capacity fitting.",
+    "New types inherit existing vanilla vegetation effects for this visual/mechanical prototype. No new balance coefficients are calibrated."
+  ]
+}

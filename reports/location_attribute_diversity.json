@@ -1,0 +1,54 @@
+{
+  "locations": 20893,
+  "native_value_counts": {
+    "topography": 7,
+    "climate": 8,
+    "vegetation": 7,
+    "is_coastal": 2,
+    "has_river": 2,
+    "is_adjacent_to_lake": 2
+  },
+  "new_value_counts": {
+    "topography": 11,
+    "climate": 18,
+    "vegetation": 16,
+    "is_coastal": 2,
+    "has_river": 2,
+    "is_adjacent_to_lake": 2,
+    "soil_type": 6,
+    "fertility": 5
+  },
+  "native_three_observed": 222,
+  "new_three_observed": 993,
+  "new_five_observed": 3311,
+  "native_with_water_presence_observed": 960,
+  "new_with_water_presence_observed": 6086,
+  "old_largest_group": 975,
+  "old_largest_group_attributes": [
+    "flatland",
+    "continental",
+    "woods"
+  ],
+  "old_effective_combinations": 64.07790284416716,
+  "new_largest_group": 287,
+  "new_largest_group_attributes": [
+    "flatland",
+    "continental",
+    "grasslands",
+    "loam",
+    "high"
+  ],
+  "new_effective_combinations": 602.085558937889,
+  "old_theoretical_main": 392,
+  "new_theoretical_main": 95040,
+  "theoretical_with_coast_lake_six_river_states": {
+    "old": 9408,
+    "new": 2280960
+  },
+  "notes": [
+    "Only 20,893 ownable locations and types actually used on that land.",
+    "Winter is derived from climate and adds no independent combinations.",
+    "Six river display categories assumed for theoretical count: absent and sizes 1-5. Unclassified ? is a diagnostic fallback, not a new natural attribute.",
+    "Observed counts with water properties use cached river presence only; native engine size flags are not in this offline inventory."
+  ]
+}

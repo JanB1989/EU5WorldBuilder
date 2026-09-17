@@ -467,7 +467,7 @@ wheels = [
 ]
 
 [[package]]
-name = "historical-agriculture-1300"
+name = "eu5-world-builder"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [

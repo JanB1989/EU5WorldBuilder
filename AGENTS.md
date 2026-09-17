@@ -1,6 +1,17 @@
-# HistoricalAgriculture1300
+# EU5 World Builder
 
-## Single objective
+## World-data ownership
+
+This repository, formerly HistoricalAgriculture1300, owns the evidence-based
+location attributes and geographical datasets: climate/winter, vegetation,
+topography, soils/fertility, river/coast/lake attributes, capacity modelling,
+maps, validation and isolated geography test-mod exports. Production gameplay
+integration, building balance and release deployment belong to the Constructor.
+The canonical checkout is `/home/jan/development/EU5WorldBuilder`; an old-path
+alias preserves existing local map links. Preserve historical source identities
+and manifests rather than rewriting them to match the repository name.
+
+## Complete location outputs
 
 Own and build the complete EU5 location dataset and location map described in `reports/location_model_contract.md`. This contract supersedes older per-hectare-only project boundaries.
 
@@ -18,4 +29,4 @@ Preserve existing dirty work. Archive superseded experiments when useful; do not
 
 ## Validation
 
-Use `uv run ha1300 --help` for the existing CLI and `uv run pytest -q` for tests. Add the canonical complete location-build workflow within this CLI. Coverage, accounting and scientific confidence must be reported separately. A complete estimate with uncertainty is acceptable as an iteration; an incomplete output is not.
+Use `uv run worldbuilder --help` for the CLI and `uv run pytest -q` for tests. `ha1300` remains a supported alias. Add the canonical complete location-build workflow within this CLI. Coverage, accounting and scientific confidence must be reported separately. A complete estimate with uncertainty is acceptable as an iteration; an incomplete output is not.

@@ -5,7 +5,7 @@ def main():
     if len(sys.argv)>1 and sys.argv[1] in ("fetch","scale"):
         from .legacy import main as legacy
         return legacy()
-    parser=argparse.ArgumentParser(description="Historical Agriculture 1300 research pipeline")
+    parser=argparse.ArgumentParser(description="EU5 World Builder: location attributes, maps and capacity models")
     sub=parser.add_subparsers(dest="command",required=True)
     for name in ["acquire","audit","evidence","calibrate","assign","food-assign","calculate","compare","food-calculate","validate","maps","run"]:
         a=sub.add_parser(name)

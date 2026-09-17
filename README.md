@@ -1,6 +1,22 @@
-# HistoricalAgriculture1300
+# EU5 World Builder
 
-This repository owns the reconstruction of a **complete EU5 location capacity dataset and location map**. Fine-grid evidence and calculations are retained until the final location aggregation.
+This repository owns the evidence-based construction of **EU5 location attributes, geography maps and population-capacity datasets**. It combines global source data with historical reconstruction, retains fine-grid calculations until location aggregation, and exports complete location data and inspectable maps.
+
+Formerly **HistoricalAgriculture1300**. The repository was renamed with its Git history intact. Its canonical checkout is `/home/jan/development/EU5WorldBuilder`; the old local path remains an alias for existing map links. Historical reports retain their original names and provenance.
+
+## Location attributes and maps
+
+- Climate and winter severity, vegetation and topography.
+- Soil type and fertility.
+- Coast, lake and native river attributes, plus isolated river-map experiments.
+- Equal-area population-capacity values and bounded attribute-fit diagnostics.
+- Reproducible source manifests, validation reports, HTML maps and isolated geography test-mod exports.
+
+`worldbuilder` is the main command. `ha1300` remains an alias for existing scripts and reproduction instructions. The internal Python package name is unchanged.
+
+```bash
+uv run worldbuilder --help
+```
 
 ## Deliverable
 
@@ -25,7 +41,7 @@ Read the [model and completion contract](reports/location_model_contract.md).
 
 ## Scope
 
-Yield, historical crops, land cover and water calculations are internal supporting stages. They serve this single location-output objective. Building types, counts, costs and implementation are deferred. Deployment, autonomous economic simulation and separate labour-research deliverables are outside the current work.
+World Builder owns source acquisition, geographical classification, complete location attributes, supporting agricultural/water calculations, capacity modelling and validation. Isolated geography test mods demonstrate these outputs in-game. Production gameplay integration, building balance and release deployment belong to the Constructor; autonomous economic simulation and separate labour-research deliverables are outside this repository's scope.
 
 The repo must own required code, configuration, evidence records, source manifests and geometry mapping. Sources may be acquired or imported from existing caches with provenance; a completed pipeline must not require a sibling project's generated model or runtime. Large downloaded and generated files remain ignored as appropriate for their licenses and size.
 
@@ -45,8 +61,8 @@ Existing work is preserved. The [previous research README](reports/archive/pre_l
 
 ```bash
 uv sync --group dev
-uv run ha1300 --help
-uv run ha1300 locations
+uv run worldbuilder --help
+uv run worldbuilder locations
 uv run python scripts/validate_locations.py
 uv run pytest -q
 ```

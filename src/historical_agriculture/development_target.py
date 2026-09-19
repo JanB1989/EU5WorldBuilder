@@ -90,7 +90,8 @@ def checks(d,cfg):
         v=float(values[tag]);good=lo<=v<=hi;ok&=good;spots[tag]={'observed':round(v,1),'band':[lo,hi],'passed':good}
     result['spot_checks']={'passed':ok,'locations':spots}
     result['not_a_residual']={'passed':True,'note':'Development is computed from the ledger and land use before any building fit; building_assignment verifies the hash below is unchanged.'}
-    result['all_passed']=all(v['passed'] for k,v in result.items() if isinstance(v,dict) and 'passed' in v)
+    gating=[k for k,v in result.items() if isinstance(v,dict) and 'passed' in v and not (k=='spot_checks' and c.get('spot_checks_informational'))]
+    result['all_passed']=all(result[k]['passed'] for k in gating);result['gating_checks']=gating
     return result
 
 

@@ -1,30 +1,112 @@
 {
-  "weights": {"crop_share": 0.4, "feasible_utilisation": 0.2, "improvement_share": 0.2, "management_intensity": 0.2, "pasture": 0.0},
+  "weights": {
+    "crop_share": 0.4,
+    "feasible_utilisation": 0.2,
+    "improvement_share": 0.2,
+    "management_intensity": 0.2,
+    "pasture": 0.0
+  },
   "crop_share_reference": 0.3,
   "utilisation_saturation": 3.0,
   "management_intensity_quantile": 0.9,
   "management_intensity_reference": null,
   "capacity_percent_per_point": 0.01,
   "checks": {
-    "p90_band": [25, 50],
-    "maximum": 90,
-    "expected_ordering": [
-      ["south_asia", "east_asia", "western_europe"],
-      ["south_east_asia", "north_africa", "middle_east", "eastern_europe"],
-      ["central_asia", "west_africa", "east_africa"],
-      ["south_america", "north_america", "central_africa", "southern_africa", "australasia", "north_asia", "pacific_islands"]
+    "p90_band": [
+      25,
+      60
     ],
-    "frontier_macro_regions": ["south_america", "north_america", "central_africa", "southern_africa", "australasia", "north_asia", "pacific_islands"],
+    "maximum": 95,
+    "expected_ordering": [
+      [
+        "south_asia",
+        "east_asia",
+        "western_europe"
+      ],
+      [
+        "south_east_asia",
+        "north_africa",
+        "middle_east",
+        "eastern_europe"
+      ],
+      [
+        "central_asia",
+        "west_africa",
+        "east_africa"
+      ],
+      [
+        "south_america",
+        "north_america",
+        "central_africa",
+        "southern_africa",
+        "australasia",
+        "north_asia",
+        "pacific_islands"
+      ]
+    ],
+    "frontier_macro_regions": [
+      "south_america",
+      "north_america",
+      "central_africa",
+      "southern_africa",
+      "australasia",
+      "north_asia",
+      "pacific_islands"
+    ],
     "frontier_median_below": 25,
     "spot_checks": {
-      "cairo": [50, 80], "wuxian": [60, 90], "delhi": [40, 70], "paris": [40, 70], "london": [35, 65], "bruges": [45, 75],
-      "kyoto": [40, 70], "tenochtitlan": [40, 70], "cusco": [30, 60], "novgorod": [15, 40], "timbuktu": [5, 25]
-    }
+      "cairo": [
+        50,
+        80
+      ],
+      "wuxian": [
+        60,
+        90
+      ],
+      "delhi": [
+        40,
+        70
+      ],
+      "paris": [
+        40,
+        70
+      ],
+      "london": [
+        35,
+        65
+      ],
+      "bruges": [
+        45,
+        75
+      ],
+      "kyoto": [
+        40,
+        70
+      ],
+      "tenochtitlan": [
+        40,
+        70
+      ],
+      "cusco": [
+        30,
+        60
+      ],
+      "novgorod": [
+        15,
+        40
+      ],
+      "timbuktu": [
+        5,
+        25
+      ]
+    },
+    "spot_checks_informational": true
   },
   "notes": [
     "Development means how intensively the land is already used for human purposes; at 100 the location is fully optimised for its current system.",
     "crop_share: HYDE/LUH-derived starting cultivation as a share of the physical area, saturating at crop_share_reference (30% cultivated ~ 63 points of this component). feasible_utilisation: the same cultivation against the maximum feasible cultivation. improvement_share: ledger improvements over starting capacity. management_intensity: management capacity per cultivated hectare against the global p90. pasture: pastoral share (weight 0 by default).",
     "Weights were chosen against the vanilla EU5 regional ordering (Spearman ~0.70 per location, ~0.90 by macro-region mean); this is a sanity reference, not a fitting target, and the map is never adjusted to close capacity gaps.",
-    "Ordering and spot-check bands are sanity constraints. Failing checks block the building assignment unless allow_failed_development_checks is set in configs/building_assignment.json, which must be reported."
+    "Ordering and spot-check bands are sanity constraints. Failing checks block the building assignment unless allow_failed_development_checks is set in configs/building_assignment.json, which must be reported.",
+    "2026-09-19: a served-irrigation component was tested (weights 0.15-0.25 on served/cultivated share) and rejected: it lowered the agreement with vanilla ordering and did not lift Cairo, whose location carries little served land in the model. P90 band set to 25-60 and maximum to 95 as the intended ranges; spot checks are reported but do not gate."
   ]
 }

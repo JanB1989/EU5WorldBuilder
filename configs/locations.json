@@ -122,5 +122,7 @@
       "north_africa"
     ],
     "status": "Informational evaluation targets for scripts/calibrate_fill.py and FILL.md. Population is joined only in that evaluation."
-  }
+  },
+  "crop_free_maximum_fallback": true,
+  "crop_free_maximum_fallback_status": "2026-09-19: cells that no historically listed crop reaches receive the best caloric crop of the catalogue by low-input potential, so the maximum scenario is no longer closed there (start unaffected unless HYDE records cultivation)."
 }

@@ -93,6 +93,22 @@ def crop_densities(root,cfg,out):
         rr=ranks[eco_f]
         use,new_rank=select_candidate(np.maximum(lo,hr),hi,rr,rank,domain)
         crop[use]=code;rank=new_rank
+    # Crop-free fallback for the maximum scenario: cells that no historically listed crop reaches receive the
+    # best caloric crop of the whole catalogue by low-input potential, so no location's maximum is closed merely
+    # because the catalogue is silent there. This is potential, consistent with the fertility attribute, not a
+    # claim of historic presence; the starting scenario is unaffected unless HYDE records cultivation there.
+    fallback_cells=0
+    if cfg.get('crop_free_maximum_fallback'):
+        open_cells=domain&(crop==0);best=np.zeros(ft.shape,dtype=np.float32);best_code=np.zeros(ft.shape,dtype=np.int16)
+        for code,c in enumerate(rc['crop_order'],1):
+            lo,_=read(food/'crops'/f'{c}_lower.tif');hr,_=read(food/'crops'/f'{c}_high_rainfed.tif')
+            cal=annual_food(np.nan_to_num(np.maximum(lo,hr),nan=0.).astype(np.float32),rc['crops'][c],1.0,1.0)[2]
+            better=open_cells&(cal>best);best[better]=cal[better];best_code[better]=code
+        take=open_cells&(best>0);crop[take]=best_code[take];rank[take]=150;fallback_cells=int(take.sum())
+        write_json(out/'crop_free_fallback.json',{'cells_without_listed_crop':int(open_cells.sum()),'cells_assigned_by_potential':fallback_cells,
+            'crop_counts':{rc['crop_order'][k-1]:int(v) for k,v in zip(*np.unique(best_code[take],return_counts=True))},
+            'note':'Best caloric crop of the full catalogue by low-input potential, used only where no historically listed crop applies.'})
+        log(f'Crop-free fallback assigned {fallback_cells:,} of {int(open_cells.sum()):,} unlisted cells')
     rf=np.zeros(ft.shape,dtype=np.float32);ir=rf.copy();reference=rf.copy();low_rf=rf.copy();rainfed_headroom=rf.copy();fraction=np.ones_like(rf);freq=np.ones_like(rf);position=np.full_like(rf,.45)
     for r in rules:
         use=np.isin(eco_f,r['ecoregion_ids']);m=rc['management'][r['management']]

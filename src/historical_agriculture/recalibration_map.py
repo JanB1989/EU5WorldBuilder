@@ -65,6 +65,65 @@ def layers(d):
     return out
 
 
+def pages(d,units,c):
+    """Tables for the Buildings, Attributes and Regions tabs."""
+    fit=json.loads((ROOT/'artifacts/attribute_fit_flat/report.json').read_text())
+    coef=pd.read_csv(ROOT/'artifacts/attribute_fit_flat/coefficients.csv',keep_default_na=False)
+    caps=pd.read_csv(ROOT/'artifacts/building_assignment/cap_coefficients.csv',keep_default_na=False)
+    bld=pd.read_csv(ROOT/'artifacts/building_assignment/buildings.csv',keep_default_na=False)
+    bcfg=json.loads((ROOT/'configs/building_assignment.json').read_text())
+    dcfg=json.loads((ROOT/'configs/development.json').read_text())
+    dchecks=json.loads((ROOT/'artifacts/development/development_checks.json').read_text())
+    targets=pd.read_csv(ROOT/'artifacts/locations/capacity_targets_equal_area.csv',keep_default_na=False,usecols=['location_tag','super_region']).set_index('location_tag')
+    own=d.copy();own['super_region']=targets.super_region.reindex(own.index).fillna('unknown')
+    # attributes: flat values per class for both targets, spans, counts, cap terms per building
+    attrs={}
+    for target in ['natural_capacity','maximum_capacity']:
+        cc=coef[coef.target==target]
+        for r in cc.itertuples():
+            key=(r.attribute,r.value);a=attrs.setdefault(key,{'attribute':r.attribute,'value':r.value,'locations':int(r.locations)})
+            a[target]={'people':float(r.people),'share':float(r.share_of_reference),'span':[float(r.span_min),float(r.span_max)]}
+    for r in caps.itertuples():
+        key=(r.attribute if r.attribute!='base' else 'reference',r.value if r.attribute!='base' else 'intercept')
+        a=attrs.setdefault(key,{'attribute':key[0],'value':key[1],'locations':None});a.setdefault('caps',{})[r.building]=int(r.levels)
+    attribute_rows=[v for k,v in attrs.items()]
+    order={'reference':0,'climate':1,'topography':2,'vegetation':3,'soil_type':4,'fertility':5,'river_level':6,'is_coastal':7,'is_adjacent_to_lake':8,'development_band':9}
+    attribute_rows.sort(key=lambda a:(order.get(a['attribute'],99),a['value']))
+    # buildings: per type summary, gate, cap equation, level histogram
+    buildings=[]
+    for r in bld.itertuples():
+        k=r.building;lv=own[f'{k}_levels_start'].to_numpy(float) if f'{k}_levels_start' in own else np.zeros(len(own))
+        cap100=own[f'{k}_cap_at_development_100'].to_numpy(float) if f'{k}_cap_at_development_100' in own else np.zeros(len(own))
+        hist={str(int(b)):int(n) for b,n in zip(*np.unique(lv[lv>0],return_counts=True))}
+        terms=caps[(caps.building==k)&(caps.levels!=0)&(caps.attribute!='base')]
+        buildings.append({'building':k,'label':KIND_LABELS.get(k,k),'unit':float(r.unit_people_per_level) if r.unit_people_per_level not in ('',None) else None,
+            'eligible':int(r.eligible_locations),'users':int(getattr(r,'users_at_start',0) or 0),'ungated_share':float(r.ungated_ledger_share),
+            'captured_within_25':float(getattr(r,'quantisation_captured_within_25_share',0) or 0),'at_level_limit':int(getattr(r,'quantisation_locations_at_level_limit',0) or 0),
+            'cap_short':int(getattr(r,'cap_short_locations',0) or 0),'cap_excess':int(getattr(r,'cap_excess_locations',0) or 0),'base_cap':int(getattr(r,'cap_intercept',0) or 0),
+            'gate':bcfg['gates'].get(k,[]),'cap_terms':[{'attribute':t.attribute,'value':t.value,'levels':int(t.levels)} for t in terms.itertuples()],
+            'levels_hist':hist,'levels_total':int(lv.sum()),'cap100_total':int(cap100.sum()),'people_at_start':float(lv.sum()*(float(r.unit_people_per_level) if r.unit_people_per_level not in ('',None) else 0))})
+    # regions: compact statistics by super and macro region
+    def block(g):
+        pop=g.population.fillna(0);st=g.starting_capacity;sm=g.starting_capacity_model
+        rural=g.context.eq('rural_or_unranked')
+        return {'locations':int(len(g)),'population':float(pop.sum()),'starting_target':float(st.sum()),'starting_model':float(sm.sum()),
+            'maximum_target':float(g.maximum_capacity_people.sum()),'maximum_model':float(g.maximum_capacity_model.sum()),
+            'natural_target':float(g.natural_capacity_people.sum()),'attribute_natural':float(g.attribute_natural_people.sum()),
+            'fill_target':float(pop.sum()/st.sum()) if st.sum()>0 else None,'fill_model':float(pop.sum()/sm.sum()) if sm.sum()>0 else None,
+            'median_fill':float((pop/st.replace(0,np.nan)).median()),'rural_over_capacity':int(((pop>st)&rural).sum()),'urban_over_capacity':int(((pop>st)&~rural).sum()),
+            'development_mean':float(g.development.mean()),'development_p90':float(g.development.quantile(.9)),
+            'start_residual_median':float((sm/st.replace(0,np.nan)-1).median()),'max_residual_median':float((g.maximum_capacity_model/g.maximum_capacity_people.replace(0,np.nan)-1).median()),
+            'review':int(g.start_exceeds_attribute_maximum.astype(str).eq('True').sum()),
+            'levels':{k:int(g[f'{k}_levels_start'].sum()) for k in LEDGER_KINDS if f'{k}_levels_start' in g}}
+    regions={'super_region':{k:block(g) for k,g in own.groupby('super_region')},'macro_region':{k:block(g) for k,g in own.groupby('macro_region')},'world':block(own)}
+    return {'attributes':attribute_rows,'buildings':buildings,'regions':regions,
+        'fit':{'reference':fit['config']['reference_classes'],'reference_scale':fit['reference_scale_people'],'tau':fit['config']['tau'],'metrics':fit['metrics'],'sensibility':{k:{kk:vv for kk,vv in v.items() if kk not in ('pinned','signs')} for k,v in fit['sensibility'].items()}},
+        'development':{'weights':dcfg['weights'],'percent_per_point':c,'bands':[b[2] for b in DEV_BANDS_LIST],'checks':{k:v for k,v in dchecks['checks'].items() if k!='spot_checks'},'spot_checks':dchecks['checks']['spot_checks']['locations'],'component_means':dchecks.get('component_means',{})},
+        'building_config':{'level_limit':bcfg['level_limit'],'envelope_quantile':bcfg['envelope_quantile'],'scope':bcfg.get('envelope_fit_scope','with_ledger')}}
+
+DEV_BANDS_LIST=[(0,20,'d00_20'),(20,40,'d20_40'),(40,60,'d40_60'),(60,80,'d60_80'),(80,101,'d80_100')]
+
+
 CAT_COLORS={'very_low':[168,64,59],'low':[215,125,64],'moderate':[219,191,100],'high':[139,182,94],'very_high':[55,139,80],
             'on review list':[191,53,58],'ok':[70,110,90],'d00_20':[230,235,240],'d20_40':[170,200,220],'d40_60':[100,150,200],'d60_80':[50,100,170],'d80_100':[20,50,120]}
 
@@ -121,7 +180,7 @@ def build(output_path=None):
         rec['n']={f:(None if pd.isna(r[f]) else round(float(r[f]),3)) for f in nums}
         rec['b']=[[k,int(r[f'{k}_levels_start']),int(r[f'{k}_cap']),int(r[f'{k}_cap_at_development_100']),round(float(units.get(k) or 0))] for k in LEDGER_KINDS]
         data[i]=rec
-    payload=json.dumps({'locations':data,'layers':manifest,'c':c,'units':units},separators=(',',':'))
+    payload=json.dumps({'locations':data,'layers':manifest,'c':c,'units':units,'pages':pages(d,units,c)},separators=(',',':'))
     lookup=(source/'location_lookup.js').read_text().removeprefix('window.LOCATION_LOOKUP=').strip().removesuffix(';')
     html=HTML.replace('__PAYLOAD__',payload).replace('__LOOKUP__',lookup).replace('__IMAGES__',json.dumps(images))
     (out/'index.html').write_text(html)
@@ -133,15 +192,21 @@ HTML=r'''<!doctype html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EU5 · Recalibrated capacity model</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#0c1420;color:#e6edf3;font:15px system-ui,sans-serif}main{max-width:1600px;margin:auto;padding:24px}h1{font-size:25px;margin:0 0 8px}p{line-height:1.5;color:#afc2d5;margin:8px 0 18px}select,input,button{font:inherit;background:#182638;color:#e6edf3;border:1px solid #425367;border-radius:6px;padding:9px}button{cursor:pointer}label{color:#afc2d5;font-size:13px;display:grid;gap:6px}.controls{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0}.controls input{width:280px}.controls select{max-width:520px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px}canvas{width:100%;height:65vh;min-height:400px;display:block;touch-action:none;cursor:grab;background:#0d1824;border:1px solid #33465b;border-radius:8px}.map{position:relative}.zoom{position:absolute;left:12px;top:12px;display:flex;gap:6px}aside{padding:18px;background:#142131;border:1px solid #33465b;border-radius:8px;font-size:14px}aside h2{font-size:20px;margin:0 0 6px}.row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid #2c4054}.muted,small{color:#afc2d5}.legend{margin:14px 0;max-width:600px}.gradient{height:12px;border-radius:4px}.seq{background:linear-gradient(90deg,#440154,#31688e,#35b779,#fde725)}.div{background:linear-gradient(90deg,#2a6fbb,#e7eae7,#bf353a)}.ticks{display:flex;justify-content:space-between;font-size:13px;margin-top:5px}.stats{margin:16px 0;font-size:14px;color:#cbd7e3}a{color:#82c6ff}details{margin-top:12px}summary{cursor:pointer}#suggestions{position:absolute;background:#182638;z-index:4;width:340px;max-height:300px;overflow:auto;border-radius:5px}#suggestions button{display:block;width:100%;text-align:left;border:0;border-radius:0}#suggestions button:hover{background:#304861}.search{position:relative}.badge{font-size:12px;color:#efcd8d}.note{font-size:13px;max-width:1000px}table{width:100%;font-size:12px;border-collapse:collapse}td,th{padding:4px 2px;text-align:right}td:first-child,th:first-child{text-align:left}.swatch{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:middle}.h{color:#efcd8d;font-size:13px;margin:12px 0 4px}@media(max-width:850px){.layout{grid-template-columns:1fr}canvas{height:55vh}main{padding:16px}}
+*{box-sizing:border-box}body{margin:0;background:#0c1420;color:#e6edf3;font:15px system-ui,sans-serif}main{max-width:1600px;margin:auto;padding:24px}h1{font-size:25px;margin:0 0 8px}p{line-height:1.5;color:#afc2d5;margin:8px 0 18px}select,input,button{font:inherit;background:#182638;color:#e6edf3;border:1px solid #425367;border-radius:6px;padding:9px}button{cursor:pointer}label{color:#afc2d5;font-size:13px;display:grid;gap:6px}.controls{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0}.controls input{width:280px}.controls select{max-width:520px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px}canvas{width:100%;height:65vh;min-height:400px;display:block;touch-action:none;cursor:grab;background:#0d1824;border:1px solid #33465b;border-radius:8px}.map{position:relative}.zoom{position:absolute;left:12px;top:12px;display:flex;gap:6px}aside{padding:18px;background:#142131;border:1px solid #33465b;border-radius:8px;font-size:14px}aside h2{font-size:20px;margin:0 0 6px}.row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid #2c4054}.muted,small{color:#afc2d5}.legend{margin:14px 0;max-width:600px}.gradient{height:12px;border-radius:4px}.seq{background:linear-gradient(90deg,#440154,#31688e,#35b779,#fde725)}.div{background:linear-gradient(90deg,#2a6fbb,#e7eae7,#bf353a)}.ticks{display:flex;justify-content:space-between;font-size:13px;margin-top:5px}.stats{margin:16px 0;font-size:14px;color:#cbd7e3}a{color:#82c6ff}details{margin-top:12px}summary{cursor:pointer}#suggestions{position:absolute;background:#182638;z-index:4;width:340px;max-height:300px;overflow:auto;border-radius:5px}#suggestions button{display:block;width:100%;text-align:left;border:0;border-radius:0}#suggestions button:hover{background:#304861}.search{position:relative}.badge{font-size:12px;color:#efcd8d}.note{font-size:13px;max-width:1000px}table{width:100%;font-size:12px;border-collapse:collapse}td,th{padding:4px 2px;text-align:right}td:first-child,th:first-child{text-align:left}.swatch{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:middle}.h{color:#efcd8d;font-size:13px;margin:12px 0 4px}.tabs{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}.tabs button[aria-pressed="true"]{background:#315e7e;border-color:#87c4ed;color:#fff}section h2{font-size:20px;margin:18px 0 8px}section h3{font-size:16px;margin:16px 0 6px;color:#efcd8d}.card{background:#142131;border:1px solid #33465b;border-radius:8px;padding:14px;margin:12px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:12px}.wide{overflow:auto}.wide table{min-width:900px;font-size:13px}.wide th{position:sticky;top:0;background:#182638}.pos{color:#9be0a3}.neg{color:#f2a1a1}.rule{display:inline-block;background:#1f3247;border-radius:4px;padding:2px 6px;margin:2px 4px 2px 0;font-size:12px}.bar{display:inline-block;height:9px;background:#5aa9e6;vertical-align:middle;border-radius:2px}@media(max-width:850px){.layout{grid-template-columns:1fr}canvas{height:55vh}main{padding:16px}}
 </style><main>
 <h1>Recalibrated capacity model</h1>
-<p>Capacity = (attribute flat + building flat) × (1 + 1% × development). Targets are people per location in equal-area units; nothing here uses population except the two fill layers.</p>
+<p>Capacity = (attribute flat + building flat) × (1 + 1% × development). Targets are people per location in equal-area units; nothing here uses population except the fill layers and the Regions table.</p>
+<nav class="tabs"><button data-tab="map" aria-pressed="true">Map</button><button data-tab="buildings" aria-pressed="false">Buildings</button><button data-tab="attributes" aria-pressed="false">Attributes &amp; development</button><button data-tab="regions" aria-pressed="false">Regions</button></nav>
+<section id="tab-map">
 <div class="controls"><label>Layer<select id="metric"></select></label>
 <label class="search">Find a location<input id="search" placeholder="Location or province…" autocomplete="off"><div id="suggestions" style="top:66px"></div></label></div>
 <div class="layout"><div><div class="map"><canvas id="map"></canvas><div class="zoom"><button id="plus" aria-label="Zoom in">+</button><button id="minus" aria-label="Zoom out">−</button><button id="reset">Reset view</button></div></div>
 <div class="legend" id="legend"></div><div id="stats" class="stats"></div></div><aside id="panel"><h2>Inspect a location</h2><p>Click the map or search above.</p></aside></div>
 <p class="note">Sequential layers use a logarithmic viridis scale up to the 99th percentile. Residual and fill layers are blue (below) to red (above), saturating at ±100%. Grey land is non-ownable. Building levels are those the ledger supports at starting development; caps are the fitted integer level limits at development 100.</p>
+</section>
+<section id="tab-buildings" hidden></section>
+<section id="tab-attributes" hidden></section>
+<section id="tab-regions" hidden></section>
 </main><script>(()=>{const FIT=__PAYLOAD__;const LOCATION_LOOKUP=__LOOKUP__;const MAP_IMAGES=__IMAGES__;
 const canvas=document.getElementById('map'),ctx=canvas.getContext('2d'),metric=document.getElementById('metric'),panel=document.getElementById('panel'),search=document.getElementById('search'),suggestions=document.getElementById('suggestions'),legend=document.getElementById('legend');
 let img=new Image(),z=1,ox=0,oy=0,selected=0,drag=null,moved=false;
@@ -173,5 +238,36 @@ canvas.addEventListener('wheel',e=>{e.preventDefault();let b=canvas.getBoundingC
 document.getElementById('plus').onclick=()=>zoom(1.5);document.getElementById('minus').onclick=()=>zoom(1/1.5);document.getElementById('reset').onclick=reset;metric.onchange=update;
 function jump(id){show(id);let r=FIT.locations[id];z=5;let s=Math.min(canvas.width/4096,canvas.height/2048)*z;ox=canvas.width/2-r.x*s;oy=canvas.height/2-r.y*s;draw();suggestions.replaceChildren();search.value=pretty(r.tag)}
 search.oninput=()=>{let q=search.value.toLowerCase().trim().replaceAll(' ','_');suggestions.replaceChildren();if(!q)return;FIT.locations.map((r,id)=>({r,id})).filter(({r})=>r&&(r.tag.includes(q)||r.province.includes(q))).slice(0,12).forEach(({r,id})=>{let b=document.createElement('button');b.textContent=pretty(r.tag)+' · '+pretty(r.province);b.onclick=()=>jump(id);suggestions.appendChild(b)})};search.onkeydown=e=>{if(e.key==='Enter')suggestions.querySelector('button')?.click();if(e.key==='Escape')suggestions.replaceChildren()};
+const P=FIT.pages,kinds=Object.keys(FIT.units);
+const sign=v=>'<span class="'+(v>0?'pos':v<0?'neg':'')+'">'+(v>0?'+':'')+fmt(v)+'</span>';
+function ruleText(rule){return Object.entries(rule).map(([a,vals])=>'<b>'+esc(pretty(a))+'</b> ∈ {'+vals.map(v=>esc(pretty(v))).join(', ')+'}').join(' <small>and</small> ')}
+function renderBuildings(){const el=document.getElementById('tab-buildings');if(el.dataset.done)return;el.dataset.done=1;
+ let h='<h2>Buildings</h2><p>One flat building per improvement type. Each level adds a fixed number of people (before the development multiplier). A location may build it only where its gate holds; its level cap is base + attribute-class terms + development-band terms, capped at '+P.building_config.level_limit+'. Caps were fitted as a '+fmt(100*P.building_config.envelope_quantile)+'th-percentile envelope over '+(P.building_config.scope==='gated'?'every eligible location':'eligible locations that have ledger mass')+'.</p>';
+ h+='<div class="card wide"><table><tr><th>Building</th><th>People / level</th><th>Eligible</th><th>Users at start</th><th>Levels at start</th><th>People at start</th><th>Caps @100 (levels)</th><th>Ungated ledger</th><th>Captured ±25%</th><th>At level limit</th><th>Cap short</th><th>Cap excess</th></tr>';
+ P.buildings.forEach(b=>{h+='<tr><td>'+esc(b.label)+'</td><td>'+fmt(b.unit)+'</td><td>'+fmt(b.eligible)+'</td><td>'+fmt(b.users)+'</td><td>'+fmt(b.levels_total)+'</td><td>'+fmt(b.people_at_start)+'</td><td>'+fmt(b.cap100_total)+'</td><td>'+fmt(100*b.ungated_share)+'%</td><td>'+fmt(100*b.captured_within_25)+'%</td><td>'+fmt(b.at_level_limit)+'</td><td>'+fmt(b.cap_short)+'</td><td>'+fmt(b.cap_excess)+'</td></tr>'});
+ h+='</table><p class="note">Ungated ledger: share of the historical ledger mass sitting in locations that fail the gate (gate quality). Cap short / excess: locations whose cap at development 100 is below / above the levels the ledger maximum needs.</p></div><div class="grid">';
+ P.buildings.forEach(b=>{const maxN=Math.max(1,...Object.values(b.levels_hist));h+='<div class="card"><h3>'+esc(b.label)+' · '+fmt(b.unit)+' people per level</h3><div class="h">Can be built where</div>'+(b.gate.length?b.gate.map(r=>'<div class="rule">'+ruleText(r)+'</div>').join('<small> or </small>'):'<span class="rule">everywhere</span>');
+  h+='<div class="h">Level cap = '+b.base_cap+' (base)'+(b.cap_terms.length?' + terms':'')+'</div>';
+  const grp={};b.cap_terms.forEach(t=>(grp[t.attribute]=grp[t.attribute]||[]).push(t));
+  h+=Object.entries(grp).map(([a,ts])=>'<div class="row"><small>'+esc(pretty(a))+'</small><span>'+ts.map(t=>esc(pretty(t.value))+' '+sign(t.levels)).join(', ')+'</span></div>').join('');
+  h+='<div class="h">Levels at start (locations per level)</div>'+Object.entries(b.levels_hist).map(([l,n])=>'<div class="row"><small>'+l+'</small><span><span class="bar" style="width:'+Math.round(140*n/maxN)+'px"></span> '+fmt(n)+'</span></div>').join('')+'</div>'});
+ h+='</div>';el.innerHTML=h}
+function renderAttributes(){const el=document.getElementById('tab-attributes');if(el.dataset.done)return;el.dataset.done=1;const f=P.fit,D=P.development;
+ let h='<h2>Attribute values</h2><p>Flat people added or removed by each displayed attribute class, for the natural capacity (at starting development) and the maximum (at development 100). The reference location ('+Object.entries(f.reference).map(([k,v])=>esc(pretty(k))+'='+esc(pretty(v))).join(', ')+') has value = intercept; every other class adds its term. Spans are the allowed range; a value sitting on a span edge is a constrained value, not an estimate. Cap columns show the extra building levels a class grants.</p>';
+ h+='<div class="card wide"><table><tr><th>Attribute</th><th>Class</th><th>Locations</th><th>Natural · people</th><th>share</th><th>span</th><th>Maximum · people</th><th>share</th><th>span</th>'+kinds.map(k=>'<th>cap '+esc(pretty(k))+'</th>').join('')+'</tr>';
+ P.attributes.forEach(a=>{const n=a.natural_capacity,m=a.maximum_capacity;h+='<tr><td>'+esc(pretty(a.attribute))+'</td><td>'+esc(pretty(a.value))+'</td><td>'+(a.locations===null?'—':fmt(a.locations))+'</td>'+(n?'<td>'+sign(n.people)+'</td><td>'+fmt(100*n.share)+'%</td><td><small>'+fmt(n.span[0])+' … '+fmt(n.span[1])+'</small></td>':'<td></td><td></td><td></td>')+(m?'<td>'+sign(m.people)+'</td><td>'+fmt(100*m.share)+'%</td><td><small>'+fmt(m.span[0])+' … '+fmt(m.span[1])+'</small></td>':'<td></td><td></td><td></td>')+kinds.map(k=>'<td>'+(a.caps&&a.caps[k]!==undefined?(a.caps[k]?sign(a.caps[k]):'0'):'')+'</td>').join('')+'</tr>'});
+ h+='</table></div>';
+ h+='<h2>Development</h2><div class="card"><p>Capacity = flat × (1 + '+fmt(100*D.percent_per_point)+'% × development). Development is derived before any fit from land use and the ledger: '+Object.entries(D.weights).filter(([k,w])=>w>0).map(([k,w])=>w+' × '+esc(pretty(k))).join(' + ')+'. It also enters the building caps through five bands: '+D.bands.map(b=>esc(b.replace('d','').replace('_','–'))).join(', ')+' (band terms are listed in the attribute table above).</p>';
+ h+='<div class="h">Sanity checks</div>'+Object.entries(D.checks).filter(([k,v])=>v&&typeof v==='object'&&'passed' in v).map(([k,v])=>'<div class="row"><span>'+esc(pretty(k))+'</span><b class="'+(v.passed?'pos':'neg')+'">'+(v.passed?'pass':'fail')+(v.observed!==undefined&&typeof v.observed==='number'?' · '+fmt(v.observed):'')+'</b></div>').join('');
+ h+='<div class="h">Spot checks</div>'+Object.entries(D.spot_checks).map(([k,v])=>'<div class="row"><span>'+esc(pretty(k))+'</span><b class="'+(v.passed?'pos':v.passed===false?'neg':'')+'">'+(v.observed===null?'missing':fmt(v.observed))+' <small>band '+v.band[0]+'–'+v.band[1]+'</small></b></div>').join('')+'</div>';
+ h+='<div class="card"><div class="h">Attribute fit</div>'+f.metrics.map(m=>'<div class="row"><span>'+esc(pretty(m.target))+' · '+esc(pretty(m.evaluation))+'</span><b>R² '+fmt(m.r2)+' · median error '+fmt(m.median_absolute_percentage_error)+'%</b></div>').join('')+'<p class="note">tau = '+f.tau+': the fit is a low envelope with that share of locations allowed above it; reference scale '+fmt(f.reference_scale)+' people.</p></div>';
+ el.innerHTML=h}
+function renderRegions(){const el=document.getElementById('tab-regions');if(el.dataset.done)return;el.dataset.done=1;
+ const M=x=>fmt(x/1e6)+'M',pc=x=>x===null||x===undefined?'—':fmt(100*x)+'%';
+ const table=(title,rows)=>{let h='<h3>'+title+'</h3><div class="card wide"><table><tr><th>Region</th><th>Locations</th><th>Population</th><th>Start target</th><th>Start model</th><th>Max target</th><th>Max model</th><th>Attr. natural / target</th><th>Fill (target)</th><th>Fill (model)</th><th>Median fill</th><th>Rural over cap</th><th>Urban over cap</th><th>Dev mean / p90</th><th>Start resid. med.</th><th>Max resid. med.</th><th>Review list</th>'+kinds.map(k=>'<th>'+esc(pretty(k))+' lv</th>').join('')+'</tr>';
+  Object.entries(rows).sort((a,b)=>b[1].population-a[1].population).forEach(([name,r])=>{h+='<tr><td>'+esc(pretty(name))+'</td><td>'+fmt(r.locations)+'</td><td>'+M(r.population)+'</td><td>'+M(r.starting_target)+'</td><td>'+M(r.starting_model)+'</td><td>'+M(r.maximum_target)+'</td><td>'+M(r.maximum_model)+'</td><td>'+pc(r.attribute_natural/r.natural_target)+'</td><td>'+pc(r.fill_target)+'</td><td>'+pc(r.fill_model)+'</td><td>'+pc(r.median_fill)+'</td><td>'+fmt(r.rural_over_capacity)+'</td><td>'+fmt(r.urban_over_capacity)+'</td><td>'+fmt(r.development_mean)+' / '+fmt(r.development_p90)+'</td><td>'+pc(r.start_residual_median)+'</td><td>'+pc(r.max_residual_median)+'</td><td>'+fmt(r.review)+'</td>'+kinds.map(k=>'<td>'+fmt(r.levels[k]||0)+'</td>').join('')+'</tr>'});
+  return h+'</table></div>'};
+ el.innerHTML='<h2>Where we stand, by region</h2><p>Targets and model in people; fill is starting population over starting capacity (population is context only). Residual medians are model ÷ target − 1 per location. Building columns are total levels at start.</p>'+table('World',{world:P.regions.world})+table('Super regions',P.regions.super_region)+table('Macro regions',P.regions.macro_region)}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.ariaPressed='false');b.ariaPressed='true';['map','buildings','attributes','regions'].forEach(t=>document.getElementById('tab-'+t).hidden=t!==b.dataset.tab);if(b.dataset.tab==='buildings')renderBuildings();if(b.dataset.tab==='attributes')renderAttributes();if(b.dataset.tab==='regions')renderRegions();if(b.dataset.tab==='map')fit()});
 window.addEventListener('resize',fit);fit();reset();update();
 })();</script></html>'''

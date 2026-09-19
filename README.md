@@ -158,3 +158,14 @@ improvement capacity are preserved. The allowance enters base effective units
 and is separately visible in the map detail and `rural_balance_ledger.csv`.
 `rural_balance_validation.json` tests the complete map and export identities.
 The earlier residual counts above describe the pre-allowance experiment.
+
+## Publishing the recalibration map
+
+The map at `artifacts/recalibration_map/index.html` is published to GitHub Pages only on request:
+
+```bash
+uv run worldbuilder recalibration-map   # rebuild the map
+scripts/publish_map.sh                  # force-push it as a single commit to the gh-pages branch
+```
+
+Pages serves the `gh-pages` branch at https://janb1989.github.io/EU5WorldBuilder/. Ordinary pushes to `main` never republish.

@@ -30,7 +30,7 @@ def load():
     d['context']=fill.context.reindex(d.index).fillna('unknown')
     d['best_kcal_per_ha']=pd.to_numeric(fert.get('best_kcal_per_ha',pd.Series(dtype=float)),errors='coerce').reindex(d.index)
     d['best_crop']=fert.get('best_crop',pd.Series(dtype=str)).reindex(d.index).fillna('')
-    numeric=[x for x in d.columns if x not in ('climate','topography','vegetation','soil_type','fertility','river_level','is_coastal','is_adjacent_to_lake','region','macro_region','development_band','context','best_crop','start_exceeds_attribute_maximum')]
+    numeric=[x for x in d.columns if x not in ('climate','topography','vegetation','soil_type','fertility','river_level','is_coastal','is_adjacent_to_lake','region','macro_region','context','best_crop','start_exceeds_attribute_maximum')]
     for x in numeric:d[x]=pd.to_numeric(d[x],errors='coerce')
     d['fill_target']=d.population/d.starting_capacity.replace(0,np.nan)
     d['fill_model']=d.population/d.starting_capacity_model.replace(0,np.nan)
@@ -56,8 +56,7 @@ def layers(d):
          ('fill_target','Population ÷ starting target','Population','div',d.fill_target-1),
          ('fill_model','Population ÷ starting model','Population','div',d.fill_model-1),
          ('review','Start exceeds attribute maximum (review list)','Flags','cat',d.start_exceeds_attribute_maximum.astype(str).map({'True':'on review list','False':'ok'})),
-         ('fertility','Fertility class (best staple kcal/ha)','Attributes','cat',d.fertility),
-         ('development_band','Development band','Attributes','cat',d.development_band)]
+         ('fertility','Fertility class (best staple kcal/ha)','Attributes','cat',d.fertility)]
     for k in LEDGER_KINDS:
         out.append((f'{k}_levels_start',f'{KIND_LABELS[k]} · levels at start','Buildings · start','lin',d[f'{k}_levels_start']))
     for k in LEDGER_KINDS:
@@ -85,9 +84,9 @@ def pages(d,units,c):
             a[target]={'people':float(r.people),'share':float(r.share_of_reference),'span':[float(r.span_min),float(r.span_max)]}
     for r in caps.itertuples():
         key=(r.attribute if r.attribute!='base' else 'reference',r.value if r.attribute!='base' else 'intercept')
-        a=attrs.setdefault(key,{'attribute':key[0],'value':key[1],'locations':None});a.setdefault('caps',{})[r.building]=int(r.levels)
+        a=attrs.setdefault(key,{'attribute':key[0],'value':key[1],'locations':None});a.setdefault('caps',{})[r.building]=float(r.levels)
     attribute_rows=[v for k,v in attrs.items()]
-    order={'reference':0,'climate':1,'topography':2,'vegetation':3,'soil_type':4,'fertility':5,'river_level':6,'is_coastal':7,'is_adjacent_to_lake':8,'development_band':9}
+    order={'reference':0,'climate':1,'topography':2,'vegetation':3,'soil_type':4,'fertility':5,'river_level':6,'is_coastal':7,'is_adjacent_to_lake':8,'development':9}
     attribute_rows.sort(key=lambda a:(order.get(a['attribute'],99),a['value']))
     # buildings: per type summary, gate, cap equation, level histogram
     buildings=[]
@@ -95,12 +94,13 @@ def pages(d,units,c):
         k=r.building;lv=own[f'{k}_levels_start'].to_numpy(float) if f'{k}_levels_start' in own else np.zeros(len(own))
         cap100=own[f'{k}_cap_at_development_100'].to_numpy(float) if f'{k}_cap_at_development_100' in own else np.zeros(len(own))
         hist={str(int(b)):int(n) for b,n in zip(*np.unique(lv[lv>0],return_counts=True))}
-        terms=caps[(caps.building==k)&(caps.levels!=0)&(caps.attribute!='base')]
+        terms=caps[(caps.building==k)&(caps.levels!=0)&(~caps.attribute.isin(['base','development']))]
+        gamma=float(caps[(caps.building==k)&(caps.attribute=='development')].levels.iloc[0]) if ((caps.building==k)&(caps.attribute=='development')).any() else 0.
         buildings.append({'building':k,'label':KIND_LABELS.get(k,k),'unit':float(r.unit_people_per_level) if r.unit_people_per_level not in ('',None) else None,
             'eligible':int(r.eligible_locations),'users':int(getattr(r,'users_at_start',0) or 0),'ungated_share':float(r.ungated_ledger_share),
             'captured_within_25':float(getattr(r,'quantisation_captured_within_25_share',0) or 0),'at_level_limit':int(getattr(r,'quantisation_locations_at_level_limit',0) or 0),
             'cap_short':int(getattr(r,'cap_short_locations',0) or 0),'cap_excess':int(getattr(r,'cap_excess_locations',0) or 0),'base_cap':int(getattr(r,'cap_intercept',0) or 0),
-            'gate':bcfg['gates'].get(k,[]),'cap_terms':[{'attribute':t.attribute,'value':t.value,'levels':int(t.levels)} for t in terms.itertuples()],
+            'gate':bcfg['gates'].get(k,[]),'levels_per_development_point':gamma,'cap_terms':[{'attribute':t.attribute,'value':t.value,'levels':int(t.levels)} for t in terms.itertuples()],
             'levels_hist':hist,'levels_total':int(lv.sum()),'cap100_total':int(cap100.sum()),'people_at_start':float(lv.sum()*(float(r.unit_people_per_level) if r.unit_people_per_level not in ('',None) else 0))})
     # regions: compact statistics by super and macro region
     def block(g):
@@ -118,10 +118,9 @@ def pages(d,units,c):
     regions={'super_region':{k:block(g) for k,g in own.groupby('super_region')},'macro_region':{k:block(g) for k,g in own.groupby('macro_region')},'world':block(own)}
     return {'attributes':attribute_rows,'buildings':buildings,'regions':regions,
         'fit':{'reference':fit['config']['reference_classes'],'reference_scale':fit['reference_scale_people'],'tau':fit['config']['tau'],'metrics':fit['metrics'],'sensibility':{k:{kk:vv for kk,vv in v.items() if kk not in ('pinned','signs')} for k,v in fit['sensibility'].items()}},
-        'development':{'weights':dcfg['weights'],'percent_per_point':c,'bands':[b[2] for b in DEV_BANDS_LIST],'checks':{k:v for k,v in dchecks['checks'].items() if k!='spot_checks'},'spot_checks':dchecks['checks']['spot_checks']['locations'],'component_means':dchecks.get('component_means',{})},
+        'development':{'weights':dcfg['weights'],'percent_per_point':c,'checks':{k:v for k,v in dchecks['checks'].items() if k!='spot_checks'},'spot_checks':dchecks['checks']['spot_checks']['locations'],'component_means':dchecks.get('component_means',{})},
         'building_config':{'level_limit':bcfg['level_limit'],'envelope_quantile':bcfg['envelope_quantile'],'scope':bcfg.get('envelope_fit_scope','with_ledger')}}
 
-DEV_BANDS_LIST=[(0,20,'d00_20'),(20,40,'d20_40'),(40,60,'d40_60'),(60,80,'d60_80'),(80,101,'d80_100')]
 
 
 CAT_COLORS={'very_low':[168,64,59],'low':[215,125,64],'moderate':[219,191,100],'high':[139,182,94],'very_high':[55,139,80],
@@ -170,7 +169,7 @@ def build(output_path=None):
         images[key]='data:image/png;base64,'+base64.b64encode((out/f'{key}.png').read_bytes()).decode('ascii')
         manifest.append(entry)
     data=[None]*(len(locations)+1)
-    fields=['climate','topography','vegetation','soil_type','fertility','river_level','is_coastal','is_adjacent_to_lake','best_crop','context','development_band']
+    fields=['climate','topography','vegetation','soil_type','fertility','river_level','is_coastal','is_adjacent_to_lake','best_crop','context']
     nums=['natural_capacity_people','starting_capacity','maximum_capacity_people','attribute_natural_people','attribute_maximum_people','starting_capacity_model','maximum_capacity_model','buildings_start_people','buildings_max_people','development','population','fill_target','fill_model','best_kcal_per_ha','leftover_start_total','leftover_max_total']
     for i,row in enumerate(locations,1):
         tag=row['location_tag']
@@ -244,12 +243,12 @@ function makeSortable(root){root.querySelectorAll('table').forEach(table=>{const
 const sign=v=>'<span class="'+(v>0?'pos':v<0?'neg':'')+'">'+(v>0?'+':'')+fmt(v)+'</span>';
 function ruleText(rule){return Object.entries(rule).map(([a,vals])=>'<b>'+esc(pretty(a))+'</b> ∈ {'+vals.map(v=>esc(pretty(v))).join(', ')+'}').join(' <small>and</small> ')}
 function renderBuildings(){const el=document.getElementById('tab-buildings');if(el.dataset.done)return;el.dataset.done=1;
- let h='<h2>Buildings</h2><p>One flat building per improvement type. Each level adds a fixed number of people (before the development multiplier). A location may build it only where its gate holds; its level cap is base + attribute-class terms + development-band terms, capped at '+P.building_config.level_limit+'. Caps were fitted as a '+fmt(100*P.building_config.envelope_quantile)+'th-percentile envelope over '+(P.building_config.scope==='gated'?'every eligible location':'eligible locations that have ledger mass')+'.</p>';
+ let h='<h2>Buildings</h2><p>One flat building per improvement type. Each level adds a fixed number of people (before the development multiplier). A location may build it only where its gate holds; its level cap is base + attribute-class terms + levels per development point × development, floored to whole levels and capped at '+P.building_config.level_limit+'. Caps were fitted as a '+fmt(100*P.building_config.envelope_quantile)+'th-percentile envelope over '+(P.building_config.scope==='gated'?'every eligible location':'eligible locations that have ledger mass')+'.</p>';
  h+='<div class="card wide"><table><tr><th>Building</th><th>People / level</th><th>Eligible</th><th>Users at start</th><th>Levels at start</th><th>People at start</th><th>Caps @100 (levels)</th><th>Ungated ledger</th><th>Captured ±25%</th><th>At level limit</th><th>Cap short</th><th>Cap excess</th></tr>';
  P.buildings.forEach(b=>{h+='<tr><td>'+esc(b.label)+'</td><td>'+fmt(b.unit)+'</td><td>'+fmt(b.eligible)+'</td><td>'+fmt(b.users)+'</td><td>'+fmt(b.levels_total)+'</td><td>'+fmt(b.people_at_start)+'</td><td>'+fmt(b.cap100_total)+'</td><td>'+fmt(100*b.ungated_share)+'%</td><td>'+fmt(100*b.captured_within_25)+'%</td><td>'+fmt(b.at_level_limit)+'</td><td>'+fmt(b.cap_short)+'</td><td>'+fmt(b.cap_excess)+'</td></tr>'});
  h+='</table><p class="note">Ungated ledger: share of the historical ledger mass sitting in locations that fail the gate (gate quality). Cap short / excess: locations whose cap at development 100 is below / above the levels the ledger maximum needs.</p></div><div class="grid">';
  P.buildings.forEach(b=>{const maxN=Math.max(1,...Object.values(b.levels_hist));h+='<div class="card"><h3>'+esc(b.label)+' · '+fmt(b.unit)+' people per level</h3><div class="h">Can be built where</div>'+(b.gate.length?b.gate.map(r=>'<div class="rule">'+ruleText(r)+'</div>').join('<small> or </small>'):'<span class="rule">everywhere</span>');
-  h+='<div class="h">Level cap = '+b.base_cap+' (base)'+(b.cap_terms.length?' + terms':'')+'</div>';
+  h+='<div class="h">Level cap = '+b.base_cap+' (base)'+(b.cap_terms.length?' + terms':'')+(b.levels_per_development_point?' + '+b.levels_per_development_point+' × development (up to '+sign(Math.floor(100*b.levels_per_development_point))+' at 100)':'')+'</div>';
   const grp={};b.cap_terms.forEach(t=>(grp[t.attribute]=grp[t.attribute]||[]).push(t));
   h+=Object.entries(grp).map(([a,ts])=>'<div class="row"><small>'+esc(pretty(a))+'</small><span>'+ts.map(t=>esc(pretty(t.value))+' '+sign(t.levels)).join(', ')+'</span></div>').join('');
   h+='<div class="h">Levels at start (locations per level)</div>'+Object.entries(b.levels_hist).map(([l,n])=>'<div class="row"><small>'+l+'</small><span><span class="bar" style="width:'+Math.round(140*n/maxN)+'px"></span> '+fmt(n)+'</span></div>').join('')+'</div>'});
@@ -259,7 +258,7 @@ function renderAttributes(){const el=document.getElementById('tab-attributes');i
  h+='<div class="card wide"><table><tr><th>Attribute</th><th>Class</th><th>Locations</th><th>Natural · people</th><th>share</th><th>span</th><th>Maximum · people</th><th>share</th><th>span</th>'+kinds.map(k=>'<th>cap '+esc(pretty(k))+'</th>').join('')+'</tr>';
  P.attributes.forEach(a=>{const n=a.natural_capacity,m=a.maximum_capacity;h+='<tr><td>'+esc(pretty(a.attribute))+'</td><td>'+esc(pretty(a.value))+'</td><td>'+(a.locations===null?'—':fmt(a.locations))+'</td>'+(n?'<td>'+sign(n.people)+'</td><td>'+fmt(100*n.share)+'%</td><td><small>'+fmt(n.span[0])+' … '+fmt(n.span[1])+'</small></td>':'<td></td><td></td><td></td>')+(m?'<td>'+sign(m.people)+'</td><td>'+fmt(100*m.share)+'%</td><td><small>'+fmt(m.span[0])+' … '+fmt(m.span[1])+'</small></td>':'<td></td><td></td><td></td>')+kinds.map(k=>'<td>'+(a.caps&&a.caps[k]!==undefined?(a.caps[k]?sign(a.caps[k]):'0'):'')+'</td>').join('')+'</tr>'});
  h+='</table></div>';
- h+='<h2>Development</h2><div class="card"><p>Capacity = flat × (1 + '+fmt(100*D.percent_per_point)+'% × development). Development is derived before any fit from land use and the ledger: '+Object.entries(D.weights).filter(([k,w])=>w>0).map(([k,w])=>w+' × '+esc(pretty(k))).join(' + ')+'. It also enters the building caps through five bands: '+D.bands.map(b=>esc(b.replace('d','').replace('_','–'))).join(', ')+' (band terms are listed in the attribute table above).</p>';
+ h+='<h2>Development</h2><div class="card"><p>Capacity = flat × (1 + '+fmt(100*D.percent_per_point)+'% × development). Development is derived before any fit from land use and the ledger: '+Object.entries(D.weights).filter(([k,w])=>w>0).map(([k,w])=>w+' × '+esc(pretty(k))).join(' + ')+'. It also raises building caps linearly: each building has its own levels per development point (the “development · per point” row in the attribute table; EU5 script: add = { value = development multiply = γ }).</p>';
  h+='<div class="h">Sanity checks</div>'+Object.entries(D.checks).filter(([k,v])=>v&&typeof v==='object'&&'passed' in v).map(([k,v])=>'<div class="row"><span>'+esc(pretty(k))+'</span><b class="'+(v.passed?'pos':'neg')+'">'+(v.passed?'pass':'fail')+(v.observed!==undefined&&typeof v.observed==='number'?' · '+fmt(v.observed):'')+'</b></div>').join('');
  h+='<div class="h">Spot checks</div>'+Object.entries(D.spot_checks).map(([k,v])=>'<div class="row"><span>'+esc(pretty(k))+'</span><b class="'+(v.passed?'pos':v.passed===false?'neg':'')+'">'+(v.observed===null?'missing':fmt(v.observed))+' <small>band '+v.band[0]+'–'+v.band[1]+'</small></b></div>').join('')+'</div>';
  h+='<div class="card"><div class="h">Attribute fit</div>'+f.metrics.map(m=>'<div class="row"><span>'+esc(pretty(m.target))+' · '+esc(pretty(m.evaluation))+'</span><b>R² '+fmt(m.r2)+' · median error '+fmt(m.median_absolute_percentage_error)+'%</b></div>').join('')+'<p class="note">tau = '+f.tau+': the fit is a low envelope with that share of locations allowed above it; reference scale '+fmt(f.reference_scale)+' people.</p></div>';

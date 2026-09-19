@@ -2,7 +2,7 @@
 
 One building per ledger type. Each has a fixed flat value per level, an
 eligibility gate written as attribute rules, and a level-cap equation in
-attribute classes and development bands fitted as an envelope. Starting
+attribute classes plus a linear development term (levels per point) fitted as an envelope. Starting
 levels come from the ledger and never exceed the cap at starting development.
 No per-location term exists anywhere; leftovers are reported, not absorbed.
 """
@@ -16,7 +16,6 @@ from .development_target import hash_map
 from .provenance import write_json
 
 ROOT=Path(__file__).resolve().parents[2]
-DEV_BANDS=[(0,20,'d00_20'),(20,40,'d20_40'),(40,60,'d40_60'),(60,80,'d60_80'),(80,101,'d80_100')]
 
 
 def gate(d,rules):
@@ -28,12 +27,6 @@ def gate(d,rules):
         for attr,allowed in rule.items():m&=d[attr].astype(str).isin([str(a) for a in allowed]).to_numpy()
         mask|=m
     return mask
-
-
-def development_band(dev):
-    dev=np.asarray(dev,float);out=np.empty(len(dev),dtype=object)
-    for lo,hi,name in DEV_BANDS:out[(dev>=lo)&(dev<hi)]=name
-    return out
 
 
 def choose_unit(values,level_limit,quantiles,round_to=0):
@@ -58,11 +51,13 @@ def choose_unit(values,level_limit,quantiles,round_to=0):
 def assign(d,ledger,dev,cfg):
     """Return per-location levels/caps and per-building summaries. d indexed by location_tag."""
     led=ledger.set_index('location_tag').loc[d.index]
-    d=d.copy();d['development']=dev.reindex(d.index).to_numpy(float);d['development_band']=development_band(d.development)
-    features=cfg['cap_features']+['development_band']
-    reference={**cfg['reference_classes'],'development_band':'d00_20'}
-    X,names,groups=design_reference(d,features,reference)
-    ordinal={**cfg.get('ordinal',{}),'development_band':[b[2] for b in DEV_BANDS]}
+    d=d.copy();d['development']=dev.reindex(d.index).to_numpy(float)
+    features=cfg['cap_features']
+    X,names,groups=design_reference(d,features,cfg['reference_classes'])
+    # EU5 cap equations take development only as a linear term: add = { value = development multiply = gamma }.
+    X=np.column_stack([X,d.development.to_numpy(float)]);names=names+[('development','per_point')];idev=X.shape[1]-1
+    X100=X.copy();X100[:,idev]=100.
+    ordinal=cfg.get('ordinal',{})
     rows={};buildings=[];caps_out=[]
     out=pd.DataFrame(index=d.index)
     for kind in LEDGER_KINDS:
@@ -79,27 +74,27 @@ def assign(d,ledger,dev,cfg):
         need=np.clip(np.ceil(Lm/unit),0,cfg['level_limit'])
         spans={f:(0.,float(cfg['level_limit'])) for f in features}
         spans.update({f:(-float(cfg['level_limit']),float(cfg['level_limit'])) for f in cfg.get('signed_cap_features',[])})
+        spans['development']=(0.,float(cfg.get('max_levels_per_development_point',cfg['level_limit']/100)))
         # Fit the cap envelope over every gated location, including those with no ledger mass, so that
         # classes where works are rare receive small caps instead of inheriting their neighbours' need.
         sub=g if cfg.get('envelope_fit_scope','with_ledger')=='gated' else g&(need>0)
         beta,info=fit_quantile(X[sub],need[sub],names,groups,{'tau':cfg['envelope_quantile']},spans,(0.,float(cfg['level_limit'])),float(cfg['level_limit']),ordinal)
-        beta=np.round(beta);beta[0]=max(beta[0],0)
-        cap=np.clip(np.where(g,X@beta,0),0,cfg['level_limit'])
-        band100=groups['development_band']['columns'].get('d80_100')
-        X100=X.copy()
-        for name,i in groups['development_band']['columns'].items():X100[:,i]=1. if i==band100 else 0.
-        cap100=np.clip(np.where(g,X100@beta,0),0,cfg['level_limit'])
+        gamma=max(0.,round(float(beta[idev]),2));beta=np.round(beta);beta[idev]=gamma;beta[0]=max(beta[0],0)
+        # Levels are whole numbers in game: the cap is floored after the linear development term.
+        cap=np.clip(np.where(g,np.floor(X@beta+1e-9),0),0,cfg['level_limit'])
+        cap100=np.clip(np.where(g,np.floor(X100@beta+1e-9),0),0,cfg['level_limit'])
         n_start=np.minimum(np.clip(np.round(Ls/unit),0,cfg['level_limit']),cap)
         out[f'{kind}_levels_start']=n_start.astype(int);out[f'{kind}_cap']=cap.astype(int);out[f'{kind}_cap_at_development_100']=cap100.astype(int)
         out[f'{kind}_leftover_start']=Ls-n_start*unit;out[f'{kind}_leftover_max']=Lm-cap100*unit
         shortfall=g&(cap100<need);excess=g&(cap100>need)
         buildings.append({'building':kind,'unit_people_per_level':unit,'eligible_locations':int(g.sum()),'users_at_start':int((n_start>0).sum()),'ungated_ledger_share':ungated,
             **{f'quantisation_{k}':v for k,v in quant.items()},'cap_short_locations':int(shortfall.sum()),'cap_short_share_of_ledger':float(Lm[shortfall].sum()/max(Lm[g].sum(),1)),'cap_excess_locations':int(excess.sum()),'cap_excess_levels':float((cap100-need)[excess].sum()),
-            'cap_intercept':float(beta[0]),'envelope_status':info['status'],'gate':json.dumps(rules)})
+            'cap_intercept':float(beta[0]),'levels_per_development_point':gamma,'envelope_status':info['status'],'gate':json.dumps(rules)})
         for i,(f,v) in enumerate(names):
-            if i:caps_out.append({'building':kind,'attribute':f,'value':v,'levels':int(beta[i])})
+            if i==idev:caps_out.append({'building':kind,'attribute':'development','value':'per_point','levels':gamma})
+            elif i:caps_out.append({'building':kind,'attribute':f,'value':v,'levels':int(beta[i])})
             else:caps_out.append({'building':kind,'attribute':'base','value':'reference','levels':int(beta[0])})
-    out['development']=d.development;out['development_band']=d.development_band
+    out['development']=d.development
     return out,pd.DataFrame(buildings),pd.DataFrame(caps_out)
 
 

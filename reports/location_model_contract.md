@@ -149,3 +149,13 @@ recomputes candidates from the native-grid rasters and evaluates them against
 `fill_targets` (settled Old-World rural median fill, rural over-capacity share)
 in `FILL.md` / `fill_evaluation.json`. Population enters only that evaluation.
 Urban food-importing cities are reported separately and handled later.
+
+### Inheritance activation retired — 2026-09-19
+
+The starting scenario no longer inherits a share of the remaining potential
+(`maximum_opportunity_activation` = 0 for every farm-system class). Starting
+improvements, and therefore starting building levels, represent evidenced
+1300 works only. Before this change 43% of starting improvement capacity was
+activated potential, which gave many sparsely populated locations high
+starting building levels close to their maximum. The maximum scenario is
+unchanged, so the room between start and maximum widens accordingly.

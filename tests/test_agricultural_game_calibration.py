@@ -46,6 +46,9 @@ def test_native_grid_inheritance_keeps_source_and_resource_limits(tmp_path,monke
     import historical_agriculture.agricultural_game_calibration as model
     c=json.loads((Path(__file__).parents[1]/'configs/agricultural_game_calibration.json').read_text())
     c['inheritance'].pop('extent_guard',None)  # Explicit legacy scenario remains reproducible.
+    # The live config retired activation for the targets; this test exercises the mechanism itself.
+    c['inheritance']['maximum_opportunity_activation']={'extensive':.2,'rotation':.4,'managed':.55,'intensive':.7}
+    c['inheritance']['unknown_system_activation']=.2
     (tmp_path/'configs').mkdir()
     (tmp_path/'configs/game.json').write_text(json.dumps(c))
     (tmp_path/'configs/regions.json').write_text(json.dumps({'regions':[{'ecoregion_ids':[1],'management':'managed'}]}))

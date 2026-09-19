@@ -36,7 +36,8 @@
     "noncrop_reference_support": 0.1,
     "formula": "game = game_scale * G(s;r), G(s;r) = max(s, r * (s/r)^exponent), G(0;r)=0",
     "interpretation": "Compress the extreme low-support tail in game units. Reference values use the source density's units for dimensional consistency; they are calibration anchors, not measured crop or pastoral yields. Apply to baseline, inherited starting and maximum support on the native grid. Preserve ordering, unchanged high support and the bounded location multiplier. game_scale is one global factor applied to base, starting and maximum game support after conversion; together with the exponent it is the only fill-calibration knob. Choose it with scripts/calibrate_fill.py against the configured fill targets; population evaluates candidates but never enters the formula.",
-    "game_scale": 1.0
+    "game_scale": 0.45,
+    "game_scale_status": "2026-09-19: chosen from scripts/calibrate_fill.py; settled Old-World rural median fill ~0.33 with ~11% rural over-capacity. A 0.75 median is unreachable without >30% over-capacity, so the fill target was lowered to 0.35 / 0.10."
   },
   "sensitivity": {
     "conservative_exponent": 0.4,

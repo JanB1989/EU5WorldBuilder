@@ -109,8 +109,8 @@
     "status": "Retired 2026-09-19. The population-based allowance is no longer applied to any target; when enabled it is only reported in rural_balance_diagnostic.csv."
   },
   "fill_targets": {
-    "settled_median_fill": 0.75,
-    "rural_over_capacity_share": 0.05,
+    "settled_median_fill": 0.35,
+    "rural_over_capacity_share": 0.1,
     "min_cropland_share": 0.02,
     "settled_macro_regions": [
       "western_europe",
@@ -121,7 +121,7 @@
       "middle_east",
       "north_africa"
     ],
-    "status": "Informational evaluation targets for scripts/calibrate_fill.py and FILL.md. Population is joined only in that evaluation."
+    "status": "Informational evaluation targets for scripts/calibrate_fill.py and FILL.md. Lowered 2026-09-19 from 0.75/0.05 after the calibration grid showed the pair unreachable; population is joined only in that evaluation."
   },
   "crop_free_maximum_fallback": true,
   "crop_free_maximum_fallback_status": "2026-09-19: cells that no historically listed crop reaches receive the best caloric crop of the catalogue by low-input potential, so the maximum scenario is no longer closed there (start unaffected unless HYDE records cultivation)."

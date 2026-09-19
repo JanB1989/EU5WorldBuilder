@@ -242,7 +242,62 @@
         ]
       }
     ],
-    "management": []
+    "management": [],
+    "oasis_irrigation": [
+      {
+        "climate": [
+          "arid",
+          "cold_arid"
+        ],
+        "river_level": [
+          "0"
+        ],
+        "is_adjacent_to_lake": [
+          "False"
+        ]
+      },
+      {
+        "climate": [
+          "hot_steppe",
+          "cold_steppe"
+        ],
+        "vegetation": [
+          "desert",
+          "scrubland",
+          "sparse"
+        ],
+        "river_level": [
+          "0"
+        ],
+        "is_adjacent_to_lake": [
+          "False"
+        ]
+      }
+    ],
+    "pastoral": [
+      {
+        "vegetation": [
+          "grasslands",
+          "savanna",
+          "scrubland",
+          "sparse",
+          "tundra",
+          "thicket",
+          "dry_forest",
+          "desert"
+        ]
+      },
+      {
+        "climate": [
+          "cold_steppe",
+          "hot_steppe",
+          "arid",
+          "cold_arid",
+          "subarctic",
+          "arctic"
+        ]
+      }
+    ]
   },
   "notes": [
     "Gates are attribute rules (OR over rules, AND within a rule). ungated_ledger_share above ~10% means the gate is wrong, not the location.",
@@ -255,5 +310,72 @@
   "allow_failed_development_checks_reason": "2026-09-19: development sanity suite fails by small margins (P90 52 vs band 50, max 91.6 vs 90, one ordering violation south_east_asia < central_asia, 4/11 spot checks). Recorded, not tuned away; see artifacts/development/report.md.",
   "envelope_fit_scope": "with_ledger",
   "round_to": 100,
-  "max_levels_per_development_point": 0.2
+  "max_levels_per_development_point": 0.2,
+  "extensions": {
+    "oasis_irrigation": {
+      "enabled": true,
+      "gate": [
+        {
+          "climate": [
+            "arid",
+            "cold_arid"
+          ],
+          "river_level": [
+            "0"
+          ],
+          "is_adjacent_to_lake": [
+            "False"
+          ]
+        },
+        {
+          "climate": [
+            "hot_steppe",
+            "cold_steppe"
+          ],
+          "vegetation": [
+            "desert",
+            "scrubland",
+            "sparse"
+          ],
+          "river_level": [
+            "0"
+          ],
+          "is_adjacent_to_lake": [
+            "False"
+          ]
+        }
+      ],
+      "note": "Water-supply ledger of dry locations without surface water in the displayed attributes: qanats, wells and oasis channels."
+    },
+    "pastoral": {
+      "enabled": false,
+      "share_multiplier": 1.0,
+      "maximum_multiplier": 1.0,
+      "gate": [
+        {
+          "vegetation": [
+            "grasslands",
+            "savanna",
+            "scrubland",
+            "sparse",
+            "tundra",
+            "thicket",
+            "dry_forest",
+            "desert"
+          ]
+        },
+        {
+          "climate": [
+            "cold_steppe",
+            "hot_steppe",
+            "arid",
+            "cold_arid",
+            "subarctic",
+            "arctic"
+          ]
+        }
+      ],
+      "note": "Natural capacity times the pastoral land share (World Builder pastoral_area_ha / area), carved out of the natural target; no expansion at maximum. Tested 2026-09-19 and disabled: carving 58M people of pastoral land out of the natural target lowered the start-model fit (R2 0.831 -> 0.812, median error 25% -> 30%) because the class-level caps of a pastoral building cannot return the carved mass per location. Building type kept for later use."
+    }
+  }
 }

@@ -135,12 +135,22 @@ def build_flat(config_path=None,output_path=None):
     dev=pd.read_csv(ROOT/'artifacts/development/locations.csv',keep_default_na=False).set_index('location_tag')
     d['development']=pd.to_numeric(dev.development,errors='raise').reindex(d.index).fillna(0.)
     d['natural_capacity_people']=d.natural_capacity;d['maximum_capacity_people']=d.maximum_capacity
-    d['natural_capacity']=d.natural_capacity_people/(1+c*d.development)
-    d['maximum_capacity']=d.maximum_capacity_people/(1+c*100)
+    # Building types carved from the ledger by explicit rules (pastoral land leaves the natural target).
+    carve=np.zeros(len(d))
+    if cfg.get('building_assignment_config'):
+        from .ledger_extensions import extend
+        bcfg=json.loads((ROOT/cfg['building_assignment_config']).read_text())
+        ledger=pd.read_csv(ROOT/'artifacts/locations/improvement_ledger_equal_area.csv',keep_default_na=False)
+        for col in ledger.columns:
+            if col.endswith('_capacity'):ledger[col]=pd.to_numeric(ledger[col],errors='raise')
+        _,carve=extend(d,ledger,bcfg)
+    d['pastoral_carve_people']=carve
+    d['natural_capacity']=np.maximum(d.natural_capacity_people-carve,0)/(1+c*d.development)
+    d['maximum_capacity']=np.maximum(d.maximum_capacity_people-carve,0)/(1+c*100)
     scale=float(d.natural_capacity.median())
     X,names,groups=design_reference(d,cfg['features'],cfg['reference_classes'])
     fold,fold_regions=region_folds(d.reset_index().rename(columns={'index':'location_tag'}) if 'region' not in d else d,cfg['folds'],cfg['seed'])
-    pred=d[cfg['features']+['region','macro_region','development','natural_capacity','starting_capacity','maximum_capacity','natural_capacity_people','maximum_capacity_people']].copy();pred['validation_fold']=fold
+    pred=d[cfg['features']+['region','macro_region','development','natural_capacity','starting_capacity','maximum_capacity','natural_capacity_people','maximum_capacity_people','pastoral_carve_people']].copy();pred['validation_fold']=fold
     results=[];coefficients=[];fits={};sensibility_checks={}
     for target,spec in cfg['targets'].items():
         y=d[target].to_numpy(float);mult=float(spec.get('span_multiplier',1.0))
@@ -170,8 +180,9 @@ def build_flat(config_path=None,output_path=None):
     table=pd.DataFrame(results);table.to_csv(out/'metrics.csv',index=False)
     pd.DataFrame(coefficients).to_csv(out/'coefficients.csv',index=False)
     # In people at development 100: attribute flat maximum times the full development multiplier.
-    pred['attribute_maximum_people']=pred.maximum_capacity_fitted*(1+c*100)
-    pred['attribute_natural_people']=pred.natural_capacity_fitted*(1+c*pred.development)
+    # In people: attribute flat times the development multiplier, plus the carved pastoral share (a flat building later).
+    pred['attribute_maximum_people']=pred.maximum_capacity_fitted*(1+c*100)+pred.pastoral_carve_people
+    pred['attribute_natural_people']=pred.natural_capacity_fitted*(1+c*pred.development)+pred.pastoral_carve_people
     pred['start_exceeds_attribute_maximum']=pred.starting_capacity>pred.attribute_maximum_people
     pred.to_csv(out/'location_predictions.csv',index=True,index_label='location_tag')
     review=pred[pred.start_exceeds_attribute_maximum].copy();review['excess']=review.starting_capacity-review.attribute_maximum_people

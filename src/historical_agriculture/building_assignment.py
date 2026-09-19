@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 from .attribute_fit_flat import load_attributes, design_reference, fit_quantile
 from .capacity_targets import LEDGER_KINDS
+from .ledger_extensions import extend, EXTENSION_KINDS
 from .development_target import hash_map
 from .provenance import write_json
 
@@ -60,7 +61,8 @@ def assign(d,ledger,dev,cfg):
     ordinal=cfg.get('ordinal',{})
     rows={};buildings=[];caps_out=[]
     out=pd.DataFrame(index=d.index)
-    for kind in LEDGER_KINDS:
+    kinds=list(LEDGER_KINDS)+[k for k in EXTENSION_KINDS if f'starting_{k}_capacity' in led and led[f'maximum_{k}_capacity'].sum()>0]
+    for kind in kinds:
         rules=cfg['gates'].get(kind,[]);g=gate(d,rules)
         # Ledger people -> flat units: the game multiplies flat values by (1 + c*D), D at start for existing
         # works and 100 for the maximum, so the buildings only need to supply the pre-development part.
@@ -113,6 +115,7 @@ def build(config_path=None,output_path=None):
     ledger=pd.read_csv(ROOT/'artifacts/locations/improvement_ledger_equal_area.csv',keep_default_na=False)
     for c in ledger.columns:
         if c.endswith('_capacity'):ledger[c]=pd.to_numeric(ledger[c],errors='raise')
+    ledger,_=extend(d,ledger,cfg)
     devchecks=json.loads((ROOT/'artifacts/development/development_checks.json').read_text())
     devmap=pd.read_csv(ROOT/'artifacts/development/locations.csv',keep_default_na=False)
     devmap['development']=pd.to_numeric(devmap.development,errors='raise')

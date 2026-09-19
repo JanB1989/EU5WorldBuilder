@@ -10,9 +10,10 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 from .capacity_targets import LEDGER_KINDS
+KINDS=LEDGER_KINDS
 
 ROOT=Path(__file__).resolve().parents[2]
-KIND_LABELS={'clearing':'Clearing','management':'Field management','water_supply':'Water supply','paddy_control':'Paddy control','flood_bunds':'Flood bunds','field_drainage':'Field drainage','polders':'Polders'}
+KIND_LABELS={'clearing':'Clearing','management':'Field management','water_supply':'Water supply','paddy_control':'Paddy control','flood_bunds':'Flood bunds','field_drainage':'Field drainage','polders':'Polders','oasis_irrigation':'Oasis irrigation','pastoral':'Pastoral'}
 
 
 def load():
@@ -21,7 +22,8 @@ def load():
     bld=pd.read_csv(ROOT/'artifacts/building_assignment/locations.csv',keep_default_na=False).set_index('location_tag')
     fill=pd.read_csv(loc/'fill_evaluation.csv',keep_default_na=False).set_index('location_tag')
     fert=pd.read_csv(ROOT/'artifacts/fertility/locations.csv',keep_default_na=False).set_index('location_tag')
-    units={r['building']:r.get('unit_people_per_level') for r in json.loads((ROOT/'artifacts/building_assignment/report.json').read_text())['buildings']}
+    units={r['building']:r.get('unit_people_per_level') for r in json.loads((ROOT/'artifacts/building_assignment/report.json').read_text())['buildings'] if r.get('unit_people_per_level')}
+    global KINDS;KINDS=tuple(units)
     c=json.loads((ROOT/'configs/building_assignment.json').read_text())['capacity_percent_per_point']
     d=pred.copy()
     for col in bld.columns:
@@ -34,8 +36,8 @@ def load():
     for x in numeric:d[x]=pd.to_numeric(d[x],errors='coerce')
     d['fill_target']=d.population/d.starting_capacity.replace(0,np.nan)
     d['fill_model']=d.population/d.starting_capacity_model.replace(0,np.nan)
-    d['buildings_start_people']=sum(d[f'{k}_levels_start']*(units.get(k) or 0) for k in LEDGER_KINDS)*(1+c*d.development)
-    d['buildings_max_people']=sum(d[f'{k}_cap_at_development_100']*(units.get(k) or 0) for k in LEDGER_KINDS)*(1+c*100)
+    d['buildings_start_people']=sum(d[f'{k}_levels_start']*(units.get(k) or 0) for k in KINDS)*(1+c*d.development)
+    d['buildings_max_people']=sum(d[f'{k}_cap_at_development_100']*(units.get(k) or 0) for k in KINDS)*(1+c*100)
     return d,units,c
 
 
@@ -57,10 +59,10 @@ def layers(d):
          ('fill_model','Population ÷ starting model','Population','div',d.fill_model-1),
          ('review','Start exceeds attribute maximum (review list)','Flags','cat',d.start_exceeds_attribute_maximum.astype(str).map({'True':'on review list','False':'ok'})),
          ('fertility','Fertility class (best staple kcal/ha)','Attributes','cat',d.fertility)]
-    for k in LEDGER_KINDS:
-        out.append((f'{k}_levels_start',f'{KIND_LABELS[k]} · levels at start','Buildings · start','lin',d[f'{k}_levels_start']))
-    for k in LEDGER_KINDS:
-        out.append((f'{k}_cap_at_development_100',f'{KIND_LABELS[k]} · cap at development 100','Buildings · caps','lin',d[f'{k}_cap_at_development_100']))
+    for k in KINDS:
+        out.append((f'{k}_levels_start',f'{KIND_LABELS.get(k,k)} · levels at start','Buildings · start','lin',d[f'{k}_levels_start']))
+    for k in KINDS:
+        out.append((f'{k}_cap_at_development_100',f'{KIND_LABELS.get(k,k)} · cap at development 100','Buildings · caps','lin',d[f'{k}_cap_at_development_100']))
     return out
 
 
@@ -114,7 +116,7 @@ def pages(d,units,c):
             'development_mean':float(g.development.mean()),'development_p90':float(g.development.quantile(.9)),
             'start_residual_median':float((sm/st.replace(0,np.nan)-1).median()),'max_residual_median':float((g.maximum_capacity_model/g.maximum_capacity_people.replace(0,np.nan)-1).median()),
             'review':int(g.start_exceeds_attribute_maximum.astype(str).eq('True').sum()),
-            'levels':{k:int(g[f'{k}_levels_start'].sum()) for k in LEDGER_KINDS if f'{k}_levels_start' in g}}
+            'levels':{k:int(g[f'{k}_levels_start'].sum()) for k in KINDS if f'{k}_levels_start' in g}}
     regions={'super_region':{k:block(g) for k,g in own.groupby('super_region')},'macro_region':{k:block(g) for k,g in own.groupby('macro_region')},'world':block(own)}
     return {'attributes':attribute_rows,'buildings':buildings,'regions':regions,
         'fit':{'reference':fit['config']['reference_classes'],'reference_scale':fit['reference_scale_people'],'tau':fit['config']['tau'],'metrics':fit['metrics'],'sensibility':{k:{kk:vv for kk,vv in v.items() if kk not in ('pinned','signs')} for k,v in fit['sensibility'].items()}},
@@ -177,7 +179,7 @@ def build(output_path=None):
         r=d.loc[tag];rec={'tag':tag,'province':row['province'],'region':row['region'],'x':row['centroid_x']/4,'y':row['centroid_y']/4,'review':bool(r.start_exceeds_attribute_maximum) if isinstance(r.start_exceeds_attribute_maximum,(bool,np.bool_)) else str(r.start_exceeds_attribute_maximum)=='True'}
         rec['a']={f:str(r[f]) for f in fields}
         rec['n']={f:(None if pd.isna(r[f]) else round(float(r[f]),3)) for f in nums}
-        rec['b']=[[k,int(r[f'{k}_levels_start']),int(r[f'{k}_cap']),int(r[f'{k}_cap_at_development_100']),round(float(units.get(k) or 0))] for k in LEDGER_KINDS]
+        rec['b']=[[k,int(r[f'{k}_levels_start']),int(r[f'{k}_cap']),int(r[f'{k}_cap_at_development_100']),round(float(units.get(k) or 0))] for k in KINDS]
         data[i]=rec
     payload=json.dumps({'locations':data,'layers':manifest,'c':c,'units':units,'pages':pages(d,units,c)},separators=(',',':'))
     lookup=(source/'location_lookup.js').read_text().removeprefix('window.LOCATION_LOOKUP=').strip().removesuffix(';')

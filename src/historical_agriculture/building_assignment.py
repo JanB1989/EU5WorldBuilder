@@ -36,7 +36,7 @@ def development_band(dev):
     return out
 
 
-def choose_unit(values,level_limit,quantiles):
+def choose_unit(values,level_limit,quantiles,round_to=0):
     """Flat people per level minimising quantisation error over the positive ledger values."""
     v=np.asarray(values,float);v=v[v>0]
     if len(v)==0:return float('nan'),{'locations':0}
@@ -47,7 +47,9 @@ def choose_unit(values,level_limit,quantiles):
             unit=u*factor
             n=np.clip(np.round(v/unit),0,level_limit);err=np.abs(n*unit-v).sum()
             if best is None or err<best[0]:best=(err,unit)
-    unit=best[1];n=np.clip(np.round(v/unit),0,level_limit);rep=n*unit
+    unit=best[1]
+    if round_to:unit=max(round_to,float(np.round(unit/round_to)*round_to))
+    n=np.clip(np.round(v/unit),0,level_limit);rep=n*unit
     within=np.abs(rep-v)<=.25*v
     return unit,{'locations':int(len(v)),'captured_within_25_share':float(rep[within].sum()/v.sum()),'locations_within_25':float(within.mean()),
                  'locations_at_level_limit':int((n>=level_limit).sum()),'median_levels':float(np.median(n))}
@@ -70,7 +72,7 @@ def assign(d,ledger,dev,cfg):
         c=float(cfg['capacity_percent_per_point']);dstart=d.development.to_numpy(float)
         Ls=led[f'starting_{kind}_capacity'].to_numpy(float)/(1+c*dstart);Lm=led[f'maximum_{kind}_capacity'].to_numpy(float)/(1+c*100)
         ungated=float(Lm[~g].sum()/Lm.sum()) if Lm.sum()>0 else 0.
-        unit,quant=choose_unit(np.concatenate([Ls[g],Lm[g]]),cfg['level_limit'],cfg['unit_quantiles'])
+        unit,quant=choose_unit(np.concatenate([Ls[g],Lm[g]]),cfg['level_limit'],cfg['unit_quantiles'],float(cfg.get('round_to',0) or 0))
         if not np.isfinite(unit):
             out[f'{kind}_levels_start']=0;out[f'{kind}_cap']=0;out[f'{kind}_leftover_start']=Ls;out[f'{kind}_leftover_max']=Lm
             buildings.append({'building':kind,'unit_people_per_level':None,'eligible_locations':int(g.sum()),'ungated_ledger_share':ungated,'note':'no ledger mass'});continue

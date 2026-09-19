@@ -249,9 +249,11 @@
     "Gates are attribute rules (OR over rules, AND within a rule). ungated_ledger_share above ~10% means the gate is wrong, not the location.",
     "Development enters only through the cap equation's development bands; the development map is read and hash-checked, never adjusted.",
     "Gates widened 2026-09-19 after the ungated-ledger audit: the World Builder attributes bunds, drainage and small-stream water supply from wetland and moisture evidence that the displayed attributes cannot see, so those gates use terrain plus a humid-climate rule rather than the EU5 river level alone. envelope_quantile 0.5 keeps caps from overshooting the maximum for most locations; uncovered maximum is reported.",
-    "envelope_fit_scope: with_ledger fits each cap equation over gated locations that have ledger mass for that type (caps mean where works are historically attested; better start fit, larger maximum overshoot); gated fits over every eligible location (smaller overshoot, more starting works blocked by caps). The maximum map is only representable to the extent attributes explain it; overshoot versus uncovered maximum is the reported trade-off."
+    "envelope_fit_scope: with_ledger fits each cap equation over gated locations that have ledger mass for that type (caps mean where works are historically attested; better start fit, larger maximum overshoot); gated fits over every eligible location (smaller overshoot, more starting works blocked by caps). The maximum map is only representable to the extent attributes explain it; overshoot versus uncovered maximum is the reported trade-off.",
+    "round_to: people per building level are rounded to the nearest multiple of this many people after the quantisation search."
   ],
   "allow_failed_development_checks": true,
   "allow_failed_development_checks_reason": "2026-09-19: development sanity suite fails by small margins (P90 52 vs band 50, max 91.6 vs 90, one ordering violation south_east_asia < central_asia, 4/11 spot checks). Recorded, not tuned away; see artifacts/development/report.md.",
-  "envelope_fit_scope": "with_ledger"
+  "envelope_fit_scope": "with_ledger",
+  "round_to": 100
 }

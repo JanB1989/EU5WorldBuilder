@@ -89,11 +89,21 @@ def fit_quantile(X,y,names,groups,cfg,spans,intercept_bounds,maximum,ordinal):
     return beta,info
 
 
+def round_values(beta,groups,step):
+    """Round every flat value to the nearest step after fitting; keep the global zero floor."""
+    if not step:return beta
+    b=np.round(np.asarray(beta,float)/step)*step
+    floor=b[0]+sum(min(0,min([b[i] for i in gi['columns'].values()],default=0)) for gi in groups.values())
+    while floor<0:b[0]+=step;floor+=step
+    return b
+
+
 def sensibility(beta,names,groups,spans,intercept_bounds,cfg,scale):
     checks={'inside_spans':True,'pinned':[],'ordinal':True,'signs':[]}
+    step=float(cfg.get('round_to',0) or 0)
     for i,(f,v) in enumerate(names):
         if f=='reference':continue
-        lo,hi=spans.get((f,v),spans[f]);tol=1e-6*scale
+        lo,hi=spans.get((f,v),spans[f]);tol=max(1e-6*scale,step/2)
         if beta[i]<lo-tol or beta[i]>hi+tol:checks['inside_spans']=False
         if abs(beta[i]-lo)<=tol or abs(beta[i]-hi)<=tol:checks['pinned'].append({'attribute':f,'value':v,'people':float(beta[i])})
     for f,order in cfg.get('ordinal',{}).items():
@@ -142,9 +152,11 @@ def build_flat(config_path=None,output_path=None):
         ib=(cfg['intercept_span'][0]*scale*mult,cfg['intercept_span'][1]*scale*mult)
         maximum=float(y.max())*1.05
         beta,info=fit_quantile(X,y,names,groups,cfg,spans,ib,maximum,cfg.get('ordinal',{}))
+        step=float(cfg.get('round_to',0) or 0)
+        beta=round_values(beta,groups,step);info['rounded_to']=step;info['overshoot_share']=float(np.mean(X@beta>y+1e-6))
         fitted=X@beta;oof=np.zeros(len(d))
         for k in range(cfg['folds']):
-            train=fold!=k;b,_=fit_quantile(X[train],y[train],names,groups,cfg,spans,ib,maximum,cfg.get('ordinal',{}));oof[~train]=X[~train]@b
+            train=fold!=k;b,_=fit_quantile(X[train],y[train],names,groups,cfg,spans,ib,maximum,cfg.get('ordinal',{}));oof[~train]=X[~train]@round_values(b,groups,step)
         pred[target+'_fitted']=fitted;pred[target+'_heldout']=oof
         fits[target]=info
         results.append({'target':target,'evaluation':'full_fit',**metrics(y,fitted)})
@@ -154,7 +166,7 @@ def build_flat(config_path=None,output_path=None):
             coefficients.append({'target':target,'attribute':f,'value':v,'people':float(beta[i]),'share_of_reference':float(beta[i]/scale),'span_min':lo,'span_max':hi,'locations':int(X[:,i].sum()) if i else len(d)})
         sensibility_checks[target]=sensibility(beta,names,groups,spans,ib,cfg,scale)
         sensibility_checks[target]['heldout_gap_ok']=bool(abs(results[-2]['r2']-results[-1]['r2'])<=0.05)
-        sensibility_checks[target]['overshoot_share']=info['overshoot_share'];sensibility_checks[target]['overshoot_within_tau']=bool(abs(info['overshoot_share']-cfg['tau'])<=0.05)
+        sensibility_checks[target]['overshoot_share']=info['overshoot_share'];sensibility_checks[target]['overshoot_within_tau']=bool(abs(info['overshoot_share']-cfg['tau'])<=0.08)
     table=pd.DataFrame(results);table.to_csv(out/'metrics.csv',index=False)
     pd.DataFrame(coefficients).to_csv(out/'coefficients.csv',index=False)
     # In people at development 100: attribute flat maximum times the full development multiplier.

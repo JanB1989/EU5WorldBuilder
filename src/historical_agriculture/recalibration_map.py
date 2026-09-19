@@ -154,8 +154,14 @@ def build(output_path=None):
         else:
             arr=v.to_numpy(float);ok=np.isfinite(arr)
             if kind=='seq':
-                cap=float(np.nanquantile(arr[ok&(arr>0)],.99)) if (ok&(arr>0)).any() else 1.
-                t=np.log1p(np.maximum(arr,0))/np.log1p(cap);entry['cap']=cap;entry['scale']='log'
+                # Quantile (rank) scale over the positive values: every shade covers the same number of locations,
+                # so the top of the palette is no longer spent on the few largest values.
+                pos=np.sort(arr[ok&(arr>0)])
+                if len(pos):
+                    t=np.where(arr>0,np.searchsorted(pos,np.nan_to_num(arr),side='right')/len(pos),0.)
+                    entry['ticks']=[float(np.quantile(pos,q)) for q in (0,.25,.5,.75,1)]
+                else:t=np.zeros_like(arr);entry['ticks']=[0,0,0,0,0]
+                entry['cap']=float(pos[-1]) if len(pos) else 1.;entry['scale']='quantile'
             elif kind=='lin':
                 cap=float(np.nanmax(arr[ok])) if ok.any() else 1.;t=np.maximum(arr,0)/max(cap,1e-9);entry['cap']=cap;entry['scale']='linear'
             else:
@@ -203,7 +209,7 @@ HTML=r'''<!doctype html>
 <label class="search">Find a location<input id="search" placeholder="Location or province…" autocomplete="off"><div id="suggestions" style="top:66px"></div></label></div>
 <div class="layout"><div><div class="map"><canvas id="map"></canvas><div class="zoom"><button id="plus" aria-label="Zoom in">+</button><button id="minus" aria-label="Zoom out">−</button><button id="reset">Reset view</button></div></div>
 <div class="legend" id="legend"></div><div id="stats" class="stats"></div></div><aside id="panel"><h2>Inspect a location</h2><p>Click the map or search above.</p></aside></div>
-<p class="note">Sequential layers use a logarithmic viridis scale up to the 99th percentile. Residual and fill layers are blue (below) to red (above), saturating at ±100%. Grey land is non-ownable. Building levels are those the ledger supports at starting development; caps are the fitted integer level limits at development 100.</p>
+<p class="note">Sequential layers use a quantile viridis scale: each shade covers an equal share of the locations with a positive value, and the legend ticks are the minimum, quartiles and maximum. Residual and fill layers are blue (below) to red (above), saturating at ±100%. Grey land is non-ownable. Building levels are those the ledger supports at starting development; caps are the fitted integer level limits at development 100.</p>
 </section>
 <section id="tab-buildings" hidden></section>
 <section id="tab-attributes" hidden></section>
@@ -221,7 +227,7 @@ function pct(x){return x===null||x===undefined||!Number.isFinite(x)?'—':(x>=0?
 function show(id){selected=id;const r=FIT.locations[id];if(!r){panel.innerHTML='<h2>Not ownable</h2><p>No capacity target for this zone.</p>';draw();return}const n=r.n;
 let h='<h2>'+esc(pretty(r.tag))+'</h2><small>'+esc(pretty(r.province))+' · '+esc(pretty(r.region))+' · '+esc(r.a.context)+(r.review?' · <span class="badge">on review list</span>':'')+'</small>';
 h+='<div class="h">Targets (people)</div><div class="row"><span>Natural</span><b>'+fmt(n.natural_capacity_people)+'</b></div><div class="row"><span>Starting</span><b>'+fmt(n.starting_capacity)+'</b></div><div class="row"><span>Maximum</span><b>'+fmt(n.maximum_capacity_people)+'</b></div>';
-h+='<div class="h">Model</div><div class="row"><span>Attributes only · natural at start</span><b>'+fmt(n.attribute_natural_people)+'</b></div><div class="row"><span>Buildings at start × development</span><b>'+fmt(n.buildings_start_people)+'</b></div><div class="row"><span>Starting capacity · model</span><b>'+fmt(n.starting_capacity_model)+' <small>('+pct(n.starting_capacity_model/n.starting_capacity-1)+')</small></b></div><div class="row"><span>Maximum capacity · model</span><b>'+fmt(n.maximum_capacity_model)+' <small>('+pct(n.maximum_capacity_model/n.maximum_capacity_people-1)+')</small></b></div><div class="row"><span>Development</span><b>'+fmt(n.development)+' <small>('+esc(r.a.development_band)+')</small></b></div>';
+h+='<div class="h">Model</div><div class="row"><span>Attributes only · natural at start</span><b>'+fmt(n.attribute_natural_people)+'</b></div><div class="row"><span>Buildings at start × development</span><b>'+fmt(n.buildings_start_people)+'</b></div><div class="row"><span>Starting capacity · model</span><b>'+fmt(n.starting_capacity_model)+' <small>('+pct(n.starting_capacity_model/n.starting_capacity-1)+')</small></b></div><div class="row"><span>Maximum capacity · model</span><b>'+fmt(n.maximum_capacity_model)+' <small>('+pct(n.maximum_capacity_model/n.maximum_capacity_people-1)+')</small></b></div><div class="row"><span>Development</span><b>'+fmt(n.development)+'</b></div>';
 h+='<div class="h">Buildings</div><table><tr><th>Type</th><th>Start</th><th>Cap now</th><th>Cap @100</th><th>People/level</th></tr>'+r.b.map(b=>'<tr><td>'+esc(pretty(b[0]))+'</td><td>'+b[1]+'</td><td>'+b[2]+'</td><td>'+b[3]+'</td><td>'+fmt(b[4])+'</td></tr>').join('')+'</table>';
 h+='<div class="h">Population (context only)</div><div class="row"><span>Starting population</span><b>'+fmt(n.population)+'</b></div><div class="row"><span>Fill vs target / vs model</span><b>'+fmt(100*n.fill_target)+'% / '+fmt(100*n.fill_model)+'%</b></div>';
 h+='<details><summary>Attributes</summary>'+Object.entries(r.a).map(([k,v])=>'<div class="row"><small>'+esc(pretty(k))+'</small><span>'+esc(pretty(v))+'</span></div>').join('')+'<div class="row"><small>best staple kcal/ha</small><span>'+fmt(n.best_kcal_per_ha)+'</span></div></details>';
@@ -229,7 +235,8 @@ panel.innerHTML=h;draw()}
 function update(){const m=FIT.layers[metric.value];img=new Image();img.onload=draw;img.src=MAP_IMAGES[m.key];
 if(m.kind==='cat'){legend.innerHTML=Object.entries(m.legend||{}).map(([k,c])=>'<span style="margin-right:14px"><span class="swatch" style="background:rgb('+c.join(',')+')"></span>'+esc(pretty(k))+'</span>').join('');document.getElementById('stats').textContent=''}
 else if(m.kind==='div'){legend.innerHTML='<div class="gradient div"></div><div class="ticks"><span>−100% · below</span><span>0</span><span>+100% or more · above</span></div>';document.getElementById('stats').textContent='Median '+pct(m.stats.median)+' · p10 '+pct(m.stats.p10)+' · p90 '+pct(m.stats.p90)}
-else{legend.innerHTML='<div class="gradient seq"></div><div class="ticks"><span>0</span><span>'+fmt(m.cap)+(m.scale==='log'?' (log scale, 99th percentile)':'')+'</span></div>';document.getElementById('stats').textContent='Median '+fmt(m.stats.median)+' · p10 '+fmt(m.stats.p10)+' · p90 '+fmt(m.stats.p90)}
+else if(m.scale==='quantile'){legend.innerHTML='<div class="gradient seq"></div><div class="ticks">'+m.ticks.map(t=>'<span>'+fmt(t)+'</span>').join('')+'</div><div class="ticks"><span>min</span><span>p25</span><span>median</span><span>p75</span><span>max</span></div>';document.getElementById('stats').textContent='Quantile scale · median '+fmt(m.stats.median)+' · p10 '+fmt(m.stats.p10)+' · p90 '+fmt(m.stats.p90)}
+else{legend.innerHTML='<div class="gradient seq"></div><div class="ticks"><span>0</span><span>'+fmt(m.cap)+'</span></div>';document.getElementById('stats').textContent='Median '+fmt(m.stats.median)+' · p10 '+fmt(m.stats.p10)+' · p90 '+fmt(m.stats.p90)}
 if(selected)show(selected)}
 function zoom(f,x=canvas.width/2,y=canvas.height/2){let nz=Math.max(.5,Math.min(40,z*f)),r=nz/z;ox=x-(x-ox)*r;oy=y-(y-oy)*r;z=nz;draw()}
 canvas.onpointerdown=e=>{drag=[e.clientX,e.clientY,ox,oy];moved=false;canvas.setPointerCapture(e.pointerId)};

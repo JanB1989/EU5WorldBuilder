@@ -66,8 +66,7 @@
           "tropical_monsoon",
           "highland_monsoon",
           "continental_monsoon",
-          "savanna",
-          "continental"
+          "savanna"
         ],
         "topography": [
           "flatland",
@@ -304,7 +303,8 @@
     "Gates widened 2026-09-19 after the ungated-ledger audit: the World Builder attributes bunds, drainage and small-stream water supply from wetland and moisture evidence that the displayed attributes cannot see, so those gates use terrain plus a humid-climate rule rather than the EU5 river level alone. envelope_quantile 0.5 keeps caps from overshooting the maximum for most locations; uncovered maximum is reported.",
     "envelope_fit_scope: with_ledger fits each cap equation over gated locations that have ledger mass for that type (caps mean where works are historically attested; better start fit, larger maximum overshoot); gated fits over every eligible location (smaller overshoot, more starting works blocked by caps). The maximum map is only representable to the extent attributes explain it; overshoot versus uncovered maximum is the reported trade-off.",
     "round_to: people per building level are rounded to the nearest multiple of this many people after the quantisation search.",
-    "Development enters each cap equation as one linear term, levels_per_development_point (EU5: add = { value = development multiply = gamma }), bounded by max_levels_per_development_point and rounded to 0.01; caps are floored to whole levels. The development map is read and hash-checked, never adjusted."
+    "Development enters each cap equation as one linear term, levels_per_development_point (EU5: add = { value = development multiply = gamma }), bounded by max_levels_per_development_point and rounded to 0.01; caps are floored to whole levels. The development map is read and hash-checked, never adjusted.",
+    "2026-09-19: 'continental' removed from the paddy-control gate. It had been added for northern Japan and Korea (3.5% of the maximum paddy ledger) but made 3,452 continental locations paddy-eligible, e.g. Stockholm with 11 cap levels at development 100; outside Asia those caps added 1.09B people to the world maximum. The Japanese and Korean continental paddy stays uncovered (leftover) instead."
   ],
   "allow_failed_development_checks": true,
   "allow_failed_development_checks_reason": "2026-09-19: development sanity suite fails by small margins (P90 52 vs band 50, max 91.6 vs 90, one ordering violation south_east_asia < central_asia, 4/11 spot checks). Recorded, not tuned away; see artifacts/development/report.md.",

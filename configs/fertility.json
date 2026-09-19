@@ -297,7 +297,15 @@
         "role": "CADI USDA kcal per 100 g dry weight per GAEZ crop (Komander, Mayoral, Mueller 2026, Table 1); include flags exclude cash, fodder and fruit crops"
       }
     ],
-    "staple_note": "Included crops are food staples only: cereals, roots and tubers, pulses and plantain. Silage maize (whole-plant fodder biomass), sugar crops, oil crops and vegetables are excluded because they are not what a location lived on and they inflate calorie density (silage maize alone won 61% of locations)."
+    "staple_note": "Included crops are food staples only: cereals, roots and tubers, pulses and plantain. Silage maize (whole-plant fodder biomass), sugar crops, oil crops and vegetables are excluded because they are not what a location lived on and they inflate calorie density (silage maize alone won 61% of locations).",
+    "surface_water": {
+      "scenario": "LILM",
+      "manifest": "data/raw/gaez/fertility_irrigated_manifest.json",
+      "topography_weights": {},
+      "river_level_weights": {},
+      "lake_weight": 0.0,
+      "note": "Tested 2026-09-19 and disabled (all weights 0): blending the irrigated (LILM) best-staple potential into surface-water-fed locations lowered the attribute fit (natural held-out R2 0.273 -> 0.247 with floodplain/delta/river/lake weights, 0.255 with floodplains/deltas and river level >= 4 only) and grew the review list, because the raised thresholds pushed rain-fed temperate land down a class while the Nile core (cairo: flatland, river level 0) gained nothing. The irrigated diagnostic columns remain in locations.csv."
+    }
   },
   "sources": [
     {

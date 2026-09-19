@@ -192,6 +192,22 @@ def chemistry_reference(cp,cfg,out):
         return {},f'unavailable ({type(exc).__name__}); chemistry_fertility_id is 0 everywhere'
 
 
+def surface_water_weight(inv,sw):
+    """Per-location weight of the irrigated potential: the largest configured weight whose condition holds.
+
+    Conditions are displayed attributes only: topography classes, World Builder river level, lake adjacency.
+    """
+    w=np.zeros(len(inv))
+    topo=pd.read_csv(ROOT/'artifacts/topography/locations.csv',keep_default_na=False).set_index('location_tag').topography.reindex(inv.location_tag).fillna('').to_numpy()
+    for cls,value in sw.get('topography_weights',{}).items():w=np.maximum(w,np.where(topo==cls,value,0))
+    levels=ROOT/'artifacts/river_network/location_levels.csv'
+    if levels.exists():
+        lv=pd.read_csv(levels,keep_default_na=False).set_index('location_tag').marker_aware_predicted_level.reindex(inv.location_tag).fillna(0).astype(int).to_numpy()
+        for level,value in sw.get('river_level_weights',{}).items():w=np.maximum(w,np.where(lv>=int(level),value,0))
+    if 'is_adjacent_to_lake' in inv and sw.get('lake_weight'):w=np.maximum(w,np.where(inv.is_adjacent_to_lake.astype(str).eq('True').to_numpy(),sw['lake_weight'],0))
+    return w
+
+
 def build_caloric(cp,cfg):
     from . import acquisition, fertility_caloric as fc
     from .location_geometry import overlap_matrix
@@ -201,13 +217,20 @@ def build_caloric(cp,cfg):
     crops=[c for c in cal['crops'] if c.get('include',True)]
     records,missing=acquisition.acquire_rasters(ROOT,[c['code'] for c in crops],[cal['scenario']],target,manifest_path,import_directory=cal.get('import_directory'),strict=False)
     available={r['crop']:r for r in records}
+    irrigated_records=[]
+    sw=cal.get('surface_water')
+    if sw:
+        irrigated_records,_=acquisition.acquire_rasters(ROOT,[c['code'] for c in crops],[sw['scenario']],target,ROOT/sw['manifest'],import_directory=cal.get('import_directory'),strict=False)
     if len(available)<cal.get('minimum_crops',20):raise ValueError(f'Only {len(available)} caloric crop rasters available')
     chemistry,chemistry_source=chemistry_reference(cp,cfg,out)
     code=[cp,Path(__file__),Path(fc.__file__),Path(acquisition.__file__),ROOT/'src/historical_agriculture/location_geometry.py',ROOT/'src/historical_agriculture/location_inventory.py']
     paths=code+[manifest_path,raw/'inventory.parquet',raw/'locations.png',raw/'transform.json',raw/'game_default.map',raw/'game_templates.txt',raw/'game_named_locations.txt']
     if (out/'chemistry_locations.csv').exists():paths.append(out/'chemistry_locations.csv')
     inputs={str(p.relative_to(ROOT)):soil.sha(p) for p in paths}
-    inputs.update({str((target/r['name']).relative_to(ROOT)):r['sha256'] for r in records})
+    inputs.update({str((target/r['name']).relative_to(ROOT)):r['sha256'] for r in records+irrigated_records})
+    if sw:
+        for extra in [ROOT/'artifacts/river_network/location_levels.csv',ROOT/'artifacts/topography/locations.csv']:
+            if extra.exists():inputs[str(extra.relative_to(ROOT))]=soil.sha(extra)
     manifest=out/'manifest.json'
     if manifest.exists() and (out/'locations.csv').exists():
         prior=json.loads(manifest.read_text())
@@ -220,10 +243,16 @@ def build_caloric(cp,cfg):
     rasters={c:(lambda p=target/r['name']:fc.read_raster(p)) for c,r in available.items()}
     best,index,codes=fc.best_caloric_yield(rasters,kcal,nodata=cal.get('nodata',fc.NODATA))
     print(f'Best caloric staple grid from {len(codes)} crops',flush=True)
-    result,summary=fc.location_table(inv,zones,weights,best,index,codes,cfg,cp,chemistry)
+    irrigated=None;water_weight=None
+    if sw and irrigated_records:
+        irr={r['crop']:(lambda p=target/r['name']:fc.read_raster(p)) for r in irrigated_records}
+        irrigated,_,_=fc.best_caloric_yield(irr,kcal,nodata=cal.get('nodata',fc.NODATA))
+        print(f'Best irrigated staple grid from {len(irr)} crops',flush=True)
+        water_weight=surface_water_weight(inv,sw)
+    result,summary=fc.location_table(inv,zones,weights,best,index,codes,cfg,cp,chemistry,irrigated=irrigated,water_weight=water_weight)
     inputs[str(cp.relative_to(ROOT))]=soil.sha(cp)  # thresholds may have been frozen into the config
     result.to_csv(out/'locations.csv',index=False,float_format='%.8f')
-    render(result,cfg,raw,out,title='Fertility — best caloric staple, low-input rain-fed (GAEZ v5)')
+    render(result,cfg,raw,out,title='Fertility — best caloric staple, low input, rain-fed plus surface-water-fed land (GAEZ v5)')
     own=result[result.is_ownable];land=result[result.fertility_id>0]
     soils=ROOT/'artifacts/soils/locations.csv'
     if soils.exists():

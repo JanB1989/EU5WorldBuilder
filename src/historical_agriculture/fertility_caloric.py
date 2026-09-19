@@ -24,7 +24,7 @@ CONTRACT_COLUMNS = ['location_tag', 'map_color_rgb', 'game_zone_class', 'is_owna
                     'assignment_source', 'analogue_location', 'analogue_distance_km', 'source_coverage', 'dominant_share',
                     'very_low_share', 'low_share', 'moderate_share', 'high_share', 'very_high_share',
                     'fertility', 'fertility_id', 'inferred', 'low_confidence', 'fertility_score', 'chemistry_imputed_share']
-DIAGNOSTIC_COLUMNS = ['best_kcal_per_ha', 'best_crop', 'coverage', 'chemistry_fertility_id']
+DIAGNOSTIC_COLUMNS = ['best_kcal_per_ha', 'best_crop', 'coverage', 'chemistry_fertility_id', 'rainfed_kcal_per_ha', 'irrigated_kcal_per_ha', 'surface_water_weight']
 
 
 def crop_table(block):
@@ -137,7 +137,7 @@ def nearest_donors(lon, lat, donors, targets):
     return np.asarray(donors)[near], 2 * RADIUS_KM * np.arcsin(np.minimum(chord / 2, 1))
 
 
-def location_table(inv, zones, weights, best, best_index, codes, cfg, config_path, chemistry=None):
+def location_table(inv, zones, weights, best, best_index, codes, cfg, config_path, chemistry=None, irrigated=None, water_weight=None):
     """Complete per-zone table in the fertility contract plus diagnostic columns.
 
     Ownable locations are graded from their overlap-weighted mean best kcal/ha;
@@ -152,6 +152,14 @@ def location_table(inv, zones, weights, best, best_index, codes, cfg, config_pat
     if weights.shape[0] != len(d): raise ValueError('Fertility overlap rows do not match the inventory')
     n = len(d)
     mean, coverage = aggregate(weights, best)
+    rainfed = mean.copy(); irrigated_mean = np.full(n, np.nan); weight = np.zeros(n)
+    if irrigated is not None:
+        # Surface-water-fed land: blend in the irrigated best-staple potential by an explicit per-location weight
+        # (floodplain/delta topography, river level, lake adjacency). Still crop-free and population-free.
+        irrigated_mean, _ = aggregate(weights, irrigated)
+        weight = np.clip(np.nan_to_num(np.asarray(water_weight, dtype=np.float64)), 0, 1)
+        gain = np.where(np.isfinite(irrigated_mean) & np.isfinite(rainfed), np.maximum(irrigated_mean - rainfed, 0), 0.)
+        mean = np.where(np.isfinite(rainfed), rainfed + weight * gain, np.where(np.isfinite(irrigated_mean), weight * irrigated_mean, np.nan))
     own = d.is_ownable.to_numpy(bool); has = coverage > 0
     bounds, frozen_now = resolve_thresholds(cfg, config_path, mean[own & has])
     finite = np.isfinite(best).ravel(); den = np.asarray(weights @ finite.astype(np.float64)).ravel()
@@ -168,6 +176,7 @@ def location_table(inv, zones, weights, best, best_index, codes, cfg, config_pat
         if not len(donors): raise ValueError('No ownable location has caloric evidence')
         near, km = nearest_donors(d.longitude.to_numpy(), d.latitude.to_numpy(), donors, np.flatnonzero(missing))
         mean[missing] = mean[near]; shares[missing] = shares[near]; crop[missing] = crop[near]
+        rainfed[missing] = rainfed[near]; irrigated_mean[missing] = irrigated_mean[near]
         source[missing] = 'nearest ownable caloric location; inferred'
         analogue[missing] = d.location_tag.to_numpy()[near]; distance[missing] = km
     ids = classify(mean, bounds); ids[~own] = 0
@@ -182,6 +191,7 @@ def location_table(inv, zones, weights, best, best_index, codes, cfg, config_pat
     d['fertility_score'] = np.where(ids > 0, mean, np.nan)
     d['chemistry_imputed_share'] = 0.
     d['best_kcal_per_ha'] = mean; d['best_crop'] = crop; d['coverage'] = coverage
+    d['rainfed_kcal_per_ha'] = rainfed; d['irrigated_kcal_per_ha'] = irrigated_mean; d['surface_water_weight'] = weight
     extras = zones[~zones.location_tag.isin(d.location_tag)].copy()
     if extras.is_ownable.any(): raise ValueError('Ownable location absent from the overlap inventory')
     ew = extras.game_zone_class.str.contains('sea_zones|lakes').to_numpy()
@@ -192,6 +202,7 @@ def location_table(inv, zones, weights, best, best_index, codes, cfg, config_pat
     extras['fertility'] = np.where(ew, 'water', 'unassigned'); extras['fertility_id'] = 0
     extras['inferred'] = False; extras['low_confidence'] = False; extras['fertility_score'] = np.nan
     extras['chemistry_imputed_share'] = 0.; extras['best_kcal_per_ha'] = np.nan; extras['best_crop'] = ''; extras['coverage'] = 0.
+    extras['rainfed_kcal_per_ha'] = np.nan; extras['irrigated_kcal_per_ha'] = np.nan; extras['surface_water_weight'] = 0.
     d = pd.concat([d, extras], ignore_index=True).sort_values('location_tag').reset_index(drop=True)
     d['chemistry_fertility_id'] = d.location_tag.map(chemistry or {}).fillna(0).astype(int)
     d = d[CONTRACT_COLUMNS + DIAGNOSTIC_COLUMNS]
@@ -203,5 +214,7 @@ def location_table(inv, zones, weights, best, best_index, codes, cfg, config_pat
                'best_kcal_per_ha_ownable': {'min': float(np.nanmin(ownable.best_kcal_per_ha)), 'median': float(np.nanmedian(ownable.best_kcal_per_ha)),
                                             'max': float(np.nanmax(ownable.best_kcal_per_ha))},
                'best_crop_ownable': {k: int(v) for k, v in ownable.best_crop.value_counts().items()},
+               'surface_water_ownable': {'weighted_locations': int((ownable.surface_water_weight > 0).sum()),
+                                         'grade_lifted_by_irrigation': int(((classify(ownable.rainfed_kcal_per_ha.to_numpy(), bounds) < ownable.fertility_id.to_numpy()) & (ownable.surface_water_weight > 0)).sum())},
                'mixed_class_ownable': int((ownable.dominant_share < .5).sum())}
     return d, summary

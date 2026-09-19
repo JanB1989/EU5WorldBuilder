@@ -45,6 +45,23 @@ def main():
             if not passed:raise ValueError('Improvement distribution mismatch: '+col)
     from historical_agriculture.water_management import validate as validate_water, KINDS as WATER_KINDS
     validate_water(equal)
+    from historical_agriculture.capacity_targets import derive,validate_targets,validate_ledger,TARGETS,LEDGER_COLUMNS
+    from historical_agriculture.improvement_distribution import allocate as allocate_distribution
+    for mode,version in [('physical',d),('equal_area',equal)]:
+        targets=pd.read_csv(out/f'capacity_targets_{mode}.csv',keep_default_na=False)
+        ledger=pd.read_csv(out/f'improvement_ledger_{mode}.csv',keep_default_na=False)
+        for frame,cols in [(targets,TARGETS),(ledger,LEDGER_COLUMNS+['natural_capacity','starting_capacity','maximum_capacity'])]:
+            for col in cols:frame[col]=pd.to_numeric(frame[col],errors='raise')
+            frame['is_ownable']=frame.is_ownable.astype(str).eq('True')
+        checks['targets_'+mode]=validate_targets(targets,inv)
+        checks['ledger_'+mode]=validate_ledger(ledger)
+        expected_targets,expected_ledger,_=derive(allocate_distribution(version))
+        if targets.location_tag.tolist()!=expected_targets.location_tag.tolist():raise ValueError('Capacity target inventory mismatch: '+mode)
+        for col in TARGETS:
+            if not np.allclose(targets[col],expected_targets[col],rtol=1e-9,atol=1e-6):raise ValueError('Capacity target mismatch: '+col)
+        for col in LEDGER_COLUMNS:
+            if not np.allclose(ledger[col],expected_ledger[col],rtol=1e-9,atol=1e-6):raise ValueError('Improvement ledger mismatch: '+col)
+    if not (out/'fill_evaluation.json').is_file():raise ValueError('Missing fill evaluation')
     from historical_agriculture.water_boundary import report as boundary_report
     from tempfile import TemporaryDirectory
     with TemporaryDirectory() as checked:

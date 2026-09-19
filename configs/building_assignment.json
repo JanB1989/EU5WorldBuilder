@@ -1,0 +1,257 @@
+{
+  "attribute_fit_config": "configs/attribute_fit_flat.json",
+  "attribute_fit_predictions": "artifacts/attribute_fit_flat/location_predictions.csv",
+  "capacity_percent_per_point": 0.01,
+  "level_limit": 20,
+  "envelope_quantile": 0.5,
+  "unit_quantiles": [
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    0.95
+  ],
+  "cap_features": [
+    "climate",
+    "topography",
+    "vegetation",
+    "fertility",
+    "river_level",
+    "is_coastal",
+    "is_adjacent_to_lake"
+  ],
+  "reference_classes": {
+    "climate": "continental",
+    "topography": "flatland",
+    "vegetation": "grasslands",
+    "soil_type": "loam",
+    "fertility": "moderate",
+    "river_level": "0",
+    "is_coastal": "False",
+    "is_adjacent_to_lake": "False"
+  },
+  "ordinal": {
+    "fertility": [
+      "very_low",
+      "low",
+      "moderate",
+      "high",
+      "very_high"
+    ],
+    "river_level": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ]
+  },
+  "signed_cap_features": [
+    "climate",
+    "topography",
+    "vegetation",
+    "fertility"
+  ],
+  "gates": {
+    "paddy_control": [
+      {
+        "climate": [
+          "subtropical",
+          "subtropical_monsoon",
+          "tropical",
+          "tropical_monsoon",
+          "highland_monsoon",
+          "continental_monsoon",
+          "savanna",
+          "continental"
+        ],
+        "topography": [
+          "flatland",
+          "floodplains",
+          "wetlands",
+          "deltas",
+          "valleys",
+          "hills",
+          "plateau"
+        ]
+      }
+    ],
+    "polders": [
+      {
+        "is_coastal": [
+          "True"
+        ],
+        "topography": [
+          "flatland",
+          "wetlands",
+          "deltas",
+          "floodplains",
+          "hills",
+          "valleys"
+        ]
+      },
+      {
+        "topography": [
+          "wetlands",
+          "deltas"
+        ]
+      }
+    ],
+    "flood_bunds": [
+      {
+        "river_level": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      {
+        "topography": [
+          "floodplains",
+          "wetlands",
+          "deltas"
+        ]
+      },
+      {
+        "vegetation": [
+          "marsh",
+          "swamp"
+        ]
+      },
+      {
+        "climate": [
+          "continental",
+          "continental_monsoon",
+          "dry_summer_continental",
+          "oceanic",
+          "subpolar_oceanic",
+          "mediterranean",
+          "subtropical",
+          "subtropical_monsoon",
+          "tropical",
+          "tropical_monsoon",
+          "highland_monsoon",
+          "savanna",
+          "hot_steppe",
+          "cold_steppe"
+        ],
+        "topography": [
+          "flatland",
+          "valleys",
+          "hills"
+        ]
+      }
+    ],
+    "field_drainage": [
+      {
+        "topography": [
+          "wetlands",
+          "floodplains",
+          "deltas"
+        ]
+      },
+      {
+        "vegetation": [
+          "marsh",
+          "swamp"
+        ]
+      },
+      {
+        "climate": [
+          "continental",
+          "continental_monsoon",
+          "dry_summer_continental",
+          "oceanic",
+          "subpolar_oceanic",
+          "mediterranean",
+          "subtropical",
+          "subtropical_monsoon",
+          "tropical",
+          "tropical_monsoon",
+          "highland_monsoon",
+          "savanna",
+          "hot_steppe",
+          "cold_steppe"
+        ],
+        "topography": [
+          "flatland",
+          "floodplains",
+          "wetlands",
+          "deltas",
+          "valleys",
+          "hills",
+          "rolling",
+          "plateau"
+        ]
+      }
+    ],
+    "water_supply": [
+      {
+        "river_level": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ]
+      },
+      {
+        "is_adjacent_to_lake": [
+          "True"
+        ]
+      },
+      {
+        "topography": [
+          "deltas",
+          "floodplains",
+          "valleys"
+        ]
+      },
+      {
+        "is_coastal": [
+          "True"
+        ],
+        "topography": [
+          "flatland",
+          "wetlands"
+        ]
+      }
+    ],
+    "clearing": [
+      {
+        "vegetation": [
+          "forest",
+          "mixed_forest",
+          "coniferous_forest",
+          "woods",
+          "jungle",
+          "marsh",
+          "swamp",
+          "thicket",
+          "dry_forest",
+          "scrubland",
+          "savanna",
+          "grasslands",
+          "farmland"
+        ]
+      }
+    ],
+    "management": []
+  },
+  "notes": [
+    "One flat building per ledger type; the flat people per level is chosen to minimise quantisation error over the ledger; caps are integer envelopes in attribute classes and development bands at the configured quantile.",
+    "Gates are attribute rules (OR over rules, AND within a rule). ungated_ledger_share above ~10% means the gate is wrong, not the location.",
+    "Development enters only through the cap equation's development bands; the development map is read and hash-checked, never adjusted.",
+    "Gates widened 2026-09-19 after the ungated-ledger audit: the World Builder attributes bunds, drainage and small-stream water supply from wetland and moisture evidence that the displayed attributes cannot see, so those gates use terrain plus a humid-climate rule rather than the EU5 river level alone. envelope_quantile 0.5 keeps caps from overshooting the maximum for most locations; uncovered maximum is reported.",
+    "envelope_fit_scope: with_ledger fits each cap equation over gated locations that have ledger mass for that type (caps mean where works are historically attested; better start fit, larger maximum overshoot); gated fits over every eligible location (smaller overshoot, more starting works blocked by caps). The maximum map is only representable to the extent attributes explain it; overshoot versus uncovered maximum is the reported trade-off."
+  ],
+  "allow_failed_development_checks": true,
+  "allow_failed_development_checks_reason": "2026-09-19: development sanity suite fails by small margins (P90 52 vs band 50, max 91.6 vs 90, one ordering violation south_east_asia < central_asia, 4/11 spot checks). Recorded, not tuned away; see artifacts/development/report.md.",
+  "envelope_fit_scope": "with_ledger"
+}

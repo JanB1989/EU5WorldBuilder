@@ -31,7 +31,7 @@ def emit_fertility(output,game):
     write_text(output,'in_game/common/on_action/ha1300_fertility.txt','\n'.join(actions)+'\n')
     entries={
       'game_concept_ha1300_fertility':'Fertility',
-      'game_concept_ha1300_fertility_desc':'Fertility describes the soil\'s underlying ability to make plant nutrients available and retain them. It is separate from soil type, climate and water management. The five grades are Very low, Low, Moderate, High and Very high. Existing cultivation and improvements are separate from this attribute.',
+      'game_concept_ha1300_fertility_desc':'Fertility describes how much food the best-suited staple crop yields per hectare under traditional low-input farming, combining climate, soil and terrain. It is separate from soil type and from existing cultivation or improvements. The five grades are Very low, Low, Moderate, High and Very high.',
       'HA1300_FERTILITY_UNKNOWN':'Unassigned',
       'HA1300_FERTILITY_UNKNOWN_DESC':'Fertility is assigned when a new campaign begins.',
       'HA1300_FERTILITY_WATER':'Water',

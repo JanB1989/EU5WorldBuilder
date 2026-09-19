@@ -1,4 +1,37 @@
-# Fertility attribute — first global test iteration
+# Fertility attribute — best caloric staple (v2, crop-free)
+
+Five values: **Very low, Low, Moderate, High, Very high**. Fertility now describes how much food the best-suited staple crop yields per hectare under traditional low-input rain-fed farming, combining climate, soil and terrain. It is separate from Soil Type and from existing cultivation or improvements. No crop is fixed per location: every 5-arcminute cell is scored by whichever caloric crop does best there, so the attribute stays crop-free at the location level. Population, cultivation, irrigation, improvements and soil-type labels never enter the grade. This is a complete game classification with explicit uncertainty, not a medieval harvest reconstruction.
+
+## Method
+
+1. **Inputs.** GAEZ v5 `RES05-YXX` attainable yield rasters (kg/ha, 5 arcmin, scenario `LRLM`: low input, rain-fed; period HP0120, AGERA5 climate) for the caloric crops of the CADI kcal table (`configs/fertility.json`, `caloric_yield.crops`, copied from `ProsperOrPerishStaticModifiersV2/config/crops.yaml`; Komander, Mayoral and Mueller 2026, Table 1). Rasters are pinned in `data/raw/gaez/fertility_manifest.json` with sha256; files were adopted from the local GAEZ cache, copied from the sibling repository cache (recorded as `imported_from`, source never modified) or downloaded from the FAO GCS bucket. Crops without a raster are listed under `crops_missing` and skipped.
+2. **Best caloric staple per cell.** `kcal/ha = yield_kg_ha × kcal_per_100g × 10`, elementwise maximum over crops (`fertility_caloric.best_caloric_yield`). Nodata (−9) and negative cells are excluded per crop; cells with no valid crop are NaN (water, ice). The winning crop is kept only as a diagnostic.
+3. **Location aggregation.** The exact spherical overlap matrix (`location_geometry.overlap_matrix`) gives the area-weighted mean of the best kcal/ha over valid cells; `coverage` is the valid overlap area divided by the location's total overlap area. Within-location class shares (`*_share`) are area shares of cells per grade.
+4. **Grades.** Five lower-bound-inclusive bins on the location mean. The boundaries were derived once as the 20/40/60/80 % quantiles of the ownable locations and **frozen** in `configs/fertility.json` (`caloric_thresholds_kcal_ha`, `thresholds_frozen_on`): later rebuilds with changed inputs keep the same class meaning; delete the key to re-derive deliberately.
+5. **Gaps.** Ownable locations with zero valid overlap inherit the nearest ownable location with evidence (`cKDTree` on lon/lat), recorded in `assignment_source`, `analogue_location`, `analogue_distance_km`, `inferred`. Non-ownable zones keep `fertility_id` 0. `low_confidence` flags coverage below 50 %, a dominant class share below 50 %, or an inferred donor.
+6. **Chemistry diagnostic.** The previous HWSD chemistry grade is retained as `chemistry_fertility_id` (archived in `artifacts/fertility/chemistry_locations.csv`); it does not influence the grade.
+
+## Frozen thresholds and current distribution (build of 2026-09-19)
+
+| Grade | Lower bound (kcal/ha) | Ownable locations |
+|---|---:|---:|
+| Very low | 0 | 4,184 |
+| Low | 2,851,844.7 | 4,177 |
+| Moderate | 9,683,773.8 | 4,177 |
+| High | 16,518,084.0 | 4,177 |
+| Very high | 24,164,738.4 | 4,178 |
+
+45 of 46 included caloric crops had a raster (`TRI` triticale is not published in RES05-YXX). All 20,893 ownable locations are graded; 6 use a nearest-location donor, 64 have less than 50 % valid coverage (median coverage 1.0), 2,337 have no single class above half of their area. Ownable median best yield is 12.5 million kcal/ha (maximum 51.7 million). Agreement with the chemistry grade is 23.5 %, as expected for a different concept.
+
+Caveats: attainable yield is a modelled agro-climatic potential under 1981–2010 climate, not a measured medieval harvest, and it already merges climate, soil and terrain constraints. The CADI include list contains silage maize (`MZS`, whole-plant biomass, 407 kcal/100 g), oil crops, vegetables and sugar crops; `MZS` is the winning crop in 12,723 ownable locations and stretches the upper kcal range. Restricting the crop set is a config decision (`include: false` per crop) that would require re-freezing the thresholds.
+
+Reproduction: `uv run worldbuilder fertility`, then `uv run pytest -q tests/test_fertility.py tests/test_fertility_caloric.py tests/test_geography_test.py`. Outputs: `artifacts/fertility/locations.csv` (contract columns unchanged, plus `best_kcal_per_ha`, `best_crop`, `coverage`, `chemistry_fertility_id`), `fertility.png`, `soil_type_crosscheck.csv`, `manifest.json` (with a `caloric` section).
+
+---
+
+# Previous chemistry-only iteration
+
+The text below describes the first, HWSD-chemistry-based producer. Its classifier remains importable from `fertility.py` (`classify_components`, `location_grades`, `build_chemistry`) and its grade is kept as the `chemistry_fertility_id` diagnostic column; it no longer produces the fertility attribute.
 
 Five values: **Very low, Low, Moderate, High, Very high**. Fertility is a chemical-soil proxy; Soil Type remains a separate physical category. Climate, drainage, irrigation, soil depth, texture labels, population and crop output do not enter this score. This is a complete game classification with explicit uncertainty, not an independently validated historical fertility reconstruction.
 

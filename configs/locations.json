@@ -7,7 +7,7 @@
   "food_directory": "artifacts/reconstruction",
   "water_directory": "artifacts/water",
   "maximum_scenario": "Maintained preindustrial crop system with additional clearing and low-lift surface irrigation; current crop/rotation held fixed. No modern fertilizer, powered pumping or unlimited basin supply.",
-  "normalization": "Game multiplier is the local reference support density bounded to 0.25\u20135. Base and improvement effective units are inversely normalized to preserve every capacity contribution. These are game-design bounds, not historical yield limits.",
+  "normalization": "Targets are people per location (capacity_targets_equal_area.csv): natural, starting and maximum capacity plus a disjoint typed improvement ledger. The base/multiplier split (bounded 0.25-5) is retained as a diagnostic normalization only; no unit floor and no population-based allowance enter the targets.",
   "multiplier_floor": 0.25,
   "baseline_access_by_pnv": {
     "forest": 0.015,
@@ -63,7 +63,7 @@
   "refinement_config": "configs/location_refinements.json",
   "refinement_variant": "central",
   "equal_reference_area_ha": 246651.09965447552,
-  "equal_area_base_land_floor": 1000.0,
+  "equal_area_base_land_floor": 0.0,
   "system_round_config": "configs/cultivated_systems.json",
   "terrain_access": {
     "method": "fine_slope_classes",
@@ -103,10 +103,24 @@
   "water_management_config": "configs/water_management.json",
   "agricultural_system_repair": "configs/agricultural_system_repair.json",
   "water_boundary_historical_comparison": false,
-  "rural_balance": {
+  "rural_balance_diagnostic": {
     "maximum_starting_fill": 1.5,
-    "authorization": "User explicitly approved the population-informed rural allowance on 2026-09-14 after reviewing the 150% proposal.",
-    "scope": "Ownable rural_or_unranked locations only. Final equal-area game allowance; not historical farmland.",
-    "allocation": "Base units increase by capacity allowance / unchanged multiplier. Typed improvements and remaining capacity unchanged."
+    "enabled": false,
+    "status": "Retired 2026-09-19. The population-based allowance is no longer applied to any target; when enabled it is only reported in rural_balance_diagnostic.csv."
+  },
+  "fill_targets": {
+    "settled_median_fill": 0.75,
+    "rural_over_capacity_share": 0.05,
+    "min_cropland_share": 0.02,
+    "settled_macro_regions": [
+      "western_europe",
+      "eastern_europe",
+      "east_asia",
+      "south_asia",
+      "south_east_asia",
+      "middle_east",
+      "north_africa"
+    ],
+    "status": "Informational evaluation targets for scripts/calibrate_fill.py and FILL.md. Population is joined only in that evaluation."
   }
 }

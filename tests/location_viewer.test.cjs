@@ -27,13 +27,13 @@ console.log('PASS: click selection with blocked canvas readback, row boundaries,
 click(410,170);
 const panel=elements.detail.innerHTML;
 const primary=panel.split('<details>')[0];
-assert.match(primary,/The four model values/);
+assert.match(primary,/Capacity targets \(people\)/);
 assert.match(primary,/33% of starting capacity occupied/);
 assert.match(primary,/Total limit, including existing improvements/);
 assert.ok(!primary.includes('Physical location area'));
 assert.ok(!primary.includes('Base contribution'));
 assert.match(panel,/<details><summary>Breakdown &amp; evidence<\/summary>/);
-console.log('PASS: summary first, four inputs, percentage fill, secondary details collapsed');
+console.log('PASS: summary first, people targets, percentage fill, secondary details collapsed');
 
 assert.equal(elements.areaMode,undefined);
 assert.equal(vm.runInContext('img.src',sandbox),'starting_capacity_equal.png');

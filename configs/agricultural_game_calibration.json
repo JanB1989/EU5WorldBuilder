@@ -3,10 +3,19 @@
   "status": "Explicit shared game calibration, not historical food-production estimates. Population evaluates the candidate but is not a formula input or a location-specific target.",
   "inheritance": {
     "historical_extent_half_saturation": 0.01,
-    "maximum_opportunity_activation": {"extensive": 0.2, "rotation": 0.4, "managed": 0.55, "intensive": 0.7},
+    "maximum_opportunity_activation": {
+      "extensive": 0.2,
+      "rotation": 0.4,
+      "managed": 0.55,
+      "intensive": 0.7
+    },
     "unknown_system_activation": 0.2,
     "extent_guard": {
-      "eligible_systems": ["unknown", "extensive", "rotation"],
+      "eligible_systems": [
+        "unknown",
+        "extensive",
+        "rotation"
+      ],
       "full_guard_below_cultivated_fraction": 0.01,
       "no_guard_above_cultivated_fraction": 0.05,
       "extra_extent_ratio": 1.0,
@@ -18,10 +27,14 @@
     "exponent": 0.3333333333333333,
     "crop_reference_support": 1.0,
     "noncrop_reference_support": 0.1,
-    "formula": "G(s;r) = max(s, r * (s/r)^exponent), G(0;r)=0",
-    "interpretation": "Compress the extreme low-support tail in game units. Reference values use the source density's units for dimensional consistency; they are calibration anchors, not measured crop or pastoral yields. Apply to baseline, inherited starting and maximum support on the native grid. Preserve ordering, unchanged high support and the bounded location multiplier."
+    "formula": "game = game_scale * G(s;r), G(s;r) = max(s, r * (s/r)^exponent), G(0;r)=0",
+    "interpretation": "Compress the extreme low-support tail in game units. Reference values use the source density's units for dimensional consistency; they are calibration anchors, not measured crop or pastoral yields. Apply to baseline, inherited starting and maximum support on the native grid. Preserve ordering, unchanged high support and the bounded location multiplier. game_scale is one global factor applied to base, starting and maximum game support after conversion; together with the exponent it is the only fill-calibration knob. Choose it with scripts/calibrate_fill.py against the configured fill targets; population evaluates candidates but never enters the formula.",
+    "game_scale": 1.0
   },
-  "sensitivity": {"conservative_exponent": 0.4, "strong_exponent": 0.3},
+  "sensitivity": {
+    "conservative_exponent": 0.4,
+    "strong_exponent": 0.3
+  },
   "evaluation": {
     "maximum_rural_starting_shortfalls": 500,
     "maximum_new_rural_shortfalls": 0,

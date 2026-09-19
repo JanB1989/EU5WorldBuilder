@@ -118,3 +118,34 @@ This explicitly supersedes population independence for this final game allowance
 only. It does not change physical land, water, yields, or historical assignments,
 and must never be presented as evidence for those quantities. Food/population
 simulation acceptance is separate from passing this game-map pressure ceiling.
+
+## People-denominated targets — 2026-09-19
+
+The game model fits **flat capacity from location attributes plus flat capacity
+from conditional buildings, multiplied by development**. Its targets are
+therefore plain people per location, written by `capacity_targets.py`:
+
+- `capacity_targets_equal_area.csv` (and `_physical.csv`): `natural_capacity`
+  (land before represented improvements), `starting_capacity`,
+  `maximum_capacity`, `starting_improvement_capacity`, `remaining_capacity`,
+  with `reference_people_per_effective_ha` as a diagnostic. No population column.
+- `improvement_ledger_equal_area.csv`: one disjoint partition of improvement
+  capacity for the start and for the maximum over clearing, management,
+  water supply, paddy control, flood bunds, field drainage and polders. The
+  typed values sum exactly to starting minus natural and maximum minus natural.
+  Transfers, sensitivity bounds and unit columns live in
+  `improvement_ledger_diagnostics_equal_area.csv`.
+
+This supersedes the four-value B/M/I interface, the 0.25–5 multiplier bound as
+a game quantity, the 1,000-unit minimum base land and the rural game-balance
+allowance. The base/multiplier split is still computed and bounded, but only
+as a diagnostic normalization; the unit floor is set to zero; the population
+based allowance is retired (`rural_balance_diagnostic`, off by default, may
+report what it would have added but is never applied).
+
+Fill is calibrated with one global, population-free knob: `game_scale` and
+`exponent` of the shared support conversion. `scripts/calibrate_fill.py`
+recomputes candidates from the native-grid rasters and evaluates them against
+`fill_targets` (settled Old-World rural median fill, rural over-capacity share)
+in `FILL.md` / `fill_evaluation.json`. Population enters only that evaluation.
+Urban food-importing cities are reported separately and handled later.

@@ -102,6 +102,11 @@ def apply(root,cfg,arrays,historical_extent,food_type,domain,out):
     b=arrays['baseline_support_per_land_ha'];s=arrays['starting_support_per_land_ha'];u=arrays['maximum_support_per_land_ha']
     components={name:arrays[name] for name in CAPACITY_COLUMNS}
     gb,gs,gu,converted,inherited=transform(b,s,u,components,active,reference,gc['exponent'])
+    scale=float(gc.get('game_scale',1.0))
+    if not np.isfinite(scale) or scale<=0:raise ValueError('Invalid game scale')
+    # One global, population-free scale sets the game fill; it never varies by location.
+    gb,gs,gu=gb*scale,gs*scale,gu*scale
+    converted={k:v*scale for k,v in converted.items()}
     result=dict(arrays)
     for name,values in [('uncalibrated_base_support',b),('uncalibrated_starting_support',s),('uncalibrated_maximum_support',u),('inherited_physical_starting_support',inherited)]:
         result[name]=values.copy()
@@ -110,7 +115,7 @@ def apply(root,cfg,arrays,historical_extent,food_type,domain,out):
     result['baseline_support_per_land_ha']=gb;result['starting_support_per_land_ha']=gs;result['maximum_support_per_land_ha']=gu
     result['game_inheritance_activation_fraction']=active
     result['game_inheritance_unrestricted_activation_fraction']=unrestricted
-    result['game_inheritance_removed_support']=convert(s+unrestricted*(u-s),reference,gc['exponent'])-gs
+    result['game_inheritance_removed_support']=scale*convert(s+unrestricted*(u-s),reference,gc['exponent'])-gs
     result['game_conversion_reference_support']=reference
     # Retain reconstructed source extents separately from the inherited scenario.
     for current,limit in [('starting_crop_fraction','maximum_crop_fraction'),('starting_served_fraction','maximum_served_fraction')]:
@@ -122,11 +127,11 @@ def apply(root,cfg,arrays,historical_extent,food_type,domain,out):
     # Existing diagnostic contribution undergoes the same initial-stage conversion.
     initial_scale=np.divide(gs-gb,inherited-b,out=np.ones_like(gs),where=inherited>b)
     result['dry_field_alternative_support']=arrays['dry_field_alternative_support']*initial_scale
-    result['game_inheritance_support']=gs-convert(s,reference,gc['exponent'])
-    result['game_conversion_added_support']=convert(s,reference,gc['exponent'])-s
+    result['game_inheritance_support']=gs-scale*convert(s,reference,gc['exponent'])
+    result['game_conversion_added_support']=scale*convert(s,reference,gc['exponent'])-s
     result['game_base_added_support']=gb-b
     write_json(out/'agricultural_game_calibration.json',{
-        'configuration':c,'population_in_formula':False,'location_specific_parameters':False,
+        'configuration':c,'game_scale':scale,'population_in_formula':False,'location_specific_parameters':False,
         'inherits_from_existing_simultaneous_maximum':True,'physical_water_or_land_created':False,
         'base_can_change':True,'productivity_multiplier_changes':False,
         'inherited_cells':int(np.sum(domain&(active>0))),

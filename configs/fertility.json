@@ -2,6 +2,303 @@
   "schema_version": 1,
   "source_directory": "data/raw/documentation/soil_audit",
   "output_directory": "artifacts/fertility",
+  "caloric_yield": {
+    "scenario": "LRLM",
+    "manifest": "data/raw/gaez/fertility_manifest.json",
+    "import_directory": "../ProsperOrPerishStaticModifiersV2/data/input_data/gaez/DATA/GAEZ-V5/MAPSET/RES05-YXX",
+    "minimum_crops": 20,
+    "nodata": -9,
+    "crops": [
+      {
+        "code": "WHE",
+        "name": "Wheat",
+        "kcal_per_100g": 377,
+        "include": true
+      },
+      {
+        "code": "RCW",
+        "name": "Wetland rice",
+        "kcal_per_100g": 413,
+        "include": true
+      },
+      {
+        "code": "RCD",
+        "name": "Dryland rice",
+        "kcal_per_100g": 413,
+        "include": true
+      },
+      {
+        "code": "MZE",
+        "name": "Maize",
+        "kcal_per_100g": 407,
+        "include": true
+      },
+      {
+        "code": "MZS",
+        "name": "Silage maize",
+        "kcal_per_100g": 407,
+        "include": false
+      },
+      {
+        "code": "SRG",
+        "name": "Sorghum",
+        "kcal_per_100g": 375,
+        "include": true
+      },
+      {
+        "code": "PML",
+        "name": "Pearl millet",
+        "kcal_per_100g": 413,
+        "include": true
+      },
+      {
+        "code": "FML",
+        "name": "Foxtail millet",
+        "kcal_per_100g": 413,
+        "include": true
+      },
+      {
+        "code": "FIML",
+        "name": "Finger millet",
+        "kcal_per_100g": 413,
+        "include": true
+      },
+      {
+        "code": "FONIO",
+        "name": "Fonio",
+        "kcal_per_100g": 413,
+        "include": true
+      },
+      {
+        "code": "TEF",
+        "name": "Tef",
+        "kcal_per_100g": 413,
+        "include": true
+      },
+      {
+        "code": "BRL",
+        "name": "Barley",
+        "kcal_per_100g": 391,
+        "include": true
+      },
+      {
+        "code": "OAT",
+        "name": "Oat",
+        "kcal_per_100g": 404,
+        "include": true
+      },
+      {
+        "code": "RYE",
+        "name": "Rye",
+        "kcal_per_100g": 404,
+        "include": true
+      },
+      {
+        "code": "BCK",
+        "name": "Buckwheat",
+        "kcal_per_100g": 404,
+        "include": true
+      },
+      {
+        "code": "TRI",
+        "name": "Triticale",
+        "kcal_per_100g": 404,
+        "include": false
+      },
+      {
+        "code": "WPO",
+        "name": "White potato",
+        "kcal_per_100g": 363,
+        "include": true
+      },
+      {
+        "code": "SPO",
+        "name": "Sweet potato",
+        "kcal_per_100g": 363,
+        "include": true
+      },
+      {
+        "code": "CSV",
+        "name": "Cassava",
+        "kcal_per_100g": 397,
+        "include": true
+      },
+      {
+        "code": "YAM",
+        "name": "Yam",
+        "kcal_per_100g": 388,
+        "include": true
+      },
+      {
+        "code": "TANN",
+        "name": "Tannia",
+        "kcal_per_100g": 388,
+        "include": true
+      },
+      {
+        "code": "TAROD",
+        "name": "Taro (dryland)",
+        "kcal_per_100g": 388,
+        "include": true
+      },
+      {
+        "code": "TAROW",
+        "name": "Taro (wetland)",
+        "kcal_per_100g": 388,
+        "include": true
+      },
+      {
+        "code": "SUB",
+        "name": "Sugar beet",
+        "kcal_per_100g": 387,
+        "include": false
+      },
+      {
+        "code": "SUC",
+        "name": "Sugarcane",
+        "kcal_per_100g": 387,
+        "include": false
+      },
+      {
+        "code": "PHB",
+        "name": "Phaseolus bean",
+        "kcal_per_100g": 393,
+        "include": true
+      },
+      {
+        "code": "CHK",
+        "name": "Chickpea",
+        "kcal_per_100g": 393,
+        "include": true
+      },
+      {
+        "code": "COW",
+        "name": "Cowpea",
+        "kcal_per_100g": 393,
+        "include": true
+      },
+      {
+        "code": "PEA",
+        "name": "Dry pea",
+        "kcal_per_100g": 393,
+        "include": true
+      },
+      {
+        "code": "GRM",
+        "name": "Gram",
+        "kcal_per_100g": 393,
+        "include": true
+      },
+      {
+        "code": "PIG",
+        "name": "Pigeonpea",
+        "kcal_per_100g": 393,
+        "include": true
+      },
+      {
+        "code": "SOY",
+        "name": "Soybean",
+        "kcal_per_100g": 488,
+        "include": true
+      },
+      {
+        "code": "RSD",
+        "name": "Rapeseed",
+        "kcal_per_100g": 810,
+        "include": false
+      },
+      {
+        "code": "SFL",
+        "name": "Sunflower seed",
+        "kcal_per_100g": 613,
+        "include": false
+      },
+      {
+        "code": "GRD",
+        "name": "Groundnut",
+        "kcal_per_100g": 618,
+        "include": false
+      },
+      {
+        "code": "SES",
+        "name": "Sesame seed",
+        "kcal_per_100g": 601,
+        "include": false
+      },
+      {
+        "code": "OLP",
+        "name": "Oil palm fruit",
+        "kcal_per_100g": 810,
+        "include": false
+      },
+      {
+        "code": "OLV",
+        "name": "Olive",
+        "kcal_per_100g": 810,
+        "include": false
+      },
+      {
+        "code": "FLX",
+        "name": "Flax",
+        "kcal_per_100g": 810,
+        "include": false
+      },
+      {
+        "code": "CON",
+        "name": "Coconut",
+        "kcal_per_100g": 668,
+        "include": false
+      },
+      {
+        "code": "BAN",
+        "name": "Banana and plantain",
+        "kcal_per_100g": 394,
+        "include": true
+      },
+      {
+        "code": "CAB",
+        "name": "Cabbage",
+        "kcal_per_100g": 365,
+        "include": false
+      },
+      {
+        "code": "CAR",
+        "name": "Carrot",
+        "kcal_per_100g": 365,
+        "include": false
+      },
+      {
+        "code": "ONI",
+        "name": "Onion",
+        "kcal_per_100g": 365,
+        "include": false
+      },
+      {
+        "code": "OKRA",
+        "name": "Okra",
+        "kcal_per_100g": 365,
+        "include": false
+      },
+      {
+        "code": "TOM",
+        "name": "Tomato",
+        "kcal_per_100g": 415,
+        "include": false
+      }
+    ],
+    "source_note": "CADI kcal table via ProsperOrPerishStaticModifiersV2/config/crops.yaml",
+    "sources": [
+      {
+        "url": "https://gaez.fao.org/",
+        "role": "GAEZ v5 RES05-YXX attainable yield (kg/ha), HP0120 AGERA5 HIST, low input rain-fed (LRLM); GCS bucket fao-gismgr-gaez-v5-data, CC-BY-4.0"
+      },
+      {
+        "url": "sibling repository ProsperOrPerishStaticModifiersV2/config/crops.yaml (local copy of the CADI table)",
+        "role": "CADI USDA kcal per 100 g dry weight per GAEZ crop (Komander, Mayoral, Mueller 2026, Table 1); include flags exclude cash, fodder and fruit crops"
+      }
+    ],
+    "staple_note": "Included crops are food staples only: cereals, roots and tubers, pulses and plantain. Silage maize (whole-plant fodder biomass), sugar crops, oil crops and vegetables are excluded because they are not what a location lived on and they inflate calorie density (silage maize alone won 61% of locations)."
+  },
   "sources": [
     {
       "url": "https://www.fao.org/land-water/resources/tools/databases/hwsd/en",
@@ -158,5 +455,13 @@
       ],
       "description": "Exceptionally favourable nutrient availability and retention support demanding cultivation."
     }
-  }
+  },
+  "caloric_thresholds_kcal_ha": [
+    1927697.7,
+    5705685.1,
+    8371496.4,
+    10703786.9
+  ],
+  "thresholds_frozen_on": "2026-09-19",
+  "thresholds_note": "Frozen on first caloric build as the 20/40/60/80% quantiles of the ownable-location mean best caloric yield (kcal/ha, GAEZ v5 LRLM). Later rebuilds keep these boundaries; delete the key to re-derive them deliberately."
 }

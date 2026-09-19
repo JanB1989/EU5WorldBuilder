@@ -7,12 +7,15 @@ to close capacity gaps. A sanity suite compares the map with the regional
 ordering of vanilla EU5's starting development and named spot checks; failing
 checks block the building assignment unless explicitly overridden.
 
+Used land = cultivated hectares + grazing equivalence x grazing hectares. Grazing (LUH 1300 managed
+pasture plus rangeland, total only) counts through an explicit per-climate equivalence: meadow and dairy
+land in humid climates is intensive use, open range in dry or cold climates barely is. No population term.
+
 Components (all population-free, each in 0..1):
-- crop_share: cultivated share of the physical area, saturating at a reference share
-- feasible_utilisation: cultivated share of the maximum feasible cultivation
+- land_use_share: used land as a share of the physical area, saturating at a reference share
+- feasible_utilisation: used land against the maximum feasible cultivation
 - improvement_share: improvement capacity share of starting capacity
-- management_intensity: management capacity per cultivated hectare against its global p90
-- pasture: pastoral land share
+- management_intensity: field works (management, drainage, polders by default) per used hectare against the global p90
 """
 import json,hashlib
 from pathlib import Path
@@ -21,7 +24,8 @@ import pandas as pd
 from .provenance import write_json
 
 ROOT=Path(__file__).resolve().parents[2]
-COMPONENTS=('crop_share','feasible_utilisation','improvement_share','management_intensity','pasture')
+COMPONENTS=('land_use_share','feasible_utilisation','improvement_share','management_intensity')
+DEFAULT_INTENSITY_KINDS=('management','field_drainage','polders')
 
 
 def saturate(x,reference):
@@ -35,20 +39,36 @@ def ratio(num,den):
     return np.clip(np.divide(num,den,out=np.zeros(len(num)),where=den>0),0,None)
 
 
+def grazing_equivalence(climate,cfg):
+    """Per-location weight of a grazing hectare against a cultivated one, by climate class (explicit assumptions)."""
+    g=cfg.get('grazing_equivalence') or {};by=g.get('by_climate') or {};default=float(g.get('default',0.))
+    return np.array([float(by.get(str(c),default)) for c in climate],dtype=float)
+
+
+def used_land(frame,cfg):
+    """Cultivated hectares plus equivalence-weighted grazing hectares, and the equivalence used."""
+    crop=np.clip(frame.source_starting_crop_ha.to_numpy(float),0,None)
+    grazing=np.clip(frame.grazing_area_ha.to_numpy(float),0,None) if 'grazing_area_ha' in frame else np.zeros(len(frame))
+    climate=frame.climate.to_numpy() if 'climate' in frame else np.full(len(frame),'')
+    g=grazing_equivalence(climate,cfg)
+    return crop+g*grazing,g
+
+
 def components(frame,ledger,cfg):
     led=ledger.set_index('location_tag').loc[frame.location_tag]
-    area=frame.physical_location_ha.to_numpy(float);crop=frame.source_starting_crop_ha.to_numpy(float)
+    area=frame.physical_location_ha.to_numpy(float);used,g=used_land(frame,cfg)
     natural=led.natural_capacity.to_numpy(float);imp=led.starting_ledger_total.to_numpy(float)
-    mgmt=led.starting_management_capacity.to_numpy(float)
+    kinds=cfg.get('management_intensity_kinds') or list(DEFAULT_INTENSITY_KINDS)
+    works=sum(led[f'starting_{k}_capacity'].to_numpy(float) for k in kinds)
     out=pd.DataFrame(index=frame.index)
-    out['crop_share']=saturate(ratio(crop,area),cfg['crop_share_reference'])
-    out['feasible_utilisation']=-np.expm1(-cfg['utilisation_saturation']*np.clip(ratio(crop,frame.maximum_crop_ha.to_numpy(float)),0,None))
+    out['land_use_share']=saturate(ratio(used,area),cfg['land_use_reference'])
+    out['feasible_utilisation']=-np.expm1(-cfg['utilisation_saturation']*np.clip(ratio(used,frame.maximum_crop_ha.to_numpy(float)),0,None))
     out['improvement_share']=np.clip(ratio(imp,imp+natural),0,1)
-    intensity=ratio(mgmt,crop)
+    intensity=ratio(works,used)
     reference=cfg.get('management_intensity_reference') or (float(np.quantile(intensity[intensity>0],cfg['management_intensity_quantile'])) if (intensity>0).any() else 0.)
     out['management_intensity']=saturate(intensity,reference)
-    out['pasture']=np.clip(ratio(frame.pastoral_area_ha.to_numpy(float),area),0,1)
-    out.attrs['management_intensity_reference']=reference
+    out['used_land_ha']=used;out['grazing_equivalence']=g
+    out.attrs['management_intensity_reference']=reference;out.attrs['management_intensity_kinds']=list(kinds)
     return out
 
 
@@ -58,10 +78,14 @@ def development(frame,ledger,cfg):
     if not np.isclose(total,1.0):raise ValueError('Development weights must sum to one')
     d=frame[['location_tag','province','region','macro_region','is_ownable','settlement_context']].copy()
     parts=components(frame,ledger,cfg)
+    d['climate']=frame.climate.to_numpy() if 'climate' in frame else ''
+    d['cultivated_ha']=frame.source_starting_crop_ha.to_numpy(float)
+    d['grazing_ha']=frame.grazing_area_ha.to_numpy(float) if 'grazing_area_ha' in frame else 0.
+    d['grazing_equivalence']=parts.grazing_equivalence.to_numpy();d['used_land_ha']=parts.used_land_ha.to_numpy()
     for k in COMPONENTS:d[k]=parts[k].to_numpy()
     score=sum(w.get(k,0)*parts[k].to_numpy() for k in COMPONENTS)
     d['development']=np.where(d.is_ownable.astype(bool),100*np.clip(score,0,1),0.)
-    d.attrs['management_intensity_reference']=parts.attrs['management_intensity_reference']
+    d.attrs['management_intensity_reference']=parts.attrs['management_intensity_reference'];d.attrs['management_intensity_kinds']=parts.attrs['management_intensity_kinds']
     return d
 
 
@@ -104,9 +128,15 @@ def build(config_path=None,output_path=None):
     cp=Path(config_path or ROOT/'configs/development.json').resolve();cfg=json.loads(cp.read_text())
     out=Path(output_path or ROOT/'artifacts/development').resolve();out.mkdir(parents=True,exist_ok=True)
     loc=ROOT/'artifacts/locations'
-    frame=pd.read_csv(loc/'locations_equal_area.csv',keep_default_na=False,usecols=['location_tag','province','region','macro_region','is_ownable','settlement_context','source_starting_crop_ha','maximum_crop_ha','pastoral_area_ha','physical_location_ha'])
-    for c in ['source_starting_crop_ha','maximum_crop_ha','pastoral_area_ha','physical_location_ha']:frame[c]=pd.to_numeric(frame[c],errors='coerce').fillna(0.)
+    frame=pd.read_csv(loc/'locations_equal_area.csv',keep_default_na=False,usecols=['location_tag','province','region','macro_region','is_ownable','settlement_context','source_starting_crop_ha','maximum_crop_ha','grazing_area_ha','physical_location_ha'])
+    for c in ['source_starting_crop_ha','maximum_crop_ha','grazing_area_ha','physical_location_ha']:frame[c]=pd.to_numeric(frame[c],errors='coerce').fillna(0.)
     frame['is_ownable']=frame.is_ownable.astype(str).eq('True')
+    # Climate is a displayed attribute; it only selects the grazing equivalence.
+    climate=pd.read_csv(ROOT/'artifacts/climate/locations.csv',keep_default_na=False,usecols=['location_tag','climate']).set_index('location_tag').climate
+    frame['climate']=frame.location_tag.map(climate).fillna('')
+    if (frame.is_ownable&frame.climate.eq('')).any():raise ValueError('Climate missing for ownable locations')
+    known=set((cfg.get('grazing_equivalence') or {}).get('by_climate') or {})
+    unknown=sorted(set(frame.loc[frame.is_ownable,'climate'])-known)
     ledger=pd.read_csv(loc/'improvement_ledger_equal_area.csv',keep_default_na=False)
     for c in ledger.columns:
         if c.endswith('_capacity') or c.endswith('_total'):ledger[c]=pd.to_numeric(ledger[c],errors='raise')
@@ -117,15 +147,17 @@ def build(config_path=None,output_path=None):
     written=pd.read_csv(out/'locations.csv',keep_default_na=False)
     own=d[d.is_ownable]
     own.groupby('macro_region').development.agg(['size','mean','median',lambda s:s.quantile(.9),'max']).rename(columns={'<lambda_0>':'p90'}).round(2).to_csv(out/'macro_regions.csv')
-    report={'config':cfg,'hash':hash_map(written),'checks':result,'management_intensity_reference':d.attrs['management_intensity_reference'],
+    report={'config':cfg,'hash':hash_map(written),'checks':result,'management_intensity_reference':d.attrs['management_intensity_reference'],'management_intensity_kinds':d.attrs['management_intensity_kinds'],
+        'grazing':{'climates_using_default_equivalence':unknown,'ownable_grazing_ha':float(own.grazing_ha.sum()),'ownable_cultivated_ha':float(own.cultivated_ha.sum()),'ownable_used_land_ha':float(own.used_land_ha.sum()),
+                   'locations_with_grazing_above_cultivated':int((own.grazing_ha>own.cultivated_ha).sum())},
         'inputs':{'locations_equal_area.csv':hashlib.sha256((loc/'locations_equal_area.csv').read_bytes()).hexdigest(),'improvement_ledger_equal_area.csv':hashlib.sha256((loc/'improvement_ledger_equal_area.csv').read_bytes()).hexdigest()},
         'quantiles':own.development.quantile([0,.1,.25,.5,.75,.9,.99,1]).round(2).to_dict(),'component_means':{k:float(own[k].mean()) for k in COMPONENTS},
         'capacity_percent_per_point':cfg['capacity_percent_per_point'],'population_used':False,
-        'note':'D = 100 * clip(sum_k w_k * component_k). Components use HYDE/LUH-derived starting cultivation, the maximum feasible cultivation, the improvement ledger and pastoral land; attributes never use HYDE, only this start-state quantity does.'}
+        'note':'D = 100 * clip(sum_k w_k * component_k). Components use HYDE/LUH-derived starting cultivation and LUH grazing (total only, weighted by a per-climate equivalence), the maximum feasible cultivation and the improvement ledger; attributes never use HYDE, only this start-state quantity does.'}
     write_json(out/'development_checks.json',report)
     w=cfg['weights']
     lines=['# Starting development target','',f"Overall: **{'PASS' if result['all_passed'] else 'FAIL'}**. Development is derived before any building fit and never adjusted to close capacity gaps (hash `{report['hash'][:16]}`).",'',
-        'Formula: D = 100 · clip('+' + '.join(f"{w.get(k,0)}·{k}" for k in COMPONENTS if w.get(k,0))+f", 0, 1); capacity multiplier {cfg['capacity_percent_per_point']*100:.1f}% per point. Management intensity reference: {report['management_intensity_reference']:.4f} people per cultivated hectare (global p{int(100*cfg['management_intensity_quantile'])}).",'',
+        'Formula: D = 100 · clip('+' + '.join(f"{w.get(k,0)}·{k}" for k in COMPONENTS if w.get(k,0))+f", 0, 1); capacity multiplier {cfg['capacity_percent_per_point']*100:.1f}% per point. Used land = cultivated + grazing × equivalence by climate ({', '.join(f'{k} {v}' for k,v in sorted((cfg.get('grazing_equivalence') or {}).get('by_climate',{}).items()))}; default {(cfg.get('grazing_equivalence') or {}).get('default',0)}). Management intensity = {' + '.join(report['management_intensity_kinds'])} per used hectare; reference {report['management_intensity_reference']:.4f} (global p{int(100*cfg['management_intensity_quantile'])}).",'',
         '| Check | Observed | Requirement | Result |','|---|---|---|:---:|',
         f"| P90 | {result['p90_in_band']['observed']:.1f} | {result['p90_in_band']['band']} | {'PASS' if result['p90_in_band']['passed'] else 'FAIL'} |",
         f"| Maximum | {result['maximum']['observed']:.1f} | <= {result['maximum']['limit']} | {'PASS' if result['maximum']['passed'] else 'FAIL'} |",

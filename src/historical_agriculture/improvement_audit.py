@@ -51,12 +51,12 @@ def report(out,d,fingerprint):
     own=d.loc[d.is_ownable].copy()
     cols=['location_tag','province','region','macro_region','capacity_multiplier','unbounded_reference_multiplier','inert_capacity','starting_capacity','maximum_capacity']+CAPACITY_COLUMNS+ROUNDING_COLUMNS+[
         'starting_crop_ha','maximum_crop_ha','starting_served_ha','maximum_served_ha',
-        'crop_candidate_area_ha','rotation_active_area_equivalent_ha','pastoral_area_ha',
+        'crop_candidate_area_ha','rotation_active_area_equivalent_ha','pastoral_area_ha','grazing_area_ha',
         'rainfed_management_headroom_people_per_crop_ha']
     own[cols].to_csv(out/'improvement_components_equal_area.csv',index=False,float_format='%.15g')
     summaries={}
     for group in ['province','region','macro_region']:
-        total=own.groupby(group)[['inert_capacity','starting_capacity','maximum_capacity']+CAPACITY_COLUMNS+ROUNDING_COLUMNS+['starting_crop_ha','maximum_crop_ha','starting_served_ha','maximum_served_ha','crop_candidate_area_ha','rotation_active_area_equivalent_ha','pastoral_area_ha']].sum()
+        total=own.groupby(group)[['inert_capacity','starting_capacity','maximum_capacity']+CAPACITY_COLUMNS+ROUNDING_COLUMNS+['starting_crop_ha','maximum_crop_ha','starting_served_ha','maximum_served_ha','crop_candidate_area_ha','rotation_active_area_equivalent_ha','pastoral_area_ha','grazing_area_ha']].sum()
         total['multiplier_median']=own.groupby(group).capacity_multiplier.median()
         total['maximum_starting_ratio']=total.maximum_capacity/total.starting_capacity
         total['infrastructure_share']=1-total.inert_capacity/total.starting_capacity

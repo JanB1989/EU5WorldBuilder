@@ -1,13 +1,41 @@
 {
   "weights": {
-    "crop_share": 0.4,
+    "land_use_share": 0.4,
     "feasible_utilisation": 0.2,
     "improvement_share": 0.2,
-    "management_intensity": 0.2,
-    "pasture": 0.0
+    "management_intensity": 0.2
   },
-  "crop_share_reference": 0.3,
+  "land_use_reference": 0.3,
   "utilisation_saturation": 3.0,
+  "grazing_equivalence": {
+    "default": 0.15,
+    "by_climate": {
+      "oceanic": 0.5,
+      "subpolar_oceanic": 0.5,
+      "continental": 0.5,
+      "continental_monsoon": 0.5,
+      "subtropical": 0.5,
+      "subtropical_monsoon": 0.5,
+      "tropical": 0.5,
+      "tropical_monsoon": 0.5,
+      "highland_monsoon": 0.5,
+      "mediterranean": 0.3,
+      "dry_summer_continental": 0.3,
+      "savanna": 0.3,
+      "hot_steppe": 0.15,
+      "cold_steppe": 0.15,
+      "arid": 0.15,
+      "cold_arid": 0.15,
+      "subarctic": 0.15,
+      "arctic": 0.15
+    },
+    "note": "How much a grazing hectare counts against a cultivated one when measuring land use. Humid climates: meadow, hay and dairy land, worked as intensively as fields (0.5). Mediterranean, dry-summer and savanna: seasonal and transhumant grazing (0.3). Steppe, desert and the far north: open range (0.15). Explicit assumptions by displayed climate class; the HYDE pasture/rangeland split is not used because it is population-density based."
+  },
+  "management_intensity_kinds": [
+    "management",
+    "field_drainage",
+    "polders"
+  ],
   "management_intensity_quantile": 0.9,
   "management_intensity_reference": null,
   "capacity_percent_per_point": 0.01,
@@ -104,9 +132,10 @@
   },
   "notes": [
     "Development means how intensively the land is already used for human purposes; at 100 the location is fully optimised for its current system.",
-    "crop_share: HYDE/LUH-derived starting cultivation as a share of the physical area, saturating at crop_share_reference (30% cultivated ~ 63 points of this component). feasible_utilisation: the same cultivation against the maximum feasible cultivation. improvement_share: ledger improvements over starting capacity. management_intensity: management capacity per cultivated hectare against the global p90. pasture: pastoral share (weight 0 by default).",
+    "land_use_share: used land (HYDE/LUH starting cultivation + grazing_equivalence x LUH grazing) as a share of the physical area, saturating at land_use_reference (30% used ~ 63 points of this component). feasible_utilisation: used land against the maximum feasible cultivation. improvement_share: ledger improvements over starting capacity. management_intensity: the management_intensity_kinds ledger per used hectare against the global p90.",
     "Weights were chosen against the vanilla EU5 regional ordering (Spearman ~0.70 per location, ~0.90 by macro-region mean); this is a sanity reference, not a fitting target, and the map is never adjusted to close capacity gaps.",
     "Ordering and spot-check bands are sanity constraints. Failing checks block the building assignment unless allow_failed_development_checks is set in configs/building_assignment.json, which must be reported.",
-    "2026-09-19: a served-irrigation component was tested (weights 0.15-0.25 on served/cultivated share) and rejected: it lowered the agreement with vanilla ordering and did not lift Cairo, whose location carries little served land in the model. P90 band set to 25-60 and maximum to 95 as the intended ranges; spot checks are reported but do not gate."
+    "2026-09-19: a served-irrigation component was tested (weights 0.15-0.25 on served/cultivated share) and rejected: it lowered the agreement with vanilla ordering and did not lift Cairo, whose location carries little served land in the model. P90 band set to 25-60 and maximum to 95 as the intended ranges; spot checks are reported but do not gate.",
+    "2026-09-19: grazing added. Before, cultivation alone scored wet and upland pasture economies (Holland, Frisia, Ireland, the Alps) as unused land, e.g. Alkmaar 4.2 with 40% grazing and 0.1% cropland in LUH 1300; the previous pasture component read a livelihood-type diagnostic that covers only steppe locations and had weight 0. Drainage and polder works now count as management per used hectare."
   ]
 }

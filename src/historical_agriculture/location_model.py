@@ -183,6 +183,21 @@ def crop_densities(root,cfg,out):
     diagnostics={'low_rf':low_rf,'rainfed_headroom':rainfed_headroom,'rotation_fraction':np.where(crop>0,fraction,0),'crop_candidate':(crop>0).astype(float),'pastoral':np.isin(ft,[19,20,23]).astype(float),'baseline_rf':baseline_rf,'baseline_crop':baseline_crop,'refinement_flags':refinement_flags,'refinement_audit':refinement_audit}
     return domain,profile,ft,crop,rf,ir,reference,livelihood,inferred,diagnostics,{'irrigation_inferior_cells_using_rainfed':reversed_cells,'numeric_crop_or_livelihood_inferred_cells':int(inferred.sum()),'potential_crop_assigned_cells':int(np.sum(domain&(crop>0))),'no_compatible_historical_crop_cells':int(np.sum(domain&(crop==0)))}
 
+def luh_grazing_fraction(z,cultivated):
+    """LUH 1300 grazing land (managed pasture plus rangeland) as a cell fraction on the 5-arcminute grid.
+
+    Only the total is used: HYDE splits grazing into pasture and rangeland by population density and aridity,
+    so the split is population-derived and stays out of the model. Grazing is capped so cultivated plus
+    grazing never exceeds the cell.
+    """
+    g=np.asarray(z['pastr'],dtype=np.float32)+np.asarray(z['range'],dtype=np.float32)
+    lat=np.asarray(z['lat'])
+    if lat[0]<lat[-1]:g=g[::-1]
+    g=np.repeat(np.repeat(g,3,axis=0),3,axis=1)
+    g=np.where(np.isfinite(g),np.clip(g,0,1),0.)
+    return np.clip(np.minimum(g,1-np.clip(np.nan_to_num(cultivated),0,1)),0,1).astype(np.float32)
+
+
 def land_inputs(root,cfg,domain,profile,rf,crop,out):
     raw=root/cfg['input_directory'];area=area_grid();meta={}
     from netCDF4 import num2date
@@ -208,6 +223,10 @@ def land_inputs(root,cfg,domain,profile,rf,crop,out):
     lu,lu_missing=fill_nearest(np.where((luh>=0)&(luh<=1),luh,np.nan))
     current=np.clip(np.where(invalid,lu,vals['cropland']),0,1)
     write(out/'historical_cultivated_fraction.tif',current,profile,'Dated HYDE/LUH cultivated land, before natural-access union')
+    grazing=luh_grazing_fraction(z,current)
+    write(out/'historical_grazing_fraction.tif',grazing,profile,'LUH 1300 grazing land (managed pasture plus rangeland), capped so cultivated plus grazing <= 1')
+    meta['grazing']={'source':'luh1300.npz pastr+range','year':int(np.asarray(z['year']).ravel()[0]),'grazing_ha':float(np.sum(np.where(domain,grazing,0)*area)*100),
+        'note':'Total grazing only; the HYDE pasture/rangeland split depends on population density and is not used. Grazing enters development (used-land intensity), never the capacity targets.'}
     ii=~np.isfinite(vals['total_irrigated'])|(vals['total_irrigated']<0)
     # Unknown irrigation receives local irrigated/cropland-ratio analogue, explicitly flagged.
     ratio=np.divide(vals['total_irrigated'],np.maximum(vals['cropland'],1e-10))
@@ -452,6 +471,7 @@ def execute(config_path,output):
     arrays['china_refinement_fraction']=(diagnostics['refinement_flags']==1).astype(float)
     arrays['andes_refinement_fraction']=np.isin(diagnostics['refinement_flags'],[2,3]).astype(float)
     arrays['prairie_refinement_fraction']=read(out/'prairie_access_refined.tif')[0]
+    arrays['historical_grazing_fraction']=read(out/'historical_grazing_fraction.tif')[0]
     arrays['improvement_reference_refinement_fraction']=read(out/'improvement_reference_refined.tif')[0]
     arrays['management_envelope_refinement_fraction']=read(out/'management_envelope_refined.tif')[0]
     arrays['cultivated_system_refinement_fraction']=(system_flags>0).astype(float)
@@ -515,6 +535,8 @@ def execute(config_path,output):
     d['crop_candidate_area_ha']=totals['crop_candidate']
     d['rotation_active_area_equivalent_ha']=totals['rotation_fraction']
     d['pastoral_area_ha']=totals['pastoral']
+    # LUH 1300 grazing land in physical hectares; a land-use quantity for development, not a capacity input.
+    d['grazing_area_ha']=totals['historical_grazing_fraction']
     d['rainfed_management_headroom_people_per_crop_ha']=np.divide(totals['rainfed_headroom'],totals['crop_candidate'],out=np.zeros(len(d)),where=totals['crop_candidate']>0)
     d['physical_location_ha']=area_ha
     if cfg.get('water_management_config'):

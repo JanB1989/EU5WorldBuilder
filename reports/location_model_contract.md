@@ -159,3 +159,20 @@ improvements, and therefore starting building levels, represent evidenced
 activated potential, which gave many sparsely populated locations high
 starting building levels close to their maximum. The maximum scenario is
 unchanged, so the room between start and maximum widens accordingly.
+
+### Grazing land in development — 2026-09-19
+
+`locations_equal_area.csv` gains `grazing_area_ha`: LUH 1300 managed pasture plus
+rangeland in physical hectares, capped so cultivated plus grazing never exceeds
+a cell (`historical_grazing_fraction.tif`). Only the total is read; HYDE's
+pasture/rangeland split is population-density based and stays out. The column
+is a land-use quantity for the development target and the (disabled) pastoral
+building; it does not enter any capacity target. `pastoral_area_ha` is the
+older livelihood-type diagnostic (steppe systems only) and is unchanged.
+
+Development now measures used land, cultivated plus grazing weighted by an
+explicit per-climate equivalence (`configs/development.json`), and counts
+drainage and polder works as management per used hectare. Wet and upland
+pasture economies that cultivation alone scored as unused land (the Dutch coast
+at 4-6, Frisia, Ireland, the Alps) are the motivation; arable heartlands are
+unaffected, open range in dry and cold climates counts little.

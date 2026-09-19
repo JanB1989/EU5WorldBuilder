@@ -3,8 +3,8 @@
 - oasis_irrigation: the water-supply ledger of locations that have no surface water in the
   displayed attributes (no river level, no lake) but sit in arid or steppe climates; the
   historical works there were qanats, wells and oasis channels rather than river canals.
-- pastoral: the share of natural capacity that stands on pastoral land (World Builder
-  pastoral_area_ha / physical area). It is carved out of the natural target so the attribute
+- pastoral: the share of natural capacity that stands on grazing land (LUH 1300
+  grazing_area_ha / physical area). It is carved out of the natural target so the attribute
   fit no longer has to carry herding land, and represented as a flat building with no expansion.
 
 Both are gated by attribute rules from the building-assignment config; no per-location term.
@@ -28,9 +28,9 @@ def _gate(d,rules):
 
 
 def pastoral_share(index):
-    loc=pd.read_csv(ROOT/'artifacts/locations/locations_equal_area.csv',keep_default_na=False,usecols=['location_tag','pastoral_area_ha','physical_location_ha']).set_index('location_tag')
+    loc=pd.read_csv(ROOT/'artifacts/locations/locations_equal_area.csv',keep_default_na=False,usecols=['location_tag','grazing_area_ha','physical_location_ha']).set_index('location_tag')
     area=pd.to_numeric(loc.physical_location_ha,errors='coerce').reindex(index).to_numpy(float)
-    past=pd.to_numeric(loc.pastoral_area_ha,errors='coerce').reindex(index).fillna(0).to_numpy(float)
+    past=pd.to_numeric(loc.grazing_area_ha,errors='coerce').reindex(index).fillna(0).to_numpy(float)
     return np.clip(np.divide(past,area,out=np.zeros(len(index)),where=area>0),0,1)
 
 

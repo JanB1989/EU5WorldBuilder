@@ -12,5 +12,7 @@
   "global_fertility": true,
   "global_vegetation": true,
   "global_topography": true,
-  "global_climate": true
+  "global_climate": true,
+  "geography_compatibility": true,
+  "global_rivers": true
 }

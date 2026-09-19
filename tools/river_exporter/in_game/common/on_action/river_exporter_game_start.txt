@@ -1,0 +1,51 @@
+﻿# River Exporter - Game Start
+# Iterates every location and stores engine-derived properties as location variables.
+# Only presence flags are sparse; schema and all five size fields must exist.
+on_game_start = {
+	on_actions = {
+		river_exporter_tag_river_locations
+	}
+}
+
+river_exporter_tag_river_locations = {
+	effect = {
+		# has_river: only river locations receive this variable; absence = no river
+		every_location_in_the_world = {
+			limit = { has_river = yes }
+			set_variable = {
+				name = river_exporter_has_river
+				value = 1
+			}
+		}
+		# is_adjacent_to_lake: only lake-adjacent locations receive this variable
+		every_location_in_the_world = {
+			limit = { is_adjacent_to_lake = yes }
+			set_variable = {
+				name = river_exporter_is_adjacent_to_lake
+				value = 1
+			}
+		}
+		# location_size: stored for every location
+		every_location_in_the_world = {
+			set_variable = {
+				name = river_exporter_location_size
+				value = location_size
+			}
+		}
+
+		every_location_in_the_world = {
+			set_variable = { name = river_exporter_schema value = 2 }
+			set_variable = { name = river_exporter_river_level value = 0 }
+			set_variable = { name = river_exporter_size_1 value = modifier:river_exporter_size_1 }
+			if = { limit = { modifier:river_exporter_size_1 > 0 } set_variable = { name = river_exporter_river_level value = 1 } }
+			set_variable = { name = river_exporter_size_2 value = modifier:river_exporter_size_2 }
+			if = { limit = { modifier:river_exporter_size_2 > 0 } set_variable = { name = river_exporter_river_level value = 2 } }
+			set_variable = { name = river_exporter_size_3 value = modifier:river_exporter_size_3 }
+			if = { limit = { modifier:river_exporter_size_3 > 0 } set_variable = { name = river_exporter_river_level value = 3 } }
+			set_variable = { name = river_exporter_size_4 value = modifier:river_exporter_size_4 }
+			if = { limit = { modifier:river_exporter_size_4 > 0 } set_variable = { name = river_exporter_river_level value = 4 } }
+			set_variable = { name = river_exporter_size_5 value = modifier:river_exporter_size_5 }
+			if = { limit = { modifier:river_exporter_size_5 > 0 } set_variable = { name = river_exporter_river_level value = 5 } }
+		}
+	}
+}

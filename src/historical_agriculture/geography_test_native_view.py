@@ -1,7 +1,42 @@
 """Six native location properties, with no synthetic attribute modifiers."""
+import re
+
 from .geography_test import write_text, block_span
 
 LOC = 'LocationView.GetLocation'
+
+
+def guard_location_models(gui):
+    """Keep inherited list slices/repeaters valid even while widgets are hidden.
+
+    EU5 can evaluate hidden data models. Skipping one item from an empty model
+    asks the engine to reshape to -1, so visibility conditions are insufficient.
+    This only patches top-level list constructors in the window we already own.
+    """
+    pattern = re.compile(r'(?m)^([^#\n]*?\bdatamodel\s*=\s*"\[)(DataModelSkipFirst|DataModelRepeatedItem)\((.*)\)(\]")')
+    def replace(m):
+        prefix, fn, args, suffix = m.groups()
+        if fn == 'DataModelRepeatedItem':
+            if args.startswith("Max_int32('(int32)0', "): return m[0]
+            guarded = f"Max_int32('(int32)0', {args})"
+        else:
+            depth = 0
+            quote = None
+            split = None
+            for i, c in enumerate(args):
+                if quote:
+                    if c == quote: quote = None
+                elif c in "\"'": quote = c
+                elif c == '(': depth += 1
+                elif c == ')': depth -= 1
+                elif c == ',' and depth == 0:
+                    split = i; break
+            if split is None: raise ValueError('Unrecognised DataModelSkipFirst arguments')
+            model, count = args[:split].strip(), args[split+1:].strip()
+            if count.startswith("Max_int32('(int32)0', Min_int32("): return m[0]
+            guarded = f"{model}, Max_int32('(int32)0', Min_int32({count}, GetDataModelSize({model})))"
+        return f'{prefix}{fn}({guarded}){suffix}'
+    return pattern.sub(replace, gui)
 
 
 def tooltip(title, icon, content, concept, mapmode=None):
@@ -161,7 +196,8 @@ def add_native_view(output, game, cfg):
         }
         expand = {}
     }'''.replace('__CHIPS__', '\n'.join(widgets))
-    write_text(output, 'in_game/gui/location_window.gui', gui[:start] + row + gui[start+consumed:])
+    write_text(output, 'in_game/gui/location_window.gui',
+               guard_location_models(gui[:start] + row + gui[start+consumed:]))
     write_text(output, 'in_game/common/customizable_localization/ha1300_native_geography.txt', '\n'.join(custom))
     write_text(output, 'main_menu/localization/english/ha1300_native_geography_l_english.yml',
                'l_english:\n' + ''.join(f' {k}: "{v}"\n' for k,v in entries.items()))

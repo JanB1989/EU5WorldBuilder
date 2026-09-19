@@ -40,6 +40,7 @@ def emit_soils(output, game):
     names=['ha1300_soil_type_name = { type = location']
     descriptions=['ha1300_soil_type_description = { type = location']
     entries={
+      'MAPMODE_'+MAP.upper():'#T Soil Type#!\\nThe representative soil material in each location.',
       'mapmode_'+MAP+'_name':'Soil Type',
       'mapmode_'+MAP+'_description':'The representative soil material in each location.',
       'HA1300_SOIL_UNKNOWN':'Soil type unavailable',

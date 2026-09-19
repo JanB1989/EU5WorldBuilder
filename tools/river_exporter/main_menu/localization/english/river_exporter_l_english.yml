@@ -1,0 +1,11 @@
+﻿l_english:
+ MODIFIER_TYPE_NAME_river_exporter_size_1: "River size 1 export flag"
+ MODIFIER_TYPE_DESC_river_exporter_size_1: "Diagnostic engine flag for the river exporter."
+ MODIFIER_TYPE_NAME_river_exporter_size_2: "River size 2 export flag"
+ MODIFIER_TYPE_DESC_river_exporter_size_2: "Diagnostic engine flag for the river exporter."
+ MODIFIER_TYPE_NAME_river_exporter_size_3: "River size 3 export flag"
+ MODIFIER_TYPE_DESC_river_exporter_size_3: "Diagnostic engine flag for the river exporter."
+ MODIFIER_TYPE_NAME_river_exporter_size_4: "River size 4 export flag"
+ MODIFIER_TYPE_DESC_river_exporter_size_4: "Diagnostic engine flag for the river exporter."
+ MODIFIER_TYPE_NAME_river_exporter_size_5: "River size 5 export flag"
+ MODIFIER_TYPE_DESC_river_exporter_size_5: "Diagnostic engine flag for the river exporter."

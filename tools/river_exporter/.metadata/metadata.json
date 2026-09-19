@@ -1,0 +1,12 @@
+{
+  "name": "River Exporter",
+  "id": "river_exporter",
+  "version": "2.0.0",
+  "supported_game_version": "1.3.11",
+  "short_description": "Exports native river-size effects and maximum river level into save variables.",
+  "tags": [
+    "Utilities"
+  ],
+  "relationships": [],
+  "game_custom_data": {}
+}

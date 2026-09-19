@@ -1,0 +1,5 @@
+﻿river_exporter_size_1 = { decimals = 0 game_data = { category = location } }
+river_exporter_size_2 = { decimals = 0 game_data = { category = location } }
+river_exporter_size_3 = { decimals = 0 game_data = { category = location } }
+river_exporter_size_4 = { decimals = 0 game_data = { category = location } }
+river_exporter_size_5 = { decimals = 0 game_data = { category = location } }

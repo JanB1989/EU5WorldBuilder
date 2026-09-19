@@ -18,6 +18,23 @@ Formerly **HistoricalAgriculture1300**. The repository was renamed with its Git 
 uv run worldbuilder --help
 ```
 
+## Independent river network and EU5 export
+
+```bash
+uv run worldbuilder rivers --stage network
+uv run worldbuilder rivers --stage export
+# Or both stages:
+uv run worldbuilder rivers
+```
+
+The first stage preserves the full HydroATLAS geographic network in GeoParquet.
+The second applies `configs/rivers.json` to produce an indexed EU5 river PNG,
+connection markers, a coverage ledger and a junction-level audit. Changing game
+size thresholds or raster routing does not change the source network.
+
+Open `artifacts/river_network/index.html` for the geographic and EU5 previews.
+See [river pipeline method and limitations](reports/river_network_pipeline.md).
+
 ## Deliverable
 
 Every location in the frozen EU5 location inventory must have four finite values:

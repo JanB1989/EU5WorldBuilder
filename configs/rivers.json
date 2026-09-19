@@ -1,0 +1,29 @@
+{
+  "source": "data/raw/location_inputs/hydrology/river_reaches.parquet",
+  "network": "data/processed/rivers/network.parquet",
+  "output": "artifacts/river_network",
+  "raw_map_inputs": "data/raw/location_inputs",
+  "local_config": "geography_test.local.toml",
+  "geographic_preview_minimum_mean_discharge_m3_s": 10,
+  "export": {
+    "minimum_mean_discharge_m3_s": 50,
+    "level_lower_bounds_m3_s": [
+      50,
+      150,
+      500,
+      2000,
+      8000
+    ],
+    "level_palette_indices": [
+      4,
+      7,
+      11,
+      13,
+      15
+    ],
+    "minimum_visible_branch_pixels": 8,
+    "junction_snap_radius_pixels": 12,
+    "junction_policy": "native_markers_with_promotion_audit",
+    "ownable_locations_only": true
+  }
+}

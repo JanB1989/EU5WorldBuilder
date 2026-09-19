@@ -1,4 +1,4 @@
-"""Build and sync the isolated Land Clearance Geography Test mod."""
+"""Build and sync the EU5 World Builder geography mod."""
 from __future__ import annotations
 import hashlib
 import json
@@ -7,7 +7,8 @@ import shutil
 import tomllib
 from pathlib import Path
 
-MOD_NAME = 'Land Clearance Geography Test'
+MOD_NAME = 'EU5 World Builder'
+# Keep the installed identity stable when changing its display/folder name.
 MOD_ID = 'ha1300_land_clearance_geography_test'
 BUILDING = 'ha1300_test_land_clearance'
 VEGETATION = 'ha1300_clearable_forest'
@@ -102,7 +103,7 @@ def sync_tree(source,target,parent):
         if sha(target/rel)!=digest:raise RuntimeError(f'Deploy mismatch: {rel}')
     return {'target':str(target),'verified_files':len(current),'byte_parity':True}
 
-def build(config_path=None,local_path=None,deploy=True):
+def build(config_path=None,local_path=None,deploy=True,refresh_data=True):
     config_path=Path(config_path or ROOT/'configs/geography_test.json')
     local_path=Path(local_path or ROOT/'geography_test.local.toml')
     cfg=json.loads(config_path.read_text())
@@ -112,26 +113,29 @@ def build(config_path=None,local_path=None,deploy=True):
     target=mod_parent/MOD_NAME
     if deploy:validate_owned_destination(target,mod_parent)
     soil_result=None
+    def cached_manifest(config_name):
+        cached_cfg=json.loads((ROOT/f'configs/{config_name}.json').read_text())
+        return json.loads((ROOT/cached_cfg['output_directory']/'manifest.json').read_text())
     if cfg.get('global_soil_types'):
         from .soil_types import build as build_soils
-        soil_result=build_soils()
+        soil_result=build_soils() if refresh_data else cached_manifest('soil_types')
     fertility_result=None
     if cfg.get('global_fertility'):
         if not cfg.get('global_soil_types'):raise ValueError('Fertility requires the shared soil geography stage')
         from .fertility import build as build_fertility
-        fertility_result=build_fertility()
+        fertility_result=build_fertility() if refresh_data else cached_manifest('fertility')
     vegetation_result=None
     if cfg.get('global_vegetation'):
         from .vegetation import build as build_vegetation
-        vegetation_result=build_vegetation()
+        vegetation_result=build_vegetation() if refresh_data else cached_manifest('vegetation')
     topography_result=None
     if cfg.get('global_topography'):
         from .topography import build as build_topography
-        topography_result=build_topography()
+        topography_result=build_topography() if refresh_data else cached_manifest('topography')
     climate_result=None
     if cfg.get('global_climate'):
         from .climate import build as build_climate
-        climate_result=build_climate()
+        climate_result=build_climate() if refresh_data else cached_manifest('climate')
     output=ROOT/'artifacts/geography_test'/MOD_NAME
     report=ROOT/'artifacts/geography_test';report.mkdir(parents=True,exist_ok=True)
     sources={'climate':game/'in_game/common/climates/00_default.txt',
@@ -232,11 +236,11 @@ def build(config_path=None,local_path=None,deploy=True):
       'short_description':'Global climate, topography, vegetation, soil type and fertility. Enable alone and start a new 1337 game.',
       'tags':['Utilities'],'relationships':[],'game_custom_data':{}}
     write_text(output,'.metadata/metadata.json',json.dumps(metadata,indent=2))
-    checklist=['# Land Clearance Geography Test','','Enable this mod ALONE in a test playset, restart EU5 and start a NEW 1337 game as Sweden. Geography is loaded from location templates; do not use an existing campaign. Main Prosper or Perish and other map mods must be disabled for a controlled result.','','Open the following locations and find Land Clearance (Geography Test). It starts at zero levels. Hover its maximum level to inspect Base Allowance, Vegetation and Climate.','','| Location | Vegetation addition | Climate addition | Expected limit |','|---|---:|---:|---:|']
+    checklist=['# '+MOD_NAME,'','Enable this mod ALONE in a test playset, restart EU5 and start a NEW 1337 game as Sweden. Geography is loaded from location templates; do not use an existing campaign. Main Prosper or Perish and other map mods must be disabled for a controlled result.','','Open the following locations and find Land Clearance (Geography Test). It starts at zero levels. Hover its maximum level to inspect Base Allowance, Vegetation and Climate.','','| Location | Vegetation addition | Climate addition | Expected limit |','|---|---:|---:|---:|']
     for c in expected:checklist.append(f"| {c['location']} | +{c['vegetation_bonus']} | +{c['climate_bonus']} | {c['expected_max_levels']} |")
     checklist+=['','## Engine checks','','- New forest/climate names, icons and tooltips render, with their extra level modifiers.','- Limits match the table; outside these four locations the test building is unavailable.','- Build one level in each: confirm its raw capacity contribution and resulting total capacity.','- Each level adds 1 game capacity unit (normally 1,000 displayed people), multiplied by the full active native relative factor. Record that factor from the local capacity tooltip; native development/rank effects may differ by location. This test does not force the agricultural model multiplier into the game.','- Build to the cap, including queued levels; verify another level cannot be built.','- Demolish one level: one slot should reopen, not change the total maximum.','- Save, reload and recheck the attributes, capacity and limits.','- Inspect error.log for ha1300 keys, missing icons, invalid modifier/types or unknown definitions.','- The new categories inherit the original forest/continental definition except for the explicit test allowance. Scripts that explicitly check the vanilla key do not automatically recognise a new subtype. This test does not implement global compatibility rewrites.','','Construction has a nominal cost of 1 gold, no goods demand or staffing, and a base duration of 2 days; native modifiers may affect the displayed cost/time. Empty maintenance is deliberate.','','## Status','','Build/parser/unit-test and deployed byte-parity checks are engineering evidence only. Loading, construction, UI and save/reload behavior remain pending until checked in the running game.','','## Rebuild and sync','','`uv run ha1300 geography-test`','','Build without syncing: `uv run ha1300 geography-test --build-only`','','The live destination comes from ignored geography_test.local.toml. Only the dedicated test folder is managed. To uninstall, disable this mod and remove that folder.']
     if not cases:
-        checklist=['# Geography Test','','Global climate, topography, vegetation, soil type and fertility using the native location interface.','','Restart EU5 and start a NEW campaign to load the updated geography. Enable the test mod alone.','','The old Swedish clearing trial, artificial forest/climate variants and test bonuses have been retired. All locations use the global vegetation assignment and mapped climate and topography.','','Build and sync: `uv run ha1300 geography-test`. Build only: `uv run ha1300 geography-test --build-only`.']
+        checklist=['# '+MOD_NAME,'','Global climate, topography, vegetation, soil type and fertility using the native location interface.','','Restart EU5 and start a NEW campaign to load the updated geography. Enable the test mod alone.','','The old Swedish clearing trial, artificial forest/climate variants and test bonuses have been retired. All locations use the global vegetation assignment and mapped climate and topography.','','Build and sync: `uv run ha1300 geography-test`. Build only: `uv run ha1300 geography-test --build-only`.']
     write_text(output,'README.md','\n'.join(checklist)+'\n')
     if cfg.get('soil_types'):
         from .geography_test_soil import add_soil_prototype
@@ -262,6 +266,13 @@ def build(config_path=None,local_path=None,deploy=True):
     if cfg.get('global_climate'):
         from .geography_test_climate import emit_climate
         climate_export=emit_climate(output,game)
+    if cfg.get('geography_compatibility'):
+        from .geography_compatibility import emit, validate_references
+        emit(output,game)
+        validate_references(output,game)
+    if cfg.get('global_rivers'):
+        from .geography_compatibility import emit_rivers
+        emit_rivers(output)
     files={str(p.relative_to(output)):sha(p) for p in sorted(output.rglob('*')) if p.is_file() and p.name!='ha1300-build.json'}
     manifest={'id':MOD_ID,'files':files,'sources':{str(p):sha(p) for p in [*sources.values(),*assets.values()]},
       'config_sha256':sha(config_path),'code_sha256':sha(Path(__file__)),'cases':expected,'engine_status':'pending manual test'}

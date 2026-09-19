@@ -1,0 +1,61 @@
+{
+  "folds": 5,
+  "seed": 1300,
+  "ridge": 0.0001,
+  "primary_objective": "absolute",
+  "features": [
+    "topography",
+    "climate",
+    "vegetation",
+    "is_coastal",
+    "river_level",
+    "is_adjacent_to_lake",
+    "soil_type",
+    "fertility"
+  ],
+  "native_features": [
+    "topography",
+    "climate",
+    "vegetation",
+    "is_coastal",
+    "has_river",
+    "is_adjacent_to_lake"
+  ],
+  "targets": {
+    "base_effective_cropland": {
+      "label": "Base land",
+      "scale": 50000,
+      "minimum": 1000,
+      "maximum": 400000,
+      "coefficient_cap": 50000,
+      "relative_floor": 10000
+    },
+    "capacity_multiplier": {
+      "label": "Multiplier",
+      "scale": 1,
+      "minimum": 0.25,
+      "maximum": 5,
+      "coefficient_cap": 1.5,
+      "relative_floor": 0.5
+    }
+  },
+  "fertility_order": [
+    "very_low",
+    "low",
+    "moderate",
+    "high",
+    "very_high"
+  ],
+  "notes": [
+    "Fixed additive effects only: intercept plus one effect per displayed attribute. Winter excluded because climate determines it.",
+    "Current river levels use the World Builder ownable-only bitmap, including junction promotions. The presence-only control uses presence from that same bitmap; the native control retains vanilla geography and river presence. Bitmap levels are predictions, not a fresh engine export.",
+    "Coefficients are centred to a training-frequency-weighted mean of zero within each attribute; the intercept is the shared reference.",
+    "Prediction bounds apply even to unobserved attribute combinations. Fertility effects on multiplier must be nondecreasing; no arbitrary crop or terrain ranking is imposed.",
+    "Base-unit coefficient caps and 400,000 upper bound are exploratory game-design assumptions, not historical measurements.",
+    "Region-grouped five-fold validation holds entire regions out. Region, population, coordinates, location size, culture, crop system and improvements are never predictors.",
+    "Targets are the current equal-area game model, not independently measured population capacities.",
+    "Hard upper constraints apply separately to base land and multiplier at every training location. No held-out target is used in a fold. Predictions are never clipped to targets. Full-map component bounds also bound derived capacities with unchanged nonnegative improvements."
+  ],
+  "river_source": "worldbuilder",
+  "no_overshoot": true
+}

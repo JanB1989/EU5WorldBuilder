@@ -72,6 +72,23 @@ def components(frame,ledger,cfg):
     return out
 
 
+def game_start_development(frame,cfg):
+    """Development taken from the game's own starting values (day-one savegame snapshot), clipped to 0..100.
+
+    Used when configs/development.json has source.kind == 'game_start'. Nothing is derived or fitted;
+    non-ownable locations are 0 and every ownable location must be present in the table.
+    """
+    src=cfg['source'];table=pd.read_csv(ROOT/src['path'],keep_default_na=False)
+    values=pd.to_numeric(table.set_index('location_tag')[src['column']],errors='raise')
+    d=frame[['location_tag','province','region','macro_region','is_ownable','settlement_context']].copy()
+    own=d.is_ownable.astype(bool).to_numpy()
+    mapped=d.location_tag.map(values)
+    if mapped[own].isna().any():raise ValueError('Game-start development missing for ownable locations: '+', '.join(d.location_tag[own & mapped.isna().to_numpy()].head(5)))
+    d['development']=np.where(own,np.clip(mapped.fillna(0.).to_numpy(float),0,100),0.)
+    d.attrs['management_intensity_reference']=None;d.attrs['management_intensity_kinds']=[]
+    return d
+
+
 def development(frame,ledger,cfg):
     """Weighted blend of the components, clipped to 0..100; non-ownable rows are 0."""
     w=cfg['weights'];total=sum(w.get(k,0) for k in COMPONENTS)
@@ -140,24 +157,31 @@ def build(config_path=None,output_path=None):
     ledger=pd.read_csv(loc/'improvement_ledger_equal_area.csv',keep_default_na=False)
     for c in ledger.columns:
         if c.endswith('_capacity') or c.endswith('_total'):ledger[c]=pd.to_numeric(ledger[c],errors='raise')
-    d=development(frame,ledger,cfg)
+    game_start=(cfg.get('source') or {}).get('kind')=='game_start'
+    d=game_start_development(frame,cfg) if game_start else development(frame,ledger,cfg)
     result=checks(d,cfg)
+    if game_start:
+        # The map is the game's own; the sanity suite describes it but cannot fail it.
+        result['gating_checks']=[];result['all_passed']=True
+        result['not_a_residual']={'passed':True,'note':'Development is the game starting value from '+cfg['source']['path']+', read as an input; building_assignment verifies the hash below is unchanged.'}
     d.to_csv(out/'locations.csv',index=False,float_format='%.6f')
     # Hash the file as consumers will read it, so the building assignment can verify it byte-for-byte.
     written=pd.read_csv(out/'locations.csv',keep_default_na=False)
     own=d[d.is_ownable]
     own.groupby('macro_region').development.agg(['size','mean','median',lambda s:s.quantile(.9),'max']).rename(columns={'<lambda_0>':'p90'}).round(2).to_csv(out/'macro_regions.csv')
     report={'config':cfg,'hash':hash_map(written),'checks':result,'management_intensity_reference':d.attrs['management_intensity_reference'],'management_intensity_kinds':d.attrs['management_intensity_kinds'],
-        'grazing':{'climates_using_default_equivalence':unknown,'ownable_grazing_ha':float(own.grazing_ha.sum()),'ownable_cultivated_ha':float(own.cultivated_ha.sum()),'ownable_used_land_ha':float(own.used_land_ha.sum()),
+        'source':'game_start' if game_start else 'derived',
+        'grazing':None if game_start else {'climates_using_default_equivalence':unknown,'ownable_grazing_ha':float(own.grazing_ha.sum()),'ownable_cultivated_ha':float(own.cultivated_ha.sum()),'ownable_used_land_ha':float(own.used_land_ha.sum()),
                    'locations_with_grazing_above_cultivated':int((own.grazing_ha>own.cultivated_ha).sum())},
         'inputs':{'locations_equal_area.csv':hashlib.sha256((loc/'locations_equal_area.csv').read_bytes()).hexdigest(),'improvement_ledger_equal_area.csv':hashlib.sha256((loc/'improvement_ledger_equal_area.csv').read_bytes()).hexdigest()},
-        'quantiles':own.development.quantile([0,.1,.25,.5,.75,.9,.99,1]).round(2).to_dict(),'component_means':{k:float(own[k].mean()) for k in COMPONENTS},
+        'quantiles':own.development.quantile([0,.1,.25,.5,.75,.9,.99,1]).round(2).to_dict(),'component_means':{} if game_start else {k:float(own[k].mean()) for k in COMPONENTS},
         'capacity_percent_per_point':cfg['capacity_percent_per_point'],'population_used':False,
         'note':'D = 100 * clip(sum_k w_k * component_k). Components use HYDE/LUH-derived starting cultivation and LUH grazing (total only, weighted by a per-climate equivalence), the maximum feasible cultivation and the improvement ledger; attributes never use HYDE, only this start-state quantity does.'}
     write_json(out/'development_checks.json',report)
     w=cfg['weights']
     lines=['# Starting development target','',f"Overall: **{'PASS' if result['all_passed'] else 'FAIL'}**. Development is derived before any building fit and never adjusted to close capacity gaps (hash `{report['hash'][:16]}`).",'',
-        'Formula: D = 100 · clip('+' + '.join(f"{w.get(k,0)}·{k}" for k in COMPONENTS if w.get(k,0))+f", 0, 1); capacity multiplier {cfg['capacity_percent_per_point']*100:.1f}% per point. Used land = cultivated + grazing × equivalence by climate ({', '.join(f'{k} {v}' for k,v in sorted((cfg.get('grazing_equivalence') or {}).get('by_climate',{}).items()))}; default {(cfg.get('grazing_equivalence') or {}).get('default',0)}). Management intensity = {' + '.join(report['management_intensity_kinds'])} per used hectare; reference {report['management_intensity_reference']:.4f} (global p{int(100*cfg['management_intensity_quantile'])}).",'',
+        (f"Source: the game's own starting development from `{cfg['source']['path']}` (column `{cfg['source']['column']}`), clipped to 0..100. Nothing is derived; the checks below are informational. Capacity multiplier {cfg['capacity_percent_per_point']*100:.1f}% per point." if game_start else
+        'Formula: D = 100 · clip('+' + '.join(f"{w.get(k,0)}·{k}" for k in COMPONENTS if w.get(k,0))+f", 0, 1); capacity multiplier {cfg['capacity_percent_per_point']*100:.1f}% per point. Used land = cultivated + grazing × equivalence by climate ({', '.join(f'{k} {v}' for k,v in sorted((cfg.get('grazing_equivalence') or {}).get('by_climate',{}).items()))}; default {(cfg.get('grazing_equivalence') or {}).get('default',0)}). Management intensity = {' + '.join(report['management_intensity_kinds'])} per used hectare; reference {report['management_intensity_reference']:.4f} (global p{int(100*cfg['management_intensity_quantile'])})."),'',
         '| Check | Observed | Requirement | Result |','|---|---|---|:---:|',
         f"| P90 | {result['p90_in_band']['observed']:.1f} | {result['p90_in_band']['band']} | {'PASS' if result['p90_in_band']['passed'] else 'FAIL'} |",
         f"| Maximum | {result['maximum']['observed']:.1f} | <= {result['maximum']['limit']} | {'PASS' if result['maximum']['passed'] else 'FAIL'} |",

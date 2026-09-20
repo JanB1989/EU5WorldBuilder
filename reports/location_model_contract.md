@@ -176,3 +176,14 @@ drainage and polder works as management per used hectare. Wet and upland
 pasture economies that cultivation alone scored as unused land (the Dutch coast
 at 4-6, Frisia, Ireland, the Alps) are the motivation; arable heartlands are
 unaffected, open range in dry and cold climates counts little.
+
+### Development no longer multiplies capacity — 2026-09-20
+
+`capacity_percent_per_point` is 0 in every config. Population capacity is one flat
+number, farmland: attribute flats plus improvement buildings, minus commercial farm
+buildings. Development enters only the building cap equations as the linear term
+`add = { value = development multiply = γ }`, so intensification arrives as extra
+improvement levels rather than as a percentage. Development itself is the game's
+own starting value (`data/raw/vanilla/start_development_1337.csv`); the derived
+land-use formula remains as a diagnostic (`source.kind = derived`). Targets and ledger
+units are people directly.

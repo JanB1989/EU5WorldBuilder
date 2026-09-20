@@ -38,7 +38,7 @@
   ],
   "management_intensity_quantile": 0.9,
   "management_intensity_reference": null,
-  "capacity_percent_per_point": 0.01,
+  "capacity_percent_per_point": 0.0,
   "checks": {
     "p90_band": [
       25,
@@ -136,6 +136,13 @@
     "Weights were chosen against the vanilla EU5 regional ordering (Spearman ~0.70 per location, ~0.90 by macro-region mean); this is a sanity reference, not a fitting target, and the map is never adjusted to close capacity gaps.",
     "Ordering and spot-check bands are sanity constraints. Failing checks block the building assignment unless allow_failed_development_checks is set in configs/building_assignment.json, which must be reported.",
     "2026-09-19: a served-irrigation component was tested (weights 0.15-0.25 on served/cultivated share) and rejected: it lowered the agreement with vanilla ordering and did not lift Cairo, whose location carries little served land in the model. P90 band set to 25-60 and maximum to 95 as the intended ranges; spot checks are reported but do not gate.",
-    "2026-09-19: grazing added. Before, cultivation alone scored wet and upland pasture economies (Holland, Frisia, Ireland, the Alps) as unused land, e.g. Alkmaar 4.2 with 40% grazing and 0.1% cropland in LUH 1300; the previous pasture component read a livelihood-type diagnostic that covers only steppe locations and had weight 0. Drainage and polder works now count as management per used hectare."
-  ]
+    "2026-09-19: grazing added. Before, cultivation alone scored wet and upland pasture economies (Holland, Frisia, Ireland, the Alps) as unused land, e.g. Alkmaar 4.2 with 40% grazing and 0.1% cropland in LUH 1300; the previous pasture component read a livelihood-type diagnostic that covers only steppe locations and had weight 0. Drainage and polder works now count as management per used hectare.",
+    "2026-09-20: development no longer multiplies capacity (capacity_percent_per_point 0). Population capacity flat is farmland; development enters only the building cap equations as a linear term. The derived formula stays available (source.kind = derived) as a diagnostic; the game starting development is the input."
+  ],
+  "source": {
+    "kind": "game_start",
+    "path": "data/raw/vanilla/start_development_1337.csv",
+    "column": "profile_start_development",
+    "note": "EU5 1.3.11 starting development per location, day-one savegame snapshot exported through the constructor state table (column profile_start_development). Negative values (empty land) clip to 0. Set kind to 'derived' to use the land-use formula instead."
+  }
 }

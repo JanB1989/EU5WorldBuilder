@@ -177,9 +177,10 @@
     "Sign expectations are enforced as one-sided spans (negative classes may not add capacity; positive classes may not remove it), so a fitted value of zero means the data did not support the expected direction.",
     "Targets are converted to flat (pre-development) units before fitting: natural/(1+c*D_start) and maximum/(1+c*100), because the game multiplies every flat value by (1 + c*development). Development comes from artifacts/development/locations.csv and is never adjusted here.",
     "round_to: after the fit, the intercept and every class value are rounded to the nearest multiple of this many people (the zero floor is preserved by lifting the intercept if needed); predictions, metrics and the review list use the rounded values.",
-    "building_assignment_config: ledger extensions defined there (pastoral carve-out) are subtracted from the natural and maximum targets before fitting, so herding land is carried by a flat building rather than by the attributes."
+    "building_assignment_config: ledger extensions defined there (pastoral carve-out) are subtracted from the natural and maximum targets before fitting, so herding land is carried by a flat building rather than by the attributes.",
+    "2026-09-20: capacity_percent_per_point 0. Targets and ledger units are people directly; no development multiplier anywhere in the capacity model."
   ],
-  "capacity_percent_per_point": 0.01,
+  "capacity_percent_per_point": 0.0,
   "round_to": 100,
   "building_assignment_config": "configs/building_assignment.json"
 }

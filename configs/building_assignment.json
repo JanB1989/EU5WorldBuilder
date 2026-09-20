@@ -1,7 +1,7 @@
 {
   "attribute_fit_config": "configs/attribute_fit_flat.json",
   "attribute_fit_predictions": "artifacts/attribute_fit_flat/location_predictions.csv",
-  "capacity_percent_per_point": 0.025,
+  "capacity_percent_per_point": 0.0,
   "level_limit": 20,
   "envelope_quantile": 0.5,
   "unit_quantiles": [
@@ -310,7 +310,8 @@
     "2026-09-20: caps are compared with the physical maximum at each location's own starting development (columns *_cap; fit \"maximum\"); *_cap_at_reference evaluates the cap equation at maximum_reference_development (45, the highest game starting value) and is informational (fit \"maximum_at_reference_development\"). No cap is evaluated at development 100 any more.",
     "2026-09-20: capacity_percent_per_point 0.01 = the EU5 engine's own development multiplier (1% per point, not scriptable away); development is the vanilla game-start value computed from the vanilla rules (data/raw/vanilla/start_development_1337.csv, range 0..~110).",
     "2026-09-20: development floors halved for the vanilla 0..110 range (management 0.03 levels per point = +3 levels at 100); maximum_reference_development 100.",
-    "2026-09-20: engine development multiplier observed in game as 2.5% per point (Zhigu: development 36 -> Population Capacity +90%); capacity_percent_per_point 0.025. Not a scriptable value; no define found."
+    "2026-09-20: engine development multiplier observed in game as 2.5% per point (Zhigu: development 36 -> Population Capacity +90%); capacity_percent_per_point 0.025. Not a scriptable value; no define found.",
+    "2026-09-20: the development percentage is scriptable after all (vanilla static modifier development, +2.5% per point, in main_menu/common/static_modifiers/location.txt); the constructor replaces it without the capacity line, so capacity_percent_per_point is 0 again."
   ],
   "allow_failed_development_checks": true,
   "allow_failed_development_checks_reason": "2026-09-20: development is the game starting value (configs/development.json source.kind game_start); its sanity suite is informational and never gates.",

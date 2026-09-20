@@ -38,7 +38,7 @@
   ],
   "management_intensity_quantile": 0.9,
   "management_intensity_reference": null,
-  "capacity_percent_per_point": 0.01,
+  "capacity_percent_per_point": 0.025,
   "checks": {
     "p90_band": [
       40,
@@ -138,7 +138,8 @@
     "2026-09-19: a served-irrigation component was tested (weights 0.15-0.25 on served/cultivated share) and rejected: it lowered the agreement with vanilla ordering and did not lift Cairo, whose location carries little served land in the model. P90 band set to 25-60 and maximum to 95 as the intended ranges; spot checks are reported but do not gate.",
     "2026-09-19: grazing added. Before, cultivation alone scored wet and upland pasture economies (Holland, Frisia, Ireland, the Alps) as unused land, e.g. Alkmaar 4.2 with 40% grazing and 0.1% cropland in LUH 1300; the previous pasture component read a livelihood-type diagnostic that covers only steppe locations and had weight 0. Drainage and polder works now count as management per used hectare.",
     "2026-09-20: development no longer multiplies capacity (capacity_percent_per_point 0). Population capacity flat is farmland; development enters only the building cap equations as a linear term. The derived formula stays available (source.kind = derived) as a diagnostic; the game starting development is the input.",
-    "2026-09-20: capacity_percent_per_point 0.01 = the EU5 engine's own development multiplier (1% per point, not scriptable away); development is the vanilla game-start value computed from the vanilla rules (data/raw/vanilla/start_development_1337.csv, range 0..~110)."
+    "2026-09-20: capacity_percent_per_point 0.01 = the EU5 engine's own development multiplier (1% per point, not scriptable away); development is the vanilla game-start value computed from the vanilla rules (data/raw/vanilla/start_development_1337.csv, range 0..~110).",
+    "2026-09-20: engine development multiplier observed in game as 2.5% per point (Zhigu: development 36 -> Population Capacity +90%); capacity_percent_per_point 0.025. Not a scriptable value; no define found."
   ],
   "source": {
     "kind": "game_start",

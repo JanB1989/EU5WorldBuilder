@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-09-20-3f1d4c9",
-  "worldbuilder_commit": "3f1d4c9",
-  "created": "2026-09-20T13:52:51",
+  "version": "2026-09-20-a7cfd2e",
+  "worldbuilder_commit": "a7cfd2e",
+  "created": "2026-09-20T14:04:49",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
@@ -28,92 +28,92 @@
       "is_coastal": "False",
       "is_adjacent_to_lake": "False"
     },
-    "capacity_percent_per_point": 0.01
+    "capacity_percent_per_point": 0.025
   },
   "capacity_fit": [
     {
       "target": "natural_capacity",
       "evaluation": "full_fit",
-      "r2": 0.36218830646297206,
-      "mae": 7086.268054412082,
-      "rmse": 10415.223810085974,
-      "median_absolute_percentage_error": 27.42319113581425,
-      "p90_absolute_percentage_error": 84.83930320054142,
-      "within_20_percent": 38.31426793662949,
-      "within_50_percent": 74.75230938591872,
-      "within_factor_two": 78.65792370650458,
-      "mean_bias": -4337.084311225208
+      "r2": 0.24296689439268715,
+      "mae": 6932.255459449462,
+      "rmse": 10662.910447503267,
+      "median_absolute_percentage_error": 31.944095667731386,
+      "p90_absolute_percentage_error": 78.7373984160595,
+      "within_20_percent": 32.48456420810798,
+      "within_50_percent": 69.98037620255589,
+      "within_factor_two": 75.02991432537213,
+      "mean_bias": -4819.036710172401
     },
     {
       "target": "natural_capacity",
       "evaluation": "region_heldout",
-      "r2": 0.297177145644015,
-      "mae": 7627.136037390438,
-      "rmse": 10933.14998362577,
-      "median_absolute_percentage_error": 30.65197822788694,
-      "p90_absolute_percentage_error": 92.80485595156765,
-      "within_20_percent": 34.28899631455511,
-      "within_50_percent": 71.38754606806107,
-      "within_factor_two": 75.37931364571865,
-      "mean_bias": -4557.162806414984
+      "r2": 0.1849723998636552,
+      "mae": 7432.812328377914,
+      "rmse": 11063.804263834727,
+      "median_absolute_percentage_error": 35.84472162823427,
+      "p90_absolute_percentage_error": 90.06932938450898,
+      "within_20_percent": 27.861006078590915,
+      "within_50_percent": 65.9551045804815,
+      "within_factor_two": 71.10515483654812,
+      "mean_bias": -4886.2793273169
     },
     {
       "target": "maximum_capacity",
       "evaluation": "full_fit",
-      "r2": 0.2963202924986498,
-      "mae": 22408.85842400076,
-      "rmse": 40329.56980799982,
-      "median_absolute_percentage_error": 34.02927780468952,
-      "p90_absolute_percentage_error": 87.69802522059564,
-      "within_20_percent": 32.48456420810798,
+      "r2": 0.2965534912458453,
+      "mae": 12803.122778910478,
+      "rmse": 23041.64952275708,
+      "median_absolute_percentage_error": 34.01557792961119,
+      "p90_absolute_percentage_error": 88.38311781257386,
+      "within_20_percent": 32.31225769396448,
       "within_50_percent": 67.29526635715311,
-      "within_factor_two": 72.15335279758771,
-      "mean_bias": -17097.93815090503
+      "within_factor_two": 72.05762695639689,
+      "mean_bias": -9768.971064453817
     },
     {
       "target": "maximum_capacity",
       "evaluation": "region_heldout",
-      "r2": 0.23132080875515693,
-      "mae": 24098.828311900317,
-      "rmse": 42151.07335067688,
-      "median_absolute_percentage_error": 38.034052385476244,
-      "p90_absolute_percentage_error": 99.27647301768928,
-      "within_20_percent": 29.23945819173886,
-      "within_50_percent": 62.5855549705643,
-      "within_factor_two": 67.57287129660652,
-      "mean_bias": -17581.66475790259
+      "r2": 0.23245527396734766,
+      "mae": 13760.16398339569,
+      "rmse": 24068.547005670145,
+      "median_absolute_percentage_error": 37.96037079823611,
+      "p90_absolute_percentage_error": 100.0,
+      "within_20_percent": 29.292107404393814,
+      "within_50_percent": 62.59512755468338,
+      "within_factor_two": 67.62073421720194,
+      "mean_bias": -10008.635066751238
     }
   ],
   "building_fit": {
     "starting": {
-      "r2": 0.8226585159382817,
-      "median_absolute_percentage_error": 24.165959522393543,
-      "within_25_percent": 51.28511941798689,
-      "mean_bias": -6603.22140622887
+      "r2": 0.7934563931025639,
+      "median_absolute_percentage_error": 27.644348930816452,
+      "within_25_percent": 46.38395634901642,
+      "mean_bias": -7722.461795115099
     },
     "maximum": {
-      "r2": 0.48075327753471575,
-      "median_absolute_percentage_error": 33.87079636696154,
-      "within_25_percent": 39.611353084765234,
-      "mean_bias": 16506.32060624527
+      "r2": 0.38590601286068316,
+      "median_absolute_percentage_error": 40.51036859398578,
+      "within_25_percent": 34.05446800363758,
+      "mean_bias": 29166.03917227217
     },
     "starting_improvements_only": {
-      "r2": 0.916453475760489,
-      "median_absolute_percentage_error": 15.074850407412715,
-      "within_25_percent": 56.84200449911454,
-      "mean_bias": -1717.5111513816826
+      "r2": 0.9041933432449476,
+      "median_absolute_percentage_error": 13.35308602918123,
+      "within_25_percent": 59.58933614129134,
+      "mean_bias": -1948.3247808269512
     },
     "maximum_improvements_only": {
-      "r2": 0.4732768919547402,
-      "median_absolute_percentage_error": 36.990171004339494,
-      "within_25_percent": 36.83530369023118,
-      "mean_bias": 7912.706678830458
+      "r2": 0.4693336984842129,
+      "median_absolute_percentage_error": 37.418770786312514,
+      "within_25_percent": 36.2609486430862,
+      "mean_bias": 8602.03564068371
     },
     "maximum_at_reference_development": {
-      "r2": 0.3848557696869054,
-      "median_absolute_percentage_error": 40.323862744405766,
-      "within_25_percent": 27.032977552290237,
-      "mean_bias": -24032.103746408728
+      "r2": -0.026627425963965834,
+      "median_absolute_percentage_error": 55.24772505283748,
+      "within_25_percent": 14.373235054803043,
+      "mean_bias": -57171.90176488382
     }
   },
   "goods_fit": {
@@ -135,24 +135,24 @@
   },
   "self_check": {
     "starting": {
-      "r2": 0.8226585159382817,
-      "median_absolute_percentage_error": 24.165959522393543,
-      "within_25_percent": 51.28511941798689,
-      "mean_bias": -6603.22140622887,
-      "total_model": 694550496.97,
+      "r2": 0.7934563931025639,
+      "median_absolute_percentage_error": 27.644348930816452,
+      "within_25_percent": 46.38395634901642,
+      "mean_bias": -7722.461795115099,
+      "total_model": 671166207.525,
       "total_target": 832511601.8103398
     },
     "maximum": {
-      "r2": 0.40757717930406623,
-      "median_absolute_percentage_error": 37.475909372607305,
-      "within_25_percent": 29.636720432680804,
-      "mean_bias": -31591.607086761956,
-      "total_model": 1636432596.71,
+      "r2": 0.22166399874307485,
+      "median_absolute_percentage_error": 44.93638509739863,
+      "within_25_percent": 22.50993155602355,
+      "mean_bias": -47004.418583914114,
+      "total_model": 1314412726.1,
       "total_target": 2296476043.5737176
     },
-    "starting_model_total": 694550496.97,
-    "maximum_model_total": 1636432596.71,
-    "percent_per_point": 0.01
+    "starting_model_total": 671166207.525,
+    "maximum_model_total": 1314412726.1,
+    "percent_per_point": 0.025
   },
   "counts": {
     "attribute_rows": 59,
@@ -163,12 +163,12 @@
     "location_attributes": 20893
   },
   "files": {
-    "attribute_rows.csv": "a0f887b395b2baecfe9d9dfd699b76cd19d9f845c210e297ca0e17e835e62630",
-    "building_types.csv": "6f52f92eacb5f290181a564dfc8e34e94e0368673420a241b5e6b5e733445d0b",
+    "attribute_rows.csv": "a5bb774d1b6b6154246ec36840ba3d1ef33acd7300aa45388383b6ce65e96218",
+    "building_types.csv": "af27f89491d1c2e5416a97d40168f2916cca115711f77f4c024799de4af43426",
     "goods_floor.csv": "2fe877eef84bab527d8cb86503fac047f5d0c26feaa144d319428e70e2bd4408",
     "location_attributes.csv": "7fe24177ad5ff9e7bfe3bc4464f566174a2fef160ff6a641aa9b188fbbe4bd70",
-    "location_buildings.csv": "5b81bf731454583df8f09ea834243eed6ee2e1b77940a08e92959d9dbd52a828",
-    "location_targets.csv": "3e64ce9e8368681cabdd3464559a978c337d26eeb95d4b0145e4326226f93377"
+    "location_buildings.csv": "a985ec0bcb69b8f822b4ee7be92a75511414289d82e4e166f885e40bfeb68211",
+    "location_targets.csv": "269987ce397e80e4a4c1caef98c9e1f943fdaa91fbb576a471b3aaa2edf6d583"
   },
   "rules": [
     "No per-location capacity value: capacity = sum of attribute rows + sum of building levels x unit.",

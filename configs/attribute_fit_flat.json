@@ -179,9 +179,10 @@
     "round_to: after the fit, the intercept and every class value are rounded to the nearest multiple of this many people (the zero floor is preserved by lifting the intercept if needed); predictions, metrics and the review list use the rounded values.",
     "building_assignment_config: ledger extensions defined there (pastoral carve-out) are subtracted from the natural and maximum targets before fitting, so herding land is carried by a flat building rather than by the attributes.",
     "2026-09-20: capacity_percent_per_point 0. Targets and ledger units are people directly; no development multiplier anywhere in the capacity model.",
-    "2026-09-20: capacity_percent_per_point 0.01 = the EU5 engine's own development multiplier (1% per point, not scriptable away); development is the vanilla game-start value computed from the vanilla rules (data/raw/vanilla/start_development_1337.csv, range 0..~110)."
+    "2026-09-20: capacity_percent_per_point 0.01 = the EU5 engine's own development multiplier (1% per point, not scriptable away); development is the vanilla game-start value computed from the vanilla rules (data/raw/vanilla/start_development_1337.csv, range 0..~110).",
+    "2026-09-20: engine development multiplier observed in game as 2.5% per point (Zhigu: development 36 -> Population Capacity +90%); capacity_percent_per_point 0.025. Not a scriptable value; no define found."
   ],
-  "capacity_percent_per_point": 0.01,
+  "capacity_percent_per_point": 0.025,
   "round_to": 100,
   "building_assignment_config": "configs/building_assignment.json"
 }

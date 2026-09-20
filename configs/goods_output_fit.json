@@ -1,0 +1,25 @@
+{
+  "attribute_fit_config": "configs/attribute_fit_flat.json",
+  "tables_directory": "data/raw/goods_efficiency",
+  "import_root": "../ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops",
+  "rgo_source": "data/raw/vanilla/location_raw_material_1337.csv",
+  "output_min": -0.5,
+  "output_max": 0.5,
+  "rgo_floor": -0.2,
+  "min_rgo_locations_per_class": 5,
+  "prune_below": 0.1,
+  "minimum_rgo_locations": 30,
+  "round_decimals": 2,
+  "goods": [],
+  "notes": [
+    "Target per good: StaticModifiersV2 score_0_1 rank-uniform over viable locations, mapped to [output_min, output_max]; fitted on the locations where the good is the game RGO (data/raw/vanilla/location_raw_material_1337.csv). The game keeps its RGO; rows shape output only.",
+    "Relevance pruning: a (good, attribute class) row exists only where the good is the RGO in >= min_rgo_locations_per_class locations of that class; |modifier| < prune_below is dropped and refitted into the intercept. Chosen 2026-09-20 from a grid: ~300 rows across 25 goods, at most ~13 per climate class, same held-out fit on RGO locations as the unpruned 1,450-row model.",
+    "rgo_floor: RGO locations predicted below this (and RGO locations the data calls non-viable) go to rgo_floor.csv for the constructor floor carve-out, which stays.",
+    "goods: empty = every table in tables_directory.",
+    "fit_on weighted_viable: least squares over all viable locations with RGO locations weighted rgo_weight (5); fitting on RGO locations alone overfitted goods with under ~200 RGO locations (held-out R2 negative for sugar, pepper, saffron, cocoa). min_rgo_share_per_class makes relevance adaptive: a class row needs the good as RGO in at least 10% of its RGO locations (and at least min_rgo_locations_per_class).",
+    "2026-09-20 grid over rgo_weight/share/prune: weight 10, share 0, prune 0.10 gives 226 rows (max 18 per class), median held-out R2 on RGO locations 0.38 (goods with >=250 RGO locations 0.54, smaller goods 0.22, two negative). RGO-only fitting and stricter relevance both overfit small goods."
+  ],
+  "fit_on": "weighted_viable",
+  "rgo_weight": 10.0,
+  "min_rgo_share_per_class": 0.0
+}

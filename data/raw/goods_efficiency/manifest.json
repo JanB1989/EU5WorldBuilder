@@ -1,0 +1,130 @@
+{
+  "goods": {
+    "chili": {
+      "sha256": "b1fe827af52abd2ff92d12092b191b4c0a187b5efacff2234c8cc5bf7f85d2f9",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/chili/location_efficiency.csv"
+    },
+    "cloves": {
+      "sha256": "2876aa7915e4cdbe9a4b93c2c2649128d361707a770d62ba9c6cdf2f4819a74d",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/cloves/location_efficiency.csv"
+    },
+    "cocoa": {
+      "sha256": "4c6f3d8911901bfb383fb600370f7d4729e246409d4d22d26525c83dfdb538f1",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/cocoa/location_efficiency.csv"
+    },
+    "coffee": {
+      "sha256": "8b36b8f4d1f13c850395f7f17875ec08a41596ea84e394d5d650bcab218e859e",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/coffee/location_efficiency.csv"
+    },
+    "cotton": {
+      "sha256": "3956e5d0025ad52ebb51731440461494b3845d0f14e1a2b9810dd7a92e8a3500",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/cotton/location_efficiency.csv"
+    },
+    "dyes": {
+      "sha256": "5c8357d599e961f5218b17b1942fa188d660b4e7dc633eb9fd320ef576ca1014",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/dyes/location_efficiency.csv"
+    },
+    "fiber_crops": {
+      "sha256": "770cda61e49838b59a35e9d36543dcf5072af209b6f7867be66272fec3b2de3d",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/fiber_crops/location_efficiency.csv"
+    },
+    "fruit": {
+      "sha256": "6c7e31c705f7e350e3a527976b7d3e3da30db9add15e71640aee2ec27b52bc6b",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/fruit/location_efficiency.csv"
+    },
+    "incense": {
+      "sha256": "103b8bd286dddbf39e35b177968c5cab3849adb431b62e8f379d91e92fc00d0c",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/incense/location_efficiency.csv"
+    },
+    "legumes": {
+      "sha256": "4881afe4fee2d83e0ab7248517d3c3fb9c5ad03916b0e38b82ea8e8aa38c88d8",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/legumes/location_efficiency.csv"
+    },
+    "lumber": {
+      "sha256": "8af5b0c26760083910da3894bf7b4337c90bc2bec01c69aef05bee65d80956c1",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/lumber/location_efficiency.csv"
+    },
+    "maize": {
+      "sha256": "69beae13c77cdac388e04b03d9165841d3e682ec5fa0d84585fb219f0ce0b441",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/maize/location_efficiency.csv"
+    },
+    "medicaments": {
+      "sha256": "08abeef235b69e2f9b69f082627e1a72b947506fbd7ae94ba1fee4645ea0e407",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/medicaments/location_efficiency.csv"
+    },
+    "millet": {
+      "sha256": "b13c7200b088454dd84c4c7d76eedd4429e6ade29cf65cd733864a38c9b35d7c",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/millet/location_efficiency.csv"
+    },
+    "olives": {
+      "sha256": "bac2ffc524a7a3a806e4e3e4a42d1f2371ccb4de5b49bfbaaee6ef34a7c5fefd",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/olives/location_efficiency.csv"
+    },
+    "pepper": {
+      "sha256": "c82560f3b4f71007d226e88c19082dffbb32a744c960c5c1eafa1f6895b37724",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/pepper/location_efficiency.csv"
+    },
+    "potato": {
+      "sha256": "2d0f8ee6742c0bdff386e9ee97494716924635634d5b489371679e21588d239b",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/potato/location_efficiency.csv"
+    },
+    "rice": {
+      "sha256": "64b4aad166dbd3fe19f67e38db411d22942305a9e4fb37c49d8c5ce7fde50228",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/rice/location_efficiency.csv"
+    },
+    "saffron": {
+      "sha256": "fea712e3015ed91c0f903382e2e5e80254e81359d6dc3dc1f6322b6f0731c9e4",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/saffron/location_efficiency.csv"
+    },
+    "silk": {
+      "sha256": "8b020a7423c5959edf97911226b202e3fc7e6f8f5ef5fd9e78d34e27f712dc3f",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/silk/location_efficiency.csv"
+    },
+    "sugar": {
+      "sha256": "cdb273890a07e1f6d55af887538730af2b3c38cbfed8200aeb6cf21c9f8ad7b1",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/sugar/location_efficiency.csv"
+    },
+    "tea": {
+      "sha256": "497b4d1cf7cb7f2b428c3e3c0ba0e2fc43642946b1c450b19685acc5fce6ce09",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/tea/location_efficiency.csv"
+    },
+    "tobacco": {
+      "sha256": "26886c06995097fea7aa1ab8fc55d5ff23e4299b58464b3311900f671a9421d7",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/tobacco/location_efficiency.csv"
+    },
+    "wheat": {
+      "sha256": "3d9a9eef350f64223301967a05ce9e085cb2a82f552853eb7ab902e3ae8956ba",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/wheat/location_efficiency.csv"
+    },
+    "wine": {
+      "sha256": "ac4ff543db0eb86bb0e70458a74802c0da728681d9200c84181eab2dffc4569b",
+      "algorithm_version": "labor-output-efficiency-v1",
+      "imported_from": "/home/jan/development/ProsperOrPerishStaticModifiersV2/data/output_data/trade_goods/crops/wine/location_efficiency.csv"
+    }
+  },
+  "note": "StaticModifiersV2 location_efficiency.csv per good (score_0_1, viable_fraction). Copied verbatim; the fit reads these local copies only."
+}

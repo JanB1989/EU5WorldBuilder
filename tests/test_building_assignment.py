@@ -35,4 +35,4 @@ def test_assignment_uses_ledger_levels_below_caps_and_fits_no_per_location_term(
     dev_terms = caps[caps.attribute == 'development']
     assert len(dev_terms) == int(buildings.unit_people_per_level.notna().sum()) and (dev_terms.levels >= 0).all() and (dev_terms.levels <= 0.2).all()
     assert (caps[caps.attribute != 'development'].levels % 1 == 0).all()
-    assert (out.clearing_cap_at_development_100 >= 0).all()
+    assert (out.clearing_cap_at_reference >= 0).all()

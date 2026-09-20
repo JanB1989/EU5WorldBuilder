@@ -41,6 +41,17 @@ def main():
     a=sub.add_parser("building-assignment",help="Assign flat conditional buildings on top of the flat attribute fit")
     a.add_argument("--config",type=Path,default=Path("configs/building_assignment.json"))
     a.add_argument("--output",type=Path)
+    a=sub.add_parser("goods-fit",help="Fit goods output modifiers to location attributes on RGO locations")
+    a.add_argument("--config",type=Path,default=Path("configs/goods_output_fit.json"))
+    a.add_argument("--output",type=Path)
+    a=sub.add_parser("handover",help="Export the versioned handover contract for the constructor")
+    a.add_argument("--version")
+    a.add_argument("--output",type=Path)
+    a=sub.add_parser("handover-check",help="Recompute the capacity model from a constructor-side levels table and report the fit")
+    a.add_argument("--levels",type=Path,required=True)
+    a.add_argument("--units",type=Path,required=True)
+    a.add_argument("--version",required=True)
+    a.add_argument("--output",type=Path)
     a=sub.add_parser("recalibration-map",help="Render the self-contained HTML map of the recalibrated capacity model")
     a.add_argument("--output",type=Path)
     a=sub.add_parser("river-import",help="Validate complete native river-size exports from an EU5 save")
@@ -85,6 +96,24 @@ def main():
     if args.command=="recalibration-map":
         from .recalibration_map import build
         print(json.dumps(build(args.output),indent=2))
+        return
+    if args.command=="goods-fit":
+        from .goods_output_fit import build
+        r=build(args.config,args.output)
+        print(json.dumps(r["summary"],indent=2))
+        return
+    if args.command=="handover":
+        from .handover import build
+        r=build(args.version,args.output)
+        print(json.dumps({"version":r["version"],"counts":r["counts"],"self_check":r["self_check"]},indent=2))
+        return
+    if args.command=="handover-check":
+        import pandas as pd
+        from .handover import check, ROOT
+        root=(args.output or ROOT/"artifacts/handover")/args.version
+        levels=pd.read_csv(args.levels,keep_default_na=False);units=json.loads(Path(args.units).read_text())
+        targets=pd.read_csv(root/"location_targets.csv",keep_default_na=False).set_index("location_tag")
+        print(json.dumps(check(levels,units,targets),indent=2))
         return
     if args.command=="development":
         from .development_target import build

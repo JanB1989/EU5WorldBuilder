@@ -57,7 +57,9 @@ def assign(d,ledger,dev,cfg):
     X,names,groups=design_reference(d,features,cfg['reference_classes'])
     # EU5 cap equations take development only as a linear term: add = { value = development multiply = gamma }.
     X=np.column_stack([X,d.development.to_numpy(float)]);names=names+[('development','per_point')];idev=X.shape[1]-1
-    X100=X.copy();X100[:,idev]=100.
+    # Caps are compared with the physical maximum at the location's own starting development and reported at a
+    # reference development (the highest game starting value by default); the development term is a design bonus.
+    dref=float(cfg.get('maximum_reference_development',45));Xref=X.copy();Xref[:,idev]=dref
     ordinal=cfg.get('ordinal',{})
     rows={};buildings=[];caps_out=[]
     out=pd.DataFrame(index=d.index)
@@ -76,21 +78,24 @@ def assign(d,ledger,dev,cfg):
         need=np.clip(np.ceil(Lm/unit),0,cfg['level_limit'])
         spans={f:(0.,float(cfg['level_limit'])) for f in features}
         spans.update({f:(-float(cfg['level_limit']),float(cfg['level_limit'])) for f in cfg.get('signed_cap_features',[])})
-        spans['development']=(0.,float(cfg.get('max_levels_per_development_point',cfg['level_limit']/100)))
+        # Development raises improvement caps by design: each building has a minimum levels-per-point (config),
+        # so intensification arrives as extra levels even where the envelope alone would not need the term.
+        gmin=float((cfg.get('development_levels_per_point_min') or {}).get(kind,0.));gmax=float(cfg.get('max_levels_per_development_point',cfg['level_limit']/100))
+        spans['development']=(min(gmin,gmax),gmax)
         # Fit the cap envelope over every gated location, including those with no ledger mass, so that
         # classes where works are rare receive small caps instead of inheriting their neighbours' need.
         sub=g if cfg.get('envelope_fit_scope','with_ledger')=='gated' else g&(need>0)
         beta,info=fit_quantile(X[sub],need[sub],names,groups,{'tau':cfg['envelope_quantile']},spans,(0.,float(cfg['level_limit'])),float(cfg['level_limit']),ordinal)
-        gamma=max(0.,round(float(beta[idev]),2));beta=np.round(beta);beta[idev]=gamma;beta[0]=max(beta[0],0)
+        gamma=max(min(gmin,gmax),round(float(beta[idev]),2));beta=np.round(beta);beta[idev]=gamma;beta[0]=max(beta[0],0)
         # Levels are whole numbers in game: the cap is floored after the linear development term.
         cap=np.clip(np.where(g,np.floor(X@beta+1e-9),0),0,cfg['level_limit'])
-        cap100=np.clip(np.where(g,np.floor(X100@beta+1e-9),0),0,cfg['level_limit'])
+        capref=np.clip(np.where(g,np.floor(Xref@beta+1e-9),0),0,cfg['level_limit'])
         n_start=np.minimum(np.clip(np.round(Ls/unit),0,cfg['level_limit']),cap)
-        out[f'{kind}_levels_start']=n_start.astype(int);out[f'{kind}_cap']=cap.astype(int);out[f'{kind}_cap_at_development_100']=cap100.astype(int)
-        out[f'{kind}_leftover_start']=Ls-n_start*unit;out[f'{kind}_leftover_max']=Lm-cap100*unit
-        shortfall=g&(cap100<need);excess=g&(cap100>need)
+        out[f'{kind}_levels_start']=n_start.astype(int);out[f'{kind}_cap']=cap.astype(int);out[f'{kind}_cap_at_reference']=capref.astype(int)
+        out[f'{kind}_leftover_start']=Ls-n_start*unit;out[f'{kind}_leftover_max']=Lm-cap*unit
+        shortfall=g&(cap<need);excess=g&(cap>need)
         buildings.append({'building':kind,'unit_people_per_level':unit,'eligible_locations':int(g.sum()),'users_at_start':int((n_start>0).sum()),'ungated_ledger_share':ungated,
-            **{f'quantisation_{k}':v for k,v in quant.items()},'cap_short_locations':int(shortfall.sum()),'cap_short_share_of_ledger':float(Lm[shortfall].sum()/max(Lm[g].sum(),1)),'cap_excess_locations':int(excess.sum()),'cap_excess_levels':float((cap100-need)[excess].sum()),
+            **{f'quantisation_{k}':v for k,v in quant.items()},'cap_short_locations':int(shortfall.sum()),'cap_short_share_of_ledger':float(Lm[shortfall].sum()/max(Lm[g].sum(),1)),'cap_excess_locations':int(excess.sum()),'cap_excess_levels':float((cap-need)[excess].sum()),
             'cap_intercept':float(beta[0]),'levels_per_development_point':gamma,'envelope_status':info['status'],'gate':json.dumps(rules)})
         for i,(f,v) in enumerate(names):
             if i==idev:caps_out.append({'building':kind,'attribute':'development','value':'per_point','levels':gamma})
@@ -125,17 +130,20 @@ def build(config_path=None,output_path=None):
     result,buildings,caps=assign(d,ledger,dev,cfg)
     units={r.building:r.unit_people_per_level for r in buildings.itertuples() if r.unit_people_per_level}
     start_from_buildings=sum(result[f'{k}_levels_start']*units[k] for k in units)
-    max_from_buildings=sum(result[f'{k}_cap_at_development_100']*units[k] for k in units)
+    max_from_buildings=sum(result[f'{k}_cap']*units[k] for k in units)
+    ref_from_buildings=sum(result[f'{k}_cap_at_reference']*units[k] for k in units)
     c=cfg['capacity_percent_per_point']
     result['starting_capacity_model']=(d.natural_capacity_fitted+start_from_buildings)*(1+c*result.development)
     result['maximum_capacity_model']=(d.natural_capacity_fitted+max_from_buildings)*(1+c*100)
+    result['maximum_capacity_at_reference']=(d.natural_capacity_fitted+ref_from_buildings)
     result['starting_capacity_target']=d.starting_capacity;result['maximum_capacity_target']=d.maximum_capacity
     result['leftover_start_total']=d.starting_capacity-result.starting_capacity_model
     result['leftover_max_total']=d.maximum_capacity-result.maximum_capacity_model
     fit={'starting':metrics(d.starting_capacity.to_numpy(float),result.starting_capacity_model.to_numpy(float)),
          'maximum':metrics(d.maximum_capacity.to_numpy(float),result.maximum_capacity_model.to_numpy(float)),
          'starting_improvements_only':metrics((d.starting_capacity-d.natural_capacity).to_numpy(float),(start_from_buildings*(1+c*result.development)).to_numpy(float)),
-         'maximum_improvements_only':metrics((d.maximum_capacity-d.natural_capacity).to_numpy(float),(max_from_buildings*(1+c*100)).to_numpy(float))}
+         'maximum_improvements_only':metrics((d.maximum_capacity-d.natural_capacity).to_numpy(float),(max_from_buildings*(1+c*100)).to_numpy(float)),
+         'maximum_at_reference_development':metrics(d.maximum_capacity.to_numpy(float),result.maximum_capacity_at_reference.to_numpy(float))}
     result.to_csv(out/'locations.csv',index_label='location_tag',float_format='%.6g')
     buildings.to_csv(out/'buildings.csv',index=False,float_format='%.6g');caps.to_csv(out/'cap_coefficients.csv',index=False)
     leftover=result[['starting_capacity_target','starting_capacity_model','leftover_start_total','maximum_capacity_target','maximum_capacity_model','leftover_max_total','development']].copy()

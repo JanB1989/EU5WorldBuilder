@@ -32,12 +32,20 @@ def load():
     d['context']=fill.context.reindex(d.index).fillna('unknown')
     d['best_kcal_per_ha']=pd.to_numeric(fert.get('best_kcal_per_ha',pd.Series(dtype=float)),errors='coerce').reindex(d.index)
     d['best_crop']=fert.get('best_crop',pd.Series(dtype=str)).reindex(d.index).fillna('')
-    numeric=[x for x in d.columns if x not in ('climate','topography','vegetation','soil_type','fertility','river_level','is_coastal','is_adjacent_to_lake','region','macro_region','context','best_crop','start_exceeds_attribute_maximum')]
+    numeric=[x for x in d.columns if x not in ('climate','topography','vegetation','soil_type','fertility','river_level','is_coastal','is_adjacent_to_lake','region','macro_region','context','best_crop','start_exceeds_attribute_maximum','rgo_good')]
     for x in numeric:d[x]=pd.to_numeric(d[x],errors='coerce')
+    goods=ROOT/'artifacts/goods_output_fit/location_predictions.csv'
+    if goods.exists():
+        gp=pd.read_csv(goods,keep_default_na=False).set_index('location_tag')
+        d['rgo_good']=gp.good.reindex(d.index).fillna('')
+        d['rgo_output_model']=pd.to_numeric(gp.predicted,errors='coerce').reindex(d.index)
+        d['rgo_output_target']=pd.to_numeric(gp.target,errors='coerce').reindex(d.index)
+    else:d['rgo_good']='';d['rgo_output_model']=np.nan;d['rgo_output_target']=np.nan
     d['fill_target']=d.population/d.starting_capacity.replace(0,np.nan)
     d['fill_model']=d.population/d.starting_capacity_model.replace(0,np.nan)
     d['buildings_start_people']=sum(d[f'{k}_levels_start']*(units.get(k) or 0) for k in KINDS)*(1+c*d.development)
-    d['buildings_max_people']=sum(d[f'{k}_cap_at_development_100']*(units.get(k) or 0) for k in KINDS)*(1+c*100)
+    d['buildings_max_people']=sum(d[f'{k}_cap']*(units.get(k) or 0) for k in KINDS)
+    d['buildings_reference_people']=sum(d[f'{k}_cap_at_reference']*(units.get(k) or 0) for k in KINDS)
     return d,units,c
 
 
@@ -47,7 +55,7 @@ def layers(d):
          ('maximum_capacity_people','Maximum capacity · target','Targets','seq',d.maximum_capacity_people),
          ('natural_capacity_people','Natural capacity · target','Targets','seq',d.natural_capacity_people),
          ('starting_capacity_model','Starting capacity · model (attributes + buildings × development)','Model','seq',d.starting_capacity_model),
-         ('maximum_capacity_model','Maximum capacity · model (caps at development 100)','Model','seq',d.maximum_capacity_model),
+         ('maximum_capacity_model','Maximum capacity · model (caps at starting development)','Model','seq',d.maximum_capacity_model),
          ('attribute_natural_people','Attributes only · natural at starting development','Model','seq',d.attribute_natural_people),
          ('attribute_maximum_people','Attributes only · maximum at development 100','Model','seq',d.attribute_maximum_people),
          ('res_start','Start: model ÷ target − 1','Residuals','div',d.starting_capacity_model/d.starting_capacity.replace(0,np.nan)-1),
@@ -58,11 +66,16 @@ def layers(d):
          ('fill_target','Population ÷ starting target','Population','div',d.fill_target-1),
          ('fill_model','Population ÷ starting model','Population','div',d.fill_model-1),
          ('review','Start exceeds attribute maximum (review list)','Flags','cat',d.start_exceeds_attribute_maximum.astype(str).map({'True':'on review list','False':'ok'})),
-         ('fertility','Fertility class (best staple kcal/ha)','Attributes','cat',d.fertility)]
+         ('fertility','Fertility class (best staple kcal/ha)','Attributes','cat',d.fertility),
+         ('rgo_output_model','RGO output modifier · from attributes (−50%…+50%)','Goods','div',d.rgo_output_model*2),
+         ('rgo_output_target','RGO output modifier · target (efficiency rank)','Goods','div',d.rgo_output_target*2),
+         ('rgo_output_res','RGO output: model − target (×2)','Goods','div',(d.rgo_output_model-d.rgo_output_target)*2)]
     for k in KINDS:
         out.append((f'{k}_levels_start',f'{KIND_LABELS.get(k,k)} · levels at start','Buildings · start','lin',d[f'{k}_levels_start']))
     for k in KINDS:
-        out.append((f'{k}_cap_at_development_100',f'{KIND_LABELS.get(k,k)} · cap at development 100','Buildings · caps','lin',d[f'{k}_cap_at_development_100']))
+        out.append((f'{k}_cap',f'{KIND_LABELS.get(k,k)} · cap at starting development','Buildings · caps','lin',d[f'{k}_cap']))
+    for k in KINDS:
+        out.append((f'{k}_cap_at_reference',f'{KIND_LABELS.get(k,k)} · cap at reference development','Buildings · caps (reference development)','lin',d[f'{k}_cap_at_reference']))
     return out
 
 
@@ -94,7 +107,7 @@ def pages(d,units,c):
     buildings=[]
     for r in bld.itertuples():
         k=r.building;lv=own[f'{k}_levels_start'].to_numpy(float) if f'{k}_levels_start' in own else np.zeros(len(own))
-        cap100=own[f'{k}_cap_at_development_100'].to_numpy(float) if f'{k}_cap_at_development_100' in own else np.zeros(len(own))
+        cap100=own[f'{k}_cap_at_reference'].to_numpy(float) if f'{k}_cap_at_reference' in own else np.zeros(len(own))
         hist={str(int(b)):int(n) for b,n in zip(*np.unique(lv[lv>0],return_counts=True))}
         terms=caps[(caps.building==k)&(caps.levels!=0)&(~caps.attribute.isin(['base','development']))]
         gamma=float(caps[(caps.building==k)&(caps.attribute=='development')].levels.iloc[0]) if ((caps.building==k)&(caps.attribute=='development')).any() else 0.
@@ -185,7 +198,7 @@ def build(output_path=None):
         r=d.loc[tag];rec={'tag':tag,'province':row['province'],'region':row['region'],'x':row['centroid_x']/4,'y':row['centroid_y']/4,'review':bool(r.start_exceeds_attribute_maximum) if isinstance(r.start_exceeds_attribute_maximum,(bool,np.bool_)) else str(r.start_exceeds_attribute_maximum)=='True'}
         rec['a']={f:str(r[f]) for f in fields}
         rec['n']={f:(None if pd.isna(r[f]) else round(float(r[f]),3)) for f in nums}
-        rec['b']=[[k,int(r[f'{k}_levels_start']),int(r[f'{k}_cap']),int(r[f'{k}_cap_at_development_100']),round(float(units.get(k) or 0))] for k in KINDS]
+        rec['b']=[[k,int(r[f'{k}_levels_start']),int(r[f'{k}_cap']),int(r[f'{k}_cap_at_reference']),round(float(units.get(k) or 0))] for k in KINDS]
         data[i]=rec
     payload=json.dumps({'locations':data,'layers':manifest,'c':c,'units':units,'pages':pages(d,units,c)},separators=(',',':'))
     lookup=(source/'location_lookup.js').read_text().removeprefix('window.LOCATION_LOOKUP=').strip().removesuffix(';')

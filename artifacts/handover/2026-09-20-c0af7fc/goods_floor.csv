@@ -1,0 +1,1639 @@
+location_tag,good,predicted,target,reason
+choco,chili,-0.1600,,not viable in the efficiency data
+churajon,chili,-0.2100,0.0432,predicted below floor -0.2
+gochacalla,chili,-0.2100,,not viable in the efficiency data
+imbaguarbak,chili,-0.2100,-0.2396,predicted below floor -0.2
+kabeka,chili,-0.3400,,not viable in the efficiency data
+parita,chili,-0.0500,,not viable in the efficiency data
+pashas,chili,-0.2100,-0.4580,predicted below floor -0.2
+puncune,chili,-0.0300,,not viable in the efficiency data
+puyu,chili,-0.1600,,not viable in the efficiency data
+timbiqui,chili,-0.1600,,not viable in the efficiency data
+tucssa,chili,-0.2100,-0.2763,predicted below floor -0.2
+ullantaytampu,chili,-0.2100,,not viable in the efficiency data
+xelahuh,chili,-0.0300,,not viable in the efficiency data
+yurakar,chili,-0.0300,,not viable in the efficiency data
+amassing,cloves,,,good not fitted
+banda_island,cloves,,,good not fitted
+bengkulu,cloves,,,good not fitted
+bungabali,cloves,,,good not fitted
+dharmasraya,cloves,,,good not fitted
+gayo_lues,cloves,,,good not fitted
+hitu,cloves,,,good not fitted
+jambi,cloves,,,good not fitted
+julau,cloves,,,good not fitted
+kayeli,cloves,,,good not fitted
+lampung,cloves,,,good not fitted
+malacca,cloves,,,good not fitted
+menggala,cloves,,,good not fitted
+obi,cloves,,,good not fitted
+ohoi_ewur,cloves,,,good not fitted
+padang,cloves,,,good not fitted
+pekalongan,cloves,,,good not fitted
+sarikei,cloves,,,good not fitted
+tanjung_palas,cloves,,,good not fitted
+ternate,cloves,,,good not fitted
+tidore,cloves,,,good not fitted
+chactemal,cocoa,-0.2100,0.1804,predicted below floor -0.2
+chalchuapa,cocoa,0.1400,,not viable in the efficiency data
+cueiba,cocoa,-0.1000,,not viable in the efficiency data
+guaduas,cocoa,-0.2100,-0.4388,predicted below floor -0.2
+guanimar,cocoa,0.0000,,not viable in the efficiency data
+mizantla,cocoa,0.1400,,not viable in the efficiency data
+pailon,cocoa,-0.2100,-0.1584,predicted below floor -0.2
+sonso,cocoa,-0.2100,,not viable in the efficiency data
+tado_colombia,cocoa,-0.2100,,not viable in the efficiency data
+tixmul,cocoa,-0.2100,,not viable in the efficiency data
+zacatollan,cocoa,0.1400,,not viable in the efficiency data
+zaci,cocoa,-0.2100,,not viable in the efficiency data
+zanatepec,cocoa,0.1400,,not viable in the efficiency data
+zihuatlan,cocoa,0.1400,,not viable in the efficiency data
+agaro,coffee,,,good not fitted
+al_mukha,coffee,,,good not fitted
+bonga,coffee,,,good not fitted
+dakkar,coffee,,,good not fitted
+dangila,coffee,,,good not fitted
+gamo,coffee,,,good not fitted
+harar,coffee,,,good not fitted
+haya,coffee,,,good not fitted
+ilimo,coffee,,,good not fitted
+nekemte,coffee,,,good not fitted
+nyakyusa,coffee,,,good not fitted
+sheikh_hussein,coffee,,,good not fitted
+taizz,coffee,,,good not fitted
+west_aasax,coffee,,,good not fitted
+abacoa,cotton,-0.2600,-0.3354,predicted below floor -0.2
+akure,cotton,-0.2600,-0.3220,predicted below floor -0.2
+andaki,cotton,-0.2600,,not viable in the efficiency data
+andaymarca,cotton,-0.1300,,not viable in the efficiency data
+anegada,cotton,-0.2600,-0.1740,predicted below floor -0.2
+ayaviri,cotton,-0.0800,,not viable in the efficiency data
+azumi,cotton,-0.2500,,not viable in the efficiency data
+bajrajinaparamitapura,cotton,-0.2600,-0.1336,predicted below floor -0.2
+bani_cuba,cotton,-0.2600,-0.0846,predicted below floor -0.2
+biberach,cotton,-0.0800,,not viable in the efficiency data
+bikrampur,cotton,-0.2400,-0.4297,predicted below floor -0.2
+cachamay,cotton,-0.2600,-0.0114,predicted below floor -0.2
+callamaco,cotton,-0.2500,-0.4367,predicted below floor -0.2
+caniche,cotton,-0.0800,,not viable in the efficiency data
+caux,cotton,-0.2200,-0.3714,predicted below floor -0.2
+changle_xunzhou,cotton,-0.2200,0.0007,predicted below floor -0.2
+changshu,cotton,-0.3200,-0.2253,predicted below floor -0.2
+cohari,cotton,-0.2500,-0.4223,predicted below floor -0.2
+colha,cotton,-0.2600,-0.1203,predicted below floor -0.2
+coosaw,cotton,-0.2200,-0.4603,predicted below floor -0.2
+cuauhtitlan,cotton,-0.0800,,not viable in the efficiency data
+daet,cotton,-0.2600,,not viable in the efficiency data
+fuqing,cotton,-0.2200,-0.2908,predicted below floor -0.2
+girin_ula,cotton,0.2700,,not viable in the efficiency data
+haskovo,cotton,-0.2500,0.0836,predicted below floor -0.2
+hewanorra,cotton,-0.2600,-0.4741,predicted below floor -0.2
+huari,cotton,-0.1300,,not viable in the efficiency data
+ijebu_ode,cotton,-0.2600,-0.3730,predicted below floor -0.2
+ilog,cotton,-0.2600,,not viable in the efficiency data
+itzamkanac,cotton,-0.2600,-0.3947,predicted below floor -0.2
+jiaha,cotton,-0.2500,-0.1922,predicted below floor -0.2
+jiaohua,cotton,-0.3100,-0.2661,predicted below floor -0.2
+kandong,cotton,-0.2600,0.0007,predicted below floor -0.2
+karajia,cotton,-0.1300,,not viable in the efficiency data
+kyaukse,cotton,-0.3100,-0.2976,predicted below floor -0.2
+lucca,cotton,-0.2500,-0.4023,predicted below floor -0.2
+luliang,cotton,0.1800,,not viable in the efficiency data
+maheshpur,cotton,-0.4200,-0.4278,predicted below floor -0.2
+maukallaqta,cotton,-0.1300,,not viable in the efficiency data
+mayapan,cotton,-0.2600,-0.4180,predicted below floor -0.2
+menghai,cotton,-0.3200,,not viable in the efficiency data
+nanan_quanzhou,cotton,-0.2200,-0.1007,predicted below floor -0.2
+nanning,cotton,0.1800,,not viable in the efficiency data
+neuse,cotton,-0.3200,,not viable in the efficiency data
+noh_peten,cotton,-0.2600,0.2902,predicted below floor -0.2
+ocotelolco,cotton,-0.0100,,not viable in the efficiency data
+ohoopee,cotton,-0.2200,0.0679,predicted below floor -0.2
+oyo_ile,cotton,-0.2600,-0.0928,predicted below floor -0.2
+ozoro,cotton,-0.2400,-0.4546,predicted below floor -0.2
+pacaca,cotton,-0.3100,,not viable in the efficiency data
+pebuenmapu,cotton,-0.3200,,not viable in the efficiency data
+peedee,cotton,-0.3200,-0.4126,predicted below floor -0.2
+pumpu,cotton,-0.0800,,not viable in the efficiency data
+qiubei,cotton,-0.2500,-0.1808,predicted below floor -0.2
+rigyal,cotton,0.0600,,not viable in the efficiency data
+seqse_qaqa,cotton,-0.0800,,not viable in the efficiency data
+shilong,cotton,-0.1800,,not viable in the efficiency data
+sicasica,cotton,0.1000,,not viable in the efficiency data
+sotk,cotton,-0.2700,,not viable in the efficiency data
+talisi,cotton,-0.2200,-0.4086,predicted below floor -0.2
+tases,cotton,-0.2600,-0.4214,predicted below floor -0.2
+teayotlan,cotton,-0.2600,-0.3052,predicted below floor -0.2
+tede,cotton,-0.2600,-0.0211,predicted below floor -0.2
+weiqing,cotton,-0.2500,-0.4977,predicted below floor -0.2
+wuxi,cotton,-0.3200,-0.2337,predicted below floor -0.2
+yangchun,cotton,-0.2700,,not viable in the efficiency data
+yeongdong,cotton,-0.3200,-0.4419,predicted below floor -0.2
+zhangpu,cotton,-0.2600,-0.1256,predicted below floor -0.2
+asir,dyes,0.0400,,not viable in the efficiency data
+bades,dyes,-0.3500,-0.0436,predicted below floor -0.2
+beni_sabih,dyes,-0.3500,,not viable in the efficiency data
+ghariyan,dyes,-0.1900,,not viable in the efficiency data
+jiroft,dyes,-0.3500,-0.3435,predicted below floor -0.2
+maxorata,dyes,-0.3500,,not viable in the efficiency data
+ouargla,dyes,-0.3500,,not viable in the efficiency data
+sehwan,dyes,-0.3500,,not viable in the efficiency data
+silla,dyes,-0.3500,,not viable in the efficiency data
+teguise,dyes,-0.3500,,not viable in the efficiency data
+yenecamu,dyes,-0.3500,-0.1942,predicted below floor -0.2
+adirondacks,fiber_crops,-0.3200,-0.4783,predicted below floor -0.2
+aizkraukle,fiber_crops,-0.3200,-0.3550,predicted below floor -0.2
+altan_gadas,fiber_crops,-0.3200,,not viable in the efficiency data
+amiskwaciwiy,fiber_crops,-0.3200,-0.4388,predicted below floor -0.2
+ashevo,fiber_crops,-0.3200,-0.4009,predicted below floor -0.2
+astrina,fiber_crops,-0.3200,-0.3346,predicted below floor -0.2
+bakhmach,fiber_crops,-0.3200,-0.2952,predicted below floor -0.2
+balikley,fiber_crops,-0.3200,-0.0806,predicted below floor -0.2
+bardejov,fiber_crops,-0.3200,-0.3098,predicted below floor -0.2
+barza,fiber_crops,-0.3200,-0.1814,predicted below floor -0.2
+becaguimec,fiber_crops,-0.3200,,not viable in the efficiency data
+belgorod,fiber_crops,-0.3200,-0.3063,predicted below floor -0.2
+beljamen,fiber_crops,-0.3200,-0.2466,predicted below floor -0.2
+benewah,fiber_crops,-0.3200,-0.3200,predicted below floor -0.2
+berlin,fiber_crops,-0.3200,-0.2728,predicted below floor -0.2
+biecz,fiber_crops,-0.3200,-0.2530,predicted below floor -0.2
+bogorodskoye,fiber_crops,-0.3200,-0.3873,predicted below floor -0.2
+boorj,fiber_crops,-0.3200,-0.4778,predicted below floor -0.2
+borisogleb,fiber_crops,-0.3200,-0.4556,predicted below floor -0.2
+busiyn,fiber_crops,-0.3200,,not viable in the efficiency data
+ceepee,fiber_crops,-0.3200,-0.4364,predicted below floor -0.2
+chelmno,fiber_crops,-0.3200,-0.2583,predicted below floor -0.2
+chernyany,fiber_crops,-0.3200,-0.3086,predicted below floor -0.2
+chortolisy,fiber_crops,-0.3200,-0.3127,predicted below floor -0.2
+cumumba,fiber_crops,-0.3200,-0.3131,predicted below floor -0.2
+deh_kord,fiber_crops,-0.3200,-0.2983,predicted below floor -0.2
+dobele,fiber_crops,-0.3200,-0.3462,predicted below floor -0.2
+drysvyaty,fiber_crops,-0.3200,-0.3658,predicted below floor -0.2
+dubna,fiber_crops,-0.3200,-0.4586,predicted below floor -0.2
+durbe,fiber_crops,-0.3200,-0.3461,predicted below floor -0.2
+dzierzgon,fiber_crops,-0.3200,-0.3126,predicted below floor -0.2
+dzisna,fiber_crops,-0.3200,-0.3748,predicted below floor -0.2
+enisala,fiber_crops,-0.2100,-0.0467,predicted below floor -0.2
+evur,fiber_crops,-0.1700,,not viable in the efficiency data
+fastiv,fiber_crops,-0.3200,-0.2517,predicted below floor -0.2
+gawakomitigweia,fiber_crops,-0.3200,-0.4493,predicted below floor -0.2
+gdov,fiber_crops,-0.3200,-0.4280,predicted below floor -0.2
+golino,fiber_crops,-0.3200,-0.4164,predicted below floor -0.2
+gottingen,fiber_crops,-0.3200,-0.2262,predicted below floor -0.2
+grodek,fiber_crops,-0.3200,-0.3211,predicted below floor -0.2
+hangu_romania,fiber_crops,-0.3200,-0.3710,predicted below floor -0.2
+hjo,fiber_crops,-0.3200,-0.3591,predicted below floor -0.2
+hlusk,fiber_crops,-0.3200,-0.3239,predicted below floor -0.2
+hochelaga,fiber_crops,-0.3200,-0.3705,predicted below floor -0.2
+jurchi,fiber_crops,-0.3200,-0.1029,predicted below floor -0.2
+kanevskaya,fiber_crops,-0.3200,0.0585,predicted below floor -0.2
+kastsyukovichy,fiber_crops,-0.3200,-0.3588,predicted below floor -0.2
+katepwewi,fiber_crops,-0.3200,-0.4398,predicted below floor -0.2
+kehek_aike,fiber_crops,-0.3200,,not viable in the efficiency data
+khoiniki,fiber_crops,-0.3200,-0.2902,predicted below floor -0.2
+kholm_tver,fiber_crops,-0.3200,-0.4572,predicted below floor -0.2
+kickatari,fiber_crops,-0.3200,-0.1647,predicted below floor -0.2
+kldekari,fiber_crops,-0.3200,-0.4254,predicted below floor -0.2
+klepiki,fiber_crops,-0.3200,-0.4144,predicted below floor -0.2
+koostaaka,fiber_crops,-0.3200,-0.4286,predicted below floor -0.2
+koponovo,fiber_crops,-0.3200,-0.4066,predicted below floor -0.2
+kopyshche,fiber_crops,-0.3200,-0.3006,predicted below floor -0.2
+krasavino,fiber_crops,-0.3200,-0.4948,predicted below floor -0.2
+kremenets,fiber_crops,-0.3200,-0.2764,predicted below floor -0.2
+kreminna,fiber_crops,-0.3200,-0.2081,predicted below floor -0.2
+kulmbach,fiber_crops,-0.3200,-0.2523,predicted below floor -0.2
+lelow,fiber_crops,-0.3200,-0.2792,predicted below floor -0.2
+lezhnevo,fiber_crops,-0.3200,-0.4572,predicted below floor -0.2
+linz,fiber_crops,-0.3200,-0.2012,predicted below floor -0.2
+lubartow,fiber_crops,-0.3200,-0.2751,predicted below floor -0.2
+luninets,fiber_crops,-0.3200,-0.3441,predicted below floor -0.2
+lutava,fiber_crops,-0.3200,-0.2778,predicted below floor -0.2
+lyakhovichy,fiber_crops,-0.3200,-0.4190,predicted below floor -0.2
+lyubashany,fiber_crops,-0.3200,-0.3641,predicted below floor -0.2
+megrino,fiber_crops,-0.3200,-0.4863,predicted below floor -0.2
+mezhutka,fiber_crops,-0.3200,,not viable in the efficiency data
+minizuahe,fiber_crops,-0.3200,-0.4295,predicted below floor -0.2
+minnewaukan,fiber_crops,-0.3200,-0.4070,predicted below floor -0.2
+mokowan,fiber_crops,-0.3200,-0.4270,predicted below floor -0.2
+mykytyn_rih,fiber_crops,-0.3200,-0.0834,predicted below floor -0.2
+nebesek,fiber_crops,-0.3200,-0.4215,predicted below floor -0.2
+nikolo_dor,fiber_crops,-0.3200,-0.4529,predicted below floor -0.2
+nizhelskoe,fiber_crops,-0.3200,-0.4229,predicted below floor -0.2
+oancea,fiber_crops,-0.3200,0.0011,predicted below floor -0.2
+okobojo,fiber_crops,-0.3200,-0.3320,predicted below floor -0.2
+oleksandrivka,fiber_crops,-0.3200,-0.1805,predicted below floor -0.2
+opishnya,fiber_crops,-0.3200,-0.2606,predicted below floor -0.2
+orekhovna,fiber_crops,-0.3200,-0.4192,predicted below floor -0.2
+ossossane,fiber_crops,-0.3200,-0.3317,predicted below floor -0.2
+ostrechiny,fiber_crops,-0.3200,-0.4978,predicted below floor -0.2
+oweekeno,fiber_crops,-0.3200,,not viable in the efficiency data
+padise,fiber_crops,-0.3200,-0.4112,predicted below floor -0.2
+patapsco,fiber_crops,-0.3200,-0.1784,predicted below floor -0.2
+pogostishche,fiber_crops,-0.3200,-0.4093,predicted below floor -0.2
+pokegama,fiber_crops,-0.3200,-0.4042,predicted below floor -0.2
+poughkeepsie,fiber_crops,-0.3200,-0.1745,predicted below floor -0.2
+prudnik,fiber_crops,-0.3200,-0.1928,predicted below floor -0.2
+pukiupukio,fiber_crops,-0.3200,-0.3298,predicted below floor -0.2
+qahqaheh,fiber_crops,-0.3200,0.0119,predicted below floor -0.2
+qalancaq,fiber_crops,-0.3200,-0.0952,predicted below floor -0.2
+qonirat,fiber_crops,-0.1800,,not viable in the efficiency data
+raguli,fiber_crops,-0.3200,-0.1131,predicted below floor -0.2
+rakau,fiber_crops,-0.3200,-0.3619,predicted below floor -0.2
+rakitnya,fiber_crops,-0.3200,-0.4586,predicted below floor -0.2
+raznezhye,fiber_crops,-0.3200,-0.4160,predicted below floor -0.2
+revny,fiber_crops,-0.3200,-0.3616,predicted below floor -0.2
+rogachevo,fiber_crops,-0.3200,-0.4586,predicted below floor -0.2
+rothenburg,fiber_crops,-0.3200,-0.2163,predicted below floor -0.2
+rothenburg_oberlausitz,fiber_crops,-0.3200,-0.1785,predicted below floor -0.2
+samarchyk,fiber_crops,-0.3200,-0.1717,predicted below floor -0.2
+selenge,fiber_crops,-0.3200,-0.4971,predicted below floor -0.2
+serebryanye_prudy,fiber_crops,-0.3200,-0.3942,predicted below floor -0.2
+shackamaxon,fiber_crops,-0.3200,-0.1907,predicted below floor -0.2
+shantsa,fiber_crops,-0.3200,,not viable in the efficiency data
+shenga_kurya,fiber_crops,-0.3200,,not viable in the efficiency data
+shigony,fiber_crops,-0.3200,-0.4231,predicted below floor -0.2
+sogndal,fiber_crops,-0.3200,,not viable in the efficiency data
+sokilets,fiber_crops,-0.3200,-0.2170,predicted below floor -0.2
+sordavala,fiber_crops,-0.3200,,not viable in the efficiency data
+spasskoye,fiber_crops,-0.3200,-0.4821,predicted below floor -0.2
+spaxomin,fiber_crops,-0.3200,-0.4683,predicted below floor -0.2
+st_martin,fiber_crops,-0.3200,-0.3680,predicted below floor -0.2
+starodub_votsky,fiber_crops,-0.3200,-0.4136,predicted below floor -0.2
+straupe,fiber_crops,-0.3200,-0.3840,predicted below floor -0.2
+svir_beloozero,fiber_crops,-0.3200,-0.4999,predicted below floor -0.2
+swidwin,fiber_crops,-0.3200,-0.2820,predicted below floor -0.2
+szprotawa,fiber_crops,-0.3200,-0.1927,predicted below floor -0.2
+taganrog,fiber_crops,-0.3200,-0.0963,predicted below floor -0.2
+talitsa_yelets,fiber_crops,-0.3200,-0.3854,predicted below floor -0.2
+teiehonwahkhkwatha,fiber_crops,-0.3200,-0.3424,predicted below floor -0.2
+tereshkovichy,fiber_crops,-0.3200,-0.3258,predicted below floor -0.2
+tokmak,fiber_crops,-0.3200,-0.0723,predicted below floor -0.2
+toniato,fiber_crops,-0.3200,-0.3509,predicted below floor -0.2
+tsepina,fiber_crops,-0.3200,0.1089,predicted below floor -0.2
+tura,fiber_crops,-0.3200,-0.4908,predicted below floor -0.2
+ust_tsimla,fiber_crops,-0.3200,-0.1340,predicted below floor -0.2
+vetlitsy,fiber_crops,-0.3200,-0.4229,predicted below floor -0.2
+vienna,fiber_crops,-0.3200,-0.1172,predicted below floor -0.2
+vilaka,fiber_crops,-0.3200,-0.3928,predicted below floor -0.2
+vilkmerge,fiber_crops,-0.3200,-0.3354,predicted below floor -0.2
+vonnu,fiber_crops,-0.3200,-0.4053,predicted below floor -0.2
+voronizh_chernihiv,fiber_crops,-0.3200,-0.3204,predicted below floor -0.2
+vorotynsk,fiber_crops,-0.3200,-0.4122,predicted below floor -0.2
+vydreya,fiber_crops,-0.3200,-0.3823,predicted below floor -0.2
+woonsocket,fiber_crops,-0.3200,-0.3557,predicted below floor -0.2
+ya_kti_ki,fiber_crops,-0.3200,,not viable in the efficiency data
+yahotyn,fiber_crops,-0.3200,-0.2416,predicted below floor -0.2
+yelanets,fiber_crops,-0.3200,-0.1539,predicted below floor -0.2
+yiman,fiber_crops,-0.1700,,not viable in the efficiency data
+zemlyansk,fiber_crops,-0.3200,-0.3458,predicted below floor -0.2
+zhizhets,fiber_crops,-0.3200,-0.4134,predicted below floor -0.2
+abiz,fruit,-0.3200,-0.4707,predicted below floor -0.2
+abu_qasr,fruit,-0.3900,-0.2979,predicted below floor -0.2
+acteon,fruit,-0.1200,,not viable in the efficiency data
+adrar,fruit,-0.3900,-0.2609,predicted below floor -0.2
+afif,fruit,-0.3900,-0.4294,predicted below floor -0.2
+ahel,fruit,-0.3900,-0.4631,predicted below floor -0.2
+ailinglaplap_atoll,fruit,-0.1200,,not viable in the efficiency data
+ajdabiya,fruit,-0.3900,-0.2478,predicted below floor -0.2
+ajim,fruit,-0.5100,-0.2237,predicted below floor -0.2
+akola,fruit,-0.4900,-0.4931,predicted below floor -0.2
+al_aythamah,fruit,-0.3900,-0.4338,predicted below floor -0.2
+al_bad,fruit,-0.3900,-0.4275,predicted below floor -0.2
+al_bidda,fruit,-0.3900,-0.4036,predicted below floor -0.2
+al_fuqarah,fruit,-0.3900,-0.4325,predicted below floor -0.2
+al_ghat,fruit,-0.3900,-0.3673,predicted below floor -0.2
+al_ghazalah,fruit,-0.3900,-0.4423,predicted below floor -0.2
+al_haddar,fruit,-0.3900,-0.3554,predicted below floor -0.2
+al_haqu,fruit,-0.3900,-0.3629,predicted below floor -0.2
+al_hawra,fruit,-0.3900,-0.3833,predicted below floor -0.2
+al_hufayr,fruit,-0.3900,-0.3965,predicted below floor -0.2
+al_hufayrah,fruit,-0.3900,-0.4146,predicted below floor -0.2
+al_huwayyit,fruit,-0.3900,-0.3605,predicted below floor -0.2
+al_jawf,fruit,-0.3900,-0.2497,predicted below floor -0.2
+al_kamil_wal_wafi,fruit,-0.3900,-0.2110,predicted below floor -0.2
+al_kharabah,fruit,-0.3900,-0.2402,predicted below floor -0.2
+al_khosuf,fruit,-0.2700,-0.3555,predicted below floor -0.2
+al_khums,fruit,-0.5100,-0.3892,predicted below floor -0.2
+al_laghfiyyah,fruit,-0.3900,-0.4211,predicted below floor -0.2
+al_maghib,fruit,-0.3900,-0.4188,predicted below floor -0.2
+al_majazah,fruit,-0.3900,-0.3501,predicted below floor -0.2
+al_mundassah,fruit,-0.3900,-0.2604,predicted below floor -0.2
+al_muthainiyah,fruit,-0.3900,-0.4568,predicted below floor -0.2
+al_muwaylih,fruit,-0.3900,-0.4196,predicted below floor -0.2
+al_qaiyah,fruit,-0.3900,-0.3483,predicted below floor -0.2
+al_qara,fruit,-0.3900,-0.3261,predicted below floor -0.2
+al_qunfudhah,fruit,-0.3900,-0.2789,predicted below floor -0.2
+al_suman,fruit,-0.3900,-0.3389,predicted below floor -0.2
+al_thulayma,fruit,-0.3900,-0.3416,predicted below floor -0.2
+al_ukhaydir,fruit,-0.3900,-0.3990,predicted below floor -0.2
+al_ula,fruit,-0.3900,-0.3988,predicted below floor -0.2
+al_yamamah,fruit,-0.3900,-0.3725,predicted below floor -0.2
+albacete,fruit,-0.2000,,not viable in the efficiency data
+ali_sabieh,fruit,-0.3900,-0.4495,predicted below floor -0.2
+alicante,fruit,-0.3200,-0.2041,predicted below floor -0.2
+an_nasifah,fruit,-0.3900,-0.2835,predicted below floor -0.2
+anah,fruit,-0.3900,-0.2889,predicted below floor -0.2
+anew,fruit,-0.2600,-0.4906,predicted below floor -0.2
+angkor_borei,fruit,-0.2800,0.0230,predicted below floor -0.2
+ar_rayn,fruit,-0.3900,-0.4082,predicted below floor -0.2
+ar_rukai,fruit,-0.3900,-0.3413,predicted below floor -0.2
+arar,fruit,-0.3900,-0.3781,predicted below floor -0.2
+aratika_atoll,fruit,-0.1200,,not viable in the efficiency data
+ardakan,fruit,-0.3900,-0.4969,predicted below floor -0.2
+ardestan,fruit,-0.3800,-0.4222,predicted below floor -0.2
+arno_atoll,fruit,-0.1200,,not viable in the efficiency data
+as_salafiyah,fruit,-0.2700,-0.3888,predicted below floor -0.2
+ash_shaqiqah,fruit,-0.3900,-0.3843,predicted below floor -0.2
+ash_shibahah,fruit,-0.3900,-0.4349,predicted below floor -0.2
+ash_shuaybah_hail,fruit,-0.3900,-0.4078,predicted below floor -0.2
+ashmunayn,fruit,-0.3900,-0.3962,predicted below floor -0.2
+assa,fruit,-0.3900,-0.4127,predicted below floor -0.2
+asuf,fruit,-0.3900,,not viable in the efficiency data
+auwe,fruit,-0.4000,-0.4758,predicted below floor -0.2
+az_zilfi,fruit,-0.3900,-0.4206,predicted below floor -0.2
+az_zubayir,fruit,-0.3900,-0.4469,predicted below floor -0.2
+bacuma,fruit,-0.2200,-0.3826,predicted below floor -0.2
+badr_hunayn,fruit,-0.3900,-0.4293,predicted below floor -0.2
+bafq,fruit,-0.3900,-0.4452,predicted below floor -0.2
+baghin,fruit,-0.3800,,not viable in the efficiency data
+bajdah,fruit,-0.3900,-0.4106,predicted below floor -0.2
+bajestan,fruit,-0.3900,-0.4613,predicted below floor -0.2
+balanggarra,fruit,-0.1800,,not viable in the efficiency data
+bam,fruit,-0.3900,-0.3663,predicted below floor -0.2
+bandar_rig,fruit,-0.3900,,not viable in the efficiency data
+baraqish,fruit,-0.3900,-0.3220,predicted below floor -0.2
+barkdiz,fruit,-0.3200,-0.4502,predicted below floor -0.2
+bechar,fruit,-0.3900,-0.4676,predicted below floor -0.2
+bengkalis,fruit,-0.2600,,not viable in the efficiency data
+bent,fruit,-0.3900,-0.4656,predicted below floor -0.2
+berber,fruit,-0.3900,-0.3203,predicted below floor -0.2
+bikini_atoll,fruit,-0.1800,,not viable in the efficiency data
+bilghah,fruit,-0.3900,-0.2823,predicted below floor -0.2
+bir_al_qurr,fruit,-0.3900,-0.3635,predicted below floor -0.2
+birjand,fruit,-0.3200,-0.4961,predicted below floor -0.2
+bost,fruit,-0.3900,-0.3761,predicted below floor -0.2
+brak,fruit,-0.3900,-0.4040,predicted below floor -0.2
+bukhara,fruit,-0.3800,-0.4674,predicted below floor -0.2
+buraydah,fruit,-0.3900,-0.4242,predicted below floor -0.2
+burraq,fruit,-0.3200,-0.4717,predicted below floor -0.2
+calkini,fruit,-0.4000,-0.4395,predicted below floor -0.2
+carteret_atoll,fruit,-0.1200,,not viable in the efficiency data
+chehl_dokhtaran,fruit,-0.3900,-0.4572,predicted below floor -0.2
+chibuene,fruit,-0.4000,-0.3916,predicted below floor -0.2
+chuuk,fruit,-0.2500,,not viable in the efficiency data
+dar_es_salaam,fruit,-0.2800,-0.2297,predicted below floor -0.2
+dashahai,fruit,-0.3800,,not viable in the efficiency data
+deyhuk,fruit,-0.3900,-0.3933,predicted below floor -0.2
+dhahran,fruit,-0.3900,-0.4219,predicted below floor -0.2
+dhi_ain,fruit,-0.3900,-0.4445,predicted below floor -0.2
+dia,fruit,-0.5100,-0.4459,predicted below floor -0.2
+dire_dawa,fruit,-0.5100,-0.4489,predicted below floor -0.2
+djanet,fruit,-0.3900,-0.2113,predicted below floor -0.2
+dongola,fruit,-0.3900,-0.3901,predicted below floor -0.2
+dunga_bunga,fruit,-0.3900,-0.3776,predicted below floor -0.2
+durun,fruit,-0.2600,-0.4876,predicted below floor -0.2
+echemmaia,fruit,-0.3900,-0.2218,predicted below floor -0.2
+el_alamein,fruit,-0.3900,-0.4588,predicted below floor -0.2
+el_balyana,fruit,-0.3900,-0.4038,predicted below floor -0.2
+el_bayadh,fruit,-0.3200,-0.4868,predicted below floor -0.2
+el_golea,fruit,-0.3900,-0.3739,predicted below floor -0.2
+el_guerrara,fruit,-0.3900,-0.4752,predicted below floor -0.2
+el_metemma,fruit,-0.3900,-0.2369,predicted below floor -0.2
+eleuthera,fruit,-0.5200,-0.2191,predicted below floor -0.2
+eqlid,fruit,-0.3200,-0.4807,predicted below floor -0.2
+fadak,fruit,-0.3900,-0.3466,predicted below floor -0.2
+fahraj_narmashir,fruit,-0.3900,-0.3720,predicted below floor -0.2
+fayd,fruit,-0.3900,-0.4071,predicted below floor -0.2
+firabr,fruit,-0.3800,-0.4530,predicted below floor -0.2
+gafsa,fruit,-0.3900,-0.3674,predicted below floor -0.2
+gaiman,fruit,-0.3800,,not viable in the efficiency data
+galkayo,fruit,-0.3900,,not viable in the efficiency data
+gamrun,fruit,-0.3900,-0.4556,predicted below floor -0.2
+ghadames,fruit,-0.3900,-0.1733,predicted below floor -0.2
+ghazni,fruit,-0.3200,,not viable in the efficiency data
+ghumayqah,fruit,-0.3900,-0.4212,predicted below floor -0.2
+gogodala,fruit,-0.1300,,not viable in the efficiency data
+gunupur,fruit,-0.2800,-0.3159,predicted below floor -0.2
+gwatar,fruit,-0.3900,-0.4693,predicted below floor -0.2
+haapai,fruit,-0.2500,,not viable in the efficiency data
+habiyah,fruit,-0.3900,-0.4049,predicted below floor -0.2
+hajar,fruit,-0.3900,-0.2748,predicted below floor -0.2
+hami,fruit,-0.3800,,not viable in the efficiency data
+haylan,fruit,-0.3900,-0.4450,predicted below floor -0.2
+hinglaj,fruit,-0.3900,-0.4740,predicted below floor -0.2
+hudaida,fruit,-0.2700,-0.3772,predicted below floor -0.2
+ibri,fruit,-0.3900,-0.2645,predicted below floor -0.2
+igli,fruit,-0.3900,-0.4247,predicted below floor -0.2
+itya_mahadu,fruit,-0.4000,-0.4130,predicted below floor -0.2
+jagin_zir,fruit,-0.3900,-0.4530,predicted below floor -0.2
+jahrom,fruit,-0.3900,-0.4269,predicted below floor -0.2
+jilib,fruit,-0.3900,-0.3557,predicted below floor -0.2
+jondaq,fruit,-0.3900,-0.4820,predicted below floor -0.2
+jumento,fruit,-0.4000,-0.4171,predicted below floor -0.2
+kabara_atoll,fruit,-0.1200,,not viable in the efficiency data
+kaditshwene,fruit,-0.3900,-0.2782,predicted below floor -0.2
+kahnuj,fruit,-0.3900,-0.4280,predicted below floor -0.2
+kandahar,fruit,-0.5100,-0.3299,predicted below floor -0.2
+karaj_abi_dulaf,fruit,-0.0200,,not viable in the efficiency data
+karbala,fruit,-0.3900,-0.2521,predicted below floor -0.2
+karvandar,fruit,-0.3900,-0.4462,predicted below floor -0.2
+kaweinag,fruit,-0.2600,-0.1632,predicted below floor -0.2
+kebili,fruit,-0.3900,-0.4256,predicted below floor -0.2
+kerman,fruit,-0.3800,,not viable in the efficiency data
+khamir,fruit,-0.2700,-0.4236,predicted below floor -0.2
+kharibta,fruit,-0.3900,-0.3947,predicted below floor -0.2
+khaybar,fruit,-0.3900,-0.4824,predicted below floor -0.2
+khaybar_janoub,fruit,-0.3900,-0.4136,predicted below floor -0.2
+kilemba,fruit,-0.2800,-0.3891,predicted below floor -0.2
+kirkuk,fruit,-0.3900,-0.4184,predicted below floor -0.2
+kom_ombo,fruit,-0.3900,-0.4150,predicted below floor -0.2
+korientze,fruit,-0.3900,-0.2848,predicted below floor -0.2
+korit,fruit,-0.3900,-0.4974,predicted below floor -0.2
+kurki,fruit,-0.3900,,not viable in the efficiency data
+laayoune,fruit,-0.3900,-0.3298,predicted below floor -0.2
+laila,fruit,-0.3900,-0.2971,predicted below floor -0.2
+lash_joveyn,fruit,-0.3900,,not viable in the efficiency data
+lasjerd,fruit,-0.3900,-0.4912,predicted below floor -0.2
+linah,fruit,-0.3900,-0.3452,predicted below floor -0.2
+lyngngam,fruit,-0.2200,-0.1593,predicted below floor -0.2
+macaca,fruit,-0.2800,-0.2064,predicted below floor -0.2
+maiana_atoll,fruit,-0.1200,,not viable in the efficiency data
+malham,fruit,-0.3900,-0.3421,predicted below floor -0.2
+manadeley,fruit,-0.3900,-0.2496,predicted below floor -0.2
+manihi_atoll,fruit,-0.1200,,not viable in the efficiency data
+manuae_atoll,fruit,-0.1200,,not viable in the efficiency data
+manujan,fruit,-0.3900,-0.4533,predicted below floor -0.2
+manyakheta,fruit,-0.2800,-0.2635,predicted below floor -0.2
+mara_india,fruit,-0.2200,-0.2108,predicted below floor -0.2
+maradah,fruit,-0.3900,-0.4186,predicted below floor -0.2
+maralbexi,fruit,-0.3800,,not viable in the efficiency data
+mareeg,fruit,-0.3900,-0.3857,predicted below floor -0.2
+marvast,fruit,-0.3800,-0.4457,predicted below floor -0.2
+mashdhubah,fruit,-0.3900,-0.3834,predicted below floor -0.2
+mashhad_rizeh,fruit,-0.3200,-0.4600,predicted below floor -0.2
+masjed_soleyman,fruit,-0.3900,,not viable in the efficiency data
+mawza,fruit,-0.3900,-0.4213,predicted below floor -0.2
+mazhan,fruit,-0.3200,-0.4502,predicted below floor -0.2
+mecca,fruit,-0.3900,-0.3507,predicted below floor -0.2
+medina,fruit,-0.3900,-0.4365,predicted below floor -0.2
+meyami,fruit,-0.3800,-0.4907,predicted below floor -0.2
+mora_eth,fruit,-0.3900,-0.4693,predicted below floor -0.2
+motutunga_atoll,fruit,-0.1200,,not viable in the efficiency data
+muhammad_tur,fruit,-0.3900,-0.4474,predicted below floor -0.2
+muhayil,fruit,-0.2700,-0.4319,predicted below floor -0.2
+murayghan,fruit,-0.3900,-0.3346,predicted below floor -0.2
+murt,fruit,-0.3900,-0.4370,predicted below floor -0.2
+murzuk,fruit,-0.3900,-0.2101,predicted below floor -0.2
+musaymir,fruit,-0.3900,-0.4307,predicted below floor -0.2
+muwayh,fruit,-0.3900,-0.3861,predicted below floor -0.2
+muzahmiyah,fruit,-0.3900,-0.3595,predicted below floor -0.2
+nakhal,fruit,-0.3900,-0.3710,predicted below floor -0.2
+narmashir,fruit,-0.3900,-0.4043,predicted below floor -0.2
+naserpur,fruit,-0.3900,-0.4377,predicted below floor -0.2
+natanz,fruit,-0.3900,-0.4616,predicted below floor -0.2
+nefta,fruit,-0.3900,-0.3770,predicted below floor -0.2
+nganaa_nui_atoll,fruit,-0.1200,,not viable in the efficiency data
+ngaous,fruit,-0.2000,,not viable in the efficiency data
+nisa,fruit,-0.2600,-0.0908,predicted below floor -0.2
+nizwa,fruit,-0.3900,-0.2420,predicted below floor -0.2
+nukunonu_atoll,fruit,-0.1200,,not viable in the efficiency data
+ouarzazate,fruit,-0.3800,-0.4444,predicted below floor -0.2
+pakpattan,fruit,-0.3900,-0.3731,predicted below floor -0.2
+paroom,fruit,-0.3900,-0.4602,predicted below floor -0.2
+pinya,fruit,-0.2800,-0.2888,predicted below floor -0.2
+pulusuk_atoll,fruit,-0.1200,,not viable in the efficiency data
+pushang,fruit,-0.3200,-0.4503,predicted below floor -0.2
+qalat_bishah,fruit,-0.3900,-0.4420,predicted below floor -0.2
+qaryat_ulya,fruit,-0.3900,-0.4201,predicted below floor -0.2
+qaryatayn,fruit,-0.3200,-0.4687,predicted below floor -0.2
+qorveh_darjazin,fruit,-0.0200,,not viable in the efficiency data
+quban,fruit,-0.3900,,not viable in the efficiency data
+quchan,fruit,-0.0200,,not viable in the efficiency data
+qurayyat_al_milh,fruit,-0.3900,-0.3457,predicted below floor -0.2
+rakhyah,fruit,-0.3900,-0.2818,predicted below floor -0.2
+ramsheh,fruit,-0.3800,-0.4646,predicted below floor -0.2
+raqqa,fruit,-0.5100,-0.4468,predicted below floor -0.2
+raroia_atoll,fruit,-0.1200,,not viable in the efficiency data
+rijal_almaa,fruit,-0.2700,-0.4336,predicted below floor -0.2
+rodrigues,fruit,-0.5200,,not viable in the efficiency data
+sabzevar,fruit,-0.3200,-0.4655,predicted below floor -0.2
+salumbar,fruit,-0.2700,-0.3342,predicted below floor -0.2
+sara,fruit,-0.3900,-0.4128,predicted below floor -0.2
+sarayan,fruit,-0.3200,-0.4582,predicted below floor -0.2
+satawan_atoll,fruit,-0.1200,,not viable in the efficiency data
+sayun,fruit,-0.3900,-0.3221,predicted below floor -0.2
+selima,fruit,-0.3900,-0.3882,predicted below floor -0.2
+shahabad_kerman,fruit,-0.3900,-0.4662,predicted below floor -0.2
+shaharah,fruit,-0.2700,-0.2722,predicted below floor -0.2
+sheberghan,fruit,-0.3200,-0.4090,predicted below floor -0.2
+shinas,fruit,-0.3900,-0.3476,predicted below floor -0.2
+shusef,fruit,-0.3800,-0.4383,predicted below floor -0.2
+siwa,fruit,-0.3900,-0.3779,predicted below floor -0.2
+soalara,fruit,-0.3900,-0.3824,predicted below floor -0.2
+sufaynah,fruit,-0.3900,-0.3482,predicted below floor -0.2
+sukhnah,fruit,-0.3900,,not viable in the efficiency data
+suq_al_ghinan,fruit,-0.3900,-0.3909,predicted below floor -0.2
+tabalah,fruit,-0.3900,-0.4612,predicted below floor -0.2
+tabas_al_tamr,fruit,-0.3900,,not viable in the efficiency data
+tabelbala,fruit,-0.3900,-0.4679,predicted below floor -0.2
+tabiteuea_atoll,fruit,-0.1200,,not viable in the efficiency data
+tabuk_arabia,fruit,-0.3900,-0.3917,predicted below floor -0.2
+taenga_atoll,fruit,-0.1200,,not viable in the efficiency data
+taka_atoll,fruit,-0.3900,,not viable in the efficiency data
+tal_afar,fruit,-0.3900,,not viable in the efficiency data
+tarrana,fruit,-0.3900,-0.2421,predicted below floor -0.2
+tata_MOR,fruit,-0.3900,-0.4147,predicted below floor -0.2
+tawurgha,fruit,-0.3900,-0.2568,predicted below floor -0.2
+thadij,fruit,-0.3900,-0.3960,predicted below floor -0.2
+thadiq,fruit,-0.3900,-0.3419,predicted below floor -0.2
+thula,fruit,-0.2600,0.1568,predicted below floor -0.2
+thung_yang,fruit,-0.2800,-0.1379,predicted below floor -0.2
+tikehau_atoll,fruit,-0.1200,,not viable in the efficiency data
+timimoun,fruit,-0.3900,-0.2439,predicted below floor -0.2
+tiznit,fruit,-0.3900,-0.2669,predicted below floor -0.2
+tmimi,fruit,-0.3900,-0.4726,predicted below floor -0.2
+toau_atoll,fruit,-0.1200,,not viable in the efficiency data
+tolga,fruit,-0.3900,-0.4341,predicted below floor -0.2
+tungkal,fruit,-0.2600,-0.1278,predicted below floor -0.2
+turaythith,fruit,-0.3200,-0.4360,predicted below floor -0.2
+turbah,fruit,-0.3900,-0.4364,predicted below floor -0.2
+turpan,fruit,-0.3800,,not viable in the efficiency data
+udakh,fruit,-0.3900,-0.4130,predicted below floor -0.2
+ukbara,fruit,-0.3900,-0.4829,predicted below floor -0.2
+umm_al_ghiran,fruit,-0.3900,-0.3894,predicted below floor -0.2
+umm_al_qulban,fruit,-0.3900,-0.4029,predicted below floor -0.2
+urayrah,fruit,-0.3900,-0.3573,predicted below floor -0.2
+urgench,fruit,-0.3800,,not viable in the efficiency data
+ushmum_tannah,fruit,-0.3900,-0.3839,predicted below floor -0.2
+uvea_atoll,fruit,-0.1200,,not viable in the efficiency data
+uyun_al_jiwa,fruit,-0.3900,-0.4198,predicted below floor -0.2
+vauvau,fruit,-0.2500,,not viable in the efficiency data
+vosporo,fruit,0.0000,,not viable in the efficiency data
+washuk,fruit,-0.3900,-0.4165,predicted below floor -0.2
+wotje_atoll,fruit,-0.1800,,not viable in the efficiency data
+yalamlam,fruit,-0.3900,-0.3527,predicted below floor -0.2
+yambina,fruit,-0.3900,-0.3005,predicted below floor -0.2
+yanbu_an_nakhil,fruit,-0.3900,-0.4476,predicted below floor -0.2
+yo,fruit,-0.3900,-0.4256,predicted below floor -0.2
+zabol,fruit,-0.3900,,not viable in the efficiency data
+zadian,fruit,-0.3900,-0.3913,predicted below floor -0.2
+zuwarah,fruit,-0.3900,,not viable in the efficiency data
+nyemo,incense,-0.1400,,not viable in the efficiency data
+qishn,incense,0.2600,,not viable in the efficiency data
+shibam,incense,0.2600,,not viable in the efficiency data
+tarim,incense,0.2600,,not viable in the efficiency data
+abadeh,legumes,-0.4200,,not viable in the efficiency data
+abagaita,legumes,-0.2500,-0.1534,predicted below floor -0.2
+abiward,legumes,-0.2600,-0.4050,predicted below floor -0.2
+al_abwa,legumes,-0.4500,,not viable in the efficiency data
+al_bayda_yemen,legumes,-0.4500,,not viable in the efficiency data
+al_farah_ula,legumes,-0.4500,,not viable in the efficiency data
+al_jumum,legumes,-0.4500,,not viable in the efficiency data
+al_mahani,legumes,-0.4500,,not viable in the efficiency data
+amman,legumes,-0.4200,-0.2538,predicted below floor -0.2
+an_nakhil,legumes,-0.4500,,not viable in the efficiency data
+anar,legumes,-0.4000,,not viable in the efficiency data
+ancud,legumes,-0.3200,,not viable in the efficiency data
+arak,legumes,-0.4500,,not viable in the efficiency data
+arandai,legumes,-0.5000,,not viable in the efficiency data
+arari,legumes,-0.4700,,not viable in the efficiency data
+as_suwayriqiyah,legumes,-0.4500,,not viable in the efficiency data
+asanas,legumes,-0.4000,,not viable in the efficiency data
+asht,legumes,-0.2800,-0.1404,predicted below floor -0.2
+baba_ata,legumes,-0.4200,-0.3930,predicted below floor -0.2
+bahla,legumes,-0.4500,,not viable in the efficiency data
+bakel,legumes,-0.3800,-0.4139,predicted below floor -0.2
+bakusaya,legumes,-0.4500,-0.4668,predicted below floor -0.2
+baram,legumes,-0.5000,,not viable in the efficiency data
+barem,legumes,-0.2700,-0.3405,predicted below floor -0.2
+basand,legumes,-0.3200,-0.2083,predicted below floor -0.2
+beni_suef,legumes,-0.4500,,not viable in the efficiency data
+bohai,legumes,-0.3900,,not viable in the efficiency data
+boiken,legumes,-0.5000,-0.4793,predicted below floor -0.2
+bojaya,legumes,-0.5000,-0.3852,predicted below floor -0.2
+bola,legumes,-0.2700,-0.3577,predicted below floor -0.2
+buluguda,legumes,-0.2800,-0.3859,predicted below floor -0.2
+burica,legumes,-0.2700,-0.3613,predicted below floor -0.2
+busayrah,legumes,-0.4500,-0.4587,predicted below floor -0.2
+camacota,legumes,-0.5000,-0.3821,predicted below floor -0.2
+chach,legumes,-0.2800,-0.2046,predicted below floor -0.2
+chinali,legumes,-0.2800,-0.2083,predicted below floor -0.2
+chuqiu,legumes,-0.2500,-0.2479,predicted below floor -0.2
+colhue_huapi,legumes,-0.4000,,not viable in the efficiency data
+corpen_aike,legumes,-0.4000,,not viable in the efficiency data
+cubuk,legumes,-0.3200,-0.2707,predicted below floor -0.2
+dadi_dadi,legumes,-0.4200,-0.4511,predicted below floor -0.2
+daya_kathyn,legumes,-0.4000,,not viable in the efficiency data
+deogarh,legumes,-0.3800,0.1044,predicted below floor -0.2
+deping,legumes,-0.2800,-0.3762,predicted below floor -0.2
+diara,legumes,-0.3800,-0.4760,predicted below floor -0.2
+doubare,legumes,-0.2400,-0.2626,predicted below floor -0.2
+dzhulsub,legumes,-0.2800,-0.1871,predicted below floor -0.2
+eket,legumes,-0.2400,-0.4883,predicted below floor -0.2
+estok_gna,legumes,-0.2400,-0.3137,predicted below floor -0.2
+faraveh,legumes,-0.4000,-0.3613,predicted below floor -0.2
+farkhor,legumes,-0.2800,-0.1716,predicted below floor -0.2
+feriana,legumes,-0.4200,-0.4439,predicted below floor -0.2
+gardez,legumes,-0.2800,-0.3263,predicted below floor -0.2
+gori_gori,legumes,-0.2700,-0.4235,predicted below floor -0.2
+guaja,legumes,-0.2400,-0.1939,predicted below floor -0.2
+hadishahr,legumes,-0.2800,-0.3211,predicted below floor -0.2
+harat,legumes,-0.4200,,not viable in the efficiency data
+hargaya,legumes,-0.3800,,not viable in the efficiency data
+hargeisa,legumes,-0.3800,-0.4922,predicted below floor -0.2
+hashatjin,legumes,-0.3200,-0.3391,predicted below floor -0.2
+hit,legumes,-0.4500,,not viable in the efficiency data
+huth,legumes,-0.4500,-0.4587,predicted below floor -0.2
+ifrane,legumes,-0.4500,-0.4164,predicted below floor -0.2
+ilgin,legumes,-0.3200,-0.4066,predicted below floor -0.2
+inapiremapu,legumes,-0.3200,-0.1557,predicted below floor -0.2
+iparuka,legumes,-0.3100,-0.4875,predicted below floor -0.2
+iriirakiicuhat,legumes,-0.2800,-0.2425,predicted below floor -0.2
+jinghai,legumes,-0.2500,-0.1661,predicted below floor -0.2
+kafr_saqr,legumes,-0.4500,,not viable in the efficiency data
+kaiparowit,legumes,-0.4200,-0.2772,predicted below floor -0.2
+kamalia,legumes,-0.3100,,not viable in the efficiency data
+kanibonzon,legumes,-0.3800,-0.4207,predicted below floor -0.2
+kate,legumes,-0.2700,-0.3345,predicted below floor -0.2
+kelinjau,legumes,-0.5000,,not viable in the efficiency data
+kesra,legumes,-0.2800,-0.2542,predicted below floor -0.2
+khash_sistan,legumes,-0.4500,,not viable in the efficiency data
+khiva,legumes,-0.4000,,not viable in the efficiency data
+khwansar,legumes,-0.4200,,not viable in the efficiency data
+kiriri,legumes,-0.2900,0.0093,predicted below floor -0.2
+koure,legumes,-0.3800,-0.4562,predicted below floor -0.2
+kubuna,legumes,-0.2700,-0.4933,predicted below floor -0.2
+kukiya,legumes,-0.4500,,not viable in the efficiency data
+laerdal,legumes,-0.2800,,not viable in the efficiency data
+latje_latje,legumes,-0.4200,-0.4668,predicted below floor -0.2
+luyi,legumes,-0.5200,-0.4032,predicted below floor -0.2
+madinat_far,legumes,-0.2400,-0.2668,predicted below floor -0.2
+mahgas,legumes,-0.4500,,not viable in the efficiency data
+mahmudabad,legumes,-0.2800,-0.1738,predicted below floor -0.2
+makalondi,legumes,-0.2400,-0.2969,predicted below floor -0.2
+managalang,legumes,-0.2700,-0.3587,predicted below floor -0.2
+marajoara,legumes,-0.4700,,not viable in the efficiency data
+mardankuyik,legumes,-0.2800,-0.3915,predicted below floor -0.2
+marind,legumes,-0.4700,-0.3785,predicted below floor -0.2
+marwah,legumes,-0.2800,0.0883,predicted below floor -0.2
+mastung,legumes,-0.4000,-0.4860,predicted below floor -0.2
+matman,legumes,0.0000,,not viable in the efficiency data
+mayaimi,legumes,-0.4700,-0.4127,predicted below floor -0.2
+maybrat,legumes,-0.5000,-0.4778,predicted below floor -0.2
+mbara,legumes,-0.2400,-0.3178,predicted below floor -0.2
+millapel,legumes,-0.2800,-0.0604,predicted below floor -0.2
+mithri,legumes,-0.4500,,not viable in the efficiency data
+moloka_i,legumes,-0.2900,-0.3391,predicted below floor -0.2
+mughan,legumes,-0.2800,-0.3137,predicted below floor -0.2
+muhammerah,legumes,-0.4500,,not viable in the efficiency data
+muktsar,legumes,-0.3100,,not viable in the efficiency data
+musi,legumes,-0.5000,-0.4883,predicted below floor -0.2
+nadushan,legumes,-0.4000,,not viable in the efficiency data
+nam_thing,legumes,0.0000,,not viable in the efficiency data
+namau,legumes,-0.5000,-0.4742,predicted below floor -0.2
+nauhtlan,legumes,-0.2700,-0.0306,predicted below floor -0.2
+naupahuasi,legumes,-0.2800,-0.3173,predicted below floor -0.2
+ndiaganiao,legumes,-0.2400,-0.3587,predicted below floor -0.2
+negar,legumes,-0.4200,,not viable in the efficiency data
+ngambe,legumes,-0.2400,,not viable in the efficiency data
+ngazidja,legumes,-0.2400,0.1167,predicted below floor -0.2
+nhanta,legumes,-0.3800,-0.4398,predicted below floor -0.2
+norosi,legumes,-0.2400,-0.1528,predicted below floor -0.2
+olanchito,legumes,-0.2400,-0.3945,predicted below floor -0.2
+pahva_nits,legumes,-0.4200,-0.2986,predicted below floor -0.2
+pangvay,legumes,-0.4500,-0.4962,predicted below floor -0.2
+pasca,legumes,-0.3200,-0.3606,predicted below floor -0.2
+piranshahr,legumes,-0.3200,-0.4875,predicted below floor -0.2
+pulasari,legumes,-0.2700,-0.4956,predicted below floor -0.2
+qasr_e_qand,legumes,-0.4500,,not viable in the efficiency data
+qayyarah,legumes,-0.2400,-0.3886,predicted below floor -0.2
+qena,legumes,-0.4500,,not viable in the efficiency data
+riantana,legumes,-0.5000,,not viable in the efficiency data
+riz,legumes,-0.2400,-0.4639,predicted below floor -0.2
+roanoke,legumes,-0.3700,-0.3315,predicted below floor -0.2
+roon,legumes,-0.5000,,not viable in the efficiency data
+rostaq,legumes,-0.4500,-0.4823,predicted below floor -0.2
+rudkhaneh,legumes,-0.4500,,not viable in the efficiency data
+rungan,legumes,-0.5000,,not viable in the efficiency data
+sain,legumes,-0.3200,-0.4659,predicted below floor -0.2
+sakao,legumes,-0.5000,,not viable in the efficiency data
+salamiyya,legumes,-0.4200,-0.3327,predicted below floor -0.2
+samakh,legumes,-0.4500,,not viable in the efficiency data
+samiram,legumes,-0.4600,,not viable in the efficiency data
+sanandaj,legumes,-0.3200,-0.4962,predicted below floor -0.2
+sandikli,legumes,-0.3200,-0.1636,predicted below floor -0.2
+sar_pol,legumes,-0.2800,-0.4172,predicted below floor -0.2
+sarkisla,legumes,-0.3200,-0.3852,predicted below floor -0.2
+seacal,legumes,-0.2700,-0.2640,predicted below floor -0.2
+senapelan,legumes,-0.5000,,not viable in the efficiency data
+shajwa,legumes,-0.4500,,not viable in the efficiency data
+shirvan_iran,legumes,-0.2800,-0.4503,predicted below floor -0.2
+sikieye,legumes,-0.3800,-0.4381,predicted below floor -0.2
+silae,legumes,-0.2700,-0.2633,predicted below floor -0.2
+sindagi,legumes,-0.2400,-0.3376,predicted below floor -0.2
+sintang,legumes,-0.5000,-0.4695,predicted below floor -0.2
+sivrihisar,legumes,-0.2800,-0.1973,predicted below floor -0.2
+sohrevard,legumes,-0.2800,-0.4695,predicted below floor -0.2
+solimandungan,legumes,-0.2700,-0.3479,predicted below floor -0.2
+sungurlu,legumes,-0.3200,-0.2375,predicted below floor -0.2
+surab,legumes,-0.4000,,not viable in the efficiency data
+ta_shwe_htan,legumes,-0.1500,,not viable in the efficiency data
+tampo,legumes,-0.4500,-0.3694,predicted below floor -0.2
+tes,legumes,-0.2800,-0.2018,predicted below floor -0.2
+tissint,legumes,-0.4500,,not viable in the efficiency data
+tu_dotlizh_ndee,legumes,-0.3200,-0.2419,predicted below floor -0.2
+ulungur,legumes,-0.4200,-0.4231,predicted below floor -0.2
+wahin_wakpa,legumes,-0.2800,-0.2910,predicted below floor -0.2
+waropen,legumes,-0.5000,,not viable in the efficiency data
+worla,legumes,-0.2400,-0.1283,predicted below floor -0.2
+xicallanco,legumes,-0.2400,-0.1486,predicted below floor -0.2
+xincheng_baoding,legumes,-0.2500,0.0232,predicted below floor -0.2
+xoko,legumes,-0.2900,-0.1889,predicted below floor -0.2
+yagalingu,legumes,-0.2400,-0.4201,predicted below floor -0.2
+aashbikkaashee,lumber,-0.3200,-0.4149,predicted below floor -0.2
+akinka_nup,lumber,-0.3700,-0.3445,predicted below floor -0.2
+aknuq_uk,lumber,-0.3500,-0.4812,predicted below floor -0.2
+akureyri,lumber,-0.1300,,not viable in the efficiency data
+al_khuimat,lumber,-0.4600,-0.4565,predicted below floor -0.2
+alpowna,lumber,-0.3700,-0.3071,predicted below floor -0.2
+alvdal,lumber,-0.3900,-0.3241,predicted below floor -0.2
+amli,lumber,-0.2100,-0.1489,predicted below floor -0.2
+amot,lumber,-0.2100,-0.0554,predicted below floor -0.2
+angoya,lumber,-0.5100,-0.3862,predicted below floor -0.2
+aopuni_atoll,lumber,0.3700,,not viable in the efficiency data
+apispaha,lumber,-0.3200,-0.3978,predicted below floor -0.2
+aq_am,lumber,-0.2100,-0.1953,predicted below floor -0.2
+aqyam_nup,lumber,-0.3700,-0.3964,predicted below floor -0.2
+arkvaz,lumber,-0.4500,,not viable in the efficiency data
+arylakh,lumber,-0.2100,-0.2348,predicted below floor -0.2
+ayllu_yacuchiri,lumber,-0.2900,0.1705,predicted below floor -0.2
+bacalhieu,lumber,-0.2100,0.1964,predicted below floor -0.2
+bad_rock,lumber,-0.3700,-0.3691,predicted below floor -0.2
+balj,lumber,-0.3400,-0.3320,predicted below floor -0.2
+balladonia,lumber,-0.4900,-0.2475,predicted below floor -0.2
+barylas,lumber,-0.2300,-0.3859,predicted below floor -0.2
+baykit,lumber,-0.2300,-0.2034,predicted below floor -0.2
+belle_isle,lumber,-0.2100,-0.0737,predicted below floor -0.2
+belya,lumber,-0.2300,-0.1339,predicted below floor -0.2
+berdigestyakh,lumber,-0.2100,-0.1970,predicted below floor -0.2
+beryozovo,lumber,-0.3500,-0.1257,predicted below floor -0.2
+besni,lumber,-0.2700,-0.4090,predicted below floor -0.2
+bidungu,lumber,-0.4600,-0.4693,predicted below floor -0.2
+boanawari,lumber,-0.3200,-0.2704,predicted below floor -0.2
+bolshaya_laptyuga,lumber,-0.2100,-0.0632,predicted below floor -0.2
+bryante,lumber,-0.2100,-0.1569,predicted below floor -0.2
+byanye,lumber,-0.2100,-0.2361,predicted below floor -0.2
+byas_kyuyol,lumber,-0.2100,-0.2172,predicted below floor -0.2
+caisaboscai,lumber,-0.2100,-0.3024,predicted below floor -0.2
+catucto,lumber,-0.2100,-0.2131,predicted below floor -0.2
+cauouatstacau,lumber,-0.2100,-0.2627,predicted below floor -0.2
+cavalese,lumber,-0.2100,-0.3281,predicted below floor -0.2
+chakola,lumber,-0.2100,-0.0906,predicted below floor -0.2
+charang,lumber,-0.2100,-0.1987,predicted below floor -0.2
+chay,lumber,-0.2100,-0.2474,predicted below floor -0.2
+chayygda,lumber,-0.2100,-0.2436,predicted below floor -0.2
+chelan,lumber,-0.3700,-0.3469,predicted below floor -0.2
+chengji,lumber,-0.2600,-0.2625,predicted below floor -0.2
+chiavenna,lumber,-0.3500,-0.3958,predicted below floor -0.2
+chicchoc,lumber,-0.2300,-0.0459,predicted below floor -0.2
+chishamnee,lumber,-0.2900,-0.2729,predicted below floor -0.2
+choigan,lumber,-0.2300,-0.1881,predicted below floor -0.2
+chungju,lumber,-0.2600,-0.2441,predicted below floor -0.2
+chuya,lumber,-0.2300,-0.1259,predicted below floor -0.2
+dadandang,lumber,-0.4200,-0.2572,predicted below floor -0.2
+deokju,lumber,-0.3000,-0.2739,predicted below floor -0.2
+dep,lumber,-0.2300,-0.0546,predicted below floor -0.2
+disentis,lumber,-0.3500,-0.3937,predicted below floor -0.2
+dishmok,lumber,-0.1800,,not viable in the efficiency data
+djappuminyou,lumber,-0.3200,-0.3324,predicted below floor -0.2
+djee,lumber,-0.2300,-0.0765,predicted below floor -0.2
+dulgalakh,lumber,-0.2300,-0.3773,predicted below floor -0.2
+dulis_ma,lumber,-0.2300,-0.0844,predicted below floor -0.2
+durgyeling,lumber,-0.3500,-0.4006,predicted below floor -0.2
+eben_ezer,lumber,-0.2900,-0.0037,predicted below floor -0.2
+ekonda,lumber,-0.2100,-0.3377,predicted below floor -0.2
+elkhorn,lumber,-0.2100,-0.2185,predicted below floor -0.2
+elverum,lumber,-0.2100,-0.0332,predicted below floor -0.2
+emyakhsin,lumber,-0.2100,-0.2823,predicted below floor -0.2
+enashimo,lumber,-0.2300,-0.1518,predicted below floor -0.2
+enewetak_atoll,lumber,0.5100,,not viable in the efficiency data
+enontakis,lumber,-0.2100,-0.1460,predicted below floor -0.2
+eringiin,lumber,-0.3400,-0.2962,predicted below floor -0.2
+faaite_atoll,lumber,0.3700,,not viable in the efficiency data
+foping,lumber,-0.3400,-0.2746,predicted below floor -0.2
+fucheng,lumber,-0.4200,-0.3292,predicted below floor -0.2
+fulaga_atoll,lumber,0.4700,,not viable in the efficiency data
+funafuti_atoll,lumber,0.5600,,not viable in the efficiency data
+gellivaara,lumber,-0.2100,-0.0867,predicted below floor -0.2
+gerger,lumber,-0.4300,-0.4635,predicted below floor -0.2
+gerit,lumber,-0.4300,,not viable in the efficiency data
+giiwas,lumber,-0.4600,-0.0271,predicted below floor -0.2
+gilyuy,lumber,-0.2100,-0.2344,predicted below floor -0.2
+goat_creek,lumber,-0.2100,-0.1050,predicted below floor -0.2
+grass_creek,lumber,-0.3200,-0.4083,predicted below floor -0.2
+grenland,lumber,-0.3700,-0.1341,predicted below floor -0.2
+gualamba,lumber,-0.2900,-0.0288,predicted below floor -0.2
+guhlkahende,lumber,-0.3400,-0.3075,predicted below floor -0.2
+guochuan,lumber,-0.3000,-0.2623,predicted below floor -0.2
+gurun,lumber,-0.2700,-0.4168,predicted below floor -0.2
+hakkari,lumber,-0.2700,-0.4466,predicted below floor -0.2
+hallingdal,lumber,-0.3700,-0.2345,predicted below floor -0.2
+heshun,lumber,-0.3400,-0.3403,predicted below floor -0.2
+hinsepu,lumber,-0.2700,-0.3444,predicted below floor -0.2
+hot_springs,lumber,-0.3200,-0.3782,predicted below floor -0.2
+huayuantou,lumber,-0.3400,-0.3100,predicted below floor -0.2
+hurunui,lumber,-0.3500,-0.2368,predicted below floor -0.2
+ibb,lumber,-0.4500,-0.4033,predicted below floor -0.2
+idre,lumber,-0.2100,-0.1058,predicted below floor -0.2
+illecillewaet,lumber,-0.3700,-0.3537,predicted below floor -0.2
+imsdalen,lumber,-0.3700,-0.1957,predicted below floor -0.2
+ingedei,lumber,-0.2200,-0.2046,predicted below floor -0.2
+inutsualak,lumber,-0.2100,-0.2209,predicted below floor -0.2
+iyeesnime,lumber,-0.3700,-0.3497,predicted below floor -0.2
+iyesyak,lumber,-0.2100,-0.2350,predicted below floor -0.2
+izeh,lumber,-0.0200,,not viable in the efficiency data
+izhma,lumber,-0.2100,-0.1204,predicted below floor -0.2
+jigansk,lumber,-0.2300,-0.2234,predicted below floor -0.2
+jokkmokk,lumber,-0.2100,-0.1231,predicted below floor -0.2
+jungaa,lumber,-0.1900,,not viable in the efficiency data
+juntura,lumber,-0.4300,-0.3397,predicted below floor -0.2
+kamniga,lumber,-0.2300,-0.3145,predicted below floor -0.2
+kananmituk,lumber,-0.3700,-0.3415,predicted below floor -0.2
+kanishushteu,lumber,-0.2100,0.0857,predicted below floor -0.2
+kapan,lumber,-0.2700,-0.3753,predicted below floor -0.2
+kapfenberg,lumber,-0.2600,-0.2267,predicted below floor -0.2
+kardakan,lumber,-0.2300,-0.1509,predicted below floor -0.2
+katima,lumber,-0.2900,0.0762,predicted below floor -0.2
+katzie,lumber,-0.3700,-0.3643,predicted below floor -0.2
+kauehi_atoll,lumber,0.3700,,not viable in the efficiency data
+kauipushkakamat,lumber,-0.2100,-0.2794,predicted below floor -0.2
+kaukura_atoll,lumber,0.3700,,not viable in the efficiency data
+kaurna_pangkarra,lumber,-0.3200,-0.0804,predicted below floor -0.2
+kazhi,lumber,-0.3400,-0.3804,predicted below floor -0.2
+kazym,lumber,-0.2100,-0.1218,predicted below floor -0.2
+kenamu,lumber,-0.2100,-0.3163,predicted below floor -0.2
+kerben,lumber,-0.3200,-0.3651,predicted below floor -0.2
+khan_khentii,lumber,-0.3900,-0.2508,predicted below floor -0.2
+kharbalakh,lumber,-0.2100,-0.2175,predicted below floor -0.2
+khati,lumber,-0.2100,-0.2272,predicted below floor -0.2
+khelhghubunt_en,lumber,-0.2100,-0.1674,predicted below floor -0.2
+khoro,lumber,-0.2100,-0.2391,predicted below floor -0.2
+kidutokado,lumber,-0.2700,-0.0197,predicted below floor -0.2
+kiemi,lumber,-0.2100,-0.1125,predicted below floor -0.2
+kinbasket,lumber,-0.2100,-0.4497,predicted below floor -0.2
+kirsehir,lumber,-0.2700,-0.3118,predicted below floor -0.2
+kitasoo,lumber,-0.2100,-0.3879,predicted below floor -0.2
+kittikas,lumber,-0.4600,-0.2516,predicted below floor -0.2
+kobyai,lumber,-0.2100,-0.2362,predicted below floor -0.2
+konitsa,lumber,-0.4300,-0.2636,predicted below floor -0.2
+koptyuga,lumber,-0.2100,-0.0942,predicted below floor -0.2
+korpilombo,lumber,-0.2100,-0.0679,predicted below floor -0.2
+ktunwakanmituk,lumber,-0.3700,-0.4129,predicted below floor -0.2
+kuchaky,lumber,-0.2100,-0.1946,predicted below floor -0.2
+kuchugunnur,lumber,-0.2100,-0.2055,predicted below floor -0.2
+kupuri,lumber,-0.2100,-0.3166,predicted below floor -0.2
+kur,lumber,-0.2300,-0.0908,predicted below floor -0.2
+kuukucyn,lumber,-0.3500,-0.3976,predicted below floor -0.2
+kwajalein_atoll,lumber,0.5600,,not viable in the efficiency data
+kysyl_syr,lumber,-0.2100,-0.2155,predicted below floor -0.2
+kyubeme,lumber,-0.2300,-0.4819,predicted below floor -0.2
+lentekhi,lumber,-0.5100,-0.3343,predicted below floor -0.2
+lhoosk_uzt_en,lumber,-0.2100,-0.1078,predicted below floor -0.2
+licheng_luan,lumber,-0.3000,-0.3956,predicted below floor -0.2
+liksiyu,lumber,-0.2700,-0.1694,predicted below floor -0.2
+longan,lumber,-0.3000,-0.2821,predicted below floor -0.2
+macha,lumber,-0.2100,-0.1754,predicted below floor -0.2
+male_atoll,lumber,0.4000,,not viable in the efficiency data
+malka,lumber,-0.2300,-0.1617,predicted below floor -0.2
+maloelap_atoll,lumber,0.5600,,not viable in the efficiency data
+malung,lumber,-0.2100,0.0175,predicted below floor -0.2
+mamiya_kala,lumber,-0.3900,-0.2672,predicted below floor -0.2
+manouanis,lumber,-0.2100,-0.1675,predicted below floor -0.2
+marutea,lumber,0.3700,,not viable in the efficiency data
+mayya,lumber,-0.2100,-0.2026,predicted below floor -0.2
+mekwiskajk,lumber,-0.2100,0.1424,predicted below floor -0.2
+mengung,lumber,-0.4200,-0.4011,predicted below floor -0.2
+midyat,lumber,-0.0200,,not viable in the efficiency data
+mili_atoll,lumber,0.5600,,not viable in the efficiency data
+milkovo,lumber,-0.2300,-0.1241,predicted below floor -0.2
+misekumaw,lumber,-0.2100,-0.2354,predicted below floor -0.2
+mistecapiu,lumber,-0.2300,0.0088,predicted below floor -0.2
+mitse_adazi,lumber,-0.2100,-0.2306,predicted below floor -0.2
+moghwachi,lumber,-0.3200,-0.4152,predicted below floor -0.2
+molvo,lumber,-0.2100,-0.2733,predicted below floor -0.2
+moneta,lumber,-0.3200,,not viable in the efficiency data
+moose_river,lumber,-0.2100,-0.4630,predicted below floor -0.2
+morgex,lumber,-0.3500,-0.3830,predicted below floor -0.2
+mulmuga,lumber,-0.2100,-0.1347,predicted below floor -0.2
+na_isha,lumber,-0.3200,-0.4337,predicted below floor -0.2
+namewaminikan,lumber,-0.2100,0.2474,predicted below floor -0.2
+ningzhou,lumber,-0.2600,-0.3022,predicted below floor -0.2
+nipissis,lumber,-0.2100,-0.2294,predicted below floor -0.2
+nisenan,lumber,-0.4600,-0.2950,predicted below floor -0.2
+nisga_a,lumber,-0.3700,-0.3656,predicted below floor -0.2
+nizhnyaya_toyma,lumber,-0.2100,-0.0368,predicted below floor -0.2
+ntiltxitk,lumber,-0.2100,-0.2956,predicted below floor -0.2
+nueltin,lumber,-0.3500,-0.4188,predicted below floor -0.2
+nunnanen,lumber,-0.2100,-0.1035,predicted below floor -0.2
+nurchuu,lumber,-0.2300,-0.2270,predicted below floor -0.2
+okwanuchu,lumber,-0.2100,-0.2037,predicted below floor -0.2
+onistagane,lumber,-0.2100,-0.1214,predicted below floor -0.2
+orotuk,lumber,-0.2300,-0.3573,predicted below floor -0.2
+otta,lumber,-0.3700,-0.2698,predicted below floor -0.2
+oukwanyama,lumber,-0.2900,-0.1602,predicted below floor -0.2
+oyusut,lumber,-0.2100,-0.2167,predicted below floor -0.2
+pa_kiut_lema,lumber,-0.2700,-0.2533,predicted below floor -0.2
+paanajarvi,lumber,-0.2100,-0.0531,predicted below floor -0.2
+petawanga,lumber,-0.2300,0.0526,predicted below floor -0.2
+pieve,lumber,-0.3900,-0.3099,predicted below floor -0.2
+pigou,lumber,-0.2300,-0.0874,predicted below floor -0.2
+pinega,lumber,-0.2100,-0.1009,predicted below floor -0.2
+pipmuacan,lumber,-0.2100,-0.0959,predicted below floor -0.2
+pokshenga,lumber,-0.2100,-0.0838,predicted below floor -0.2
+pushroot,lumber,-0.3200,,not viable in the efficiency data
+puxian,lumber,-0.3400,-0.3661,predicted below floor -0.2
+qianyou,lumber,-0.3400,-0.3338,predicted below floor -0.2
+rangiroa_atoll,lumber,0.3700,,not viable in the efficiency data
+rawanduz,lumber,-0.4300,-0.4689,predicted below floor -0.2
+rinpung,lumber,-0.5100,-0.4055,predicted below floor -0.2
+rongelap_atoll,lumber,0.3900,,not viable in the efficiency data
+s_awdaan,lumber,-0.3500,-0.4647,predicted below floor -0.2
+saanen,lumber,-0.5100,-0.2840,predicted below floor -0.2
+salkhad,lumber,-0.4900,-0.4867,predicted below floor -0.2
+samsu,lumber,-0.3000,-0.2596,predicted below floor -0.2
+sanshui_binzhou,lumber,-0.4200,-0.2930,predicted below floor -0.2
+sarkikaraagac,lumber,-0.2700,-0.1683,predicted below floor -0.2
+segyan_kyuyol,lumber,-0.2100,-0.2221,predicted below floor -0.2
+seneca,lumber,-0.2900,-0.2406,predicted below floor -0.2
+shangluo,lumber,-0.3400,-0.3298,predicted below floor -0.2
+shatili,lumber,-0.5100,-0.2993,predicted below floor -0.2
+shukden,lumber,-0.3500,,not viable in the efficiency data
+silbojock,lumber,-0.3700,-0.1677,predicted below floor -0.2
+sinipi,lumber,-0.2900,0.1201,predicted below floor -0.2
+sinnar,lumber,-0.2900,-0.3430,predicted below floor -0.2
+sisakht,lumber,-0.4300,-0.4977,predicted below floor -0.2
+skitswish,lumber,-0.4600,-0.3043,predicted below floor -0.2
+sliammon,lumber,-0.3700,-0.3084,predicted below floor -0.2
+sm_algyax,lumber,-0.2100,-0.3094,predicted below floor -0.2
+snt_t_ulix,lumber,-0.2700,-0.1453,predicted below floor -0.2
+south_molala,lumber,-0.4600,-0.1309,predicted below floor -0.2
+splatsin,lumber,-0.2100,-0.2613,predicted below floor -0.2
+split_rock,lumber,-0.0200,,not viable in the efficiency data
+stensele,lumber,-0.2100,-0.0594,predicted below floor -0.2
+sts_ailes,lumber,-0.3700,-0.3252,predicted below floor -0.2
+suledal,lumber,-0.3700,-0.3437,predicted below floor -0.2
+sveg,lumber,-0.2100,-0.0670,predicted below floor -0.2
+sydybyl,lumber,-0.2100,-0.2829,predicted below floor -0.2
+systyg,lumber,-0.2300,-0.2298,predicted below floor -0.2
+sysy_meyite,lumber,-0.2300,-0.3570,predicted below floor -0.2
+taant_a,lumber,-0.3700,-0.3217,predicted below floor -0.2
+tabaga,lumber,-0.2100,-0.2196,predicted below floor -0.2
+tagotoka,lumber,-0.4300,,not viable in the efficiency data
+takspaslama,lumber,-0.2700,-0.2851,predicted below floor -0.2
+tanakteuk,lumber,-0.3700,-0.3474,predicted below floor -0.2
+tanchang,lumber,-0.4200,-0.3084,predicted below floor -0.2
+tangkhay,lumber,-0.2100,-0.3175,predicted below floor -0.2
+tarawa_atoll,lumber,0.5600,,not viable in the efficiency data
+tarna,lumber,-0.3700,-0.1459,predicted below floor -0.2
+tatinnai,lumber,-0.3500,-0.4330,predicted below floor -0.2
+tavaputs,lumber,-0.4800,,not viable in the efficiency data
+taviwac,lumber,-0.3500,-0.4044,predicted below floor -0.2
+tazin,lumber,-0.2100,-0.2910,predicted below floor -0.2
+tchitogama,lumber,-0.2100,-0.0031,predicted below floor -0.2
+tekman,lumber,-0.2700,-0.3464,predicted below floor -0.2
+temiscamie,lumber,-0.2100,-0.1642,predicted below floor -0.2
+tineo,lumber,-0.2300,-0.0544,predicted below floor -0.2
+tlacolula,lumber,-0.2900,-0.0843,predicted below floor -0.2
+tokuma,lumber,-0.2300,-0.3814,predicted below floor -0.2
+tomarza,lumber,-0.2700,-0.3158,predicted below floor -0.2
+tomtor,lumber,-0.2100,-0.2090,predicted below floor -0.2
+tongareva,lumber,0.3700,,not viable in the efficiency data
+tonguo,lumber,-0.2100,-0.2404,predicted below floor -0.2
+torgo,lumber,-0.2300,-0.3858,predicted below floor -0.2
+toulnustouc,lumber,-0.2100,-0.0952,predicted below floor -0.2
+troitsko_pechorsk,lumber,-0.2100,-0.0854,predicted below floor -0.2
+trysil,lumber,-0.2100,-0.0618,predicted below floor -0.2
+tsala_ihmec,lumber,-0.2100,-0.4089,predicted below floor -0.2
+tulamba,lumber,-0.1900,,not viable in the efficiency data
+tynset,lumber,-0.3700,-0.2602,predicted below floor -0.2
+uanaman,lumber,-0.2100,-0.2312,predicted below floor -0.2
+uel_tympychan,lumber,-0.2300,-0.1141,predicted below floor -0.2
+ugoyan,lumber,-0.2100,-0.2142,predicted below floor -0.2
+uintah,lumber,-0.3200,-0.3341,predicted below floor -0.2
+uivvatok,lumber,-0.2100,-0.1891,predicted below floor -0.2
+ulakhan_vava,lumber,-0.2100,-0.3344,predicted below floor -0.2
+uluu,lumber,-0.2100,-0.1713,predicted below floor -0.2
+unkagarit,lumber,-0.3200,,not viable in the efficiency data
+uolba,lumber,-0.2100,-0.2004,predicted below floor -0.2
+uolbut,lumber,-0.2100,-0.1824,predicted below floor -0.2
+upper_nioman,lumber,-0.3700,-0.3404,predicted below floor -0.2
+upsukdaskooch,lumber,-0.2100,-0.0938,predicted below floor -0.2
+urkan,lumber,-0.2300,-0.0752,predicted below floor -0.2
+ust_chulasa,lumber,-0.2100,-0.1106,predicted below floor -0.2
+ust_vym,lumber,-0.2100,-0.0550,predicted below floor -0.2
+uzkand,lumber,-0.3100,-0.3041,predicted below floor -0.2
+valdres,lumber,-0.3700,-0.2204,predicted below floor -0.2
+verkhnyaya,lumber,-0.2100,-0.1748,predicted below floor -0.2
+vezhakary,lumber,-0.2100,-0.1166,predicted below floor -0.2
+vilyuychan,lumber,-0.2100,-0.1941,predicted below floor -0.2
+vygozero,lumber,-0.2100,0.0429,predicted below floor -0.2
+wajarri,lumber,-0.4600,-0.4410,predicted below floor -0.2
+wallowa,lumber,-0.2900,-0.2886,predicted below floor -0.2
+waradika,lumber,-0.3500,-0.4154,predicted below floor -0.2
+wenatchi,lumber,-0.4600,-0.3316,predicted below floor -0.2
+wenshan,lumber,-0.4200,-0.2445,predicted below floor -0.2
+wintu,lumber,-0.2100,-0.3577,predicted below floor -0.2
+witym,lumber,-0.2300,-0.1795,predicted below floor -0.2
+wiznay,lumber,-0.2900,-0.0684,predicted below floor -0.2
+yakyu_ki,lumber,-0.3700,-0.4376,predicted below floor -0.2
+yana,lumber,-0.3000,-0.1675,predicted below floor -0.2
+yangam,lumber,-0.3000,-0.2652,predicted below floor -0.2
+yedey,lumber,-0.2100,-0.1788,predicted below floor -0.2
+yixingzhou,lumber,-0.3400,-0.3624,predicted below floor -0.2
+yiyang_songzhou,lumber,-0.3400,-0.3456,predicted below floor -0.2
+ynakhsyt,lumber,-0.2100,-0.2465,predicted below floor -0.2
+ypoa,lumber,-0.4800,-0.1671,predicted below floor -0.2
+yukhta,lumber,-0.2100,-0.2726,predicted below floor -0.2
+yukta,lumber,-0.2100,-0.2237,predicted below floor -0.2
+yuttyakh,lumber,-0.2300,-0.3417,predicted below floor -0.2
+zharzhan,lumber,-0.2300,-0.2845,predicted below floor -0.2
+zhebariki_khaya,lumber,-0.2100,-0.2483,predicted below floor -0.2
+aaku,maize,-0.3900,-0.4201,predicted below floor -0.2
+aburra,maize,-0.3900,-0.4126,predicted below floor -0.2
+akimel_oodham,maize,-0.3900,-0.4585,predicted below floor -0.2
+alausi,maize,-0.3100,-0.4787,predicted below floor -0.2
+atarque,maize,-0.3100,-0.4573,predicted below floor -0.2
+atash,maize,0.0000,,not viable in the efficiency data
+bosa_colombia,maize,-0.3100,-0.3637,predicted below floor -0.2
+caraveli,maize,-0.3100,-0.3407,predicted below floor -0.2
+caribaro,maize,-0.3100,-0.1071,predicted below floor -0.2
+chao,maize,-0.3100,-0.0982,predicted below floor -0.2
+chavin,maize,-0.0800,,not viable in the efficiency data
+chiquia,maize,-0.0800,,not viable in the efficiency data
+comcaac,maize,-0.3900,,not viable in the efficiency data
+cotapampa,maize,0.0000,,not viable in the efficiency data
+dzilam,maize,-0.3100,-0.3947,predicted below floor -0.2
+elki,maize,-0.3900,,not viable in the efficiency data
+gualeguas,maize,-0.3100,-0.2382,predicted below floor -0.2
+gueiquesales,maize,-0.3100,-0.4599,predicted below floor -0.2
+guwevkabaya,maize,-0.3100,-0.4733,predicted below floor -0.2
+halchidoma,maize,-0.3900,,not viable in the efficiency data
+hatun_xauxa,maize,-0.0800,,not viable in the efficiency data
+ica,maize,-0.3100,-0.1611,predicted below floor -0.2
+japallan,maize,-0.0800,,not viable in the efficiency data
+kamsack,maize,-0.1200,,not viable in the efficiency data
+kileqollo,maize,-0.3100,,not viable in the efficiency data
+machala,maize,-0.3100,-0.2812,predicted below floor -0.2
+machaqa,maize,-0.0800,,not viable in the efficiency data
+mindu,maize,-0.3100,-0.2102,predicted below floor -0.2
+muruam,maize,-0.3100,-0.3679,predicted below floor -0.2
+nentego,maize,-0.3100,-0.3058,predicted below floor -0.2
+ogiciza_wakpa,maize,-0.1200,,not viable in the efficiency data
+omaguacas,maize,-0.3100,,not viable in the efficiency data
+pame,maize,-0.3100,-0.4126,predicted below floor -0.2
+paramonga,maize,-0.3100,-0.2111,predicted below floor -0.2
+paribari,maize,-0.3100,,not viable in the efficiency data
+payette,maize,-0.3100,-0.4083,predicted below floor -0.2
+picchu,maize,-0.3100,-0.3810,predicted below floor -0.2
+piipaash,maize,-0.3900,,not viable in the efficiency data
+pikunwijimapu,maize,-0.3100,-0.4347,predicted below floor -0.2
+pimicaskewyashik,maize,-0.1200,,not viable in the efficiency data
+piren,maize,-0.3100,,not viable in the efficiency data
+piscopeek,maize,-0.3100,-0.3475,predicted below floor -0.2
+pomata,maize,-0.0800,,not viable in the efficiency data
+tetamekanch,maize,-0.3100,-0.3181,predicted below floor -0.2
+than_u_ge,maize,-0.3100,-0.1535,predicted below floor -0.2
+toponisw,maize,-0.3100,-0.4760,predicted below floor -0.2
+tora,maize,-0.3100,-0.2467,predicted below floor -0.2
+tuf_shur_tia,maize,-0.3100,-0.3665,predicted below floor -0.2
+uinkaret,maize,-0.3900,-0.4379,predicted below floor -0.2
+ures,maize,-0.3100,-0.4024,predicted below floor -0.2
+waqrapukara,maize,-0.0800,,not viable in the efficiency data
+yahandeka,maize,-0.3100,-0.4124,predicted below floor -0.2
+yaino,maize,-0.3100,-0.3901,predicted below floor -0.2
+yashikumne,maize,-0.3100,-0.4092,predicted below floor -0.2
+yeme,maize,-0.3100,-0.3775,predicted below floor -0.2
+agno,medicaments,-0.3200,-0.0710,predicted below floor -0.2
+aguasabon,medicaments,-0.1700,,not viable in the efficiency data
+bitterroot,medicaments,-0.3500,-0.1768,predicted below floor -0.2
+caupolican,medicaments,-0.3200,0.1129,predicted below floor -0.2
+donggo,medicaments,-0.2700,-0.1680,predicted below floor -0.2
+fukushima,medicaments,-0.3800,-0.4239,predicted below floor -0.2
+gonpatsi,medicaments,-0.2800,,not viable in the efficiency data
+havaii,medicaments,-0.2800,,not viable in the efficiency data
+hulu_padas,medicaments,-0.3200,-0.2914,predicted below floor -0.2
+jaluit_atoll,medicaments,-0.2200,,not viable in the efficiency data
+janakkala,medicaments,-0.3500,-0.4645,predicted below floor -0.2
+jaskis,medicaments,-0.3500,-0.4550,predicted below floor -0.2
+kauakiekamatsh,medicaments,-0.4400,-0.4988,predicted below floor -0.2
+kennebango,medicaments,-0.2800,-0.4777,predicted below floor -0.2
+kipahigan,medicaments,-0.3500,,not viable in the efficiency data
+kirillov,medicaments,-0.3500,-0.2729,predicted below floor -0.2
+korvala,medicaments,-0.4400,,not viable in the efficiency data
+ksituan,medicaments,-0.3700,-0.3381,predicted below floor -0.2
+kuopio,medicaments,-0.3500,,not viable in the efficiency data
+ky_son,medicaments,-0.1900,,not viable in the efficiency data
+lindjarvi,medicaments,-0.3500,-0.4645,predicted below floor -0.2
+maaselka,medicaments,-0.4400,-0.4727,predicted below floor -0.2
+manouane,medicaments,-0.4400,-0.4740,predicted below floor -0.2
+mattawa,medicaments,-0.1900,,not viable in the efficiency data
+metabeskega,medicaments,-0.3000,-0.4871,predicted below floor -0.2
+mica_creek,medicaments,-0.6300,,not viable in the efficiency data
+minzhou,medicaments,-0.3700,-0.2416,predicted below floor -0.2
+muang_sing,medicaments,-0.3800,-0.3964,predicted below floor -0.2
+muhaukamau,medicaments,-0.4400,-0.4645,predicted below floor -0.2
+muli,medicaments,-0.1900,,not viable in the efficiency data
+nagaoka,medicaments,-0.3800,-0.3946,predicted below floor -0.2
+natinixwe,medicaments,-0.2900,,not viable in the efficiency data
+nazkot_en,medicaments,-0.3500,-0.2725,predicted below floor -0.2
+nikolskoye_kema,medicaments,-0.3500,-0.1901,predicted below floor -0.2
+osisko,medicaments,-0.1900,,not viable in the efficiency data
+pyeongchang,medicaments,-0.3800,-0.4381,predicted below floor -0.2
+rongerik_atoll,medicaments,-0.2200,,not viable in the efficiency data
+rukajarvi,medicaments,-0.4400,-0.4645,predicted below floor -0.2
+selanger,medicaments,-0.3500,-0.4928,predicted below floor -0.2
+sguuxs,medicaments,-0.3500,-0.2408,predicted below floor -0.2
+shipshaw,medicaments,-0.1900,,not viable in the efficiency data
+sirudal,medicaments,-0.4600,,not viable in the efficiency data
+skuppah,medicaments,-0.6300,,not viable in the efficiency data
+sylhet,medicaments,0.0000,,not viable in the efficiency data
+tula,medicaments,-0.1700,,not viable in the efficiency data
+verkhoturye,medicaments,-0.3700,-0.2518,predicted below floor -0.2
+wli_qospem,medicaments,-0.2600,-0.4722,predicted below floor -0.2
+zhuban_ana,medicaments,0.0000,,not viable in the efficiency data
+afmadow,millet,-0.3600,,not viable in the efficiency data
+agnam_civol,millet,-0.3600,-0.4703,predicted below floor -0.2
+ain_madhi,millet,-0.3600,-0.4326,predicted below floor -0.2
+ain_sefra,millet,-0.3600,-0.4810,predicted below floor -0.2
+alat,millet,-0.3600,,not viable in the efficiency data
+alays,millet,-0.3600,-0.4267,predicted below floor -0.2
+andolo,millet,-0.4600,-0.3539,predicted below floor -0.2
+aurland,millet,-0.3600,-0.4565,predicted below floor -0.2
+ayerou,millet,-0.3600,-0.4675,predicted below floor -0.2
+babuza,millet,-0.2600,-0.4375,predicted below floor -0.2
+badra,millet,-0.3600,,not viable in the efficiency data
+baiyungu,millet,-0.3600,,not viable in the efficiency data
+balanipa,millet,-0.3900,-0.3551,predicted below floor -0.2
+banjar,millet,-0.3600,,not viable in the efficiency data
+barah,millet,-0.3600,-0.4689,predicted below floor -0.2
+bardera,millet,-0.3600,,not viable in the efficiency data
+baru,millet,-0.3600,,not viable in the efficiency data
+bayankhot,millet,-0.3600,-0.3156,predicted below floor -0.2
+bayannur,millet,-0.3600,,not viable in the efficiency data
+beledweyne,millet,-0.3600,,not viable in the efficiency data
+bitki,millet,-0.3600,-0.3983,predicted below floor -0.2
+boluohe,millet,-0.3600,-0.4895,predicted below floor -0.2
+bookabie,millet,-0.3600,-0.3988,predicted below floor -0.2
+bou_saada,millet,-0.3600,-0.4148,predicted below floor -0.2
+brig,millet,-0.3600,-0.0588,predicted below floor -0.2
+bumi_ayu,millet,-0.3600,,not viable in the efficiency data
+bunratty,millet,-0.3100,-0.3962,predicted below floor -0.2
+charklik,millet,-0.3600,,not viable in the efficiency data
+coleraine,millet,-0.3100,-0.4057,predicted below floor -0.2
+cork,millet,-0.3100,-0.3432,predicted below floor -0.2
+dargol,millet,-0.3600,-0.4452,predicted below floor -0.2
+daura,millet,-0.3600,-0.4026,predicted below floor -0.2
+dingyuan_lingzhou,millet,-0.3600,-0.3106,predicted below floor -0.2
+dumai,millet,-0.3600,,not viable in the efficiency data
+ed_damer,millet,-0.3600,,not viable in the efficiency data
+edinburgh,millet,-0.3100,-0.3300,predicted below floor -0.2
+el_agheila,millet,-0.3600,,not viable in the efficiency data
+elgin,millet,-0.5500,-0.4693,predicted below floor -0.2
+fardawsa,millet,-0.3600,,not viable in the efficiency data
+galway,millet,-0.3100,-0.3924,predicted below floor -0.2
+gaotai,millet,-0.3600,-0.0458,predicted below floor -0.2
+gode,millet,-0.3600,-0.4263,predicted below floor -0.2
+gorontalo,millet,-0.3900,,not viable in the efficiency data
+goudooumaria,millet,-0.3600,-0.4833,predicted below floor -0.2
+goure,millet,-0.3600,-0.4629,predicted below floor -0.2
+hamdallaye,millet,-0.3600,-0.4489,predicted below floor -0.2
+haomen,millet,-0.3600,-0.4178,predicted below floor -0.2
+ikoyi,millet,-0.3200,-0.3234,predicted below floor -0.2
+initao,millet,-0.2900,-0.3647,predicted below floor -0.2
+inverness,millet,-0.3600,-0.4720,predicted below floor -0.2
+jadliaura,millet,-0.3600,,not viable in the efficiency data
+jadu,millet,-0.3600,,not viable in the efficiency data
+jingzhou_dorbod,millet,-0.3600,-0.2901,predicted below floor -0.2
+kakarakala,millet,-0.3600,,not viable in the efficiency data
+karangan,millet,-0.3900,-0.4086,predicted below floor -0.2
+khanaser,millet,-0.3600,-0.4039,predicted below floor -0.2
+khara_khoto,millet,-0.3600,,not viable in the efficiency data
+khed,millet,-0.3600,-0.4100,predicted below floor -0.2
+khovd,millet,-0.3600,-0.4482,predicted below floor -0.2
+kosa,millet,-0.3600,-0.4610,predicted below floor -0.2
+kota_marudu,millet,-0.3900,-0.3607,predicted below floor -0.2
+kotawaringin_lama,millet,-0.3600,,not viable in the efficiency data
+kualuh,millet,-0.3600,,not viable in the efficiency data
+kubu,millet,-0.3600,,not viable in the efficiency data
+kufa,millet,-0.3600,,not viable in the efficiency data
+kutai_lama,millet,-0.5600,,not viable in the efficiency data
+kuyu_shazhou,millet,-0.3600,,not viable in the efficiency data
+kyaukkyi,millet,-0.2600,-0.3481,predicted below floor -0.2
+latu,millet,-0.3900,-0.3785,predicted below floor -0.2
+lillehammer,millet,-0.3600,-0.3647,predicted below floor -0.2
+limerick,millet,-0.3100,-0.3320,predicted below floor -0.2
+limey,millet,-0.3600,-0.4005,predicted below floor -0.2
+liulin,millet,-0.3600,,not viable in the efficiency data
+madaba,millet,-0.3600,-0.4333,predicted below floor -0.2
+madi_madi,millet,-0.3600,-0.4452,predicted below floor -0.2
+majanna,millet,-0.3600,,not viable in the efficiency data
+makatao,millet,-0.2600,-0.4900,predicted below floor -0.2
+martuthunira,millet,-0.3600,-0.4468,predicted below floor -0.2
+masa_sud,millet,-0.3600,-0.4341,predicted below floor -0.2
+mastuj,millet,-0.3600,-0.1226,predicted below floor -0.2
+matano,millet,-0.1900,,not viable in the efficiency data
+matmata,millet,-0.3600,,not viable in the efficiency data
+meru,millet,-0.3600,-0.3785,predicted below floor -0.2
+midelt,millet,-0.3600,0.2148,predicted below floor -0.2
+monterado,millet,-0.3600,,not viable in the efficiency data
+mtetengwe,millet,-0.3600,-0.3047,predicted below floor -0.2
+muse,millet,-0.2600,,not viable in the efficiency data
+musi_hilir,millet,-0.3600,,not viable in the efficiency data
+nanja,millet,-0.3600,,not viable in the efficiency data
+nasiriyah,millet,-0.3600,,not viable in the efficiency data
+ngadjuri,millet,-0.3600,,not viable in the efficiency data
+ngarluma,millet,-0.3600,-0.3487,predicted below floor -0.2
+nguru,millet,-0.3600,-0.4100,predicted below floor -0.2
+niono,millet,-0.3600,-0.3300,predicted below floor -0.2
+oriel,millet,-0.3100,-0.3492,predicted below floor -0.2
+pak_huei_lang,millet,-0.2600,-0.2878,predicted below floor -0.2
+pamkala,millet,-0.3600,-0.3358,predicted below floor -0.2
+pangkalan_kerinci,millet,-0.3600,,not viable in the efficiency data
+pangyang,millet,-0.1600,,not viable in the efficiency data
+papora,millet,-0.2600,-0.4624,predicted below floor -0.2
+phongsali,millet,-0.2600,,not viable in the efficiency data
+pilda,millet,-0.3600,-0.4081,predicted below floor -0.2
+port_loko,millet,-0.3600,-0.4183,predicted below floor -0.2
+qadisiyyah,millet,-0.3600,,not viable in the efficiency data
+qidaban,millet,-0.3600,-0.1757,predicted below floor -0.2
+quz_rajab,millet,-0.3600,,not viable in the efficiency data
+ranpur,millet,-0.3600,-0.4473,predicted below floor -0.2
+roscommon,millet,-0.3100,-0.3635,predicted below floor -0.2
+ryfylke,millet,-0.3600,-0.2260,predicted below floor -0.2
+safare,millet,-0.3600,,not viable in the efficiency data
+sandakan,millet,-0.1900,,not viable in the efficiency data
+saribas,millet,-0.3600,,not viable in the efficiency data
+sengkae,millet,-0.2600,-0.3796,predicted below floor -0.2
+sidenreng,millet,-0.3900,-0.3767,predicted below floor -0.2
+skoura,millet,-0.3600,-0.1001,predicted below floor -0.2
+stavoren,millet,-0.5500,,not viable in the efficiency data
+stonehaven,millet,-0.3100,-0.2873,predicted below floor -0.2
+sungai_jujuhan,millet,-0.3600,,not viable in the efficiency data
+tagmadert,millet,-0.3600,,not viable in the efficiency data
+tanjungpura,millet,-0.3600,,not viable in the efficiency data
+tatrang,millet,-0.3600,,not viable in the efficiency data
+thilogne,millet,-0.3600,-0.4637,predicted below floor -0.2
+thu_vat,millet,-0.0600,,not viable in the efficiency data
+tinago,millet,-0.2900,-0.3880,predicted below floor -0.2
+tivaouane,millet,-0.3600,-0.3198,predicted below floor -0.2
+tiyuh_tuha,millet,-0.3900,,not viable in the efficiency data
+towing,millet,-0.3600,-0.3371,predicted below floor -0.2
+tulu_nama_dun,millet,-0.3600,-0.3545,predicted below floor -0.2
+tuyen_hoa,millet,-0.0600,,not viable in the efficiency data
+uliastai,millet,-0.3600,-0.4849,predicted below floor -0.2
+urquhart,millet,-0.3600,-0.4934,predicted below floor -0.2
+vieng_phouka,millet,0.0400,,not viable in the efficiency data
+vik,millet,-0.3600,,not viable in the efficiency data
+waounde,millet,-0.3600,-0.3474,predicted below floor -0.2
+waterford,millet,-0.3100,-0.3352,predicted below floor -0.2
+xagal,millet,-0.3600,,not viable in the efficiency data
+xojeli,millet,-0.3600,,not viable in the efficiency data
+yamatji,millet,-0.3600,,not viable in the efficiency data
+zagzuugiin_balgas,millet,-0.3600,-0.4293,predicted below floor -0.2
+zankor,millet,-0.3600,-0.1930,predicted below floor -0.2
+giresun,olives,-0.1700,,not viable in the efficiency data
+mevouillon,olives,-0.1700,,not viable in the efficiency data
+savona,olives,-0.1700,,not viable in the efficiency data
+ventimiglia,olives,0.0500,,not viable in the efficiency data
+fuchi,pepper,-0.2800,-0.2903,predicted below floor -0.2
+takakusa,pepper,-0.2800,-0.2554,predicted below floor -0.2
+achacachi,potato,-0.3600,-0.3328,predicted below floor -0.2
+aconca_hue,potato,-0.2600,-0.1531,predicted below floor -0.2
+aruni,potato,-0.2600,-0.1397,predicted below floor -0.2
+axawiri,potato,-0.3600,,not viable in the efficiency data
+caurakawin,potato,-0.2600,-0.3550,predicted below floor -0.2
+chacayacu,potato,-0.2600,-0.1776,predicted below floor -0.2
+chullac,potato,-0.3600,-0.2960,predicted below floor -0.2
+hatun_killaka,potato,-0.2600,-0.1569,predicted below floor -0.2
+hatunqulla,potato,-0.3600,0.0070,predicted below floor -0.2
+huarochiri,potato,-0.2600,-0.2613,predicted below floor -0.2
+incahuasi,potato,-0.2600,-0.2265,predicted below floor -0.2
+kellollampu,potato,-0.3600,0.1237,predicted below floor -0.2
+macaya,potato,-0.3600,-0.4899,predicted below floor -0.2
+quillahuaca,potato,-0.3600,-0.1269,predicted below floor -0.2
+qusqu,potato,-0.3600,-0.1652,predicted below floor -0.2
+soras,potato,-0.2600,-0.2100,predicted below floor -0.2
+suamox,potato,-0.2600,-0.2496,predicted below floor -0.2
+sura,potato,-0.2600,-0.1636,predicted below floor -0.2
+wari_willka,potato,-0.2600,0.0977,predicted below floor -0.2
+yanque,potato,-0.2600,-0.1447,predicted below floor -0.2
+al_qatr,rice,-0.1600,,not viable in the efficiency data
+ansongo,rice,-0.1600,,not viable in the efficiency data
+auyo,rice,-0.2900,-0.1080,predicted below floor -0.2
+ballou,rice,-0.2900,-0.1625,predicted below floor -0.2
+batang,rice,-0.1600,,not viable in the efficiency data
+biram,rice,-0.2900,-0.1060,predicted below floor -0.2
+dikwa,rice,-0.2900,-0.3303,predicted below floor -0.2
+dongming,rice,-0.1600,,not viable in the efficiency data
+dutsi,rice,-0.2900,-0.2089,predicted below floor -0.2
+gao,rice,-0.1600,,not viable in the efficiency data
+gapsan,rice,-0.1600,,not viable in the efficiency data
+goronyo,rice,-0.2900,0.0842,predicted below floor -0.2
+gotheye,rice,-0.1600,,not viable in the efficiency data
+goudel,rice,-0.1600,,not viable in the efficiency data
+gubio,rice,-0.1600,,not viable in the efficiency data
+hillah,rice,-0.1600,,not viable in the efficiency data
+machul,rice,-0.2900,-0.3730,predicted below floor -0.2
+mser,rice,-0.2900,-0.3206,predicted below floor -0.2
+ningbian,rice,-0.2900,-0.4668,predicted below floor -0.2
+nyamina,rice,-0.2900,,not viable in the efficiency data
+pouss,rice,-0.2900,-0.2373,predicted below floor -0.2
+salmas,rice,-0.2900,-0.3119,predicted below floor -0.2
+say,rice,-0.2900,-0.4010,predicted below floor -0.2
+shushtar,rice,-0.2900,-0.4452,predicted below floor -0.2
+surame,rice,-0.2900,0.0848,predicted below floor -0.2
+tabou_m,rice,0.0400,,not viable in the efficiency data
+talata_mafara,rice,-0.2900,-0.2247,predicted below floor -0.2
+urmia,rice,-0.2900,-0.2792,predicted below floor -0.2
+wenchuan,rice,-0.2900,0.2259,predicted below floor -0.2
+zhigu,rice,-0.2900,-0.2382,predicted below floor -0.2
+abengourou,saffron,-0.4000,,not viable in the efficiency data
+abomey,saffron,-0.5300,,not viable in the efficiency data
+amaigbo,saffron,-0.3000,,not viable in the efficiency data
+andevoranto,saffron,-0.3500,,not viable in the efficiency data
+bemanevika,saffron,-0.5100,,not viable in the efficiency data
+cestos,saffron,-0.6100,,not viable in the efficiency data
+daoukro,saffron,-0.4000,,not viable in the efficiency data
+epe,saffron,-0.4000,,not viable in the efficiency data
+fahambahy,saffron,-0.5100,,not viable in the efficiency data
+ghardaia,saffron,-0.2600,-0.1501,predicted below floor -0.2
+grand_lahou,saffron,-0.4000,,not viable in the efficiency data
+kibi,saffron,-0.4000,,not viable in the efficiency data
+kissidougou,saffron,-0.4600,,not viable in the efficiency data
+kong,saffron,-0.3800,,not viable in the efficiency data
+mahaela,saffron,-0.5100,,not viable in the efficiency data
+manambato,saffron,-0.3500,-0.3923,predicted below floor -0.2
+nakpa,saffron,-0.2500,,not viable in the efficiency data
+ras_hafun,saffron,-0.2900,,not viable in the efficiency data
+salaga,saffron,-0.3800,,not viable in the efficiency data
+sanniquellie,saffron,-0.4600,,not viable in the efficiency data
+segbwema,saffron,-0.5800,,not viable in the efficiency data
+settra_kru,saffron,-0.5100,,not viable in the efficiency data
+tamacine,saffron,-0.2600,-0.3507,predicted below floor -0.2
+tozeur,saffron,-0.2600,-0.2305,predicted below floor -0.2
+vohipeno,saffron,-0.5100,,not viable in the efficiency data
+winneba,saffron,-0.4000,,not viable in the efficiency data
+yagala,saffron,-0.6100,,not viable in the efficiency data
+yanbu,saffron,-0.2600,,not viable in the efficiency data
+ahlat,silk,-0.1200,,not viable in the efficiency data
+akyazi,silk,-0.4500,-0.0941,predicted below floor -0.2
+chinon,silk,-0.2900,-0.3312,predicted below floor -0.2
+corbeil,silk,-0.2900,-0.4032,predicted below floor -0.2
+fenouillet,silk,-0.2900,-0.2116,predicted below floor -0.2
+florac,silk,-0.2900,-0.4530,predicted below floor -0.2
+geneve,silk,-0.2900,-0.4492,predicted below floor -0.2
+genoa,silk,-0.2900,-0.2737,predicted below floor -0.2
+lyon,silk,-0.2900,-0.3635,predicted below floor -0.2
+sakju,silk,-0.3400,,not viable in the efficiency data
+sangju,silk,-0.2600,-0.3331,predicted below floor -0.2
+sivas,silk,-0.1200,,not viable in the efficiency data
+suwa,silk,-0.2800,,not viable in the efficiency data
+takai,silk,-0.2800,-0.3911,predicted below floor -0.2
+trebizond,silk,-0.4500,-0.3088,predicted below floor -0.2
+tsuru,silk,-0.2600,-0.3822,predicted below floor -0.2
+unju,silk,-0.3400,,not viable in the efficiency data
+zhouzhi,silk,-0.3400,-0.0823,predicted below floor -0.2
+ambilobe,sugar,-0.2500,0.0937,predicted below floor -0.2
+basai,sugar,-0.3900,-0.3156,predicted below floor -0.2
+cibuaya,sugar,-0.2100,-0.2737,predicted below floor -0.2
+jinkang,sugar,-0.3900,0.0587,predicted below floor -0.2
+karkala,sugar,-0.2700,-0.4564,predicted below floor -0.2
+kawliya,sugar,-0.2100,-0.4184,predicted below floor -0.2
+ketagalan,sugar,-0.3900,-0.2677,predicted below floor -0.2
+khandwa,sugar,-0.3800,-0.4812,predicted below floor -0.2
+lalan,sugar,-0.1200,,not viable in the efficiency data
+nosy_be,sugar,-0.2700,-0.0545,predicted below floor -0.2
+paka,sugar,-0.3300,-0.4660,predicted below floor -0.2
+phetchaburi,sugar,-0.2500,-0.1257,predicted below floor -0.2
+pontianak,sugar,-0.1200,,not viable in the efficiency data
+sada,sugar,-0.2700,-0.0447,predicted below floor -0.2
+surat,sugar,-0.3800,0.1924,predicted below floor -0.2
+zozan,sugar,-0.1800,,not viable in the efficiency data
+anhua,tea,-0.3100,,not viable in the efficiency data
+changxing,tea,0.0100,,not viable in the efficiency data
+chongde,tea,0.0100,,not viable in the efficiency data
+hadong,tea,-0.3100,-0.2059,predicted below floor -0.2
+jianping,tea,-0.1300,,not viable in the efficiency data
+jinjam,tea,0.0100,,not viable in the efficiency data
+khordong,tea,0.0700,,not viable in the efficiency data
+kuji,tea,-0.1900,,not viable in the efficiency data
+laiyang,tea,-0.3100,,not viable in the efficiency data
+sunju,tea,-0.3100,,not viable in the efficiency data
+wenxian_gongchang,tea,-0.1100,,not viable in the efficiency data
+yuhang,tea,0.0100,,not viable in the efficiency data
+east_sabaneque,tobacco,-0.4900,-0.3362,predicted below floor -0.2
+guanamacabibes,tobacco,-0.3800,-0.0602,predicted below floor -0.2
+jaltenango,tobacco,-0.2200,-0.3147,predicted below floor -0.2
+magorix,tobacco,-0.4900,-0.1028,predicted below floor -0.2
+maynoa,tobacco,-0.2300,-0.1562,predicted below floor -0.2
+ozumacin,tobacco,0.0400,,not viable in the efficiency data
+sotuta,tobacco,-0.4900,,not viable in the efficiency data
+abadan,wheat,-0.4000,-0.4998,predicted below floor -0.2
+abha,wheat,-0.4000,-0.2439,predicted below floor -0.2
+abil,wheat,-0.4000,-0.2000,predicted below floor -0.2
+abiy_addi,wheat,-0.3600,-0.0541,predicted below floor -0.2
+ad_dughmiyah,wheat,-0.4000,,not viable in the efficiency data
+adham,wheat,-0.4000,-0.3866,predicted below floor -0.2
+agadir,wheat,-0.3300,-0.1783,predicted below floor -0.2
+aguz,wheat,-0.3300,-0.2447,predicted below floor -0.2
+al_ajfar,wheat,-0.4000,,not viable in the efficiency data
+al_amlah,wheat,-0.4000,,not viable in the efficiency data
+al_amwah,wheat,-0.4000,,not viable in the efficiency data
+al_anbar,wheat,-0.4000,,not viable in the efficiency data
+al_ayn,wheat,-0.4000,,not viable in the efficiency data
+al_baharah,wheat,-0.4000,,not viable in the efficiency data
+al_bleiteh,wheat,-0.4000,,not viable in the efficiency data
+al_burud,wheat,-0.4000,,not viable in the efficiency data
+al_hadhah,wheat,-0.4000,,not viable in the efficiency data
+al_hegrieah,wheat,-0.4000,,not viable in the efficiency data
+al_husayniyah,wheat,-0.4000,,not viable in the efficiency data
+al_jar,wheat,-0.4000,,not viable in the efficiency data
+al_khaburah,wheat,-0.4000,,not viable in the efficiency data
+al_khanbarah,wheat,-0.4000,,not viable in the efficiency data
+al_mafalis,wheat,-0.4000,-0.4586,predicted below floor -0.2
+al_manjur,wheat,-0.4000,,not viable in the efficiency data
+al_maramiyah,wheat,-0.4000,,not viable in the efficiency data
+al_marwa,wheat,-0.4000,,not viable in the efficiency data
+al_mashqar,wheat,-0.4000,,not viable in the efficiency data
+al_tib,wheat,-0.4000,-0.2519,predicted below floor -0.2
+almudevar,wheat,-0.2400,-0.0606,predicted below floor -0.2
+ambaca,wheat,-0.1600,,not viable in the efficiency data
+aqiq_banu_uqayi,wheat,-0.4000,,not viable in the efficiency data
+ar_rabadha,wheat,-0.4000,,not viable in the efficiency data
+ar_rawdah,wheat,-0.4000,,not viable in the efficiency data
+ar_ruwailiyyah,wheat,-0.4000,,not viable in the efficiency data
+arbaji,wheat,-0.4000,,not viable in the efficiency data
+aror,wheat,-0.4000,,not viable in the efficiency data
+as_suwaydirah,wheat,-0.4000,,not viable in the efficiency data
+ash_shuara,wheat,-0.4000,,not viable in the efficiency data
+asyut,wheat,-0.4000,,not viable in the efficiency data
+azzan,wheat,-0.4000,,not viable in the efficiency data
+bani_saad,wheat,-0.4000,-0.4288,predicted below floor -0.2
+baqqa,wheat,-0.4000,,not viable in the efficiency data
+barahrah,wheat,-0.4000,-0.2006,predicted below floor -0.2
+barom,wheat,-0.2000,,not viable in the efficiency data
+batchingou,wheat,-0.1600,,not viable in the efficiency data
+bayhan,wheat,-0.4000,,not viable in the efficiency data
+bela,wheat,-0.4000,,not viable in the efficiency data
+belen_ana,wheat,-0.3300,,not viable in the efficiency data
+birnin_gwari,wheat,-0.3600,,not viable in the efficiency data
+birnin_kebbi,wheat,-0.3300,,not viable in the efficiency data
+bolgan_ana,wheat,-0.3400,-0.4681,predicted below floor -0.2
+bongor,wheat,-0.2400,,not viable in the efficiency data
+bugur,wheat,-0.3300,-0.1765,predicted below floor -0.2
+bula_kongo,wheat,-0.2400,,not viable in the efficiency data
+buwat,wheat,-0.4000,,not viable in the efficiency data
+cairo,wheat,-0.4000,,not viable in the efficiency data
+changyuan,wheat,-0.3400,-0.1431,predicted below floor -0.2
+chengfu,wheat,-0.4000,-0.3565,predicted below floor -0.2
+chishtian,wheat,-0.4000,,not viable in the efficiency data
+chitral,wheat,-0.3800,-0.1479,predicted below floor -0.2
+dacheng,wheat,-0.3400,-0.2064,predicted below floor -0.2
+damanhur,wheat,-0.4000,-0.4604,predicted below floor -0.2
+darghat,wheat,-0.4000,,not viable in the efficiency data
+deir_ez_zor,wheat,-0.4000,-0.4311,predicted below floor -0.2
+dhat_al_hajj,wheat,-0.4000,,not viable in the efficiency data
+diakha,wheat,-0.3600,,not viable in the efficiency data
+dijkot,wheat,-0.2500,,not viable in the efficiency data
+dipalpur,wheat,-0.2500,,not viable in the efficiency data
+diriyah,wheat,-0.4000,,not viable in the efficiency data
+dogonbadan,wheat,-0.3300,0.0012,predicted below floor -0.2
+dongan_shuntian,wheat,-0.3500,-0.1632,predicted below floor -0.2
+dubbi,wheat,-0.4000,,not viable in the efficiency data
+dunla,wheat,-0.3400,-0.2365,predicted below floor -0.2
+el_manaqil,wheat,-0.4000,,not viable in the efficiency data
+espe,wheat,-0.3400,-0.4681,predicted below floor -0.2
+fadisheh,wheat,-0.3400,-0.3298,predicted below floor -0.2
+fasa,wheat,-0.3400,-0.3502,predicted below floor -0.2
+ferrara,wheat,-0.2400,0.2964,predicted below floor -0.2
+firozpur,wheat,-0.3300,-0.3412,predicted below floor -0.2
+gabes,wheat,-0.4000,,not viable in the efficiency data
+gaia,wheat,-0.3600,,not viable in the efficiency data
+gechak,wheat,-0.2000,,not viable in the efficiency data
+gereshk,wheat,-0.4000,-0.3545,predicted below floor -0.2
+hail,wheat,-0.4000,,not viable in the efficiency data
+hali,wheat,-0.4000,,not viable in the efficiency data
+haql,wheat,-0.4000,,not viable in the efficiency data
+harad_asir,wheat,-0.4000,-0.3675,predicted below floor -0.2
+hejian,wheat,-0.3400,-0.2258,predicted below floor -0.2
+huraydah,wheat,-0.4000,,not viable in the efficiency data
+ibra,wheat,-0.4000,,not viable in the efficiency data
+jannat_shahr,wheat,-0.4800,-0.3425,predicted below floor -0.2
+jiaohe,wheat,-0.3400,-0.2369,predicted below floor -0.2
+jingan_shenzhou,wheat,-0.3400,-0.4903,predicted below floor -0.2
+jinxiang,wheat,-0.3500,0.0935,predicted below floor -0.2
+jiyang,wheat,-0.3500,-0.2186,predicted below floor -0.2
+jurrah,wheat,-0.4000,-0.4699,predicted below floor -0.2
+kaf,wheat,-0.4000,,not viable in the efficiency data
+kagoma,wheat,-0.2400,-0.4294,predicted below floor -0.2
+kairouan,wheat,-0.3300,-0.2301,predicted below floor -0.2
+kajenje,wheat,-0.2400,-0.3374,predicted below floor -0.2
+kalat,wheat,-0.3300,-0.4288,predicted below floor -0.2
+karasahr,wheat,-0.3300,-0.2649,predicted below floor -0.2
+karmakshi,wheat,-0.3300,,not viable in the efficiency data
+kashgar,wheat,-0.3300,-0.2408,predicted below floor -0.2
+kashmore,wheat,-0.4000,,not viable in the efficiency data
+kerma,wheat,-0.4000,,not viable in the efficiency data
+khalis,wheat,-0.4000,-0.2212,predicted below floor -0.2
+kherameh,wheat,-0.3400,-0.3572,predicted below floor -0.2
+khoja_idat_kala,wheat,-0.3300,-0.3956,predicted below floor -0.2
+khunj,wheat,-0.4800,-0.3459,predicted below floor -0.2
+kolokani,wheat,-0.3300,,not viable in the efficiency data
+lalian,wheat,-0.2500,-0.3670,predicted below floor -0.2
+legnago,wheat,-0.2400,-0.0660,predicted below floor -0.2
+lhasa,wheat,-0.3800,-0.3594,predicted below floor -0.2
+lisino,wheat,-0.2300,-0.2577,predicted below floor -0.2
+lower_pinda,wheat,-0.4000,-0.3654,predicted below floor -0.2
+lukulunga,wheat,-0.1600,,not viable in the efficiency data
+manigango,wheat,-0.2000,,not viable in the efficiency data
+mansura,wheat,-0.4000,,not viable in the efficiency data
+mantova,wheat,-0.2400,-0.0632,predicted below floor -0.2
+marte,wheat,-0.4000,,not viable in the efficiency data
+mawqaq,wheat,-0.4000,,not viable in the efficiency data
+mbanza_mbata,wheat,-0.2400,-0.4923,predicted below floor -0.2
+minya,wheat,-0.4000,,not viable in the efficiency data
+mirandola,wheat,-0.2400,-0.0503,predicted below floor -0.2
+miskah,wheat,-0.4000,,not viable in the efficiency data
+mokwa,wheat,-0.2400,,not viable in the efficiency data
+molundu,wheat,-0.2400,,not viable in the efficiency data
+mondonedo,wheat,-0.2000,,not viable in the efficiency data
+mongoffa,wheat,-0.2400,-0.3907,predicted below floor -0.2
+mourdiah,wheat,-0.3300,,not viable in the efficiency data
+murau,wheat,-0.2300,-0.2164,predicted below floor -0.2
+nguidjilone,wheat,-0.4000,,not viable in the efficiency data
+nimvar,wheat,-0.3400,-0.3658,predicted below floor -0.2
+nonantola,wheat,-0.2400,-0.0203,predicted below floor -0.2
+nyzvar,wheat,-0.3300,,not viable in the efficiency data
+orta_kuyu,wheat,-0.3300,,not viable in the efficiency data
+pandjih,wheat,-0.3400,-0.3654,predicted below floor -0.2
+payzawat,wheat,-0.3300,,not viable in the efficiency data
+po,wheat,-0.3600,,not viable in the efficiency data
+poskam,wheat,-0.3300,-0.0832,predicted below floor -0.2
+potiskum,wheat,-0.3300,,not viable in the efficiency data
+purang,wheat,-0.2000,,not viable in the efficiency data
+qasr_al_qaba,wheat,-0.4000,,not viable in the efficiency data
+qus,wheat,-0.4000,,not viable in the efficiency data
+raghdan,wheat,-0.4000,-0.4274,predicted below floor -0.2
+rajabar,wheat,-0.4000,,not viable in the efficiency data
+ranyah,wheat,-0.4000,,not viable in the efficiency data
+roshtkhar,wheat,-0.3400,-0.3897,predicted below floor -0.2
+rusafa,wheat,-0.4000,-0.4998,predicted below floor -0.2
+saadatshahr,wheat,-0.3400,-0.3583,predicted below floor -0.2
+sadah,wheat,-0.4000,-0.2922,predicted below floor -0.2
+salde,wheat,-0.4000,,not viable in the efficiency data
+samanoud,wheat,-0.4000,,not viable in the efficiency data
+samira,wheat,-0.4000,,not viable in the efficiency data
+sansanding,wheat,-0.3300,,not viable in the efficiency data
+sar_mashhad,wheat,-0.3300,0.0293,predicted below floor -0.2
+saryadyn,wheat,-0.3400,-0.3758,predicted below floor -0.2
+shahpur,wheat,-0.2500,-0.3869,predicted below floor -0.2
+shayar,wheat,-0.3300,,not viable in the efficiency data
+shush,wheat,-0.3300,0.0093,predicted below floor -0.2
+sillanwali,wheat,-0.2500,-0.4566,predicted below floor -0.2
+sironj,wheat,-0.4000,-0.2622,predicted below floor -0.2
+sitpur,wheat,-0.4000,,not viable in the efficiency data
+sok,wheat,-0.2000,,not viable in the efficiency data
+taif,wheat,-0.4000,,not viable in the efficiency data
+taihe,wheat,-0.5500,-0.3532,predicted below floor -0.2
+taklung,wheat,-0.2000,,not viable in the efficiency data
+tarrega,wheat,-0.2400,-0.0730,predicted below floor -0.2
+tas_kichu,wheat,-0.3400,-0.3711,predicted below floor -0.2
+tenteksor,wheat,-0.3400,-0.4431,predicted below floor -0.2
+tikrit,wheat,-0.4000,-0.3183,predicted below floor -0.2
+tim_samarkand,wheat,-0.3400,-0.3459,predicted below floor -0.2
+toksun,wheat,-0.3300,-0.1964,predicted below floor -0.2
+tragor,wheat,-0.2000,,not viable in the efficiency data
+tripoli,wheat,-0.3300,-0.1826,predicted below floor -0.2
+tsaparang,wheat,-0.3800,,not viable in the efficiency data
+uch,wheat,-0.4000,,not viable in the efficiency data
+ushkan,wheat,-0.3300,-0.4503,predicted below floor -0.2
+wanqiu,wheat,-0.5500,-0.1283,predicted below floor -0.2
+xihua,wheat,-0.4000,0.1157,predicted below floor -0.2
+yafran,wheat,-0.4000,-0.4604,predicted below floor -0.2
+yahr,wheat,-0.2500,-0.3974,predicted below floor -0.2
+yongqing,wheat,-0.3500,-0.4889,predicted below floor -0.2
+yuncheng,wheat,-0.3500,-0.0148,predicted below floor -0.2
+zangla,wheat,-0.2000,,not viable in the efficiency data
+zondoma,wheat,-0.3300,,not viable in the efficiency data
+cividale,wine,-0.0700,,not viable in the efficiency data
+massa,wine,-0.2100,-0.3933,predicted below floor -0.2
+montreux,wine,-0.2100,,not viable in the efficiency data
+morella,wine,-0.2100,-0.1364,predicted below floor -0.2
+nyon,wine,-0.0700,,not viable in the efficiency data
+qingxiang,wine,-0.1800,,not viable in the efficiency data
+sarzana,wine,-0.0700,,not viable in the efficiency data
+shaoxing,wine,0.0100,,not viable in the efficiency data
+shkoder,wine,0.0100,,not viable in the efficiency data
+trebinje,wine,0.1200,,not viable in the efficiency data
+tsageri,wine,-0.2100,,not viable in the efficiency data
+viana_do_castelo,wine,0.0200,,not viable in the efficiency data

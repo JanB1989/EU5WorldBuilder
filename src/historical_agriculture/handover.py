@@ -1,0 +1,160 @@
+"""Handover contract for the constructor.
+
+One versioned directory with everything the mod needs from the World Builder, denominated in people
+(1 game capacity unit = 1,000 people; the constructor converts and rounds):
+
+- contract.json          schema, World Builder commit, units, fit metrics, file hashes
+- attribute_rows.csv     one row per attribute class: flat capacity people (natural fit) and goods
+                         output modifiers (output_<good> columns, blank where no row)
+- building_types.csv     one row per improvement building: unit people per level, level limit, gate
+                         rules (JSON), cap equation in levels (JSON: base, class terms, development
+                         per point), ledger totals
+- location_buildings.csv one row per location and building: starting levels, caps, ledger people
+- location_targets.csv   one row per location: targets, attribute flat, development, model values
+- goods_floor.csv        RGO locations for the constructor floor carve-out
+- README.md
+
+``check`` recomputes the start and maximum model from a constructor-side levels table (after any
+rescaling or rounding) and reports the fit against the targets, so scaling decisions can be verified.
+"""
+import json,hashlib,subprocess,datetime
+from pathlib import Path
+import numpy as np
+import pandas as pd
+from .provenance import write_json
+
+ROOT=Path(__file__).resolve().parents[2]
+SCHEMA_VERSION='1.0'
+
+
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+
+
+def git_commit():
+    try:return subprocess.run(['git','rev-parse','--short','HEAD'],cwd=ROOT,capture_output=True,text=True,check=True).stdout.strip()
+    except Exception:return 'unknown'
+
+
+def metrics(y,p):
+    y=np.asarray(y,float);p=np.asarray(p,float);err=p-y;rel=np.abs(err)/np.maximum(y,1)
+    ss=float(((y-y.mean())**2).sum())
+    return {'r2':float(1-(err**2).sum()/ss) if ss>0 else float('nan'),'median_absolute_percentage_error':float(100*np.median(rel)),'within_25_percent':float(100*np.mean(rel<=.25)),'mean_bias':float(err.mean()),'total_model':float(p.sum()),'total_target':float(y.sum())}
+
+
+def attribute_rows(fit_coef,goods_coef,features):
+    cap=fit_coef[fit_coef.target=='natural_capacity'][['attribute','value','people','share_of_reference','locations']].rename(columns={'people':'capacity_people','share_of_reference':'capacity_share_of_reference'})
+    mx=fit_coef[fit_coef.target=='maximum_capacity'][['attribute','value','people']].rename(columns={'people':'maximum_capacity_people_info'})
+    rows=cap.merge(mx,on=['attribute','value'],how='left')
+    rows['is_reference']=rows.attribute.eq('reference')
+    if len(goods_coef):
+        g=goods_coef.pivot_table(index=['attribute','value'],columns='good',values='modifier',aggfunc='first')
+        g.columns=[f'output_{c}' for c in g.columns];rows=rows.merge(g.reset_index(),on=['attribute','value'],how='left')
+        # goods intercepts live on the reference row
+    order={f:i for i,f in enumerate(['reference']+list(features))}
+    rows['_o']=rows.attribute.map(order).fillna(99);rows=rows.sort_values(['_o','value']).drop(columns='_o')
+    return rows
+
+
+def building_types(buildings,caps,ledger):
+    out=[]
+    for r in buildings.itertuples():
+        if not r.unit_people_per_level or not np.isfinite(r.unit_people_per_level):continue
+        c=caps[caps.building==r.building]
+        eq={'base_levels':float(c[c.attribute=='base'].levels.iloc[0]) if (c.attribute=='base').any() else 0.,
+            'levels_per_development_point':float(c[c.attribute=='development'].levels.iloc[0]) if (c.attribute=='development').any() else 0.,
+            'class_terms':[{'attribute':x.attribute,'value':str(x.value),'levels':float(x.levels)} for x in c[~c.attribute.isin(['base','development'])].itertuples() if x.levels]}
+        out.append({'building':r.building,'unit_people_per_level':float(r.unit_people_per_level),'level_limit':int(getattr(r,'level_limit',20) or 20),'gate_json':r.gate,'cap_equation_json':json.dumps(eq),
+            'levels_per_development_point':eq['levels_per_development_point'],'eligible_locations':int(r.eligible_locations),'users_at_start':int(getattr(r,'users_at_start',0) or 0),
+            'starting_ledger_people':float(ledger[f'starting_{r.building}_capacity'].sum()) if f'starting_{r.building}_capacity' in ledger else float('nan'),
+            'maximum_ledger_people':float(ledger[f'maximum_{r.building}_capacity'].sum()) if f'maximum_{r.building}_capacity' in ledger else float('nan')})
+    return pd.DataFrame(out)
+
+
+def location_buildings(assign,ledger,kinds):
+    led=ledger.set_index('location_tag').reindex(assign.index)
+    rows=[]
+    for k in kinds:
+        rows.append(pd.DataFrame({'location_tag':assign.index,'building':k,'starting_levels':assign[f'{k}_levels_start'].astype(int).to_numpy(),
+            'cap_at_start':assign[f'{k}_cap'].astype(int).to_numpy(),'cap_at_reference_development':assign[f'{k}_cap_at_reference'].astype(int).to_numpy(),
+            'starting_ledger_people':led.get(f'starting_{k}_capacity',pd.Series(0.,index=assign.index)).fillna(0.).to_numpy(float),
+            'maximum_ledger_people':led.get(f'maximum_{k}_capacity',pd.Series(0.,index=assign.index)).fillna(0.).to_numpy(float)}))
+    out=pd.concat(rows,ignore_index=True)
+    return out[(out.starting_levels>0)|(out.cap_at_start>0)|(out.cap_at_reference_development>0)|(out.maximum_ledger_people>0)].reset_index(drop=True)
+
+
+def check(levels,units,targets):
+    """levels: DataFrame(location_tag, building, starting_levels, cap_at_start); units: {building: people per level};
+    targets: DataFrame indexed by location_tag with attribute_flat_people, starting_target_people, maximum_target_people."""
+    lv=levels.copy();lv['unit']=lv.building.map(units).astype(float)
+    if lv.unit.isna().any():raise ValueError('Missing unit for buildings: '+', '.join(sorted(lv[lv.unit.isna()].building.unique())))
+    start=(lv.starting_levels*lv.unit).groupby(lv.location_tag).sum().reindex(targets.index).fillna(0.)
+    mx=(lv.cap_at_start*lv.unit).groupby(lv.location_tag).sum().reindex(targets.index).fillna(0.)
+    flat=targets.attribute_flat_people.to_numpy(float)
+    return {'starting':metrics(targets.starting_target_people,flat+start.to_numpy()),'maximum':metrics(targets.maximum_target_people,flat+mx.to_numpy()),
+            'starting_model_total':float((flat+start).sum()),'maximum_model_total':float((flat+mx).sum())}
+
+
+def build(version=None,output_root=None):
+    commit=git_commit();version=version or f"{datetime.date.today().isoformat()}-{commit}"
+    out=Path(output_root or ROOT/'artifacts/handover').resolve()/version;out.mkdir(parents=True,exist_ok=True)
+    fit=json.loads((ROOT/'artifacts/attribute_fit_flat/report.json').read_text());fit_cfg=fit['config']
+    coef=pd.read_csv(ROOT/'artifacts/attribute_fit_flat/coefficients.csv',keep_default_na=False)
+    pred=pd.read_csv(ROOT/'artifacts/attribute_fit_flat/location_predictions.csv',keep_default_na=False).set_index('location_tag')
+    assign=pd.read_csv(ROOT/'artifacts/building_assignment/locations.csv',keep_default_na=False).set_index('location_tag')
+    breport=json.loads((ROOT/'artifacts/building_assignment/report.json').read_text())
+    buildings=pd.read_csv(ROOT/'artifacts/building_assignment/buildings.csv',keep_default_na=False)
+    buildings['unit_people_per_level']=pd.to_numeric(buildings.unit_people_per_level,errors='coerce')
+    caps=pd.read_csv(ROOT/'artifacts/building_assignment/cap_coefficients.csv',keep_default_na=False)
+    bcfg=breport['config'];buildings['level_limit']=int(bcfg['level_limit'])
+    ledger=pd.read_csv(ROOT/'artifacts/locations/improvement_ledger_equal_area.csv',keep_default_na=False)
+    for c in ledger.columns:
+        if c.endswith('_capacity'):ledger[c]=pd.to_numeric(ledger[c],errors='raise')
+    targets=pd.read_csv(ROOT/'artifacts/locations/capacity_targets_equal_area.csv',keep_default_na=False).set_index('location_tag')
+    dev=pd.read_csv(ROOT/'artifacts/development/locations.csv',keep_default_na=False).set_index('location_tag')
+    goods_dir=ROOT/'artifacts/goods_output_fit'
+    goods_coef=pd.read_csv(goods_dir/'coefficients.csv',keep_default_na=False) if (goods_dir/'coefficients.csv').exists() else pd.DataFrame(columns=['good','attribute','value','modifier'])
+    goods_report=json.loads((goods_dir/'report.json').read_text()) if (goods_dir/'report.json').exists() else None
+    floors=pd.read_csv(goods_dir/'rgo_floor.csv',keep_default_na=False) if (goods_dir/'rgo_floor.csv').exists() else pd.DataFrame()
+    kinds=[b for b,u in zip(buildings.building,buildings.unit_people_per_level) if np.isfinite(u)]
+
+    rows=attribute_rows(coef,goods_coef,fit_cfg['features']);rows.to_csv(out/'attribute_rows.csv',index=False)
+    bt=building_types(buildings,caps,ledger);bt.to_csv(out/'building_types.csv',index=False)
+    lb=location_buildings(assign,ledger,kinds);lb.to_csv(out/'location_buildings.csv',index=False,float_format='%.1f')
+    own=pred.index
+    lt=pd.DataFrame({'location_tag':own,'is_ownable':True,'region':pred.region.to_numpy(),'macro_region':pred.macro_region.to_numpy(),
+        'natural_target_people':pred.natural_capacity_people.to_numpy(float),'starting_target_people':pred.starting_capacity.to_numpy(float),'maximum_target_people':pred.maximum_capacity_people.to_numpy(float),
+        'attribute_flat_people':pred.natural_capacity_fitted.to_numpy(float),'attribute_maximum_info_people':pred.maximum_capacity_fitted.to_numpy(float),
+        'development':pd.to_numeric(dev.development,errors='coerce').reindex(own).fillna(0.).to_numpy(),
+        'starting_model_people':assign.starting_capacity_model.reindex(own).to_numpy(float),'maximum_model_people':assign.maximum_capacity_model.reindex(own).to_numpy(float),
+        'start_exceeds_attribute_maximum':pred.start_exceeds_attribute_maximum.astype(str).eq('True').to_numpy()})
+    lt.to_csv(out/'location_targets.csv',index=False,float_format='%.1f')
+    floors.to_csv(out/'goods_floor.csv',index=False)
+    self_check=check(lb.rename(columns={'starting_levels':'starting_levels'}),{r.building:r.unit_people_per_level for r in bt.itertuples()},lt.set_index('location_tag'))
+    files={f.name:sha(f) for f in sorted(out.glob('*.csv'))}
+    contract={'schema_version':SCHEMA_VERSION,'version':version,'worldbuilder_commit':commit,'created':datetime.datetime.now().isoformat(timespec='seconds'),
+        'units':{'people_per_game_capacity_unit':1000,'note':'All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding.'},
+        'attributes':{'features':fit_cfg['features'],'reference_classes':fit_cfg['reference_classes'],'capacity_percent_per_point':0.0},
+        'capacity_fit':fit['metrics'],'building_fit':breport['fit'],'goods_fit':goods_report['summary'] if goods_report else None,
+        'development':{'source':'game_start','maximum_reference_development':bcfg.get('maximum_reference_development',45),'note':'Development multiplies nothing; it enters the cap equations as levels per point (cap_at_start uses each location\'s starting development, cap_at_reference_development the reference value). The constructor reads development from the game.'},
+        'self_check':self_check,'counts':{'attribute_rows':int(len(rows)),'building_types':int(len(bt)),'location_buildings':int(len(lb)),'locations':int(len(lt)),'goods_floor':int(len(floors))},
+        'files':files,'rules':['No per-location capacity value: capacity = sum of attribute rows + sum of building levels x unit.',
+            'Farm buildings take land: raw_modifier local_population_capacity = -land per level; max_levels = floor((flat - reserve)/land) + own levels (constructor constants).',
+            'The game keeps its RGO; goods rows shape output only; the constructor keeps its floor carve-out for goods_floor.csv.']}
+    write_json(out/'contract.json',contract)
+    (out/'README.md').write_text(f"""# World Builder handover {version}
+
+Schema {SCHEMA_VERSION}, World Builder commit `{commit}`. All values in people (1 game unit = 1,000 people).
+
+| File | Rows | Content |
+|---|---:|---|
+| attribute_rows.csv | {len(rows)} | flat capacity people per attribute class (natural fit) and goods output modifiers (`output_<good>`, blank = no row); the `reference` row is the intercept |
+| building_types.csv | {len(bt)} | improvement buildings: unit people per level, level limit, gate rules (JSON), cap equation in levels (JSON), ledger totals |
+| location_buildings.csv | {len(lb)} | per location and building: starting levels, cap at start, cap at development 100, ledger people |
+| location_targets.csv | {len(lt)} | per location: targets, attribute flat, development, model values, review flag |
+| goods_floor.csv | {len(floors)} | RGO locations for the floor carve-out |
+
+Self-check (attribute flat + levels x unit against targets): start R² {self_check['starting']['r2']:.3f}, median error {self_check['starting']['median_absolute_percentage_error']:.1f}%; maximum R² {self_check['maximum']['r2']:.3f}, median error {self_check['maximum']['median_absolute_percentage_error']:.1f}%.
+
+Verify a rescaled or rounded levels table with `worldbuilder handover-check --levels <csv> --units <json> --version {version}`.
+""")
+    return contract

@@ -28,6 +28,15 @@ uv run worldbuilder --help
 
 ## Independent river network and EU5 export
 
+Vanilla completion (2026-09-21, `configs/rivers.json` `export.vanilla_completion`): where vanilla gives an
+ownable location a river the network drawing does not, a one-pixel bank detour moves the mainstem into
+the other bank location (a mainstem rasterised on one side of a border, Cairo on the Nile), and where the
+network carries nothing (small rivers below the discharge cut, delta distributaries the downstream tree
+cannot represent) vanilla's own river piece is copied as its own tree with one pixel of clearance and
+vanilla's widths. `location_levels.csv` predicts the engine level of every location from the bitmap with
+the verified rules (highest width inside the location wins, a connection marker forces level 5), so the
+attribute fit and the exported bitmap agree without an in-game export.
+
 ```bash
 uv run worldbuilder rivers --stage network
 uv run worldbuilder rivers --stage export

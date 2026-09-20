@@ -1351,31 +1351,34 @@ surame,rice,-0.2800,0.0848,predicted below floor -0.2
 tabou_m,rice,0.0300,,not viable in the efficiency data
 wenchuan,rice,-0.2800,0.2259,predicted below floor -0.2
 zhigu,rice,-0.2800,-0.2382,predicted below floor -0.2
-abengourou,saffron,-0.4200,,not viable in the efficiency data
-abomey,saffron,-0.4200,,not viable in the efficiency data
-amaigbo,saffron,-0.3100,,not viable in the efficiency data
-andevoranto,saffron,-0.3600,,not viable in the efficiency data
-bemanevika,saffron,-0.4900,,not viable in the efficiency data
-cestos,saffron,-0.5800,,not viable in the efficiency data
-daoukro,saffron,-0.4200,,not viable in the efficiency data
-epe,saffron,-0.4200,,not viable in the efficiency data
-fahambahy,saffron,-0.4900,,not viable in the efficiency data
-grand_lahou,saffron,-0.4200,,not viable in the efficiency data
-kibi,saffron,-0.4200,,not viable in the efficiency data
-kissidougou,saffron,-0.4400,,not viable in the efficiency data
-kong,saffron,-0.2800,,not viable in the efficiency data
-mahaela,saffron,-0.4900,,not viable in the efficiency data
-manambato,saffron,-0.3600,-0.3923,predicted below floor -0.2
-nakpa,saffron,-0.2800,,not viable in the efficiency data
-ras_hafun,saffron,-0.3400,,not viable in the efficiency data
-salaga,saffron,-0.2800,,not viable in the efficiency data
-sanniquellie,saffron,-0.4400,,not viable in the efficiency data
-segbwema,saffron,-0.4500,,not viable in the efficiency data
-settra_kru,saffron,-0.4900,,not viable in the efficiency data
-vohipeno,saffron,-0.4900,,not viable in the efficiency data
-winneba,saffron,-0.4200,,not viable in the efficiency data
-yagala,saffron,-0.5800,,not viable in the efficiency data
-yanbu,saffron,-0.2000,,not viable in the efficiency data
+abengourou,saffron,-0.3900,,not viable in the efficiency data
+abomey,saffron,-0.5300,,not viable in the efficiency data
+amaigbo,saffron,-0.2900,,not viable in the efficiency data
+andevoranto,saffron,-0.3500,,not viable in the efficiency data
+bemanevika,saffron,-0.5100,,not viable in the efficiency data
+cestos,saffron,-0.6000,,not viable in the efficiency data
+daoukro,saffron,-0.3900,,not viable in the efficiency data
+epe,saffron,-0.3900,,not viable in the efficiency data
+fahambahy,saffron,-0.5100,,not viable in the efficiency data
+ghardaia,saffron,-0.2500,-0.1501,predicted below floor -0.2
+grand_lahou,saffron,-0.3900,,not viable in the efficiency data
+kibi,saffron,-0.3900,,not viable in the efficiency data
+kissidougou,saffron,-0.4500,,not viable in the efficiency data
+kong,saffron,-0.3800,,not viable in the efficiency data
+mahaela,saffron,-0.5100,,not viable in the efficiency data
+manambato,saffron,-0.3500,-0.3923,predicted below floor -0.2
+nakpa,saffron,-0.2400,,not viable in the efficiency data
+ras_hafun,saffron,-0.2800,,not viable in the efficiency data
+salaga,saffron,-0.3800,,not viable in the efficiency data
+sanniquellie,saffron,-0.4500,,not viable in the efficiency data
+segbwema,saffron,-0.5800,,not viable in the efficiency data
+settra_kru,saffron,-0.5100,,not viable in the efficiency data
+tamacine,saffron,-0.2500,-0.3507,predicted below floor -0.2
+tozeur,saffron,-0.2500,-0.2305,predicted below floor -0.2
+vohipeno,saffron,-0.5100,,not viable in the efficiency data
+winneba,saffron,-0.3900,,not viable in the efficiency data
+yagala,saffron,-0.6000,,not viable in the efficiency data
+yanbu,saffron,-0.2500,,not viable in the efficiency data
 ahlat,silk,-0.1000,,not viable in the efficiency data
 akyazi,silk,-0.4600,-0.0941,predicted below floor -0.2
 chinon,silk,-0.2900,-0.3312,predicted below floor -0.2
@@ -1651,10 +1654,10 @@ massa,wine,-0.2400,-0.3933,predicted below floor -0.2
 montreux,wine,-0.2400,,not viable in the efficiency data
 morella,wine,-0.2400,-0.1364,predicted below floor -0.2
 nyon,wine,-0.0400,,not viable in the efficiency data
-qingxiang,wine,-0.1400,,not viable in the efficiency data
+qingxiang,wine,-0.1200,,not viable in the efficiency data
 sarzana,wine,-0.0400,,not viable in the efficiency data
 shaoxing,wine,-0.0400,,not viable in the efficiency data
-shkoder,wine,0.0000,,not viable in the efficiency data
+shkoder,wine,0.0200,,not viable in the efficiency data
 trebinje,wine,0.1000,,not viable in the efficiency data
 tsageri,wine,-0.2400,,not viable in the efficiency data
 viana_do_castelo,wine,0.0500,,not viable in the efficiency data

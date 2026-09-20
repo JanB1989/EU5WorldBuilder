@@ -24,6 +24,13 @@
     "minimum_visible_branch_pixels": 8,
     "junction_snap_radius_pixels": 12,
     "junction_policy": "native_markers_with_promotion_audit",
-    "ownable_locations_only": true
+    "ownable_locations_only": true,
+    "vanilla_completion": {
+      "enabled": true,
+      "bank_detours": true,
+      "fallback_pieces": true,
+      "minimum_piece_pixels": 4,
+      "note": "2026-09-21: where vanilla gives an ownable location a river and the network drawing does not (2,122 locations: mainstems rasterised on one bank only, e.g. Cairo; small rivers below the discharge cut; delta distributaries the downstream tree cannot carry), a one-pixel bank detour of the mainstem or a copy of vanilla's own river piece (with one pixel of clearance, as its own tree) gives the location its river. Levels: the mainstem's for detours, vanilla's widths for pieces."
+    }
   }
 }

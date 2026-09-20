@@ -375,7 +375,7 @@ def export(config):
     network, output, raw = Path(config["network"]), Path(config["output"]), Path(config["raw_map_inputs"])
     output.mkdir(parents=True, exist_ok=True)
     code_fingerprints = {str(p): digest(p) for p in [Path(__file__),
-        Path(__file__).with_name("river_network.py"), Path(__file__).with_name("river_preview.py")]}
+        Path(__file__).with_name("river_network.py"), Path(__file__).with_name("river_preview.py"), Path(__file__).with_name("river_completion.py")]}
     upstream = verify(network)
     cfg = config["export"]
     if cfg["junction_policy"] != "native_markers_with_promotion_audit":
@@ -501,6 +501,14 @@ def export(config):
         if len(ledger) % 5000 == 0:
             print(f"  {len(ledger):,} branches routed", flush=True)
     if not visited.all(): raise AssertionError("Selected reaches missing from the export ledger")
+    # Vanilla completion: bank detours and vanilla fallback pieces where vanilla gives a location a river the
+    # network drawing does not (see river_completion.py). Runs before the marker and topology gates.
+    completion = None
+    if cfg.get("vanilla_completion", {}).get("enabled", False):
+        from .river_completion import complete
+        completion_sources = []   # green sources of copied pieces are set by the completion itself
+        completion = complete(np.asarray(native), sizes, owner, markers, zones, inv, blocked, cfg["vanilla_completion"])
+        print(f"Vanilla completion: {completion}", flush=True)
     del owner
     # Keep junction centres ordinary width pixels. Tributary endpoints were
     # marked during routing, one pixel before each receiving mainstem.
@@ -578,7 +586,7 @@ def export(config):
             "latitude": [float(project.lats[-1]), float(project.lats[0])]},
         "river_pixels": vertices, "components": int(components), "junction_pixels": int((markers == 1).sum()),
         "native_encoding_audit": native_checks,
-        "routing": dict(counters), "location_audit": loc,
+        "routing": dict(counters), "location_audit": loc, "vanilla_completion": completion,
         "engineering_checks": {"every_selected_reach_accounted_for": bool(visited.all()),
             "acyclic_four_connected_raster": forest_ok, "one_source_per_component": sources_ok,
             "indexed_png_roundtrip": True, "native_tributary_encoding": True},

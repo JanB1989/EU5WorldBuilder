@@ -1412,7 +1412,7 @@ ayr,oceanic,flatland,farmland,loam,low,0,True,False,galloway_province,europe,-4.
 aytos,oceanic,hills,savanna,loam,very_high,0,False,False,burgas_province,europe,27.382576073858246,42.764675768850175
 ayvacik,mediterranean,hills,thicket,loam,high,0,True,False,biga_province,asia,26.34135697573919,39.67108978706526
 ayvu_pora,savanna,flatland,savanna,loam,very_high,5,False,False,paraguay_province,america,-57.10967514594225,-22.825921120480928
-az_zilfi,arid,plateau,scrubland,sand,very_low,0,False,False,sudair_province,asia,44.601916844707404,26.299664582558144
+az_zilfi,arid,plateau,scrubland,sand,very_low,2,False,False,sudair_province,asia,44.601916844707404,26.299664582558144
 az_zubayir,arid,plateau,desert,sand,very_low,0,False,False,qura_province,asia,37.92088137882217,25.917628832413875
 azab,dry_summer_continental,mountains,grasslands,sand,very_low,0,False,False,adraskan_province,asia,63.54129277810816,33.45663599639824
 azadvar,cold_arid,plateau,scrubland,loam,low,0,False,False,esfarayen_province,asia,56.64136830617082,36.68279200367944
@@ -2581,7 +2581,7 @@ borulakh,subarctic,flatland,coniferous_forest,loam,very_low,2,False,False,upper_
 boruma,subtropical_monsoon,hills,savanna,loam,very_high,5,False,False,luangwa_province,africa,29.55302570401912,-15.070848666875023
 borun,savanna,hills,dry_forest,sand,very_high,3,False,False,urucu_province,america,-41.84532193271937,-18.440564781656956
 boruy,subtropical,flatland,mixed_forest,loam,very_high,0,False,False,sliven_province,europe,25.79326402921771,42.481895651263216
-boryeong,continental,hills,marsh,loam,very_high,0,True,False,hongju_province,asia,126.70943157317913,36.40046297787093
+boryeong,continental,hills,marsh,loam,very_high,1,True,False,hongju_province,asia,126.70943157317913,36.40046297787093
 boryspil,continental,floodplains,mixed_forest,silt,high,0,False,False,pereiaslav_province,europe,31.161224053033465,50.36632518325901
 bosa,mediterranean,hills,farmland,loam,low,0,True,False,logudoro_province,europe,8.613300577846047,40.295804895200604
 bosa_colombia,oceanic,mountains,jungle,loam,low,1,False,False,chunsa_province,america,-74.19315613492782,4.509348791564114
@@ -4608,7 +4608,7 @@ dongning,continental_monsoon,hills,mixed_forest,silt,high,0,False,False,muling_p
 dongola,arid,flatland,desert,stony,very_low,4,False,False,makuria_province,africa,30.461390953777084,18.611366420501987
 dongondoutchi,hot_steppe,flatland,grasslands,sand,very_low,0,False,False,dosso_province,africa,4.4036142743534015,13.900546889483307
 dongping,subtropical,mountains,forest,loam,high,3,False,False,changsha_province,asia,111.05435354311578,28.271831505994065
-dongsheng,cold_steppe,floodplains,grasslands,loam,low,0,False,False,qingcheng_province,asia,111.30627139526825,40.398119718719904
+dongsheng,cold_steppe,floodplains,grasslands,loam,low,3,False,False,qingcheng_province,asia,111.30627139526825,40.398119718719904
 dongxiang,subtropical,floodplains,marsh,sand,moderate,0,False,False,fuzhou_jiangxi_province,asia,116.5975392706415,28.19614625051808
 dongxiang_dazhou,subtropical_monsoon,hills,forest,loam,moderate,5,False,False,dazhou_province,asia,107.78343378523937,31.509090442673156
 dongyang,subtropical,mountains,forest,loam,high,0,False,False,jinhua_province,asia,120.42636567913388,29.153332106555627
@@ -5513,7 +5513,7 @@ gardelegen,oceanic,flatland,grasslands,loam,very_high,0,False,False,altmark_prov
 gardez,cold_steppe,plateau,scrubland,loam,low,1,False,False,ghazni_province,asia,68.99096309791491,33.46952932601204
 gardman,continental,mountains,forest,loam,very_high,0,False,False,arran_province,europe,46.1883222353251,40.50972439125292
 gardr,arctic,hills,tundra,stony,very_low,0,True,False,gardr_province,europe,-45.454284978369174,60.728196214304006
-garengaze,savanna,plateau,savanna,sand,high,0,False,False,mweru_province,africa,27.303380526733946,-9.334993936650807
+garengaze,savanna,plateau,savanna,sand,high,2,False,False,mweru_province,africa,27.303380526733946,-9.334993936650807
 gargando,arid,floodplains,scrubland,sand,very_low,2,False,False,safare_province,africa,-4.276280534347933,16.188786352178933
 garha,subtropical_monsoon,flatland,marsh,clay,low,2,False,False,garha_mandla,asia,79.9464608832676,23.198052267495054
 garhwa,subtropical_monsoon,hills,dry_forest,loam,very_high,1,False,False,surguja,asia,83.79119935455014,23.9009340239727
@@ -5874,7 +5874,7 @@ gromatukha,subarctic,flatland,mixed_forest,stony,low,3,False,False,lower_zeya_pr
 groningen,oceanic,wetlands,marsh,loam,low,0,True,False,ommelanden_province,europe,6.52934416094098,53.27565160442424
 gronnedal,arctic,plateau,tundra,stony,very_low,0,True,False,middle_settlement,europe,-47.719331143686446,61.16075818429827
 grosseto,mediterranean,wetlands,farmland,loam,moderate,0,True,False,grosseto_province,europe,11.222769368813601,42.874102034254285
-grudziadz,continental,flatland,forest,loam,high,0,False,False,chelmno_province,europe,18.992854580698946,53.46691953755973
+grudziadz,continental,flatland,forest,loam,high,3,False,False,chelmno_province,europe,18.992854580698946,53.46691953755973
 grundsunda,subarctic,flatland,coniferous_forest,sand,low,0,True,False,angermanland_province,europe,19.17795649345402,63.358271877938066
 gruyere,continental,hills,woods,loam,moderate,0,False,False,vaud_province,europe,7.113377655499164,46.67557042813769
 gruzino,continental,wetlands,coniferous_forest,loam,moderate,2,False,False,volkhovskaya_province,europe,32.004288668193226,58.76883517298383
@@ -6575,7 +6575,7 @@ horki,continental,flatland,forest,loam,high,0,False,False,orsha_province,europe,
 hormuz,arid,flatland,desert,sand,very_low,0,True,False,gamrun_province,asia,55.86308661017168,26.78535488654278
 horn,continental,flatland,forest,silt,very_high,0,False,False,ober_dem_manhartsberg_province,europe,15.690243008231647,48.796179013696836
 hornborg,continental,rolling,coniferous_forest,stony,low,0,True,False,bohus_province,europe,11.50368291997529,58.532521120406194
-horodnia,continental,flatland,marsh,loam,very_high,0,False,False,chernihiv_province,europe,31.610354583548542,51.89344888734334
+horodnia,continental,flatland,marsh,loam,very_high,2,False,False,chernihiv_province,europe,31.610354583548542,51.89344888734334
 horodok,continental,flatland,savanna,loam,very_high,0,False,False,western_podolia_province,europe,26.523681189157458,49.342947050950706
 horodyshche,continental,wetlands,marsh,loam,high,5,False,False,lubny_province,europe,33.01945334286239,49.46540041202492
 horoshino,continental,flatland,marsh,loam,high,5,False,False,lubny_province,europe,32.61618676626318,49.65968668899576
@@ -7804,7 +7804,7 @@ kalilayan,tropical,flatland,jungle,loam,high,0,True,False,katagalugan_province,a
 kalina,savanna,flatland,savanna,sand,high,0,False,False,orinucu_province,america,-63.445405395548676,8.935902154307161
 kalinganagara,savanna,hills,marsh,clay,very_high,1,False,False,ganjam_garjats,asia,83.80971898976469,18.728358166853663
 kalingapattanam,savanna,flatland,marsh,loam,high,1,True,False,ganjam_garjats,asia,84.16837033790631,18.545967358843065
-kalininskaya,continental,floodplains,marsh,loam,very_high,0,False,False,akhtar_province,europe,38.46740939741818,45.483715527690464
+kalininskaya,continental,floodplains,marsh,loam,very_high,2,False,False,akhtar_province,europe,38.46740939741818,45.483715527690464
 kalinjar,subtropical_monsoon,valleys,dry_forest,loam,very_high,0,False,False,lower_bundelkhand_province,asia,80.70027916684751,24.998339618979152
 kalinkavichy,continental,floodplains,forest,loam,high,2,False,False,mazyr_province,europe,29.52575687033439,52.151198100038364
 kalispel,dry_summer_continental,hills,coniferous_forest,stony,low,3,False,False,kalispel_province,america,-117.30467662919162,48.36178225320197
@@ -9098,7 +9098,7 @@ koshkar_ata,cold_arid,flatland,scrubland,sand,very_low,0,True,False,mangistau_pr
 koshki,continental,flatland,savanna,loam,moderate,0,False,False,sergiyevsk_province,europe,50.533370121255416,54.1251711462046
 koshkonong,continental,flatland,marsh,silt,very_high,1,False,False,millioke_province,america,-89.18953739130563,42.77679823077579
 koshoy_korgon,cold_steppe,plateau,grasslands,loam,low,0,False,True,naryn_province,asia,75.5798131937446,41.00850218717283
-kosi,subtropical_monsoon,floodplains,marsh,loam,very_high,0,False,False,purnia_province,asia,87.00048705290874,26.16301849534368
+kosi,subtropical_monsoon,floodplains,marsh,loam,very_high,3,False,False,purnia_province,asia,87.00048705290874,26.16301849534368
 kosice,continental,hills,grasslands,stony,very_high,0,False,False,szepes_province,europe,21.395169888786143,48.686863550892134
 kosichkoj,continental,flatland,swamp,loam,high,1,False,False,knyazhaya_province,europe,30.325687775707365,58.23515679667788
 kosiv,continental,mountains,forest,stony,low,0,False,False,pocutia_province,europe,24.938574819428737,48.21472297633826
@@ -9722,7 +9722,7 @@ lapai,savanna,flatland,savanna,sand,high,4,False,False,south_zazzau_province,afr
 lappo,subarctic,wetlands,swamp,stony,low,1,False,False,sodra_osterbotten_province,europe,23.869527143408504,62.746886281498476
 lapseki,mediterranean,hills,mixed_forest,loam,high,0,True,False,biga_province,asia,26.836041530983607,40.33124573260748
 lar,arid,mountains,scrubland,sand,very_low,0,False,False,lar_province,asia,54.7557479735581,27.643753742304654
-larache,mediterranean,flatland,thicket,loam,very_high,0,True,False,azghar_province,africa,-6.1047049431792,34.8465013171625
+larache,mediterranean,flatland,thicket,loam,very_high,1,True,False,azghar_province,africa,-6.1047049431792,34.8465013171625
 laran,savanna,mountains,jungle,stony,high,0,True,False,timor_province,asia,125.50969430850353,-9.071649359834888
 larantuka,savanna,mountains,jungle,loam,very_high,0,True,False,flores_province,asia,122.76106196270814,-8.373835594238605
 larba,subarctic,hills,coniferous_forest,stony,very_low,5,False,False,yuktali_province,asia,123.37698336394692,55.36625493805605
@@ -9942,7 +9942,7 @@ limasawa,tropical,hills,jungle,loam,moderate,0,True,False,tandaya_province,asia,
 limassol,mediterranean,hills,forest,loam,low,0,True,False,cyprus_province,asia,32.9245636776503,34.79792056417387
 limbazi,continental,wetlands,coniferous_forest,stony,low,0,True,False,south_livonia_province,europe,24.642909707251988,57.5555867436189
 limbdi,hot_steppe,flatland,savanna,clay,low,0,False,False,jhalavad,asia,71.82788495144345,22.603426780049837
-limbourg,oceanic,hills,grasslands,loam,high,0,False,False,liege_province,europe,5.917054120384904,50.653845958084084
+limbourg,oceanic,hills,grasslands,loam,high,2,False,False,liege_province,europe,5.917054120384904,50.653845958084084
 limerick,oceanic,flatland,marsh,loam,low,2,True,False,limerick_province,europe,-8.84104642898734,52.58153468367245
 limeuil,oceanic,rolling,grasslands,loam,very_high,5,False,False,perigord_province,europe,0.852797315512646,44.87760390208911
 limey,hot_steppe,plateau,thicket,loam,very_low,2,False,False,haud_province,africa,42.3677572865557,6.604539244679478
@@ -9968,7 +9968,7 @@ lingbi,subtropical_monsoon,floodplains,marsh,loam,very_high,1,False,False,suzhou
 lingchuan,subtropical,hills,forest,loam,moderate,2,False,False,guilin_province,asia,110.40195240491028,25.353807114252152
 lingchuan_zezhou,continental_monsoon,mountains,forest,loam,very_high,1,False,False,zezhou_province,asia,113.3158175442884,35.71250245811834
 linge,tropical,mountains,jungle,loam,moderate,1,False,True,northern_aceh_province,asia,96.94254481528321,4.5875640165537295
-lingen,oceanic,floodplains,grasslands,sand,high,0,False,False,emsland_province,europe,7.507841063426582,52.51472004095005
+lingen,oceanic,floodplains,grasslands,sand,high,1,False,False,emsland_province,europe,7.507841063426582,52.51472004095005
 lingfang,subtropical,flatland,marsh,loam,high,0,False,False,binzhou_guangxi_province,asia,108.92147465207472,23.145516653553454
 lingketeng,tropical,mountains,jungle,clay,moderate,0,True,False,banggai_province,asia,122.5031258555407,-0.8645287049447075
 lingling,subtropical,hills,marsh,loam,high,3,False,False,yongzhou_province,asia,111.61596429688888,26.00751141469653
@@ -10210,7 +10210,7 @@ lubben,continental,floodplains,grasslands,sand,high,1,False,False,niederlausitz_
 lubeck,oceanic,flatland,marsh,sand,high,0,True,False,lubeck_province,europe,10.76234344379219,53.92079091592718
 lubefu,tropical_monsoon,rolling,jungle,clay,very_high,5,False,False,lomami_province,africa,23.0569653492891,-3.8013496657485915
 lubica,continental,hills,grasslands,stony,low,0,False,False,szepes_province,europe,20.457968051452866,49.26010766711462
-lubile,savanna,flatland,dry_forest,loam,high,0,False,False,lukuga_province,africa,27.914850852224163,-6.820010008937809
+lubile,savanna,flatland,dry_forest,loam,high,3,False,False,lukuga_province,africa,27.914850852224163,-6.820010008937809
 lublin,continental,flatland,forest,silt,high,0,False,False,lublin_province,europe,22.69943359834815,51.18056899353957
 lubliniec,continental,flatland,forest,sand,high,0,False,False,opole_province,europe,18.761706768631655,50.719014940515
 lubny,continental,flatland,savanna,loam,high,0,False,False,lubny_province,europe,32.97535477380106,50.01759210569033
@@ -10355,7 +10355,7 @@ lysva,subarctic,flatland,coniferous_forest,loam,moderate,1,False,False,beryozovk
 lysychansk,continental,flatland,grasslands,loam,moderate,2,False,False,bakhmut_province,europe,38.611548468085914,48.65949179884519
 lysye_gory,continental,valleys,grasslands,loam,moderate,0,False,False,atkarsk_province,europe,45.087752109924395,51.41372353711569
 lyuban,continental,flatland,swamp,silt,low,3,False,False,lopskaya_province,europe,31.364910463314686,59.23153796089898
-lyubashany,continental,flatland,forest,loam,high,0,False,False,barysaw_province,europe,29.212953649060438,53.87107909641606
+lyubashany,continental,flatland,forest,loam,high,1,False,False,barysaw_province,europe,29.212953649060438,53.87107909641606
 lyubcha,continental,valleys,coniferous_forest,loam,high,1,False,False,novogrudok_province,europe,25.74305592935235,53.68567045978927
 lyubichi,continental,floodplains,swamp,silt,low,3,False,False,rostislavl_province,europe,39.735631458196394,55.00239108180086
 lyubim,continental,flatland,coniferous_forest,loam,moderate,1,False,False,buy_province,europe,40.51673462612257,58.33614827795733
@@ -10385,7 +10385,7 @@ macaclita,highland_monsoon,plateau,thicket,loam,very_high,1,False,False,macaclit
 macaregua,tropical_monsoon,flatland,jungle,loam,low,3,False,False,boiaca_province,america,-73.39940505709629,7.3683141441988536
 macas,tropical,hills,jungle,loam,low,5,False,False,kofan_province,america,-78.17810059628326,-2.6347445712278588
 macassa,continental,valleys,marsh,loam,very_high,0,True,False,niagara_province,america,-79.8959530480482,43.29433966516949
-macauba,savanna,flatland,savanna,clay,high,0,False,False,tocantins_province,america,-47.99127007136275,-6.1482903335338905
+macauba,savanna,flatland,savanna,clay,high,1,False,False,tocantins_province,america,-47.99127007136275,-6.1482903335338905
 macaya,arctic,floodplains,grasslands,sand,very_low,2,False,True,ayaviri_province,america,-70.04538547684697,-15.051988437298471
 maccan,continental,hills,woods,sand,low,0,True,False,agg_piktuk_province,america,-64.39171749919694,45.58157959423695
 macclesfield,oceanic,flatland,marsh,loam,moderate,1,True,False,cheshire_province,europe,-2.2935212663966524,53.34078337833767
@@ -10396,7 +10396,7 @@ macha,subarctic,flatland,coniferous_forest,loam,very_low,4,False,False,eastern_s
 machakh,subarctic,flatland,mixed_forest,loam,very_low,1,False,False,kustuur_province,asia,132.26693436020707,66.87439032020151
 machala,savanna,wetlands,dry_forest,loam,low,0,True,False,guancavilca_province,america,-79.71653289482884,-3.137239841372862
 machame,savanna,plateau,savanna,loam,high,1,False,False,upper_gafana_province,africa,37.562583941350056,-2.7804252822507265
-machang,subtropical_monsoon,mountains,mixed_forest,loam,moderate,0,False,False,xilong_province,asia,105.29028043501893,24.570519474836136
+machang,subtropical_monsoon,mountains,mixed_forest,loam,moderate,3,False,False,xilong_province,asia,105.29028043501893,24.570519474836136
 machaqa,arctic,plateau,scrubland,loam,very_low,3,False,False,tiwanaku_province,america,-69.09431913615316,-16.899136058579636
 machecoul,oceanic,floodplains,grasslands,loam,high,3,True,False,nantais_province,europe,-1.8290134921828667,47.15490577657626
 machekha,continental,flatland,grasslands,loam,moderate,0,False,False,yelan_province,europe,43.26519023744899,50.799397783285855
@@ -11386,7 +11386,7 @@ miksiw_sipisis,continental,plateau,grasslands,loam,moderate,2,False,False,miksiw
 mikulino,continental,flatland,coniferous_forest,loam,high,1,False,False,vitebsk_province,europe,30.912974763414212,55.1605406281808
 mikulino_tver,continental,flatland,swamp,loam,moderate,1,False,False,zubtsov_province,europe,35.747989457574306,56.48903320398049
 mila,mediterranean,hills,thicket,loam,very_high,0,False,False,constantine_province,africa,6.228636610800407,36.50778668288922
-milange,subtropical_monsoon,hills,savanna,clay,very_high,0,False,False,shire_province,africa,35.45830969317666,-16.15259758461044
+milange,subtropical_monsoon,hills,savanna,clay,very_high,3,False,False,shire_province,africa,35.45830969317666,-16.15259758461044
 milano,subtropical,flatland,marsh,loam,very_high,0,False,False,milano_province,europe,9.236646306793375,45.487717871179846
 milas,mediterranean,flatland,thicket,stony,very_high,1,True,True,aydin_province,asia,27.683645844863577,37.376041754416896
 mile,subtropical_monsoon,mountains,thicket,loam,high,2,False,False,guanxi_province,asia,103.382152220803,24.19155947311921
@@ -11556,7 +11556,7 @@ mixquiahuala,cold_steppe,hills,grasslands,loam,moderate,1,False,False,xilotepec_
 mixtlan,tropical_monsoon,valleys,savanna,loam,high,2,False,False,tochtepec_province,america,-95.75241236941469,17.927399711735116
 miyagi,continental,flatland,swamp,silt,very_high,0,True,False,rikuzen_province,asia,140.78838715650363,38.37167816991198
 miyakojima,subtropical,flatland,forest,clay,moderate,0,True,False,sakishima_islands_province,asia,125.29855318611271,24.758565624403683
-miyaneh,dry_summer_continental,hills,grasslands,sand,low,0,False,False,miyaneh_province,asia,47.40197579162651,37.58684229714524
+miyaneh,dry_summer_continental,hills,grasslands,sand,low,1,False,False,miyaneh_province,asia,47.40197579162651,37.58684229714524
 miyazaki,subtropical,mountains,mixed_forest,loam,moderate,0,True,False,hyuuga_province,asia,131.27784888667657,31.585582235977167
 miyoshi,subtropical,hills,mixed_forest,loam,very_high,1,False,False,bingo_province,asia,132.8096580187592,34.83099846450315
 miyoshi_shikoku,subtropical,mountains,mixed_forest,loam,very_high,1,False,False,awa_province,asia,133.78717206719728,34.00219030271826
@@ -11625,7 +11625,7 @@ mojacar,cold_steppe,hills,thicket,loam,very_high,0,True,False,almeria_province,e
 mojenga,subtropical_monsoon,plateau,savanna,sand,moderate,1,False,False,malingo_province,africa,18.476329001798263,-16.182643098130885
 mokaie,savanna,flatland,dry_forest,loam,very_high,0,True,True,mokaie_province,america,-41.8035210155731,-22.13804129643615
 mokelumne,mediterranean,mountains,coniferous_forest,stony,low,0,False,False,miwok_province,america,-120.39129203268823,38.35610055553743
-mokhcha,continental,flatland,savanna,silt,high,0,False,False,bogdanovo_province,europe,43.36392270627877,53.75072102554838
+mokhcha,continental,flatland,savanna,silt,high,1,False,False,bogdanovo_province,europe,43.36392270627877,53.75072102554838
 mokowan,continental,hills,coniferous_forest,loam,low,1,False,False,apahtoksipisskan_province,america,-113.82937455896925,49.67490762552449
 mokrous,continental,flatland,grasslands,loam,low,0,False,False,piterka_province,europe,47.44659578255454,51.26719260691207
 mokshan,continental,flatland,savanna,loam,high,1,False,False,penza_province,europe,44.579757745910115,53.47390731751638
@@ -12171,7 +12171,7 @@ nahil,subtropical_monsoon,flatland,marsh,loam,very_high,1,False,False,bareilly_p
 nahma,continental,flatland,mixed_forest,loam,low,2,False,False,mattagami_province,america,-80.89070461808188,49.26839846235286
 nahuelpan,mediterranean,hills,grasslands,loam,very_low,2,False,False,chubut_province,america,-70.05773409099936,-43.2773546629134
 naiba,subarctic,flatland,mixed_forest,silt,very_low,0,False,False,urasalaax_province,asia,130.40933388545182,69.69943684156337
-naiman,continental_monsoon,flatland,thicket,loam,low,0,False,False,daning_province,asia,120.9672134650043,43.003981722912016
+naiman,continental_monsoon,flatland,thicket,loam,low,1,False,False,daning_province,asia,120.9672134650043,43.003981722912016
 nain,cold_arid,plateau,desert,sand,very_low,0,False,False,ardestan_province,asia,53.09863223555044,32.866793439444756
 nainital,subtropical_monsoon,mountains,mixed_forest,loam,very_high,0,False,False,kumaon_province,asia,79.64869610960932,29.269472762666524
 nainpur,subtropical_monsoon,valleys,savanna,clay,low,1,False,False,garha_mandla,asia,80.31528656132616,22.42612907228482
@@ -12568,7 +12568,7 @@ nganyaywana,subtropical,hills,savanna,loam,high,0,False,False,burugardi_province
 ngaoundaye,savanna,plateau,savanna,sand,high,5,False,False,eastern_adamawa_province,africa,15.293678008470692,7.380289642334024
 ngaoundere,savanna,mountains,savanna,loam,very_high,1,False,False,eastern_adamawa_province,africa,13.969581664858566,7.463049074711127
 ngaous,cold_steppe,hills,thicket,loam,low,0,False,True,constantine_province,africa,6.094965631588934,35.747191840822744
-ngape,savanna,hills,dry_forest,loam,high,0,False,False,salin_province,asia,94.43849477470894,20.07036078669241
+ngape,savanna,hills,dry_forest,loam,high,1,False,False,salin_province,asia,94.43849477470894,20.07036078669241
 ngaputaw,tropical_monsoon,floodplains,jungle,loam,moderate,2,True,False,myaungmya_province,asia,94.51921453695275,16.472329863093886
 ngarbal,oceanic,plateau,savanna,loam,very_high,1,False,False,turrbal_province,oceania,151.39971274640698,-29.529008313918386
 ngargad,mediterranean,flatland,savanna,loam,low,0,False,False,karta_pintingga_province,oceania,140.59262221550875,-36.179781506071734
@@ -12589,7 +12589,7 @@ nghe_ann,tropical_monsoon,floodplains,marsh,loam,low,3,True,False,nghe_an_provin
 ngibelai,hot_steppe,flatland,desert,sand,low,1,False,True,south_turkana_province,africa,36.434065953935885,1.9631541067885507
 ngikwatela,hot_steppe,flatland,thicket,stony,low,0,False,False,north_turkana_province,africa,34.62520638541503,4.679004335629702
 ngilukumong,hot_steppe,flatland,thicket,sand,low,0,False,False,north_turkana_province,africa,34.659261367432634,3.6868592877772777
-ngimbo_amburi,savanna,plateau,dry_forest,sand,high,0,False,False,kinhasa_province,africa,15.702319979079391,-5.349982917337135
+ngimbo_amburi,savanna,plateau,dry_forest,sand,high,2,False,False,kinhasa_province,africa,15.702319979079391,-5.349982917337135
 ngisir,arid,flatland,desert,stony,low,1,False,True,north_turkana_province,africa,35.34227108472416,3.10433853224378
 ngisonyoka,arid,flatland,desert,stony,low,5,False,True,south_turkana_province,africa,35.79628194544074,2.4393662274760053
 ngiyepakuno,hot_steppe,flatland,scrubland,stony,very_low,0,False,True,north_turkana_province,africa,35.51058467554057,4.170270021711376
@@ -14413,7 +14413,7 @@ puck,continental,flatland,forest,loam,moderate,0,True,False,danzig_province,euro
 puctlan,savanna,wetlands,swamp,clay,high,5,True,False,cuetlaxtlan_province,america,-95.8343184614535,18.643099586675408
 pudasjarvi,subarctic,wetlands,swamp,peat,very_low,2,False,False,norra_osterbotten_province,europe,26.84008553114552,64.95384590260717
 puddokothai,savanna,flatland,marsh,loam,very_high,0,False,False,cola_nadu,asia,78.80923881790596,10.399092334237686
-puding,subtropical_monsoon,plateau,farmland,loam,moderate,0,False,False,anshun_province,asia,106.04618601413608,26.17911623248775
+puding,subtropical_monsoon,plateau,farmland,loam,moderate,1,False,False,anshun_province,asia,106.04618601413608,26.17911623248775
 pudoga,subarctic,flatland,coniferous_forest,silt,low,0,False,False,zaonezhye_province,europe,37.27949408483849,61.50329154662039
 pudtol,tropical_monsoon,mountains,jungle,loam,moderate,1,False,False,lower_cagayan_province,asia,121.13694721121692,18.078666713097327
 puebla_de_alcocer,mediterranean,flatland,thicket,sand,moderate,1,False,False,trujillo_province,europe,-5.1077915677926455,38.9764527807566
@@ -15743,7 +15743,7 @@ scharding,continental,flatland,woods,stony,high,3,False,False,schaunberg_provinc
 scheibbs,continental,mountains,forest,stony,moderate,3,False,False,ober_dem_wienerwald_province,europe,15.129708875217545,47.982783638773185
 schenectady,continental,flatland,forest,loam,high,2,False,False,kanienkehaka_province,america,-74.23659954696282,42.73209941814254
 schesslitz,continental,hills,farmland,stony,moderate,0,False,False,frankische_schweiz_province,europe,11.206285711084206,49.95372989703574
-schinhandowi,subtropical,hills,mixed_forest,loam,very_high,0,False,False,shenandoah_province,america,-79.27469293304054,38.015551083909415
+schinhandowi,subtropical,hills,mixed_forest,loam,very_high,1,False,False,shenandoah_province,america,-79.27469293304054,38.015551083909415
 schio,continental,hills,mixed_forest,loam,low,0,False,False,vicenza_province,europe,11.381277473981385,45.81104631465923
 schladming,subarctic,mountains,coniferous_forest,loam,low,0,False,False,upper_styria_province,europe,13.876873657463818,47.44976479891826
 schleiden,oceanic,hills,grasslands,stony,moderate,0,False,False,eifel_province,europe,6.586592450370517,50.528975694950425
@@ -15802,7 +15802,7 @@ sekadau,tropical,flatland,swamp,loam,low,5,False,False,lower_kapuas_province,asi
 sekayam,tropical,valleys,jungle,loam,low,2,False,False,lower_kapuas_province,asia,110.44575077475531,0.7036476013370025
 seke_gabun,tropical_monsoon,flatland,jungle,loam,low,5,True,False,moyen_ogoowe_province,africa,9.86517184809398,0.8230732414600498
 sekili,subarctic,flatland,mixed_forest,stony,low,1,False,False,tokma_province,asia,103.7180483718314,59.06216131051432
-sekkosi,subtropical_monsoon,plateau,dry_forest,sand,very_high,0,False,False,south_moxico_province,africa,23.488077628481136,-13.476808470416792
+sekkosi,subtropical_monsoon,plateau,dry_forest,sand,very_high,3,False,False,south_moxico_province,africa,23.488077628481136,-13.476808470416792
 selanger,subarctic,flatland,coniferous_forest,stony,low,2,True,False,halsingland_province,europe,17.188190182559367,62.342545410674745
 selby,oceanic,floodplains,farmland,loam,moderate,2,False,False,east_riding_province,europe,-0.7729579053601014,53.82898485002285
 selemde,subarctic,hills,coniferous_forest,stony,very_low,2,False,False,selemdzha_province,asia,132.38560411389903,52.91965845393726
@@ -16046,7 +16046,7 @@ shelek,cold_steppe,flatland,grasslands,loam,moderate,2,False,False,ilibalyk_prov
 sheleksa,subarctic,flatland,coniferous_forest,stony,low,2,False,False,yemetsk_province,europe,40.083627598861085,62.86684156304595
 shemkhiya,arid,flatland,desert,stony,very_low,4,False,False,bayuda_province,africa,33.01837042587388,18.48876025919464
 shemonayevskoye,continental,flatland,grasslands,loam,moderate,1,False,False,zmeinogorsk_province,asia,81.02547653935858,50.8069847214112
-shemysheyka,continental,flatland,coniferous_forest,silt,high,0,False,False,penza_province,europe,45.67016037468903,52.74655089981268
+shemysheyka,continental,flatland,coniferous_forest,silt,high,1,False,False,penza_province,europe,45.67016037468903,52.74655089981268
 shenandoah,subtropical,flatland,mixed_forest,loam,very_high,1,False,False,shenandoah_province,america,-78.42079942582359,38.71773285285753
 shenango,continental,rolling,forest,loam,moderate,2,False,False,erie_province,america,-79.87881366787448,41.52879662867435
 shendi,arid,flatland,desert,stony,very_low,4,False,False,lower_butana_province,africa,33.83490996731621,16.1856095915169
@@ -17848,7 +17848,7 @@ ticamaya,tropical,flatland,jungle,clay,high,1,True,False,naco_province,america,-
 tichit,arid,flatland,desert,sand,very_low,0,False,False,tagant_province,africa,-9.552713729151492,18.63789652616233
 tickanwatic,subtropical,flatland,savanna,loam,high,1,False,False,tickanwatic_province,america,-98.19580008603381,30.86087925481394
 ticonderoga,continental,hills,forest,silt,moderate,2,False,True,adirondacks_province,america,-73.56770989574397,43.61975924189429
-tidah,arid,deltas,savanna,loam,moderate,0,False,True,gharbiyya_province,africa,30.96703783868628,31.24295057029218
+tidah,arid,deltas,savanna,loam,moderate,1,False,True,gharbiyya_province,africa,30.96703783868628,31.24295057029218
 tidee,subarctic,wetlands,swamp,stony,very_low,0,False,True,tu_nedhe_province,america,-115.6476590853324,61.84731959393496
 tidjikja,arid,plateau,desert,sand,very_low,0,False,False,tagant_province,africa,-11.448116811345415,18.5647468717288
 tidni,cold_arid,flatland,scrubland,loam,very_low,0,False,False,tidni_province,oceania,133.087187027234,-31.196374644432176
@@ -18069,7 +18069,7 @@ tolz,continental,hills,grasslands,stony,moderate,1,False,False,alpenvorland_prov
 tom,continental_monsoon,flatland,savanna,silt,low,1,False,False,lower_zeya_province,asia,130.05056779167234,51.02194128294246
 tomakivka,continental,flatland,grasslands,loam,moderate,5,False,False,kodaky_province,europe,34.870118064032,47.87274720668234
 tomamae,continental,hills,forest,loam,high,0,True,False,teshio_province,asia,141.8433201029909,44.384585068910624
-tomar,mediterranean,flatland,thicket,loam,high,0,False,False,ribatejo_province,europe,-8.210591798148869,39.650114151442885
+tomar,mediterranean,flatland,thicket,loam,high,2,False,False,ribatejo_province,europe,-8.210591798148869,39.650114151442885
 tomarza,dry_summer_continental,plateau,grasslands,stony,low,1,False,False,kayseri_province,asia,36.06867110399361,38.615936098351604
 tomata,continental,hills,mixed_forest,loam,very_high,0,False,False,mimasaka_province,asia,133.92652708196545,35.221537053871586
 tomatlan,savanna,flatland,jungle,sand,very_high,0,True,False,tomatlan_province,america,-105.07166772847316,19.848444858465566
@@ -18137,7 +18137,7 @@ tonkawa,subtropical,valleys,grasslands,loam,moderate,1,False,False,tonkawa_provi
 tonle_kong,tropical_monsoon,flatland,jungle,loam,high,5,False,False,champasak_province,asia,106.34842091180201,14.554459356132334
 tonnerre,oceanic,flatland,farmland,loam,very_high,0,False,False,senonais_province,europe,4.104218230343406,47.92245192772335
 tonsberg,continental,flatland,woods,sand,moderate,1,True,False,vestfold_province,europe,10.259753593671519,59.105564096072605
-tonshayevo,continental,flatland,mixed_forest,loam,moderate,0,False,False,uren_province,europe,46.74687184208889,57.71034722115711
+tonshayevo,continental,flatland,mixed_forest,loam,moderate,1,False,False,uren_province,europe,46.74687184208889,57.71034722115711
 tooele,cold_steppe,plateau,scrubland,loam,very_low,0,False,False,kusiutta_province,america,-113.31857237581053,40.34412121569226
 toogee,oceanic,mountains,savanna,sand,low,5,True,False,tasmania_province,oceania,146.24393066161406,-43.05257381873471
 toolginburra,hot_steppe,flatland,savanna,loam,low,0,False,False,bindal_province,oceania,147.99173665000706,-21.957295145136563
@@ -18423,7 +18423,7 @@ tulguur,continental_monsoon,wetlands,marsh,loam,high,4,False,False,sanjiang_prov
 tuliemao,continental_monsoon,hills,grasslands,loam,moderate,0,False,False,taoer_province,asia,120.48530115125817,45.47185880886617
 tulita,subarctic,flatland,coniferous_forest,loam,low,5,False,False,mackenzie_sahtu_province,america,-125.25736221641893,64.3699953142387
 tullahoma,subtropical,flatland,forest,loam,high,1,False,False,kaskinampo_province,america,-85.80764506215891,35.73677306281325
-tullamore,oceanic,wetlands,marsh,peat,low,0,False,True,meath_province,europe,-7.69805883662093,53.25616386732301
+tullamore,oceanic,wetlands,marsh,peat,low,1,False,True,meath_province,europe,-7.69805883662093,53.25616386732301
 tulle,oceanic,hills,grasslands,stony,moderate,0,False,False,turenne_province,europe,1.7639639169815098,45.49988322892543
 tulln,continental,floodplains,farmland,stony,very_high,3,False,False,ober_dem_wienerwald_province,europe,15.862976601294122,48.362671729183326
 tulnici,continental,mountains,forest,loam,very_high,0,False,False,barlad_province,europe,26.680396961164007,45.89218781462451
@@ -18829,7 +18829,7 @@ urgench,cold_arid,floodplains,marsh,loam,high,0,False,False,khiva_province,asia,
 urghtbulaq,cold_arid,plateau,scrubland,sand,low,0,False,True,bortala_province,asia,83.9750130451556,45.45862778124226
 urgun,cold_steppe,mountains,scrubland,stony,very_low,0,False,False,koh_e_sulayman_province,asia,68.90085301255019,32.411129419240304
 urgup,dry_summer_continental,plateau,grasslands,loam,low,1,False,False,kirsehir_province,asia,34.90261390352552,38.81674645054701
-uri,arid,valleys,desert,stony,very_low,0,False,False,north_darfur_province,africa,24.596635838340035,15.095079501243822
+uri,arid,valleys,desert,stony,very_low,1,False,False,north_darfur_province,africa,24.596635838340035,15.095079501243822
 uri_ae_ona,mediterranean,flatland,thicket,sand,low,0,True,False,cochoqua_province,africa,18.240765260221963,-32.97943853416052
 uriparacoxi,subtropical,wetlands,swamp,sand,high,1,False,True,okeechobee_province,america,-81.23748792451471,27.536326094213617
 uriutina,subtropical,wetlands,coniferous_forest,sand,very_high,0,False,False,timucua_province,america,-82.27007631411874,30.292530821662258
@@ -19187,7 +19187,7 @@ vientiane,savanna,floodplains,marsh,loam,high,5,False,False,vientiane_province,a
 vierzon,oceanic,valleys,grasslands,loam,very_high,0,False,False,upper_berry_province,europe,2.3641104358868006,47.406532158293174
 viitasaari,subarctic,wetlands,swamp,stony,very_low,1,False,False,tavastland_province,europe,25.74649705333985,63.19053048713435
 vijaya,tropical_monsoon,flatland,dry_forest,loam,high,1,True,False,vijaya_province,asia,108.98316590628065,13.901063626467487
-vijayanagar,hot_steppe,plateau,dry_forest,loam,very_high,0,False,False,kampili,asia,76.55683577695447,15.11287733330076
+vijayanagar,hot_steppe,plateau,dry_forest,loam,very_high,2,False,False,kampili,asia,76.55683577695447,15.11287733330076
 vijayapur,subtropical_monsoon,flatland,marsh,loam,very_high,5,False,False,lower_kosi_province,asia,87.36960104347884,26.621404591335466
 vijaygarh,subtropical_monsoon,flatland,dry_forest,loam,very_high,5,False,False,baghelkhand,asia,82.99175284953333,24.637871088473247
 vijes,tropical,floodplains,jungle,loam,low,2,False,False,tahami_province,america,-76.24681702147643,4.17139931994082
@@ -19438,7 +19438,7 @@ wallenpaupack,continental,plateau,forest,loam,high,0,False,False,shamokin_provin
 wallerfangen,oceanic,flatland,grasslands,loam,high,2,False,False,pays_messin_province,europe,6.554882952448338,49.28005983813393
 walloomsac,continental,hills,forest,stony,low,1,False,False,pocumtuc_province,america,-72.98247859734872,43.057779913512434
 wallowa,dry_summer_continental,mountains,coniferous_forest,loam,low,3,False,False,nimiipuu_province,america,-117.17997857871734,45.544178120380764
-walnaypek,continental,flatland,swamp,sand,very_low,0,True,False,akilasiewakik_province,america,-55.65902676879128,49.41091336635358
+walnaypek,continental,flatland,swamp,sand,very_low,1,True,False,akilasiewakik_province,america,-55.65902676879128,49.41091336635358
 walong,highland_monsoon,mountains,dry_forest,loam,moderate,5,False,False,zayul_province,asia,96.73762471041397,28.052441531213017
 walpi,cold_steppe,plateau,scrubland,sand,very_low,0,False,False,orayvi_province,america,-110.23515616524784,35.65003590811758
 waluulapam,dry_summer_continental,hills,grasslands,loam,moderate,3,False,False,sahaptin_province,america,-118.45602610531031,45.863163405741275
@@ -19828,7 +19828,7 @@ wuji,cold_steppe,floodplains,mixed_forest,silt,very_high,0,False,False,zhending_
 wujiang,subtropical,wetlands,marsh,loam,high,2,False,True,suzhou_province,asia,120.61672837302478,31.012200657297324
 wujiang_bozhou,subtropical_monsoon,plateau,forest,loam,moderate,5,False,False,bozhou_province,asia,106.80104232108465,27.500729020144423
 wujiang_yingtian,subtropical,wetlands,marsh,loam,very_high,5,False,False,yingtian_province,asia,118.51229196884378,32.03556090097543
-wujin,subtropical,wetlands,mixed_forest,loam,high,0,False,True,changzhou_province,asia,119.91940626519397,31.765462002244227
+wujin,subtropical,wetlands,mixed_forest,loam,high,5,False,True,changzhou_province,asia,119.91940626519397,31.765462002244227
 wujing,highland_monsoon,mountains,jungle,loam,high,3,False,False,dali_province,asia,99.3809678128465,25.954976185936196
 wukari,savanna,flatland,savanna,sand,high,5,False,False,western_adamawa_province,africa,9.71439443357221,7.454820884273528
 wulensi,savanna,flatland,jungle,loam,high,2,False,False,dagbon_province,africa,0.3132129876687202,8.29087139968182
@@ -19885,7 +19885,7 @@ xalima,subarctic,flatland,mixed_forest,silt,very_low,1,False,False,north_kolyma_
 xalisco,savanna,hills,jungle,loam,very_high,1,True,False,aztatlan_province,america,-105.01904208067748,21.05877583776155
 xalostotitlan,subtropical_monsoon,hills,thicket,loam,high,0,False,False,tepactitlan_province,america,-102.18923703509168,21.027870099795443
 xaltocan,cold_steppe,hills,grasslands,loam,moderate,0,False,True,tetzcoco_province,america,-98.98506581860883,19.884647788905237
-xam,arid,plateau,scrubland,stony,very_low,0,False,False,kharakhoen_province,africa,19.45320532430742,-25.970678622192523
+xam,arid,plateau,scrubland,stony,very_low,1,False,False,kharakhoen_province,africa,19.45320532430742,-25.970678622192523
 xam_ka_e,cold_arid,hills,scrubland,stony,very_low,0,False,False,siyathemba_province,africa,21.30054875318237,-31.622296051457106
 xam_neua,subtropical_monsoon,mountains,jungle,loam,moderate,1,False,False,xam_neua_province,asia,104.18774859519863,20.18091403336392
 xamapan,savanna,flatland,thicket,loam,moderate,1,True,False,cuetlaxtlan_province,america,-96.01844483961156,18.944945028775102
@@ -20106,7 +20106,7 @@ yakesa,subarctic,flatland,mixed_forest,stony,low,3,False,False,amur_province,asi
 yakhi,cold_steppe,plateau,grasslands,loam,low,0,False,True,torey_province,asia,113.5103545173979,48.68033840783512
 yakkajari,cold_steppe,floodplains,thicket,sand,low,1,False,False,wemba_wemba_province,oceania,145.45936016095828,-34.9636186274625
 yakovlevskoye_bolshoye,continental,flatland,coniferous_forest,loam,moderate,3,False,False,kostroma_province,europe,41.438897257248186,57.30333626255692
-yakshur_bodya,continental,rolling,coniferous_forest,loam,moderate,0,False,False,igra_province,europe,53.276235860620204,57.18877692820062
+yakshur_bodya,continental,rolling,coniferous_forest,loam,moderate,1,False,False,igra_province,europe,53.276235860620204,57.18877692820062
 yakwahnim_paa,cold_steppe,plateau,scrubland,sand,low,0,False,False,idaho_province,america,-115.69571585840916,42.35315207250127
 yakyu_ki,subarctic,mountains,coniferous_forest,sand,very_low,1,False,False,north_ktunaxa_province,america,-115.54060377645101,51.09204655608185
 yala,tropical_monsoon,hills,jungle,loam,high,1,False,False,kelantan_province,asia,101.23775604453101,6.204233123126729
@@ -20487,7 +20487,7 @@ yuanjiang_yuanjiang,subtropical_monsoon,mountains,jungle,loam,very_high,2,False,
 yuanling,subtropical,hills,forest,loam,high,5,False,False,chen_province,asia,110.40466277256212,28.440799872330338
 yuanmou,subtropical_monsoon,plateau,thicket,loam,very_high,5,False,False,wuding_province,asia,101.86744970997245,25.7742916667421
 yuannan,subtropical,flatland,swamp,loam,high,3,False,False,changde_province,asia,111.21721196763997,28.66976669458929
-yuanqu,continental_monsoon,hills,forest,loam,very_high,0,False,False,jiangzhou_province,asia,111.78160039251247,35.22657643746564
+yuanqu,continental_monsoon,hills,forest,loam,very_high,3,False,False,jiangzhou_province,asia,111.78160039251247,35.22657643746564
 yuanshi_zhending,cold_steppe,flatland,mixed_forest,loam,very_high,0,False,False,zhending_province,asia,114.40900521954558,37.83708698007706
 yuanyang,cold_steppe,floodplains,farmland,loam,very_high,3,False,False,zhengzhou_province,asia,113.93968794429668,35.04879337065994
 yuat,mediterranean,flatland,thicket,loam,low,0,False,False,yuat_province,oceania,116.65625294360916,-30.85716041861971

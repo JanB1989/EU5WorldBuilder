@@ -101,6 +101,125 @@ def bank_detours(sizes, owner, markers, zones, targets, blocked):
     return served
 
 
+def _bfs(start, goal, free, forbidden, x0, y0, x1, y1):
+    """Shortest 4-path from ``start`` to any pixel with goal(pixel) True over free(pixel) pixels, never entering
+    ``forbidden``; returns the path excluding ``start`` (last element satisfies goal) or None."""
+    queue = deque([start]); parents = {start: None}
+    while queue:
+        px, py = queue.popleft()
+        for ox, oy in OFFSETS:
+            n = (px + ox, py + oy)
+            if not (x0 <= n[0] < x1 and y0 <= n[1] < y1) or n in parents or n in forbidden or not free(n):
+                continue
+            parents[n] = (px, py)
+            if goal(n):
+                path = []
+                while n != start:
+                    path.append(n); n = parents[n]
+                return path[::-1]
+            queue.append(n)
+    return None
+
+
+def _neighbourhood(pixels):
+    out = set()
+    for x, y in pixels:
+        out.add((x, y))
+        for ox, oy in OFFSETS:
+            out.add((x + ox, y + oy))
+    return out
+
+
+def bfs_detours(sizes, owner, markers, zones, targets, blocked, max_length=12, reach=4):
+    """Rule 3. For a target location near a river (within ``reach`` px), replace one interior river pixel p (neighbours
+    a, b) by a simple free 4-path from a to b that passes through the location and touches no other river pixel:
+    a leg from a into the location, a leg from b into the location, joined inside. Generalises the straight-run
+    detour to bends and to rivers a few pixels away from the border."""
+    h, w = sizes.shape
+    river = sizes > 0
+    served = []
+    for zone in np.flatnonzero(targets):
+        inside = zones == zone
+        if not inside.any():
+            continue
+        ys, xs = np.where(inside)
+        y0, y1, x0, x1 = max(ys.min() - reach - 2, 0), min(ys.max() + reach + 3, h), max(xs.min() - reach - 2, 0), min(xs.max() + reach + 3, w)
+        win = np.zeros((y1 - y0, x1 - x0), bool); win[ys - y0, xs - x0] = True
+        near = ndimage.binary_dilation(win, iterations=reach)
+        candidates = np.argwhere(near & river[y0:y1, x0:x1])
+        done = False
+        for cy, cx in candidates:
+            if done:
+                break
+            x, y = int(cx + x0), int(cy + y0)
+            if markers[y, x] != 255:
+                continue
+            ns = [(x + ox, y + oy) for ox, oy in OFFSETS if 0 <= x + ox < w and 0 <= y + oy < h and river[y + oy, x + ox]]
+            if len(ns) != 2:
+                continue
+            a, b = ns
+            if markers[a[1], a[0]] != 255 or markers[b[1], b[0]] != 255:
+                continue
+            allowed_contacts = {a, b, (x, y)}
+
+            def free(n, allowed=allowed_contacts):
+                nx, ny = n
+                if river[ny, nx] or blocked[ny, nx]:
+                    return False
+                for qx, qy in OFFSETS:
+                    cx2, cy2 = nx + qx, ny + qy
+                    if 0 <= cx2 < w and 0 <= cy2 < h:
+                        if river[cy2, cx2] and (cx2, cy2) not in allowed:
+                            return False
+                        if markers[cy2, cx2] != 255:
+                            return False
+                return True
+
+            goal = lambda n: bool(inside[n[1], n[0]])
+            # each leg keeps clear of the other end's neighbourhood, so a and b keep degree two after the swap
+            leg_a = _bfs(a, goal, free, (_neighbourhood([b]) | {(x, y)}) - {a}, x0, y0, x1, y1)
+            if leg_a is None:
+                continue
+            forbidden_b = (_neighbourhood(leg_a[:-1]) | _neighbourhood([a]) | {(x, y)}) - {leg_a[-1], b}
+            leg_b = _bfs(b, goal, free, forbidden_b, x0, y0, x1, y1)
+            if leg_b is None:
+                continue
+            e, f = leg_a[-1], leg_b[-1]
+            if e == f:
+                path = leg_a + leg_b[-2::-1]
+            elif abs(e[0] - f[0]) + abs(e[1] - f[1]) == 1:
+                path = leg_a + leg_b[::-1]
+            else:
+                forbidden_c = (_neighbourhood(leg_a[:-1]) | _neighbourhood(leg_b[:-1]) | _neighbourhood([a, b]) | {(x, y)}) - {e, f}
+                join = _bfs(e, lambda n: n == f, free, forbidden_c, x0, y0, x1, y1)
+                if join is None:
+                    continue
+                path = leg_a + join[:-1] + leg_b[::-1]
+            if len(path) > max_length:
+                continue
+            # a simple path: each pixel touches only its path neighbours (and a / b at the ends)
+            pset = set(path)
+            ok = len(pset) == len(path)
+            for i, (qx, qy) in enumerate(path):
+                if not ok:
+                    break
+                adj = {(qx + ox, qy + oy) for ox, oy in OFFSETS} & pset
+                expected = {path[j] for j in (i - 1, i + 1) if 0 <= j < len(path)}
+                if adj != expected:
+                    ok = False
+                touches = {(qx + ox, qy + oy) for ox, oy in OFFSETS} & {a, b}
+                if (i == 0 and touches != {a}) or (i == len(path) - 1 and touches != {b}) or (0 < i < len(path) - 1 and touches):
+                    ok = False
+            if not ok:
+                continue
+            level, basin = int(sizes[y, x]), int(owner[y, x])
+            sizes[y, x] = 0; owner[y, x] = 0; river[y, x] = False
+            for qx, qy in path:
+                sizes[qy, qx] = level; owner[qy, qx] = basin; river[qy, qx] = True
+            served.append(int(zone)); done = True
+    return served
+
+
 def _simple_path(mask):
     """Longest-ish simple 4-path of a connected mask: BFS from an endpoint, then from the farthest pixel."""
     ys, xs = np.where(mask)
@@ -239,6 +358,14 @@ def complete(native, sizes, owner, markers, zones, inv, blocked, cfg):
         pieces = vanilla_pieces(native, sizes, owner, markers, zones, targets, blocked, int(cfg.get("minimum_piece_pixels", 4)))
         report["fallback_pieces"] = {k: v for k, v in pieces.items() if k != "served"}
         report["fallback_locations"] = len(pieces["served"])
+    if cfg.get("bfs_detours", True):
+        served = bfs_detours(sizes, owner, markers, zones, targets, blocked, int(cfg.get("detour_max_length", 12)), int(cfg.get("detour_reach", 4)))
+        targets[served] = False
+        report["bfs_detours"] = len(served)
+        # what is still left gets vanilla's smallest pieces too
+        pieces = vanilla_pieces(native, sizes, owner, markers, zones, targets, blocked, 2)
+        report["small_pieces"] = {k: v for k, v in pieces.items() if k != "served"}
+        report["small_piece_locations"] = len(pieces["served"])
     drawn = location_presence(zones, sizes > 0, count)
     report["remaining"] = int((ownable & vanilla_present & ~drawn).sum())
     return report

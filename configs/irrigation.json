@@ -1,0 +1,10 @@
+{
+  "source": "Siebert, S., Kummu, M., Porkka, M., Doell, P., Ramankutty, N., Scanlon, B.R. (2015): A global data set of the extent of irrigated land from 1900 to 2005. Hydrol. Earth Syst. Sci. 19, 1521-1545. Historical Irrigation Dataset (HID) v1.0, https://mygeohub.org/publications/8, CC BY 4.0",
+  "archive": "data/raw/irrigation/HID.zip",
+  "inner_zip": "irrigation data/Supplement_S6_AEI_in_gridded_products_of_the_HID_ascii.zip",
+  "member": "AEI_HYDE_FINAL_IR_1900.asc",
+  "grid": "data/raw/irrigation/HID_ascii/AEI_HYDE_FINAL_IR_1900.asc",
+  "year": 1900,
+  "output_directory": "artifacts/irrigation",
+  "note": "AEI_HYDE_FINAL_IR: area equipped for irrigation (ha per 5-arc-minute cell), the HID's final product downscaled with the HYDE irrigated-cropland map. 1900 is the earliest layer and pre-modern irrigation almost everywhere the mod needs it (Nile, Indus, Tigris-Euphrates, North China, Central Asia). Used only as the weight of the irrigated staple potential in the fertility grade."
+}

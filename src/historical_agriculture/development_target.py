@@ -197,3 +197,7 @@ def build(config_path=None,output_path=None):
     lines+=['','Population is not used. Files: `locations.csv` (components and development), `macro_regions.csv`, `development_checks.json`.']
     (out/'report.md').write_text('\n'.join(lines)+'\n')
     return report
+
+def capacity_people_per_point():
+    """Flat people of capacity per development point (configs/development.json), 0 when unset."""
+    return float(json.loads((ROOT/'configs/development.json').read_text()).get('capacity_people_per_point',0.0))

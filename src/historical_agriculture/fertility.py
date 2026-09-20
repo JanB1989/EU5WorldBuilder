@@ -205,6 +205,12 @@ def surface_water_weight(inv,sw):
         lv=pd.read_csv(levels,keep_default_na=False).set_index('location_tag').marker_aware_predicted_level.reindex(inv.location_tag).fillna(0).astype(int).to_numpy()
         for level,value in sw.get('river_level_weights',{}).items():w=np.maximum(w,np.where(lv>=int(level),value,0))
     if 'is_adjacent_to_lake' in inv and sw.get('lake_weight'):w=np.maximum(w,np.where(inv.is_adjacent_to_lake.astype(str).eq('True').to_numpy(),sw['lake_weight'],0))
+    # Irrigation evidence: the irrigated share of the location's land (HID 1900) saturating at `irrigated_share_saturation`.
+    if sw.get('irrigated_share_source'):
+        src=ROOT/sw['irrigated_share_source']
+        if not src.exists():raise FileNotFoundError(f'{src}: run `worldbuilder irrigation` first')
+        share=pd.read_csv(src,keep_default_na=False).set_index('location_tag').irrigated_share.reindex(inv.location_tag).fillna(0).to_numpy(float)
+        w=np.maximum(w,np.clip(share/float(sw.get('irrigated_share_saturation',0.3)),0,1))
     return w
 
 
@@ -229,7 +235,7 @@ def build_caloric(cp,cfg):
     inputs={str(p.relative_to(ROOT)):soil.sha(p) for p in paths}
     inputs.update({str((target/r['name']).relative_to(ROOT)):r['sha256'] for r in records+irrigated_records})
     if sw:
-        for extra in [ROOT/'artifacts/river_network/location_levels.csv',ROOT/'artifacts/topography/locations.csv']:
+        for extra in [ROOT/'artifacts/river_network/location_levels.csv',ROOT/'artifacts/topography/locations.csv']+([ROOT/sw['irrigated_share_source']] if sw.get('irrigated_share_source') else []):
             if extra.exists():inputs[str(extra.relative_to(ROOT))]=soil.sha(extra)
     manifest=out/'manifest.json'
     if manifest.exists() and (out/'locations.csv').exists():

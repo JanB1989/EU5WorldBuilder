@@ -7,7 +7,15 @@ Formerly **HistoricalAgriculture1300**. The repository was renamed with its Git 
 ## Location attributes and maps
 
 - Climate and winter severity, vegetation and topography.
-- Soil type and fertility.
+- Soil type and fertility. Fertility is the best caloric staple yield of the land people farm: rain-fed
+  low-input GAEZ v5 potential, or the irrigated potential where the Historical Irrigation Dataset (1900,
+  `uv run worldbuilder irrigation`, `artifacts/irrigation/locations.csv`) shows the location's land was
+  equipped for irrigation (weight = irrigated share / 10%, capped at 1). Added 2026-09-21 because the
+  rain-fed grade called the Nile, Indus and Mesopotamian valleys barren.
+- A flat capacity term of `capacity_people_per_point` (configs/development.json, 1,000 people per
+  development point) is part of the capacity model: the attribute fit subtracts it from its targets, the
+  building assignment and the handover add it back, the constructor writes it as a flat row on the
+  development modifier.
 - Coast, lake and native river attributes, plus isolated river-map experiments.
 - Equal-area population-capacity values and bounded attribute-fit diagnostics.
 - Reproducible source manifests, validation reports, HTML maps and isolated geography test-mod exports.

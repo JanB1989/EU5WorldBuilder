@@ -24,6 +24,8 @@ def main():
     a.add_argument("--export-only",action="store_true",help="Use verified existing geography assignments without recomputing datasets")
     a=sub.add_parser("soils",help="Classify HWSD soils and build the complete EU5 soil-type map")
     a.add_argument("--config",type=Path,default=Path("configs/soil_types.json"))
+    a=sub.add_parser("irrigation",help="Irrigated share of every location from the Historical Irrigation Dataset (1900), the weight of the irrigated staple potential in the fertility grade")
+    a.add_argument("--config",type=Path,default=Path("configs/irrigation.json"))
     a=sub.add_parser("fertility",help="Build complete five-grade fertility assignments from the best caloric staple (GAEZ v5, crop-free); HWSD chemistry when the config has no caloric_yield block")
     a.add_argument("--config",type=Path,default=Path("configs/fertility.json"))
     a=sub.add_parser("vegetation",help="Build complete historical vegetation types and global map")
@@ -140,6 +142,9 @@ def main():
         result=build(args.config)
         print(json.dumps({k:v for k,v in result.items() if k not in ("inputs","geometry")},indent=2))
         return
+    if args.command=="irrigation":
+        from .irrigation import build
+        print(json.dumps(build(args.config),indent=2));return
     if args.command=="fertility":
         from .fertility import build
         result=build(args.config)

@@ -133,9 +133,12 @@ def build(config_path=None,output_path=None):
     max_from_buildings=sum(result[f'{k}_cap']*units[k] for k in units)
     ref_from_buildings=sum(result[f'{k}_cap_at_reference']*units[k] for k in units)
     c=cfg['capacity_percent_per_point']
-    result['starting_capacity_model']=(d.natural_capacity_fitted+start_from_buildings)*(1+c*result.development)
-    result['maximum_capacity_model']=(d.natural_capacity_fitted+max_from_buildings)*(1+c*100)
-    result['maximum_capacity_at_reference']=(d.natural_capacity_fitted+ref_from_buildings)
+    from .development_target import capacity_people_per_point
+    kdev=capacity_people_per_point();dref=float(cfg.get('maximum_reference_development',100))
+    result['development_flat_people']=kdev*result.development
+    result['starting_capacity_model']=(d.natural_capacity_fitted+start_from_buildings)*(1+c*result.development)+kdev*result.development
+    result['maximum_capacity_model']=(d.natural_capacity_fitted+max_from_buildings)*(1+c*100)+kdev*100
+    result['maximum_capacity_at_reference']=(d.natural_capacity_fitted+ref_from_buildings)+kdev*dref
     result['starting_capacity_target']=d.starting_capacity;result['maximum_capacity_target']=d.maximum_capacity
     result['leftover_start_total']=d.starting_capacity-result.starting_capacity_model
     result['leftover_max_total']=d.maximum_capacity-result.maximum_capacity_model

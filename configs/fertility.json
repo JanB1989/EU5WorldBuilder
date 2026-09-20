@@ -304,7 +304,9 @@
       "topography_weights": {},
       "river_level_weights": {},
       "lake_weight": 0.0,
-      "note": "Tested 2026-09-19 and disabled (all weights 0): blending the irrigated (LILM) best-staple potential into surface-water-fed locations lowered the attribute fit (natural held-out R2 0.273 -> 0.247 with floodplain/delta/river/lake weights, 0.255 with floodplains/deltas and river level >= 4 only) and grew the review list, because the raised thresholds pushed rain-fed temperate land down a class while the Nile core (cairo: flatland, river level 0) gained nothing. The irrigated diagnostic columns remain in locations.csv."
+      "note": "2026-09-19: blending the irrigated (LILM) potential by topography/river/lake weights was tested and disabled (weights 0): it lowered the fit and the Nile core (cairo: river level 0) gained nothing because the river layer misses the delta. 2026-09-21: the weight is now the location's irrigated share of land from the Historical Irrigation Dataset (1900), saturating at 10% equipped (the grade describes the land people farm; a desert valley polygon is mostly desert around its watered strip); a desert valley that was irrigated in 1900 gets its irrigated staple potential, rain-fed land is untouched. Thresholds stay frozen, so only watered land changes class.",
+      "irrigated_share_source": "artifacts/irrigation/locations.csv",
+      "irrigated_share_saturation": 0.1
     }
   },
   "sources": [

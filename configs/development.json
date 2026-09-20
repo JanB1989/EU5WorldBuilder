@@ -147,5 +147,7 @@
     "path": "data/raw/vanilla/start_development_1337.csv",
     "column": "development",
     "note": "EU5 1.3.11 vanilla game-start development per location, the vanilla 14_development.txt rules evaluated on the vanilla location table by ppc worldbuilder export-development. Range 0..~110. Set kind to derived to use the land-use formula instead."
-  }
+  },
+  "capacity_people_per_point": 1000.0,
+  "capacity_people_per_point_note": "2026-09-21: flat people of capacity per development point, written by the constructor as a flat row on the development modifier (1 game unit per point). It sits on top of the physical targets: the attribute fit describes the land, the term is the game's intensification bonus (subtracting it from the targets collapsed the fit, it exceeds most natural targets). The building assignment and the handover self-check add it to the model. Chosen because vanilla places its pops where development is 20-50, which the terrain-only model missed."
 }

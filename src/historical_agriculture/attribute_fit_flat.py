@@ -145,6 +145,11 @@ def build_flat(config_path=None,output_path=None):
             if col.endswith('_capacity'):ledger[col]=pd.to_numeric(ledger[col],errors='raise')
         _,carve=extend(d,ledger,bcfg)
     d['pastoral_carve_people']=carve
+    # A flat term per development point (people) sits ON TOP of the physical targets: the attributes fit the land,
+    # the term is the game's intensification bonus (at 1,000 per point it exceeds most natural targets, so it cannot
+    # be subtracted from them without collapsing the fit).
+    from .development_target import capacity_people_per_point
+    kdev=capacity_people_per_point();d['development_flat_people']=kdev*d.development
     d['natural_capacity']=np.maximum(d.natural_capacity_people-carve,0)/(1+c*d.development)
     d['maximum_capacity']=np.maximum(d.maximum_capacity_people-carve,0)/(1+c*100)
     scale=float(d.natural_capacity.median())
@@ -181,8 +186,8 @@ def build_flat(config_path=None,output_path=None):
     pd.DataFrame(coefficients).to_csv(out/'coefficients.csv',index=False)
     # In people at development 100: attribute flat maximum times the full development multiplier.
     # In people: attribute flat times the development multiplier, plus the carved pastoral share (a flat building later).
-    pred['attribute_maximum_people']=pred.maximum_capacity_fitted*(1+c*100)+pred.pastoral_carve_people
-    pred['attribute_natural_people']=pred.natural_capacity_fitted*(1+c*pred.development)+pred.pastoral_carve_people
+    pred['attribute_maximum_people']=pred.maximum_capacity_fitted*(1+c*100)+pred.pastoral_carve_people+kdev*100
+    pred['attribute_natural_people']=pred.natural_capacity_fitted*(1+c*pred.development)+pred.pastoral_carve_people+kdev*pred.development
     pred['start_exceeds_attribute_maximum']=pred.starting_capacity>pred.attribute_maximum_people
     pred.to_csv(out/'location_predictions.csv',index=True,index_label='location_tag')
     review=pred[pred.start_exceeds_attribute_maximum].copy();review['excess']=review.starting_capacity-review.attribute_maximum_people
@@ -195,7 +200,7 @@ def build_flat(config_path=None,output_path=None):
     audit['start_exceeds_attribute_maximum']={'locations':int(pred.start_exceeds_attribute_maximum.sum()),'excess_people':float(review.excess.sum()) if len(review) else 0.}
     report={'locations':len(d),'reference_scale_people':scale,'region_folds':fold_regions,'config':cfg,'fits':fits,'sensibility':sensibility_checks,'metrics':results,'audit':audit,
         'inputs':{str(p.relative_to(ROOT)):sha(p) for p in [cp,Path(__file__),ROOT/cfg['targets_source'],ROOT/'data/raw/location_inputs/inventory.parquet']+[ROOT/f'artifacts/{f}/locations.csv' for f in ['topography','vegetation','climate','soils','fertility']]},
-        'capacity_percent_per_point':c,'units':'Targets are flat (pre-development) people: natural/(1+c*D_start) and maximum/(1+c*100). Columns *_people hold the original targets.',
+        'capacity_percent_per_point':c,'capacity_people_per_point':kdev,'units':'Targets are flat (pre-development) people: natural/(1+c*D_start) and maximum/(1+c*100). Columns *_people hold the original targets.',
         'scope':'Flat-only attribute values in people on the people-denominated targets; no population, no percent modifiers, no per-location term.'}
     from .provenance import write_json
     write_json(out/'report.json',report);write_json(out/'overshoot_undershoot_audit.json',audit)

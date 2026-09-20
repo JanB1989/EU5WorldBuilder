@@ -99,7 +99,7 @@ def location_buildings(assign,ledger,kinds):
     return out[(out.starting_levels>0)|(out.cap_at_start>0)|(out.cap_at_reference_development>0)|(out.maximum_ledger_people>0)].reset_index(drop=True)
 
 
-def check(levels,units,targets,percent_per_point=0.0):
+def check(levels,units,targets,percent_per_point=0.0,people_per_point=0.0):
     """levels: DataFrame(location_tag, building, starting_levels, cap_at_start); units: {building: people per level};
     targets: DataFrame indexed by location_tag with attribute_flat_people, starting_target_people, maximum_target_people
     and development. Capacity = (flat + levels x unit) x (1 + percent_per_point x development), the engine's multiplier."""
@@ -109,9 +109,10 @@ def check(levels,units,targets,percent_per_point=0.0):
     mx=(lv.cap_at_start*lv.unit).groupby(lv.location_tag).sum().reindex(targets.index).fillna(0.)
     flat=targets.attribute_flat_people.to_numpy(float)
     mult=1+float(percent_per_point)*(targets.development.to_numpy(float) if 'development' in targets else 0.)
-    s=(flat+start.to_numpy())*mult;m=(flat+mx.to_numpy())*mult
+    dev=targets.development.to_numpy(float) if 'development' in targets else 0.
+    s=(flat+start.to_numpy())*mult+float(people_per_point)*dev;m=(flat+mx.to_numpy())*mult+float(people_per_point)*dev
     return {'starting':metrics(targets.starting_target_people,s),'maximum':metrics(targets.maximum_target_people,m),
-            'starting_model_total':float(s.sum()),'maximum_model_total':float(m.sum()),'percent_per_point':float(percent_per_point)}
+            'starting_model_total':float(s.sum()),'maximum_model_total':float(m.sum()),'percent_per_point':float(percent_per_point),'people_per_point':float(people_per_point)}
 
 
 def build(version=None,output_root=None):
@@ -156,11 +157,13 @@ def build(version=None,output_root=None):
         if c in inv:la[c]=inv[c].reindex(la.index)
     la.insert(0,'location_tag',la.index);la.to_csv(out/'location_attributes.csv',index=False)
     c=float(bcfg.get('capacity_percent_per_point',0.0))
-    self_check=check(lb,{r.building:r.unit_people_per_level for r in bt.itertuples()},lt.set_index('location_tag'),c)
+    from .development_target import capacity_people_per_point
+    kdev=capacity_people_per_point()
+    self_check=check(lb,{r.building:r.unit_people_per_level for r in bt.itertuples()},lt.set_index('location_tag'),c,kdev)
     files={f.name:sha(f) for f in sorted(out.glob('*.csv'))}
     contract={'schema_version':SCHEMA_VERSION,'version':version,'worldbuilder_commit':commit,'created':datetime.datetime.now().isoformat(timespec='seconds'),
         'units':{'people_per_game_capacity_unit':1000,'note':'All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding.'},
-        'attributes':{'features':fit_cfg['features'],'reference_classes':fit_cfg['reference_classes'],'capacity_percent_per_point':c},
+        'attributes':{'features':fit_cfg['features'],'reference_classes':fit_cfg['reference_classes'],'capacity_percent_per_point':c,'capacity_people_per_development_point':kdev},
         'capacity_fit':fit['metrics'],'building_fit':breport['fit'],'goods_fit':goods_report['summary'] if goods_report else None,
         'development':{'source':'game_start','maximum_reference_development':bcfg.get('maximum_reference_development',100),'note':'The engine multiplies capacity by capacity_percent_per_point x development (vanilla game-start development, written per location by the constructor); development also enters the cap equations as levels per point (cap_at_start at starting development, cap_at_reference_development at the reference value).'},
         'self_check':self_check,'counts':{'attribute_rows':int(len(rows)),'building_types':int(len(bt)),'location_buildings':int(len(lb)),'locations':int(len(lt)),'goods_floor':int(len(floors)),'location_attributes':int(len(la))},

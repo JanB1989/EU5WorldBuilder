@@ -1,7 +1,7 @@
 {
   "attribute_fit_config": "configs/attribute_fit_flat.json",
   "attribute_fit_predictions": "artifacts/attribute_fit_flat/location_predictions.csv",
-  "capacity_percent_per_point": 0.0,
+  "capacity_percent_per_point": 0.01,
   "level_limit": 20,
   "envelope_quantile": 0.5,
   "unit_quantiles": [
@@ -307,13 +307,15 @@
     "2026-09-19: 'continental' removed from the paddy-control gate. It had been added for northern Japan and Korea (3.5% of the maximum paddy ledger) but made 3,452 continental locations paddy-eligible, e.g. Stockholm with 11 cap levels at development 100; outside Asia those caps added 1.09B people to the world maximum. The Japanese and Korean continental paddy stays uncovered (leftover) instead.",
     "2026-09-20: capacity_percent_per_point 0. Targets and ledger units are people directly; no development multiplier anywhere in the capacity model.",
     "2026-09-20: development_levels_per_point_min sets a design floor on the development term of each cap equation (levels per point; the game starting development runs 0-45, so 0.06 means about +2.7 management levels at 45). The envelope fit may raise the term, never lower it below the floor. Development multiplies nothing else.",
-    "2026-09-20: caps are compared with the physical maximum at each location's own starting development (columns *_cap; fit \"maximum\"); *_cap_at_reference evaluates the cap equation at maximum_reference_development (45, the highest game starting value) and is informational (fit \"maximum_at_reference_development\"). No cap is evaluated at development 100 any more."
+    "2026-09-20: caps are compared with the physical maximum at each location's own starting development (columns *_cap; fit \"maximum\"); *_cap_at_reference evaluates the cap equation at maximum_reference_development (45, the highest game starting value) and is informational (fit \"maximum_at_reference_development\"). No cap is evaluated at development 100 any more.",
+    "2026-09-20: capacity_percent_per_point 0.01 = the EU5 engine's own development multiplier (1% per point, not scriptable away); development is the vanilla game-start value computed from the vanilla rules (data/raw/vanilla/start_development_1337.csv, range 0..~110).",
+    "2026-09-20: development floors halved for the vanilla 0..110 range (management 0.03 levels per point = +3 levels at 100); maximum_reference_development 100."
   ],
   "allow_failed_development_checks": true,
   "allow_failed_development_checks_reason": "2026-09-20: development is the game starting value (configs/development.json source.kind game_start); its sanity suite is informational and never gates.",
   "envelope_fit_scope": "with_ledger",
   "round_to": 100,
-  "max_levels_per_development_point": 0.2,
+  "max_levels_per_development_point": 0.1,
   "extensions": {
     "oasis_irrigation": {
       "enabled": true,
@@ -382,14 +384,14 @@
     }
   },
   "development_levels_per_point_min": {
-    "management": 0.06,
-    "paddy_control": 0.05,
-    "field_drainage": 0.05,
-    "flood_bunds": 0.04,
-    "clearing": 0.03,
-    "water_supply": 0.03,
-    "polders": 0.02,
-    "oasis_irrigation": 0.02
+    "management": 0.03,
+    "paddy_control": 0.025,
+    "field_drainage": 0.025,
+    "flood_bunds": 0.02,
+    "clearing": 0.015,
+    "water_supply": 0.015,
+    "polders": 0.01,
+    "oasis_irrigation": 0.01
   },
-  "maximum_reference_development": 45
+  "maximum_reference_development": 100
 }

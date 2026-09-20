@@ -19,7 +19,8 @@ def test_check_recomputes_model_from_levels_and_units():
         check(levels, {'x': 500.}, targets)
 
 
-def test_attribute_rows_merge_capacity_and_goods_columns():
+def test_attribute_rows_merge_capacity_and_goods_columns(monkeypatch):
+    monkeypatch.setattr('historical_agriculture.handover.game_keys', lambda: {('climate', 'arid'): 'arid'})
     coef = pd.DataFrame({'target': ['natural_capacity'] * 3 + ['maximum_capacity'] * 3, 'attribute': ['reference', 'climate', 'climate'] * 2,
                          'value': ['intercept', 'arid', 'oceanic'] * 2, 'people': [1000, -200, 100, 3000, -600, 300], 'share_of_reference': [1, -.2, .1, 3, -.6, .3], 'locations': [10, 4, 6] * 2})
     goods = pd.DataFrame({'good': ['wheat', 'wheat', 'incense'], 'attribute': ['reference', 'climate', 'climate'], 'value': ['intercept', 'oceanic', 'arid'], 'modifier': [0.05, 0.2, 0.4]})

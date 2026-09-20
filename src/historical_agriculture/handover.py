@@ -41,6 +41,20 @@ def metrics(y,p):
     return {'r2':float(1-(err**2).sum()/ss) if ss>0 else float('nan'),'median_absolute_percentage_error':float(100*np.median(rel)),'within_25_percent':float(100*np.mean(rel<=.25)),'mean_bias':float(err.mean()),'total_model':float(p.sum()),'total_target':float(y.sum())}
 
 
+def game_keys():
+    """In-game identifiers per World Builder class: climate/vegetation/topography type keys (from the geography
+    configs), soil and fertility ids with their scripted-trigger names, river levels as numbers."""
+    keys={}
+    for attr,cfgname in [('climate','climate'),('vegetation','vegetation'),('topography','topography')]:
+        cfg=json.loads((ROOT/f'configs/{cfgname}.json').read_text())
+        for name,t in (cfg.get('types') or {}).items():keys[(attr,name)]=str(t.get('game_key') or name)
+    soil=json.loads((ROOT/'configs/soil_types.json').read_text())
+    for name,sid in (soil.get('types') or {}).items():keys[('soil_type',name)]=f'ha1300_soil_is_{name}'
+    fert=json.loads((ROOT/'configs/fertility.json').read_text())
+    for name in (fert.get('levels') or {}):keys[('fertility',name)]=f'ha1300_fertility_is_{name}'
+    return keys
+
+
 def attribute_rows(fit_coef,goods_coef,features):
     cap=fit_coef[fit_coef.target=='natural_capacity'][['attribute','value','people','share_of_reference','locations']].rename(columns={'people':'capacity_people','share_of_reference':'capacity_share_of_reference'})
     mx=fit_coef[fit_coef.target=='maximum_capacity'][['attribute','value','people']].rename(columns={'people':'maximum_capacity_people_info'})
@@ -52,6 +66,9 @@ def attribute_rows(fit_coef,goods_coef,features):
         # goods intercepts live on the reference row
     order={f:i for i,f in enumerate(['reference']+list(features))}
     rows['_o']=rows.attribute.map(order).fillna(99);rows=rows.sort_values(['_o','value']).drop(columns='_o')
+    keys=game_keys()
+    rows['game_key']=[keys.get((a,str(v)),(str(v) if a not in ('reference','is_coastal','is_adjacent_to_lake') else '')) for a,v in zip(rows.attribute,rows.value)]
+    # Vanilla-named classes not listed in the geography configs keep their own name (e.g. topography flatland).
     return rows
 
 
@@ -82,16 +99,19 @@ def location_buildings(assign,ledger,kinds):
     return out[(out.starting_levels>0)|(out.cap_at_start>0)|(out.cap_at_reference_development>0)|(out.maximum_ledger_people>0)].reset_index(drop=True)
 
 
-def check(levels,units,targets):
+def check(levels,units,targets,percent_per_point=0.0):
     """levels: DataFrame(location_tag, building, starting_levels, cap_at_start); units: {building: people per level};
-    targets: DataFrame indexed by location_tag with attribute_flat_people, starting_target_people, maximum_target_people."""
+    targets: DataFrame indexed by location_tag with attribute_flat_people, starting_target_people, maximum_target_people
+    and development. Capacity = (flat + levels x unit) x (1 + percent_per_point x development), the engine's multiplier."""
     lv=levels.copy();lv['unit']=lv.building.map(units).astype(float)
     if lv.unit.isna().any():raise ValueError('Missing unit for buildings: '+', '.join(sorted(lv[lv.unit.isna()].building.unique())))
     start=(lv.starting_levels*lv.unit).groupby(lv.location_tag).sum().reindex(targets.index).fillna(0.)
     mx=(lv.cap_at_start*lv.unit).groupby(lv.location_tag).sum().reindex(targets.index).fillna(0.)
     flat=targets.attribute_flat_people.to_numpy(float)
-    return {'starting':metrics(targets.starting_target_people,flat+start.to_numpy()),'maximum':metrics(targets.maximum_target_people,flat+mx.to_numpy()),
-            'starting_model_total':float((flat+start).sum()),'maximum_model_total':float((flat+mx).sum())}
+    mult=1+float(percent_per_point)*(targets.development.to_numpy(float) if 'development' in targets else 0.)
+    s=(flat+start.to_numpy())*mult;m=(flat+mx.to_numpy())*mult
+    return {'starting':metrics(targets.starting_target_people,s),'maximum':metrics(targets.maximum_target_people,m),
+            'starting_model_total':float(s.sum()),'maximum_model_total':float(m.sum()),'percent_per_point':float(percent_per_point)}
 
 
 def build(version=None,output_root=None):
@@ -129,18 +149,29 @@ def build(version=None,output_root=None):
         'start_exceeds_attribute_maximum':pred.start_exceeds_attribute_maximum.astype(str).eq('True').to_numpy()})
     lt.to_csv(out/'location_targets.csv',index=False,float_format='%.1f')
     floors.to_csv(out/'goods_floor.csv',index=False)
-    self_check=check(lb.rename(columns={'starting_levels':'starting_levels'}),{r.building:r.unit_people_per_level for r in bt.itertuples()},lt.set_index('location_tag'))
+    # Per-location attribute classes (the keys of attribute_rows.csv) plus geography for the constructor.
+    inv=pd.read_parquet(ROOT/'data/raw/location_inputs/inventory.parquet').set_index('location_tag')
+    la=pred[fit_cfg['features']].copy()
+    for c in ['province','super_region','calibrated_lon','calibrated_lat']:
+        if c in inv:la[c]=inv[c].reindex(la.index)
+    la.insert(0,'location_tag',la.index);la.to_csv(out/'location_attributes.csv',index=False)
+    c=float(bcfg.get('capacity_percent_per_point',0.0))
+    self_check=check(lb,{r.building:r.unit_people_per_level for r in bt.itertuples()},lt.set_index('location_tag'),c)
     files={f.name:sha(f) for f in sorted(out.glob('*.csv'))}
     contract={'schema_version':SCHEMA_VERSION,'version':version,'worldbuilder_commit':commit,'created':datetime.datetime.now().isoformat(timespec='seconds'),
         'units':{'people_per_game_capacity_unit':1000,'note':'All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding.'},
-        'attributes':{'features':fit_cfg['features'],'reference_classes':fit_cfg['reference_classes'],'capacity_percent_per_point':0.0},
+        'attributes':{'features':fit_cfg['features'],'reference_classes':fit_cfg['reference_classes'],'capacity_percent_per_point':c},
         'capacity_fit':fit['metrics'],'building_fit':breport['fit'],'goods_fit':goods_report['summary'] if goods_report else None,
-        'development':{'source':'game_start','maximum_reference_development':bcfg.get('maximum_reference_development',45),'note':'Development multiplies nothing; it enters the cap equations as levels per point (cap_at_start uses each location\'s starting development, cap_at_reference_development the reference value). The constructor reads development from the game.'},
-        'self_check':self_check,'counts':{'attribute_rows':int(len(rows)),'building_types':int(len(bt)),'location_buildings':int(len(lb)),'locations':int(len(lt)),'goods_floor':int(len(floors))},
+        'development':{'source':'game_start','maximum_reference_development':bcfg.get('maximum_reference_development',100),'note':'The engine multiplies capacity by capacity_percent_per_point x development (vanilla game-start development, written per location by the constructor); development also enters the cap equations as levels per point (cap_at_start at starting development, cap_at_reference_development at the reference value).'},
+        'self_check':self_check,'counts':{'attribute_rows':int(len(rows)),'building_types':int(len(bt)),'location_buildings':int(len(lb)),'locations':int(len(lt)),'goods_floor':int(len(floors)),'location_attributes':int(len(la))},
         'files':files,'rules':['No per-location capacity value: capacity = sum of attribute rows + sum of building levels x unit.',
             'Farm buildings take land: raw_modifier local_population_capacity = -land per level; max_levels = floor((flat - reserve)/land) + own levels (constructor constants).',
             'The game keeps its RGO; goods rows shape output only; the constructor keeps its floor carve-out for goods_floor.csv.']}
     write_json(out/'contract.json',contract)
+    # A stable path for consumers: artifacts/handover/latest mirrors the newest version.
+    import shutil;latest=out.parent/'latest'
+    if latest.exists():shutil.rmtree(latest)
+    shutil.copytree(out,latest)
     (out/'README.md').write_text(f"""# World Builder handover {version}
 
 Schema {SCHEMA_VERSION}, World Builder commit `{commit}`. All values in people (1 game unit = 1,000 people).
@@ -152,6 +183,7 @@ Schema {SCHEMA_VERSION}, World Builder commit `{commit}`. All values in people (
 | location_buildings.csv | {len(lb)} | per location and building: starting levels, cap at start, cap at development 100, ledger people |
 | location_targets.csv | {len(lt)} | per location: targets, attribute flat, development, model values, review flag |
 | goods_floor.csv | {len(floors)} | RGO locations for the floor carve-out |
+| location_attributes.csv | {len(la)} | per location: its class for every attribute in attribute_rows.csv, province, super region, lon/lat |
 
 Self-check (attribute flat + levels x unit against targets): start R² {self_check['starting']['r2']:.3f}, median error {self_check['starting']['median_absolute_percentage_error']:.1f}%; maximum R² {self_check['maximum']['r2']:.3f}, median error {self_check['maximum']['median_absolute_percentage_error']:.1f}%.
 

@@ -1,0 +1,178 @@
+{
+  "schema_version": "1.0",
+  "version": "2026-09-20-3f1d4c9",
+  "worldbuilder_commit": "3f1d4c9",
+  "created": "2026-09-20T13:52:51",
+  "units": {
+    "people_per_game_capacity_unit": 1000,
+    "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
+  },
+  "attributes": {
+    "features": [
+      "climate",
+      "topography",
+      "vegetation",
+      "soil_type",
+      "fertility",
+      "river_level",
+      "is_coastal",
+      "is_adjacent_to_lake"
+    ],
+    "reference_classes": {
+      "climate": "continental",
+      "topography": "flatland",
+      "vegetation": "grasslands",
+      "soil_type": "loam",
+      "fertility": "moderate",
+      "river_level": "0",
+      "is_coastal": "False",
+      "is_adjacent_to_lake": "False"
+    },
+    "capacity_percent_per_point": 0.01
+  },
+  "capacity_fit": [
+    {
+      "target": "natural_capacity",
+      "evaluation": "full_fit",
+      "r2": 0.36218830646297206,
+      "mae": 7086.268054412082,
+      "rmse": 10415.223810085974,
+      "median_absolute_percentage_error": 27.42319113581425,
+      "p90_absolute_percentage_error": 84.83930320054142,
+      "within_20_percent": 38.31426793662949,
+      "within_50_percent": 74.75230938591872,
+      "within_factor_two": 78.65792370650458,
+      "mean_bias": -4337.084311225208
+    },
+    {
+      "target": "natural_capacity",
+      "evaluation": "region_heldout",
+      "r2": 0.297177145644015,
+      "mae": 7627.136037390438,
+      "rmse": 10933.14998362577,
+      "median_absolute_percentage_error": 30.65197822788694,
+      "p90_absolute_percentage_error": 92.80485595156765,
+      "within_20_percent": 34.28899631455511,
+      "within_50_percent": 71.38754606806107,
+      "within_factor_two": 75.37931364571865,
+      "mean_bias": -4557.162806414984
+    },
+    {
+      "target": "maximum_capacity",
+      "evaluation": "full_fit",
+      "r2": 0.2963202924986498,
+      "mae": 22408.85842400076,
+      "rmse": 40329.56980799982,
+      "median_absolute_percentage_error": 34.02927780468952,
+      "p90_absolute_percentage_error": 87.69802522059564,
+      "within_20_percent": 32.48456420810798,
+      "within_50_percent": 67.29526635715311,
+      "within_factor_two": 72.15335279758771,
+      "mean_bias": -17097.93815090503
+    },
+    {
+      "target": "maximum_capacity",
+      "evaluation": "region_heldout",
+      "r2": 0.23132080875515693,
+      "mae": 24098.828311900317,
+      "rmse": 42151.07335067688,
+      "median_absolute_percentage_error": 38.034052385476244,
+      "p90_absolute_percentage_error": 99.27647301768928,
+      "within_20_percent": 29.23945819173886,
+      "within_50_percent": 62.5855549705643,
+      "within_factor_two": 67.57287129660652,
+      "mean_bias": -17581.66475790259
+    }
+  ],
+  "building_fit": {
+    "starting": {
+      "r2": 0.8226585159382817,
+      "median_absolute_percentage_error": 24.165959522393543,
+      "within_25_percent": 51.28511941798689,
+      "mean_bias": -6603.22140622887
+    },
+    "maximum": {
+      "r2": 0.48075327753471575,
+      "median_absolute_percentage_error": 33.87079636696154,
+      "within_25_percent": 39.611353084765234,
+      "mean_bias": 16506.32060624527
+    },
+    "starting_improvements_only": {
+      "r2": 0.916453475760489,
+      "median_absolute_percentage_error": 15.074850407412715,
+      "within_25_percent": 56.84200449911454,
+      "mean_bias": -1717.5111513816826
+    },
+    "maximum_improvements_only": {
+      "r2": 0.4732768919547402,
+      "median_absolute_percentage_error": 36.990171004339494,
+      "within_25_percent": 36.83530369023118,
+      "mean_bias": 7912.706678830458
+    },
+    "maximum_at_reference_development": {
+      "r2": 0.3848557696869054,
+      "median_absolute_percentage_error": 40.323862744405766,
+      "within_25_percent": 27.032977552290237,
+      "mean_bias": -24032.103746408728
+    }
+  },
+  "goods_fit": {
+    "goods": 25,
+    "goods_fitted": 23,
+    "total_rows": 226,
+    "rows_per_class_value_mean": 5.380952380952381,
+    "rows_per_class_value_max": 18,
+    "median_r2_rgo_heldout": 0.37692013546540737,
+    "mean_mae_rgo_heldout": 0.17109576376901026,
+    "rgo_below_floor_share": 0.15742848709258636,
+    "rgo_nonviable_share": 0.08375254017450824,
+    "floor_list": 1638
+  },
+  "development": {
+    "source": "game_start",
+    "maximum_reference_development": 100,
+    "note": "The engine multiplies capacity by capacity_percent_per_point x development (vanilla game-start development, written per location by the constructor); development also enters the cap equations as levels per point (cap_at_start at starting development, cap_at_reference_development at the reference value)."
+  },
+  "self_check": {
+    "starting": {
+      "r2": 0.8226585159382817,
+      "median_absolute_percentage_error": 24.165959522393543,
+      "within_25_percent": 51.28511941798689,
+      "mean_bias": -6603.22140622887,
+      "total_model": 694550496.97,
+      "total_target": 832511601.8103398
+    },
+    "maximum": {
+      "r2": 0.40757717930406623,
+      "median_absolute_percentage_error": 37.475909372607305,
+      "within_25_percent": 29.636720432680804,
+      "mean_bias": -31591.607086761956,
+      "total_model": 1636432596.71,
+      "total_target": 2296476043.5737176
+    },
+    "starting_model_total": 694550496.97,
+    "maximum_model_total": 1636432596.71,
+    "percent_per_point": 0.01
+  },
+  "counts": {
+    "attribute_rows": 59,
+    "building_types": 8,
+    "location_buildings": 114093,
+    "locations": 20893,
+    "goods_floor": 1638,
+    "location_attributes": 20893
+  },
+  "files": {
+    "attribute_rows.csv": "a0f887b395b2baecfe9d9dfd699b76cd19d9f845c210e297ca0e17e835e62630",
+    "building_types.csv": "6f52f92eacb5f290181a564dfc8e34e94e0368673420a241b5e6b5e733445d0b",
+    "goods_floor.csv": "2fe877eef84bab527d8cb86503fac047f5d0c26feaa144d319428e70e2bd4408",
+    "location_attributes.csv": "7fe24177ad5ff9e7bfe3bc4464f566174a2fef160ff6a641aa9b188fbbe4bd70",
+    "location_buildings.csv": "5b81bf731454583df8f09ea834243eed6ee2e1b77940a08e92959d9dbd52a828",
+    "location_targets.csv": "3e64ce9e8368681cabdd3464559a978c337d26eeb95d4b0145e4326226f93377"
+  },
+  "rules": [
+    "No per-location capacity value: capacity = sum of attribute rows + sum of building levels x unit.",
+    "Farm buildings take land: raw_modifier local_population_capacity = -land per level; max_levels = floor((flat - reserve)/land) + own levels (constructor constants).",
+    "The game keeps its RGO; goods rows shape output only; the constructor keeps its floor carve-out for goods_floor.csv."
+  ]
+}

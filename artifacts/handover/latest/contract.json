@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-09-21-ffac3e5",
-  "worldbuilder_commit": "ffac3e5",
-  "created": "2026-09-21T01:33:06",
+  "version": "2026-09-21-92713d0",
+  "worldbuilder_commit": "92713d0",
+  "created": "2026-09-21T01:42:58",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
@@ -48,15 +48,15 @@
     {
       "target": "natural_capacity",
       "evaluation": "region_heldout",
-      "r2": 0.34644117645434136,
-      "mae": 8589.393589695992,
-      "rmse": 11756.848200956278,
+      "r2": 0.34644104825512156,
+      "mae": 8589.398375988052,
+      "rmse": 11756.849354041995,
       "median_absolute_percentage_error": 29.81867987673113,
       "p90_absolute_percentage_error": 100.0,
       "within_20_percent": 34.963863494950466,
       "within_50_percent": 72.83779256210214,
       "within_factor_two": 76.46580194323458,
-      "mean_bias": -4621.036912579443
+      "mean_bias": -4621.032126287383
     },
     {
       "target": "maximum_capacity",
@@ -93,10 +93,10 @@
       "mean_bias": 14064.895332870348
     },
     "maximum": {
-      "r2": -0.8345987490866047,
+      "r2": -0.8345716266342906,
       "median_absolute_percentage_error": 130.55747418576541,
       "within_25_percent": 9.371559852582205,
-      "mean_bias": 110651.48405811911
+      "mean_bias": 110652.64234079751
     },
     "starting_improvements_only": {
       "r2": 0.9331229667726957,
@@ -105,16 +105,16 @@
       "mean_bias": -1536.9395297859326
     },
     "maximum_improvements_only": {
-      "r2": 0.41812348532646104,
+      "r2": 0.41818596097824934,
       "median_absolute_percentage_error": 40.38829491630662,
       "within_25_percent": 35.00694012348634,
-      "mean_bias": 14890.503069966246
+      "mean_bias": 14891.661352644654
     },
     "maximum_at_reference_development": {
-      "r2": -2.3372240055502402,
+      "r2": -2.337223373585419,
       "median_absolute_percentage_error": 174.43648730494775,
       "within_25_percent": 5.269707557555162,
-      "mean_bias": 156872.02203734659
+      "mean_bias": 156873.56322338976
     }
   },
   "goods_fit": {
@@ -124,7 +124,7 @@
     "rows_per_class_value_mean": 5.357142857142857,
     "rows_per_class_value_max": 18,
     "median_r2_rgo_heldout": 0.352094141513443,
-    "mean_mae_rgo_heldout": 0.17343531949045787,
+    "mean_mae_rgo_heldout": 0.17343518422768928,
     "rgo_below_floor_share": 0.15606728460012873,
     "rgo_nonviable_share": 0.08375254017450824,
     "floor_list": 1662
@@ -144,15 +144,15 @@
       "total_target": 832511601.8103398
     },
     "maximum": {
-      "r2": 0.3749071873661828,
+      "r2": 0.37494883884219343,
       "median_absolute_percentage_error": 44.64980421014545,
       "within_25_percent": 29.85688986741971,
-      "mean_bias": 30492.337932622526,
-      "total_model": 2933552460.0,
+      "mean_bias": 30493.496215300933,
+      "total_model": 2933576660.0,
       "total_target": 2296476043.5737176
     },
     "starting_model_total": 1126369460.0,
-    "maximum_model_total": 2933552460.0,
+    "maximum_model_total": 2933576660.0,
     "percent_per_point": 0.0,
     "people_per_point": 1000.0
   },
@@ -165,12 +165,12 @@
     "location_attributes": 20893
   },
   "files": {
-    "attribute_rows.csv": "53107716ff1f18dbd9b6eb643595dc5d2b1d42cb0d45a289b7fbfbbf745581e9",
-    "building_types.csv": "75df1167912d2652d129040496f2c87b507f9e64bb6de42770185578deffffbb",
+    "attribute_rows.csv": "7389ec92698e3c172cac66f21acdb81dc3a88f88e03356f6a75b3d7962419b26",
+    "building_types.csv": "4eaceec151be1321d3213ec80fa53a08da81c2f07ae94cd7aa23c442645f5532",
     "goods_floor.csv": "c154bb0c929f729bee8e9bd83e36c87eb95e2f6b123de9724f5b5b35b58026dd",
-    "location_attributes.csv": "b12a03faa4eec946c0ce090dd62685ae4ebe8f1e4a570580efbdeaa749bac62b",
-    "location_buildings.csv": "7ea808ffca1877fc11e19aa2707b41929bd62c5d7b239c6c6a13a30823904393",
-    "location_targets.csv": "b138a35b981440b6f6362608a8186c754c67b0509ec3edd71f9c9dec3e074a51"
+    "location_attributes.csv": "e35bbf9a078ba4d8b3059368c478382907255d3b3d44e63548ff634c68bafe0f",
+    "location_buildings.csv": "d03002a8d20d6212d288e67f114638b9b8d98cb70e8b0562562b4469722298fd",
+    "location_targets.csv": "2489fe29e698d313943564c7b962f0f612b1fe5d53f6d361ca465296568e7b0c"
   },
   "rules": [
     "No per-location capacity value: capacity = sum of attribute rows + sum of building levels x unit.",

@@ -4183,7 +4183,7 @@ dannenberg,True,north_german_region,western_europe,30448.8,135540.8,159671.2,277
 dantewada,True,central_india_region,south_asia,40207.5,70894.1,262564.6,38500.0,94700.0,26.6,82860.0,299300.0,False
 dantu,True,east_china_region,east_asia,23104.4,283047.2,558608.8,26400.0,150400.0,68.8,352370.0,446000.0,True
 danubyu,True,indochina_region,south_east_asia,19775.4,91185.4,635618.1,23100.0,83400.0,33.7,128290.0,426200.0,False
-danyang,True,east_china_region,east_asia,22117.6,227159.5,584379.7,23300.0,127700.0,57.1,287320.0,381600.0,False
+danyang,True,east_china_region,east_asia,22117.6,227159.5,584379.7,23300.0,127700.0,57.1,287320.0,399400.0,False
 danyang_korea,True,korea_region,east_asia,23169.8,23369.7,102114.0,22900.0,78700.0,23.9,46770.0,191200.0,False
 daoba,True,tibet_region,east_asia,9724.6,9724.6,12190.1,1200.0,0.0,14.0,15210.0,112100.0,False
 daolong,True,south_china_region,east_asia,27927.5,31403.1,93522.8,20500.0,102100.0,23.9,44420.0,206300.0,False
@@ -5311,7 +5311,7 @@ freienwalde,True,north_german_region,western_europe,28324.0,106867.6,119532.5,28
 freising,True,south_german_region,western_europe,34658.1,96160.5,180663.1,28900.0,109300.0,59.1,151130.0,221000.0,False
 freistadt,True,south_german_region,western_europe,28798.3,79341.0,117037.7,23900.0,101900.0,56.5,127650.0,207100.0,False
 frejus,True,france_region,western_europe,34571.0,70363.4,90267.3,23900.0,60900.0,49.0,108900.0,175700.0,False
-fremont,True,west_coast_region,north_america,3841.8,3841.8,20780.2,17800.0,58900.0,0.0,17800.0,172800.0,False
+fremont,True,west_coast_region,north_america,3841.8,3841.8,20780.2,17800.0,58900.0,0.0,17800.0,176000.0,False
 french_ales,True,france_region,western_europe,26145.8,34925.0,80217.2,18500.0,40500.0,30.5,56740.0,154500.0,False
 fresco,True,guinea_region,west_africa,25671.9,29105.4,76995.1,27000.0,76600.0,3.6,30630.0,201300.0,False
 fresnes,True,france_region,western_europe,35302.4,147909.2,171451.0,30600.0,124600.0,71.1,203100.0,243500.0,False
@@ -19566,7 +19566,7 @@ waumandee,True,east_coast_region,north_america,69360.9,69387.1,232265.0,38400.0,
 waupecan,True,east_coast_region,north_america,55338.3,59992.2,309414.7,29300.0,131700.0,5.5,36250.0,229600.0,False
 waveroo,True,australia_region,australasia,10970.2,10970.2,71381.0,32500.0,124200.0,2.0,34500.0,373100.0,False
 wawaskesiw_sipiy,True,great_plains_region,north_america,10421.6,10421.6,44664.6,17200.0,49000.0,2.0,19200.0,152800.0,False
-wawaskesiwisakahikan,True,alaska_region,north_america,5300.2,5300.2,49383.2,12800.0,44700.0,0.0,12800.0,154000.0,False
+wawaskesiwisakahikan,True,alaska_region,north_america,5300.2,5300.2,49383.2,12800.0,44700.0,0.0,12800.0,157200.0,False
 wawassan,True,east_coast_region,north_america,38102.5,38102.5,197116.2,27400.0,97100.0,1.0,28410.0,212800.0,False
 wawiyastan,True,canada_region,north_america,4226.9,4226.9,24621.6,20200.0,69700.0,0.0,20200.0,186500.0,False
 waxhaw,True,east_coast_region,north_america,41258.5,41973.5,237970.0,26000.0,137000.0,3.6,30310.0,326100.0,False

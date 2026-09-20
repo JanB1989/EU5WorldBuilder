@@ -45967,7 +45967,7 @@ freienwalde,water_supply,0,1,2,0.0,1589.4
 freising,water_supply,0,1,2,0.0,0.0
 freistadt,water_supply,0,1,2,0.0,6.5
 frejus,water_supply,0,0,0,0.0,537.8
-fremont,water_supply,0,0,0,0.0,424.4
+fremont,water_supply,0,1,2,0.0,424.4
 french_ales,water_supply,0,0,0,0.0,728.9
 fresco,water_supply,0,1,2,0.0,156.9
 fresnes,water_supply,0,2,2,0.0,396.2
@@ -59394,7 +59394,7 @@ waumandee,water_supply,0,1,2,0.0,19.3
 waupecan,water_supply,0,1,2,0.0,252.2
 waveroo,water_supply,0,1,2,0.0,1102.1
 wawaskesiw_sipiy,water_supply,0,1,2,0.0,45.3
-wawaskesiwisakahikan,water_supply,0,0,0,0.0,0.0
+wawaskesiwisakahikan,water_supply,0,1,2,0.0,0.0
 wawassan,water_supply,0,1,2,0.0,3818.8
 wawiyastan,water_supply,0,1,2,0.0,0.0
 waxhaw,water_supply,0,1,2,0.0,2115.5
@@ -61993,7 +61993,7 @@ danleng,paddy_control,1,3,6,21383.9,104709.9
 dantewada,paddy_control,1,5,8,25770.1,104026.9
 dantu,paddy_control,9,10,11,166017.0,322641.9
 danubyu,paddy_control,3,11,13,54051.9,252499.4
-danyang,paddy_control,8,8,10,136816.4,345420.7
+danyang,paddy_control,8,9,11,136816.4,345420.7
 danyang_korea,paddy_control,0,0,0,144.1,19577.0
 dapiguemlec,paddy_control,0,6,9,0.0,0.0
 dapitan,paddy_control,0,6,9,4141.8,129308.4
@@ -86454,7 +86454,7 @@ waumandee,flood_bunds,0,1,3,0.0,2286.9
 waupecan,flood_bunds,0,4,6,194.2,30480.1
 waveroo,flood_bunds,0,1,3,0.0,478.5
 wawaskesiw_sipiy,flood_bunds,0,0,2,0.0,510.1
-wawaskesiwisakahikan,flood_bunds,0,0,0,0.0,1098.1
+wawaskesiwisakahikan,flood_bunds,0,0,2,0.0,1098.1
 wawassan,flood_bunds,0,1,3,0.0,5023.5
 wawiyastan,flood_bunds,0,4,6,0.0,2250.5
 waxhaw,flood_bunds,0,1,3,0.0,4308.4

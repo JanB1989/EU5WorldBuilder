@@ -30,7 +30,9 @@
       "bank_detours": true,
       "fallback_pieces": true,
       "minimum_piece_pixels": 4,
-      "note": "2026-09-21: where vanilla gives an ownable location a river and the network drawing does not (2,122 locations: mainstems rasterised on one bank only, e.g. Cairo; small rivers below the discharge cut; delta distributaries the downstream tree cannot carry), a one-pixel bank detour of the mainstem or a copy of vanilla's own river piece (with one pixel of clearance, as its own tree) gives the location its river. Levels: the mainstem's for detours, vanilla's widths for pieces."
+      "note": "2026-09-21: where vanilla gives an ownable location a river and the network drawing does not (2,122 locations: mainstems rasterised on one bank only, e.g. Cairo; small rivers below the discharge cut; delta distributaries the downstream tree cannot carry), a one-pixel bank detour of the mainstem or a copy of vanilla's own river piece (with one pixel of clearance, as its own tree) gives the location its river. Levels: the mainstem's for detours, vanilla's widths for pieces.",
+      "detour_reach": 8,
+      "detour_max_length": 24
     }
   }
 }

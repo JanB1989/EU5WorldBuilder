@@ -4183,7 +4183,7 @@ dannenberg,oceanic,floodplains,farmland,sand,moderate,3,False,False,luneburger_h
 dantewada,savanna,plateau,savanna,loam,very_high,2,False,False,bastar_province,asia,81.42162734711331,18.817133807142646
 dantu,subtropical,floodplains,swamp,loam,very_high,5,False,False,zhenjiang_province,asia,119.55766705207304,32.14809095757462
 danubyu,savanna,deltas,jungle,loam,moderate,5,False,False,pathein_province,asia,95.37977613786819,17.1050482623846
-danyang,subtropical,floodplains,mixed_forest,loam,high,1,False,False,zhenjiang_province,asia,119.6281955348527,31.960792558140547
+danyang,subtropical,floodplains,mixed_forest,loam,high,5,False,False,zhenjiang_province,asia,119.6281955348527,31.960792558140547
 danyang_korea,continental,mountains,mixed_forest,sand,moderate,1,False,False,chungju_province,asia,128.3634967305876,36.98897942073542
 daoba,arctic,mountains,tundra,loam,very_low,1,False,False,lithang_province,asia,100.26455608574418,28.738874745165784
 daolong,subtropical_monsoon,mountains,jungle,loam,high,1,False,False,cheli_province,asia,100.23975177940275,21.763457913155094
@@ -5311,7 +5311,7 @@ freienwalde,continental,flatland,farmland,loam,high,3,False,False,mittelmark_pro
 freising,continental,flatland,grasslands,loam,very_high,5,False,False,munchner_schotterebene_province,europe,11.7405093877382,48.428745944180804
 freistadt,continental,hills,farmland,loam,moderate,3,False,False,muhlviertel_province,europe,14.535271311292377,48.48944910652206
 frejus,mediterranean,hills,grasslands,loam,moderate,0,True,False,dracenois_province,europe,6.577611562594228,43.442506980229375
-fremont,continental,hills,coniferous_forest,loam,low,0,False,False,dukundeka_province,america,-111.24056736456421,44.27964777720729
+fremont,continental,hills,coniferous_forest,loam,low,1,False,False,dukundeka_province,america,-111.24056736456421,44.27964777720729
 french_ales,mediterranean,mountains,mixed_forest,stony,low,0,False,False,nimois_province,europe,3.729176557388172,44.10093318725207
 fresco,savanna,rolling,jungle,loam,high,2,True,False,kru_province,africa,-5.924479744213613,5.354992533348975
 fresnes,oceanic,flatland,farmland,loam,high,1,False,False,verdunois_province,europe,5.618734795935097,49.0896743287809
@@ -10935,7 +10935,7 @@ mashkai,arid,mountains,desert,sand,very_low,0,False,False,qusdar_province,asia,6
 mashkel,arid,plateau,desert,sand,very_low,0,False,True,khash_province,asia,63.137097939054314,27.69187568462795
 masiko,savanna,plateau,dry_forest,sand,high,1,False,False,north_moxico_province,africa,22.989750621457034,-11.355881341391328
 masindrano,tropical,flatland,jungle,clay,moderate,2,True,False,antemoro_province,africa,48.10747496850925,-21.39443585153322
-masinga,savanna,plateau,dry_forest,loam,high,1,False,False,kinhasa_province,africa,15.515045432600601,-4.857735700945334
+masinga,savanna,plateau,dry_forest,loam,high,2,False,False,kinhasa_province,africa,15.515045432600601,-4.857735700945334
 masirah,arid,flatland,desert,sand,very_low,0,True,False,masqat_province,asia,58.38746048189708,20.64515150645917
 masjed_soleyman,hot_steppe,flatland,scrubland,stony,low,2,False,False,dezful_province,asia,49.39058616822024,31.82996545088321
 maskanah,hot_steppe,flatland,scrubland,loam,very_low,3,False,False,halab_province,asia,38.12118876095005,35.74143600705838
@@ -19566,7 +19566,7 @@ waumandee,continental,rolling,savanna,silt,very_high,1,False,False,pokemaga_prov
 waupecan,continental,flatland,marsh,loam,very_high,5,False,False,peoria_province,america,-88.57088744926105,41.206920155450426
 waveroo,subtropical,flatland,savanna,loam,high,1,False,False,braiakalung_province,oceania,146.19328897164866,-36.37266256309747
 wawaskesiw_sipiy,cold_steppe,plateau,grasslands,loam,moderate,2,False,False,michichi_province,america,-110.67194520263274,51.137938283308515
-wawaskesiwisakahikan,subarctic,flatland,coniferous_forest,loam,moderate,0,False,False,amisk_sipi_province,america,-112.0288350432321,54.94576221052801
+wawaskesiwisakahikan,subarctic,flatland,coniferous_forest,loam,moderate,2,False,False,amisk_sipi_province,america,-112.0288350432321,54.94576221052801
 wawassan,continental,rolling,forest,silt,high,1,False,False,shackamaxon_province,america,-75.61632531597232,39.999396716883545
 wawiyastan,continental,wetlands,swamp,peat,low,2,False,False,moosonee_province,america,-81.11862441259316,50.59386643980247
 waxhaw,subtropical,flatland,coniferous_forest,sand,very_high,2,False,False,waxhaw_province,america,-80.09701210907951,35.025464162501834

@@ -73,6 +73,13 @@ def chip(name, icon, value, tip, context=None, extra=''):
                     visible = "[{LOC}.IsCoastal]" }}
                  icon = {{ size = {{ 30 30 }} texture = "gfx/interface/icons/location_icons/inland.dds"
                     visible = "[Not({LOC}.IsCoastal)]" }}'''
+    if name == 'lake':
+        # no separate no-lake art exists: the same lake icon, dimmed, so the two states are told apart at a glance
+        lakeside = f"EqualTo_string({LOC}.Custom('ha1300_native_lake'), Localize('HA1300_LAKESIDE'))"
+        art = f'''icon = {{ size = {{ 30 30 }} texture = "{icon}"
+                    visible = "[{lakeside}]" }}
+                 icon = {{ size = {{ 30 30 }} texture = "{icon}" alpha = 0.3
+                    visible = "[Not({lakeside})]" }}'''
     return f'''widget = {{
         name = "ha1300_native_{name}"
         size = {{ 30 30 }}
@@ -90,7 +97,7 @@ def add_native_view(output, game, cfg):
         'HA1300_COASTAL': 'Coastal', 'HA1300_INLAND': 'Inland',
         'HA1300_LAKESIDE': 'Lakeside', 'HA1300_NO_LAKE': 'No lake',
         'HA1300_LAKE_TITLE': 'Lake adjacency',
-        'HA1300_LAKE_HELP': 'Whether this location borders a lake. This display adds no effects.',
+        'HA1300_LAKE_HELP': 'Whether this location borders a lake.',
         'HA1300_COAST_TITLE': 'Coastal access',
         'HA1300_COAST_HELP': 'Whether this location borders the sea. The effects below belong to its coastal status.',
         'HA1300_MAX_WINTER_TITLE': 'Maximum winter severity',

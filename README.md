@@ -37,6 +37,13 @@ vanilla's widths. `location_levels.csv` predicts the engine level of every locat
 the verified rules (highest width inside the location wins, a connection marker forces level 5), so the
 attribute fit and the exported bitmap agree without an in-game export.
 
+Named waterways (2026-09-21, `export.waterways` in `configs/rivers.json`, `river_waterways.py`): canals and
+rivers below the discharge cut that neither the network nor vanilla carries (the Grand Canal south of the
+Yangtze, the Zhedong canal, the Xitiaoxi) are drawn as their own trees along an ordered chain of location
+tags: one simple path through the deepest interior pixel of every listed location, clearance from every other
+river, one green source, the location's higher existing level kept. A chain that cannot be drawn fails the
+export by name.
+
 ```bash
 uv run worldbuilder rivers --stage network
 uv run worldbuilder rivers --stage export

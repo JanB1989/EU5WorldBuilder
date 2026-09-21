@@ -842,7 +842,7 @@ anigiduwagi,subtropical,hills,forest,loam,moderate,1,False,False,kanawha_provinc
 anilco,subtropical,wetlands,marsh,loam,very_high,5,False,False,anilco_province,america,-91.13396045579401,33.95970359129544
 anipitapiskow,subarctic,floodplains,swamp,loam,low,4,False,True,pikwitonei_province,america,-95.9134542893697,56.03829357848998
 aniyutsi,subtropical,hills,forest,loam,very_high,5,False,False,aniyutsi_province,america,-85.4808253010919,36.44229631359637
-anji,subtropical,hills,marsh,loam,high,0,False,False,huzhou_province,asia,119.56193265690325,30.628011731641706
+anji,subtropical,hills,marsh,loam,high,2,False,False,huzhou_province,asia,119.56193265690325,30.628011731641706
 anju_nurgan,continental_monsoon,mountains,mixed_forest,stony,low,0,True,False,suifun_province,asia,134.41768343688807,43.56879703458756
 anka,savanna,flatland,savanna,sand,moderate,0,False,False,kebbi_province,africa,5.715507615933404,11.985917866965204
 ankara,dry_summer_continental,plateau,savanna,loam,low,0,False,False,ankara_province,asia,32.79690629783903,39.880493590774954
@@ -3343,7 +3343,7 @@ changshe,subtropical_monsoon,flatland,mixed_forest,loam,very_high,1,False,False,
 changshi,subtropical,hills,coniferous_forest,sand,moderate,0,True,False,funing_province,asia,120.03950853189588,27.07878951284125
 changshou_changshou,subtropical_monsoon,floodplains,marsh,loam,moderate,5,False,False,fuzhou_sichuan_province,asia,107.12336116806961,29.948497971466278
 changshou_pingjiang,subtropical,flatland,forest,loam,high,1,False,False,yuezhou_province,asia,113.87057501414421,28.69608187244754
-changshu,subtropical,floodplains,swamp,loam,high,0,True,False,suzhou_province,asia,120.75807328820815,31.68794953116732
+changshu,subtropical,floodplains,swamp,loam,high,2,True,False,suzhou_province,asia,120.75807328820815,31.68794953116732
 changtai,subtropical,hills,woods,stony,high,2,False,False,zhangzhou_province,asia,117.78526838781534,24.719206086573006
 changtan,subtropical,hills,forest,loam,very_high,0,False,False,guangzhou_henan_province,asia,114.84536095077635,31.65012855489815
 changting,subtropical,hills,coniferous_forest,sand,high,1,False,False,tingzhou_province,asia,116.35695134990772,25.672510380766294
@@ -3698,7 +3698,7 @@ chomuruvuti,hot_steppe,flatland,savanna,loam,very_high,1,False,False,lower_runde
 chon_naryn,arctic,mountains,tundra,sand,very_low,1,False,False,naryn_province,asia,77.44838029436733,41.64382298513791
 chondon,subarctic,flatland,mixed_forest,silt,very_low,1,False,False,xalizaax_province,asia,137.64627961681816,69.28756483187723
 chongan,subtropical,mountains,coniferous_forest,sand,moderate,1,False,False,jianning_province,asia,118.0083230103719,27.729322677359225
-chongde,subtropical,floodplains,marsh,loam,high,0,False,False,jiaxing_province,asia,120.47164967314723,30.615697354903755
+chongde,subtropical,floodplains,marsh,loam,high,3,False,False,jiaxing_province,asia,120.47164967314723,30.615697354903755
 chongming,subtropical,deltas,woods,loam,high,0,True,False,suzhou_province,asia,121.3880768656768,31.66878769666331
 chongoene,savanna,flatland,savanna,sand,moderate,1,True,False,inhambane_province,africa,34.28167895293947,-24.625382027563226
 chongren,subtropical,floodplains,marsh,sand,moderate,1,False,False,fuzhou_jiangxi_province,asia,116.04374829174026,27.69120857083673
@@ -4611,7 +4611,7 @@ dongping,subtropical,mountains,forest,loam,high,3,False,False,changsha_province,
 dongsheng,cold_steppe,floodplains,grasslands,loam,low,3,False,False,qingcheng_province,asia,111.30627139526825,40.398119718719904
 dongxiang,subtropical,floodplains,marsh,sand,moderate,0,False,False,fuzhou_jiangxi_province,asia,116.5975392706415,28.19614625051808
 dongxiang_dazhou,subtropical_monsoon,hills,forest,loam,moderate,5,False,False,dazhou_province,asia,107.78343378523937,31.509090442673156
-dongyang,subtropical,mountains,forest,loam,high,0,False,False,jinhua_province,asia,120.42636567913388,29.153332106555627
+dongyang,subtropical,mountains,forest,loam,high,2,False,False,jinhua_province,asia,120.42636567913388,29.153332106555627
 donjek,subarctic,hills,coniferous_forest,loam,low,5,False,False,north_tutchone_province,america,-139.60997389948562,62.77090827194241
 donkov,continental,flatland,savanna,loam,high,1,False,False,lipetsk_province,europe,39.37917833650809,53.08206032549878
 donwun,tropical_monsoon,hills,swamp,loam,moderate,2,True,False,thaton_province,asia,97.32151011228609,17.330344604732566
@@ -6176,10 +6176,10 @@ hailar,subarctic,plateau,savanna,silt,moderate,1,False,False,hailar_province,asi
 hailing,subtropical,floodplains,mixed_forest,loam,moderate,0,True,False,taizhou_nanzhili_province,asia,120.23032753141524,32.54095468717329
 hailun,continental_monsoon,flatland,marsh,loam,high,1,False,False,hulan_province,asia,126.6431247974624,47.38943926522775
 haimen,subtropical,flatland,mixed_forest,loam,very_low,0,True,False,tongzhou_province,asia,121.39039191725317,32.02847765473249
-haining,subtropical,wetlands,marsh,loam,high,0,True,False,hangzhou_province,asia,120.59729906066912,30.46411988733741
+haining,subtropical,wetlands,marsh,loam,high,2,True,False,hangzhou_province,asia,120.59729906066912,30.46411988733741
 haiom,hot_steppe,plateau,grasslands,stony,low,0,False,False,damara_province,africa,16.223596255104695,-20.284565583869963
 haisla,subarctic,mountains,coniferous_forest,stony,very_low,5,True,False,kwakwala_province,america,-128.100174612331,53.71028737400269
-haiyan,subtropical,deltas,marsh,loam,high,0,True,False,jiaxing_province,asia,120.97369417838217,30.633103389123054
+haiyan,subtropical,deltas,marsh,loam,high,2,True,False,jiaxing_province,asia,120.97369417838217,30.633103389123054
 haiyang,subtropical,wetlands,marsh,loam,high,3,True,False,chaozhou_province,asia,116.67922502163862,23.623522689501932
 haiyuwel,arctic,flatland,grasslands,loam,very_low,0,True,False,karukinka_province,america,-69.93808102911817,-53.24745783195466
 haizhou_liaoyang,continental_monsoon,floodplains,marsh,loam,very_high,5,True,False,jinzhou_province,asia,122.64605878921662,40.79239657134943
@@ -7431,7 +7431,7 @@ jiaoshui,continental_monsoon,floodplains,marsh,clay,very_high,0,False,False,laiz
 jiaoxi,continental_monsoon,flatland,farmland,loam,very_high,0,True,False,jiaozhou_province,asia,119.94176739060532,36.26878955658233
 jiaxian,subtropical_monsoon,flatland,farmland,loam,very_high,1,False,False,ruzhou_province,asia,113.21091191306118,34.015361772987305
 jiaxiang,continental_monsoon,floodplains,marsh,loam,very_high,0,False,False,jining_province,asia,116.28451842150673,35.43929734648789
-jiaxing,subtropical,deltas,marsh,loam,high,0,False,True,jiaxing_province,asia,120.79378283960716,30.8039825125469
+jiaxing,subtropical,deltas,marsh,loam,high,3,False,True,jiaxing_province,asia,120.79378283960716,30.8039825125469
 jiayu,subtropical,floodplains,farmland,loam,high,5,False,False,wuchang_province,asia,113.94848345880939,30.008413826244574
 jiazhou,continental_monsoon,hills,grasslands,loam,high,3,False,False,jiazhou_province,asia,110.39716029326183,38.044839249740996
 jibat,mediterranean,plateau,savanna,clay,high,5,False,False,hadiya_province,africa,37.66687985613254,8.452482265409959
@@ -15984,7 +15984,7 @@ shangshui,subtropical_monsoon,wetlands,mixed_forest,loam,low,1,False,False,chenz
 shangsi,subtropical_monsoon,hills,jungle,loam,high,1,False,False,siming_province,asia,107.89145419423875,22.027541897415674
 shangxi,subtropical,hills,forest,loam,very_high,2,False,False,yongshun_province,asia,109.5010166103666,29.21595834522871
 shangyou,subtropical,hills,savanna,sand,high,1,False,False,nanan_province,asia,114.38240256279857,25.92135082478663
-shangyu,subtropical,floodplains,marsh,loam,high,1,True,False,shaoxing_province,asia,120.88973456234294,29.943482595905945
+shangyu,subtropical,floodplains,marsh,loam,high,2,True,False,shaoxing_province,asia,120.88973456234294,29.943482595905945
 shangyuan,subtropical,floodplains,farmland,loam,very_high,5,False,False,yingtian_province,asia,118.8195131352764,32.12320403442851
 shangzhou,continental_monsoon,mountains,forest,loam,very_high,0,False,False,shangzhou_province,asia,109.8586392373337,33.90813745153327
 shanha,continental,valleys,grasslands,loam,moderate,1,False,False,shanha_province,america,-101.9183290533118,44.321410552315584
@@ -15999,7 +15999,7 @@ shanyang_huaian,subtropical_monsoon,deltas,marsh,loam,very_high,5,False,True,hua
 shanyang_yingzhou,cold_steppe,plateau,farmland,loam,moderate,0,False,False,yingzhou_shanxi_province,asia,112.46310121863138,39.307280845817964
 shanyin,continental_monsoon,plateau,farmland,loam,moderate,0,False,False,yingzhou_shanxi_province,asia,112.77312883128849,39.568463978278764
 shaowu,subtropical,hills,coniferous_forest,sand,moderate,1,False,False,shaowu_province,asia,117.45899388851149,27.22188464622869
-shaoxing,subtropical,floodplains,marsh,loam,high,0,True,False,shaoxing_province,asia,120.56047733284805,29.96164087588646
+shaoxing,subtropical,floodplains,marsh,loam,high,2,True,False,shaoxing_province,asia,120.56047733284805,29.96164087588646
 shaoyang,subtropical,mountains,marsh,loam,very_high,1,False,False,baoqing_province,asia,111.44356117324287,27.410920751236134
 shapoquate,continental,flatland,marsh,silt,very_high,1,False,False,sandusky_province,america,-83.56501957280528,40.863825693698644
 shaqrud,arid,mountains,desert,sand,very_low,0,False,False,minab_province,asia,56.66887704252386,27.802807391635376
@@ -19825,7 +19825,7 @@ wuhe,subtropical_monsoon,wetlands,marsh,loam,very_high,3,False,False,sizhou_prov
 wuhu,subtropical,wetlands,marsh,loam,high,5,False,False,taiping_province,asia,118.48730527544717,31.22421926610072
 wujal_wujal,savanna,mountains,savanna,sand,very_high,1,True,False,umbindhamu_province,oceania,144.9985162808489,-16.106642573503766
 wuji,cold_steppe,floodplains,mixed_forest,silt,very_high,0,False,False,zhending_province,asia,114.93956614642093,38.21524098917617
-wujiang,subtropical,wetlands,marsh,loam,high,2,False,True,suzhou_province,asia,120.61672837302478,31.012200657297324
+wujiang,subtropical,wetlands,marsh,loam,high,3,False,True,suzhou_province,asia,120.61672837302478,31.012200657297324
 wujiang_bozhou,subtropical_monsoon,plateau,forest,loam,moderate,5,False,False,bozhou_province,asia,106.80104232108465,27.500729020144423
 wujiang_yingtian,subtropical,wetlands,marsh,loam,very_high,5,False,False,yingtian_province,asia,118.51229196884378,32.03556090097543
 wujin,subtropical,wetlands,mixed_forest,loam,high,5,False,True,changzhou_province,asia,119.91940626519397,31.765462002244227
@@ -19857,8 +19857,8 @@ wushan,subtropical_monsoon,mountains,forest,loam,high,5,False,False,kuizhou_prov
 wuthathi,savanna,flatland,savanna,loam,high,0,True,False,yadhaigana_province,oceania,142.755286600004,-11.949968162695388
 wutun,subtropical,hills,forest,loam,moderate,5,False,False,tengzhou_guangxi_province,asia,110.67198408555868,23.72173010427431
 wuwei,subtropical,wetlands,marsh,loam,very_high,5,False,False,he_province,asia,117.84331988509285,31.263315447037904
-wuxi,subtropical,floodplains,swamp,loam,high,0,False,True,changzhou_province,asia,120.31612392237241,31.58958448760779
-wuxian,subtropical,floodplains,farmland,loam,very_high,2,False,True,suzhou_province,asia,120.57157568069817,31.316311490932357
+wuxi,subtropical,floodplains,swamp,loam,high,3,False,True,changzhou_province,asia,120.31612392237241,31.58958448760779
+wuxian,subtropical,floodplains,farmland,loam,very_high,3,False,True,suzhou_province,asia,120.57157568069817,31.316311490932357
 wuxian_liuzhou,subtropical,floodplains,marsh,loam,moderate,5,False,False,liuzhou_province,asia,109.66875243647507,23.577696751606986
 wuxiang,continental_monsoon,plateau,farmland,loam,high,0,False,False,qinzhou_province,asia,112.90109900742925,36.91995627385795
 wuxing,subtropical,floodplains,marsh,loam,high,5,False,True,huzhou_province,asia,120.16749184847544,30.792456330376545
@@ -20371,7 +20371,7 @@ yinjiang,subtropical,mountains,forest,loam,high,0,False,False,sinan_province,asi
 yinshaluo,highland_monsoon,mountains,dry_forest,loam,high,3,False,False,menglian_province,asia,99.93414420224997,22.906894149503728
 yinshan,cold_steppe,plateau,grasslands,loam,low,3,False,False,qingcheng_province,asia,110.07657943001811,41.00370343183591
 yinwum,savanna,flatland,savanna,sand,high,1,False,False,yupangathi_province,oceania,142.86308495775438,-12.90642336266216
-yinxian,subtropical,floodplains,mixed_forest,loam,high,0,True,False,ningbo_province,asia,121.50863330280447,29.783295304775848
+yinxian,subtropical,floodplains,mixed_forest,loam,high,2,True,False,ningbo_province,asia,121.50863330280447,29.783295304775848
 yique,continental_monsoon,flatland,mixed_forest,loam,very_high,0,False,False,songzhou_province,asia,112.44416069797762,34.41980390026891
 yir_yoront,savanna,deltas,marsh,loam,high,5,True,False,kukatj_province,oceania,141.94790994469736,-15.293627418576923
 yirandali,hot_steppe,flatland,savanna,sand,low,0,False,False,yirandali_province,oceania,144.73500570233875,-21.5619763202658
@@ -20379,7 +20379,7 @@ yishan,subtropical,hills,forest,loam,moderate,5,False,False,qingyuan_province,as
 yishui,continental_monsoon,flatland,forest,stony,very_high,1,False,False,juzhou_province,asia,118.5793030722258,35.9327332467768
 yita,hot_steppe,floodplains,dry_forest,sand,very_high,0,False,False,lumnanas_province,america,-60.62960618879703,-22.200676621225693
 yitha_yitha,cold_steppe,floodplains,thicket,clay,very_low,1,False,False,dadi_dadi_province,oceania,144.8224786839529,-33.43779817301588
-yiwu,subtropical,valleys,forest,loam,high,1,False,False,jinhua_province,asia,120.04097194849498,29.304418909113476
+yiwu,subtropical,valleys,forest,loam,high,2,False,False,jinhua_province,asia,120.04097194849498,29.304418909113476
 yixian,subtropical,hills,mixed_forest,loam,high,1,False,False,huizhou_province,asia,117.88204371183014,30.00934475341146
 yixian_yizhou,continental_monsoon,hills,forest,loam,very_high,0,False,False,yizhou_province,asia,115.23168139779494,39.34882068409407
 yixing,subtropical,floodplains,marsh,loam,very_high,1,False,True,changzhou_province,asia,119.74129538521333,31.369713595117375
@@ -20572,7 +20572,7 @@ yuubari,continental,hills,marsh,silt,high,2,False,False,ishikari_province,asia,1
 yuufutsu,continental,hills,forest,sand,high,0,True,False,iburi_province,asia,142.01635600675962,42.85663407908463
 yuwi,subtropical_monsoon,hills,savanna,loam,very_high,0,True,False,bindal_province,oceania,148.76853947488848,-21.281930804007587
 yuyang,continental_monsoon,floodplains,marsh,loam,very_high,0,False,False,jizhou_province,asia,117.41782208038046,40.046998078980074
-yuyao,subtropical,floodplains,marsh,loam,high,0,True,False,shaoxing_province,asia,121.13965256542929,29.974361783467533
+yuyao,subtropical,floodplains,marsh,loam,high,2,True,False,shaoxing_province,asia,121.13965256542929,29.974361783467533
 yuza,continental,flatland,forest,loam,very_high,2,True,False,ugo_province,asia,139.95669004538803,39.00729333890111
 yuzhou,continental_monsoon,mountains,forest,loam,high,0,False,False,pingding_province,asia,113.33757788963447,38.24565536231146
 yverdon_les_bains,continental,plateau,grasslands,loam,moderate,0,False,True,vaud_province,europe,6.549660727305707,46.79759541010175

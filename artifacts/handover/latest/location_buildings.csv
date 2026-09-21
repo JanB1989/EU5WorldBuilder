@@ -41738,7 +41738,7 @@ anigiduwagi,water_supply,0,1,2,0.0,0.7
 anilco,water_supply,0,1,2,0.0,3245.8
 anipitapiskow,water_supply,0,1,2,0.0,0.0
 aniyutsi,water_supply,0,1,2,0.0,1517.0
-anji,water_supply,0,0,0,0.0,601.8
+anji,water_supply,0,1,2,0.0,601.8
 anka,water_supply,0,0,0,0.0,301.8
 ankara,water_supply,0,0,0,0.0,1266.9
 ankavandra,water_supply,0,1,2,0.0,21899.3
@@ -45312,7 +45312,7 @@ dongping,water_supply,0,1,2,0.0,0.9
 dongsheng,water_supply,0,1,2,0.0,1246.4
 dongxiang,water_supply,0,1,2,809.6,12632.3
 dongxiang_dazhou,water_supply,0,1,2,0.0,487.9
-dongyang,water_supply,0,0,0,0.0,1687.9
+dongyang,water_supply,0,1,2,0.0,1687.9
 donjek,water_supply,0,1,2,0.0,0.1
 donkov,water_supply,0,1,2,0.0,500.7
 donwun,water_supply,0,1,2,0.0,60735.7
@@ -72058,7 +72058,7 @@ dongping,flood_bunds,0,1,3,20.5,1287.9
 dongsheng,flood_bunds,0,1,3,60.4,4396.0
 dongxiang,flood_bunds,0,5,7,25.1,339.2
 dongxiang_dazhou,flood_bunds,0,0,2,72.4,1114.6
-dongyang,flood_bunds,0,0,0,49.3,480.8
+dongyang,flood_bunds,0,1,3,49.3,480.8
 donjek,flood_bunds,0,0,2,0.0,82.7
 donkov,flood_bunds,0,1,3,5.1,270.6
 donwun,flood_bunds,0,3,5,11.0,1165.9

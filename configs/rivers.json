@@ -33,6 +33,70 @@
       "note": "2026-09-21: where vanilla gives an ownable location a river and the network drawing does not (2,122 locations: mainstems rasterised on one bank only, e.g. Cairo; small rivers below the discharge cut; delta distributaries the downstream tree cannot carry), a one-pixel bank detour of the mainstem or a copy of vanilla's own river piece (with one pixel of clearance, as its own tree) gives the location its river. Levels: the mainstem's for detours, vanilla's widths for pieces.",
       "detour_reach": 8,
       "detour_max_length": 24
-    }
+    },
+    "waterways_note": "2026-09-21: named waterways drawn as their own trees (river_waterways.py) where real water is missing from both the RiverATLAS tree and vanilla's bitmap: the Grand Canal south of the Yangtze (Hangzhou-Chongde-Jiaxing-Wujiang-Suzhou(wuxian)-Wuxi-Changzhou(wujin)-Danyang-Zhenjiang(dantu)), the Shangtang canal along Hangzhou Bay, the Yuanhe canal Suzhou-Changshu, the Zhedong canal Xiaoshan-Ningbo(yinxian), and two rivers below the discharge cut (Xitiaoxi Anji-Huzhou(wuxing), Dongyang River Dongyang-Yiwu-Jinhua). The path stays inside the listed locations, keeps clearance from every other river and stops one pixel inside the last location; a location keeps a higher level it already has. Levels: 3 for the Grand Canal trunk, 2 for the rest.",
+    "waterways": [
+      {
+        "name": "grand_canal_jiangnan",
+        "level": 3,
+        "locations": [
+          "hangzhou",
+          "chongde",
+          "jiaxing",
+          "wujiang",
+          "wuxian",
+          "wuxi",
+          "wujin",
+          "danyang",
+          "dantu"
+        ]
+      },
+      {
+        "name": "shangtang_canal",
+        "level": 2,
+        "locations": [
+          "hangzhou",
+          "haining",
+          "haiyan",
+          "jiaxing"
+        ]
+      },
+      {
+        "name": "yuanhe_canal",
+        "level": 2,
+        "locations": [
+          "wuxian",
+          "changshu"
+        ]
+      },
+      {
+        "name": "zhedong_canal",
+        "level": 2,
+        "locations": [
+          "xiaoshan",
+          "shaoxing",
+          "shangyu",
+          "yuyao",
+          "yinxian"
+        ]
+      },
+      {
+        "name": "xitiaoxi_river",
+        "level": 2,
+        "locations": [
+          "anji",
+          "wuxing"
+        ]
+      },
+      {
+        "name": "dongyang_river",
+        "level": 2,
+        "locations": [
+          "dongyang",
+          "yiwu",
+          "jinhua"
+        ]
+      }
+    ]
   }
 }

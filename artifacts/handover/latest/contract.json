@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-09-21-92713d0",
-  "worldbuilder_commit": "92713d0",
-  "created": "2026-09-21T01:42:58",
+  "version": "2026-09-21-64eb529",
+  "worldbuilder_commit": "64eb529",
+  "created": "2026-09-21T10:56:51",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
@@ -93,10 +93,10 @@
       "mean_bias": 14064.895332870348
     },
     "maximum": {
-      "r2": -0.8345716266342906,
+      "r2": -0.8345699850320838,
       "median_absolute_percentage_error": 130.55747418576541,
       "within_25_percent": 9.371559852582205,
-      "mean_bias": 110652.64234079751
+      "mean_bias": 110652.98695382579
     },
     "starting_improvements_only": {
       "r2": 0.9331229667726957,
@@ -105,16 +105,16 @@
       "mean_bias": -1536.9395297859326
     },
     "maximum_improvements_only": {
-      "r2": 0.41818596097824934,
+      "r2": 0.41819648652359387,
       "median_absolute_percentage_error": 40.38829491630662,
       "within_25_percent": 35.00694012348634,
-      "mean_bias": 14891.661352644654
+      "mean_bias": 14892.00596567294
     },
     "maximum_at_reference_development": {
-      "r2": -2.337223373585419,
+      "r2": -2.3372269940528705,
       "median_absolute_percentage_error": 174.43648730494775,
       "within_25_percent": 5.269707557555162,
-      "mean_bias": 156873.56322338976
+      "mean_bias": 156874.29073978282
     }
   },
   "goods_fit": {
@@ -144,15 +144,15 @@
       "total_target": 832511601.8103398
     },
     "maximum": {
-      "r2": 0.37494883884219343,
+      "r2": 0.374954742952886,
       "median_absolute_percentage_error": 44.64980421014545,
       "within_25_percent": 29.85688986741971,
-      "mean_bias": 30493.496215300933,
-      "total_model": 2933576660.0,
+      "mean_bias": 30493.84082832922,
+      "total_model": 2933583860.0,
       "total_target": 2296476043.5737176
     },
     "starting_model_total": 1126369460.0,
-    "maximum_model_total": 2933576660.0,
+    "maximum_model_total": 2933583860.0,
     "percent_per_point": 0.0,
     "people_per_point": 1000.0
   },
@@ -165,12 +165,12 @@
     "location_attributes": 20893
   },
   "files": {
-    "attribute_rows.csv": "7389ec92698e3c172cac66f21acdb81dc3a88f88e03356f6a75b3d7962419b26",
-    "building_types.csv": "4eaceec151be1321d3213ec80fa53a08da81c2f07ae94cd7aa23c442645f5532",
+    "attribute_rows.csv": "ac5e8162e0c5be5a3cb2be60bd544171628b0aa494a409e7fd4c48cbc19900d6",
+    "building_types.csv": "969e4db06cd0c98e5d2ac7b3fdb01e7177d6ac497796933941914b965fef3e7c",
     "goods_floor.csv": "c154bb0c929f729bee8e9bd83e36c87eb95e2f6b123de9724f5b5b35b58026dd",
-    "location_attributes.csv": "e35bbf9a078ba4d8b3059368c478382907255d3b3d44e63548ff634c68bafe0f",
-    "location_buildings.csv": "d03002a8d20d6212d288e67f114638b9b8d98cb70e8b0562562b4469722298fd",
-    "location_targets.csv": "2489fe29e698d313943564c7b962f0f612b1fe5d53f6d361ca465296568e7b0c"
+    "location_attributes.csv": "f74c93a299fca1dc953cf92a1b7ac8b8b82aa43332bc8dc557054535252d2e42",
+    "location_buildings.csv": "e42c27998d8ed449a1eb1caba98e8c87b9a0afe87f90eed425a1e79a3b230e63",
+    "location_targets.csv": "b3a85243147399ca09869988e355d397e1162a6c9633dfb0e699c82c9f43c206"
   },
   "rules": [
     "No per-location capacity value: capacity = sum of attribute rows + sum of building levels x unit.",

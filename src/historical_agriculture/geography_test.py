@@ -273,6 +273,9 @@ def build(config_path=None,local_path=None,deploy=True,refresh_data=True):
     if cfg.get('global_rivers'):
         from .geography_compatibility import emit_rivers
         emit_rivers(output)
+    if cfg.get('global_navigation'):
+        from .navigation_integration import emit
+        emit(output)
     files={str(p.relative_to(output)):sha(p) for p in sorted(output.rglob('*')) if p.is_file() and p.name!='ha1300-build.json'}
     manifest={'id':MOD_ID,'files':files,'sources':{str(p):sha(p) for p in [*sources.values(),*assets.values()]},
       'config_sha256':sha(config_path),'code_sha256':sha(Path(__file__)),'cases':expected,'engine_status':'pending manual test'}

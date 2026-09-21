@@ -63,7 +63,13 @@ def main():
     a=sub.add_parser("rivers",help="Build an independent geographic river network and/or its EU5 bitmap")
     a.add_argument("--stage",choices=["network","export","all"],default="all")
     a.add_argument("--config",type=Path,default=Path("configs/rivers.json"))
+    a=sub.add_parser("navigation",help="Classify and export configurable navigable river water tiles")
+    a.add_argument("--config",type=Path,default=Path("configs/river_navigation.json"))
     args=parser.parse_args()
+    if args.command=="navigation":
+        from .river_navigation import build
+        build(args.config)
+        return
     if args.command=="rivers":
         cfg=json.loads(args.config.read_text())
         if args.stage in ("network","all"):

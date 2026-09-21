@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "baseline_year": 1300,
+  "network": "data/processed/rivers/network.parquet",
+  "river_export": "artifacts/river_network",
+  "raw_inputs": "data/raw/location_inputs",
+  "output": "artifacts/river_navigation",
+  "elevation": "data/raw/location_inputs/hydrology/ETOPO_2022_v1_60s_N90W180_surface.tif",
+  "local_config": "geography_test.local.toml",
+  "selection": {
+    "minimum_mean_discharge_m3_s": 500,
+    "minimum_low_discharge_m3_s": 75,
+    "source_prefilter_m3_s": 40,
+    "maximum_match_distance_pixels": 8,
+    "open_gradient_m_per_km": 0.35,
+    "improvable_gradient_m_per_km": 2.0,
+    "minimum_reach_length_for_gradient_km": 5,
+    "gradient_smoothing_pixels": 7
+  },
+  "raster": {
+    "width_pixels": 2,
+    "minimum_tile_pixels": 32,
+    "target_tile_pixels": 96,
+    "minimum_remaining_land_pixels": 100,
+    "maximum_land_fraction_removed": 0.35,
+    "undersized_state_policy": "retain_native_river",
+    "preserve_land_connectivity": false,
+    "maximum_crossing_span_pixels": 12,
+    "maximum_reassigned_fragment_pixels": 32,
+    "state_aggregation": "median_physical_worst_explicit",
+    "land_bisection_policy": "retain_both_banks_under_original_location"
+  },
+  "road_costs": {
+    "navigable": {
+      "movement_cost": -0.35,
+      "market_access": -0.5
+    },
+    "improvable": {
+      "movement_cost": 1.0,
+      "market_access": 2.0
+    },
+    "barrier": {
+      "movement_cost": 2.0,
+      "market_access": 3.0
+    },
+    "improved": {
+      "movement_cost": -0.5,
+      "market_access": -0.75
+    }
+  },
+  "shore_connections": true,
+  "overrides": [
+    {
+      "id": "lower_congo_cataracts",
+      "bounds": [
+        13.2,
+        -5.8,
+        15.5,
+        -4.1
+      ],
+      "state": "barrier",
+      "source": "congo_1911",
+      "reason": "Natural cataract belt between Matadi and Pool Malebo; bounding envelope conservatively includes rapids."
+    },
+    {
+      "id": "boyoma_falls",
+      "bounds": [
+        25.05,
+        0.05,
+        25.7,
+        0.7
+      ],
+      "state": "barrier",
+      "source": "congo_1911",
+      "reason": "Falls at the upstream end of the middle Congo navigation."
+    },
+    {
+      "id": "nile_cataract_belt",
+      "bounds": [
+        29.0,
+        17.0,
+        33.0,
+        24.15
+      ],
+      "state": "barrier",
+      "source": "nile_1911",
+      "reason": "Cataract belt: retain discontinuity rather than permit fleets across rapids. Broad conservative exclusion, not individual cataract survey."
+    },
+    {
+      "id": "victoria_falls",
+      "bounds": [
+        25.5,
+        -18.3,
+        26.6,
+        -17.4
+      ],
+      "state": "barrier",
+      "source": "victoria_unesco",
+      "reason": "Permanent natural waterfall and gorge."
+    },
+    {
+      "id": "saint_anthony_falls",
+      "bounds": [
+        -93.5,
+        44.85,
+        -93.05,
+        45.3
+      ],
+      "state": "barrier",
+      "source": "mississippi_nps",
+      "reason": "Natural upper Mississippi navigation break; modern locks excluded."
+    },
+    {
+      "id": "niagara",
+      "bounds": [
+        -79.2,
+        42.9,
+        -78.8,
+        43.3
+      ],
+      "state": "barrier",
+      "source": "niagara_nps",
+      "reason": "Natural falls; no modern Welland canal."
+    },
+    {
+      "id": "lower_thames",
+      "locations": [
+        "london",
+        "barking",
+        "kingston",
+        "harrow",
+        "rochester",
+        "abingdon",
+        "oxford",
+        "henley",
+        "reading",
+        "windsor",
+        "wycombe",
+        "woking"
+      ],
+      "state": "improvable",
+      "allow_below_threshold": true,
+      "source": "thames_history",
+      "reason": "Thames cargo navigation corridor; upstream reaches require maintenance and later navigation works. All-fleet use is an engine compromise."
+    },
+    {
+      "id": "jiangnan_canal_corridor",
+      "locations": [
+        "hangzhou",
+        "chongde",
+        "jiaxing",
+        "wujiang",
+        "wuxian",
+        "wuxi",
+        "wujin",
+        "danyang",
+        "dantu",
+        "haining",
+        "haiyan",
+        "changshu"
+      ],
+      "state": "improvable",
+      "allow_below_threshold": true,
+      "source": "grand_canal_unesco",
+      "reason": "Existing southern Grand Canal and connected maintained waterways; navigation works placed from the existing improvement allowance."
+    }
+  ],
+  "sources": {
+    "hydroatlas": {
+      "url": "https://www.hydrosheds.org/hydroatlas",
+      "role": "Modern physical river network and discharge proxies; not historical navigability."
+    },
+    "etopo": {
+      "url": "https://www.ncei.noaa.gov/products/etopo-global-relief-model",
+      "role": "Coarse natural gradient proxy; riverbed and individual rapids not resolved."
+    },
+    "grand_canal_unesco": {
+      "url": "https://whc.unesco.org/en/list/1443",
+      "role": "Pre-1300 interconnected grain transport canals."
+    },
+    "grand_canal_icomos": {
+      "url": "https://whc.unesco.org/document/128794",
+      "role": "Huitong 1289 and Tonghui late thirteenth century; chronology of changing courses."
+    },
+    "british_canals": {
+      "url": "https://www.canalmuseum.org.uk/history/ukcanals.htm",
+      "role": "Exeter 1566, later seventeenth/eighteenth-century canal development; do not pre-place industrial networks."
+    },
+    "thames_history": {
+      "url": "https://hbap.pdfsrv.co.uk/customers/HBAP/CQ56690/Vol%2049%202005/1/%E2%80%98The%20Transformation%20of%20the%20Thames%20and%20the%20Port%20of%20London%E2%80%99%20by%20Stephen%20Croad.pdf",
+      "role": "Historical port and river access; local fleet abstraction remains a design choice."
+    },
+    "congo_1911": {
+      "url": "https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Congo",
+      "role": "Pre-major-dam description of natural navigation breaks; not 1300 infrastructure evidence."
+    },
+    "nile_1911": {
+      "url": "https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Nile",
+      "role": "Cataracts and seasonality; broad natural barrier proxy."
+    },
+    "victoria_unesco": {
+      "url": "https://whc.unesco.org/en/list/509",
+      "role": "Natural waterfall barrier."
+    },
+    "mississippi_nps": {
+      "url": "https://www.nps.gov/miss/learn/historyculture/river-of-hisory-chapter-6.htm",
+      "role": "Natural Saint Anthony Falls and much later navigation engineering."
+    },
+    "niagara_nps": {
+      "url": "https://www.nps.gov/places/niagara-falls.htm",
+      "role": "Natural waterfall barrier, documented by the US National Park Service."
+    }
+  },
+  "native_geometry_overrides": [
+    {
+      "id": "thames_native_lower_channel",
+      "box": [
+        7642,
+        1740,
+        7701,
+        1880
+      ],
+      "state": "improvable",
+      "source": "thames_history",
+      "reason": "Use the tested vanilla lower-Thames alignment to reach the existing Thames estuary. Modern-source river registration ends inland here."
+    }
+  ]
+}

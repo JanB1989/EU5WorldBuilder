@@ -160,7 +160,10 @@ def build(version=None,output_root=None):
     from .development_target import capacity_people_per_point
     kdev=capacity_people_per_point()
     self_check=check(lb,{r.building:r.unit_people_per_level for r in bt.itertuples()},lt.set_index('location_tag'),c,kdev)
+    from .navigation_integration import handover as navigation_handover
+    navigation_files = navigation_handover(out)
     files={f.name:sha(f) for f in sorted(out.glob('*.csv'))}
+    files.update(navigation_files)
     contract={'schema_version':SCHEMA_VERSION,'version':version,'worldbuilder_commit':commit,'created':datetime.datetime.now().isoformat(timespec='seconds'),
         'units':{'people_per_game_capacity_unit':1000,'note':'All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding.'},
         'attributes':{'features':fit_cfg['features'],'reference_classes':fit_cfg['reference_classes'],'capacity_percent_per_point':c,'capacity_people_per_development_point':kdev},

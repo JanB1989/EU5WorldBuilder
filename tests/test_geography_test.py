@@ -71,6 +71,7 @@ def test_complete_fixture_build_and_default_sync(tmp_path,monkeypatch):
     base_cfg.pop('global_climate',None)
     base_cfg.pop('geography_compatibility',None)
     base_cfg.pop('global_rivers',None)
+    base_cfg.pop('global_navigation',None)
     # Explicit historical trial fixture; the shipped config has retired it.
     base_cfg['cases']=[{'location':name,'vegetation_bonus':v,'climate_bonus':c} for name,v,c in [('norrtalje',0,0),('tierp',3,0),('heby',0,2),('enkoping',3,2)]]
     cfg=tmp_path/'fixture_config.json';cfg.write_text(json.dumps(base_cfg))

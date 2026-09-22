@@ -434,7 +434,7 @@ def export(config, evidence, river):
     palette_image=Image.open(ROOT/json.loads((ROOT/config['river_export']/'export_manifest.json').read_text())['output_png'])
     cleaned_image=Image.fromarray(cleaned,mode='P');cleaned_image.putpalette(palette_image.getpalette())
     cleaned_image.save(mod/md/'rivers.png');written.append(md+'rivers.png')
-    pd.DataFrame(preservation,columns=['location_tag','river_level','x','y','distance_pixels']).to_csv(out/'preserved_river_pixels.csv',index=False)
+    pd.DataFrame(preservation,columns=['location_tag','river_level','x','y','distance_pixels','added_source']).to_csv(out/'preserved_river_pixels.csv',index=False)
     metadata={r['location']:r for r in tile_meta}
     # Geometry contract for Constructor: no gameplay building balance here.
     edges=[]
@@ -486,7 +486,7 @@ def export(config, evidence, river):
             'mouth_alignment_repairs':mouth_snaps, 'river_preservation':'native_bank_pixel', 'preserved_river_pixels':len(preservation), 'river_port_locations':sorted(names[c] for c in port_candidates), 'port_harbor_floor':config.get('port_harbor_floor',.25), 'crossings':len(crossings),'ports_changed':len(port_changes),'land_effect_rows_to_restore':len(bonus_rows),
             'omissions':dict(omitted),'crossing_guard_locations':cfg.get('retain_native_locations',[]),'bank_fragment_repairs':repairs,'locators_moved':dict(moved),'edges':len(edges),'files':{rel:digest(mod/rel) for rel in written},
             'bisected_land_locations':bisected,
-            'checks':{'river_port_coordinates_on_passable_shore':True,'native_river_levels_preserved':True,'no_native_rivers_on_converted_water':True,'minimum_tile_size':True,'connected_tiles':True,'land_area_guard':True,'land_identities_retained':True,'lost_land_adjacencies_restored':not missing},
+            'checks':{'native_river_topology_valid':True,'river_port_coordinates_on_passable_shore':True,'native_river_levels_preserved':True,'no_native_rivers_on_converted_water':True,'minimum_tile_size':True,'connected_tiles':True,'land_area_guard':True,'land_identities_retained':True,'lost_land_adjacencies_restored':not missing},
             'map_code_sha256':digest(Path(__file__)), 'cleanup_code_sha256':digest(Path(__file__).with_name('navigation_cleanup.py')), 'native_geometry_inputs':native_inputs,
             'engine_status':'Global output requires a fresh campaign; local Thames mechanism confirmed by user.'}
     # Lightweight inspectable world map, embedded raster plus clickable nodes.

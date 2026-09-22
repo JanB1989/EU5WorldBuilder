@@ -41,6 +41,8 @@ def test_native_bank_pixel_preserves_maximum_and_clears_water():
     assert not (cleaned[after==200]<16).any()
     assert LEVELS[cleaned[after==100]].max()==5
     assert rows[0]['distance_pixels']==1
+    assert rows[0]['added_source']
+    assert (cleaned==0).sum()==1
 
 
 def test_gap_closure_follows_native_line_and_respects_exclusions():
@@ -66,3 +68,17 @@ def test_mouth_snap_closes_only_short_land_to_sea_registration_gap():
     rows['state']=3
     fixed,audit=snap_mouths(rows,original,{100},{200},3)
     assert not audit
+
+
+def test_cut_receiving_segment_repairs_sources_and_clumped_tributaries():
+    from historical_agriculture.navigation_cleanup import repair_native_topology
+    from historical_agriculture.river_map import validate_native_rivers
+    pixels=np.full((9,10),255,dtype=np.uint8)
+    pixels[4,1:9]=4;pixels[4,1]=0
+    pixels[1:4,5]=4;pixels[3,5]=1
+    pixels[5:8,5]=4;pixels[5,5]=1
+    validate_native_rivers(pixels)
+    pixels[4,6:9]=254
+    owners=np.full(pixels.shape,100,dtype=np.uint32)
+    repaired=repair_native_topology(pixels,owners,{100})
+    assert validate_native_rivers(repaired)['components']==3

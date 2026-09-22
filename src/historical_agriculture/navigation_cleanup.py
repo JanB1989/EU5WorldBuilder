@@ -42,6 +42,54 @@ def close_short_gaps(rows, width, maximum):
     return len(additions)
 
 
+def repair_native_topology(pixels, owners, land):
+    """Repair the valid native forest after cutting converted channel vertices."""
+    from scipy import ndimage
+    def degree(mask):
+        d=np.zeros(mask.shape,np.uint8)
+        d[1:]+=mask[:-1];d[:-1]+=mask[1:];d[:,1:]+=mask[:,:-1];d[:,:-1]+=mask[:,1:]
+        return d
+    h,w=pixels.shape
+    def ns(y,x):
+        return [(yy,xx) for yy,xx in [(y-1,x),(y+1,x),(y,x-1),(y,x+1)] if 0<=yy<h and 0<=xx<w]
+    # Truncated tributary connectors become ordinary width pixels. Repeat
+    # because removal of one connector changes neighbouring segment degrees.
+    for _ in range(8):
+        river=pixels<16;d=degree(river);sd=degree(river & (pixels!=1));bad=[]
+        for y,x in np.argwhere(pixels==1):
+            values=[int(sd[yy,xx]) for yy,xx in ns(y,x) if river[yy,xx]]
+            if d[y,x]!=2 or sorted(values)!=[1,2]:bad.append((y,x))
+        clumps=(river & (pixels!=1)) & (sd>2)
+        if not bad and not clumps.any():break
+        for y,x in bad:pixels[y,x]=15
+        # A cut can collapse several former tributaries onto an endpoint.
+        # Separate that junction instead of emitting an invalid affluent.
+        pixels[clumps]=255
+    # Isolated old green sources carry no size and no longer describe a river.
+    pixels[(pixels==0)&(degree(pixels<16)==0)]=255
+    river=pixels<16;labels,count=ndimage.label(river);d=degree(river)
+    segments=river&(pixels!=1);sl,nseg=ndimage.label(segments);sd=degree(segments)
+    children=set()
+    for y,x in np.argwhere(pixels==1):
+        for yy,xx in ns(y,x):
+            if segments[yy,xx] and sd[yy,xx]==1:children.add(int(sl[yy,xx]))
+    roots=set(range(1,nseg+1))-children
+    sourced=set(map(int,labels[pixels==0]));ends={}
+    for y,x in np.argwhere(river&(d==1)):
+        if int(sl[y,x]) in roots:ends.setdefault(int(labels[y,x]),(int(y),int(x)))
+    for ident in range(1,count+1):
+        if ident in sourced:continue
+        if ident in ends:
+            y,x=ends[ident];pixels[y,x]=0
+    # Single remaining width pixels get a source neighbour, preserving their
+    # size. If no safe neighbour exists, drop it; bank restoration follows.
+    for y,x in np.argwhere(river&(d==0)):
+        c=int(owners[y,x]);options=[(yy,xx) for yy,xx in ns(y,x) if int(owners[yy,xx])==c and c in land and pixels[yy,xx]>=16 and sum(pixels[a,b]<16 for a,b in ns(yy,xx))==1]
+        if options:pixels[options[0]]=0
+        else:pixels[y,x]=255
+    return pixels
+
+
 def preserve_levels(river, original, after, land, inventory, geometry_boxes=()):
     """Erase converted channels and retain one ordinary size pixel on each bank.
 
@@ -67,6 +115,11 @@ def preserve_levels(river, original, after, land, inventory, geometry_boxes=()):
         target=before_levels[c];level=int(LEVELS[cleaned[y,x]])
         if level>target:cleaned[y,x]=PALETTE[target] if target else 255
         remaining[c]=max(remaining[c],min(level,target))
+    cleaned=repair_native_topology(cleaned,after,land)
+    remaining=defaultdict(int)
+    for y,x in zip(*np.where(cleaned<16)):
+        c=int(after[y,x])
+        if c in land:remaining[c]=max(remaining[c],int(LEVELS[cleaned[y,x]]))
     rows=[]
     by_color={int(r.map_color_rgb,16):r for r in inventory.itertuples()}
     for c,level in sorted(before_levels.items()):
@@ -75,13 +128,30 @@ def preserve_levels(river, original, after, land, inventory, geometry_boxes=()):
         yy,xx=np.where(after[y0:y1,x0:x1]==c)
         oy,ox=np.where((original[y0:y1,x0:x1]==c)&(LEVELS[river[y0:y1,x0:x1]]==level))
         if not len(xx) or not len(ox):raise ValueError('No river-bank preservation candidate')
-        # Closest remaining bank pixel to the old channel; never an arbitrary dot inland.
         distances,_=cKDTree(np.column_stack((ox,oy))).query(np.column_stack((xx,yy)))
-        k=int(np.argmin(distances));x=int(xx[k]+x0);y=int(yy[k]+y0)
+        # Prefer an existing ordinary width pixel: changing its size leaves the
+        # validated native tree intact. Otherwise create a two-pixel source/run.
+        ordinary=[k for k in range(len(xx)) if 3<=cleaned[yy[k]+y0,xx[k]+x0]<16]
+        added_source=False
+        if ordinary:k=min(ordinary,key=lambda k:distances[k])
+        else:
+            k=None
+            h,w=cleaned.shape
+            def ns(y,x):return [(a,b) for a,b in [(y-1,x),(y+1,x),(y,x-1),(y,x+1)] if 0<=a<h and 0<=b<w]
+            for candidate in np.argsort(distances):
+                py,px=int(yy[candidate]+y0),int(xx[candidate]+x0)
+                if cleaned[py,px]<16 or any(cleaned[a,b]<16 for a,b in ns(py,px)):continue
+                sources=[(a,b) for a,b in ns(py,px) if int(after[a,b])==c and cleaned[a,b]>=16 and not any(cleaned[u,v]<16 for u,v in ns(a,b))]
+                if not sources:continue
+                k=int(candidate);cleaned[sources[0]]=0;added_source=True;break
+            if k is None:raise ValueError('No isolated native bank segment fits '+r.location_tag)
+        x=int(xx[k]+x0);y=int(yy[k]+y0)
         cleaned[y,x]=PALETTE[level];remaining[c]=level
-        rows.append({'location_tag':r.location_tag,'river_level':level,'x':x,'y':y,'distance_pixels':float(distances[k])})
+        rows.append({'location_tag':r.location_tag,'river_level':level,'x':x,'y':y,'distance_pixels':float(distances[k]),'added_source':added_source})
     assert all(remaining[c]==level for c,level in before_levels.items())
     assert not np.any(cleaned[water]<16)
+    from .river_map import validate_native_rivers
+    validate_native_rivers(cleaned)
     return cleaned,rows,before_levels
 
 

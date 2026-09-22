@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-09-22-8a30fe4",
-  "worldbuilder_commit": "8a30fe4",
-  "created": "2026-09-22T01:29:07",
+  "version": "2026-09-22-125518f",
+  "worldbuilder_commit": "125518f",
+  "created": "2026-09-22T02:38:16",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
@@ -171,12 +171,13 @@
     "location_attributes.csv": "f74c93a299fca1dc953cf92a1b7ac8b8b82aa43332bc8dc557054535252d2e42",
     "location_buildings.csv": "e42c27998d8ed449a1eb1caba98e8c87b9a0afe87f90eed425a1e79a3b230e63",
     "location_targets.csv": "b3a85243147399ca09869988e355d397e1162a6c9633dfb0e699c82c9f43c206",
-    "navigation/manifest.json": "bc02b3aed636de5e16a0231d3642a96724c27229b2d430f83e718098df8b43d1",
-    "navigation/tiles.csv": "06236e22e978dc7fbe73915754e85a2516e8da6011df19c6c421fcece6c5b1bf",
-    "navigation/edges.csv": "73b5be109be6668b2f01a3a38e24811796a38dc497bb7db84a0a99c91d91ab6f",
-    "navigation/shores.csv": "17ce6dbba4ca8b0bbba82a331af13ab0c46bd680395c097e4d721428650e282b",
-    "navigation/lost_river_effects.csv": "8454aaaf9dd41c264afe462a0362d1fbb55711a09e437b1bc7160d0397280830",
-    "navigation/river_effect_changes.csv": "262ee71c03dd303e254bc4851998d23782881eb03ab46154d0230f4d79bbc1c8"
+    "navigation/manifest.json": "da0966a08ac4529bc3c12d1cc002e819e7555f7d5487e3c837797866152c1508",
+    "navigation/tiles.csv": "9a09ca405978c85227f9c18a2b62d1e9195b83ac32b4f5fde711b0843696d160",
+    "navigation/edges.csv": "e4ee295f726b7a0143a871b19e22346fa289f5055cf6bbcd62518c1404642f17",
+    "navigation/shores.csv": "15e30af7ff2abb566023cbe00050d55b2631e332325ecffba6ff6001dea9452e",
+    "navigation/lost_river_effects.csv": "56317cd6d6f4b7a78e2f749c3cb929ca485157acbcc0ec954d0b1d6e96f37abb",
+    "navigation/river_effect_changes.csv": "2a62b440b907caddea2507d3b46502329be93c4001b4d51d4a9ac71ded0a94ca",
+    "navigation/preserved_river_pixels.csv": "f147f44c94fb340c93fcf6c1fc7af57db2b3b75e2fdf537f6305f8ae3bf1e3c6"
   },
   "rules": [
     "No per-location capacity value: capacity = sum of attribute rows + sum of building levels x unit.",

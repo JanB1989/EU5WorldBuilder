@@ -376,7 +376,7 @@
     }
   ],
   "river_preservation": "native_bank_pixel",
-  "preserved_river_pixels": 1702,
+  "preserved_river_pixels": 1832,
   "river_port_locations": [
     "aaboukingon",
     "aarau",
@@ -23079,7 +23079,7 @@
     "in_game/gfx/map/map_objects/generated_map_object_locators_combat.txt": "d0c9a2c9b8d3c9b516a0cebbdc982031af32978111fa0338bd32828c06493662",
     "in_game/gfx/map/map_objects/generated_map_object_locators_unit_stack.txt": "b63eb3529d0b382f6632f186ac998194ba73e5a5d3d9a6ec66df1f79049ef685",
     "in_game/gfx/map/map_objects/generated_map_object_locators_dock.txt": "5a51c39951a046a807427dac8ea6a6bfcb6b80f987b034802a404f1dca15b916",
-    "in_game/map_data/rivers.png": "d6f7ff5dcfdc47c3f31933326b9f7165ed8605a97c9d4f8365bca69789af240e"
+    "in_game/map_data/rivers.png": "11609fea7ba0531006b6771c4b41a098ca7b87b260cb9850f8c97f2452907834"
   },
   "bisected_land_locations": [
     {
@@ -27659,6 +27659,7 @@
     }
   ],
   "checks": {
+    "native_river_topology_valid": true,
     "river_port_coordinates_on_passable_shore": true,
     "native_river_levels_preserved": true,
     "no_native_rivers_on_converted_water": true,
@@ -27668,8 +27669,8 @@
     "land_identities_retained": true,
     "lost_land_adjacencies_restored": true
   },
-  "map_code_sha256": "649b5dc9f1c8bfa49c4bca2b7cb561c6487e5409152ab2eac979732a155420c5",
-  "cleanup_code_sha256": "c734cf17a942fe24934019459ee0ed4f6dadc7f42678d27f33eedd5a3ab75b51",
+  "map_code_sha256": "3fcc6c6a0887c9f846cc8f34028e2db48425e3f40f24020d420b6c91ccbb775e",
+  "cleanup_code_sha256": "b9fcfeeab2287969ffd4e282396d2a35392ee48e9ec468d6558cf171600ce980",
   "native_geometry_inputs": {
     "/mnt/c/Games/steamapps/common/Europa Universalis V/game/in_game/map_data/rivers.png": "9e7b04a87aebd8862683cb035b7a88de26c98c5708f8e950aea0cbda79c650e0"
   },

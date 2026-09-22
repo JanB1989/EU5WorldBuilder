@@ -71,3 +71,32 @@ def test_guard_handles_nested_calls_and_is_idempotent():
     assert 'GetDataModelSize(GetModel(A, B))' in result
     assert guard_location_models(result)==result
     assert result.endswith(']" }')
+
+
+def test_native_row_keeps_vanilla_modifier_lists():
+    from historical_agriculture.geography_test_native_view import splice_native_row
+    gui = """x = {
+# BOTTOM CONDITIONS
+hbox = {
+ background = { }
+ hbox = { margin = { 10 8 }
+  hbox = { spacing = 5
+   widget = { tooltipwidget = { using = Topography_tooltip } }
+   ### IS BLOCKADED by ice
+   widget = { visible = "[LocationView.GetLocation.IsBlockadedByIce]" }
+  }
+ }
+ widget = { hbox = {
+  # RIVER MODIFIER
+  icon = { texture = "[GetConceptTexture(river)]" }
+  # Location timed modifiers
+  widget = { datamodel = "[LocationView.GetLocation.GetTimedModifiers]" }
+ } }
+ expand = {}
+}
+}
+"""
+    out = splice_native_row(gui, ['widget = { name = "ha1300_native_river" }'])
+    assert 'GetTimedModifiers' in out and 'IsBlockadedByIce' in out and 'ha1300_native_river' in out
+    assert 'Topography_tooltip' not in out and '# RIVER MODIFIER' not in out
+    assert out.count('{') == out.count('}')

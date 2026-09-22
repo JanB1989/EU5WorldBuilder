@@ -1,7 +1,7 @@
 """Six native location properties, with no synthetic attribute modifiers."""
 import re
 
-from .geography_test import write_text, block_span
+from .geography_test import write_text
 
 LOC = 'LocationView.GetLocation'
 
@@ -91,6 +91,54 @@ def chip(name, icon, value, tip, context=None, extra=''):
     }}'''
 
 
+def _block_end(text, open_brace):
+    """Index just past the brace matching ``text[open_brace]``; braces in comments/strings are ignored."""
+    depth = 0; quoted = False; comment = False
+    for i in range(open_brace, len(text)):
+        c = text[i]
+        if comment:
+            comment = c != '\n'
+        elif quoted:
+            quoted = c != '"'
+        elif c == '#': comment = True
+        elif c == '"': quoted = True
+        elif c == '{': depth += 1
+        elif c == '}':
+            depth -= 1
+            if depth == 0: return i + 1
+    raise ValueError('Unbalanced GUI block')
+
+
+def _find_block(text, pattern, start, end):
+    m = re.compile(pattern).search(text, start, end)
+    if not m: raise ValueError(f'location_window.gui: no {pattern!r} in the bottom row')
+    return m.start(), _block_end(text, text.index('{', m.start()))
+
+
+def splice_native_row(gui, widgets):
+    """Swap the vanilla geography icons of the bottom row for the native chips.
+
+    Only the framed icon group (topography, climate, vegetation, inland/coastal) is replaced; its ice
+    blockade icon and the rest of the row (harbor, sound toll, volcano, winter, earthquake, levies, holy
+    sites, attrition, disease, the location's base modifier, the location and province timed modifiers
+    and movements) stay vanilla. Vanilla's river icon is dropped because the river chip replaces it.
+    """
+    marker = gui.index('# BOTTOM CONDITIONS')
+    row_start, row_end = _find_block(gui, r'hbox\s*=\s*\{', marker, len(gui))
+    group_start, group_end = _find_block(gui, r'hbox\s*=\s*\{', gui.index('{', row_start) + 1, row_end)
+    icons_start, icons_end = _find_block(gui, r'hbox\s*=\s*\{', gui.index('{', group_start) + 1, group_end)
+    ice_at = gui.index('### IS BLOCKADED by ice', icons_start, icons_end)
+    ice_start, ice_end = _find_block(gui, r'widget\s*=\s*\{', ice_at, icons_end)
+    icons = ('hbox = {\n\tspacing = 5\n' + '\n'.join(widgets) + '\n'
+             + gui[ice_at:ice_start] + gui[ice_start:ice_end] + '\n}')
+    rest = gui[group_end:row_end]
+    river_at = rest.index('# RIVER MODIFIER')
+    river_start, river_end = _find_block(rest, r'icon\s*=\s*\{', river_at, len(rest))
+    rest = rest[:river_at] + rest[river_end:]
+    head = gui[row_start:icons_start].replace('hbox = {', 'hbox = {\n\tname = "ha1300_native_geography_row"', 1)
+    return gui[:row_start] + head + icons + gui[icons_end:group_end] + rest + gui[row_end:]
+
+
 def add_native_view(output, game, cfg):
     custom = []
     entries = {
@@ -175,36 +223,7 @@ def add_native_view(output, game, cfg):
         widgets.append(fertility_chip())
 
     gui = (game/'in_game/gui/location_window.gui').read_text(encoding='utf-8-sig')
-    start = gui.index('hbox = {', gui.index('# BOTTOM CONDITIONS'))
-    tail = gui[start:].replace('hbox', 'ha1300_target', 1)
-    _, _, end = block_span(tail, 'ha1300_target')
-    consumed = end - len('ha1300_target') + len('hbox')
-    row = '''hbox = {
-        name = "ha1300_native_geography_row"
-        layoutpolicy_horizontal = expanding
-        maximumsize = { -1 40 }
-        background = {
-            using = color_dark_blue_texture
-            alpha = 1
-            modify_texture = {
-                using = bg_fade_vertical_up_mask_texture
-                blend_mode = alphamultiply
-                alpha = 1
-            }
-        }
-        hbox = {
-            margin = { 10 8 }
-            using = bg_paper_card
-            using = bg_cabinet_card_frame
-            hbox = {
-                spacing = 5
-                __CHIPS__
-            }
-        }
-        expand = {}
-    }'''.replace('__CHIPS__', '\n'.join(widgets))
-    write_text(output, 'in_game/gui/location_window.gui',
-               guard_location_models(gui[:start] + row + gui[start+consumed:]))
+    write_text(output, 'in_game/gui/location_window.gui', guard_location_models(splice_native_row(gui, widgets)))
     write_text(output, 'in_game/common/customizable_localization/ha1300_native_geography.txt', '\n'.join(custom))
     write_text(output, 'main_menu/localization/english/ha1300_native_geography_l_english.yml',
                'l_english:\n' + ''.join(f' {k}: "{v}"\n' for k,v in entries.items()))

@@ -25,24 +25,27 @@ def validated():
     return out,manifest
 
 
-def emit(output):
+def emit(output,game,settings=None):
     out,manifest=validated()
+    from .navigation_ports import select,prune
+    ports,table=select(out,manifest,game,settings)
+    table.to_csv(out/'port_selection.csv',index=False)
     for rel in manifest['files']:
         target=Path(output)/rel;target.parent.mkdir(parents=True,exist_ok=True)
         if rel=='in_game/map_data/location_templates.txt':
             # Geography has already written the complete climate/terrain model.
             base=target.read_text(encoding='utf-8-sig')
-            ports=set(manifest.get('river_port_locations',[]));floor=manifest.get('port_harbor_floor',.25)
             def harbor(m):
                 if m[1] not in ports:return m[0]
                 body=m[2];hit=re.search(r'natural_harbor_suitability\s*=\s*([.\d]+)',body)
                 if hit:
-                    value=max(floor,float(hit[1]));body=body[:hit.start()]+f'natural_harbor_suitability = {value:g}'+body[hit.end():]
-                else:body+=f' natural_harbor_suitability = {floor:g} '
+                    value=max(ports[m[1]],float(hit[1]));body=body[:hit.start()]+f'natural_harbor_suitability = {value:.2f}'+body[hit.end():]
+                else:body+=f' natural_harbor_suitability = {ports[m[1]]:.2f} '
                 return m[1]+' = {'+body+'}'
             base=re.sub(r'(\w+)\s*=\s*\{([^{}]*)\}',harbor,base)
             target.write_text(base+'\n'+(out/'sea_templates.txt').read_text(),encoding='utf-8-sig')
         else:shutil.copy2(out/'mod'/rel,target)
+    port_stats=prune(Path(output),ports,game,len(table))
     # Names belong to the geography layer even in the standalone World Builder.
     import pandas as pd
     rows=pd.read_csv(out/'tiles.csv')
@@ -54,7 +57,7 @@ def emit(output):
         for i in range((len(g)+11)//12):loc.append(f' pp_nav_{region}_{i}_province: "{label} Waterways"')
     p=Path(output)/'main_menu/localization/english/pp_navigation_geography_l_english.yml';p.parent.mkdir(parents=True,exist_ok=True)
     p.write_text('\n'.join(loc)+'\n',encoding='utf-8-sig')
-    return {'tiles':manifest['tiles'],'edges':manifest['edges']}
+    return {'tiles':manifest['tiles'],'edges':manifest['edges'],'river_ports':port_stats}
 
 
 def handover(output):

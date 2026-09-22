@@ -56,7 +56,7 @@ def prepare(config):
     cache = output/"pixel_evidence.parquet"
     fingerprint = {"network": digest(network), "river": digest(river_path), "elevation": digest(ROOT/config["elevation"]),
                    "transform": digest(raw/"transform.json"), "prefilter": cfg["source_prefilter_m3_s"],
-                   "code": digest(Path(__file__))}
+                   "evidence_algorithm": 1}
     stamp = output/"pixel_evidence.manifest.json"
     if cache.exists() and stamp.exists() and json.loads(stamp.read_text()) == fingerprint:
         print("Using verified navigation evidence cache", flush=True)
@@ -119,6 +119,10 @@ def build(config_path=None):
     projection = Projection(json.loads((raw/"transform.json").read_text()), image.shape[1], image.shape[0])
     rows["longitude"] = projection.longitude(rows.x.to_numpy())
     rows["latitude"] = projection.lats[rows.y.to_numpy()]
+    tropical=rows.latitude.abs() <= config['selection'].get('tropical_latitude',23.5)
+    inadequate=(rows.q_mean_m3_s < config['selection'].get('tropical_minimum_mean_discharge_m3_s',2000)) | (rows.q_min_m3_s < config['selection'].get('tropical_minimum_low_discharge_m3_s',250))
+    rows.loc[tropical & inadequate,'state']=0
+    rows.loc[tropical & inadequate,'evidence']='tropical_small_or_seasonal_native'
     overrides = []
     for override in config["overrides"]:
         if "bounds" in override:
@@ -133,6 +137,9 @@ def build(config_path=None):
         rows.loc[match, "state"] = STATES[override["state"]]
         rows.loc[match, "evidence"] = override["id"]
         overrides.append({"id": override["id"], "pixels": int(match.sum()), "source": override["source"]})
+    from .navigation_cleanup import close_short_gaps
+    gap_pixels=close_short_gaps(rows,image.shape[1],config['raster'].get('maximum_native_gap_pixels',6))
+    print(f'Restored {gap_pixels} short native-channel gap pixels',flush=True)
     rows.to_parquet(output/"classified_pixels.parquet", index=False)
     from .navigation_map import export
     result = export(config, rows, river)

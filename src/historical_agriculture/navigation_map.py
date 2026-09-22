@@ -14,6 +14,7 @@ from scipy import ndimage
 
 from .location_inventory import read_zone_inventory
 from .river_network import save_json, digest
+from .navigation_cleanup import LEVELS
 
 ROOT = Path(__file__).resolve().parents[2]
 STATE_NAMES = {1: "navigable", 2: "improvable", 3: "barrier"}
@@ -106,6 +107,8 @@ def export(config, evidence, river):
             additions.append(row);indices.append(int(y)*width+int(x))
         pixel_rows=pixel_rows.drop(index=[p for p in indices if p in pixel_rows.index])
         pixel_rows=pd.concat([pixel_rows,pd.DataFrame(additions,index=indices)])
+    from .navigation_cleanup import snap_mouths
+    pixel_rows,mouth_snaps=snap_mouths(pixel_rows,original,land,seas,cfg.get('maximum_mouth_snap_pixels',6))
     # Native river lines are eight-connected; location adjacency is four-
     # connected. Fill only the corner of existing diagonal river neighbours,
     # never a gap between unrelated stretches or a retained native barrier.
@@ -116,7 +119,8 @@ def export(config, evidence, river):
             q=p+delta
             if q not in selected_rows or abs(q%width-p%width)!=1:continue
             other=selected_rows[q]
-            if r.main_basin_id!=other.main_basin_id:continue
+            # A visible confluence is an actual raster connection even when
+            # nearest-source registration assigned the two banks to different basins.
             corners=[p+width,q-width]
             if any(c in selected_rows or c in bridges for c in corners):continue
             options=[c for c in corners if int(flat[c]) in land and river.ravel()[c]>=16]
@@ -236,6 +240,9 @@ def export(config, evidence, river):
                           "low_discharge_m3_s": float(rows.q_min_m3_s.median()),
                           "gradient_m_per_km": float(rows.gradient_m_per_km.median()),
                           "evidence": ";".join(sorted(set(rows.evidence))),
+                          "river_level": int(max([0]+[int(LEVELS[river.ravel()[p]]) for p in g["center"]])),
+                          "tropical": bool(abs(float(rows.latitude.median())) <= config['selection'].get('tropical_latitude',23.5)),
+                          "seasonal": bool(float(rows.q_min_m3_s.median()) / max(float(rows.q_mean_m3_s.median()),1) < config['selection'].get('seasonal_low_flow_ratio',.15)),
                           "x": float(rows.x.mean()), "y": float(rows.y.mean())})
         names[color] = tag; colors[tag] = color
     changed = np.flatnonzero(af != flat)
@@ -354,6 +361,10 @@ def export(config, evidence, river):
         sea_c,points=max(choices,key=lambda item:(len(item[1]),-item[0]))
         xy=np.array([(p%width,p//width) for p in points]); idx=np.argmin(((xy-xy.mean(axis=0))**2).sum(axis=1))
         x,y=map(int,xy[idx]);port_changes[name]=(names[sea_c],x,y)
+    for name,(sea,x,y) in port_changes.items():
+        assert int(after[y,x])==colors[sea]
+        assert colors[name] in {int(af[q]) for q in neighbours(y*width+x,width,flat.size)}
+        assert tile_by_color[colors[sea]]['state']!=3
     port_rows=[r for r in port_rows if r.split(';')[0] not in port_changes]
     port_rows += [f"{n};{sea};{x};{height-y};x" for n,(sea,x,y) in sorted(port_changes.items())]
     write(md+"ports.csv",'\n'.join(port_rows)+'\n')
@@ -418,6 +429,13 @@ def export(config, evidence, river):
         additions=''.join(f'\n {{ id={n} position={{ {x} 0 {z} }} rotation={{ 0 0 0 1 }} scale={{ 1 1 1 }} }}' for n,(x,z) in add.items())
         close=text.rfind('}',0,text.rfind('}'));assert len(seen)>1000
         write(rel,text[:close]+additions+'\n'+text[close:])
+    from .navigation_cleanup import preserve_levels
+    cleaned,preservation,original_level_map=preserve_levels(river,original,after,land,base_info.reset_index(),[o['box'] for o in config.get('native_geometry_overrides',[])])
+    palette_image=Image.open(ROOT/json.loads((ROOT/config['river_export']/'export_manifest.json').read_text())['output_png'])
+    cleaned_image=Image.fromarray(cleaned,mode='P');cleaned_image.putpalette(palette_image.getpalette())
+    cleaned_image.save(mod/md/'rivers.png');written.append(md+'rivers.png')
+    pd.DataFrame(preservation,columns=['location_tag','river_level','x','y','distance_pixels']).to_csv(out/'preserved_river_pixels.csv',index=False)
+    metadata={r['location']:r for r in tile_meta}
     # Geometry contract for Constructor: no gameplay building balance here.
     edges=[]
     for c,targets in sorted(adjacent.items()):
@@ -425,7 +443,9 @@ def export(config, evidence, river):
             if d in tile_by_color and c>d:continue
             if d in tile_by_color or d in seas or (config['shore_connections'] and d in land):
                 state=max(tile_by_color[c]['state'],tile_by_color[d]['state'] if d in tile_by_color else 1)
-                edges.append({'from':names[c],'to':names[d],'state':STATE_NAMES[state],'shore':d in land})
+                rough=any(metadata[n].get('tropical') or metadata[n].get('seasonal') for n in [names[c],names[d]] if n in metadata)
+                profile='difficult' if state==1 and rough else STATE_NAMES[state]
+                edges.append({'from':names[c],'to':names[d],'state':STATE_NAMES[state],'cost_profile':profile,'shore':d in land})
     graph=defaultdict(set)
     passable={r['location'] for r in tile_meta if r['state']!='barrier'}
     ocean={names[c] for c in seas}
@@ -444,41 +464,30 @@ def export(config, evidence, river):
         components.append(len(component))
     shore=[]
     for (l,c),points in sorted(coast_pixels.items()):shore.append({'location_tag':names[l],'water_location':names[c],'state':STATE_NAMES[tile_by_color[c]['state']], 'shore_pixels':len(points)})
+    for row in tile_meta:row['ocean_connected']=row['location'] in visited
     pd.DataFrame(tile_meta).to_csv(out/'tiles.csv',index=False)
     pd.DataFrame(edges).to_csv(out/'edges.csv',index=False)
     pd.DataFrame(shore).to_csv(out/'shores.csv',index=False)
-    # Native size effects can be sparse. Preserve the complete set of active
-    # sizes, not just the largest, when a converted pixel removes an effect.
-    original_effects=defaultdict(set);remaining_effects=defaultdict(set)
-    level_lut={0:0,1:5,2:5,3:1,4:1,5:1,6:2,7:2,8:2,9:3,10:3,11:3,12:4,13:4,14:4,15:5}
-    ry,rx=np.where(river<16)
-    for y,x in zip(ry,rx):
-        level=level_lut[int(river[y,x])]
-        if not level:continue
-        c=int(original[y,x]);d=int(after[y,x])
-        if c in land:original_effects[c].add(level)
-        if d in land:remaining_effects[d].add(level)
+    # The native bitmap now preserves exactly one maximum level per original
+    # land location. No gameplay compensation is needed or allowed to stack.
+    original_effects={c:{n} for c,n in original_level_map.items() if n}
     bonus_rows=[]
-    for c in sorted(original_effects):
-        for level in sorted(original_effects[c]-remaining_effects[c]):bonus_rows.append({'location_tag':names[c],'river_level':level,'original_coastal':bool(base_info.loc[names[c],'is_coastal'])})
-    pd.DataFrame(bonus_rows,columns=['location_tag','river_level','original_coastal']).to_csv(out/'lost_river_effects.csv',index=False)
+    pd.DataFrame(columns=['location_tag','river_level','original_coastal']).to_csv(out/'lost_river_effects.csv',index=False)
     changed_effects=[]
     new_coast={l for l,_ in coast_pixels}
-    for c in sorted(set(original_effects)|set(remaining_effects)):
-        before=original_effects[c];remaining=remaining_effects[c]
+    for c,levels in sorted(original_effects.items()):
         coastal=bool(base_info.loc[names[c],'is_coastal'])
-        if before!=remaining or (c in new_coast and not coastal):
-            changed_effects.append({'location_tag':names[c],'original_levels':','.join(map(str,sorted(before))),
-                                   'remaining_levels':','.join(map(str,sorted(remaining))),
-                                   'original_coastal':coastal,'new_coastal':coastal or c in new_coast})
-    pd.DataFrame(changed_effects,columns=['location_tag','original_levels','remaining_levels','original_coastal','new_coastal']).to_csv(out/'river_effect_changes.csv',index=False)
+        changed_effects.append({'location_tag':names[c],'original_levels':str(max(levels)),
+                               'remaining_levels':str(max(levels)),
+                               'original_coastal':coastal,'new_coastal':coastal or c in new_coast})
+    pd.DataFrame(changed_effects).to_csv(out/'river_effect_changes.csv',index=False)
     report={'tiles':len(tile_meta),'tile_states':dict(Counter(r['state'] for r in tile_meta)), 'converted_pixels':int(len(changed)),
             'ocean_connected_passable_tiles':water_connected,'passable_components':len(components),'largest_passable_component':max(components,default=0),
-            'crossings':len(crossings),'ports_changed':len(port_changes),'land_effect_rows_to_restore':len(bonus_rows),
+            'mouth_alignment_repairs':mouth_snaps, 'river_preservation':'native_bank_pixel', 'preserved_river_pixels':len(preservation), 'river_port_locations':sorted(names[c] for c in port_candidates), 'port_harbor_floor':config.get('port_harbor_floor',.25), 'crossings':len(crossings),'ports_changed':len(port_changes),'land_effect_rows_to_restore':len(bonus_rows),
             'omissions':dict(omitted),'crossing_guard_locations':cfg.get('retain_native_locations',[]),'bank_fragment_repairs':repairs,'locators_moved':dict(moved),'edges':len(edges),'files':{rel:digest(mod/rel) for rel in written},
             'bisected_land_locations':bisected,
-            'checks':{'minimum_tile_size':True,'connected_tiles':True,'land_area_guard':True,'land_identities_retained':True,'lost_land_adjacencies_restored':not missing},
-            'map_code_sha256':digest(Path(__file__)), 'native_geometry_inputs':native_inputs,
+            'checks':{'river_port_coordinates_on_passable_shore':True,'native_river_levels_preserved':True,'no_native_rivers_on_converted_water':True,'minimum_tile_size':True,'connected_tiles':True,'land_area_guard':True,'land_identities_retained':True,'lost_land_adjacencies_restored':not missing},
+            'map_code_sha256':digest(Path(__file__)), 'cleanup_code_sha256':digest(Path(__file__).with_name('navigation_cleanup.py')), 'native_geometry_inputs':native_inputs,
             'engine_status':'Global output requires a fresh campaign; local Thames mechanism confirmed by user.'}
     # Lightweight inspectable world map, embedded raster plus clickable nodes.
     preview=Image.fromarray(rgb).resize((2048,1024),Image.Resampling.NEAREST);buf=io.BytesIO();preview.save(buf,format='PNG')

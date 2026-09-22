@@ -15,11 +15,15 @@
     "open_gradient_m_per_km": 0.35,
     "improvable_gradient_m_per_km": 2.0,
     "minimum_reach_length_for_gradient_km": 5,
-    "gradient_smoothing_pixels": 7
+    "gradient_smoothing_pixels": 7,
+    "tropical_latitude": 23.5,
+    "tropical_minimum_mean_discharge_m3_s": 2000,
+    "tropical_minimum_low_discharge_m3_s": 250,
+    "seasonal_low_flow_ratio": 0.15
   },
   "raster": {
     "width_pixels": 2,
-    "minimum_tile_pixels": 32,
+    "minimum_tile_pixels": 8,
     "target_tile_pixels": 96,
     "minimum_remaining_land_pixels": 100,
     "maximum_land_fraction_removed": 0.35,
@@ -28,12 +32,18 @@
     "maximum_crossing_span_pixels": 12,
     "maximum_reassigned_fragment_pixels": 32,
     "state_aggregation": "median_physical_worst_explicit",
-    "land_bisection_policy": "retain_both_banks_under_original_location"
+    "land_bisection_policy": "retain_both_banks_under_original_location",
+    "maximum_native_gap_pixels": 6,
+    "maximum_mouth_snap_pixels": 6
   },
   "road_costs": {
     "navigable": {
       "movement_cost": -0.35,
       "market_access": -0.5
+    },
+    "difficult": {
+      "movement_cost": 0.5,
+      "market_access": 1.5
     },
     "improvable": {
       "movement_cost": 1.0,
@@ -163,6 +173,19 @@
       "allow_below_threshold": true,
       "source": "grand_canal_unesco",
       "reason": "Existing southern Grand Canal and connected maintained waterways; navigation works placed from the existing improvement allowance."
+    },
+    {
+      "id": "khone_falls",
+      "bounds": [
+        105.6,
+        13.75,
+        106.15,
+        14.2
+      ],
+      "state": "barrier",
+      "allow_below_threshold": true,
+      "source": "mekong_mrc",
+      "reason": "Natural complete navigation barrier; modern canal proposals excluded."
     }
   ],
   "sources": {
@@ -209,6 +232,18 @@
     "niagara_nps": {
       "url": "https://www.nps.gov/places/niagara-falls.htm",
       "role": "Natural waterfall barrier, documented by the US National Park Service."
+    },
+    "mekong_mrc": {
+      "url": "https://archive.iwlearn.net/mrcmekong.org/RAK/html/1.15.3_river_navigation.html",
+      "role": "Natural complete barriers and limited navigation through rapids, shoals and sharp bends."
+    },
+    "congo_world_bank": {
+      "url": "https://documents1.worldbank.org/curated/en/684111495448714514/pdf/WP-TradeFacilitationEnglishmainweb-PUBLIC.pdf",
+      "role": "Extensive navigable basin waterways coexist with seasonal limitations and cataract barriers; not evidence of 1300 infrastructure."
+    },
+    "amazon_dnit": {
+      "url": "https://www.gov.br/dnit/pt-br/assuntos/aquaviario/antiga-daq/hidrovia-do-solimoes",
+      "role": "Long-distance natural navigation on the Amazon-Solimoes; modern information informs physical capability, not medieval port or dredging infrastructure."
     }
   },
   "native_geometry_overrides": [
@@ -224,5 +259,6 @@
       "source": "thames_history",
       "reason": "Use the tested vanilla lower-Thames alignment to reach the existing Thames estuary. Modern-source river registration ends inland here."
     }
-  ]
+  ],
+  "port_harbor_floor": 0.25
 }

@@ -2,6 +2,7 @@
 from pathlib import Path
 import json
 import shutil
+import re
 
 from .river_network import digest
 
@@ -16,6 +17,8 @@ def validated():
         raise ValueError('Navigation config changed: run worldbuilder navigation first')
     if manifest.get('map_code_sha256')!=digest(Path(__file__).with_name('navigation_map.py')):
         raise ValueError('Navigation exporter changed: run worldbuilder navigation first')
+    if manifest.get('cleanup_code_sha256')!=digest(Path(__file__).with_name('navigation_cleanup.py')):
+        raise ValueError('Navigation cleanup changed: run worldbuilder navigation first')
     if not all(manifest['checks'].values()):raise ValueError('Navigation map checks did not pass')
     for rel,expected in manifest['files'].items():
         if digest(out/'mod'/rel)!=expected:raise ValueError('Navigation export changed: '+rel)
@@ -29,6 +32,15 @@ def emit(output):
         if rel=='in_game/map_data/location_templates.txt':
             # Geography has already written the complete climate/terrain model.
             base=target.read_text(encoding='utf-8-sig')
+            ports=set(manifest.get('river_port_locations',[]));floor=manifest.get('port_harbor_floor',.25)
+            def harbor(m):
+                if m[1] not in ports:return m[0]
+                body=m[2];hit=re.search(r'natural_harbor_suitability\s*=\s*([.\d]+)',body)
+                if hit:
+                    value=max(floor,float(hit[1]));body=body[:hit.start()]+f'natural_harbor_suitability = {value:g}'+body[hit.end():]
+                else:body+=f' natural_harbor_suitability = {floor:g} '
+                return m[1]+' = {'+body+'}'
+            base=re.sub(r'(\w+)\s*=\s*\{([^{}]*)\}',harbor,base)
             target.write_text(base+'\n'+(out/'sea_templates.txt').read_text(),encoding='utf-8-sig')
         else:shutil.copy2(out/'mod'/rel,target)
     # Names belong to the geography layer even in the standalone World Builder.
@@ -50,6 +62,6 @@ def handover(output):
     if not cfg.get('global_navigation'):return {}
     out,manifest=validated();target=Path(output)/'navigation';target.mkdir(parents=True,exist_ok=True)
     files={}
-    for name in ['manifest.json','tiles.csv','edges.csv','shores.csv','lost_river_effects.csv','river_effect_changes.csv']:
+    for name in ['manifest.json','tiles.csv','edges.csv','shores.csv','lost_river_effects.csv','river_effect_changes.csv','preserved_river_pixels.csv']:
         shutil.copy2(out/name,target/name);files['navigation/'+name]=digest(target/name)
     return files

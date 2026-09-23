@@ -1,0 +1,640 @@
+{
+  "layers": [
+    {
+      "key": "starting_capacity",
+      "label": "Starting capacity \u00b7 target",
+      "group": "Targets",
+      "kind": "seq",
+      "ticks": [
+        1.84877271151173,
+        16115.7713589179,
+        33555.0517137567,
+        52691.8552673909,
+        688808.92438922
+      ],
+      "cap": 688808.92438922,
+      "scale": "quantile",
+      "stats": {
+        "median": 33555.0517137567,
+        "p10": 5694.656327765698,
+        "p90": 77684.00666813499
+      }
+    },
+    {
+      "key": "maximum_capacity_people",
+      "label": "Maximum capacity \u00b7 target",
+      "group": "Targets",
+      "kind": "seq",
+      "ticks": [
+        1.84877271151173,
+        48257.6284041819,
+        89886.3965182534,
+        142538.555369635,
+        910161.852808183
+      ],
+      "cap": 910161.852808183,
+      "scale": "quantile",
+      "stats": {
+        "median": 89886.3965182534,
+        "p10": 10629.467732131081,
+        "p90": 234789.58851283137
+      }
+    },
+    {
+      "key": "natural_capacity_people",
+      "label": "Natural capacity \u00b7 target",
+      "group": "Targets",
+      "kind": "seq",
+      "ticks": [
+        1.84877271151173,
+        14493.362737810876,
+        26503.18732499925,
+        33869.12714141215,
+        88139.7595207356
+      ],
+      "cap": 88139.7595207356,
+      "scale": "quantile",
+      "stats": {
+        "median": 26501.5837911365,
+        "p10": 5248.108640647676,
+        "p90": 42108.96622003181
+      }
+    },
+    {
+      "key": "starting_capacity_model",
+      "label": "Starting capacity \u00b7 model (attributes + buildings \u00d7 development)",
+      "group": "Model",
+      "kind": "seq",
+      "ticks": [
+        100.0,
+        23720.0,
+        39480.0,
+        68340.0,
+        467480.0
+      ],
+      "cap": 467480.0,
+      "scale": "quantile",
+      "stats": {
+        "median": 39480.0,
+        "p10": 9500.0,
+        "p90": 119145.99999999999
+      }
+    },
+    {
+      "key": "maximum_capacity_model",
+      "label": "Maximum capacity \u00b7 model (caps at starting development)",
+      "group": "Model",
+      "kind": "seq",
+      "ticks": [
+        108900.0,
+        153600.0,
+        204200.0,
+        281500.0,
+        589300.0
+      ],
+      "cap": 589300.0,
+      "scale": "quantile",
+      "stats": {
+        "median": 204200.0,
+        "p10": 128500.0,
+        "p90": 339400.0
+      }
+    },
+    {
+      "key": "attribute_natural_people",
+      "label": "Attributes only \u00b7 natural at starting development",
+      "group": "Model",
+      "kind": "seq",
+      "ticks": [
+        100.0,
+        23490.0,
+        38340.0,
+        55070.0,
+        130600.0
+      ],
+      "cap": 130600.0,
+      "scale": "quantile",
+      "stats": {
+        "median": 38340.0,
+        "p10": 9500.0,
+        "p90": 75878.0
+      }
+    },
+    {
+      "key": "attribute_maximum_people",
+      "label": "Attributes only \u00b7 maximum at development 100",
+      "group": "Model",
+      "kind": "seq",
+      "ticks": [
+        100000.0,
+        143300.0,
+        182000.0,
+        206400.0,
+        276400.0
+      ],
+      "cap": 276400.0,
+      "scale": "quantile",
+      "stats": {
+        "median": 182000.0,
+        "p10": 107300.0,
+        "p90": 226979.99999999994
+      }
+    },
+    {
+      "key": "res_start",
+      "label": "Start: model \u00f7 target \u2212 1",
+      "group": "Residuals",
+      "kind": "div",
+      "scale": "diverging",
+      "stats": {
+        "median": 0.4122687137249681,
+        "p10": -0.3055304722793374,
+        "p90": 1.634265726161353
+      }
+    },
+    {
+      "key": "res_max",
+      "label": "Maximum: model \u00f7 target \u2212 1",
+      "group": "Residuals",
+      "kind": "div",
+      "scale": "diverging",
+      "stats": {
+        "median": 1.3055747418576544,
+        "p10": 0.23118253495665808,
+        "p90": 10.72936736199423
+      }
+    },
+    {
+      "key": "res_attr_natural",
+      "label": "Attributes only \u00f7 natural target \u2212 1",
+      "group": "Residuals",
+      "kind": "div",
+      "scale": "diverging",
+      "stats": {
+        "median": 0.6142031624530814,
+        "p10": -0.2983566121018535,
+        "p90": 2.536821906927903
+      }
+    },
+    {
+      "key": "res_attr_max",
+      "label": "Attributes only \u00f7 maximum target \u2212 1",
+      "group": "Residuals",
+      "kind": "div",
+      "scale": "diverging",
+      "stats": {
+        "median": 1.0128902635542687,
+        "p10": -0.10990074408010957,
+        "p90": 9.417225619830702
+      }
+    },
+    {
+      "key": "development",
+      "label": "Development (0\u2013100)",
+      "group": "Development",
+      "kind": "lin",
+      "cap": 100.0,
+      "scale": "linear",
+      "stats": {
+        "median": 15.05,
+        "p10": 0.0,
+        "p90": 49.889999999999965
+      }
+    },
+    {
+      "key": "fill_target",
+      "label": "Population \u00f7 starting target",
+      "group": "Population",
+      "kind": "div",
+      "scale": "diverging",
+      "stats": {
+        "median": -0.7506470266533507,
+        "p10": -0.9630750285552169,
+        "p90": 0.15495269971812634
+      }
+    },
+    {
+      "key": "fill_model",
+      "label": "Population \u00f7 starting model",
+      "group": "Population",
+      "kind": "div",
+      "scale": "diverging",
+      "stats": {
+        "median": -0.8185321100917431,
+        "p10": -0.9700739053842626,
+        "p90": -0.19690108437337697
+      }
+    },
+    {
+      "key": "review",
+      "label": "Start exceeds attribute maximum (review list)",
+      "group": "Flags",
+      "kind": "cat",
+      "legend": {
+        "ok": [
+          70,
+          110,
+          90
+        ],
+        "on review list": [
+          191,
+          53,
+          58
+        ]
+      }
+    },
+    {
+      "key": "fertility",
+      "label": "Fertility class (best staple kcal/ha)",
+      "group": "Attributes",
+      "kind": "cat",
+      "legend": {
+        "very_low": [
+          168,
+          64,
+          59
+        ],
+        "high": [
+          139,
+          182,
+          94
+        ],
+        "very_high": [
+          55,
+          139,
+          80
+        ],
+        "moderate": [
+          219,
+          191,
+          100
+        ],
+        "low": [
+          215,
+          125,
+          64
+        ]
+      }
+    },
+    {
+      "key": "rgo_output_model",
+      "label": "RGO output modifier \u00b7 from attributes (\u221250%\u2026+50%)",
+      "group": "Goods",
+      "kind": "div",
+      "scale": "diverging",
+      "stats": {
+        "median": 0.0,
+        "p10": -0.62,
+        "p90": 0.32
+      }
+    },
+    {
+      "key": "rgo_output_target",
+      "label": "RGO output modifier \u00b7 target (efficiency rank)",
+      "group": "Goods",
+      "kind": "div",
+      "scale": "diverging",
+      "stats": {
+        "median": 0.0,
+        "p10": -0.79318,
+        "p90": 0.44134000000000034
+      }
+    },
+    {
+      "key": "rgo_output_res",
+      "label": "RGO output: model \u2212 target (\u00d72)",
+      "group": "Goods",
+      "kind": "div",
+      "scale": "diverging",
+      "stats": {
+        "median": 0.0324,
+        "p10": -0.33696,
+        "p90": 0.48460000000000003
+      }
+    },
+    {
+      "key": "clearing_levels_start",
+      "label": "Clearing \u00b7 levels at start",
+      "group": "Buildings \u00b7 start",
+      "kind": "lin",
+      "cap": 15.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 2.0
+      }
+    },
+    {
+      "key": "management_levels_start",
+      "label": "Field management \u00b7 levels at start",
+      "group": "Buildings \u00b7 start",
+      "kind": "lin",
+      "cap": 11.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 3.0
+      }
+    },
+    {
+      "key": "water_supply_levels_start",
+      "label": "Water supply \u00b7 levels at start",
+      "group": "Buildings \u00b7 start",
+      "kind": "lin",
+      "cap": 4.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 0.0
+      }
+    },
+    {
+      "key": "paddy_control_levels_start",
+      "label": "Paddy control \u00b7 levels at start",
+      "group": "Buildings \u00b7 start",
+      "kind": "lin",
+      "cap": 13.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 0.0
+      }
+    },
+    {
+      "key": "flood_bunds_levels_start",
+      "label": "Flood bunds \u00b7 levels at start",
+      "group": "Buildings \u00b7 start",
+      "kind": "lin",
+      "cap": 6.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 1.0
+      }
+    },
+    {
+      "key": "field_drainage_levels_start",
+      "label": "Field drainage \u00b7 levels at start",
+      "group": "Buildings \u00b7 start",
+      "kind": "lin",
+      "cap": 11.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 3.0
+      }
+    },
+    {
+      "key": "polders_levels_start",
+      "label": "Polders \u00b7 levels at start",
+      "group": "Buildings \u00b7 start",
+      "kind": "lin",
+      "cap": 2.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 0.0
+      }
+    },
+    {
+      "key": "oasis_irrigation_levels_start",
+      "label": "Oasis irrigation \u00b7 levels at start",
+      "group": "Buildings \u00b7 start",
+      "kind": "lin",
+      "cap": 5.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 0.0
+      }
+    },
+    {
+      "key": "clearing_cap",
+      "label": "Clearing \u00b7 cap at starting development",
+      "group": "Buildings \u00b7 caps",
+      "kind": "lin",
+      "cap": 15.0,
+      "scale": "linear",
+      "stats": {
+        "median": 3.0,
+        "p10": 1.0,
+        "p90": 8.0
+      }
+    },
+    {
+      "key": "management_cap",
+      "label": "Field management \u00b7 cap at starting development",
+      "group": "Buildings \u00b7 caps",
+      "kind": "lin",
+      "cap": 14.0,
+      "scale": "linear",
+      "stats": {
+        "median": 5.0,
+        "p10": 1.0,
+        "p90": 9.0
+      }
+    },
+    {
+      "key": "water_supply_cap",
+      "label": "Water supply \u00b7 cap at starting development",
+      "group": "Buildings \u00b7 caps",
+      "kind": "lin",
+      "cap": 4.0,
+      "scale": "linear",
+      "stats": {
+        "median": 1.0,
+        "p10": 0.0,
+        "p90": 1.0
+      }
+    },
+    {
+      "key": "paddy_control_cap",
+      "label": "Paddy control \u00b7 cap at starting development",
+      "group": "Buildings \u00b7 caps",
+      "kind": "lin",
+      "cap": 17.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 7.0
+      }
+    },
+    {
+      "key": "flood_bunds_cap",
+      "label": "Flood bunds \u00b7 cap at starting development",
+      "group": "Buildings \u00b7 caps",
+      "kind": "lin",
+      "cap": 6.0,
+      "scale": "linear",
+      "stats": {
+        "median": 1.0,
+        "p10": 0.0,
+        "p90": 4.0
+      }
+    },
+    {
+      "key": "field_drainage_cap",
+      "label": "Field drainage \u00b7 cap at starting development",
+      "group": "Buildings \u00b7 caps",
+      "kind": "lin",
+      "cap": 12.0,
+      "scale": "linear",
+      "stats": {
+        "median": 2.0,
+        "p10": 0.0,
+        "p90": 7.0
+      }
+    },
+    {
+      "key": "polders_cap",
+      "label": "Polders \u00b7 cap at starting development",
+      "group": "Buildings \u00b7 caps",
+      "kind": "lin",
+      "cap": 2.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 1.0
+      }
+    },
+    {
+      "key": "oasis_irrigation_cap",
+      "label": "Oasis irrigation \u00b7 cap at starting development",
+      "group": "Buildings \u00b7 caps",
+      "kind": "lin",
+      "cap": 5.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 0.0
+      }
+    },
+    {
+      "key": "clearing_cap_at_reference",
+      "label": "Clearing \u00b7 cap at reference development",
+      "group": "Buildings \u00b7 caps (reference development)",
+      "kind": "lin",
+      "cap": 16.0,
+      "scale": "linear",
+      "stats": {
+        "median": 4.0,
+        "p10": 2.0,
+        "p90": 9.0
+      }
+    },
+    {
+      "key": "management_cap_at_reference",
+      "label": "Field management \u00b7 cap at reference development",
+      "group": "Buildings \u00b7 caps (reference development)",
+      "kind": "lin",
+      "cap": 15.0,
+      "scale": "linear",
+      "stats": {
+        "median": 8.0,
+        "p10": 4.0,
+        "p90": 11.0
+      }
+    },
+    {
+      "key": "water_supply_cap_at_reference",
+      "label": "Water supply \u00b7 cap at reference development",
+      "group": "Buildings \u00b7 caps (reference development)",
+      "kind": "lin",
+      "cap": 4.0,
+      "scale": "linear",
+      "stats": {
+        "median": 2.0,
+        "p10": 0.0,
+        "p90": 2.0
+      }
+    },
+    {
+      "key": "paddy_control_cap_at_reference",
+      "label": "Paddy control \u00b7 cap at reference development",
+      "group": "Buildings \u00b7 caps (reference development)",
+      "kind": "lin",
+      "cap": 19.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 9.0
+      }
+    },
+    {
+      "key": "flood_bunds_cap_at_reference",
+      "label": "Flood bunds \u00b7 cap at reference development",
+      "group": "Buildings \u00b7 caps (reference development)",
+      "kind": "lin",
+      "cap": 7.0,
+      "scale": "linear",
+      "stats": {
+        "median": 3.0,
+        "p10": 0.0,
+        "p90": 6.0
+      }
+    },
+    {
+      "key": "field_drainage_cap_at_reference",
+      "label": "Field drainage \u00b7 cap at reference development",
+      "group": "Buildings \u00b7 caps (reference development)",
+      "kind": "lin",
+      "cap": 13.0,
+      "scale": "linear",
+      "stats": {
+        "median": 5.0,
+        "p10": 0.0,
+        "p90": 9.0
+      }
+    },
+    {
+      "key": "polders_cap_at_reference",
+      "label": "Polders \u00b7 cap at reference development",
+      "group": "Buildings \u00b7 caps (reference development)",
+      "kind": "lin",
+      "cap": 2.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 2.0
+      }
+    },
+    {
+      "key": "oasis_irrigation_cap_at_reference",
+      "label": "Oasis irrigation \u00b7 cap at reference development",
+      "group": "Buildings \u00b7 caps (reference development)",
+      "kind": "lin",
+      "cap": 9.0,
+      "scale": "linear",
+      "stats": {
+        "median": 0.0,
+        "p10": 0.0,
+        "p90": 0.0
+      }
+    }
+  ],
+  "locations": 20893,
+  "units": {
+    "clearing": 5200.0,
+    "management": 7700.0,
+    "water_supply": 3200.0,
+    "paddy_control": 17800.0,
+    "flood_bunds": 800.0,
+    "field_drainage": 700.0,
+    "polders": 2200.0,
+    "oasis_irrigation": 700.0
+  },
+  "capacity_percent_per_point": 0.0
+}

@@ -27,15 +27,21 @@ def validated():
 
 def emit(output,game,settings=None):
     out,manifest=validated()
-    from .navigation_ports import select,prune
+    from .navigation_ports import select,prune,restore_lone_sea_ports,portless_banks,assign_bank_ports
     ports,table=select(out,manifest,game,settings)
     table.to_csv(out/'port_selection.csv',index=False)
+    # Banks of passable tiles are coastal to the engine, which logs every coastal location without a port and
+    # every tile without one. The curated ports keep their harbors; every other bank gets a landing port with
+    # vanilla's small-port harbor value 0.00.
+    quiet=portless_banks(out,game,ports)
     for rel in manifest['files']:
         target=Path(output)/rel;target.parent.mkdir(parents=True,exist_ok=True)
         if rel=='in_game/map_data/location_templates.txt':
             # Geography has already written the complete climate/terrain model.
             base=target.read_text(encoding='utf-8-sig')
             def harbor(m):
+                if m[1] in quiet and 'natural_harbor_suitability' not in m[2]:
+                    return m[1]+' = {'+m[2]+' natural_harbor_suitability = 0.00 }'
                 if m[1] not in ports:return m[0]
                 body=m[2];hit=re.search(r'natural_harbor_suitability\s*=\s*([.\d]+)',body)
                 if hit:
@@ -45,7 +51,9 @@ def emit(output,game,settings=None):
             base=re.sub(r'(\w+)\s*=\s*\{([^{}]*)\}',harbor,base)
             target.write_text(base+'\n'+(out/'sea_templates.txt').read_text(),encoding='utf-8-sig')
         else:shutil.copy2(out/'mod'/rel,target)
-    port_stats=prune(Path(output),ports,game,len(table))
+    port_stats=prune(Path(output),{**{b:0.0 for b in quiet},**ports},game,len(table))
+    port_stats['restored_sea_ports']=restore_lone_sea_ports(Path(output),Path(game))
+    port_stats['bank_ports']=assign_bank_ports(Path(output),Path(game),out)
     # Names belong to the geography layer even in the standalone World Builder.
     import pandas as pd
     rows=pd.read_csv(out/'tiles.csv')

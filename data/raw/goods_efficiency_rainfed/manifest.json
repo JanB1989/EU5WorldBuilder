@@ -1,0 +1,110 @@
+{
+  "goods": {
+    "chili": {
+      "sha256": "cb69c969034c4f2faffb3c2e5e3a1bf641093d289e2a19076b4e021238db0826"
+    },
+    "cloves": {
+      "sha256": "2876aa7915e4cdbe9a4b93c2c2649128d361707a770d62ba9c6cdf2f4819a74d"
+    },
+    "cocoa": {
+      "sha256": "4c6f3d8911901bfb383fb600370f7d4729e246409d4d22d26525c83dfdb538f1"
+    },
+    "coffee": {
+      "sha256": "8b36b8f4d1f13c850395f7f17875ec08a41596ea84e394d5d650bcab218e859e"
+    },
+    "cotton": {
+      "sha256": "1b917cbaff531159fecabc256d227981d855d8c954a24b88d4fa9d76f1fefe5f"
+    },
+    "dyes": {
+      "sha256": "5c8357d599e961f5218b17b1942fa188d660b4e7dc633eb9fd320ef576ca1014"
+    },
+    "fiber_crops": {
+      "sha256": "30a2436a8659232573a1c0ee26583f7979a34da6360304c06b6f72dd5675d808"
+    },
+    "fruit": {
+      "sha256": "2b48d1daea1487549d6cbe67e06f57fdd457aa6748a0d6b824b6ddaa3370827a"
+    },
+    "incense": {
+      "sha256": "103b8bd286dddbf39e35b177968c5cab3849adb431b62e8f379d91e92fc00d0c"
+    },
+    "legumes": {
+      "sha256": "4881afe4fee2d83e0ab7248517d3c3fb9c5ad03916b0e38b82ea8e8aa38c88d8"
+    },
+    "lumber": {
+      "sha256": "8af5b0c26760083910da3894bf7b4337c90bc2bec01c69aef05bee65d80956c1"
+    },
+    "maize": {
+      "sha256": "69beae13c77cdac388e04b03d9165841d3e682ec5fa0d84585fb219f0ce0b441"
+    },
+    "medicaments": {
+      "sha256": "c465960d8c9c07b66726e5c12343a05f8f71b907edfd863010022a414a7b4a2a"
+    },
+    "millet": {
+      "sha256": "b13c7200b088454dd84c4c7d76eedd4429e6ade29cf65cd733864a38c9b35d7c"
+    },
+    "olives": {
+      "sha256": "6f835ce3312d30ded4dea8bf8d0b2902b837edc7f41b6882503f922dd94c7cf2"
+    },
+    "pepper": {
+      "sha256": "3625bb0f98ec151f911ef963694c7aef27df47f07ffe3aaef2fc0189777a73ca"
+    },
+    "potato": {
+      "sha256": "c10438d400f2f7d9f0a36b0ed33a3bb9ce2879715382f23891b1e6e8ded47edf"
+    },
+    "rice": {
+      "sha256": "a0f6fbe606e4572c0f3d34dc2e6c2d9cb4c54775d86222c51dd753f647607be8"
+    },
+    "saffron": {
+      "sha256": "dc3fc84fec4d3959cee4d2eb8460506abd757c9e5bc987e319634d93b0b4898c"
+    },
+    "silk": {
+      "sha256": "4fd67bacd8aa1fa7a34236f00e03ffdcd2725e73b074c3b89f0fbbeee3b98fdc"
+    },
+    "sugar": {
+      "sha256": "92d50502e8d193a4df4375fea4cfb3e794ee85463f2f7267a374fc765970356e"
+    },
+    "tea": {
+      "sha256": "497b4d1cf7cb7f2b428c3e3c0ba0e2fc43642946b1c450b19685acc5fce6ce09"
+    },
+    "tobacco": {
+      "sha256": "59881f8edff3f7fef63756afdc2978544d05662d4c827bf16db3045af6f68865"
+    },
+    "wheat": {
+      "sha256": "3d9a9eef350f64223301967a05ce9e085cb2a82f552853eb7ab902e3ae8956ba"
+    },
+    "wine": {
+      "sha256": "7d203b1dbe46def56734d6de19220e537b6c27782d16a9143fa655b3c8fc9796"
+    }
+  },
+  "note": "Rain-fed only (LILM branches removed) V2 labor-output efficiency on the canonical anchors.",
+  "recipe": "scripts/goods_efficiency_variants.py (setup, run, import)",
+  "components_dropped": {
+    "never_computed": {
+      "millet": [
+        "proso_millet_grain",
+        "barnyard_millet_grain",
+        "kodo_little_millet_grain",
+        "quinoa_grain",
+        "grain_amaranth_grain"
+      ],
+      "sugar": [
+        "date_palm_sweetener_proxy",
+        "palm_sap_sweetener_proxy",
+        "maple_sugar_proxy"
+      ],
+      "tea": [
+        "mate_leaf_proxy",
+        "yaupon_leaf_proxy",
+        "guayusa_leaf_proxy"
+      ]
+    },
+    "historical": {
+      "sugar": [
+        "sugar_beet"
+      ]
+    }
+  },
+  "regime_dropped": "LILM",
+  "v2_code": "/home/jan/development/ProsperOrPerishStaticModifiersV2-crop-location-modifiers",
+  "v2_commit": "4b15cee334f159060200d42015576138384c3cc5"
+}

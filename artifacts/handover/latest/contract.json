@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-09-22-311c18a",
-  "worldbuilder_commit": "311c18a",
-  "created": "2026-09-22T02:49:57",
+  "version": "2026-09-23-91324f8",
+  "worldbuilder_commit": "91324f8",
+  "created": "2026-09-23T16:03:17",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
@@ -118,16 +118,20 @@
     }
   },
   "goods_fit": {
+    "method": "constrained",
     "goods": 25,
-    "goods_fitted": 23,
-    "total_rows": 225,
-    "rows_per_class_value_mean": 5.357142857142857,
-    "rows_per_class_value_max": 18,
-    "median_r2_rgo_heldout": 0.352094141513443,
-    "mean_mae_rgo_heldout": 0.17343518422768928,
-    "rgo_below_floor_share": 0.15606728460012873,
-    "rgo_nonviable_share": 0.08375254017450824,
-    "floor_list": 1662
+    "goods_fitted": 25,
+    "total_rows": 664,
+    "rows_per_class_value_mean": 13.551020408163266,
+    "rows_per_class_value_max": 24,
+    "median_r2_viable_heldout": 0.4303404151127469,
+    "median_r2_rgo_heldout": 0.4153442360850005,
+    "mean_mae_rgo_heldout": 0.15273059419451507,
+    "rgo_below_floor_share": 0.1879123768957186,
+    "rgo_nonviable_share": 0.09638842821723205,
+    "floor_list": 1862,
+    "priors_overruled": 78,
+    "sign_table_violations": 0
   },
   "development": {
     "source": "game_start",
@@ -161,13 +165,13 @@
     "building_types": 8,
     "location_buildings": 114381,
     "locations": 20893,
-    "goods_floor": 1662,
+    "goods_floor": 1862,
     "location_attributes": 20893
   },
   "files": {
-    "attribute_rows.csv": "ac5e8162e0c5be5a3cb2be60bd544171628b0aa494a409e7fd4c48cbc19900d6",
+    "attribute_rows.csv": "79371eca2d82f67c322a2cc5dadcd43a67642d0d5cd0ba787dfbb5e74d63d096",
     "building_types.csv": "969e4db06cd0c98e5d2ac7b3fdb01e7177d6ac497796933941914b965fef3e7c",
-    "goods_floor.csv": "c154bb0c929f729bee8e9bd83e36c87eb95e2f6b123de9724f5b5b35b58026dd",
+    "goods_floor.csv": "fba21b5165b7a786bf9a9068b9732a5c4428c22a65cf36150f11ee84eea4f47d",
     "location_attributes.csv": "f74c93a299fca1dc953cf92a1b7ac8b8b82aa43332bc8dc557054535252d2e42",
     "location_buildings.csv": "e42c27998d8ed449a1eb1caba98e8c87b9a0afe87f90eed425a1e79a3b230e63",
     "location_targets.csv": "b3a85243147399ca09869988e355d397e1162a6c9633dfb0e699c82c9f43c206",

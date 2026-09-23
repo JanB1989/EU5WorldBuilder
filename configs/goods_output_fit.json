@@ -21,5 +21,63 @@
   ],
   "fit_on": "weighted_viable",
   "rgo_weight": 10.0,
-  "min_rgo_share_per_class": 0.0
+  "min_rgo_share_per_class": 0.0,
+  "method": "constrained",
+  "constrained": {
+    "notes": [
+      "2026-09-23: replaces the per-good least squares above (method ols, kept for reproduction). See src/historical_agriculture/goods_output_constrained.py and configs/goods_output_priors.json.",
+      "Target: V2 score on its own log scale (not rank-stretched), rain-fed, lifted towards the irrigated score by the historical irrigated share (same weight and saturation as the fertility grade), centred on the good median viable RGO location (all viable land when fewer than min_rgo_for_centre); after the fit one shift of all climate rows puts the mean viable RGO (floor applied) at 0, so the average RGO of every good gets exactly the raw-material bonus.",
+      "Rows: climate rows absolute (the good's level), other attributes relative to their reference class; signs bounded by the priors; fertility increasing; ridge towards zero instead of relevance pruning; rows under display_threshold dropped and refitted.",
+      "rgo_advantage (2026-09-23, user decision): where the game puts a good RGO, the good is produced for a reason; the mean viable RGO location must predict at least this much above the mean of the good other viable land (a linear constraint in the fit)."
+    ],
+    "priors": "configs/goods_output_priors.json",
+    "rainfed_tables_directory": "data/raw/goods_efficiency_rainfed",
+    "irrigated_overrides_directory": "data/raw/goods_efficiency_overrides",
+    "irrigation_weight": {
+      "source": "artifacts/irrigation/locations.csv",
+      "saturation": 0.1
+    },
+    "target_scale": 1.0,
+    "rgo_weight": 3.0,
+    "ridge_locations": 20.0,
+    "min_viable_per_class": 20,
+    "display_threshold": 0.05,
+    "marginal_without_data": -0.1,
+    "spans": {
+      "climate": [
+        -0.6,
+        0.5
+      ],
+      "topography": [
+        -0.3,
+        0.3
+      ],
+      "vegetation": [
+        -0.3,
+        0.3
+      ],
+      "soil_type": [
+        -0.2,
+        0.2
+      ],
+      "fertility": [
+        -0.3,
+        0.3
+      ],
+      "river_level": [
+        -0.15,
+        0.15
+      ],
+      "is_coastal": [
+        -0.15,
+        0.15
+      ],
+      "is_adjacent_to_lake": [
+        -0.15,
+        0.15
+      ]
+    },
+    "min_rgo_for_centre": 10,
+    "rgo_advantage": 0.05
+  }
 }

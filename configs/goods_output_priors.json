@@ -1,0 +1,900 @@
+{
+  "schema": 1,
+  "purpose": "Agronomic sign table for the goods output fit (goods_output_fit.py, method constrained). The data decides the size of every row; this table only decides which direction a row may take and which rows exist, so every class reads sensibly for every crop. Written 2026-09-23 from the per-class partial effects of the V2 efficiency data (rain-fed and irrigated), the vanilla 1337 RGO placement and the crops' agronomy and pre-modern geography.",
+  "codes": {
+    "+": "row >= 0",
+    "-": "row <= 0",
+    "0": "no row",
+    "free": "either sign (data decides)",
+    "increasing": "ordinal attribute: rows never fall with a better class; the reference class is 0",
+    "climate.core": "home climate: its row is at least as high as every marginal climate row and unsuitable_gap above every unsuitable one",
+    "climate.marginal": "its row is no higher than any home climate row and no lower than any unsuitable one",
+    "climate.unsuitable": "its row is at most unsuitable_max (below the good s typical RGO) and unsuitable_gap under every home climate",
+    "climate (unlisted)": "possible: data decides, no order"
+  },
+  "climate_rows": "Climate rows are absolute: they carry the good's level (the fit intercept is folded in), so every climate row says how the good does there. The constructor folds the intercept into the climate rows it writes; no per-good base modifier exists (the raw-material bonus pp_rgo_bonus_<good> is the base at the RGO). Rows are centred on the good s median viable RGO location, so 0 means the typical RGO; the climate order is relative (home above marginal above unsuitable), not a sign.",
+  "unsuitable_max": -0.2,
+  "unsuitable_gap": 0.2,
+  "ordinal": {
+    "fertility": [
+      "very_low",
+      "low",
+      "moderate",
+      "high",
+      "very_high"
+    ],
+    "river_level": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ]
+  },
+  "defaults": {
+    "fertility": "increasing",
+    "river_level": "0",
+    "is_coastal.True": "0",
+    "is_adjacent_to_lake.True": "0",
+    "topography.mountain_wasteland": "-",
+    "topography.atoll": "-",
+    "topography.wetlands": "-",
+    "vegetation.desert": "-",
+    "vegetation.tundra": "-",
+    "vegetation.sparse": "-",
+    "soil_type.peat": "-",
+    "vegetation.farmland": "+"
+  },
+  "groups": {
+    "field": {
+      "note": "Annual and short-cycle field crops: cleared cultivated land helps, standing forest and wet ground cost clearing and drainage, high mountains and stony ground reduce the ploughable share.",
+      "rules": {
+        "vegetation.forest": "-",
+        "vegetation.mixed_forest": "-",
+        "vegetation.coniferous_forest": "-",
+        "vegetation.woods": "-",
+        "vegetation.dry_forest": "-",
+        "vegetation.jungle": "-",
+        "vegetation.thicket": "-",
+        "vegetation.marsh": "-",
+        "vegetation.swamp": "-",
+        "topography.mountains": "-",
+        "soil_type.stony": "-"
+      }
+    },
+    "tree": {
+      "note": "Perennial tree, shrub and vine crops: they grow on cleared slopes and in wooded country, so forest and relief are data-led; waterlogged ground and bare desert are bad.",
+      "rules": {
+        "vegetation.marsh": "-",
+        "vegetation.swamp": "-"
+      }
+    },
+    "forestry": {
+      "note": "Timber, fuelwood and bamboo: forest cover is the resource.",
+      "rules": {
+        "vegetation.forest": "+",
+        "vegetation.mixed_forest": "+",
+        "vegetation.coniferous_forest": "+",
+        "vegetation.woods": "+",
+        "vegetation.dry_forest": "+",
+        "vegetation.jungle": "+",
+        "vegetation.swamp": "+",
+        "vegetation.farmland": "-",
+        "vegetation.scrubland": "-",
+        "topography.wetlands": "free",
+        "topography.atoll": "free",
+        "soil_type.peat": "free"
+      }
+    }
+  },
+  "goods": {
+    "wheat": {
+      "group": "field",
+      "components": "wheat, barley, rye, oats",
+      "climate": {
+        "core": [
+          "continental",
+          "oceanic",
+          "mediterranean",
+          "dry_summer_continental",
+          "cold_steppe",
+          "continental_monsoon"
+        ],
+        "marginal": [
+          "subarctic",
+          "subpolar_oceanic",
+          "subtropical",
+          "subtropical_monsoon",
+          "hot_steppe",
+          "highland_monsoon",
+          "arid",
+          "cold_arid",
+          "arctic"
+        ],
+        "unsuitable": [
+          "tropical",
+          "tropical_monsoon",
+          "savanna"
+        ]
+      },
+      "rules": {
+        "soil_type.sand": "-",
+        "topography.floodplains": "free"
+      },
+      "evidence": "Temperate winter and spring cereals of Europe, the Near East, the steppe and North China; barley and rye reach the boreal margin and the Ethiopian highlands; humid lowland tropics are too hot and wet. Irrigated Nile and Mesopotamian wheat is carried by the fertility grade (irrigation-weighted), not by the arid climate row. The game s arctic class is largely the Tibetan plateau, where barley is the staple, so it is marginal rather than out."
+    },
+    "millet": {
+      "group": "field",
+      "components": "pearl, foxtail, finger millet, fonio, tef, sorghum, buckwheat",
+      "climate": {
+        "core": [
+          "savanna",
+          "hot_steppe",
+          "subtropical_monsoon",
+          "continental_monsoon",
+          "cold_steppe"
+        ],
+        "marginal": [
+          "oceanic",
+          "subarctic",
+          "subpolar_oceanic",
+          "tropical",
+          "arid",
+          "cold_arid",
+          "arctic"
+        ],
+        "unsuitable": []
+      },
+      "rules": {
+        "soil_type.sand": "free"
+      },
+      "evidence": "Drought-tolerant summer grains: Sahel and Sudan (pearl millet, sorghum, fonio), Deccan, North China loess (foxtail, proso), Ethiopia (tef, finger millet); weak in wet rainforest and cool oceanic climates. Pearl millet does well on sandy soils. Sorghum and millets are dry-season grains; the wettest monsoon coasts are left to the data."
+    },
+    "maize": {
+      "group": "field",
+      "components": "maize",
+      "climate": {
+        "core": [
+          "subtropical",
+          "savanna",
+          "highland_monsoon",
+          "continental",
+          "subtropical_monsoon",
+          "continental_monsoon"
+        ],
+        "marginal": [
+          "oceanic",
+          "mediterranean",
+          "hot_steppe",
+          "dry_summer_continental",
+          "cold_steppe",
+          "tropical",
+          "arid"
+        ],
+        "unsuitable": [
+          "subarctic",
+          "subpolar_oceanic",
+          "cold_arid",
+          "arctic"
+        ]
+      },
+      "rules": {
+        "topography.mountains": "free"
+      },
+      "evidence": "Summer-rain grain of Mesoamerica, the Andes and the eastern woodlands in 1337, later everywhere with warm wet summers; highland varieties (Mexico, Andes) make mountains data-led; needs a frost-free summer. The game arctic class (Tibetan plateau, Andean puna) lies above the maize line."
+    },
+    "rice": {
+      "group": "field",
+      "components": "Asian wet and dry rice, African rice",
+      "climate": {
+        "core": [
+          "subtropical_monsoon",
+          "tropical_monsoon",
+          "tropical",
+          "subtropical",
+          "savanna"
+        ],
+        "marginal": [
+          "continental_monsoon",
+          "mediterranean",
+          "hot_steppe",
+          "arid",
+          "highland_monsoon",
+          "continental",
+          "dry_summer_continental"
+        ],
+        "unsuitable": [
+          "arctic",
+          "subarctic",
+          "subpolar_oceanic",
+          "oceanic",
+          "cold_arid",
+          "cold_steppe"
+        ]
+      },
+      "rules": {
+        "river_level": "increasing",
+        "is_adjacent_to_lake.True": "+",
+        "topography.floodplains": "+",
+        "topography.deltas": "+",
+        "topography.wetlands": "+",
+        "topography.valleys": "+",
+        "topography.plateau": "-",
+        "vegetation.marsh": "+",
+        "vegetation.swamp": "free",
+        "soil_type.clay": "+",
+        "soil_type.silt": "+",
+        "soil_type.sand": "-"
+      },
+      "evidence": "Paddy rice of monsoon Asia and the West African floodplains: standing water, puddled clay and silt, river floods and deltas are the crop's habitat. Irrigated Egyptian, Mesopotamian, Iberian and Po rice are marginal outliers."
+    },
+    "potato": {
+      "group": "field",
+      "components": "potato, sweet potato, cassava, yam, taro",
+      "climate": {
+        "core": [
+          "highland_monsoon",
+          "oceanic",
+          "tropical",
+          "tropical_monsoon",
+          "savanna"
+        ],
+        "marginal": [
+          "arid",
+          "hot_steppe"
+        ],
+        "unsuitable": []
+      },
+      "rules": {
+        "topography.mountains": "free",
+        "topography.plateau": "free",
+        "vegetation.tundra": "free",
+        "soil_type.sand": "free"
+      },
+      "evidence": "Root crops: Andean potato up to the puna (the game classes the high Andes as arctic and cold desert, where a third of vanilla potato RGOs sit, so no cold climate is ruled out), tropical yams, cassava and taro, sweet potato. Cassava and sweet potato tolerate sandy soils."
+    },
+    "legumes": {
+      "group": "field",
+      "components": "beans, chickpea, cowpea, peas, mung, pigeonpea, soybean, groundnut",
+      "climate": {
+        "core": [
+          "continental",
+          "mediterranean",
+          "subtropical",
+          "subtropical_monsoon",
+          "savanna",
+          "continental_monsoon"
+        ],
+        "marginal": [
+          "subarctic",
+          "cold_arid",
+          "arid",
+          "tropical",
+          "arctic"
+        ],
+        "unsuitable": [
+          "subpolar_oceanic"
+        ]
+      },
+      "rules": {
+        "soil_type.sand": "free"
+      },
+      "evidence": "Pulses are grown in nearly every farming climate (peas and beans in Europe, chickpea and lentil around the Mediterranean and India, soybean in China, cowpea and groundnut in the savanna); weak only in the wettest rainforest and the cold and dry extremes. Groundnut favours sandy soils. Home climates are the big pulse regions (Europe, the Mediterranean, India, China, the savanna); the rest is left to the data."
+    },
+    "cotton": {
+      "group": "field",
+      "components": "cotton lint",
+      "climate": {
+        "core": [
+          "subtropical_monsoon",
+          "savanna",
+          "hot_steppe",
+          "subtropical"
+        ],
+        "marginal": [
+          "continental",
+          "highland_monsoon",
+          "cold_arid",
+          "cold_steppe",
+          "tropical",
+          "dry_summer_continental"
+        ],
+        "unsuitable": [
+          "arctic",
+          "subarctic",
+          "subpolar_oceanic",
+          "oceanic"
+        ]
+      },
+      "rules": {
+        "river_level": "increasing",
+        "topography.floodplains": "+"
+      },
+      "evidence": "Warm crop with a long frost-free season and a dry harvest: Gujarat and the Deccan, Bengal, the Sahel, Egypt and the Levant, Central Asian oases (Bukhara and Merv lie in cold desert), Yuan China, Mesoamerica and Peru. Irrigated river land is its best ground in dry countries. North China (continental monsoon) became a major cotton region under the Yuan and Ming, so it is left to the data. The wettest monsoon coasts are left to the data (cotton wants a dry harvest)."
+    },
+    "fiber_crops": {
+      "group": "field",
+      "components": "flax, hemp, jute, ramie, kenaf, coir, abaca, agave, esparto, nettle, papyrus",
+      "climate": {
+        "core": [
+          "continental",
+          "oceanic",
+          "subtropical_monsoon",
+          "tropical_monsoon",
+          "continental_monsoon",
+          "subtropical"
+        ],
+        "marginal": [
+          "arid",
+          "cold_arid",
+          "subpolar_oceanic"
+        ],
+        "unsuitable": [
+          "arctic"
+        ]
+      },
+      "rules": {
+        "river_level": "increasing",
+        "is_coastal.True": "+",
+        "topography.floodplains": "+",
+        "topography.deltas": "+",
+        "topography.wetlands": "free",
+        "topography.atoll": "free",
+        "vegetation.marsh": "free",
+        "vegetation.swamp": "free"
+      },
+      "evidence": "Flax and hemp of the Low Countries, the Baltic and Russia, jute of the Bengal floodplain, ramie of China, flax of the Nile valley, coir from coastal coconut palms, papyrus and jute on wet ground."
+    },
+    "sugar": {
+      "group": "field",
+      "components": "sugarcane (sugar beet removed: not a sugar crop before the 19th century)",
+      "climate": {
+        "core": [
+          "tropical",
+          "tropical_monsoon",
+          "subtropical_monsoon",
+          "savanna",
+          "subtropical"
+        ],
+        "marginal": [
+          "mediterranean",
+          "hot_steppe",
+          "arid",
+          "highland_monsoon"
+        ],
+        "unsuitable": [
+          "continental",
+          "continental_monsoon",
+          "dry_summer_continental",
+          "oceanic",
+          "subarctic",
+          "arctic",
+          "cold_steppe",
+          "cold_arid",
+          "subpolar_oceanic"
+        ]
+      },
+      "rules": {
+        "river_level": "increasing",
+        "topography.floodplains": "+",
+        "topography.deltas": "+",
+        "topography.wetlands": "free",
+        "vegetation.marsh": "free",
+        "vegetation.swamp": "free"
+      },
+      "evidence": "Sugarcane of Bengal, South China, Java and the Nile, and the irrigated Mediterranean cane of Cyprus, Sicily, Crete, al-Andalus and Khuzestan; needs heat and abundant water. Beet sugar is a 19th-century crop and would otherwise make central Europe the best sugar land."
+    },
+    "tobacco": {
+      "group": "field",
+      "components": "cured tobacco",
+      "climate": {
+        "core": [
+          "subtropical",
+          "subtropical_monsoon",
+          "mediterranean"
+        ],
+        "marginal": [
+          "hot_steppe",
+          "oceanic",
+          "arid",
+          "cold_steppe"
+        ],
+        "unsuitable": [
+          "arctic",
+          "subarctic",
+          "subpolar_oceanic",
+          "cold_arid"
+        ]
+      },
+      "evidence": "American crop in 1337 (Mesoamerica, the Caribbean, the eastern woodlands); later Virginia, Brazil, the Ottoman Balkans and Anatolia, India and the Philippines: warm-temperate to subtropical with a frost-free season. Home climates are the classic warm-temperate leaf regions (Virginia-type humid subtropics, the Ottoman Mediterranean, the Gangetic plain); tropical and continental lands are left to the data."
+    },
+    "saffron": {
+      "group": "field",
+      "components": "saffron crocus",
+      "climate": {
+        "core": [
+          "dry_summer_continental",
+          "cold_steppe",
+          "mediterranean"
+        ],
+        "marginal": [
+          "savanna",
+          "subtropical_monsoon",
+          "subtropical",
+          "oceanic",
+          "arid",
+          "hot_steppe"
+        ],
+        "unsuitable": [
+          "arctic",
+          "subarctic",
+          "subpolar_oceanic",
+          "tropical",
+          "tropical_monsoon"
+        ]
+      },
+      "rules": {
+        "topography.floodplains": "-",
+        "topography.deltas": "-",
+        "soil_type.clay": "-",
+        "soil_type.stony": "free"
+      },
+      "evidence": "Crocus of Khorasan, Kashmir, Anatolia, La Mancha and Aragon (and Saffron Walden in England): hot dry summers, cold winters, well-drained calcareous ground; corms rot in wet and flooded soils."
+    },
+    "chili": {
+      "group": "field",
+      "components": "capsicum peppers",
+      "climate": {
+        "core": [
+          "tropical",
+          "savanna",
+          "subtropical",
+          "subtropical_monsoon",
+          "highland_monsoon"
+        ],
+        "marginal": [
+          "continental",
+          "continental_monsoon",
+          "oceanic",
+          "cold_steppe",
+          "cold_arid",
+          "arid",
+          "arctic"
+        ],
+        "unsuitable": [
+          "subarctic",
+          "subpolar_oceanic"
+        ]
+      },
+      "evidence": "American crop (Mexico, the Andes, the Caribbean) spread through the tropics and warm temperate lands after 1492; needs warmth; Andean highland varieties reach the cold highlands the game classes as arctic."
+    },
+    "dyes": {
+      "group": "field",
+      "components": "indigo, woad, madder, weld, safflower, turmeric, brazilwood, logwood, annatto",
+      "climate": {
+        "core": [
+          "tropical_monsoon",
+          "subtropical_monsoon",
+          "tropical",
+          "savanna",
+          "subtropical",
+          "continental",
+          "oceanic"
+        ],
+        "marginal": [
+          "arid",
+          "cold_arid",
+          "cold_steppe",
+          "subarctic",
+          "subpolar_oceanic"
+        ],
+        "unsuitable": [
+          "arctic"
+        ]
+      },
+      "rules": {
+        "vegetation.jungle": "free",
+        "vegetation.dry_forest": "free"
+      },
+      "evidence": "Two dye worlds: woad, madder and weld of Thuringia, Picardy, Toulouse and Flanders; indigo, turmeric and safflower of India and Egypt, and the dyewoods (brazilwood, logwood) of tropical forests, so tropical forest is data-led."
+    },
+    "medicaments": {
+      "group": "tree",
+      "components": "liquorice, rhubarb, opium poppy, senna, aloe, castor, betel, camphor, ginseng, coca, kola, cinchona",
+      "climate": {
+        "core": [],
+        "marginal": [
+          "subarctic",
+          "subpolar_oceanic",
+          "arctic"
+        ],
+        "unsuitable": []
+      },
+      "rules": {
+        "vegetation.farmland": "free",
+        "topography.mountains": "free"
+      },
+      "evidence": "A basket of medicinal plants from almost every climate (steppe liquorice, Chinese and Tibetan rhubarb, Anatolian and Indian opium, Egyptian senna, Socotra aloe, Indian betel, Chinese camphor, Manchurian ginseng, Andean coca, West African kola): no home climate, only the cold extremes are poor."
+    },
+    "fruit": {
+      "group": "tree",
+      "components": "citrus, pome fruit, banana, mango, cashew, coconut, watermelon, date palm",
+      "climate": {
+        "core": [
+          "mediterranean",
+          "subtropical",
+          "tropical",
+          "tropical_monsoon",
+          "oceanic",
+          "continental",
+          "dry_summer_continental"
+        ],
+        "marginal": [
+          "subarctic",
+          "cold_arid",
+          "cold_steppe",
+          "arctic"
+        ],
+        "unsuitable": [
+          "subpolar_oceanic"
+        ]
+      },
+      "rules": {
+        "river_level": "increasing",
+        "is_coastal.True": "+",
+        "topography.valleys": "+",
+        "topography.atoll": "free",
+        "topography.floodplains": "free",
+        "vegetation.desert": "free"
+      },
+      "evidence": "Orchards of the Mediterranean, the Persian and Central Asian valleys (Samarkand, Fergana), northern apples and pears, tropical bananas, mangoes and coconuts (coasts, atolls), and date palms of irrigated oases, which is why desert is not ruled out where water exists."
+    },
+    "olives": {
+      "group": "tree",
+      "components": "olive",
+      "climate": {
+        "core": [
+          "mediterranean"
+        ],
+        "marginal": [
+          "hot_steppe",
+          "subtropical",
+          "dry_summer_continental",
+          "cold_steppe",
+          "arid",
+          "oceanic"
+        ],
+        "unsuitable": [
+          "arctic",
+          "subarctic",
+          "subpolar_oceanic",
+          "continental",
+          "continental_monsoon",
+          "tropical",
+          "tropical_monsoon",
+          "savanna",
+          "subtropical_monsoon",
+          "highland_monsoon",
+          "cold_arid"
+        ]
+      },
+      "rules": {
+        "topography.hills": "+",
+        "topography.floodplains": "-",
+        "topography.deltas": "-",
+        "soil_type.stony": "free",
+        "soil_type.clay": "-"
+      },
+      "evidence": "The Mediterranean tree: needs mild wet winters, hot dry summers and no hard frost; terraced hillsides and stony calcareous ground are classic olive country; waterlogged land kills it. Steppe margins (Tunisia, the Levant) and Atlantic Iberia are marginal."
+    },
+    "wine": {
+      "group": "tree",
+      "components": "grape wine",
+      "climate": {
+        "core": [
+          "mediterranean",
+          "oceanic",
+          "continental",
+          "dry_summer_continental"
+        ],
+        "marginal": [
+          "cold_steppe",
+          "hot_steppe",
+          "continental_monsoon",
+          "highland_monsoon",
+          "arid",
+          "cold_arid"
+        ],
+        "unsuitable": [
+          "arctic",
+          "subarctic",
+          "subpolar_oceanic",
+          "tropical",
+          "tropical_monsoon",
+          "savanna",
+          "subtropical_monsoon"
+        ]
+      },
+      "rules": {
+        "topography.hills": "+",
+        "topography.valleys": "+",
+        "topography.floodplains": "-",
+        "topography.deltas": "-",
+        "topography.mountains": "-",
+        "soil_type.stony": "free",
+        "soil_type.clay": "-"
+      },
+      "evidence": "Vineyards of the Mediterranean, France, the Rhine and Danube, Hungary, the Caucasus and Persia: sunny slopes and river-valley hillsides, gravelly well-drained soils; hot humid monsoon lowlands and the boreal north are out. Humid subtropics carry heavy fungal pressure on vines, so they are left to the data."
+    },
+    "tea": {
+      "group": "tree",
+      "components": "made tea (Camellia sinensis)",
+      "climate": {
+        "core": [
+          "subtropical_monsoon",
+          "subtropical",
+          "highland_monsoon",
+          "tropical_monsoon"
+        ],
+        "marginal": [
+          "tropical",
+          "continental_monsoon",
+          "savanna",
+          "oceanic"
+        ],
+        "unsuitable": [
+          "arctic",
+          "subarctic",
+          "subpolar_oceanic",
+          "arid",
+          "cold_arid",
+          "hot_steppe",
+          "cold_steppe",
+          "mediterranean",
+          "continental",
+          "dry_summer_continental"
+        ]
+      },
+      "rules": {
+        "topography.hills": "+",
+        "topography.mountains": "+",
+        "topography.floodplains": "-",
+        "topography.deltas": "-",
+        "soil_type.clay": "-"
+      },
+      "evidence": "Tea gardens of Fujian, Zhejiang, Anhui, Sichuan and Yunnan (and later Japan, Assam, Ceylon): warm wet summers, mild winters, well-drained acid hillsides; standing water and dry or cold climates are out."
+    },
+    "coffee": {
+      "group": "tree",
+      "components": "Arabica coffee",
+      "climate": {
+        "core": [
+          "highland_monsoon",
+          "tropical",
+          "tropical_monsoon"
+        ],
+        "marginal": [
+          "savanna",
+          "subtropical",
+          "subtropical_monsoon",
+          "arid",
+          "hot_steppe",
+          "mediterranean"
+        ],
+        "unsuitable": [
+          "arctic",
+          "subarctic",
+          "subpolar_oceanic",
+          "oceanic",
+          "continental",
+          "continental_monsoon",
+          "dry_summer_continental",
+          "cold_steppe",
+          "cold_arid"
+        ]
+      },
+      "rules": {
+        "topography.hills": "+",
+        "topography.mountains": "+",
+        "topography.floodplains": "-",
+        "topography.deltas": "-"
+      },
+      "evidence": "Arabica of the Ethiopian and Yemeni highlands (terraces in an otherwise arid country, hence arid and steppe are marginal rather than out), later Java, Ceylon and the Caribbean: frost-free tropical uplands."
+    },
+    "cocoa": {
+      "group": "tree",
+      "components": "cacao",
+      "climate": {
+        "core": [
+          "tropical",
+          "tropical_monsoon"
+        ],
+        "marginal": [
+          "savanna",
+          "subtropical_monsoon",
+          "highland_monsoon",
+          "subtropical"
+        ],
+        "unsuitable": [
+          "arctic",
+          "arid",
+          "cold_arid",
+          "cold_steppe",
+          "continental",
+          "continental_monsoon",
+          "dry_summer_continental",
+          "hot_steppe",
+          "mediterranean",
+          "oceanic",
+          "subarctic",
+          "subpolar_oceanic"
+        ]
+      },
+      "rules": {
+        "topography.mountains": "-",
+        "topography.plateau": "-"
+      },
+      "evidence": "Understory tree of the humid lowland tropics (Soconusco, Tabasco, the Gulf coast, later Venezuela and West Africa): hot, wet, sheltered; highland cold and dry seasons hurt it."
+    },
+    "cloves": {
+      "group": "tree",
+      "components": "cloves, nutmeg and mace, cinnamon, star anise, vanilla",
+      "climate": {
+        "core": [
+          "tropical",
+          "tropical_monsoon"
+        ],
+        "marginal": [
+          "savanna",
+          "subtropical_monsoon",
+          "subtropical",
+          "highland_monsoon"
+        ],
+        "unsuitable": [
+          "arctic",
+          "arid",
+          "cold_arid",
+          "cold_steppe",
+          "continental",
+          "continental_monsoon",
+          "dry_summer_continental",
+          "hot_steppe",
+          "mediterranean",
+          "oceanic",
+          "subarctic",
+          "subpolar_oceanic"
+        ]
+      },
+      "evidence": "The fine spices of the Moluccas, Banda and Ceylon (cloves, nutmeg, cinnamon), with star anise from southern China: equatorial and monsoon tropics."
+    },
+    "pepper": {
+      "group": "tree",
+      "components": "black and long pepper, cubeb, Sichuan pepper, grains of paradise, ginger, cardamom, cumin",
+      "climate": {
+        "core": [
+          "tropical_monsoon",
+          "tropical",
+          "subtropical_monsoon"
+        ],
+        "marginal": [
+          "mediterranean",
+          "hot_steppe",
+          "arid",
+          "dry_summer_continental"
+        ],
+        "unsuitable": [
+          "arctic",
+          "cold_arid",
+          "cold_steppe",
+          "continental",
+          "oceanic",
+          "subarctic",
+          "subpolar_oceanic"
+        ]
+      },
+      "rules": {
+        "vegetation.jungle": "free",
+        "vegetation.marsh": "free"
+      },
+      "evidence": "Black pepper of Malabar and Sumatra, cubeb and long pepper of Java and Bengal, ginger and cardamom of South Asia, grains of paradise of West Africa, Sichuan pepper of the Chinese uplands and cumin of the dry lands: humid tropics are home, the basket reaches warm dry lands through cumin. Cumin makes the dry lands look good in the data; the game s pepper is the tropical spice, so dry climates are marginal. Temperate and cold climates are unsuitable for the tropical spice even though the basket (cumin, Sichuan pepper) reaches them."
+    },
+    "incense": {
+      "group": "tree",
+      "components": "frankincense, myrrh, mastic, storax, benzoin, agarwood, sandalwood, copal, dragon's blood",
+      "climate": {
+        "core": [
+          "hot_steppe",
+          "arid",
+          "mediterranean",
+          "tropical_monsoon",
+          "savanna"
+        ],
+        "marginal": [
+          "continental",
+          "continental_monsoon",
+          "oceanic",
+          "cold_steppe",
+          "dry_summer_continental"
+        ],
+        "unsuitable": [
+          "arctic",
+          "subarctic",
+          "subpolar_oceanic",
+          "cold_arid"
+        ]
+      },
+      "rules": {
+        "vegetation.desert": "free",
+        "vegetation.sparse": "free",
+        "soil_type.stony": "free"
+      },
+      "evidence": "Frankincense and myrrh trees of Dhofar, Hadramawt and Somalia grow rain-fed on dry stony slopes; mastic of Chios and storax of Anatolia are Mediterranean; agarwood, sandalwood and benzoin come from the monsoon tropics, copal from Mesoamerica."
+    },
+    "silk": {
+      "group": "tree",
+      "components": "mulberry silk, tasar, eri and muga silk",
+      "climate": {
+        "core": [
+          "subtropical_monsoon",
+          "subtropical",
+          "mediterranean",
+          "tropical_monsoon"
+        ],
+        "marginal": [
+          "oceanic",
+          "continental",
+          "hot_steppe",
+          "arid",
+          "cold_arid",
+          "cold_steppe"
+        ],
+        "unsuitable": [
+          "arctic",
+          "subarctic",
+          "subpolar_oceanic"
+        ]
+      },
+      "rules": {
+        "topography.floodplains": "free",
+        "topography.deltas": "free",
+        "vegetation.marsh": "free",
+        "vegetation.farmland": "free"
+      },
+      "evidence": "Mulberry sericulture of Jiangnan, Sichuan and Shandong, Bengal and Assam (eri, muga, tasar), Byzantine Greece, Syria, al-Andalus and Italy, Gilan and the Caspian: warm humid summers with mulberry groves on farmed river plains; cold climates cannot keep the worms. North China sericulture had faded behind Jiangnan by the Yuan, so it is left to the data."
+    },
+    "lumber": {
+      "group": "forestry",
+      "components": "hardwood, softwood, fuelwood, bamboo",
+      "climate": {
+        "core": [
+          "continental",
+          "subarctic",
+          "oceanic",
+          "tropical",
+          "tropical_monsoon",
+          "subtropical",
+          "subtropical_monsoon",
+          "continental_monsoon"
+        ],
+        "marginal": [
+          "cold_steppe",
+          "hot_steppe",
+          "dry_summer_continental"
+        ],
+        "unsuitable": [
+          "arid",
+          "cold_arid",
+          "arctic"
+        ]
+      },
+      "rules": {
+        "is_coastal.True": "free",
+        "is_adjacent_to_lake.True": "free"
+      },
+      "evidence": "Timber follows forest: the boreal and temperate forests, monsoon teak and tropical hardwoods, bamboo of southern China; deserts, steppes and tundra have little wood."
+    }
+  },
+  "arctic_note": "The World Builder arctic class is mostly alpine: the Tibetan plateau (285 ownable locations) and the high Andes (189), plus the European far north (83). Highland crops (Tibetan barley, Andean potato, maize, pulses and quinoa-like grains, orchard fruit in sheltered valleys, Tibetan rhubarb) are therefore marginal there, not ruled out.",
+  "farmland_note": "Farmland (a landscape of extensive cultivated fields) never lowers a crop; only timber loses from it."
+}

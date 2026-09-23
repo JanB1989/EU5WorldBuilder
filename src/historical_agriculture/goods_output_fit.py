@@ -98,6 +98,9 @@ def build(config_path=None,output_path=None):
     out=Path(output_path or ROOT/'artifacts/goods_output_fit').resolve();out.mkdir(parents=True,exist_ok=True)
     manifest=import_tables(cfg)
     fit_cfg=json.loads((ROOT/cfg['attribute_fit_config']).read_text())
+    if cfg.get('method','ols')=='constrained':
+        from .goods_output_constrained import build_all
+        return build_all({**cfg,**cfg.get('constrained',{})},fit_cfg,out,manifest)
     d=load_attributes(fit_cfg);features=cfg.get('features') or fit_cfg['features']
     X,names,groups=design_reference(d,features,fit_cfg['reference_classes'])
     member=X>0.5;member[:,0]=False

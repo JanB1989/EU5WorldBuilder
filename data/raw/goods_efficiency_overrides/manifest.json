@@ -1,0 +1,38 @@
+{
+  "goods": {
+    "sugar": {
+      "sha256": "9695209e2f27eb6556cd4f264ea63054cea095829e33c4376ddbdf2c2f71bd21"
+    }
+  },
+  "note": "V2 labor-output efficiency with sugarcane only (sugar beet removed as anachronistic), canonical regimes and anchors.",
+  "recipe": "scripts/goods_efficiency_variants.py (setup, run, import)",
+  "components_dropped": {
+    "never_computed": {
+      "millet": [
+        "proso_millet_grain",
+        "barnyard_millet_grain",
+        "kodo_little_millet_grain",
+        "quinoa_grain",
+        "grain_amaranth_grain"
+      ],
+      "sugar": [
+        "date_palm_sweetener_proxy",
+        "palm_sap_sweetener_proxy",
+        "maple_sugar_proxy"
+      ],
+      "tea": [
+        "mate_leaf_proxy",
+        "yaupon_leaf_proxy",
+        "guayusa_leaf_proxy"
+      ]
+    },
+    "historical": {
+      "sugar": [
+        "sugar_beet"
+      ]
+    }
+  },
+  "regime_dropped": null,
+  "v2_code": "/home/jan/development/ProsperOrPerishStaticModifiersV2-crop-location-modifiers",
+  "v2_commit": "4b15cee334f159060200d42015576138384c3cc5"
+}

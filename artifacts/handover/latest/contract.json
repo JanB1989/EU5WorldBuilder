@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-09-26-8211201",
-  "worldbuilder_commit": "8211201",
-  "created": "2026-09-26T16:26:27",
+  "version": "2026-09-26-40b0ba2",
+  "worldbuilder_commit": "40b0ba2",
+  "created": "2026-09-26T19:43:24",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."

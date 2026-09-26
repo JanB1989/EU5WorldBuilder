@@ -15,5 +15,10 @@
   "global_climate": true,
   "geography_compatibility": true,
   "global_rivers": true,
-  "global_navigation": true
+  "global_navigation": true,
+  "river_ports": {
+    "harbor_overrides": {
+      "frankfurt": 0.15
+    }
+  }
 }

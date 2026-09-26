@@ -33,6 +33,8 @@ DEFAULTS = {
     'harbor_tiers': [[10000, 0.2], [3000, 0.1], [1000, 0.05]],
     'harbor_rank_bonus': {'town': 0.1, 'city': 0.25, 'megalopolis': 0.25},
     'harbor_max': 0.5,
+    # Per-port floors for river ports whose trade outgrew their discharge (Frankfurt: the fair's Main port).
+    'harbor_overrides': {},
 }
 MAP_DATA = 'in_game/map_data/'
 DOCK = 'in_game/gfx/map/map_objects/generated_map_object_locators_dock.txt'
@@ -112,7 +114,8 @@ def select(out, manifest, game, settings=None):
     def harbor(name):
         flow = float(tiles.loc[banks[name]].mean_discharge_m3_s.max())
         value = next((value for threshold, value in s['harbor_tiers'] if flow >= threshold), 0.0)
-        return round(min(s['harbor_max'], value + s['harbor_rank_bonus'].get(ranks.get(name), 0.0)), 2)
+        value = min(s['harbor_max'], value + s['harbor_rank_bonus'].get(ranks.get(name), 0.0))
+        return round(max(value, s['harbor_overrides'].get(name, 0.0)), 2)
     ports = {n: harbor(n) for n in chosen}
     table = pd.DataFrame([{'location_tag': c, 'rank': ranks.get(c, ''), 'population': round(pops.get(c, 0.0), 3),
                            'max_discharge_m3_s': float(tiles.loc[banks[c]].mean_discharge_m3_s.max()),

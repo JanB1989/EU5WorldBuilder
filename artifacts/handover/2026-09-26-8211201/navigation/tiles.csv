@@ -1,0 +1,823 @@
+location,state,pixels,region,near_location,mean_discharge_m3_s,low_discharge_m3_s,gradient_m_per_km,evidence,river_level,tropical,seasonal,x,y,ocean_connected
+pp_nav_00001,navigable,79,west_siberia_region,ob,154.439,92.07,0.0,reach:Ob with Irtysh:river;reach:Ob with Irtysh:sea,2,False,False,10821.375,699.0,False
+pp_nav_00002,navigable,81,west_siberia_region,obdorsk,42.221,21.407,0.06409568786621093,reach:Ob with Irtysh:sea,1,False,False,10756.25,708.9166666666666,False
+pp_nav_00003,navigable,72,west_siberia_region,obdorsk,49.535,25.558,0.0,reach:Ob with Irtysh:sea,1,False,False,10721.979166666666,710.8125,False
+pp_nav_00004,navigable,80,west_siberia_region,ob,154.439,92.07,0.0,reach:Ob with Irtysh:sea,2,False,False,10790.829787234043,713.3617021276596,False
+pp_nav_00005,navigable,11,west_siberia_region,shchuchya,46.849,24.016,0.1899611072081796,reach:Ob with Irtysh:sea,1,False,False,10737.285714285714,710.7142857142857,False
+pp_nav_00006,navigable,81,west_siberia_region,obdorsk,42.221,21.407,0.06409568786621093,reach:Ob with Irtysh:sea,1,False,False,10737.583333333334,724.0416666666666,False
+pp_nav_00007,navigable,75,west_siberia_region,shuryshkar,11443.746,6696.11,0.0,reach:Ob with Irtysh:sea,0,False,False,10702.020833333334,731.5208333333334,False
+pp_nav_00008,navigable,32,west_siberia_region,obdorsk,42.221,21.407,0.06409568786621093,reach:Ob with Irtysh:sea,1,False,False,10761.166666666666,730.7777777777778,False
+pp_nav_00009,navigable,77,west_siberia_region,pitlyar,11435.6785,6689.523999999999,0.04049775182741772,reach:Ob with Irtysh:river;reach:Ob with Irtysh:sea,0,False,False,10688.541666666666,757.4583333333334,False
+pp_nav_00010,navigable,70,west_siberia_region,voikar,11381.677,6591.196,0.24318504333496094,reach:Ob with Irtysh:river,5,False,False,10679.166666666666,792.6666666666666,False
+pp_nav_00011,navigable,76,west_siberia_region,zazhimchar,983.613,298.091,0.06665088335882491,reach:Ob with Irtysh:river,3,False,False,10664.791666666666,823.6666666666666,False
+pp_nav_00012,navigable,74,west_siberia_region,zazhimchar,958.742,288.604,0.0,reach:Ob with Irtysh:river,3,False,False,10671.75,853.125,False
+pp_nav_00013,navigable,28,russian_region,arkhangelsk,3259.656,1005.654,0.0,reach:Northern Dvina with Sukhona (White Sea route):river;reach:Northern Dvina with Sukhona (White Sea route):sea,5,False,False,9538.0,856.5,True
+pp_nav_00014,navigable,81,russian_region,arkhangelsk,3249.082,993.798,1.926815927028656,reach:Northern Dvina with Sukhona (White Sea route):river;reach:Northern Dvina with Sukhona (White Sea route):sea,5,False,False,9538.0,869.5,True
+pp_nav_00015,navigable,74,west_siberia_region,beryozovo,11128.419,6485.541,0.0,reach:Ob with Irtysh:river,5,False,False,10686.770833333334,874.3541666666666,False
+pp_nav_00016,navigable,82,russian_region,kholmogory,2756.207,829.422,0.0,reach:Northern Dvina with Sukhona (White Sea route):river,5,False,False,9569.770833333334,885.1041666666666,True
+pp_nav_00017,navigable,72,west_siberia_region,beryozovo,10696.355,6221.934,0.0,reach:Ob with Irtysh:river,5,False,False,10694.145833333334,903.6041666666666,False
+pp_nav_00018,navigable,77,russian_region,kholmogory,2746.114,821.497,0.0,reach:Northern Dvina with Sukhona (White Sea route):river,4,False,False,9582.270833333334,903.2708333333334,True
+pp_nav_00019,navigable,74,russian_region,siya,2585.663,753.547,0.1323186741461921,reach:Northern Dvina with Sukhona (White Sea route):river,4,False,False,9598.770833333334,927.6875,True
+pp_nav_00020,navigable,79,west_siberia_region,sumgut_vosh,5363.681,3101.6270000000004,0.349622917175293,reach:Ob with Irtysh:river,0,False,False,10686.875,934.625,False
+pp_nav_00021,navigable,84,russian_region,siya,2569.198,747.87,0.19071778386799407,reach:Northern Dvina with Sukhona (White Sea route):river,4,False,False,9613.729166666666,955.7708333333334,True
+pp_nav_00022,navigable,77,west_siberia_region,vezhakary,10671.987,6183.816,0.2891701650934903,reach:Ob with Irtysh:river,0,False,False,10671.4375,957.9375,False
+pp_nav_00023,navigable,78,russian_region,ust_vayenga,2369.9685,678.8130000000001,0.29603137969970705,reach:Northern Dvina with Sukhona (White Sea route):river,5,False,False,9638.145833333334,977.7291666666666,True
+pp_nav_00024,navigable,73,west_siberia_region,karymkary,10609.4455,6138.686,0.2891701650934903,reach:Ob with Irtysh:river,5,False,False,10670.6875,982.8125,False
+pp_nav_00025,navigable,76,russian_region,sogra,239.032,57.473,0.12546119689941407,reach:Northern Dvina with Sukhona (White Sea route):river,5,False,False,9652.5,1003.7083333333334,True
+pp_nav_00026,navigable,80,west_siberia_region,karymkary,10540.683,6054.519,0.12034797668457031,reach:Ob with Irtysh:river,5,False,False,10696.479166666666,1005.0208333333334,False
+pp_nav_00027,navigable,83,west_siberia_region,nazym,10391.75,5911.978999999999,0.03905801910529673,reach:Ob with Irtysh:river,5,False,False,10725.4375,1023.7291666666666,False
+pp_nav_00028,navigable,77,russian_region,zaostrovskoye,2206.661,616.331,0.17538871765136718,reach:Northern Dvina with Sukhona (White Sea route):river,5,False,False,9680.541666666666,1022.9583333333334,True
+pp_nav_00029,navigable,83,russian_region,nizhnyaya_toyma,2086.077,579.954,0.0,reach:Northern Dvina with Sukhona (White Sea route):river,5,False,False,9714.0,1036.5833333333333,True
+pp_nav_00030,navigable,79,west_siberia_region,bardak,155.413,129.253,0.0,reach:Ob with Irtysh:river,2,False,False,10747.895833333334,1043.9375,False
+pp_nav_00031,navigable,80,russian_region,verkhnyaya_toyma,1833.448,506.04,0.0442108154296875,reach:Northern Dvina with Sukhona (White Sea route):river,5,False,False,9742.604166666666,1054.8958333333333,True
+pp_nav_00032,navigable,80,west_siberia_region,bardak,81.52000000000001,68.645,0.02805354925327238,reach:Ob with Irtysh:river,1,False,False,10761.958333333334,1073.5416666666667,False
+pp_nav_00033,navigable,80,russian_region,verkhnyaya_toyma,1561.1599999999999,417.9705,0.29980010986328126,reach:Northern Dvina with Sukhona (White Sea route):river,5,False,False,9762.645833333334,1082.8541666666667,True
+pp_nav_00034,navigable,80,west_siberia_region,yendyr,10262.207,5719.888,0.0,reach:Ob with Irtysh:river,5,False,False,10787.229166666666,1096.2708333333333,False
+pp_nav_00035,navigable,80,russian_region,krasny_bor,1351.563,361.646,0.32732620239257815,reach:Northern Dvina with Sukhona (White Sea route):river,5,False,False,9792.604166666666,1100.8958333333333,True
+pp_nav_00036,navigable,76,west_siberia_region,yendyr,10261.324,5717.609,0.30977724980219623,reach:Ob with Irtysh:river,5,False,False,10802.958333333334,1114.8541666666667,False
+pp_nav_00037,navigable,71,russian_region,veliky_ustyug,988.9255,251.13150000000002,0.05898780822753906,reach:Northern Dvina with Sukhona (White Sea route):river,5,False,False,9804.6875,1128.1458333333333,True
+pp_nav_00038,navigable,81,west_siberia_region,irtysh,2928.126,1807.73,0.2063412642815388,reach:Ob with Irtysh:river,5,False,False,10831.833333333334,1119.1666666666667,False
+pp_nav_00039,navigable,82,west_siberia_region,irtysh,109.427,87.76,0.010687637329101562,reach:Ob with Irtysh:river,1,False,False,10918.729166666666,1116.3958333333333,False
+pp_nav_00040,navigable,80,west_siberia_region,irtysh,2988.989,1848.101,0.13746389069231404,reach:Ob with Irtysh:river,0,False,False,10860.458333333334,1117.9583333333333,False
+pp_nav_00041,navigable,50,west_siberia_region,irtysh,122.026,96.428,0.17694811463412433,reach:Ob with Irtysh:river,0,False,False,10890.1,1117.6666666666667,False
+pp_nav_00042,navigable,84,west_siberia_region,surgut,310.34,236.098,0.0,reach:Ob with Irtysh:river,0,False,False,10981.270833333334,1117.5208333333333,False
+pp_nav_00043,navigable,62,west_siberia_region,irtysh,81.363,69.165,0.0,reach:Ob with Irtysh:river,1,False,False,10946.891891891892,1118.8108108108108,False
+pp_nav_00044,navigable,82,west_siberia_region,surgut,265.2495,204.6815,0.054141998291015625,reach:Ob with Irtysh:river,2,False,False,11017.5,1119.2083333333333,False
+pp_nav_00045,navigable,83,west_siberia_region,surgut,246.24,195.692,0.0,reach:Ob with Irtysh:river,0,False,False,11058.4375,1121.2291666666667,False
+pp_nav_00046,navigable,86,west_siberia_region,bolshoy_balyk,6066.278,2670.998,0.0,reach:Ob with Irtysh:river,0,False,False,11092.270833333334,1123.9791666666667,False
+pp_nav_00047,navigable,84,west_siberia_region,yendyr,6595.595,3761.4799999999996,0.33379554748535156,reach:Ob with Irtysh:river,0,False,False,10817.041666666666,1130.625,False
+pp_nav_00048,navigable,79,west_siberia_region,bolshoy_balyk,6029.623,2646.918,0.149653850221818,reach:Ob with Irtysh:river,0,False,False,11126.729166666666,1132.0208333333333,False
+pp_nav_00049,navigable,82,west_siberia_region,megion,5956.0975,2590.291,0.09073386730443622,reach:Ob with Irtysh:river,0,False,False,11154.020833333334,1136.6458333333333,False
+pp_nav_00050,navigable,79,west_siberia_region,irtysh,2928.126,1807.73,0.0,reach:Ob with Irtysh:river,0,False,False,10846.479166666666,1141.0208333333333,False
+pp_nav_00051,navigable,78,russian_region,veliky_ustyug,445.533,133.269,0.16852645874023436,reach:Northern Dvina with Sukhona (White Sea route):river,2,False,False,9780.145833333334,1145.0208333333333,True
+pp_nav_00052,navigable,79,west_siberia_region,megion,5296.602,2182.667,0.07920913696289063,reach:Ob with Irtysh:river,0,False,False,11181.541666666666,1149.25,False
+pp_nav_00053,navigable,75,west_siberia_region,irtysh,2572.31,1463.8335000000002,0.0,reach:Ob with Irtysh:river,4,False,False,10865.583333333334,1159.6666666666667,False
+pp_nav_00054,navigable,83,russian_region,veliky_ustyug,395.735,124.39,0.8252197265625,reach:Northern Dvina with Sukhona (White Sea route):river,2,False,False,9746.395833333334,1153.5625,True
+pp_nav_00055,navigable,82,west_siberia_region,upper_ob,5276.124,2179.3945,0.0,reach:Ob with Irtysh:river,0,False,False,11214.354166666666,1162.1458333333333,False
+pp_nav_00056,navigable,80,russian_region,nyuksenitsa,367.076,117.774,0.1440488485262399,reach:Northern Dvina with Sukhona (White Sea route):river,2,False,False,9710.958333333334,1164.4583333333333,True
+pp_nav_00057,navigable,78,pp_navigation_other,lake_ladoga,2257.825,1461.778,0.0,reach:Neva - Lake Ladoga - Volkhov (route to Novgorod):sea,0,False,False,9140.520833333334,1164.3958333333333,True
+pp_nav_00058,improvable,84,russian_region,staraya_ladoga,877.122,464.684,0.0,reach:Neva - Lake Ladoga - Volkhov (route to Novgorod):sea,3,False,False,9160.416666666666,1187.7916666666667,True
+pp_nav_00059,navigable,79,pp_navigation_other,lake_ladoga,2593.228,2124.532,0.0,reach:Neva - Lake Ladoga - Volkhov (route to Novgorod):sea,0,False,False,9116.145833333334,1185.0208333333333,True
+pp_nav_00060,navigable,80,west_siberia_region,upper_ob,5206.326,2155.014,0.666973893503221,reach:Ob with Irtysh:river,0,False,False,11242.166666666666,1178.1666666666667,False
+pp_nav_00061,navigable,80,west_siberia_region,irtysh,2569.754,1462.432,0.0,reach:Ob with Irtysh:river,4,False,False,10869.0,1184.375,False
+pp_nav_00062,navigable,79,russian_region,totma,337.946,112.896,0.2726104736328125,reach:Northern Dvina with Sukhona (White Sea route):river,2,False,False,9681.854166666666,1183.3541666666667,True
+pp_nav_00063,navigable,78,west_siberia_region,upper_ob,5167.2384999999995,2147.603,0.0,reach:Ob with Irtysh:river,0,False,False,11267.375,1193.875,False
+pp_nav_00064,navigable,80,russian_region,totma,324.029,110.441,0.21208962313005858,reach:Northern Dvina with Sukhona (White Sea route):river,2,False,False,9648.270833333334,1197.3125,True
+pp_nav_00065,navigable,74,west_siberia_region,irtysh,2559.102,1461.521,0.1430371673020337,reach:Ob with Irtysh:river,4,False,False,10868.208333333334,1202.7916666666667,False
+pp_nav_00066,navigable,73,west_siberia_region,upper_ob,5094.954,2137.637,0.0,reach:Ob with Irtysh:river,4,False,False,11287.8125,1210.0625,False
+pp_nav_00067,navigable,77,russian_region,oreshek,2528.565,2121.518,0.0,reach:Neva - Lake Ladoga - Volkhov (route to Novgorod):sea,3,False,False,9102.104166666666,1217.4791666666667,True
+pp_nav_00068,navigable,82,russian_region,totma,275.276,100.847,0.0,reach:Northern Dvina with Sukhona (White Sea route):river,2,False,False,9622.520833333334,1218.0208333333333,True
+pp_nav_00069,improvable,78,russian_region,staraya_ladoga,665.7819999999999,309.084,0.18415190316180394,reach:Neva - Lake Ladoga - Volkhov (route to Novgorod):river;reach:Neva - Lake Ladoga - Volkhov (route to Novgorod):sea,3,False,False,9160.395833333334,1224.0208333333333,True
+pp_nav_00070,navigable,57,russian_region,neva,2548.2165,2128.679,0.5723828315734864,reach:Neva - Lake Ladoga - Volkhov (route to Novgorod):river;reach:Neva - Lake Ladoga - Volkhov (route to Novgorod):sea,3,False,False,9078.0,1218.888888888889,True
+pp_nav_00071,navigable,70,ural_region,usolye,844.501,232.4425,0.12314095993170092,reach:Volga:river,3,False,False,10265.375,1227.4166666666667,True
+pp_nav_00072,navigable,80,west_siberia_region,turtas,2555.46,1473.166,0.42585439982911855,reach:Ob with Irtysh:river,2,False,False,10870.229166666666,1221.9791666666667,False
+pp_nav_00073,navigable,76,west_siberia_region,upper_ob,5095.45,2144.221,0.0,reach:Ob with Irtysh:river,4,False,False,11299.520833333334,1238.1041666666667,False
+pp_nav_00074,navigable,79,russian_region,vekshenga,250.205,92.936,0.0,reach:Northern Dvina with Sukhona (White Sea route):river,2,False,False,9593.041666666666,1235.3333333333333,True
+pp_nav_00075,navigable,80,west_siberia_region,turtas,167.267,152.695,0.2956367627509657,reach:Ob with Irtysh:river,2,False,False,10848.270833333334,1236.4375,False
+pp_nav_00076,navigable,73,russian_region,soltsy_kirishi,623.724,288.951,0.035265009024754955,reach:Neva - Lake Ladoga - Volkhov (route to Novgorod):river,3,False,False,9145.916666666666,1253.9166666666667,True
+pp_nav_00077,navigable,85,russian_region,shuyskoye,208.8045,79.5355,0.0,reach:Northern Dvina with Sukhona (White Sea route):river,2,False,False,9551.25,1244.6666666666667,True
+pp_nav_00078,navigable,72,west_siberia_region,turtas,2371.896,1319.887,0.06635021274971888,reach:Ob with Irtysh:river,4,False,False,10827.166666666666,1253.625,False
+pp_nav_00079,navigable,15,russian_region,vekshenga,231.691,85.486,0.0,reach:Northern Dvina with Sukhona (White Sea route):river,2,False,False,9573.222222222223,1243.2222222222222,True
+pp_nav_00080,navigable,72,ural_region,usolye,962.4875,256.764,0.0,reach:Volga:river,3,False,False,10257.020833333334,1253.5208333333333,True
+pp_nav_00081,navigable,81,west_siberia_region,upper_ob,5097.641,2138.607,0.7086649446939036,reach:Ob with Irtysh:river,0,False,False,11324.604166666666,1252.1875,False
+pp_nav_00082,navigable,48,russian_region,vologda,181.462,71.627,0.0,reach:Northern Dvina with Sukhona (White Sea route):river,2,False,False,9526.129032258064,1253.8064516129032,True
+pp_nav_00083,navigable,78,west_siberia_region,upper_ob,4834.004,1901.052,0.0,reach:Ob with Irtysh:river,0,False,False,11346.3125,1260.6875,False
+pp_nav_00084,navigable,67,west_siberia_region,qashliq,2250.585,1172.297,0.0,reach:Ob with Irtysh:river,4,False,False,10818.9375,1283.2291666666667,False
+pp_nav_00085,navigable,81,west_siberia_region,upper_ob,317.664,273.036,0.0,reach:Ob with Irtysh:river,2,False,False,11366.708333333334,1273.375,False
+pp_nav_00086,navigable,70,ural_region,yusva,1107.997,281.252,0.0,reach:Volga:river,3,False,False,10249.666666666666,1287.625,True
+pp_nav_00087,navigable,71,russian_region,gruzino,600.298,278.544,0.10840721130371093,reach:Neva - Lake Ladoga - Volkhov (route to Novgorod):river,0,False,False,9135.479166666666,1284.9791666666667,True
+pp_nav_00088,navigable,78,west_siberia_region,kargasok,4005.509,1048.0,0.07796554565429688,reach:Ob with Irtysh:river,0,False,False,11392.145833333334,1280.3958333333333,False
+pp_nav_00089,navigable,81,west_siberia_region,kargasok,4111.339,1065.6725000000001,0.3254359351133016,reach:Ob with Irtysh:river,0,False,False,11416.145833333334,1297.9375,False
+pp_nav_00090,navigable,69,west_siberia_region,qashliq,2253.35,1169.325,0.13695728712944408,reach:Ob with Irtysh:river,4,False,False,10807.75,1308.8333333333333,False
+pp_nav_00091,navigable,17,russian_region,novgorod,598.869,278.544,0.07574005126953125,reach:Neva - Lake Ladoga - Volkhov (route to Novgorod):river,0,False,False,9125.727272727272,1303.7272727272727,True
+pp_nav_00092,navigable,79,west_siberia_region,kolpashevo,4067.926,1014.915,0.16725540161132812,reach:Ob with Irtysh:river,4,False,False,11440.041666666666,1313.0416666666667,False
+pp_nav_00093,navigable,75,ural_region,chyormoz,1188.196,296.046,0.0,reach:Volga:river,3,False,False,10251.4375,1317.6875,True
+pp_nav_00094,navigable,71,west_siberia_region,tobolsk,2270.18,1166.484,0.17938954941567528,reach:Ob with Irtysh:river,5,False,False,10796.833333333334,1334.6666666666667,False
+pp_nav_00095,navigable,78,west_siberia_region,kolpashevo,116.832,97.616,0.18407602728627884,reach:Ob with Irtysh:river,5,False,False,11457.020833333334,1331.5208333333333,False
+pp_nav_00096,navigable,75,ural_region,nytva,1633.55,369.5715,0.0214141845703125,reach:Volga:river,3,False,False,10249.708333333334,1341.8958333333333,True
+pp_nav_00097,navigable,78,west_siberia_region,kolpashevo,3580.691,629.659,0.1441211063060695,reach:Ob with Irtysh:river,4,False,False,11477.958333333334,1348.1666666666667,False
+pp_nav_00098,navigable,58,west_siberia_region,kolpashevo,113.434,94.779,0.043254134339597176,reach:Ob with Irtysh:river,1,False,False,11458.514285714286,1346.7714285714285,False
+pp_nav_00099,navigable,73,russian_region,bolshoye_selo,448.588,175.32,0.0,reach:Volga:river,3,False,False,9444.729166666666,1345.8958333333333,True
+pp_nav_00100,navigable,82,russian_region,ust_sheksna,996.432,516.007,0.0,reach:Volga:river,3,False,False,9472.1875,1354.8958333333333,True
+pp_nav_00101,navigable,73,ural_region,perm,1648.226,374.842,0.0,reach:Volga:river,3,False,False,10222.770833333334,1357.6458333333333,True
+pp_nav_00102,navigable,80,west_siberia_region,tobolsk,930.395,543.858,0.013454004488500336,reach:Ob with Irtysh:river,3,False,False,10786.541666666666,1357.0,False
+pp_nav_00103,navigable,74,russian_region,uglich,429.093,169.32600000000002,0.0,reach:Volga:river,2,False,False,9437.25,1373.0416666666667,True
+pp_nav_00104,navigable,78,west_siberia_region,tobolsk,924.908,535.103,0.0953161541395627,reach:Ob with Irtysh:river,3,False,False,10759.375,1362.5833333333333,False
+pp_nav_00105,navigable,79,russian_region,yaroslavl,1008.287,519.997,0.0,reach:Volga:river,3,False,False,9501.958333333334,1372.5,True
+pp_nav_00106,navigable,29,west_siberia_region,tobolsk,927.704,540.418,0.0,reach:Ob with Irtysh:river,0,False,False,10781.764705882353,1365.1176470588234,False
+pp_nav_00107,navigable,81,russian_region,yaroslavl,1046.455,538.665,0.11526358508629173,reach:Volga:river,3,False,False,9536.520833333334,1369.2291666666667,True
+pp_nav_00108,navigable,79,west_siberia_region,molchanovo,3569.22,618.7674999999999,0.11672339861365295,reach:Ob with Irtysh:river,4,False,False,11495.4375,1374.3541666666667,False
+pp_nav_00109,navigable,79,ural_region,perm,1677.312,382.1355,0.01710052490234375,reach:Volga:river,3,False,False,10216.291666666666,1386.6666666666667,True
+pp_nav_00110,navigable,74,west_siberia_region,yurginskoye,465.87,218.975,0.03110507193632131,reach:Ob with Irtysh:river,2,False,False,10748.104166666666,1382.9791666666667,False
+pp_nav_00111,navigable,82,russian_region,kostroma,1162.206,588.005,0.0,reach:Volga:river,3,False,False,9566.862745098038,1383.235294117647,True
+pp_nav_00112,navigable,15,russian_region,yaroslavl,1040.27,532.143,0.0,reach:Volga:river,3,False,False,9519.09090909091,1377.090909090909,True
+pp_nav_00113,navigable,83,west_siberia_region,melnikovo,2756.404,405.159,0.11672339861365295,reach:Ob with Irtysh:river,4,False,True,11512.083333333334,1395.0,False
+pp_nav_00114,navigable,81,russian_region,kostroma,1172.842,594.287,0.1306607857715566,reach:Volga:river,3,False,False,9600.625,1388.7916666666667,True
+pp_nav_00115,navigable,84,russian_region,ostrovskoye,1192.561,601.74,0.16339425508187816,reach:Volga:river,3,False,False,9637.0,1392.2083333333333,True
+pp_nav_00116,navigable,73,russian_region,kashin,414.349,164.428,0.0,reach:Volga:river,2,False,False,9416.5,1399.3333333333333,True
+pp_nav_00117,navigable,74,ural_region,okhannoye,1718.261,392.058,0.0,reach:Volga:river,3,False,False,10198.0,1402.8333333333333,True
+pp_nav_00118,navigable,78,west_siberia_region,yurginskoye,457.346,207.458,0.0,reach:Ob with Irtysh:river,2,False,False,10740.166666666666,1402.5416666666667,False
+pp_nav_00119,navigable,79,russian_region,korenevo,1444.66,670.768,0.0,reach:Volga:river,3,False,False,9655.4375,1414.8125,True
+pp_nav_00120,navigable,80,west_siberia_region,melnikovo,2750.569,395.239,0.0,reach:Ob with Irtysh:river,4,False,True,11531.729166666666,1417.6458333333333,False
+pp_nav_00121,navigable,79,west_siberia_region,chimgi_tura,324.536,126.656,0.06347096208202734,reach:Ob with Irtysh:river,5,False,False,10711.583333333334,1413.3333333333333,False
+pp_nav_00122,navigable,74,russian_region,kashin,337.235,118.874,0.12527618408203126,reach:Volga:river,2,False,False,9395.854166666666,1423.2708333333333,True
+pp_nav_00123,navigable,34,west_siberia_region,chimgi_tura,267.243,107.992,0.025844021350284987,reach:Ob with Irtysh:river,0,False,False,10690.714285714286,1416.4761904761904,False
+pp_nav_00124,navigable,80,ural_region,chastye,1733.7795,398.9125,0.0,reach:Volga:river,3,False,False,10174.125,1419.75,True
+pp_nav_00125,navigable,78,baltic_region,salaspils,668.062,385.224,0.386246508418324,reach:Daugava (Western Dvina):river;reach:Daugava (Western Dvina):sea,3,False,False,8796.854166666666,1434.6458333333333,True
+pp_nav_00126,navigable,74,ural_region,votkings,1746.441,403.668,0.0175079345703125,reach:Volga:river,3,False,False,10147.6875,1436.9375,True
+pp_nav_00127,navigable,81,russian_region,gorodets,1459.519,679.776,0.0,reach:Volga:river,3,False,False,9666.75,1448.75,True
+pp_nav_00128,navigable,34,west_siberia_region,tomsk,1041.907,128.017,0.2207489013671875,reach:Ob with Irtysh:river,5,False,True,11540.142857142857,1435.952380952381,False
+pp_nav_00129,navigable,79,russian_region,vertyazin,233.539,83.09,0.00686187744140625,reach:Volga:river,2,False,False,9337.395833333334,1441.2291666666667,True
+pp_nav_00130,navigable,78,russian_region,dubna,293.754,103.612,0.06847076416015625,reach:Volga:river,2,False,False,9369.836734693878,1442.530612244898,True
+pp_nav_00131,improvable,79,baltic_region,aizkraukle,633.461,365.434,0.5160514831542968,reach:Daugava (Western Dvina):river,3,False,False,8827.104166666666,1451.0625,True
+pp_nav_00132,navigable,69,ural_region,sarapul,1803.889,424.497,0.16561337340737803,reach:Volga:river,3,False,False,10144.5,1465.0,True
+pp_nav_00133,improvable,79,baltic_region,jekabpils,563.748,330.174,0.2525604248046875,reach:Daugava (Western Dvina):river,3,False,False,8858.583333333334,1456.1666666666667,True
+pp_nav_00134,navigable,79,baltic_region,jekabpils,467.8775,277.821,0.006503675414968481,reach:Daugava (Western Dvina):river,3,False,False,8883.645833333334,1475.8541666666667,True
+pp_nav_00135,navigable,74,russian_region,rastyapino,1471.932,685.046,0.145355224609375,reach:Volga:river,3,False,False,9688.645833333334,1471.3958333333333,True
+pp_nav_00136,navigable,77,russian_region,kozmodemyansk,3300.602,1197.502,0.0,reach:Volga:river,4,False,False,9808.083333333334,1476.9166666666667,True
+pp_nav_00137,navigable,79,russian_region,khakhaly,2821.8435,1082.297,0.0189208984375,reach:Volga:river,4,False,False,9713.041666666666,1485.7916666666667,True
+pp_nav_00138,navigable,82,russian_region,meshchersk,1330.234,387.387,0.21252796565058227,reach:Volga:river,3,False,False,9669.416666666666,1482.9583333333333,True
+pp_nav_00139,navigable,75,ural_region,kasevo,1870.067,450.419,0.09576759338378907,reach:Volga:river,3,False,False,10149.145833333334,1491.1458333333333,True
+pp_nav_00140,navigable,75,russian_region,raznezhye,2857.219,1104.36,0.0,reach:Volga:river,4,False,False,9776.8125,1485.8125,True
+pp_nav_00141,navigable,87,russian_region,cheboksary,3312.944,1203.143,0.12074813842773438,reach:Volga:river,4,False,False,9840.541666666666,1486.5416666666667,True
+pp_nav_00142,navigable,73,russian_region,raznezhye,2866.648,1102.08,0.04610788580020785,reach:Volga:river,4,False,False,9745.5,1487.5454545454545,True
+pp_nav_00143,navigable,77,russian_region,starodub_votsky,1094.325,319.51,0.24851837158203124,reach:Volga:river,3,False,False,9642.604166666666,1497.8541666666667,True
+pp_nav_00144,navigable,80,ural_region,kabachischi,3376.6695,1220.247,0.28638663421510185,reach:Volga:river,4,False,False,9875.854166666666,1496.1875,True
+pp_nav_00145,navigable,78,baltic_region,daugavpils,449.878,266.835,0.22207413227865191,reach:Daugava (Western Dvina):river,2,False,False,8902.916666666666,1502.3333333333333,True
+pp_nav_00146,navigable,81,ural_region,sarapul,2926.2465,625.07,0.002856434526736661,reach:Volga:river,5,False,False,10118.25,1502.6666666666667,True
+pp_nav_00147,navigable,74,ural_region,chalninsky_pochinok,3161.1985,686.479,0.0,reach:Volga:river,4,False,False,10083.333333333334,1504.8333333333333,True
+pp_nav_00148,navigable,76,russian_region,murom,1086.65,314.437,0.134619140625,reach:Volga:river,3,False,False,9615.208333333334,1516.5416666666667,True
+pp_nav_00149,navigable,80,baltic_region,daugavpils,444.9445,263.234,0.0,reach:Daugava (Western Dvina):river,2,False,False,8934.0625,1508.8958333333333,True
+pp_nav_00150,navigable,81,russian_region,sviyazhsk,3409.5355,1238.045,0.03139452431770597,reach:Volga:river,4,False,False,9908.020833333334,1510.4791666666667,True
+pp_nav_00151,navigable,76,ruthenia_region,dzisna,381.767,235.619,0.05457581205608968,reach:Daugava (Western Dvina):river,5,False,False,8965.645833333334,1518.3125,True
+pp_nav_00152,navigable,79,ural_region,yelabuga,3175.574,689.4105,0.30027462509758335,reach:Volga:river,4,False,False,10054.791666666666,1518.4583333333333,True
+pp_nav_00153,navigable,74,russian_region,moscow,77.352,26.255,0.2745458005664351,reach:Volga:river,1,False,False,9421.270833333334,1527.2708333333333,True
+pp_nav_00154,navigable,71,russian_region,sviyazhsk,3496.292,1264.729,0.0,reach:Volga:river,4,False,False,9926.42,1537.24,True
+pp_nav_00155,navigable,79,ural_region,cukataw,4012.954,829.534,0.0,reach:Volga:river,4,False,False,10025.354166666666,1531.8541666666667,True
+pp_nav_00156,navigable,78,ruthenia_region,ushachy,311.403,193.331,0.23990443978625015,reach:Daugava (Western Dvina):river,2,False,False,8995.5,1531.875,True
+pp_nav_00157,navigable,68,russian_region,melenki,1027.172,295.218,0.0,reach:Volga:river,3,False,False,9599.0625,1544.6875,True
+pp_nav_00158,navigable,81,ural_region,cukataw,4064.249,842.475,0.0,reach:Volga:river,4,False,False,9991.541666666666,1537.875,True
+pp_nav_00159,navigable,73,russian_region,bronnitsy,100.529,32.293,0.42749786376953125,reach:Volga:river,5,False,False,9447.895833333334,1544.9375,True
+pp_nav_00160,navigable,74,baltic_region,windenburg,661.562,352.623,0.010870801886534618,reach:Neman:river;reach:Neman:sea,3,False,False,8662.583333333334,1546.8333333333333,True
+pp_nav_00161,navigable,75,ruthenia_region,ulla,250.77,145.383,0.028776897383596768,reach:Daugava (Western Dvina):river,2,False,False,9021.458333333334,1552.0,True
+pp_nav_00162,navigable,82,ural_region,laish,4082.5055,851.0895,0.0,reach:Volga:river,4,False,False,9955.979166666666,1546.4791666666667,True
+pp_nav_00163,navigable,77,ruthenia_region,vitebsk,240.156,108.499,0.4860134107115851,reach:Daugava (Western Dvina):river,2,False,False,9056.208333333334,1553.5,True
+pp_nav_00164,navigable,74,russian_region,sviyazhsk,7619.804,2117.975,0.0,reach:Volga:river,5,False,False,9926.145833333334,1562.0833333333333,True
+pp_nav_00165,navigable,79,baltic_region,ragnit,634.621,335.978,0.14444627353700643,reach:Neman:river;reach:Neman:sea,3,False,False,8691.541666666666,1561.5,True
+pp_nav_00166,navigable,14,ruthenia_region,ulla,244.385,133.71,0.5177850655305787,reach:Daugava (Western Dvina):river,2,False,False,9037.444444444445,1559.4444444444443,True
+pp_nav_00167,navigable,73,russian_region,azeevo,1013.021,279.92,0.12369803611011604,reach:Volga:river,3,False,False,9593.270833333334,1574.8125,True
+pp_nav_00168,navigable,84,baltic_region,jurbarkas,518.171,281.784,0.373052978515625,reach:Neman:river,3,False,False,8738.541666666666,1561.9166666666667,True
+pp_nav_00169,navigable,80,russian_region,perevitska,558.404,142.59,0.03175466913649371,reach:Volga:river,3,False,False,9469.708333333334,1565.0416666666667,True
+pp_nav_00170,navigable,59,baltic_region,kedainiai,482.442,264.806,0.3312862396240234,reach:Neman:river,5,False,False,8768.351351351352,1569.3783783783783,True
+pp_nav_00171,navigable,24,baltic_region,ragnit,531.969,288.345,0.05938911437988281,reach:Neman:river,0,False,False,8714.615384615385,1563.6153846153845,True
+pp_nav_00172,navigable,13,great_britain_region,newcastle,63.069,30.442,0.3674650192260742,reach:Humber/Ouse/Trent:river;reach:Humber/Ouse/Trent:sea,1,False,False,7622.0,1567.0,True
+pp_nav_00173,navigable,70,russian_region,kasimov,719.095,219.023,0.49930858109463483,reach:Volga:river,3,False,False,9566.229166666666,1574.5208333333333,True
+pp_nav_00174,navigable,77,russian_region,perevitska,569.103,150.685,0.2312419194888932,reach:Volga:river,3,False,False,9493.5625,1577.7708333333333,True
+pp_nav_00175,navigable,76,russian_region,simbirsk,7639.088,2124.094,0.0,reach:Volga:river,4,False,False,9911.520833333334,1591.1458333333333,True
+pp_nav_00176,navigable,41,russian_region,kasimov,750.287,231.251,0.0,reach:Volga:river,3,False,False,9582.0,1580.2692307692307,True
+pp_nav_00177,navigable,76,russian_region,koponovo,672.8755000000001,191.0975,0.07613222269774492,reach:Volga:river,3,False,False,9556.75,1600.625,True
+pp_nav_00178,navigable,84,russian_region,ryazan,587.138,159.571,0.002448037813915892,reach:Volga:river,3,False,False,9511.235294117647,1597.0,True
+pp_nav_00179,navigable,70,russian_region,simbirsk,7646.644,2124.62,0.0,reach:Volga:river,4,False,False,9900.1875,1619.8541666666667,True
+pp_nav_00180,navigable,77,russian_region,staraya_ryazan,641.537,173.384,0.06458282470703125,reach:Volga:river,3,False,False,9533.625,1610.125,True
+pp_nav_00181,navigable,8,baltic_region,gdansk,1102.632,716.861,0.1584182325772278,reach:Vistula:river;reach:Vistula:sea,0,False,False,8543.0,1612.0,True
+pp_nav_00182,navigable,73,baltic_region,malbork,1101.136,715.813,0.1584182325772278,reach:Vistula:river;reach:Vistula:sea,3,False,False,8550.333333333334,1629.8333333333333,True
+pp_nav_00183,navigable,15,russian_region,shilovo,648.066,181.393,2.7946296670075808,reach:Volga:river,3,False,False,9549.222222222223,1615.2222222222222,True
+pp_nav_00184,improvable,84,great_britain_region,pontefract,92.719,41.608,0.1475029500229189,reach:Humber/Ouse/Trent:river,2,False,False,7642.541666666667,1647.75,True
+pp_nav_00185,navigable,69,russian_region,pokrovskoye,7649.224,2125.7655,0.0,reach:Volga:river,4,False,False,9917.875,1648.0416666666667,True
+pp_nav_00186,navigable,64,baltic_region,nowe,1073.268,699.677,0.1815500711585913,reach:Vistula:river,3,False,False,8544.229166666666,1664.6875,True
+pp_nav_00187,navigable,77,great_britain_region,grimsby,181.053,78.497,0.0,reach:Humber/Ouse/Trent:river,2,False,False,7659.9375,1661.8125,True
+pp_nav_00188,navigable,59,russian_region,morkvash,7723.867,2160.999,0.0,reach:Volga:river,4,False,False,9935.958333333334,1673.5416666666667,True
+pp_nav_00189,navigable,63,north_german_region,winsen,790.914,427.861,0.04516153335571289,reach:Elbe:river;reach:Elbe:sea,3,False,False,8154.5,1676.0,True
+pp_nav_00190,navigable,81,great_britain_region,newark,130.568,58.542,0.265031099319458,reach:Humber/Ouse/Trent:river,1,False,False,7651.604166666667,1693.6458333333333,True
+pp_nav_00191,navigable,63,russian_region,morkvash,7785.883,2175.107,0.01791888933410853,reach:Volga:river,4,False,False,9969.583333333334,1684.1666666666667,True
+pp_nav_00192,navigable,68,baltic_region,chelmno,1057.678,686.767,0.19748340314910304,reach:Vistula:river,3,False,False,8523.416666666666,1689.2916666666667,True
+pp_nav_00193,navigable,72,north_german_region,gryfow,549.5385,346.3745,0.0031785472307616293,reach:Oder:river;reach:Oder:sea,3,False,False,8348.104166666666,1692.6041666666667,True
+pp_nav_00194,navigable,64,north_german_region,dannenberg,736.846,404.273,0.23737571576203725,reach:Elbe:river,3,False,False,8185.416666666667,1688.6666666666667,True
+pp_nav_00195,navigable,67,russian_region,khvorostyanka,7960.443,2238.368,0.0,reach:Volga:river,4,False,False,9924.104166666666,1692.2708333333333,True
+pp_nav_00196,navigable,47,russian_region,morkvash,7937.31,2221.0969999999998,0.0,reach:Volga:river,4,False,False,9952.823529411764,1694.0294117647059,True
+pp_nav_00197,navigable,62,north_german_region,bremen,370.22,157.37,0.23942289937621034,reach:Weser:river;reach:Weser:sea,2,False,False,8094.166666666667,1702.6875,True
+pp_nav_00198,navigable,67,north_german_region,osterburg,698.318,375.929,0.18628885615744636,reach:Elbe:river,3,False,False,8213.9375,1703.3125,True
+pp_nav_00199,navigable,63,russian_region,khvorostyanka,8002.144,2269.479,0.0,reach:Volga:river,5,False,False,9899.333333333334,1707.7916666666667,True
+pp_nav_00200,navigable,64,baltic_region,inowroclaw,1008.258,653.3154999999999,0.0,reach:Vistula:river,3,False,False,8538.666666666666,1708.8333333333333,True
+pp_nav_00201,navigable,72,north_german_region,chojna,535.601,339.189,0.22159719467163086,reach:Oder:river,3,False,False,8340.0625,1719.9375,True
+pp_nav_00202,navigable,11,great_britain_region,nottingham,122.631,56.068,0.5829487440733592,reach:Humber/Ouse/Trent:river,1,False,False,7640.571428571428,1709.5714285714287,True
+pp_nav_00203,navigable,71,north_german_region,nienburg,216.897,90.745,0.34123490261564865,reach:Weser:river,5,False,False,8106.75,1729.375,True
+pp_nav_00204,navigable,70,north_german_region,jerichow,594.858,297.515,0.14382438659667968,reach:Elbe:river,5,False,False,8238.25,1719.5416666666667,True
+pp_nav_00205,navigable,48,great_britain_region,lynn,57.213,23.082,0.0,reach:Great Ouse (added):river;reach:Great Ouse (added):sea,1,False,False,7706.444444444444,1731.2222222222222,True
+pp_nav_00206,navigable,51,baltic_region,wloclawek,974.536,623.941,0.36546173095703127,reach:Vistula:river,3,False,False,8565.6875,1729.8125,True
+pp_nav_00207,navigable,68,steppes_region,dukhovnitskoye,8018.353,2286.496,0.0,reach:Volga:river,5,False,False,9886.020833333334,1737.5208333333333,True
+pp_nav_00208,navigable,62,north_german_region,brandenburg,69.971,47.466,0.0,reach:Elbe:river,1,False,False,8255.583333333334,1738.9583333333333,True
+pp_nav_00209,navigable,50,baltic_region,kamieniec,141.068,76.662,0.201934814453125,reach:Vistula:river,2,False,False,8685.979166666666,1729.2708333333333,True
+pp_nav_00210,improvable,72,north_german_region,zwolle,54.581,26.415,0.2962258073828794,reach:IJssel:river;reach:IJssel:sea,0,False,False,7976.729166666667,1737.5208333333333,True
+pp_nav_00211,navigable,64,baltic_region,sokolow,122.409,66.983,0.43694915771484377,reach:Vistula:river,1,False,False,8715.916666666666,1740.5,True
+pp_nav_00212,navigable,80,great_britain_region,shrewsbury,97.97,45.379,2.2788807337300976,reach:Severn:river,1,False,False,7583.729166666667,1747.7708333333333,True
+pp_nav_00213,navigable,73,north_german_region,jerichow,593.299,295.639,0.1696498490312887,reach:Elbe:river,3,False,False,8232.875,1746.4166666666667,True
+pp_nav_00214,navigable,67,north_german_region,lebus,318.843,195.21,0.4381967354293418,reach:Oder:river,3,False,False,8355.583333333334,1746.2083333333333,True
+pp_nav_00215,navigable,67,baltic_region,warsaw,156.159,85.602,0.0828338623046875,reach:Vistula:river,2,False,False,8650.75,1739.9166666666667,True
+pp_nav_00216,navigable,54,baltic_region,gostynin,960.261,606.878,0.09851608276367188,reach:Vistula:river,3,False,False,8597.895833333334,1743.9791666666667,True
+pp_nav_00217,navigable,71,north_german_region,teltow,53.409,36.68,0.11772079467773437,reach:Elbe:river,1,False,False,8294.229166666666,1742.7291666666667,True
+pp_nav_00218,navigable,24,north_german_region,treuenbrietzen,62.787,42.808,0.0,reach:Elbe:river,1,False,False,8275.272727272728,1744.7727272727273,True
+pp_nav_00219,navigable,54,baltic_region,warsaw,581.288,370.433,0.1567746433582802,reach:Vistula:river,3,False,False,8632.979166666666,1748.5208333333333,True
+pp_nav_00220,improvable,70,north_german_region,minden,168.591,68.786,0.32460112764402826,reach:Weser:river,2,False,False,8100.75,1759.0833333333333,True
+pp_nav_00221,navigable,50,baltic_region,mielnik,117.278,64.386,0.36641984029611835,reach:Vistula:river,1,False,False,8743.627906976744,1755.3720930232557,True
+pp_nav_00222,navigable,96,north_german_region,zutphen,42.188,21.318,0.4179483413696289,reach:IJssel:river,0,False,False,7973.875,1763.7083333333333,True
+pp_nav_00223,navigable,58,steppes_region,balakovo,8034.362,2309.076,0.0,reach:Volga:river,5,False,False,9867.520833333334,1766.3541666666667,True
+pp_nav_00224,navigable,63,baltic_region,czersk,571.0325,363.6495,0.2611572265625,reach:Vistula:river,3,False,False,8655.6875,1769.9791666666667,True
+pp_nav_00225,improvable,73,north_german_region,calbe,584.2,290.931,0.08720863119972075,reach:Elbe:river,3,False,False,8228.3125,1772.1041666666667,True
+pp_nav_00226,navigable,52,baltic_region,krosno_odrzanskie,279.90999999999997,175.042,0.2293470923465799,reach:Oder:river,2,False,False,8372.270833333334,1768.7291666666667,True
+pp_nav_00227,navigable,75,great_britain_region,gloucester,173.287,76.636,0.05405298545669626,reach:Severn:river;reach:Severn:sea,2,False,False,7586.416666666667,1781.375,True
+pp_nav_00228,improvable,74,north_german_region,hoxter,150.983,60.611,0.15381546020507814,reach:Weser:river,2,False,False,8119.104166666667,1781.8125,True
+pp_nav_00229,navigable,58,baltic_region,zielona_gora,223.834,140.714,0.24055023193359376,reach:Oder:river,2,False,False,8403.208333333334,1778.125,True
+pp_nav_00230,navigable,68,steppes_region,baronsk,8114.096,2360.876,0.0,reach:Volga:river,5,False,False,9838.875,1778.375,True
+pp_nav_00231,navigable,54,north_german_region,dordrecht,2371.333,1378.106,0.036196136474609376,reach:Rhine:river;reach:Rhine:sea,4,False,False,7921.916666666667,1776.6875,True
+pp_nav_00232,navigable,52,north_german_region,tiel,2363.496,1372.839,0.09213225349028399,reach:Rhine:sea,4,False,False,7949.229166666667,1776.875,True
+pp_nav_00233,navigable,74,north_german_region,kleve,2354.421,1368.722,0.09097178665603237,reach:Rhine:sea,4,False,False,7967.8125,1784.2291666666667,True
+pp_nav_00234,navigable,13,north_german_region,dordrecht,2417.77,1403.916,0.0,reach:Rhine:river;reach:Rhine:sea,4,False,False,7904.0,1781.3333333333333,True
+pp_nav_00235,navigable,69,north_german_region,zerbst,378.3125,192.2945,0.13954010009765624,reach:Elbe:river,2,False,False,8257.833333333334,1784.875,True
+pp_nav_00236,navigable,64,north_german_region,cuijk,353.901,137.797,0.12456434445421471,reach:Meuse/Maas:river,2,False,False,7939.875,1790.0416666666667,True
+pp_nav_00237,navigable,62,baltic_region,czersk,502.995,323.447,0.31965683382664317,reach:Vistula:river,3,False,False,8672.166666666666,1797.3333333333333,True
+pp_nav_00238,navigable,69,steppes_region,voronezh,143.392,30.014,0.4602206517025552,reach:Don:river,2,False,False,9468.8125,1803.9375,True
+pp_nav_00239,navigable,70,russian_region,tereshka,8135.371,2396.32,0.06684186373145157,reach:Volga:river,5,False,False,9808.625,1792.5416666666667,True
+pp_nav_00240,navigable,58,north_german_region,torgau,344.078,174.844,0.30524587387684965,reach:Elbe:river,2,False,False,8283.5625,1803.0625,True
+pp_nav_00241,navigable,65,baltic_region,glogow,214.738,135.08,0.10575740103682808,reach:Oder:river,2,False,False,8425.770833333334,1797.7291666666667,True
+pp_nav_00242,navigable,73,north_german_region,kleve,2305.845,1345.69,0.09097178665603237,reach:Rhine:sea,5,False,False,7989.708333333333,1801.625,True
+pp_nav_00243,navigable,39,north_german_region,geertruidenberg,406.611,164.384,0.055357396602630615,reach:Meuse/Maas:river;reach:Meuse/Maas:sea,2,False,False,7909.151515151515,1793.4848484848485,True
+pp_nav_00244,navigable,70,north_german_region,venlo,322.702,122.248,0.13183269500732422,reach:Meuse/Maas:river,2,False,False,7966.104166666667,1806.0416666666667,True
+pp_nav_00245,navigable,27,north_german_region,hofgeismar,113.87,43.829,2.547822138356285,reach:Weser:river,1,False,False,8124.705882352941,1803.2941176470588,True
+pp_nav_00246,navigable,63,russian_region,ukek,8205.999,2461.589,0.010183334350585938,reach:Volga:river,5,False,False,9785.083333333334,1813.5833333333333,True
+pp_nav_00247,navigable,70,great_britain_region,windsor,58.3975,22.043,0.34384849399028417,reach:Thames:river,1,False,False,7651.208333333333,1807.125,True
+pp_nav_00248,improvable,55,great_britain_region,london,84.655,34.543,0.3270355224609375,reach:Thames:river;reach:Thames:sea,1,False,False,7676.536585365854,1811.9756097560976,True
+pp_nav_00249,navigable,73,baltic_region,wolow,175.826,111.678,0.3775060525541526,reach:Oder:river,2,False,False,8444.333333333334,1821.75,True
+pp_nav_00250,navigable,73,baltic_region,zwolen,444.5405,273.128,0.18979774709092886,reach:Vistula:river,2,False,False,8686.604166666666,1822.5625,True
+pp_nav_00251,navigable,70,north_german_region,neuss,2238.525,1311.3,0.0,reach:Rhine:river;reach:Rhine:sea,5,False,False,7998.291666666667,1822.4791666666667,True
+pp_nav_00252,navigable,61,north_german_region,annaburg,335.253,171.4505,0.8098502273844452,reach:Elbe:river,2,False,False,8304.229166666666,1828.7708333333333,True
+pp_nav_00253,navigable,67,north_german_region,roermond,271.113,99.657,0.682875672215346,reach:Meuse/Maas:river,2,False,False,7959.020833333333,1833.3125,True
+pp_nav_00254,navigable,62,steppes_region,semidesyatnoye,236.858,56.5065,0.0,reach:Don:river,2,False,False,9474.770833333334,1832.0208333333333,True
+pp_nav_00255,navigable,62,north_german_region,sint_niklaas,172.837,67.75,0.0461390495300293,reach:Scheldt:river;reach:Scheldt:sea,2,False,False,7880.083333333333,1836.4375,True
+pp_nav_00256,navigable,19,baltic_region,wroclaw,155.647,100.859,0.22783055360707927,reach:Oder:river,2,False,False,8461.285714285714,1831.7857142857142,True
+pp_nav_00257,navigable,63,steppes_region,goly_karamysh,8212.325,2470.401,0.0,reach:Volga:river,5,False,False,9783.395833333334,1844.6041666666667,True
+pp_nav_00258,navigable,69,north_german_region,cologne,2208.19,1297.511,0.5432220458984375,reach:Rhine:river;reach:Rhine:sea,4,False,False,8008.0,1843.8333333333333,True
+pp_nav_00259,navigable,69,baltic_region,sandomierz,405.806,240.474,0.2585178664321419,reach:Vistula:river,2,False,False,8683.541666666666,1855.25,True
+pp_nav_00260,navigable,70,north_german_region,kortriik,70.9725,26.676000000000002,0.20074504906649976,reach:Scheldt:river,5,False,False,7855.875,1845.0,True
+pp_nav_00261,navigable,62,steppes_region,ostrogozhsk,271.881,64.405,0.0,reach:Don:river,2,False,False,9495.375,1849.5,True
+pp_nav_00262,navigable,62,north_german_region,liege,240.006,84.503,0.9117252406958103,reach:Meuse/Maas:river,2,False,False,7944.916666666667,1863.625,True
+pp_nav_00263,navigable,49,north_german_region,tournai,76.306,28.519,0.0,reach:Scheldt:river,1,False,False,7848.65625,1859.78125,True
+pp_nav_00264,navigable,73,north_german_region,bonn,2173.41,1282.227,0.7208811796695447,reach:Rhine:river,4,False,False,8022.02,1870.36,True
+pp_nav_00265,navigable,58,steppes_region,goly_karamysh,8215.756,2479.489,0.0,reach:Volga:river,5,False,False,9775.104166666666,1869.3958333333333,True
+pp_nav_00266,navigable,68,steppes_region,rossosh,318.785,74.132,0.1701135579225516,reach:Don:river,2,False,False,9509.229166666666,1876.6041666666667,True
+pp_nav_00267,navigable,76,baltic_region,sandomierz,249.2665,135.989,0.3513600652565812,reach:Vistula:river,2,False,False,8663.25,1880.125,True
+pp_nav_00268,navigable,44,north_german_region,namur,186.079,62.16,0.0,reach:Meuse/Maas:river,2,False,False,7922.423076923077,1877.8846153846155,True
+pp_nav_00269,navigable,72,ruthenia_region,kaharlyk,1518.868,1056.713,0.020001220703125,reach:Dnieper:river,3,False,False,9089.645833333334,1895.8125,True
+pp_nav_00270,improvable,68,north_german_region,coblenz,336.91,109.166,4.920240783691407,reach:Rhine:river,5,False,False,8034.166666666667,1891.4791666666667,True
+pp_nav_00271,navigable,61,steppes_region,berezhnovka,8231.972,2511.935,0.0,reach:Volga:river,5,False,False,9767.125,1897.625,True
+pp_nav_00272,navigable,67,baltic_region,wislica,202.521,101.38,0.3429791809251088,reach:Vistula:river,2,False,False,8633.229166666666,1894.7291666666667,True
+pp_nav_00273,navigable,60,steppes_region,boguchar,344.029,79.56,0.29217832251968134,reach:Don:river,2,False,False,9519.770833333334,1900.8541666666667,True
+pp_nav_00274,navigable,74,north_german_region,cochem,326.222,105.481,0.8744057377296818,reach:Rhine:river,2,False,False,8014.541666666667,1907.9166666666667,True
+pp_nav_00275,navigable,76,north_german_region,mainz,1719.6709999999998,1138.567,0.0,reach:Rhine:river,3,False,False,8053.708333333333,1907.0416666666667,True
+pp_nav_00276,navigable,65,steppes_region,boguchar,353.11749999999995,81.93549999999999,0.34738922119140625,reach:Don:river,2,False,False,9544.104166666666,1911.7291666666667,True
+pp_nav_00277,navigable,33,north_german_region,mainz,204.959,77.364,0.0,reach:Rhine:river,3,False,False,8073.958333333333,1906.9583333333333,True
+pp_nav_00278,navigable,36,baltic_region,wieliczka,84.52000000000001,51.9615,0.0,reach:Vistula:river,1,False,False,8607.461538461539,1905.3461538461538,True
+pp_nav_00279,navigable,75,ruthenia_region,kaniv,1508.642,1059.928,0.0,reach:Dnieper:river,3,False,False,9114.520833333334,1914.1041666666667,True
+pp_nav_00280,navigable,70,north_german_region,worms,1501.93,1057.859,0.0,reach:Rhine:river,3,False,False,8072.145833333333,1925.5625,True
+pp_nav_00281,navigable,58,steppes_region,zenzevatka,8234.291,2519.286,0.0,reach:Volga:river,5,False,False,9750.75,1929.25,True
+pp_nav_00282,navigable,10,north_german_region,trier,315.414,102.462,1.0690422866574378,reach:Rhine:river,2,False,False,8002.5,1922.0,True
+pp_nav_00283,navigable,73,steppes_region,boguchar,373.935,85.195,0.0,reach:Don:river,2,False,False,9567.5,1930.9583333333333,True
+pp_nav_00284,navigable,76,ruthenia_region,zolotonosha,1542.598,1076.61,0.08398930408905991,reach:Dnieper:river,5,False,False,9137.479166666666,1935.0208333333333,True
+pp_nav_00285,navigable,59,steppes_region,veesky,378.894,87.606,0.0,reach:Don:river,0,False,False,9598.3125,1935.9375,True
+pp_nav_00286,navigable,73,steppes_region,ust_medveditskaya,577.1535,120.568,0.16411056518554687,reach:Don:river,3,False,False,9631.6875,1940.6458333333333,True
+pp_nav_00287,navigable,74,france_region,pont_audemer,545.509,191.045,0.48986258506774905,reach:Seine:sea,3,False,False,7722.479166666667,1945.2291666666667,True
+pp_nav_00288,improvable,76,france_region,pont_audemer,531.66,186.488,0.0,reach:Seine:river;reach:Seine:sea,3,False,False,7737.145833333333,1949.8125,True
+pp_nav_00289,navigable,67,south_german_region,heidelberg,154.752,55.698499999999996,0.6475557396299639,reach:Rhine:river,2,False,False,8092.291666666667,1948.5416666666667,True
+pp_nav_00290,navigable,71,ruthenia_region,cherkasy,1554.8805,1085.798,0.0,reach:Dnieper:river,5,False,False,9168.854166666666,1951.6458333333333,True
+pp_nav_00291,navigable,72,south_german_region,speyer,1301.4830000000002,989.7245,0.2645759582519531,reach:Rhine:river,3,False,False,8074.291666666667,1959.5,True
+pp_nav_00292,navigable,68,steppes_region,kremenskaya,607.889,126.759,0.14641233037387913,reach:Don:river,3,False,False,9669.958333333334,1949.3333333333333,True
+pp_nav_00293,navigable,12,france_region,pont_audemer,553.523,194.003,0.48986258506774905,reach:Seine:sea,0,False,False,7706.5,1946.0,True
+pp_nav_00294,navigable,58,steppes_region,bykovo,8238.754,2545.896,0.0,reach:Volga:river,5,False,False,9736.958333333334,1963.4583333333333,True
+pp_nav_00295,navigable,57,france_region,senlis,99.06,35.957,0.6271575927734375,reach:Seine:river,1,False,False,7809.458333333333,1955.9583333333333,True
+pp_nav_00296,navigable,19,steppes_region,kletskaya,606.871,126.206,0.26058807373046877,reach:Don:river,3,False,False,9651.411764705883,1952.5882352941176,True
+pp_nav_00297,navigable,28,south_german_region,heilbronn,128.039,47.94,0.0,reach:Rhine:river,1,False,False,8107.631578947368,1962.9473684210527,True
+pp_nav_00298,improvable,76,france_region,gisors,441.735,158.928,0.6013640821406556,reach:Seine:river,3,False,False,7753.479166666667,1968.0208333333333,True
+pp_nav_00299,navigable,69,steppes_region,kremenskaya,625.249,128.02,0.0,reach:Don:river,3,False,False,9687.208333333334,1970.1666666666667,True
+pp_nav_00300,navigable,76,steppes_region,usivka,1604.4789999999998,1110.636,0.0,reach:Dnieper:river,3,False,False,9198.666666666666,1969.8333333333333,True
+pp_nav_00301,navigable,62,france_region,montmorency,126.999,46.138,0.18915969888080655,reach:Seine:river,5,False,False,7785.958333333333,1975.5833333333333,True
+pp_nav_00302,navigable,72,france_region,meaux,70.91,24.176,0.0,reach:Seine:river,1,False,False,7833.854166666667,1979.3541666666667,True
+pp_nav_00303,navigable,75,south_german_region,straubing,481.352,282.1725,0.0675994873046875,reach:Danube:river,1,False,False,8264.1875,1981.2291666666667,True
+pp_nav_00304,navigable,70,south_german_region,baden,1255.792,975.996,0.3132605149373644,reach:Rhine:river,3,False,False,8057.666666666667,1989.1666666666667,True
+pp_nav_00305,navigable,20,france_region,mantes,429.832,153.322,0.0,reach:Seine:river,2,False,False,7770.75,1979.9166666666667,True
+pp_nav_00306,navigable,80,steppes_region,usivka,1693.946,1169.334,0.06383415879054669,reach:Dnieper:river,3,False,False,9231.25,1985.25,True
+pp_nav_00307,navigable,73,france_region,paris,310.181,107.657,0.2883766174316406,reach:Seine:river,2,False,False,7795.104166666667,1983.9583333333333,True
+pp_nav_00308,navigable,44,france_region,brie_comte_robert,95.068,32.744,0.645977783203125,reach:Seine:river,1,False,False,7810.137931034483,1985.8620689655172,True
+pp_nav_00309,navigable,75,steppes_region,srednyaya_akhtuba,8228.332,2575.37,2.602062037393642,reach:Volga:river,5,False,False,9732.291666666666,1991.875,True
+pp_nav_00310,navigable,73,steppes_region,mechet,628.196,130.983,0.007992172241210937,reach:Don:river,3,False,False,9672.916666666666,1993.875,True
+pp_nav_00311,navigable,75,south_german_region,landau,668.481,431.074,0.7028076171875,reach:Danube:river,3,False,False,8292.333333333334,1998.1666666666667,True
+pp_nav_00312,navigable,78,france_region,melun,192.893,65.464,0.2679318758368068,reach:Seine:river,2,False,False,7806.895833333333,2005.3958333333333,True
+pp_nav_00313,improvable,77,steppes_region,kodak,1773.496,1201.188,0.002350018583553212,reach:Dnieper:river,3,False,False,9259.75,2004.75,True
+pp_nav_00314,navigable,84,steppes_region,srednyaya_akhtuba,8202.071,2559.302,0.08290010614246966,reach:Volga:river,1,False,False,9763.583333333334,2002.9166666666667,True
+pp_nav_00315,navigable,70,south_german_region,strasbourg,1104.5515,776.095,0.6107308852090135,reach:Rhine:river,3,False,False,8042.416666666667,2019.0,True
+pp_nav_00316,navigable,62,steppes_region,aksay,633.5360000000001,134.1525,0.0,reach:Don:river,3,False,False,9658.354166666666,2020.8541666666667,True
+pp_nav_00317,navigable,77,south_german_region,linz,1402.805,907.992,2.4389738400797913,reach:Danube:river,3,False,False,8322.375,2015.375,True
+pp_nav_00318,navigable,74,steppes_region,pologoye_zaymishche,8199.159,2569.45,0.19204303153527852,reach:Volga:river,1,False,False,9791.416666666666,2023.0833333333333,True
+pp_nav_00319,improvable,81,steppes_region,kodak,1758.865,1181.3615,0.1785887241909732,reach:Dnieper:river,3,False,False,9287.416666666666,2020.8333333333333,True
+pp_nav_00320,navigable,76,france_region,sens,80.493,26.5195,0.3518578951424677,reach:Seine:river,5,False,False,7832.854166666667,2026.3541666666667,True
+pp_nav_00321,navigable,75,south_german_region,tulln,1829.975,1104.038,0.5312949000045901,reach:Danube:river,3,False,False,8395.0625,2022.1041666666667,True
+pp_nav_00322,navigable,79,south_german_region,tulln,1934.95,1158.125,0.2535512084007029,reach:Danube:river,3,False,False,8429.5,2024.75,True
+pp_nav_00323,improvable,73,south_german_region,amstetten,1728.834,1069.381,0.24461669921875,reach:Danube:river,3,False,False,8353.416666666666,2026.375,True
+pp_nav_00324,navigable,22,south_german_region,melk,1746.243,1068.244,5.941680908203125,reach:Danube:river,0,False,False,8374.933333333332,2028.6666666666667,True
+pp_nav_00325,navigable,72,south_german_region,bruck_leitha,2092.803,1288.109,0.37193603515625,reach:Danube:river,5,False,False,8465.729166666666,2035.3125,True
+pp_nav_00326,navigable,8,south_german_region,bruck_leitha,1959.575,1173.449,0.39706956843801716,reach:Danube:river,0,False,False,8447.0,2033.0,True
+pp_nav_00327,navigable,85,south_german_region,mulhouse,1071.564,732.759,0.8202880859375,reach:Rhine:river,3,False,False,8035.854166666667,2054.0208333333335,True
+pp_nav_00328,navigable,53,steppes_region,nagavskaya,656.658,140.215,0.0,reach:Don:river,3,False,False,9639.729166666666,2050.2291666666665,True
+pp_nav_00329,improvable,64,steppes_region,kichkas,1604.888,1075.129,0.0,reach:Dnieper:river,3,False,False,9289.104166666666,2052.6041666666665,True
+pp_nav_00330,navigable,79,steppes_region,bolkhuny,8214.53,2646.607,0.1751370490446256,reach:Volga:river,1,False,False,9808.25,2047.3333333333333,True
+pp_nav_00331,navigable,28,france_region,joigny,68.2025,22.357999999999997,0.6471321583199208,reach:Seine:river,1,False,False,7843.75,2045.75,True
+pp_nav_00332,navigable,78,carpathia_region,gyor,2088.73,1267.542,0.2064188865501473,reach:Danube:river,0,False,False,8493.354166666666,2053.0625,True
+pp_nav_00333,navigable,52,france_region,orleans,357.042,121.578,0.44927825927734377,reach:Loire:river,2,False,False,7765.5,2058.0,True
+pp_nav_00334,navigable,75,carpathia_region,esztergom,2311.7865,1385.8539999999998,0.05667211974707204,reach:Danube:river,4,False,False,8544.020833333334,2057.75,True
+pp_nav_00335,navigable,30,carpathia_region,tata,180.284,81.174,0.0,reach:Danube:river,2,False,False,8518.411764705883,2058.5882352941176,True
+pp_nav_00336,navigable,77,steppes_region,mikhaylovka_pontic,8189.464,2641.496,0.09351664561142235,reach:Volga:river,1,False,False,9827.354166666666,2072.1041666666665,True
+pp_nav_00337,navigable,72,carpathia_region,pest,2310.145,1390.7765,0.91473184555879,reach:Danube:river,4,False,False,8557.5625,2077.0625,True
+pp_nav_00338,navigable,69,steppes_region,bol_shaya_martynovka,668.04,148.799,0.0,reach:Don:river,3,False,False,9608.583333333334,2067.0833333333335,True
+pp_nav_00339,improvable,65,france_region,amboise,381.972,128.561,0.8398862766188322,reach:Loire:river,2,False,False,7737.645833333333,2077.7291666666665,True
+pp_nav_00340,navigable,76,steppes_region,kuchugur,1612.784,1078.8449999999998,0.0,reach:Dnieper:river,5,False,False,9270.020833333334,2071.8958333333335,True
+pp_nav_00341,navigable,68,steppes_region,semikarakorsk,674.248,156.504,0.0,reach:Don:river,3,False,False,9556.5625,2070.8125,True
+pp_nav_00342,navigable,36,steppes_region,bol_shaya_martynovka,671.585,154.137,0.07108554840087891,reach:Don:river,3,False,False,9582.363636363636,2071.7727272727275,True
+pp_nav_00343,navigable,69,steppes_region,bagayevskaya,819.151,183.586,0.47383786890369334,reach:Don:river,3,False,False,9527.708333333334,2084.4166666666665,True
+pp_nav_00344,navigable,64,steppes_region,velyka_lepetykha,1610.476,1073.295,0.0,reach:Dnieper:river,5,False,False,9239.6875,2086.1875,True
+pp_nav_00345,navigable,74,france_region,angers,773.176,268.172,0.3186820983886719,reach:Loire:river,3,False,False,7665.145833333333,2081.8541666666665,True
+pp_nav_00346,improvable,60,france_region,chinon,518.63,178.734,0.9306275386188437,reach:Loire:river,0,False,False,7703.125,2088.75,True
+pp_nav_00347,navigable,67,france_region,nantes,961.573,321.988,0.18086395263671876,reach:Loire:river;reach:Loire:sea,3,False,False,7629.958333333333,2088.375,True
+pp_nav_00348,navigable,80,steppes_region,rechnoye,8147.132,2641.597,0.008249563019539817,reach:Volga:river,1,False,False,9848.708333333334,2095.0,True
+pp_nav_00349,navigable,13,france_region,saumur,772.141,267.857,3.0312963177690664,reach:Loire:river,0,False,False,7684.25,2087.25,True
+pp_nav_00350,navigable,78,steppes_region,tana,952.892,283.531,1.3350277291390082,reach:Don:river;reach:Don:sea,0,False,False,9497.22,2095.08,True
+pp_nav_00351,navigable,15,france_region,nantes,997.859,332.535,0.07249240279197693,reach:Loire:river;reach:Loire:sea,0,False,False,7609.666666666667,2093.3333333333335,True
+pp_nav_00352,navigable,73,carpathia_region,solt,2321.186,1392.564,0.21662445068359376,reach:Danube:river,4,False,False,8552.791666666666,2111.5,True
+pp_nav_00353,navigable,62,steppes_region,rohat_kermen,1500.353,1004.225,0.0,reach:Dnieper:river,3,False,False,9219.354166666666,2113.8541666666665,True
+pp_nav_00354,navigable,78,steppes_region,khosheutovo,8120.848,2634.485,0.0,reach:Volga:river,1,False,False,9872.25,2116.5416666666665,True
+pp_nav_00355,navigable,58,canada_region,andawaohie,12152.347,9091.685,0.0,reach:St. Lawrence:river;reach:St. Lawrence:sea,5,False,False,4434.0625,2127.1041666666665,True
+pp_nav_00356,navigable,69,france_region,chalon_sur_saone,402.74850000000004,152.0675,0.08785223266300879,reach:Rhone/Saone:river,2,False,False,7914.25,2138.7083333333335,True
+pp_nav_00357,navigable,77,steppes_region,aslan_horod,1502.173,1004.227,0.08059213867587262,reach:Dnieper:river;reach:Dnieper:sea,3,False,False,9190.125,2129.2083333333335,True
+pp_nav_00358,navigable,73,carpathia_region,tolna,2322.682,1344.287,0.14686114947320766,reach:Danube:river,4,False,False,8551.5625,2146.3541666666665,True
+pp_nav_00359,navigable,75,steppes_region,krasny_yar,8102.217,2620.324,0.11578453189758454,reach:Volga:river,1,False,False,9890.729166666666,2144.5208333333335,True
+pp_nav_00360,navigable,68,canada_region,wolinak,11952.795,9040.548999999999,0.009737777709960937,reach:St. Lawrence:sea,5,False,False,4402.708333333333,2142.2083333333335,True
+pp_nav_00361,navigable,28,steppes_region,ordu_bazar,1550.77,1021.05,0.05031461007893086,reach:Dnieper:river;reach:Dnieper:sea,5,False,False,9169.9,2136.45,True
+pp_nav_00362,navigable,69,canada_region,masolian,10995.64,8723.6345,0.0,reach:St. Lawrence:sea,5,False,False,4374.9375,2162.4375,True
+pp_nav_00363,navigable,70,france_region,lyon,494.20799999999997,187.476,0.0,reach:Rhone/Saone:river,3,False,False,7908.5625,2173.8125,True
+pp_nav_00364,navigable,51,steppes_region,krasny_yar,8103.126,2620.387,0.0790070001900149,reach:Volga:river;reach:Volga:sea,0,False,False,9906.766666666666,2166.733333333333,True
+pp_nav_00365,navigable,67,carpathia_region,mohacs,2270.344,1329.474,0.1591523616948486,reach:Danube:river,4,False,False,8547.604166666666,2177.8958333333335,True
+pp_nav_00366,improvable,72,canada_region,kemoimenahan,10168.171,8332.393,0.030451249028069317,reach:St. Lawrence:river;reach:St. Lawrence:sea,5,False,False,4352.166666666667,2187.6666666666665,True
+pp_nav_00367,navigable,8,france_region,rochefort,168.618,44.621,0.03207216262817383,reach:Charente:river;reach:Charente:sea,1,False,False,7643.6,2176.4,True
+pp_nav_00368,navigable,78,france_region,saintes,130.5705,35.013000000000005,0.03207216262817383,reach:Charente:river;reach:Charente:sea,2,False,False,7656.75,2185.375,True
+pp_nav_00369,navigable,77,france_region,cognac,61.803,16.369,0.8022598266601563,reach:Charente:river,1,False,False,7691.5,2190.5416666666665,True
+pp_nav_00370,navigable,73,balkan_region,sisak,198.468,104.526,0.10750184390575873,reach:Danube:river,1,False,False,8432.354166666666,2196.1041666666665,True
+pp_nav_00371,navigable,9,steppes_region,astrakhan,8110.338,2609.97,0.13123550415039062,reach:Volga:river;reach:Volga:sea,0,False,False,9889.4,2188.6,True
+pp_nav_00372,navigable,66,france_region,tournon,1119.9465,693.2384999999999,0.4737152099609375,reach:Rhone/Saone:river,3,False,False,7908.75,2207.0833333333335,True
+pp_nav_00373,navigable,21,france_region,cognac,85.963,22.239,2.397109603881836,reach:Charente:river,1,False,False,7676.307692307692,2192.3846153846152,True
+pp_nav_00374,navigable,68,balkan_region,vukovar,2762.848,1581.634,0.1476818353373278,reach:Danube:river,4,False,False,8554.625,2206.5416666666665,True
+pp_nav_00375,improvable,67,canada_region,kemoimenahan,9033.707,7745.625,0.13846164659701965,reach:St. Lawrence:sea,5,False,False,4330.395833333333,2213.8958333333335,True
+pp_nav_00376,navigable,81,italy_region,legnago,193.768,48.803,0.37855358068807154,reach:Adige:river,1,False,False,8203.916666666666,2219.5416666666665,True
+pp_nav_00377,navigable,79,balkan_region,dubica,405.437,171.537,0.006703222782571302,reach:Danube:river,1,False,False,8455.375,2216.6666666666665,True
+pp_nav_00378,navigable,75,balkan_region,isaccea,6645.3099999999995,3938.1355000000003,0.03782560040202513,reach:Danube:sea,4,False,False,8975.3125,2215.0416666666665,True
+pp_nav_00379,navigable,78,balkan_region,ilok,2789.513,1599.019,0.21266138254881312,reach:Danube:river,4,False,False,8580.541666666666,2222.1666666666665,True
+pp_nav_00380,navigable,78,balkan_region,tulcea,6750.823,4016.719,0.024812616657205827,reach:Danube:sea,5,False,False,9007.583333333334,2224.0,True
+pp_nav_00381,improvable,72,canada_region,ahkwesasne,8041.97,7234.141,0.001359443901367318,reach:St. Lawrence:sea,5,False,False,4299.583333333333,2231.0833333333335,True
+pp_nav_00382,navigable,77,carpathia_region,viziru,6235.68,3720.507,0.0,reach:Danube:river;reach:Danube:sea,4,False,False,8961.145833333334,2239.8958333333335,True
+pp_nav_00383,navigable,63,france_region,tournon,1158.16,702.9635,0.6966178208479458,reach:Rhone/Saone:river,3,False,False,7910.791666666667,2240.8333333333335,True
+pp_nav_00384,navigable,77,balkan_region,gradiski_brod,539.535,214.565,0.2760207504023821,reach:Danube:river,1,False,False,8485.145833333334,2228.2291666666665,True
+pp_nav_00385,navigable,29,balkan_region,tulcea,6745.018,3982.709,0.0,reach:Danube:river;reach:Danube:sea,5,False,False,9033.777777777777,2225.722222222222,True
+pp_nav_00386,navigable,77,balkan_region,petrovaradin,3707.881,1997.0970000000002,0.0,reach:Danube:river,4,False,False,8611.395833333334,2235.6041666666665,True
+pp_nav_00387,navigable,69,italy_region,rovigo,206.362,61.477,0.26382126273537526,reach:Adige:river;reach:Adige:sea,1,False,False,8233.121951219513,2229.170731707317,True
+pp_nav_00388,navigable,71,italy_region,cremona,1383.549,806.575,0.2652434295046221,reach:Po:river,3,False,False,8142.041666666667,2232.0,True
+pp_nav_00389,navigable,20,italy_region,piacenza,1059.963,629.852,0.23320159912109376,reach:Po:river,1,False,False,8121.6,2230.9,True
+pp_nav_00390,navigable,77,balkan_region,doboj,880.952,408.344,0.21017913818359374,reach:Danube:river,3,False,False,8515.895833333334,2233.4791666666665,True
+pp_nav_00391,navigable,70,italy_region,ferrara,1807.338,1195.293,0.038180413143678336,reach:Po:river;reach:Po:sea,3,False,False,8238.270833333334,2237.3541666666665,True
+pp_nav_00392,navigable,80,italy_region,ostiglia,1718.153,1086.007,0.32422609329223634,reach:Po:river,1,False,False,8197.0,2235.0416666666665,True
+pp_nav_00393,navigable,69,france_region,benauges,460.645,134.5595,0.22314891815185547,reach:Dordogne:river;reach:Dordogne:sea;reach:Garonne/Gironde:river;reach:Garonne/Gironde:sea,2,False,False,7669.229166666667,2241.3333333333335,True
+pp_nav_00394,navigable,82,italy_region,parma,1474.2804999999998,910.7375,0.2876443754060125,reach:Po:river,3,False,False,8172.229166666667,2238.9791666666665,True
+pp_nav_00395,navigable,84,italy_region,ficarolo,1735.928,1103.153,0.2327615333938401,reach:Po:river,3,False,False,8207.458333333334,2242.0,True
+pp_nav_00396,navigable,80,balkan_region,srebrenik,1083.35,482.873,0.09038400688397878,reach:Danube:river,3,False,False,8547.479166666666,2242.1875,True
+pp_nav_00397,improvable,70,east_coast_region,kaniatarahontsi,7847.5325,7095.5,0.009204864501953125,reach:St. Lawrence:sea,4,False,False,4267.291666666667,2246.7916666666665,True
+pp_nav_00398,navigable,73,balkan_region,sabac,1439.296,588.293,0.0647125244140625,reach:Danube:river,3,False,False,8578.625,2241.8333333333335,True
+pp_nav_00399,navigable,21,italy_region,ferrara,1773.599,1153.792,0.038180413143678336,reach:Po:river,0,False,False,8218.266666666666,2242.4666666666667,True
+pp_nav_00400,navigable,63,france_region,sauveterre_de_guyenne,311.1035,86.768,0.0,reach:Dordogne:river;reach:Dordogne:sea,0,False,False,7693.289473684211,2246.9473684210525,True
+pp_nav_00401,navigable,63,italy_region,comacchio,1807.338,1195.293,0.038180413143678336,reach:Po:river;reach:Po:sea,0,False,False,8237.054054054053,2249.108108108108,True
+pp_nav_00402,navigable,74,balkan_region,debrc,1451.112,592.616,0.07677230834960938,reach:Danube:river,3,False,False,8599.770833333334,2255.4791666666665,True
+pp_nav_00403,navigable,69,balkan_region,belgrad,5186.148,3153.322,0.0,reach:Danube:river,5,False,False,8624.104166666666,2253.625,True
+pp_nav_00404,navigable,81,france_region,bazas,653.739,194.305,0.0,reach:Garonne/Gironde:river,0,False,False,7681.083333333333,2261.75,True
+pp_nav_00405,navigable,74,balkan_region,branicevo,5472.264999999999,3324.049,0.090606689453125,reach:Danube:river,4,False,False,8659.625,2255.1666666666665,True
+pp_nav_00406,navigable,65,carpathia_region,orasul_de_floci,6007.942,3567.52,0.029984334923987034,reach:Danube:river,4,False,False,8966.395833333334,2271.6041666666665,True
+pp_nav_00407,navigable,65,east_coast_region,kaniatarahontsi,7748.285,7026.766,0.0,reach:St. Lawrence:sea,5,False,False,4243.195652173913,2269.695652173913,True
+pp_nav_00408,improvable,77,france_region,valence,1412.7885,777.2585,0.5176942831890818,reach:Rhone/Saone:river,3,False,False,7905.458333333333,2275.2916666666665,True
+pp_nav_00409,navigable,11,balkan_region,smederevo,5233.13,3157.093,0.184820556640625,reach:Danube:river,0,False,False,8640.0,2259.0,True
+pp_nav_00410,navigable,67,balkan_region,visesav,5504.062,3273.343,2.6787384033203123,reach:Danube:river,4,False,False,8709.791666666666,2264.8333333333335,True
+pp_nav_00411,navigable,57,balkan_region,kucevo,5489.282,3277.277,3.0440155029296876,reach:Danube:river,4,False,False,8686.914285714285,2264.542857142857,True
+pp_nav_00412,navigable,77,france_region,agen,156.44,42.956,0.5376150508366019,reach:Garonne/Gironde:river,5,False,False,7706.104166666667,2278.1875,True
+pp_nav_00413,navigable,65,france_region,agen,137.38,36.206,0.9743606567382812,reach:Garonne/Gironde:river,1,False,False,7734.8125,2272.2708333333335,True
+pp_nav_00414,navigable,74,balkan_region,visesav,5529.17,3260.307,0.11419999425064206,reach:Danube:river,4,False,False,8722.5,2286.2916666666665,True
+pp_nav_00415,navigable,67,balkan_region,drastar,5952.666,3509.932,0.0,reach:Danube:river,5,False,False,8943.229166666666,2290.5625,True
+pp_nav_00416,navigable,77,france_region,lectoure,360.337,100.484,0.0,reach:Garonne/Gironde:river,2,False,False,7728.375,2292.75,True
+pp_nav_00417,navigable,73,balkan_region,tutrakan,5933.808,3509.349,0.2848371505737305,reach:Danube:river,5,False,False,8906.479166666666,2295.9791666666665,True
+pp_nav_00418,navigable,16,france_region,villemur,198.198,52.8,0.4559073169212843,reach:Garonne/Gironde:river,0,False,False,7747.181818181818,2295.0,True
+pp_nav_00419,improvable,65,france_region,uzes,1524.294,805.957,0.5896137250695699,reach:Rhone/Saone:river,3,False,False,7905.645833333333,2308.8541666666665,True
+pp_nav_00420,navigable,70,balkan_region,vidin,5550.478,3242.371,0.0,reach:Danube:river,4,False,False,8736.645833333334,2307.4375,True
+pp_nav_00421,improvable,81,france_region,villemur,139.911,37.569,0.8000434875488281,reach:Garonne/Gironde:river,5,False,False,7749.229166666667,2313.2708333333335,True
+pp_nav_00422,navigable,60,balkan_region,ruse,5842.913,3464.396,0.2164298585763011,reach:Danube:river,5,False,False,8873.520833333334,2311.0208333333335,True
+pp_nav_00423,navigable,82,balkan_region,lom,5482.981,3199.473,0.08449629250630003,reach:Danube:river,1,False,False,8767.980392156862,2314.098039215686,True
+pp_nav_00424,navigable,74,italy_region,poggibonsi,68.97,20.643,2.058243421642295,reach:Arno:river,1,False,False,8196.9375,2317.1041666666665,True
+pp_nav_00425,navigable,77,balkan_region,gigen,5550.763,3242.776,0.25261849014553095,reach:Danube:river,5,False,False,8805.020833333334,2319.3958333333335,True
+pp_nav_00426,navigable,41,italy_region,pisa,126.532,37.204,0.17330994249206594,reach:Arno:river;reach:Arno:sea,1,False,False,8169.6,2321.1666666666665,True
+pp_nav_00427,navigable,75,balkan_region,nikopol,5778.544,3416.102,0.17962521682275576,reach:Danube:river,5,False,False,8841.714285714286,2321.9591836734694,True
+pp_nav_00428,navigable,16,italy_region,florence,45.477999999999994,14.0735,0.32773361206054685,reach:Arno:river,1,False,False,8213.6,2323.9,True
+pp_nav_00429,improvable,42,france_region,arles,1726.83,855.499,0.18794905892508246,reach:Rhone/Saone:river;reach:Rhone/Saone:sea,0,False,False,7906.307692307692,2332.576923076923,True
+pp_nav_00430,navigable,75,east_coast_region,ponkhockie,494.009,267.035,0.0,reach:Hudson:sea,3,False,False,4331.6875,2407.6875,True
+pp_nav_00431,navigable,71,italy_region,orte,179.456,82.418,0.09123649597167968,reach:Tiber:river,2,False,False,8261.979166666666,2418.1458333333335,True
+pp_nav_00432,navigable,86,east_coast_region,poughkeepsie,668.153,359.54200000000003,0.0,reach:Hudson:sea,0,False,False,4325.4375,2446.2291666666665,True
+pp_nav_00433,navigable,29,italy_region,rome,221.01,92.07,0.3658414840698242,reach:Tiber:river;reach:Tiber:sea,2,False,False,8256.4,2439.9,True
+pp_nav_00434,navigable,88,east_coast_region,nehantuck,576.398,352.476,0.4171189308166504,reach:Connecticut:river;reach:Connecticut:sea,0,False,False,4389.098039215686,2454.843137254902,True
+pp_nav_00435,navigable,80,iberia_region,belchite,457.792,120.967,0.679425048828125,reach:Ebro:river,3,False,False,7667.588235294118,2462.4117647058824,True
+pp_nav_00436,navigable,80,east_coast_region,manhattan,723.469,398.641,0.17914736247694274,reach:Hudson:river;reach:Hudson:sea,0,False,False,4326.816326530612,2483.6530612244896,True
+pp_nav_00437,improvable,76,iberia_region,caspe,469.3415,124.2515,0.4959421510701152,reach:Ebro:river,3,False,False,7698.291666666667,2472.7291666666665,True
+pp_nav_00438,improvable,76,iberia_region,flix,505.309,172.702,0.2836341857910156,reach:Ebro:river,3,False,False,7717.0,2487.9166666666665,True
+pp_nav_00439,navigable,15,iberia_region,porto,669.687,111.832,1.4037246704101562,reach:Douro:river;reach:Douro:sea,0,False,False,7300.333333333333,2482.6666666666665,True
+pp_nav_00440,improvable,65,iberia_region,lamego,551.188,89.117,3.265345347037023,reach:Douro:river;reach:Douro:sea,5,False,False,7311.604651162791,2487.2558139534885,True
+pp_nav_00441,navigable,32,iberia_region,tortosa,427.509,143.43,0.07851497367466753,reach:Ebro:river;reach:Ebro:sea,2,False,False,7719.0,2506.8571428571427,True
+pp_nav_00442,navigable,68,east_coast_region,allegheny,978.896,423.0435,2.295482238308465,reach:Mississippi:river,3,False,False,4034.7291666666665,2515.2291666666665,True
+pp_nav_00443,navigable,78,east_coast_region,captina,1160.382,490.843,0.1713165283203125,reach:Mississippi:river,3,False,False,4019.8541666666665,2535.3541666666665,True
+pp_nav_00444,navigable,12,east_coast_region,allegheny,579.441,228.839,0.0,reach:Mississippi:river,3,False,False,4049.3333333333335,2524.6666666666665,True
+pp_nav_00445,navigable,67,east_coast_region,assunpink,365.356,208.522,0.0907318651676178,reach:Delaware:river;reach:Delaware:sea,5,False,False,4275.355555555556,2554.3555555555554,True
+pp_nav_00446,navigable,74,east_coast_region,muskingum,1235.9485,514.772,1.8070556640625,reach:Mississippi:river,3,False,False,4008.4166666666665,2570.0416666666665,True
+pp_nav_00447,navigable,79,north_china_region,luxian,55.627,13.964,0.08410558700561524,reach:Grand Canal:canal,0,False,False,12999.333333333334,2565.1666666666665,True
+pp_nav_00448,navigable,75,north_china_region,wuqing,55.627,13.964,0.08410558700561524,reach:Grand Canal:canal,5,False,False,13017.208333333334,2595.125,True
+pp_nav_00449,navigable,67,east_coast_region,onimgohow,1271.71,528.129,0.7371391609351523,reach:Mississippi:river,3,False,False,3987.25,2591.9166666666665,True
+pp_nav_00450,navigable,78,great_plains_region,nudarcha,2025.894,891.109,0.22304844156809697,reach:Mississippi:river,4,False,False,3451.0208333333335,2595.7291666666665,True
+pp_nav_00451,navigable,67,iberia_region,salvaterra,394.917,62.001,0.2728124598716184,reach:Tagus:river;reach:Tagus:sea,2,False,False,7295.4375,2604.9375,True
+pp_nav_00452,navigable,81,great_plains_region,nudarcha,2022.102,902.184,0.2942779541015625,reach:Mississippi:river,4,False,False,3423.25,2603.0,True
+pp_nav_00453,navigable,76,east_coast_region,kanawha,1665.0529999999999,687.0530000000001,0.0,reach:Mississippi:river,3,False,False,3968.2291666666665,2612.7708333333335,True
+pp_nav_00454,navigable,71,great_plains_region,nudarcha,1986.22,875.269,0.0,reach:Mississippi:river,4,False,False,3393.1666666666665,2606.0833333333335,True
+pp_nav_00455,navigable,72,great_plains_region,emasulia,2269.865,1045.635,0.2882048627960302,reach:Mississippi:river,4,False,False,3467.0833333333335,2611.4166666666665,True
+pp_nav_00456,navigable,62,east_coast_region,cuttawba,3096.495,1317.6325,0.0,reach:Mississippi:river,4,False,False,3835.0833333333335,2610.9583333333335,True
+pp_nav_00457,navigable,79,east_coast_region,cuttawba,2857.509,1218.718,0.0,reach:Mississippi:river,0,False,False,3858.8958333333335,2621.6041666666665,True
+pp_nav_00458,navigable,66,great_plains_region,kansas,272.5,110.29,0.0,reach:Mississippi:river,2,False,False,3357.875,2614.1666666666665,True
+pp_nav_00459,navigable,8,great_plains_region,kansas,302.15,125.941,2.274039738460866,reach:Mississippi:river,2,False,False,3378.0,2612.0,True
+pp_nav_00460,navigable,79,east_coast_region,doeg,356.905,161.8065,3.135943714403508,reach:Potomac:sea,2,False,False,4178.083333333333,2619.7916666666665,True
+pp_nav_00461,navigable,74,north_china_region,jinghai,80.111,12.987,0.05256422683932435,reach:Grand Canal:canal,1,False,False,13016.541666666666,2631.0416666666665,True
+pp_nav_00462,navigable,71,east_coast_region,kanawha,1691.1129999999998,696.528,0.5076156616210937,reach:Mississippi:river,4,False,False,3951.1458333333335,2627.1041666666665,True
+pp_nav_00463,navigable,77,great_plains_region,emasulia,2367.328,1131.045,0.0,reach:Mississippi:river,4,False,False,3489.7708333333335,2632.4375,True
+pp_nav_00464,navigable,77,east_coast_region,cuttawba,3259.741,1396.921,0.2051513671875,reach:Mississippi:river,4,False,False,3822.125,2629.875,True
+pp_nav_00465,navigable,71,great_plains_region,tamaroa,3282.217,1997.016,0.004078165206951922,reach:Mississippi:river,4,False,False,3579.4166666666665,2629.625,True
+pp_nav_00466,navigable,72,east_coast_region,eskalapia,2740.749,1160.133,0.3814727783203125,reach:Mississippi:river,4,False,False,3888.875,2637.25,True
+pp_nav_00467,navigable,15,east_coast_region,doeg,360.121,163.625,4.277937805939694,reach:Potomac:sea,1,False,False,4176.333333333333,2634.3333333333335,True
+pp_nav_00468,navigable,75,great_plains_region,emasulia,2957.293,1641.227,0.0,reach:Mississippi:river,4,False,False,3528.3541666666665,2635.4791666666665,True
+pp_nav_00469,improvable,75,east_coast_region,lewekeomi,3517.606,1487.166,0.0,reach:Mississippi:river,4,False,False,3800.0208333333335,2644.8125,True
+pp_nav_00470,navigable,76,east_coast_region,eskalapia,2491.324,1063.762,0.0,reach:Mississippi:river,4,False,False,3916.2916666666665,2640.125,True
+pp_nav_00471,navigable,53,great_plains_region,tamaroa,2972.559,1652.811,0.02984200407875391,reach:Mississippi:river,4,False,False,3556.294117647059,2640.323529411765,True
+pp_nav_00472,navigable,22,great_plains_region,emasulia,2818.0355,1488.0975,0.5206649780273438,reach:Mississippi:river,4,False,False,3506.4285714285716,2639.9285714285716,True
+pp_nav_00473,navigable,74,east_coast_region,kaskaskia,6487.118,4026.944,0.0,reach:Mississippi:river,0,False,False,3581.8333333333335,2654.9583333333335,True
+pp_nav_00474,navigable,51,east_coast_region,ouasioto,2311.462,1003.6,1.2428863525390625,reach:Mississippi:river,4,False,False,3937.3225806451615,2650.7419354838707,True
+pp_nav_00475,navigable,70,north_china_region,nanpi,79.617,19.175,0.08506944722103403,reach:Grand Canal:canal,1,False,False,13007.145833333334,2669.6458333333335,True
+pp_nav_00476,improvable,78,east_coast_region,lewekeomi,3522.553,1496.758,0.0,reach:Mississippi:river,4,False,False,3780.875,2669.75,True
+pp_nav_00477,navigable,81,east_coast_region,tywhapita,3640.15,1541.332,0.1659878692999184,reach:Mississippi:river,4,False,False,3760.8125,2671.1458333333335,True
+pp_nav_00478,navigable,76,great_plains_region,chepoussa,6682.474,4255.581,0.0,reach:Mississippi:river,5,False,False,3597.1041666666665,2682.3958333333335,True
+pp_nav_00479,navigable,76,east_coast_region,tywhapita,3680.546,1555.262,0.24429489612120397,reach:Mississippi:river,4,False,False,3738.5833333333335,2682.6666666666665,True
+pp_nav_00480,navigable,68,east_coast_region,aaboukingon,3702.867,1581.933,0.13389787331413977,reach:Mississippi:river,4,False,False,3711.4,2684.34,True
+pp_nav_00481,navigable,14,east_coast_region,gichthanne,3664.683,1549.288,0.0,reach:Mississippi:river,4,False,False,3752.3333333333335,2682.3333333333335,True
+pp_nav_00482,improvable,54,iberia_region,palma_del_rio,76.064,9.738,0.6998325165074434,reach:Guadalquivir:river,1,False,True,7459.75,2690.5833333333335,True
+pp_nav_00483,navigable,71,east_coast_region,mitchigamea,5061.019,2165.362,0.0,reach:Mississippi:river,4,False,False,3682.0625,2697.1875,True
+pp_nav_00484,navigable,74,korea_region,inju,329.95050000000003,51.379999999999995,0.03268442153930664,reach:Han River (Korea):river;reach:Han River (Korea):sea,2,False,False,13458.458333333334,2696.5208333333335,True
+pp_nav_00485,navigable,77,north_china_region,ande,79.76400000000001,19.281,0.226939049622745,reach:Grand Canal:canal,0,False,False,12998.708333333334,2709.2083333333335,True
+pp_nav_00486,navigable,79,great_plains_region,chepoussa,6768.762000000001,4346.8835,0.0,reach:Mississippi:river,4,False,False,3615.6875,2711.2708333333335,True
+pp_nav_00487,navigable,58,iberia_region,carmona,123.1755,15.8045,0.4766551971435547,reach:Guadalquivir:river,1,False,True,7427.9375,2704.0625,True
+pp_nav_00488,navigable,70,korea_region,jipyeong,347.9505,57.67999999999999,0.0,reach:Han River (Korea):river,2,False,False,13485.770833333334,2708.1041666666665,True
+pp_nav_00489,navigable,66,east_coast_region,kuttawa,5048.924,2161.597,0.3518428766820423,reach:Mississippi:river,5,False,False,3666.625,2720.7916666666665,True
+pp_nav_00490,barrier,60,east_coast_region,weyanock,239.928,77.92,0.41748706102371214,reach:James:river;reach:James:sea,0,False,False,4177.828571428571,2718.1714285714284,False
+pp_nav_00491,improvable,33,iberia_region,coria_del_rio,156.578,19.52,0.11292743682861328,reach:Guadalquivir:river;reach:Guadalquivir:sea,2,False,True,7415.761904761905,2723.190476190476,True
+pp_nav_00492,navigable,66,korea_region,chungju,165.129,29.045,0.5107040405273438,reach:Han River (Korea):river,2,False,False,13506.23076923077,2728.153846153846,True
+pp_nav_00493,navigable,71,north_china_region,xiajin,78.699,19.578,0.09856104114141165,reach:Grand Canal:canal,0,False,False,12977.375,2735.875,True
+pp_nav_00494,navigable,75,east_coast_region,charquis,7821.565,3371.26,0.24681625366210938,reach:Mississippi:river,5,False,False,3642.0833333333335,2730.0,True
+pp_nav_00495,navigable,38,east_coast_region,mitchigamea,6842.575,4401.221,0.2265369995767179,reach:Mississippi:river,5,False,False,3625.5652173913045,2735.4347826086955,True
+pp_nav_00496,navigable,78,east_coast_region,saponi,60.395,19.587,2.1943972342861855,reach:James:river,1,False,False,4079.0416666666665,2734.0,True
+pp_nav_00497,navigable,72,east_coast_region,occaneechi,105.7525,33.244,0.6270618770306258,reach:James:river,1,False,False,4106.125,2748.0,True
+pp_nav_00498,navigable,77,east_coast_region,charquis,14730.943,8406.452,0.0,reach:Mississippi:river,5,False,False,3628.375,2758.0416666666665,True
+pp_nav_00499,navigable,80,north_china_region,liaocheng,78.387,20.885,0.00828389706700012,reach:Grand Canal:canal,0,False,False,12964.770833333334,2764.3958333333335,True
+pp_nav_00500,navigable,58,east_coast_region,meherrin,272.101,91.84,0.11451416015625,reach:James:river,2,False,False,4131.875,2764.5416666666665,True
+pp_nav_00501,navigable,74,east_coast_region,kehaukee,292.0725,99.64750000000001,0.4057830810546875,reach:James:river,2,False,False,4162.125,2779.25,True
+pp_nav_00502,navigable,71,east_coast_region,obion,14805.6695,8389.68,0.1719897680175481,reach:Mississippi:river,5,False,False,3613.3333333333335,2783.4583333333335,True
+pp_nav_00503,improvable,75,north_china_region,xucheng,744.512,284.7115,0.08277166001791517,reach:Grand Canal:canal,3,False,False,12978.145833333334,2798.3541666666665,True
+pp_nav_00504,navigable,70,east_coast_region,chowanoke,300.376,107.933,0.1234750747680664,reach:James:river;reach:James:sea,2,False,False,4183.4375,2802.6875,True
+pp_nav_00505,navigable,73,east_coast_region,hatchie,15069.647,8475.799,0.0,reach:Mississippi:river,5,False,False,3604.7916666666665,2811.125,True
+pp_nav_00506,navigable,10,east_coast_region,chowanoke,312.026,125.816,0.20267228567546997,reach:James:river;reach:James:sea,2,False,False,4198.285714285715,2804.285714285714,True
+pp_nav_00507,improvable,81,north_china_region,rencheng,42.942,9.903,0.08629035949707031,reach:Grand Canal:canal,0,False,False,12993.291666666666,2831.2083333333335,True
+pp_nav_00508,navigable,80,east_coast_region,chucalissa,15241.901,8512.276,0.3409824690139943,reach:Mississippi:river,5,False,False,3592.6041666666665,2839.4375,True
+pp_nav_00509,navigable,17,japan_region,nakajima,81.547,53.347,0.02322397232055664,reach:Yodo River:river;reach:Yodo River:sea,5,False,False,13912.333333333334,2851.1666666666665,True
+pp_nav_00510,navigable,81,east_china_region,peixian,71.519,18.743,0.02259063720703125,reach:Grand Canal:canal,0,False,False,13006.625,2865.875,True
+pp_nav_00511,navigable,79,east_coast_region,quizquiz,15363.063,8487.5785,0.3714888051824639,reach:Mississippi:river,5,False,False,3578.1875,2868.0625,True
+pp_nav_00512,navigable,79,great_plains_region,quigate,15756.685,8618.177,0.0,reach:Mississippi:river,5,False,False,3562.8541666666665,2894.5625,True
+pp_nav_00513,navigable,79,east_china_region,xuzhou,90.83,14.815,0.33223114013671873,reach:Grand Canal:canal,0,False,False,13025.770833333334,2894.0208333333335,True
+pp_nav_00514,navigable,66,east_china_region,xiapi,129.962,30.252,0.15991668701171874,reach:Grand Canal:canal,1,False,False,13057.166666666666,2900.6666666666665,True
+pp_nav_00515,navigable,46,japan_region,naga,66.634,25.432,0.2804265975952148,reach:Yodo River:river;reach:Yodo River:sea,1,False,False,13851.074074074075,2905.4074074074074,True
+pp_nav_00516,navigable,78,great_plains_region,anilco,15773.236,8623.5065,0.20846899749753436,reach:Mississippi:river,5,False,False,3549.5208333333335,2920.1875,True
+pp_nav_00517,navigable,73,east_china_region,suqian,283.558,100.573,0.27606518852630313,reach:Grand Canal:canal,0,False,False,13080.958333333334,2923.5416666666665,True
+pp_nav_00518,navigable,71,great_plains_region,guachoyo,18089.564,9511.396,0.0,reach:Mississippi:river,5,False,False,3539.1041666666665,2946.7708333333335,True
+pp_nav_00519,improvable,74,east_china_region,qinghe_huaian,344.046,115.998,0.08358392715454102,reach:Grand Canal:canal,5,False,False,13107.6875,2944.8125,True
+pp_nav_00520,navigable,74,east_china_region,baoying,1269.494,723.851,0.05601396280915889,reach:Grand Canal:canal,3,False,False,13124.5,2972.1666666666665,True
+pp_nav_00521,navigable,69,east_coast_region,selkehatchie,308.13,111.84649999999999,0.0,reach:Savannah:river,1,False,False,3973.625,2971.7083333333335,True
+pp_nav_00522,navigable,69,great_plains_region,guachoyo,18104.707,9516.161,0.36725990857332425,reach:Mississippi:river,5,False,False,3536.875,2980.8333333333335,True
+pp_nav_00523,navigable,76,crescent_region,an_nil,1405.3,203.621,0.09960363740316724,reach:Tigris:river,3,False,True,9726.729166666666,2979.1041666666665,True
+pp_nav_00524,navigable,79,east_coast_region,wimbee,350.145,141.942,0.12935576185133754,reach:Savannah:river,1,False,False,3989.0833333333335,3001.2916666666665,True
+pp_nav_00525,navigable,78,crescent_region,an_nil,1419.065,194.12,0.0798128217977452,reach:Tigris:river,3,False,True,9751.583333333334,2997.5416666666665,True
+pp_nav_00526,improvable,80,east_china_region,jiangdu,1311.307,749.723,0.043467232278321825,reach:Grand Canal:canal,3,False,False,13131.0625,3007.1458333333335,True
+pp_nav_00527,navigable,75,great_plains_region,tunica,48.338,14.814,0.08612578333667217,reach:Mississippi:river,0,False,False,3527.4375,3017.3958333333335,True
+pp_nav_00528,navigable,67,crescent_region,wasit,1418.756,186.1285,0.03143632648807505,reach:Tigris:river,3,False,True,9788.958333333334,3005.4583333333335,True
+pp_nav_00529,navigable,36,crescent_region,numaniyyah,1428.453,188.692,0.09002623068671611,reach:Tigris:river,3,False,True,9768.727272727272,3007.409090909091,True
+pp_nav_00530,navigable,64,crescent_region,wasit,1529.743,179.495,0.07853995912554428,reach:Tigris:river,3,False,True,9815.75,3018.8333333333335,True
+pp_nav_00531,navigable,60,east_coast_region,wimbee,360.257,157.92,0.32922770977020266,reach:Savannah:river;reach:Savannah:sea,2,False,False,4000.891891891892,3028.7297297297296,True
+pp_nav_00532,improvable,67,east_china_region,dantu,29656.258,12173.681,0.0,reach:Grand Canal:canal;reach:Grand Canal:sea;reach:Yangtze:sea,5,False,False,13141.041666666666,3027.0833333333335,True
+pp_nav_00533,navigable,80,east_china_region,shangyuan,29559.17,12143.502,0.05835249101271379,reach:Yangtze:sea,5,False,False,13109.875,3028.0416666666665,True
+pp_nav_00534,navigable,60,east_coast_region,ossabaw,115.6235,66.64750000000001,0.1789830526018881,reach:Savannah:river;reach:Savannah:sea,0,False,False,3990.8888888888887,3038.6111111111113,True
+pp_nav_00535,navigable,68,east_china_region,xiangyang,1069.631,210.196,0.32578674816056424,reach:Yangtze:river,3,False,False,12791.395833333334,3038.4791666666665,True
+pp_nav_00536,navigable,79,great_plains_region,catahoula,120.2515,37.9645,0.0,reach:Mississippi:river,5,False,False,3518.625,3051.625,True
+pp_nav_00537,improvable,73,east_china_region,wujin,31008.352,12944.217,0.09214317798614502,reach:Grand Canal:canal,3,False,False,13144.458333333334,3046.0416666666665,True
+pp_nav_00538,navigable,68,crescent_region,al_tib,1500.329,169.8055,0.03780803417454627,reach:Tigris:river,3,False,True,9830.375,3045.4583333333335,True
+pp_nav_00539,navigable,63,east_china_region,hezhou_he,29516.7605,12121.005,0.0,reach:Yangtze:river;reach:Yangtze:sea,5,False,False,13085.0625,3050.5625,True
+pp_nav_00540,navigable,38,east_china_region,jiangyin,31016.404,12944.715,0.09214317798614502,reach:Yangtze:sea,5,False,False,13155.90909090909,3040.590909090909,True
+pp_nav_00541,navigable,81,east_china_region,yicheng,1288.87,304.068,0.06244049072265625,reach:Yangtze:river,3,False,False,12804.958333333334,3063.9583333333335,True
+pp_nav_00542,navigable,72,east_china_region,wuxi,308.849,196.739,0.0,reach:Grand Canal:canal,3,False,False,13170.020833333334,3068.4791666666665,True
+pp_nav_00543,navigable,67,crescent_region,abdas,1524.66,172.5125,0.025674210760176275,reach:Tigris:river,3,False,True,9846.479166666666,3073.5625,True
+pp_nav_00544,navigable,77,great_plains_region,kisatchie,1043.6860000000001,337.887,0.059125518798828124,reach:Mississippi:river,3,False,False,3474.9583333333335,3072.375,True
+pp_nav_00545,navigable,74,great_plains_region,catahoula,1077.728,299.153,0.1757722854614258,reach:Mississippi:river,4,False,False,3512.1041666666665,3079.1875,True
+pp_nav_00546,navigable,67,east_china_region,fanchang,28740.754,11890.212,0.10096189357739759,reach:Yangtze:river,5,False,False,13069.520833333334,3083.0208333333335,True
+pp_nav_00547,navigable,66,hindustan_region,lahore,206.532,29.983,0.23784467557923106,reach:Indus:river,2,False,True,11056.395833333334,3080.3125,True
+pp_nav_00548,navigable,73,egypt_region,damanhur,1935.642,300.406,0.0,reach:Nile:river;reach:Nile:sea,3,False,False,9083.020833333334,3087.4791666666665,True
+pp_nav_00549,navigable,70,egypt_region,mansoura,1935.967,300.406,0.16606040000915528,reach:Nile:river,1,False,False,9123.333333333334,3091.8333333333335,True
+pp_nav_00550,navigable,82,east_china_region,shipai,1380.567,343.706,0.09714508056640625,reach:Yangtze:river,3,False,False,12813.770833333334,3096.3541666666665,True
+pp_nav_00551,navigable,61,great_plains_region,kisatchie,1076.549,348.183,0.0,reach:Mississippi:river,3,False,False,3496.923076923077,3086.871794871795,True
+pp_nav_00552,navigable,79,east_china_region,jiaxing,302.715,181.191,0.0031154394149780274,reach:Grand Canal:canal,2,False,False,13184.8125,3100.4375,True
+pp_nav_00553,navigable,80,egypt_region,damanhur,1935.62,300.417,0.0,reach:Nile:river;reach:Nile:sea,1,False,False,9064.604166666666,3091.6458333333335,True
+pp_nav_00554,navigable,77,crescent_region,basra,2279.673,367.703,0.0,reach:Shatt al-Arab:sea;reach:Tigris:river;reach:Tigris:sea,4,False,False,9855.9375,3105.6041666666665,True
+pp_nav_00555,navigable,78,great_plains_region,opelousa,21484.021,10861.093,0.02852928638458252,reach:Mississippi:river,5,False,False,3521.5625,3104.2291666666665,True
+pp_nav_00556,navigable,74,hindustan_region,gugera,227.507,36.419,0.15213165283203126,reach:Indus:river,2,False,False,11028.270833333334,3098.7708333333335,True
+pp_nav_00557,navigable,61,east_china_region,zongyang,28673.646,11896.649,0.0,reach:Yangtze:river,5,False,False,13047.791666666666,3103.4583333333335,True
+pp_nav_00558,improvable,83,west_china_region,wushan,13464.694,3558.758,2.1206817626953125,reach:Yangtze:river,5,False,False,12692.125,3096.7916666666665,True
+pp_nav_00559,improvable,81,east_china_region,zigui,13633.806,3662.139,1.8112137842082243,reach:Yangtze:river,5,False,False,12728.0625,3100.6875,True
+pp_nav_00560,improvable,82,west_china_region,yunyang,13358.605,3467.8729999999996,0.0,reach:Yangtze:river,5,False,False,12656.958333333334,3101.25,True
+pp_nav_00561,navigable,74,egypt_region,ramsis,1935.997,300.403,0.11163435354545802,reach:Nile:river,3,False,False,9089.270833333334,3109.9375,True
+pp_nav_00562,navigable,72,west_china_region,wanzhou,13111.547,3361.458,0.6478652954101562,reach:Yangtze:river,5,False,False,12627.4375,3111.3125,True
+pp_nav_00563,navigable,79,egypt_region,mansoura,1936.088,300.39,0.030474472045898437,reach:Nile:river,1,False,False,9111.729166666666,3121.8541666666665,True
+pp_nav_00564,navigable,69,east_china_region,yiling,13785.134999999998,3718.7960000000003,0.5139198303222656,reach:Yangtze:river,5,False,False,12756.125,3118.5,True
+pp_nav_00565,navigable,75,hindustan_region,chichawatni,228.2345,36.745999999999995,0.1920745849609375,reach:Indus:river,2,False,False,11001.25,3118.5833333333335,True
+pp_nav_00566,navigable,81,great_plains_region,itihumma,21520.473,10890.527,0.15334761465658903,reach:Mississippi:river,5,False,False,3537.6666666666665,3126.7916666666665,True
+pp_nav_00567,navigable,79,east_china_region,qianjiang,1420.854,364.267,0.07703170776367188,reach:Yangtze:river,3,False,False,12824.375,3123.1666666666665,True
+pp_nav_00568,navigable,82,east_china_region,guichi,28526.034,11862.409,0.0,reach:Yangtze:river,5,False,False,13022.770833333334,3126.2708333333335,True
+pp_nav_00569,navigable,60,east_china_region,chongde,1295.67,477.439,0.0,reach:Grand Canal:canal,3,False,False,13172.244444444445,3127.2444444444445,True
+pp_nav_00570,navigable,73,east_china_region,jiangxia,22484.127,8535.711,0.0,reach:Yangtze:river,5,False,False,12896.625,3122.0833333333335,True
+pp_nav_00571,navigable,77,east_china_region,hanchuan,1479.093,390.206,0.0,reach:Yangtze:river,3,False,False,12868.625,3124.75,True
+pp_nav_00572,navigable,79,crescent_region,zuwayr,2225.912,361.297,0.05878901777804488,reach:Shatt al-Arab:sea,4,False,False,9877.6875,3131.5208333333335,True
+pp_nav_00573,navigable,81,hindustan_region,tulamba,231.81,38.649,0.1140682371959034,reach:Indus:river,3,False,False,10961.708333333334,3123.9583333333335,True
+pp_nav_00574,navigable,67,east_china_region,wuchang,22577.03,8572.989,0.0,reach:Yangtze:river,5,False,False,12920.083333333334,3130.375,True
+pp_nav_00575,navigable,14,hindustan_region,kamalia,228.1435,36.738,0.2732714274791942,reach:Indus:river,2,False,False,10982.875,3123.375,True
+pp_nav_00576,navigable,82,egypt_region,menouf,1936.2040000000002,300.389,0.13630681525871405,reach:Nile:river,3,False,False,9101.291666666666,3140.5833333333335,True
+pp_nav_00577,navigable,71,west_china_region,linjiang,13055.644,3317.565,0.0,reach:Yangtze:river,5,False,False,12609.958333333334,3139.4583333333335,True
+pp_nav_00578,navigable,50,east_china_region,yusha,1433.395,373.437,0.047851943969726564,reach:Yangtze:river,3,False,False,12845.214285714286,3132.285714285714,True
+pp_nav_00579,navigable,66,east_china_region,hanyang,21960.353499999997,8346.976999999999,0.0,reach:Yangtze:river,5,False,False,12880.625,3141.4166666666665,True
+pp_nav_00580,navigable,72,hindustan_region,kot_addu,1637.163,263.323,0.15945257798584941,reach:Indus:river,3,False,False,10938.75,3145.5833333333335,True
+pp_nav_00581,navigable,76,east_china_region,songzi,14250.039,3903.611,0.30918198742892444,reach:Yangtze:river,5,False,False,12774.541666666666,3136.6666666666665,True
+pp_nav_00582,navigable,82,east_china_region,gongan,14421.507,3987.946,0.0,reach:Yangtze:river,5,False,False,12798.729166666666,3147.1875,True
+pp_nav_00583,navigable,74,east_china_region,pengze,28245.540999999997,11847.718,0.0,reach:Yangtze:river,5,False,False,13003.020833333334,3154.5208333333335,True
+pp_nav_00584,navigable,52,crescent_region,abadan,2957.9245,390.421,0.055085504055023195,reach:Shatt al-Arab:river;reach:Shatt al-Arab:sea,4,False,True,9894.09375,3150.46875,True
+pp_nav_00585,navigable,78,great_plains_region,bulbancha,21635.938,11045.365,0.15571470260620118,reach:Mississippi:river,5,False,False,3554.125,3151.25,True
+pp_nav_00586,navigable,67,east_china_region,fuyang_hangzhou,1151.842,409.527,0.14924987710224938,reach:Qiantang River (Fuchun / Lan / Qu rivers):river;reach:Qiantang River (Fuchun / Lan / Qu rivers):sea,3,False,False,13154.979166666666,3153.0416666666665,True
+pp_nav_00587,navigable,73,east_china_region,yongxing_xingguo,22859.8295,8691.485,0.06018991470336914,reach:Yangtze:river,5,False,False,12941.25,3156.25,True
+pp_nav_00588,navigable,71,egypt_region,giza,2146.31,326.415,0.031717364482139805,reach:Nile:river,4,False,False,9113.666666666666,3167.625,True
+pp_nav_00589,navigable,71,east_china_region,xindi,20523.016,7862.1915,0.0,reach:Yangtze:river,5,False,False,12861.604166666666,3162.9375,True
+pp_nav_00590,navigable,73,west_china_region,fuzhou_sichuan,12854.530999999999,3220.0085,0.0,reach:Yangtze:river,5,False,False,12589.770833333334,3164.4791666666665,True
+pp_nav_00591,navigable,80,great_plains_region,bulbancha,21802.529,11414.229,0.3144375801086426,reach:Mississippi:river;reach:Mississippi:sea,5,False,False,3582.4166666666665,3159.8333333333335,True
+pp_nav_00592,navigable,84,east_china_region,shishou,14464.267,4043.919,0.12591658129672686,reach:Yangtze:river,5,False,False,12814.895833333334,3170.1458333333335,True
+pp_nav_00593,navigable,8,great_plains_region,bulbancha,21836.754,11466.721,0.3144375801086426,reach:Mississippi:river;reach:Mississippi:sea,5,False,False,3600.0,3161.5,True
+pp_nav_00594,navigable,74,hindustan_region,sitpur,1636.299,263.936,0.13657435045489202,reach:Indus:river,4,False,False,10927.5,3178.4583333333335,True
+pp_nav_00595,navigable,76,east_china_region,jiande,960.718,327.673,0.0,reach:Qiantang River (Fuchun / Lan / Qu rivers):river,5,False,False,13135.291666666666,3178.5416666666665,True
+pp_nav_00596,navigable,78,east_china_region,dehua_jiujiang,22722.322,8555.314,0.0,reach:Yangtze:river,5,False,False,12979.083333333334,3173.5416666666665,True
+pp_nav_00597,navigable,30,east_china_region,huangmei,23030.268,8767.231,0.0,reach:Yangtze:river,5,False,False,12961.315789473685,3169.684210526316,True
+pp_nav_00598,navigable,78,west_china_region,baxian,2367.462,513.68,2.7626158252261694,reach:Yangtze:river,5,False,False,12541.9375,3178.8125,True
+pp_nav_00599,navigable,73,west_china_region,fuzhou_sichuan,11091.652,2645.486,0.588778509100237,reach:Yangtze:river,5,False,False,12564.4375,3174.1875,True
+pp_nav_00600,navigable,76,east_china_region,jianli,14503.645,4073.065,0.0,reach:Yangtze:river,5,False,False,12834.0625,3183.5625,True
+pp_nav_00601,navigable,24,east_china_region,jianli,20513.551,7861.529,0.0,reach:Yangtze:river,5,False,False,12846.684210526315,3180.684210526316,True
+pp_nav_00602,navigable,73,east_china_region,xinjian,2847.146,1030.421,0.0,reach:Yangtze:river,4,False,False,12972.708333333334,3204.1666666666665,True
+pp_nav_00603,navigable,75,egypt_region,beni_suef,2543.495,375.987,0.08799552917480469,reach:Nile:river,4,False,True,9107.708333333334,3206.2083333333335,True
+pp_nav_00604,navigable,78,east_china_region,baling,2684.222,1028.721,0.0,reach:Yangtze:river,4,False,False,12829.104166666666,3205.6041666666665,True
+pp_nav_00605,navigable,75,hindustan_region,mithankot,2940.846,543.248,0.09642791088454157,reach:Indus:river,5,False,False,10911.541666666666,3207.75,True
+pp_nav_00606,navigable,72,hindustan_region,omerkot,5806.922,1289.449,0.10334541463223412,reach:Indus:river,4,False,False,10887.833333333334,3230.3333333333335,True
+pp_nav_00607,navigable,76,egypt_region,el_bahnasa,2547.884,371.875,0.047179794311523436,reach:Nile:river,4,False,True,9094.395833333334,3240.1041666666665,True
+pp_nav_00608,navigable,54,east_china_region,xinjian,2537.48,894.631,0.014432716369628906,reach:Yangtze:river,5,False,False,12964.770833333334,3239.8541666666665,True
+pp_nav_00609,navigable,63,east_china_region,xiangyin,2573.5915,992.96,0.0029895782470703127,reach:Yangtze:river,5,False,False,12825.041666666666,3238.9583333333335,True
+pp_nav_00610,navigable,75,western_india_region,kashmore,5782.324,1304.55,0.11252485563008308,reach:Indus:river,4,False,False,10862.208333333334,3252.7083333333335,True
+pp_nav_00611,navigable,67,east_china_region,xiangtan,2224.719,867.527,0.0,reach:Yangtze:river,5,False,False,12831.425531914894,3270.553191489362,True
+pp_nav_00612,navigable,67,east_china_region,fengcheng_fengcheng,2196.071,777.6175000000001,0.28098713926353613,reach:Yangtze:river,4,False,False,12952.8125,3269.3125,True
+pp_nav_00613,navigable,79,egypt_region,tahna,2550.316,355.801,0.0,reach:Nile:river,4,False,True,9093.666666666666,3277.75,True
+pp_nav_00614,navigable,79,western_india_region,kashmore,5701.297,1289.464,0.05045878533453529,reach:Indus:river,4,False,False,10836.5625,3274.4375,True
+pp_nav_00615,navigable,71,east_china_region,xingan_linjiang,1824.637,629.357,0.0,reach:Yangtze:river,3,False,False,12935.041666666666,3299.1666666666665,True
+pp_nav_00616,navigable,73,western_india_region,sukkur,5656.046,1289.582,0.07815259098157024,reach:Indus:river,4,False,False,10816.979166666666,3291.8125,True
+pp_nav_00617,navigable,73,western_india_region,shadodkot,5641.912,1318.6680000000001,0.10159685038026597,reach:Indus:river,4,False,False,10797.145833333334,3311.1041666666665,True
+pp_nav_00618,navigable,78,egypt_region,el_buwit,2556.139,356.002,0.23565126204962222,reach:Nile:river,4,False,True,9102.75,3313.75,True
+pp_nav_00619,navigable,68,east_china_region,taihe_taihe,1225.351,420.253,0.2898231506347656,reach:Yangtze:river,5,False,False,12926.0625,3331.1041666666665,True
+pp_nav_00620,navigable,73,egypt_region,asyut,2568.3230000000003,368.659,0.0,reach:Nile:river,4,False,True,9124.145833333334,3340.3541666666665,True
+pp_nav_00621,navigable,72,western_india_region,paat,5638.3855,1294.8310000000001,0.09803605722805506,reach:Indus:river,4,False,False,10783.833333333334,3340.4583333333335,True
+pp_nav_00622,navigable,78,hindustan_region,agra,476.737,90.417,0.1268798828125,reach:Ganges:river,3,False,False,11266.020833333334,3334.4791666666665,True
+pp_nav_00623,navigable,72,hindustan_region,etawah,560.2445,91.451,0.0,reach:Ganges:river,5,False,False,11292.791666666666,3355.7083333333335,True
+pp_nav_00624,improvable,73,east_china_region,wanan,1128.055,384.656,0.1638336181640625,reach:Yangtze:river,3,False,False,12915.9375,3359.1041666666665,True
+pp_nav_00625,navigable,75,egypt_region,akhmim,2573.818,360.502,0.022225973397128247,reach:Nile:river,4,False,True,9143.166666666666,3369.3333333333335,True
+pp_nav_00626,navigable,75,western_india_region,ranikot,5676.938,1300.28,0.10259023535282011,reach:Indus:river,4,False,False,10784.4375,3371.5625,True
+pp_nav_00627,improvable,80,east_china_region,nanping,1365.731,338.56,0.0,reach:Min River (Fujian):river,3,False,False,13086.041666666666,3366.0,True
+pp_nav_00628,navigable,80,hindustan_region,makanpur,1265.929,206.718,0.0038165876213475183,reach:Ganges:river,3,False,False,11318.541666666666,3377.9583333333335,True
+pp_nav_00629,improvable,68,east_china_region,ganxian,995.199,337.867,0.7381515502929688,reach:Yangtze:river,3,False,False,12922.292682926829,3387.9268292682927,True
+pp_nav_00630,navigable,80,east_china_region,houguan,1512.0349999999999,375.177,0.4341099533373621,reach:Min River (Fujian):river;reach:Min River (Fujian):sea,3,False,False,13113.333333333334,3384.1666666666665,True
+pp_nav_00631,navigable,79,bengal_region,goalpara,20042.807,3048.549,0.0,reach:Brahmaputra/Meghna:river,5,False,False,11810.604166666666,3381.3958333333335,True
+pp_nav_00632,navigable,62,bengal_region,guwahati,19022.91,2878.105,0.17557296752929688,reach:Brahmaputra/Meghna:river,5,False,False,11843.72972972973,3379.4054054054054,True
+pp_nav_00633,navigable,82,egypt_region,qena,2579.896,346.8335,0.00555877685546875,reach:Nile:river,4,False,True,9173.5,3386.0,True
+pp_nav_00634,navigable,15,egypt_region,qena,2577.54,350.795,0.04445194679425649,reach:Nile:river,4,False,True,9156.90909090909,3385.090909090909,True
+pp_nav_00635,navigable,75,central_india_region,rath,1582.666,198.613,0.1799860841300153,reach:Ganges:river,3,False,True,11347.229166666666,3395.3541666666665,True
+pp_nav_00636,navigable,74,western_india_region,ranikot,5672.705,1294.773,0.1227712360329706,reach:Indus:river,4,False,False,10800.145833333334,3401.2291666666665,True
+pp_nav_00637,navigable,77,bengal_region,dura,20360.936,3248.815,0.04457227429418826,reach:Brahmaputra/Meghna:river,5,False,False,11782.708333333334,3399.2083333333335,True
+pp_nav_00638,navigable,14,east_china_region,changle_fujian,1747.983,443.982,0.0,reach:Min River (Fujian):river;reach:Min River (Fujian):sea,3,False,False,13130.6,3390.1,True
+pp_nav_00639,navigable,73,egypt_region,esna,2572.217,333.397,0.05909576416015625,reach:Nile:river,4,False,True,9175.125,3411.5,True
+pp_nav_00640,navigable,81,central_india_region,banda,1995.922,220.002,0.0,reach:Ganges:river,4,False,True,11373.125,3412.0416666666665,True
+pp_nav_00641,navigable,74,hindustan_region,arrah,3695.977,492.629,0.1320103166877892,reach:Ganges:river,4,False,True,11530.8125,3408.1875,True
+pp_nav_00642,navigable,78,bengal_region,patna,8196.563,1130.0169999999998,0.08087749344583692,reach:Ganges:river,5,False,True,11561.25,3408.0416666666665,True
+pp_nav_00643,navigable,71,hindustan_region,buxar,3434.204,477.961,0.21894345473555946,reach:Ganges:river,4,False,True,11502.708333333334,3416.8333333333335,True
+pp_nav_00644,navigable,86,bengal_region,bihar_sharif,10035.313,1316.675,0.07859502104895706,reach:Ganges:river,5,False,True,11595.725490196079,3421.274509803922,True
+pp_nav_00645,navigable,76,bengal_region,muktagacha,20985.947,3358.2595,0.12006759643554688,reach:Brahmaputra/Meghna:river,5,False,False,11772.666666666666,3434.2083333333335,True
+pp_nav_00646,navigable,74,western_india_region,naserpur,4984.9490000000005,1127.7065,0.02852397346878054,reach:Indus:river,4,False,False,10799.916666666666,3434.8333333333335,True
+pp_nav_00647,navigable,77,hindustan_region,prayag,2060.7375,223.70749999999998,0.1631439072391311,reach:Ganges:river,5,False,True,11415.416666666666,3424.75,True
+pp_nav_00648,navigable,75,hindustan_region,chunar,3257.616,457.3515,0.138848876953125,reach:Ganges:river,4,False,True,11476.270833333334,3426.2291666666665,True
+pp_nav_00649,navigable,70,bengal_region,monghyr,10270.747,1346.369,0.0,reach:Ganges:river,5,False,True,11627.354166666666,3427.8958333333335,True
+pp_nav_00650,navigable,80,bengal_region,teliagarhi,12771.649,2007.078,0.3510387420654297,reach:Ganges:river,5,False,False,11667.0,3427.7083333333335,True
+pp_nav_00651,navigable,61,hindustan_region,prayag,2048.032,222.477,0.06282055859074565,reach:Ganges:river,4,False,True,11395.083333333334,3428.9166666666665,True
+pp_nav_00652,navigable,75,egypt_region,edfu,2587.842,324.74850000000004,0.06022796630859375,reach:Nile:river,4,False,True,9181.291666666666,3441.7916666666665,True
+pp_nav_00653,navigable,76,hindustan_region,kantit,3256.672,457.9295,0.040578069512295256,reach:Ganges:river,4,False,True,11440.8125,3434.7708333333335,True
+pp_nav_00654,navigable,47,bengal_region,monghyr,10437.587,1443.277,0.019058609008789064,reach:Ganges:river,5,False,True,11645.32142857143,3432.25,True
+pp_nav_00655,navigable,77,bengal_region,gaur,13268.205,2102.47,0.0,reach:Ganges:river,5,False,False,11689.625,3444.3333333333335,True
+pp_nav_00656,navigable,28,hindustan_region,varanasi,3261.454,456.24,0.0,reach:Ganges:river,4,False,True,11460.235294117647,3439.5882352941176,True
+pp_nav_00657,navigable,70,western_india_region,muhammad_tur,4152.621,921.776,0.0643222460853883,reach:Indus:river,4,False,False,10787.0,3465.375,True
+pp_nav_00658,navigable,75,bengal_region,atiya,20657.711,3283.175,0.0007708549499511718,reach:Brahmaputra/Meghna:river,5,False,False,11775.666666666666,3470.125,True
+pp_nav_00659,navigable,72,south_china_region,qujiang,513.309,180.5575,0.3348396301269531,reach:Pearl River / Xi River:river,3,False,False,12859.729166666666,3470.5625,True
+pp_nav_00660,navigable,83,egypt_region,kom_ombo,2594.0434999999998,322.6,0.0,reach:Nile:river,4,False,True,9187.833333333334,3478.1666666666665,True
+pp_nav_00661,navigable,70,bengal_region,jangipur,73.475,7.546,0.034947967529296874,reach:Ganges:river,5,False,True,11699.6875,3477.2708333333335,True
+pp_nav_00662,navigable,72,western_india_region,muhammad_tur,4108.663,890.076,0.001803445816040039,reach:Indus:river;reach:Indus:sea,4,False,False,10773.510638297872,3494.148936170213,True
+pp_nav_00663,navigable,72,indochina_region,mongyang,5694.386,807.605,0.21912765502929688,reach:Irrawaddy:river,5,False,True,12108.541666666666,3493.6666666666665,True
+pp_nav_00664,navigable,71,indochina_region,shwegu,6143.455,898.6065,0.09124755859375,reach:Irrawaddy:river,4,False,True,12085.583333333334,3491.75,True
+pp_nav_00665,navigable,60,south_china_region,yingde,761.52,258.007,0.6540122985839844,reach:Pearl River / Xi River:river,3,False,False,12850.020833333334,3502.2291666666665,True
+pp_nav_00666,navigable,72,bengal_region,bikrampur,20698.5815,3239.766,0.0010161161422729491,reach:Brahmaputra/Meghna:river,5,False,False,11775.6875,3507.5208333333335,True
+pp_nav_00667,navigable,68,bengal_region,chandrabad,314.503,35.6695,0.08370005401319792,reach:Ganges:river,5,False,True,11705.979166666666,3512.1041666666665,True
+pp_nav_00668,navigable,11,egypt_region,aswan,2637.2079999999996,322.608,5.4537134291150124,reach:Nile:river,4,False,True,9186.625,3501.375,True
+pp_nav_00669,navigable,70,indochina_region,takawng,7339.057,1133.3575,0.0,reach:Irrawaddy:river,4,False,False,12068.229166666666,3519.7291666666665,True
+pp_nav_00670,navigable,74,bengal_region,sonargaon,5431.951,836.932,0.1344033556562866,reach:Brahmaputra/Meghna:river;reach:Brahmaputra/Meghna:sea,5,True,False,11815.137254901962,3534.7450980392155,True
+pp_nav_00671,navigable,75,south_china_region,qingyuan,1282.529,409.618,0.09927330017089844,reach:Pearl River / Xi River:river,3,False,False,12833.0625,3532.5625,True
+pp_nav_00672,navigable,69,bengal_region,bikrampur,34850.273,6009.437,0.0,reach:Brahmaputra/Meghna:river;reach:Brahmaputra/Meghna:sea,5,False,False,11794.844444444445,3532.1555555555556,True
+pp_nav_00673,navigable,69,bengal_region,nadia,523.613,78.99199999999999,0.0074671745300292965,reach:Ganges:river,3,True,False,11713.083333333334,3543.1666666666665,True
+pp_nav_00674,navigable,81,indochina_region,ngasingu,7763.3435,1194.329,0.0,reach:Irrawaddy:river,4,True,False,12059.645833333334,3559.1458333333335,True
+pp_nav_00675,navigable,82,south_china_region,ducheng,6962.993,2240.904,1.1148524179054091,reach:Pearl River / Xi River:river,4,True,False,12766.895833333334,3546.0625,True
+pp_nav_00676,improvable,73,south_china_region,gaoyao,7405.0205000000005,2364.4260000000004,0.0,reach:Pearl River / Xi River:river,5,True,False,12823.729166666666,3556.9583333333335,True
+pp_nav_00677,improvable,72,south_china_region,jinkang,7209.337,2325.06,0.7790477752685547,reach:Pearl River / Xi River:river,5,True,False,12796.659574468085,3557.127659574468,True
+pp_nav_00678,navigable,79,bengal_region,husaynabad,628.338,109.11699999999999,0.0,reach:Ganges:river;reach:Ganges:sea,3,True,False,11712.208333333334,3578.7083333333335,True
+pp_nav_00679,navigable,38,south_china_region,shunde,9079.209,3004.291,0.20960397720336915,reach:Pearl River / Xi River:river;reach:Pearl River / Xi River:sea,1,True,False,12841.347826086956,3569.4347826086955,True
+pp_nav_00680,navigable,65,bengal_region,satgaon,678.643,76.381,0.0018621921539306641,reach:Ganges:river;reach:Ganges:sea,0,True,True,11696.375,3592.875,True
+pp_nav_00681,navigable,65,indochina_region,ngasingu,7784.168,1200.399,0.0223052978515625,reach:Irrawaddy:river,5,True,False,12059.270833333334,3598.9375,True
+pp_nav_00682,navigable,18,bengal_region,kulpi,676.319,105.416,0.0,reach:Ganges:sea,3,True,False,11702.333333333334,3598.8333333333335,True
+pp_nav_00683,navigable,76,indochina_region,pinya,9043.3405,1450.962,0.0,reach:Irrawaddy:river,5,True,False,12048.229166666666,3627.1875,True
+pp_nav_00684,navigable,76,indochina_region,amyint,15042.132,2117.146,0.018865966796875,reach:Irrawaddy:river,5,True,True,12026.0625,3651.5625,True
+pp_nav_00685,navigable,70,indochina_region,pagan,15060.638,2118.7585,0.1738037109375,reach:Irrawaddy:river,5,True,True,12006.5625,3678.6458333333335,True
+pp_nav_00686,navigable,79,indochina_region,khoai_chau,3359.233,571.364,0.00401773452758789,reach:Red River:river;reach:Red River:sea,4,True,False,12518.666666666666,3698.0833333333335,True
+pp_nav_00687,navigable,76,indochina_region,salay,15249.3185,2158.464,0.0,reach:Irrawaddy:river,5,True,True,12009.041666666666,3713.75,True
+pp_nav_00688,navigable,37,indochina_region,thien_truong,3377.87,671.716,0.0,reach:Red River:river;reach:Red River:sea,4,True,False,12531.708333333334,3716.375,True
+pp_nav_00689,navigable,87,indochina_region,thayet,15342.541,2187.6620000000003,0.06846084594726562,reach:Irrawaddy:river,5,True,True,12020.604166666666,3748.8958333333335,True
+pp_nav_00690,navigable,81,indochina_region,thayet,15636.353,2235.523,0.0,reach:Irrawaddy:river,5,True,True,12022.8125,3788.1458333333335,True
+pp_nav_00691,navigable,73,indochina_region,myanaung,15887.074,2273.485,0.5243223889141908,reach:Irrawaddy:river,5,True,True,12023.6875,3820.9375,True
+pp_nav_00692,navigable,79,indochina_region,tharrawaddy,111.072,7.427,0.0,reach:Irrawaddy:river,5,True,True,12039.5625,3846.6458333333335,True
+pp_nav_00693,navigable,83,indochina_region,hmawbi,285.36400000000003,17.785,0.0,reach:Irrawaddy:river,2,True,True,12051.291666666666,3880.2083333333335,True
+pp_nav_00694,navigable,71,indochina_region,dagon,361.886,22.466,0.0,reach:Irrawaddy:river;reach:Irrawaddy:sea,2,True,True,12064.767441860466,3910.279069767442,True
+pp_nav_00695,navigable,82,sahel_region,bamba,531.774,286.044,0.003289794921875,"reach:Niger (middle, inland delta):river",3,True,False,7634.520833333333,3901.6875,False
+pp_nav_00696,navigable,82,sahel_region,bourem,758.055,377.1495,0.0745657319478416,"reach:Niger (middle, inland delta):river",3,True,False,7667.270833333333,3907.5625,False
+pp_nav_00697,navigable,84,sahel_region,gourma_rharous,505.562,278.351,0.05622383124787605,"reach:Niger (middle, inland delta):river",3,True,False,7598.770833333333,3910.6458333333335,False
+pp_nav_00698,navigable,77,sahel_region,kabara,567.595,328.762,0.007818603515625,"reach:Niger (middle, inland delta):river",3,True,False,7562.708333333333,3920.6666666666665,False
+pp_nav_00699,navigable,50,sahel_region,tondibi,769.059,380.289,0.0,"reach:Niger (middle, inland delta):river",3,True,False,7683.1875,3930.3125,False
+pp_nav_00700,navigable,82,guinea_region,podor,271.133,61.97,0.02469652870276246,reach:Senegal:river,2,True,False,7009.770833333333,3924.2291666666665,True
+pp_nav_00701,navigable,75,guinea_region,walalde,347.808,58.575,0.02747955322265625,reach:Senegal:river,2,True,False,7041.375,3929.4166666666665,True
+pp_nav_00702,navigable,79,guinea_region,dagana,193.917,57.9,0.016397297155310776,reach:Senegal:river,2,True,False,6975.645833333333,3930.1041666666665,True
+pp_nav_00703,navigable,61,guinea_region,ndar,153.239,52.817,0.0,reach:Senegal:river;reach:Senegal:sea,2,True,False,6948.341463414634,3936.9268292682927,True
+pp_nav_00704,navigable,67,sahel_region,goundam,588.057,326.0695,0.0,"reach:Niger (middle, inland delta):river",3,True,False,7537.8125,3942.3125,False
+pp_nav_00705,navigable,63,indochina_region,chakangrao,290.5175,78.137,0.11006487324657617,reach:Chao Phraya:river,2,True,False,12259.25,3949.6666666666665,True
+pp_nav_00706,navigable,78,guinea_region,salde,411.877,36.231,0.10994992517968517,reach:Senegal:river,2,True,True,7066.6875,3950.5208333333335,True
+pp_nav_00707,navigable,75,sahel_region,tindirma,321.179,176.3345,0.0,"reach:Niger (middle, inland delta):river",2,True,False,7512.020833333333,3961.8958333333335,False
+pp_nav_00708,navigable,80,guinea_region,nguidjilone,431.87649999999996,59.435,0.18391363259275356,reach:Senegal:river,2,True,True,7088.104166666667,3972.8958333333335,True
+pp_nav_00709,navigable,63,indochina_region,phayuhakhiri,531.112,144.81900000000002,0.20118484497070313,reach:Chao Phraya:river,3,True,False,12248.541666666666,3983.4166666666665,True
+pp_nav_00710,navigable,69,sahel_region,safare,397.474,164.785,0.0,"reach:Niger (middle, inland delta):river",2,True,False,7497.833333333333,3986.6666666666665,False
+pp_nav_00711,navigable,83,guinea_region,waounde,472.442,44.042,0.020384100772939496,reach:Senegal:river,2,True,True,7103.645833333333,3997.0625,True
+pp_nav_00712,navigable,70,sahel_region,korientze,405.168,212.54,0.026256601491498874,"reach:Niger (middle, inland delta):river",2,True,False,7509.083333333333,4014.6666666666665,False
+pp_nav_00713,navigable,66,indochina_region,phraek,503.418,162.75549999999998,0.1374373481603499,reach:Chao Phraya:river,3,True,False,12255.916666666666,4014.5416666666665,True
+pp_nav_00714,navigable,78,sahel_region,bakel,481.895,33.456,0.1176605224609375,reach:Senegal:river,2,True,True,7125.163265306122,4019.714285714286,True
+pp_nav_00715,navigable,68,sahel_region,sanga,651.966,71.888,0.08689179140543743,"reach:Niger (middle, inland delta):river",3,True,True,7501.083333333333,4034.2083333333335,False
+pp_nav_00716,navigable,9,sahel_region,sanga,474.455,247.236,0.08689179140543743,"reach:Niger (middle, inland delta):river",0,True,False,7505.166666666667,4026.6666666666665,False
+pp_nav_00717,navigable,64,indochina_region,ayodhya,511.879,173.656,0.018428325653076172,reach:Chao Phraya:river,3,True,False,12263.979166666666,4049.7291666666665,True
+pp_nav_00718,navigable,78,sahel_region,dia,723.922,130.169,0.03731689453125,"reach:Niger (middle, inland delta):river",3,True,False,7486.166666666667,4054.5,False
+pp_nav_00719,navigable,80,sahel_region,djenne,226.859,63.319,0.0,"reach:Niger (middle, inland delta):river",2,True,False,7499.083333333333,4060.1666666666665,False
+pp_nav_00720,navigable,79,sahel_region,macina,921.539,120.5145,0.047370163160284584,"reach:Niger (middle, inland delta):river",3,True,True,7456.083333333333,4068.25,False
+pp_nav_00721,navigable,66,indochina_region,ayodhya,826.6145,398.058,0.0,reach:Chao Phraya:river;reach:Chao Phraya:sea,3,True,False,12266.525,4082.675,True
+pp_nav_00722,navigable,74,sahel_region,sansanding,1009.72,112.061,0.06787040973302104,"reach:Niger (middle, inland delta):river",3,True,True,7427.270833333333,4084.8125,False
+pp_nav_00723,navigable,28,sahel_region,djenne,230.8365,63.361,0.04711188877254973,"reach:Niger (middle, inland delta):river",2,True,False,7488.3125,4077.8125,False
+pp_nav_00724,navigable,76,guinea_region,wassu,155.121,18.652,0.0,reach:Gambia:river;reach:Gambia:sea,2,True,True,7003.4375,4090.7708333333335,True
+pp_nav_00725,barrier,75,indochina_region,stung_treng,12942.039,2068.406,0.24846766164013748,reach:Mekong:river,5,True,False,12514.208333333334,4106.833333333333,False
+pp_nav_00726,navigable,74,sahel_region,segou,1042.3,119.104,0.09892568993645177,"reach:Niger (middle, inland delta):river",3,True,True,7402.644444444444,4102.7555555555555,False
+pp_nav_00727,navigable,35,guinea_region,sine_ngayene,138.551,15.731,0.003081226348876953,reach:Gambia:sea,1,True,True,6988.652173913043,4099.826086956522,True
+pp_nav_00728,navigable,78,guinea_region,wassu,171.0005,31.418,0.08468645139339545,reach:Gambia:river;reach:Gambia:sea,2,True,False,7029.041666666667,4102.291666666667,True
+pp_nav_00729,navigable,70,guinea_region,sutuko,180.812,31.263,0.08870826771227025,reach:Gambia:river,2,True,False,7057.431372549019,4103.196078431372,True
+pp_nav_00730,navigable,31,guinea_region,sutuko,151.525,25.413,0.4861549664058745,reach:Gambia:river,2,True,False,7076.789473684211,4109.789473684211,True
+pp_nav_00731,navigable,87,indochina_region,battambang,751.587,195.148,0.0,reach:Mekong:river,3,True,False,12420.895833333334,4123.604166666667,True
+pp_nav_00732,improvable,69,indochina_region,sampheak_borak,13187.171,2102.145,0.12015241362461943,reach:Mekong:river,5,True,False,12515.041666666666,4143.0,True
+pp_nav_00733,navigable,77,indochina_region,longvek,1106.559,312.717,0.060201913291376336,reach:Mekong:river,3,True,False,12442.145833333334,4150.354166666667,True
+pp_nav_00734,navigable,74,indochina_region,longvek,1561.264,496.985,0.0,reach:Mekong:river,3,True,False,12459.75,4176.916666666667,True
+pp_nav_00735,navigable,76,indochina_region,tboung_khmum,13558.635,2139.344,0.03966102600097657,reach:Mekong:river,5,True,False,12502.729166666666,4170.0625,True
+pp_nav_00736,navigable,77,indochina_region,srey_sarchhor,13563.929,2021.828,0.05165742774864164,reach:Mekong:river,5,True,True,12480.145833333334,4189.395833333333,True
+pp_nav_00737,navigable,73,indochina_region,phnom_penh,13562.68,1997.388,0.025466549094777,reach:Mekong:river;reach:Mekong:sea,5,True,True,12469.625,4205.083333333333,True
+pp_nav_00738,navigable,83,indochina_region,vyadhapura,14915.417,2488.929,0.007218463501480707,reach:Mekong:sea,5,True,False,12481.0625,4234.6875,True
+pp_nav_00739,navigable,80,colombia_region,kamach,7261.811,3767.047,0.08815152290683284,reach:Magdalena:river;reach:Magdalena:sea,4,True,False,4289.354166666667,4253.5625,True
+pp_nav_00740,navigable,65,indochina_region,phsar_dek,15142.3685,2493.523,0.03509994307737596,reach:Mekong:sea,5,True,False,12488.979166666666,4267.1875,True
+pp_nav_00741,navigable,77,colombia_region,zarate,7276.113,3793.359,0.04415506016635007,reach:Magdalena:river,4,True,False,4284.020833333333,4287.854166666667,True
+pp_nav_00742,navigable,71,indochina_region,phsar_dek,15188.537,2365.684,0.15228892963835713,reach:Mekong:sea,5,True,False,12508.8125,4293.6875,True
+pp_nav_00743,navigable,79,colombia_region,zarate,7134.7445,3746.5175,0.05325570584384633,reach:Magdalena:river,5,True,False,4288.4375,4322.145833333333,True
+pp_nav_00744,navigable,28,indochina_region,phsar_dek,15251.463,2421.1675,0.31981973353480275,reach:Mekong:river;reach:Mekong:sea,5,True,False,12524.611111111111,4310.888888888889,True
+pp_nav_00745,navigable,75,colombia_region,mompoj,4181.675,2355.572,0.08791834554435068,reach:Magdalena:river,4,True,False,4302.0625,4352.145833333333,True
+pp_nav_00746,navigable,74,colombia_region,norosi,4032.341,2295.1205,0.10226925636936227,reach:Magdalena:river,4,True,False,4325.416666666667,4357.833333333333,True
+pp_nav_00747,navigable,78,colombia_region,uyapari,36663.461,8679.903,0.0,reach:Orinoco:sea,5,True,False,4879.625,4372.791666666667,True
+pp_nav_00748,navigable,80,colombia_region,simiti,4123.3825,2332.1414999999997,0.17990114665073698,reach:Magdalena:river,4,True,False,4329.395833333333,4390.9375,True
+pp_nav_00749,navigable,78,colombia_region,uyapari,36623.09,8649.521499999999,0.0,reach:Orinoco:sea,5,True,False,4846.354166666667,4378.9375,True
+pp_nav_00750,navigable,52,colombia_region,orinucu,36713.0,8710.131,0.0,reach:Orinoco:river;reach:Orinoco:sea,5,True,False,4909.21875,4373.59375,True
+pp_nav_00751,navigable,69,colombia_region,caroni,4393.817,1212.664,0.0,reach:Orinoco:river;reach:Orinoco:sea,4,True,False,4826.227272727273,4402.772727272727,True
+pp_nav_00752,navigable,82,guinea_region,idah,5772.0045,1125.0915,0.3227104187011719,reach:Niger (lower):river,4,True,False,7997.770833333333,4426.4375,True
+pp_nav_00753,navigable,80,colombia_region,simiti,3814.457,2255.729,0.3057243753900562,reach:Magdalena:river,4,True,False,4325.9375,4428.854166666667,True
+pp_nav_00754,navigable,81,guinea_region,ukunzu,5850.212,1140.696,0.042761240119154505,reach:Niger (lower):river,4,True,False,7994.854166666667,4466.395833333333,True
+pp_nav_00755,navigable,68,colombia_region,yolombo,2793.7575,1913.312,0.17472381591796876,reach:Magdalena:river,4,True,False,4318.333333333333,4464.333333333333,True
+pp_nav_00756,navigable,72,colombia_region,chipata,2492.225,1728.938,0.231719970703125,reach:Magdalena:river,4,True,False,4303.229166666667,4492.354166666667,True
+pp_nav_00757,navigable,79,guinea_region,ugbodu,6462.8935,1300.1985,0.1603668212890625,reach:Niger (lower):river,4,True,False,7995.958333333333,4505.708333333333,True
+pp_nav_00758,navigable,53,colombia_region,ondaimas,2080.241,1328.1399999999999,0.496649169921875,reach:Magdalena:river,2,True,False,4295.970588235294,4518.470588235294,True
+pp_nav_00759,navigable,75,guinea_region,azia,6520.007,1318.214,0.0800553649292248,reach:Niger (lower):river,4,True,False,7987.854166666667,4543.354166666667,True
+pp_nav_00760,navigable,78,guinea_region,warri,6692.834,1347.477,0.04637407408382811,reach:Niger (lower):river;reach:Niger (lower):sea,4,True,False,7972.333333333333,4575.833333333333,True
+pp_nav_00761,navigable,18,guinea_region,cabo_formoso,6830.324500000001,1370.3854999999999,0.0,reach:Niger (lower):river;reach:Niger (lower):sea,4,True,False,7966.142857142857,4599.5,True
+pp_nav_00762,navigable,70,indonesia_region,dharmasraya,293.15,185.814,0.8998794555664062,reach:Batang Hari:river,2,True,False,12312.145833333334,4902.1875,True
+pp_nav_00763,navigable,79,indonesia_region,jambi,1933.375,1053.7314999999999,0.04147740470218355,reach:Batang Hari:sea,3,True,False,12425.9375,4915.395833333333,True
+pp_nav_00764,navigable,74,indonesia_region,sungai_jujuhan,567.919,336.76,0.0,reach:Batang Hari:river,3,True,False,12340.520833333334,4911.520833333333,True
+pp_nav_00765,navigable,79,indonesia_region,batang_tabir,893.138,511.7365,0.0,reach:Batang Hari:river,3,True,False,12364.4375,4929.8125,True
+pp_nav_00766,navigable,74,indonesia_region,jambi,1886.943,1028.679,0.013092231750488282,reach:Batang Hari:river;reach:Batang Hari:sea,3,True,False,12403.125,4928.833333333333,True
+pp_nav_00767,navigable,70,brazil_region,paru,193252.48450000002,123086.992,0.0,reach:Amazon:river;reach:Amazon:sea,5,True,False,5274.5,4937.666666666667,True
+pp_nav_00768,navigable,53,brazil_region,samauma,425.982,0.0,0.0,reach:Amazon:river;reach:Amazon:sea,3,True,True,5479.625,4940.5625,True
+pp_nav_00769,navigable,46,indonesia_region,batang_tembesi,1806.7205,988.087,0.0,reach:Batang Hari:river,3,True,False,12385.71875,4936.40625,True
+pp_nav_00770,navigable,77,brazil_region,gurupatuba,192660.609,123280.867,0.0,reach:Amazon:river,5,True,False,5241.4375,4950.5625,True
+pp_nav_00771,navigable,47,andes_region,yaguachi,551.097,135.218,0.10741939544677734,reach:Guayas:river;reach:Guayas:sea,3,True,False,4060.516129032258,4956.677419354839,True
+pp_nav_00772,navigable,79,brazil_region,obidos,173273.719,115096.414,0.012546157836914063,reach:Amazon:river,5,True,False,5158.6875,4953.604166666667,True
+pp_nav_00773,navigable,75,brazil_region,curuai,169268.781,114547.543,0.0,reach:Amazon:river,5,True,False,5129.125,4966.958333333333,True
+pp_nav_00774,navigable,87,brazil_region,tupulicus,173284.71850000002,114913.0785,0.07392016293071266,reach:Amazon:river,5,True,False,5188.979166666667,4965.354166666667,True
+pp_nav_00775,navigable,79,brazil_region,ukarangma,191892.3285,123433.672,0.00017559967650589557,reach:Amazon:river,5,True,False,5220.541666666667,4974.916666666667,True
+pp_nav_00776,navigable,16,andes_region,guayaquil,1054.646,211.384,0.0,reach:Guayas:river;reach:Guayas:sea,3,True,False,4052.181818181818,4971.181818181818,True
+pp_nav_00777,navigable,77,indonesia_region,musi_hilir,3016.2515000000003,1512.423,0.0,reach:Musi:river;reach:Musi:sea,4,True,False,12467.604166666666,4993.104166666667,True
+pp_nav_00778,navigable,78,brazil_region,urucurituba,163776.984,113029.9415,0.0,reach:Amazon:river,5,True,False,5074.166666666667,4982.0,True
+pp_nav_00779,navigable,67,brazil_region,tupinambarana,163830.703,113003.102,0.0,reach:Amazon:river,5,True,False,5103.8125,4985.229166666667,True
+pp_nav_00780,navigable,71,indonesia_region,nagara_borneo,192.586,95.742,0.014768886566162109,reach:Barito:river,2,True,False,12924.4375,4996.0625,True
+pp_nav_00781,navigable,75,brazil_region,urucurituba,161432.313,112166.141,0.1534273147583008,reach:Amazon:river,5,True,False,5050.791666666667,5003.291666666667,True
+pp_nav_00782,navigable,80,indonesia_region,musi,1246.6570000000002,585.056,0.010246944427490235,reach:Musi:river,3,True,False,12426.5,5006.791666666667,True
+pp_nav_00783,navigable,51,indonesia_region,palembang,1959.857,928.1015,0.015423870086669922,reach:Musi:river;reach:Musi:sea,4,True,False,12451.34375,5010.96875,True
+pp_nav_00784,navigable,65,indonesia_region,banjar,363.189,185.445,0.0,reach:Barito:river;reach:Barito:sea,2,True,False,12907.02564102564,5021.025641025641,True
+pp_nav_00785,navigable,67,brazil_region,manaos,126969.664,96263.023,0.0,reach:Amazon:river,5,True,False,4967.4375,5015.479166666667,True
+pp_nav_00786,navigable,72,brazil_region,juris,161332.813,112127.43,0.026578330993652345,reach:Amazon:river,5,True,False,5024.208333333333,5023.125,True
+pp_nav_00787,navigable,40,brazil_region,munduruku,127088.789,96229.258,0.03965612158056597,reach:Amazon:river,5,True,False,4996.970588235294,5021.058823529412,True
+pp_nav_00788,navigable,77,kongo_region,calumbo,1868.115,289.459,0.06625056266784668,reach:Kwanza:river;reach:Kwanza:sea,3,True,False,8303.854166666666,5352.1875,True
+pp_nav_00789,navigable,76,kongo_region,ambaca,1889.8925,324.7795,0.2963234977721552,reach:Kwanza:river,5,True,False,8330.333333333334,5368.416666666667,True
+pp_nav_00790,navigable,30,kongo_region,ambaca,230.016,42.584,1.5774562184546252,reach:Kwanza:river,2,True,False,8350.107142857143,5365.75,True
+pp_nav_00791,navigable,65,zimbabwe_region,tete,2576.138,547.678,0.0,reach:Zambezi:river,4,True,False,9215.583333333334,5734.916666666667,True
+pp_nav_00792,navigable,57,zimbabwe_region,massangano,3099.3590000000004,692.701,0.3826450639731772,reach:Zambezi:river,4,True,False,9237.791666666666,5760.708333333333,True
+pp_nav_00793,navigable,59,zimbabwe_region,chiramba,3139.7395,666.1485,0.44474771228927784,reach:Zambezi:river,4,True,False,9266.791666666666,5778.0,True
+pp_nav_00794,navigable,67,zimbabwe_region,sena,3159.0195,652.203,0.3481678369962029,reach:Zambezi:river,4,True,False,9285.541666666666,5806.958333333333,True
+pp_nav_00795,navigable,62,zimbabwe_region,sena,3780.244,770.311,0.20033100726774583,reach:Zambezi:river,5,True,False,9305.458333333334,5835.041666666667,True
+pp_nav_00796,navigable,35,swahili_coast_region,quelimane,171.846,38.641,0.05612342360525485,reach:Zambezi:river;reach:Zambezi:sea,2,True,False,9364.380952380952,5838.380952380952,True
+pp_nav_00797,navigable,76,zimbabwe_region,cuama,3875.158,772.589,0.12317172932091933,reach:Zambezi:river,4,True,False,9328.333333333334,5860.166666666667,True
+pp_nav_00798,navigable,37,zimbabwe_region,cuama,3892.806,748.72,0.0,reach:Zambezi:river;reach:Zambezi:sea,4,True,False,9339.08695652174,5880.826086956522,True
+pp_nav_00799,navigable,76,chaco_region,nemby,4155.645,3108.15,0.08782477381560784,reach:Rio de la Plata / Parana / Paraguay:river,4,False,False,5072.3125,6252.5625,True
+pp_nav_00800,navigable,81,chaco_region,kyyindy,4432.003,3330.283,0.09407386779785157,reach:Rio de la Plata / Parana / Paraguay:river,4,False,False,5062.854166666667,6282.354166666667,True
+pp_nav_00801,navigable,72,chaco_region,agaes,4592.983,3431.316,0.0,reach:Rio de la Plata / Parana / Paraguay:river,4,False,False,5046.395833333333,6311.8125,True
+pp_nav_00802,navigable,77,chaco_region,avaes,5017.036,3861.889,0.0,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,5035.645833333333,6344.8125,True
+pp_nav_00803,navigable,77,chaco_region,lanagashec,13198.9985,8150.280500000001,0.0,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,5019.020833333333,6374.145833333333,True
+pp_nav_00804,navigable,83,chaco_region,qollaxalec,18038.543,11690.064,0.02402273675675097,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,5011.104166666667,6410.604166666667,True
+pp_nav_00805,navigable,79,chaco_region,qompi,18083.4215,11695.71,0.0,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,5000.270833333333,6446.1875,True
+pp_nav_00806,navigable,73,chaco_region,qompi,18247.168,11809.475,0.0,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,4988.916666666667,6481.166666666667,True
+pp_nav_00807,navigable,77,chaco_region,romang,18361.881,11893.009,0.0,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,4978.375,6514.125,True
+pp_nav_00808,navigable,81,chaco_region,romang,18731.143,12267.575,0.015967178344726562,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,4973.4375,6553.8125,True
+pp_nav_00809,navigable,67,chaco_region,qom_caia,18744.434,12270.171,0.0,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,4964.25,6589.75,True
+pp_nav_00810,navigable,76,chaco_region,mandisobi,40.316,23.789,0.3620262145996094,reach:Rio de la Plata / Parana / Paraguay:river,0,False,False,5022.791666666667,6593.291666666667,True
+pp_nav_00811,navigable,78,chaco_region,mandisobi,69.46,40.761,0.0,reach:Rio de la Plata / Parana / Paraguay:river,0,False,False,5002.833333333333,6621.041666666667,True
+pp_nav_00812,navigable,74,chaco_region,qom_caia,18801.815499999997,12367.473,0.013356013636992629,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,4945.333333333333,6618.833333333333,True
+pp_nav_00813,navigable,72,chaco_region,karendo,19250.877,12800.009,0.1389976978302002,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,4927.666666666667,6647.125,True
+pp_nav_00814,navigable,87,la_plata_region,gualeguay,178.29000000000002,93.789,0.181768798828125,reach:Rio de la Plata / Parana / Paraguay:river,0,False,False,5001.979166666667,6662.6875,True
+pp_nav_00815,navigable,71,chaco_region,lalek_cotaa,18634.67,12386.599,0.10995008838600114,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,4925.229166666667,6685.6875,True
+pp_nav_00816,navigable,76,la_plata_region,gualeguay,208.061,110.09450000000001,0.10367889404296875,reach:Rio de la Plata / Parana / Paraguay:river,0,False,False,4997.875,6702.916666666667,True
+pp_nav_00817,navigable,74,la_plata_region,mbegua,17747.168,11828.157,0.05350458481022377,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,4941.541666666667,6715.1875,True
+pp_nav_00818,navigable,82,la_plata_region,mbegua,17921.209,12038.159,0.05348610877990723,reach:Rio de la Plata / Parana / Paraguay:river,5,False,False,4972.520833333333,6724.8125,True
+pp_nav_00819,navigable,27,la_plata_region,carapachay,215.969,114.872,0.0,reach:Rio de la Plata / Parana / Paraguay:river,0,False,False,4987.133333333333,6722.466666666666,True
+pp_nav_00820,navigable,76,la_plata_region,carapachay,18158.76,12229.999,0.025245654573751584,reach:Rio de la Plata / Parana / Paraguay:river;reach:Rio de la Plata / Parana / Paraguay:sea,5,False,False,4992.5625,6745.9375,True
+pp_nav_00821,navigable,79,la_plata_region,carapachay,18310.283499999998,12419.5295,0.029043090866924515,reach:Rio de la Plata / Parana / Paraguay:sea,5,False,False,5006.395833333333,6759.895833333333,True
+pp_nav_00822,navigable,18,la_plata_region,carapachay,18311.289,12430.268,0.0,reach:Rio de la Plata / Parana / Paraguay:river;reach:Rio de la Plata / Parana / Paraguay:sea,5,False,False,5024.666666666667,6761.833333333333,True

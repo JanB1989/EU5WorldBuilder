@@ -58,7 +58,9 @@
       ]
     ],
     "accepted_cut_adjacencies_note": "Land neighbours the researched channel separates where no single water tile borders both banks for a crossing (Po, Neckar, Xi River); units cross at the neighbouring crossings. Any other cut fails the navigation checks.",
-    "restore_export_levels": true
+    "restore_export_levels": true,
+    "clear_parallel_rivers_within_pixels": 8,
+    "parallel_river_minimum_pixels": 12
   },
   "road_costs": {
     "navigable": {

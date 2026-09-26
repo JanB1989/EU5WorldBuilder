@@ -497,7 +497,8 @@ def export(config, evidence, river):
     palette_image=Image.open(ROOT/json.loads((ROOT/config['river_export']/'export_manifest.json').read_text())['output_png'])
     drawing=np.asarray(palette_image)
     cleaned,preservation,original_level_map=preserve_levels(drawing,original,after,land,base_info.reset_index(),[o['box'] for o in config.get('native_geometry_overrides',[])],
-                                                             int(cfg.get('clear_drawn_rivers_within_pixels',0)),export_levels(config,colors) if cfg.get('restore_export_levels') else None)
+                                                             int(cfg.get('clear_drawn_rivers_within_pixels',0)),export_levels(config,colors) if cfg.get('restore_export_levels') else None,
+                                                             int(cfg.get('clear_parallel_rivers_within_pixels',0)),int(cfg.get('parallel_river_minimum_pixels',12)))
     cleaned_image=Image.fromarray(cleaned,mode='P');cleaned_image.putpalette(palette_image.getpalette())
     cleaned_image.save(mod/md/'rivers.png');written.append(md+'rivers.png')
     pd.DataFrame(preservation,columns=['location_tag','river_level','x','y','distance_pixels','added_source']).to_csv(out/'preserved_river_pixels.csv',index=False)

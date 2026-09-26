@@ -90,7 +90,8 @@ def repair_native_topology(pixels, owners, land):
     return pixels
 
 
-def preserve_levels(river, original, after, land, inventory, geometry_boxes=(), corridor=0, target_levels=None):
+def preserve_levels(river, original, after, land, inventory, geometry_boxes=(), corridor=0, target_levels=None,
+                    parallel=0, parallel_min=12):
     """Erase converted channels and retain one ordinary size pixel on each bank.
 
     These pixels preserve engine has_river/size semantics; no scripted duplicate
@@ -114,9 +115,17 @@ def preserve_levels(river, original, after, land, inventory, geometry_boxes=(), 
     if corridor:
         # A channel replaces its river: drawn river lines running beside it (the drawing and the channel follow
         # slightly different lines) are cleared; bank levels are restored below like every converted river.
+        # Close to the channel everything goes; in a wider band only pieces longer than a tributary mouth
+        # (a line running alongside), so tributaries still reach the channel.
         from scipy import ndimage as _nd
         near=_nd.binary_dilation(water,iterations=corridor)&~water
         cleaned[near&(cleaned<16)]=255
+        if parallel:
+            band=_nd.binary_dilation(water,iterations=parallel)&~water&(cleaned<16)
+            labels,count=_nd.label(band,structure=np.ones((3,3),bool))
+            if count:
+                sizes=np.bincount(labels.ravel(),minlength=count+1);sizes[0]=0
+                cleaned[sizes[labels]>parallel_min]=255
     # Small bank transfers must not promote the recipient's river size.
     ys,xs=np.where(cleaned<16)
     remaining=defaultdict(int)

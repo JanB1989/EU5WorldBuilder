@@ -42,7 +42,8 @@ def haversine(a, b):
     return 12742.0176*np.arcsin(np.sqrt(np.clip(v, 0, 1)))
 
 
-def prepare(config):
+def prepare(config, points=None):
+    """Hydrology evidence (discharge, relief, reach) for every drawn river pixel, or for ``points`` (x, y arrays)."""
     cfg = config["selection"]
     raw = ROOT/config["raw_inputs"]
     output = ROOT/config["output"]; output.mkdir(parents=True, exist_ok=True)
@@ -60,7 +61,7 @@ def prepare(config):
                    "transform": digest(raw/"transform.json"), "prefilter": cfg["source_prefilter_m3_s"],
                    "evidence_algorithm": 1}
     stamp = output/"pixel_evidence.manifest.json"
-    if cache.exists() and stamp.exists() and json.loads(stamp.read_text()) == fingerprint:
+    if points is None and cache.exists() and stamp.exists() and json.loads(stamp.read_text()) == fingerprint:
         print("Using verified navigation evidence cache", flush=True)
         return pd.read_parquet(cache), river, fingerprint
     print("Matching river pixels to source reaches and sampling relief", flush=True)
@@ -80,7 +81,10 @@ def prepare(config):
     pixels = projection.project(coords)
     valid = np.isfinite(pixels).all(axis=1)
     tree = cKDTree(pixels[valid])
-    y, x = np.where(river < 16)
+    if points is None:
+        y, x = np.where(river < 16)
+    else:
+        x, y = (np.asarray(v, np.int64) for v in points)
     distance, nearest = tree.query(np.column_stack((x, y)))
     ix = parent[valid][nearest]
     rows = pd.DataFrame({"x": x.astype(np.int32), "y": y.astype(np.int32), "match_distance_pixels": distance,
@@ -95,9 +99,35 @@ def prepare(config):
         g = rows.gradient_m_per_km.to_numpy()[neighbours]
         same = rows.main_basin_id.to_numpy()[neighbours] == rows.main_basin_id.to_numpy()[:, None]
         rows["gradient_m_per_km"] = np.nanmedian(np.where(same, g, np.nan), axis=1)
-    rows.to_parquet(cache, index=False)
-    save_json(stamp, fingerprint)
+    if points is None:
+        rows.to_parquet(cache, index=False)
+        save_json(stamp, fingerprint)
     return rows, river, fingerprint
+
+
+def reach_rows(config):
+    """Researched reaches (configs/navigation_reaches) traced along vanilla lines, with hydrology evidence attached."""
+    from .navigation_reaches import Tracer, load_reaches, trace
+    from .river_map import prepare_surface
+    raw = ROOT/config["raw_inputs"]
+    river_manifest = json.loads((ROOT/config["river_export"]/"export_manifest.json").read_text())
+    Image.MAX_IMAGE_PIXELS = None
+    drawing = np.asarray(Image.open(ROOT/river_manifest["output_png"]))
+    height, width = drawing.shape
+    game = Path(tomllib.loads((ROOT/config["local_config"]).read_text())["paths"]["game_root"])
+    vanilla = np.asarray(Image.open(game/"game/in_game/map_data/rivers.png"))
+    inv, zones, _water = prepare_surface(raw, width, height)
+    sea = np.r_[False, inv.game_zone_class.str.contains("sea_zones").to_numpy()]
+    lake = np.r_[False, (inv.game_zone_class == "lakes").to_numpy()]
+    base = pd.read_parquet(raw/"inventory.parquet").set_index("location_tag")
+    tags = {t: i+1 for i, t in enumerate(inv.location_tag)}
+    print("Tracing researched navigation reaches", flush=True)
+    table, report = trace(load_reaches(ROOT/config["reaches"]["folder"]), Tracer(vanilla, drawing, zones, sea, lake, base, tags))
+    evidence, _, fingerprint = prepare(config, points=(table.x.to_numpy(), table.y.to_numpy()))
+    rows = evidence.assign(state=table.state.map(STATES).to_numpy(), evidence="reach:"+table.river+":"+table.reach,
+                           river_name=table.river.to_numpy(), reach=table.reach.to_numpy())
+    fingerprint["reaches"] = {f.name: digest(f) for f in sorted((ROOT/config["reaches"]["folder"]).glob("*.json"))}
+    return rows, drawing, fingerprint, report
 
 
 def build(config_path=None):
@@ -105,8 +135,10 @@ def build(config_path=None):
     config = json.loads(config_path.read_text())
     if config["schema_version"] != 1:
         raise ValueError("Unsupported navigation configuration")
+    output = ROOT/config["output"]; output.mkdir(parents=True, exist_ok=True)
+    if config.get("reaches"):
+        return build_reaches(config, config_path)
     rows, river, fingerprint = prepare(config)
-    output = ROOT/config["output"]
     rows["state"] = classify(rows.q_mean_m3_s, rows.q_min_m3_s, rows.gradient_m_per_km, config["selection"])
     unmatched = rows.match_distance_pixels > config["selection"]["maximum_match_distance_pixels"]
     rows.loc[unmatched, "state"] = 0
@@ -156,3 +188,52 @@ def build(config_path=None):
     save_json(output/"manifest.json", result)
     print(json.dumps({k: v for k, v in result.items() if k not in ("config", "input_sha256")}, indent=2), flush=True)
     return result
+
+
+def build_reaches(config, config_path):
+    """Navigation from researched reaches: every traced reach pixel is converted with its researched state."""
+    output = ROOT/config["output"]
+    rows, river, fingerprint, report = reach_rows(config)
+    raw = ROOT/config["raw_inputs"]
+    image = np.asarray(Image.open(raw/"locations.png").convert("RGB"))
+    sampled = image[rows.y.to_numpy(), rows.x.to_numpy()].astype(np.uint32)
+    enc = (sampled[:, 0] << 16) | (sampled[:, 1] << 8) | sampled[:, 2]
+    inv = pd.read_parquet(raw/"inventory.parquet")
+    names = dict(zip([int(c, 16) for c in inv.map_color_rgb], inv.location_tag))
+    rows["land_location"] = [names.get(int(c), "") for c in enc]
+    projection = Projection(json.loads((raw/"transform.json").read_text()), image.shape[1], image.shape[0])
+    rows["longitude"] = projection.longitude(rows.x.to_numpy())
+    rows["latitude"] = projection.lats[rows.y.to_numpy()]
+    rows.to_parquet(output/"classified_pixels.parquet", index=False)
+    pd.DataFrame(report).to_json(output/"reach_trace_report.json", orient="records", indent=1)
+    from .navigation_map import export
+    result = export(config, rows, river)
+    result["reach_connectivity"] = reach_connectivity(output, rows)
+    result.update({"baseline_year": config["baseline_year"], "config": config, "input_sha256": fingerprint,
+                   "config_sha256": digest(config_path), "overrides": [], "selection_mode": "researched_reaches",
+                   "reach_problems": {r["river"]: r["problems"] for r in report if r["problems"]},
+                   "screened_pixel_states": {n: int((rows.state == v).sum()) for n, v in STATES.items()},
+                   "limits": ["Heads of navigation and obstacles come from researched historical evidence (see configs/navigation_reaches).",
+                              "All fleet classes can use converted sea zones; barriers (falls, cataracts) are impassable.",
+                              "Improvable routes are costly but passable until works are completed.",
+                              "Rivers without a vanilla line follow the drawn export river; canals are straight between stops."]})
+    save_json(output/"manifest.json", result)
+    print(json.dumps({k: v for k, v in result.items() if k not in ("config", "input_sha256")}, indent=2), flush=True)
+    return result
+
+
+def reach_connectivity(output, rows):
+    """Per researched river: share of its traced pixels that became water, and share in sea-connected tiles."""
+    tiles = pd.read_csv(output/"tiles.csv").set_index("location")
+    names = {}
+    for line in (output/"mod/in_game/map_data/named_locations/pp_navigation.txt").read_text().splitlines():
+        tag, color = line.split("=")
+        names[int(color.strip(), 16)] = tag.strip()
+    image = np.asarray(Image.open(output/"mod/in_game/map_data/locations.png").convert("RGB"))
+    px = image[rows.y.to_numpy(), rows.x.to_numpy()].astype(np.int64)
+    tile = [names.get(int(v)) for v in (px[:, 0] << 16) | (px[:, 1] << 8) | px[:, 2]]
+    frame = pd.DataFrame({"river": rows.river_name.to_numpy(), "tile": tile})
+    frame["converted"] = frame.tile.notna()
+    frame["ocean"] = [bool(tiles.loc[t, "ocean_connected"]) if t in tiles.index else False for t in frame.tile]
+    return {river: {"pixels": int(len(g)), "converted": round(float(g.converted.mean()), 4),
+                    "ocean_connected": round(float(g.ocean.mean()), 4)} for river, g in frame.groupby("river")}

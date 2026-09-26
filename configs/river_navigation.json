@@ -25,8 +25,8 @@
     "width_pixels": 2,
     "minimum_tile_pixels": 8,
     "target_tile_pixels": 96,
-    "minimum_remaining_land_pixels": 100,
-    "maximum_land_fraction_removed": 0.35,
+    "minimum_remaining_land_pixels": 40,
+    "maximum_land_fraction_removed": 0.6,
     "undersized_state_policy": "retain_native_river",
     "preserve_land_connectivity": false,
     "maximum_crossing_span_pixels": 12,
@@ -34,7 +34,31 @@
     "state_aggregation": "median_physical_worst_explicit",
     "land_bisection_policy": "retain_both_banks_under_original_location",
     "maximum_native_gap_pixels": 6,
-    "maximum_mouth_snap_pixels": 6
+    "maximum_mouth_snap_pixels": 6,
+    "allow_lake_contact": true,
+    "shared_tile_crossings": true,
+    "retain_native_on_lost_adjacency": false,
+    "clear_drawn_rivers_within_pixels": 3,
+    "allow_vanishing_pieces": true,
+    "merge_undersized_pieces": true,
+    "convert_lake_crossings": true,
+    "convert_wasteland": true,
+    "accepted_cut_adjacencies": [
+      [
+        "mirandola",
+        "ostiglia"
+      ],
+      [
+        "erbach",
+        "sinsheim"
+      ],
+      [
+        "gaoming",
+        "sanshui"
+      ]
+    ],
+    "accepted_cut_adjacencies_note": "Land neighbours the researched channel separates where no single water tile borders both banks for a crossing (Po, Neckar, Xi River); units cross at the neighbouring crossings. Any other cut fails the navigation checks.",
+    "restore_export_levels": true
   },
   "road_costs": {
     "navigable": {
@@ -246,19 +270,9 @@
       "role": "Long-distance natural navigation on the Amazon-Solimoes; modern information informs physical capability, not medieval port or dredging infrastructure."
     }
   },
-  "native_geometry_overrides": [
-    {
-      "id": "thames_native_lower_channel",
-      "box": [
-        7642,
-        1740,
-        7701,
-        1880
-      ],
-      "state": "improvable",
-      "source": "thames_history",
-      "reason": "Use the tested vanilla lower-Thames alignment to reach the existing Thames estuary. Modern-source river registration ends inland here."
-    }
-  ],
-  "port_harbor_floor": 0.25
+  "port_harbor_floor": 0.25,
+  "reaches": {
+    "folder": "configs/navigation_reaches",
+    "note": "2026-09-26: navigable rivers come from researched heads of navigation (one JSON per world region, sources inside), traced along vanilla river lines; selection, tropical and override screens below are unused in this mode, the hydrology only annotates discharge and relief."
+  }
 }

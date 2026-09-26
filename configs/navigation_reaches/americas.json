@@ -1,0 +1,545 @@
+[
+ {
+  "river": "St. Lawrence",
+  "include": true,
+  "reason": "The trunk route of New France and British Canada: sea ships to Quebec and Montreal, then bateaux and Durham boats past the rapids to Lake Ontario.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Montreal (tag stadacona = Quebec is the conservative alternative)",
+   "tag": "hochelaga",
+   "evidence": "By the early 19th century ocean-going ships regularly berthed at Montreal, which lies just below the unnavigable Lachine Rapids; before the 1840s channel dredging the biggest ships often stopped at Quebec (tag stadacona).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Port_of_Montreal",
+    "https://en.wikipedia.org/wiki/History_of_Montreal",
+    "https://en.wikipedia.org/wiki/Saint_Lawrence_River"
+   ]
+  },
+  "river_head": {
+   "place": "Kingston (Cataraqui / Fort Frontenac) at the outlet of Lake Ontario",
+   "tag": "cataraqui",
+   "evidence": "Bateaux and later Durham boats carried freight between Lachine and Kingston, the transshipment point to lake vessels; cataraqui is the lake-shore location (has_river False, gananoque is the river-flagged neighbour).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Durham_boat",
+    "https://en.wikipedia.org/wiki/Lachine_Canal",
+    "https://en.wikipedia.org/wiki/Kingston,_Ontario"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Lachine Rapids",
+    "tag": "hochelaga",
+    "kind": "rapids",
+    "evidence": "Rapids just above Montreal harbour that stopped sea ships; goods were portaged to Lachine until the Lachine Canal opened in 1825.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Lachine_Rapids",
+     "https://en.wikipedia.org/wiki/Lachine_Canal"
+    ]
+   },
+   {
+    "name": "Cedars / Coteau rapids",
+    "tag": "otennienontant",
+    "kind": "rapids",
+    "evidence": "A chain of rapids at the Soulanges reach west of Montreal island, passed by small canals and tracking; tag placement medium confidence.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Soulanges_Canal"
+    ]
+   },
+   {
+    "name": "Long Sault Rapids",
+    "tag": "kahwenoke",
+    "kind": "rapids",
+    "evidence": "Long rapids near Cornwall that upbound bateaux had to pole or track through.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Long_Sault_(rapids)"
+    ]
+   }
+  ],
+  "period_note": "French era (1608-1763): the King's ships and merchantmen mostly unloaded at Quebec, smaller craft continued to Montreal; British era: regular ocean shipping to Montreal. Upriver traffic used bateaux from the 1760s and Durham boats from about 1800. Ottawa River (canoe fur route) deliberately excluded; the Richelieu to Lake Champlain carried bateaux but is left out as minor."
+ },
+ {
+  "river": "Hudson",
+  "include": true,
+  "reason": "Tidal to Albany; Hudson River sloops carried heavy regular traffic New York-Albany from the Dutch era on.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Albany (Fort Orange / Beverwijck)",
+   "tag": "mahicannituck",
+   "evidence": "Sea-going sloops and small ships sailed the tidal Hudson all the way to Albany, the head of sloop navigation.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Hudson_River_sloop",
+    "https://en.wikipedia.org/wiki/Hudson_River",
+    "https://en.wikipedia.org/wiki/Albany,_New_York"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Colonial and early US. Above Albany the Mohawk route (portage to Schenectady, bateaux and Durham boats, then the Erie Canal from 1825) is left out to keep the set minimal."
+ },
+ {
+  "river": "Delaware",
+  "include": true,
+  "reason": "Philadelphia was the largest colonial port and sloops continued to the falls at Trenton.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Philadelphia",
+   "tag": "shackamaxon",
+   "evidence": "Ocean ships sailed up the Delaware estuary to Philadelphia, a leading Atlantic port of the 18th century (vanilla renames shackamaxon to Philadelphia).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Delaware_River",
+    "https://en.wikipedia.org/wiki/Philadelphia"
+   ]
+  },
+  "river_head": {
+   "place": "Trenton (falls of the Delaware, head of tide)",
+   "tag": "assunpink",
+   "evidence": "River sloops ran regularly to Trenton at the falls; Durham boats brought flour and iron down from Easton to Philadelphia.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Durham_boat",
+    "https://en.wikipedia.org/wiki/Trenton,_New_Jersey"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Colonial and early US (1680s-1837). Durham boat traffic above Trenton to Easton was seasonal and is not included."
+ },
+ {
+  "river": "Connecticut",
+  "include": true,
+  "reason": "Added: sea sloops and brigs regularly sailed to Middletown and Hartford for the West Indies trade throughout the colonial era.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Hartford (Middletown, tag nehantuck, is the intermediate port)",
+   "tag": "saukiog",
+   "evidence": "Colonial Hartford and Middletown were river ports trading directly with the West Indies by sea-going vessels.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Hartford,_Connecticut",
+    "https://en.wikipedia.org/wiki/Middletown,_Connecticut",
+    "https://en.wikipedia.org/wiki/Connecticut_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "1640s-1837. Flatboats above Enfield Falls to Springfield and beyond were minor and seasonal; not included. Optional river if the set must stay very small."
+ },
+ {
+  "river": "Susquehanna",
+  "include": false,
+  "reason": "Shallow and rocky; traffic was downstream-only arks and rafts on spring freshets, and rapids above Port Deposit blocked sea access.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Havre de Grace / Port Deposit (mouth on Chesapeake Bay)",
+   "tag": "wicontiss",
+   "evidence": "Sea craft reached only the mouth at the head of Chesapeake Bay; rapids begin just above Port Deposit.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Susquehanna_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Excluded."
+ },
+ {
+  "river": "Potomac",
+  "include": true,
+  "reason": "Tidal Potomac carried sea ships to Alexandria and Georgetown, major tobacco and flour ports.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Alexandria (Georgetown on the opposite bank is tag anacostia)",
+   "tag": "doeg",
+   "evidence": "Ocean ships loaded tobacco and flour at Alexandria and Georgetown, the head of tidewater below the Little Falls.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Alexandria,_Virginia",
+    "https://en.wikipedia.org/wiki/Georgetown_(Washington,_D.C.)",
+    "https://en.wikipedia.org/wiki/Potomac_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Colonial and early US. The Patowmack Canal (1802) let boats past Great Falls toward Cumberland, but only in high water; excluded. The lower reach is mostly estuary, so the channel adds little beyond coast."
+ },
+ {
+  "river": "James",
+  "include": true,
+  "reason": "Sea ships to Richmond at the fall line; James River bateaux hauled tobacco regularly between Lynchburg and Richmond.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Richmond (Rocketts landing, fall line)",
+   "tag": "powhatan",
+   "evidence": "Tidewater shipping reached Richmond, the port where upriver tobacco was inspected and shipped.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/James_River",
+    "https://en.wikipedia.org/wiki/Richmond,_Virginia"
+   ]
+  },
+  "river_head": {
+   "place": "Lynchburg",
+   "tag": "saponi",
+   "evidence": "From the 1770s hundreds of bateaux carried tobacco hogsheads from Lynchburg down to Richmond, the regular trade until the canal replaced them around 1840.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/James_River_bateau",
+    "https://en.wikipedia.org/wiki/James_River_and_Kanawha_Canal"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Falls of the James",
+    "tag": "powhatan",
+    "kind": "falls",
+    "evidence": "Fall line at Richmond between tidewater and the bateau reach, bypassed by a canal from the 1790s.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/James_River_and_Kanawha_Canal"
+    ]
+   }
+  ],
+  "period_note": "Colonial and early US (1610s-1837); bateau era about 1770-1840."
+ },
+ {
+  "river": "Savannah",
+  "include": true,
+  "reason": "Seaport Savannah plus regular pole-boat (Petersburg boat) cotton and tobacco traffic to Augusta at the fall line.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Savannah",
+   "tag": "tybee",
+   "evidence": "Savannah, a short way up the river, was the colonial and cotton seaport of Georgia (vanilla renames tybee to Savannah).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Savannah_River",
+    "https://en.wikipedia.org/wiki/Savannah,_Georgia"
+   ]
+  },
+  "river_head": {
+   "place": "Augusta",
+   "tag": "kiokee",
+   "evidence": "Petersburg boats and other pole boats carried cargo between Augusta and Savannah in the late 18th and early 19th centuries.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Transportation_in_Augusta,_Georgia",
+    "https://en.wikipedia.org/wiki/Augusta,_Georgia"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "1733-1837; steamboats on the Savannah from about 1816."
+ },
+ {
+  "river": "Mississippi",
+  "include": true,
+  "reason": "The central artery of French/Spanish Louisiana and the US interior: sea ships to New Orleans, keelboats and later steamboats to St. Louis.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "New Orleans",
+   "tag": "bulbancha",
+   "evidence": "Ocean ships crossed the bars at the passes and sailed about 150 km upriver to New Orleans, the port of the whole basin.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Mississippi_River",
+    "https://en.wikipedia.org/wiki/New_Orleans"
+   ]
+  },
+  "river_head": {
+   "place": "St. Louis (Natchez, tag natchez, on the way)",
+   "tag": "tamaroa",
+   "evidence": "Keelboats and bateaux worked New Orleans-Natchez-St. Louis from the 18th century and steamboats made it routine after 1817.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Keelboat",
+    "https://en.wikipedia.org/wiki/St._Louis",
+    "https://en.wikipedia.org/wiki/Steamboats_of_the_Mississippi"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Ohio",
+    "head": {
+     "place": "Pittsburgh (Fort Duquesne / Fort Pitt)",
+     "tag": "allegheny",
+     "evidence": "Flatboats and keelboats ran from Pittsburgh down the Ohio to New Orleans from the 1780s; the Falls at Louisville were the only barrier.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Ohio_River",
+      "https://en.wikipedia.org/wiki/Flatboat",
+      "https://en.wikipedia.org/wiki/Louisville_and_Portland_Canal"
+     ]
+    }
+   },
+   {
+    "river": "Missouri",
+    "head": {
+     "place": "Kansas City / Westport landing (Fort Osage and Independence nearby)",
+     "tag": "kansas",
+     "evidence": "Keelboats supplied Fort Osage from 1808 and steamboats ran regularly to the Independence-Westport landings by the 1830s, the start of the Santa Fe trade.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Missouri_River",
+      "https://en.wikipedia.org/wiki/Yellowstone_(steamboat)",
+      "https://en.wikipedia.org/wiki/Fort_Osage"
+     ]
+    }
+   },
+   {
+    "river": "Red",
+    "head": {
+     "place": "Natchitoches",
+     "tag": "calcasieu",
+     "evidence": "The Great Raft made Natchitoches the head of navigation, a French trading post supplied by boat from New Orleans since 1714.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Great_Raft",
+      "https://en.wikipedia.org/wiki/Red_River_of_the_South",
+      "https://en.wikipedia.org/wiki/Natchitoches,_Louisiana"
+     ]
+    }
+   }
+  ],
+  "obstacles": [
+   {
+    "name": "Falls of the Ohio",
+    "tag": "lewekeomi",
+    "kind": "rapids",
+    "evidence": "Rapids at Louisville, the only barrier between Pittsburgh and New Orleans, bypassed by the Louisville and Portland Canal from 1830.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Falls_of_the_Ohio_National_Wildlife_Conservation_Area",
+     "https://en.wikipedia.org/wiki/Louisville_and_Portland_Canal"
+    ]
+   }
+  ],
+  "period_note": "French 1699-1763, Spanish 1763-1803, US after. Ohio traffic from the 1780s; Missouri regular only after about 1808 (fur posts) and 1819+ (steam), so it is the weakest branch; Red River branch tag calcasieu sits in natchitoches_province (confidence medium-low). Upper Mississippi above St. Louis (lead mines, Prairie du Chien) left out."
+ },
+ {
+  "river": "Rio de la Plata / Parana / Paraguay",
+  "include": true,
+  "reason": "The colonial link between Buenos Aires and Paraguay: river sailing craft carried yerba mate, tobacco and timber regularly via Santa Fe and Corrientes to Asuncion.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Buenos Aires",
+   "tag": "ituzaingo",
+   "evidence": "Ocean ships anchored in the shallow roads of Buenos Aires (deep-draught ones at Montevideo or Ensenada); the city sits on the border of ituzaingo and tuvicha_mini on the map, so the tag is medium confidence.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/R%C3%ADo_de_la_Plata",
+    "https://en.wikipedia.org/wiki/Buenos_Aires"
+   ]
+  },
+  "river_head": {
+   "place": "Asuncion (Santa Fe = qom_caia on the way)",
+   "tag": "nemby",
+   "evidence": "Balandras and other river vessels sailed regularly between Buenos Aires, Santa Fe, Corrientes and Asuncion, the main outlet for Paraguayan yerba mate.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/History_of_yerba_mate",
+    "https://en.wikipedia.org/wiki/Paraguay_River",
+    "https://en.wikipedia.org/wiki/Paran%C3%A1_River"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Uruguay",
+    "head": {
+     "place": "Salto / Concordia (Salto Grande falls)",
+     "tag": "mandisobi",
+     "evidence": "River vessels reached Salto, where the Salto Grande falls closed navigation; Paysandu and Concepcion del Uruguay lie on the way.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Uruguay_River",
+      "https://en.wikipedia.org/wiki/Salto,_Uruguay"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "Colonial from the 1580s (Santa Fe 1573, Buenos Aires 1580); traffic interrupted by the Paraguayan isolation under Francia (1814-1840). Upper Parana above Corrientes (Jesuit missions, Apipe rapids) left out. Uruguay head tag: Salto city itself falls on the mandisobi side on the map (confidence medium-low)."
+ },
+ {
+  "river": "Amazon",
+  "include": true,
+  "reason": "Portuguese Amazonia's only highway: regular convoys of large decked sail-and-oar boats carried cacao and forest goods between Belem, Santarem, Obidos and Barra.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Belem (Para)",
+   "tag": "samauma",
+   "evidence": "Ocean ships from Lisbon traded at Belem on the Para estuary; the city falls between samauma and mairi on the map.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Bel%C3%A9m",
+    "https://en.wikipedia.org/wiki/Amazon_River"
+   ]
+  },
+  "river_head": {
+   "place": "Manaus (Barra do Rio Negro); Santarem = tupulicus and Obidos = obidos on the way",
+   "tag": "manaos",
+   "evidence": "Barra do Rio Negro, capital of the captaincy of Sao Jose do Rio Negro from 1791, was supplied from Belem by river boats; steamers came only in 1853.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Manaus",
+    "https://en.wikipedia.org/wiki/Santar%C3%A9m,_Par%C3%A1",
+    "https://en.wikipedia.org/wiki/%C3%93bidos,_Par%C3%A1"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Portuguese colonial (1616-1822) and imperial Brazil. The craft (canoas de negocio, cobertas, igarites) were large planked sailing boats, not dugout canoes, but this is the borderline case against the canoe rule; drop if the set must be strict. Belem is technically on the Para/Tocantins estuary, not the Amazon mainstem."
+ },
+ {
+  "river": "Orinoco",
+  "include": true,
+  "reason": "Sea-going schooners and brigs sailed up to Angostura, the port of Spanish Guayana and Bolivar's base.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Angostura (Ciudad Bolivar, formerly Santo Tomas de Guayana)",
+   "tag": "caroni",
+   "evidence": "Angostura at the narrows of the Orinoco was reached by sea vessels and exported cattle products and tobacco of the llanos.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Ciudad_Bol%C3%ADvar",
+    "https://en.wikipedia.org/wiki/Orinoco"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Angostura founded 1764 (earlier Santo Tomas lower down). Lancha traffic up the Apure to San Fernando de Apure existed but is left out as minor."
+ },
+ {
+  "river": "Magdalena",
+  "include": true,
+  "reason": "The trunk route of New Granada: champanes (large poled cargo barges) carried goods Cartagena-Mompox-Honda for Bogota throughout the colonial era.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "River mouth at Bocas de Ceniza / Barranquilla",
+   "tag": "mocana",
+   "evidence": "A sand bar kept sea ships out of the mouth; sea cargo came in via Cartagena and the Canal del Dique (tags calamari, mahates) or via Santa Marta.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Magdalena_River",
+    "https://en.wikipedia.org/wiki/Canal_del_Dique"
+   ]
+  },
+  "river_head": {
+   "place": "Honda (Mompox = mompoj on the way)",
+   "tag": "ondaimas",
+   "evidence": "Honda at the rapids was the colonial river port where goods for Bogota left the champanes; Mompox was the main intermediate port.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Honda,_Tolima",
+    "https://en.wikipedia.org/wiki/Santa_Cruz_de_Mompox",
+    "https://en.wikipedia.org/wiki/Magdalena_River"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "1530s-1837; steam concession 1825 but steamers irregular before the 1840s. Canal del Dique (1582) joined Cartagena to the river near Calamar (tag mahates) but silted often; it is a canal, not added as a branch."
+ },
+ {
+  "river": "Guayas",
+  "include": true,
+  "reason": "Guayaquil was the Pacific shipyard and port of the Audiencia of Quito, and river boats ran regularly to Babahoyo (Bodegas), the start of the road to Quito.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Guayaquil",
+   "tag": "guayaquil",
+   "evidence": "Sea ships sailed up the Guayas estuary to Guayaquil, the main port and shipyard of the colonial Pacific coast.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Guayaquil",
+    "https://en.wikipedia.org/wiki/Guayas_River"
+   ]
+  },
+  "river_head": {
+   "place": "Babahoyo (Bodegas de Babahoyo)",
+   "tag": "babahuyu",
+   "evidence": "Cargo moved by river craft on the Babahoyo to the Bodegas warehouses, where the mule road to Quito began.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Babahoyo_River",
+    "https://en.wikipedia.org/wiki/Babahoyo"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "1540s-1837. Short reach (about 70 km); drop if the set must be very small."
+ },
+ {
+  "river": "Sao Francisco",
+  "include": false,
+  "reason": "Paulo Afonso falls split it; the lower reach was a short bar-bound stretch for small coasters and the middle reach had only local barca traffic before steamers in the 1870s.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Penedo (near the mouth)",
+   "tag": "arakaiu",
+   "evidence": "Small coastal vessels reached Penedo just inside the mouth.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/S%C3%A3o_Francisco_River",
+    "https://en.wikipedia.org/wiki/Paulo_Afonso_Falls"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Excluded."
+ },
+ {
+  "river": "Essequibo / Demerara",
+  "include": false,
+  "reason": "Dutch plantation rivers with only short tidal reaches; the Essequibo is blocked by rapids above Bartica and shipping stayed at the coast.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Stabroek / Georgetown (Demerara mouth)",
+   "tag": "demerara",
+   "evidence": "Sea ships loaded at the plantation landings near the river mouths.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Demerara_River",
+    "https://en.wikipedia.org/wiki/Essequibo_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Excluded."
+ },
+ {
+  "river": "Chagres",
+  "include": false,
+  "reason": "Historically important (bongos carried Peru silver and goods from the Chagres mouth to Venta de Cruces), but the EU5 map has no river there (chuchures has_river False).",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Chagres (Fort San Lorenzo)",
+   "tag": "chuchures",
+   "evidence": "Sea ships unloaded at the mouth, then bongos and chatas poled up to Cruces for the mule road to Panama.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Chagres_River",
+    "https://en.wikipedia.org/wiki/Las_Cruces_Trail"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Added as a candidate and excluded only because there is no map river to use."
+ },
+ {
+  "river": "Columbia",
+  "include": false,
+  "reason": "Hudson's Bay Company ships reached Fort Vancouver regularly only from 1825, too short a span within the game period.",
+  "confidence": "low",
+  "sea_head": {
+   "place": "Fort Vancouver",
+   "tag": "multnomah",
+   "evidence": "HBC supply ships sailed up the Columbia to Fort Vancouver from 1825.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Fort_Vancouver"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Excluded; could be reconsidered if the 1825-1837 fur trade matters."
+ },
+ {
+  "river": "Mobile / Alabama",
+  "include": false,
+  "reason": "Colonial traffic was small; the cotton steamboat trade to Montgomery only began in the 1820s.",
+  "confidence": "low",
+  "sea_head": {
+   "place": "Mobile",
+   "tag": "mobile",
+   "evidence": "Mobile was the seaport at the head of Mobile Bay.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Alabama_River",
+    "https://en.wikipedia.org/wiki/Mobile,_Alabama"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Excluded; late (1820s-1830s) steamboat river. If added, the head would be Montgomery (tag atahachi)."
+ }
+]

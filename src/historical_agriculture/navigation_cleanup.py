@@ -90,7 +90,7 @@ def repair_native_topology(pixels, owners, land):
     return pixels
 
 
-def preserve_levels(river, original, after, land, inventory, geometry_boxes=()):
+def preserve_levels(river, original, after, land, inventory, geometry_boxes=(), corridor=0, target_levels=None):
     """Erase converted channels and retain one ordinary size pixel on each bank.
 
     These pixels preserve engine has_river/size semantics; no scripted duplicate
@@ -101,12 +101,22 @@ def preserve_levels(river, original, after, land, inventory, geometry_boxes=()):
     for y,x in zip(ys,xs):
         c=int(original[y,x])
         if c in land:before_levels[c]=max(before_levels[c],int(LEVELS[river[y,x]]))
+    # The export's level table (what the capacity fit assumes) is the target: a location whose drawing only
+    # carries a source marker (no level in the engine) gets a real pixel of that level too.
+    for c,level in (target_levels or {}).items():
+        if c in land and level>before_levels[c]:before_levels[c]=level
     # Replaced local alignments must not leave their old parallel channel.
     for x0,y0,x1,y1 in geometry_boxes:
         box=cleaned[y0:y1,x0:x1];box[box<16]=255
     converted=original!=after
     water=converted & ~np.isin(after,list(land))
     cleaned[water]=254
+    if corridor:
+        # A channel replaces its river: drawn river lines running beside it (the drawing and the channel follow
+        # slightly different lines) are cleared; bank levels are restored below like every converted river.
+        from scipy import ndimage as _nd
+        near=_nd.binary_dilation(water,iterations=corridor)&~water
+        cleaned[near&(cleaned<16)]=255
     # Small bank transfers must not promote the recipient's river size.
     ys,xs=np.where(cleaned<16)
     remaining=defaultdict(int)
@@ -128,6 +138,10 @@ def preserve_levels(river, original, after, land, inventory, geometry_boxes=()):
         r=by_color[c];x0,x1=int(r.bbox_min_x),int(r.bbox_max_x)+1;y0,y1=int(r.bbox_min_y),int(r.bbox_max_y)+1
         yy,xx=np.where(after[y0:y1,x0:x1]==c)
         oy,ox=np.where((original[y0:y1,x0:x1]==c)&(LEVELS[river[y0:y1,x0:x1]]==level))
+        if len(xx) and not len(ox):
+            # no drawn pixel of the level: measure from any river pixel of the location, else from its own pixels
+            oy,ox=np.where((original[y0:y1,x0:x1]==c)&(river[y0:y1,x0:x1]<16))
+            if not len(ox):oy,ox=yy,xx
         if not len(xx) or not len(ox):raise ValueError('No river-bank preservation candidate')
         distances,_=cKDTree(np.column_stack((ox,oy))).query(np.column_stack((xx,yy)))
         # Prefer an existing ordinary width pixel: changing its size leaves the

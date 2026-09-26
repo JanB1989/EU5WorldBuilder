@@ -1,0 +1,1039 @@
+[
+ {
+  "river": "Seine",
+  "include": true,
+  "reason": "Paris depended on the Seine and its tributaries for grain, wine, wood and sea imports via Rouen throughout the period.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Rouen",
+   "tag": "rouen",
+   "evidence": "Rouen was the Seine's seaport where sea-going ships unloaded for transfer to river boats to Paris.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Rouen",
+    "https://en.wikipedia.org/wiki/Seine"
+   ]
+  },
+  "river_head": {
+   "place": "Paris",
+   "tag": "paris",
+   "evidence": "Paris river merchants (the marchands de l'eau / Hanse parisienne) controlled Seine traffic between Paris and the lower river.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Seine",
+    "https://en.wikipedia.org/wiki/History_of_Paris"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Oise",
+    "head": {
+     "place": "Compiegne/Noyon (nearest tag noyon; Compiegne has no tag)",
+     "tag": "noyon",
+     "evidence": "The Oise carried Picard grain and goods down to the Seine and Paris.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Oise_(river)"
+     ]
+    }
+   },
+   {
+    "river": "Marne",
+    "head": {
+     "place": "Chateau-Thierry",
+     "tag": "chateau_thierry",
+     "evidence": "Marne boats brought Champagne grain and wine down to Paris.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Marne_(river)"
+     ]
+    }
+   },
+   {
+    "river": "Yonne",
+    "head": {
+     "place": "Auxerre (tag auxerre has has_river False)",
+     "tag": "auxerre",
+     "evidence": "Auxerre and lower Burgundy wines went to Paris by boat on the Yonne.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Yonne_(river)",
+      "https://en.wikipedia.org/wiki/Auxerre"
+     ]
+    }
+   }
+  ],
+  "obstacles": [
+   {
+    "name": "Pertuis de Poses / Pont-de-l'Arche shallows (nearest tag louviers)",
+    "tag": "louviers",
+    "kind": "rapids/weir passage",
+    "evidence": "Upstream boats needed hauling through the shallow mill-weir passage near Poses and Pont-de-l'Arche before 19th-century canalisation.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Seine"
+    ]
+   }
+  ],
+  "period_note": "Continuous through 1300-1837; tidal estuary below Rouen (mouth near Harfleur/Honfleur, nearest tag tancarville)."
+ },
+ {
+  "river": "Loire",
+  "include": true,
+  "reason": "The Loire was France's busiest inland waterway, carrying salt, wine and goods between Nantes and Orleans with an organised merchants' community.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Nantes",
+   "tag": "nantes",
+   "evidence": "Nantes was the Loire's sea port; larger ships later stopped lower at Paimboeuf.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Nantes",
+    "https://en.wikipedia.org/wiki/Loire"
+   ]
+  },
+  "river_head": {
+   "place": "Orleans",
+   "tag": "orleans",
+   "evidence": "Orleans was the trade hub where the Loire came closest to Paris and headquarters of the Loire boatmen-merchants' community.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Orl%C3%A9ans",
+    "https://en.wikipedia.org/wiki/Loire"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Sandbanks and summer low water (e.g. around Tours/Saumur)",
+    "tag": "tours",
+    "kind": "shoals",
+    "evidence": "Shifting sandbanks and low summer flow made Loire navigation seasonal and slow.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Loire"
+    ]
+   }
+  ],
+  "period_note": "Boats also went higher (Roanne) but Orleans was the terminus of bulk trade; Angers on the Maine lies just off the main stem."
+ },
+ {
+  "river": "Garonne/Gironde",
+  "include": true,
+  "reason": "The Garonne carried the high-country wine, grain and woad from Toulouse down to Bordeaux's export fleets.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Bordeaux",
+   "tag": "bordeaux",
+   "evidence": "Sea-going ships ascend the tidal Garonne to Bordeaux, the wine-fleet port.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Garonne",
+    "https://en.wikipedia.org/wiki/Bordeaux"
+   ]
+  },
+  "river_head": {
+   "place": "Toulouse",
+   "tag": "toulouse",
+   "evidence": "Medieval boatmen carried goods between Toulouse and Bordeaux; the Toulouse head of traffic lay below the Bazacle weir.",
+   "sources": [
+    "https://www.lauragais-patrimoine.fr/LES-PERSONNALITES/PIERRE%20PAUL%20RIQUET/NAVIGATION-SUR-GARONNE/La-navigation-sur-la-Garonne-en-aval%20de-Toulouse-au-temps-de-Riquet.html",
+    "https://en.wikipedia.org/wiki/Garonne"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Tarn",
+    "head": {
+     "place": "Montauban (river trade reached Gaillac, which has no tag)",
+     "tag": "montauban",
+     "evidence": "Gaillac wines came down the Tarn to Bordeaux in the Middle Ages.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Tarn_(river)",
+      "https://en.wikipedia.org/wiki/Gaillac_wine"
+     ]
+    }
+   },
+   {
+    "river": "Lot",
+    "head": {
+     "place": "Cahors",
+     "tag": "cahors",
+     "evidence": "Cahors wine was shipped down the Lot to Bordeaux.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Lot_(river)",
+      "https://en.wikipedia.org/wiki/Cahors_wine"
+     ]
+    }
+   }
+  ],
+  "obstacles": [
+   {
+    "name": "Bazacle weir at Toulouse",
+    "tag": "toulouse",
+    "kind": "weir",
+    "evidence": "The Bazacle mill dam ended through-navigation at Toulouse; traffic started below it.",
+    "sources": [
+     "https://www.lauragais-patrimoine.fr/LES-PERSONNALITES/PIERRE%20PAUL%20RIQUET/NAVIGATION-SUR-GARONNE/La-navigation-sur-la-Garonne-en-aval%20de-Toulouse-au-temps-de-Riquet.html"
+    ]
+   }
+  ],
+  "period_note": "Navigation seasonal (roughly November-June); never canalised in the period (Canal de Garonne 1850s)."
+ },
+ {
+  "river": "Dordogne",
+  "include": true,
+  "reason": "The Dordogne carried Bergerac and Perigord wine to Libourne and the Gironde.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Libourne",
+   "tag": "libourne",
+   "evidence": "Libourne was a tidal wine port reached by sea-going ships at the Dordogne-Isle confluence.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Libourne",
+    "https://en.wikipedia.org/wiki/Dordogne_(river)"
+   ]
+  },
+  "river_head": {
+   "place": "Bergerac",
+   "tag": "bergerac",
+   "evidence": "Gabarres carried wine from Bergerac down to Libourne; the rapids above Lalinde limited upstream trade.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Bergerac,_Dordogne",
+    "https://en.wikipedia.org/wiki/Dordogne_(river)"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Joins the Garonne at Bec d'Ambes to form the Gironde; Libourne was an English-held bastide wine port 1270-1453."
+ },
+ {
+  "river": "Charente",
+  "include": true,
+  "reason": "From the Middle Ages the Charente was the main trade route between the Atlantic salt coast and Cognac/Angouleme (salt up, wine/brandy/stone/paper down).",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Tonnay-Charente/Rochefort (tag rochefort)",
+   "tag": "rochefort",
+   "evidence": "Sea-going ships loaded brandy and wine at Tonnay-Charente; Rochefort arsenal from 1666.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Charente_(river)",
+    "https://www.guide-charente-maritime.com/en/experiences/weekend-et-holidays/article-discovery-of-tonnay-charente-and-its-suspension-bridge-181.html"
+   ]
+  },
+  "river_head": {
+   "place": "Angouleme",
+   "tag": "angouleme",
+   "evidence": "Gabarres carried goods between Angouleme, Cognac and the coast; the stretch above Cognac was abandoned only in 1926.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Charente_(river)",
+    "https://www.french-waterways.com/waterways/west/charente-boutonne/"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Canalised only 1772-1835, but boat trade is continuous from the Middle Ages; brandy trade grows after 1600."
+ },
+ {
+  "river": "Rhone/Saone",
+  "include": true,
+  "reason": "The Rhone-Saone axis was the main north-south trade corridor linking the Mediterranean with Lyon, Burgundy and the Champagne/Geneva fairs.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Arles",
+   "tag": "arles",
+   "evidence": "Sea-going ships reached Arles; the silting mouths made the lower delta hard for larger ships.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Arles",
+    "https://en.wikipedia.org/wiki/Rh%C3%B4ne"
+   ]
+  },
+  "river_head": {
+   "place": "Lyon",
+   "tag": "lyon",
+   "evidence": "Lyon was the great Rhone-Saone river port and fair town; the Rhone above Lyon was barely navigable.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Lyon",
+    "https://en.wikipedia.org/wiki/Rh%C3%B4ne"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Saone",
+    "head": {
+     "place": "Chalon-sur-Saone",
+     "tag": "chalon_sur_saone",
+     "evidence": "The Saone was an easy, slow waterway; Chalon was its fair town and main river port (boats reached Gray).",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Sa%C3%B4ne",
+      "https://en.wikipedia.org/wiki/Chalon-sur-Sa%C3%B4ne"
+     ]
+    }
+   }
+  ],
+  "obstacles": [
+   {
+    "name": "Pont-Saint-Esprit bridge passage (nearest tag viviers)",
+    "tag": "viviers",
+    "kind": "dangerous bridge/current",
+    "evidence": "The fast current through the arches of the medieval bridge at Pont-Saint-Esprit was a notorious hazard.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Pont-Saint-Esprit"
+    ]
+   },
+   {
+    "name": "Rhone mouth bars (tag arles)",
+    "tag": "arles",
+    "kind": "bar/silting",
+    "evidence": "Shifting sand bars at the delta mouths hindered sea ships reaching Arles.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Rh%C3%B4ne"
+    ]
+   }
+  ],
+  "period_note": "Upstream traffic needed horse towing against a strong current; Avignon, Beaucaire (fair) and Vienne lie on the reach."
+ },
+ {
+  "river": "Rhine",
+  "include": true,
+  "reason": "Europe's busiest river route: Rhine wine, metals and Upper German goods to the Low Countries, with staple towns along the way.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Cologne",
+   "tag": "cologne",
+   "evidence": "Under Cologne's 1259 staple right, deep lower-Rhine/sea craft and shallow upper-Rhine boats transshipped at Cologne.",
+   "sources": [
+    "https://thehistoryofcologne.com/2025/02/03/84-the-staple-right-of-1259-colognes-key-to-centuries-of-wealth/",
+    "https://en.wikipedia.org/wiki/Staple_right"
+   ]
+  },
+  "river_head": {
+   "place": "Basel",
+   "tag": "basel",
+   "evidence": "Rhine boat traffic ran up to Basel; the falls and rapids above Basel (Laufenburg, Rhine Falls) ended through-navigation.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Rhine",
+    "https://en.wikipedia.org/wiki/Basel"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Waal/Merwede (delta arm to the sea)",
+    "head": {
+     "place": "Dordrecht",
+     "tag": "dordrecht",
+     "evidence": "The Waal-Merwede arm carried Rhine traffic past Nijmegen to the Dordrecht staple and the sea; branch head is its sea end.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Waal",
+      "https://en.wikipedia.org/wiki/Dordrecht"
+     ]
+    }
+   },
+   {
+    "river": "Main",
+    "head": {
+     "place": "Frankfurt",
+     "tag": "frankfurt",
+     "evidence": "The Main carried goods to the Frankfurt fairs, the river's main trade terminus.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Main_(river)",
+      "https://en.wikipedia.org/wiki/Frankfurt_Trade_Fair"
+     ]
+    }
+   },
+   {
+    "river": "Moselle",
+    "head": {
+     "place": "Trier",
+     "tag": "trier",
+     "evidence": "Moselle wine and goods moved by boat between Trier and Koblenz.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Moselle"
+     ]
+    }
+   },
+   {
+    "river": "Neckar",
+    "head": {
+     "place": "Heilbronn",
+     "tag": "heilbronn",
+     "evidence": "Heilbronn held Neckar navigation privileges (1333) and was the head of regular Neckar shipping.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Heilbronn",
+      "https://en.wikipedia.org/wiki/Neckar"
+     ]
+    }
+   }
+  ],
+  "obstacles": [
+   {
+    "name": "Middle Rhine gorge reefs: Binger Loch and Lorelei (nearest tag katzenelnbogen, which held St. Goar)",
+    "tag": "katzenelnbogen",
+    "kind": "reef/rapids",
+    "evidence": "The rock bar at the Binger Loch and the reefs by the Lorelei were the most dangerous passages on the Rhine.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Binger_Loch",
+     "https://en.wikipedia.org/wiki/Lorelei"
+    ]
+   }
+  ],
+  "period_note": "Staple towns Cologne and Mainz forced transshipment; dozens of tolls. Delta: IJssel listed separately; Lek/Nederrijn omitted as minor."
+ },
+ {
+  "river": "Meuse/Maas",
+  "include": true,
+  "reason": "The Meuse carried Ardennes stone, timber, coal and Dinant/Liege metalwork downstream and salt and fish upstream, with ports at Namur, Huy, Liege and Maastricht.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Dordrecht",
+   "tag": "dordrecht",
+   "evidence": "Dordrecht at the Maas-Merwede junction was the sea-going port and staple for Meuse traffic.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Dordrecht",
+    "https://en.wikipedia.org/wiki/Meuse"
+   ]
+  },
+  "river_head": {
+   "place": "Namur (trade reached Dinant and Mezieres; dinant tag has has_river False)",
+   "tag": "namur",
+   "evidence": "Medieval Meuse ports ran from Mezieres through Dinant, Namur, Huy and Liege to Maastricht.",
+   "sources": [
+    "https://books.openedition.org/psorbonne/12912?lang=en",
+    "https://en.wikipedia.org/wiki/Meuse"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Many small-lordship tolls rather than physical barriers; Venlo, Roermond, Maastricht and Liege lie on the reach."
+ },
+ {
+  "river": "Scheldt",
+  "include": true,
+  "reason": "The Scheldt linked Antwerp, Europe's leading 16th-century port, with Ghent and the Tournai stone and Hainaut grain country.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Antwerp",
+   "tag": "antwerp",
+   "evidence": "Sea-going ships reached Antwerp until the Dutch closed the Scheldt in 1585.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Antwerp",
+    "https://en.wikipedia.org/wiki/Scheldt"
+   ]
+  },
+  "river_head": {
+   "place": "Tournai",
+   "tag": "tournai",
+   "evidence": "Tournai stone and Hainaut grain went downriver to Ghent's grain staple and Antwerp.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Scheldt",
+    "https://en.wikipedia.org/wiki/Tournai"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Lys",
+    "head": {
+     "place": "Kortrijk (tag kortriik, has_river False)",
+     "tag": "kortriik",
+     "evidence": "The Lys carried Artois grain and Flemish goods to Ghent.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Lys_(river)"
+     ]
+    }
+   },
+   {
+    "river": "Rupel/Dijle",
+    "head": {
+     "place": "Mechelen",
+     "tag": "mechelen",
+     "evidence": "Mechelen's staple for salt, fish and oats relied on boats on the Dijle from the Scheldt/Rupel.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Mechelen",
+      "https://en.wikipedia.org/wiki/Dijle"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "1585-1795 the Dutch blocked the Scheldt mouth for sea trade to Antwerp; river traffic continued."
+ },
+ {
+  "river": "Lys",
+  "include": false,
+  "reason": "Kept, but merged into the Scheldt entry as a branch (Ghent-Kortrijk).",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Ghent (confluence with Scheldt)",
+   "tag": "ghent",
+   "evidence": "Ghent sits at the Lys-Scheldt confluence.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Lys_(river)"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "See Scheldt branches."
+ },
+ {
+  "river": "IJssel",
+  "include": true,
+  "reason": "The IJssel connected the Rhine with the Zuiderzee and carried the trade of the Hanseatic towns Kampen, Zwolle, Deventer, Zutphen and Doesburg.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Kampen",
+   "tag": "kampen",
+   "evidence": "Kampen was a Hanseatic seaport at the IJssel mouth.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Kampen,_Overijssel",
+    "https://en.wikipedia.org/wiki/IJssel"
+   ]
+  },
+  "river_head": {
+   "place": "Arnhem (IJssel leaves the Rhine at Westervoort, next to Arnhem)",
+   "tag": "arnhem",
+   "evidence": "The IJssel is a Rhine branch; Deventer and Zutphen traded with Cologne along it.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/IJssel",
+    "https://www.canonvannederland.nl/en/hanze"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Silting of the IJssel (from c. 1430)",
+    "tag": "kampen",
+    "kind": "silting/shoals",
+    "evidence": "Silting from about 1430 gradually ended Kampen's prosperity.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Kampen,_Overijssel"
+    ]
+   }
+  ],
+  "period_note": "Strong in 1300-1450, declining after; deventer and zutphen tags exist but have has_river False. Neither the vanilla map nor the hydrology network draws the IJssel (a Rhine distributary), so its channel runs straight through its stops.",
+  "kind": "unmapped_river",
+  "stops": [
+   "arnhem",
+   "zutphen",
+   "deventer",
+   "zwolle",
+   "kampen"
+  ]
+ },
+ {
+  "river": "Thames",
+  "include": true,
+  "reason": "London's grain, malt, wood and wool supply from the Thames valley came by barge.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "London",
+   "tag": "london",
+   "evidence": "London was the sea port; sea ships moored below London Bridge.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/River_Thames",
+    "https://en.wikipedia.org/wiki/Port_of_London"
+   ]
+  },
+  "river_head": {
+   "place": "Henley",
+   "tag": "henley",
+   "evidence": "By c.1300 Henley was the main transshipment point for grain to London and effectively the head of large-scale navigation; Burcot/Oxford only reopened c.1600-1635.",
+   "sources": [
+    "https://www.british-history.ac.uk/vch/oxon/vol16/pp78-104",
+    "https://www.british-history.ac.uk/vch/oxon/vol16/pp23-30"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Old London Bridge",
+    "tag": "london",
+    "kind": "bridge/rapids",
+    "evidence": "The narrow arches of medieval London Bridge made a dangerous fall ('shooting the bridge') and stopped ships going above it.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Old_London_Bridge"
+    ]
+   }
+  ],
+  "period_note": "Head moved upstream to Burcot then Oxford after the Oxford-Burcot Commission (1605-1635)."
+ },
+ {
+  "river": "Severn",
+  "include": true,
+  "reason": "The Severn was England's busiest free river, with trows carrying goods between Bristol Channel ports, Gloucester, Worcester, Bewdley and Shrewsbury.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Gloucester",
+   "tag": "gloucester",
+   "evidence": "Gloucester was the highest port reached by sea-going vessels on the tidal Severn (customs port from 1580).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Gloucester",
+    "https://en.wikipedia.org/wiki/River_Severn"
+   ]
+  },
+  "river_head": {
+   "place": "Shrewsbury",
+   "tag": "shrewsbury",
+   "evidence": "Severn trows traded up to Shrewsbury; Bewdley (no tag) was a major inland port.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/River_Severn",
+    "https://en.wikipedia.org/wiki/Bewdley"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Bristol (on the Avon, tag bristol) was the regional sea port; the Severn tidal bore and shoals hindered but did not stop trade."
+ },
+ {
+  "river": "Humber/Ouse/Trent",
+  "include": true,
+  "reason": "Hull, York and the Trent towns were joined by one river system carrying wool, lead, grain and cloth.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "York (medieval; later only lighter craft)",
+   "tag": "york",
+   "evidence": "York traded overseas by ship in the 14th century; by the late 16th century larger sea ships could no longer reach it.",
+   "sources": [
+    "https://www.historyofyork.org.uk/themes/trade-on-the-rivers",
+    "https://en.wikipedia.org/wiki/River_Ouse,_Yorkshire"
+   ]
+  },
+  "river_head": null,
+  "branches": [
+   {
+    "river": "Trent",
+    "head": {
+     "place": "Nottingham (Gainsborough, the Trent's sea-ship port, has no tag)",
+     "tag": "nottingham",
+     "evidence": "Gainsborough became the main inland port on the Trent in the 16th century; boats traded on to Nottingham.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/River_Trent",
+      "https://en.wikipedia.org/wiki/Gainsborough,_Lincolnshire"
+     ]
+    }
+   }
+  ],
+  "obstacles": [
+   {
+    "name": "Silting of the Ouse below York",
+    "tag": "york",
+    "kind": "shoals/silting",
+    "evidence": "Sediment build-up cut York off from larger ships by the late 16th century.",
+    "sources": [
+     "https://www.historyofyork.org.uk/themes/trade-on-the-rivers"
+    ]
+   }
+  ],
+  "period_note": "Mouth port Hull (tag hull). None of york, nottingham or hull have has_river True in the TSV."
+ },
+ {
+  "river": "Great Ouse (added)",
+  "include": true,
+  "reason": "King's Lynn's Hanseatic port fed the Fens: boats served Ely, Cambridge (Stourbridge Fair) and Huntingdon.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "King's Lynn",
+   "tag": "lynn",
+   "evidence": "King's Lynn was a major medieval port at the Great Ouse mouth.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/River_Great_Ouse",
+    "https://en.wikipedia.org/wiki/King%27s_Lynn"
+   ]
+  },
+  "river_head": {
+   "place": "Huntingdon/St Ives (tag huntingdon, has_river False)",
+   "tag": "huntingdon",
+   "evidence": "Before 17th-century improvements the Bedford bridge blocked the upper river, so trade stopped around St Ives/Huntingdon.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/River_Great_Ouse",
+    "https://www.bedfordshirehrs.org.uk/content/publication/navigation-great-ouse"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Cam",
+    "head": {
+     "place": "Cambridge (has_river False)",
+     "tag": "cambridge",
+     "evidence": "Cambridge and the Stourbridge Fair were supplied by boat from Lynn along the Cam.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/River_Cam",
+      "https://en.wikipedia.org/wiki/Stourbridge_Fair"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "Optional addition; drop if the English set must stay smaller."
+ },
+ {
+  "river": "Guadalquivir",
+  "include": true,
+  "reason": "Seville was the only port for the Indies trade (1503-1717) and barges carried wool and oil down from Cordoba.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Seville",
+   "tag": "sevilla",
+   "evidence": "Ocean ships of the Carrera de Indias sailed up the Guadalquivir to Seville.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Guadalquivir",
+    "https://en.wikipedia.org/wiki/Seville"
+   ]
+  },
+  "river_head": {
+   "place": "Cordoba",
+   "tag": "cordoba",
+   "evidence": "In medieval times barges navigated from Seville up to Cordoba, carrying bulk wool.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Guadalquivir"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Sanlucar bar",
+    "tag": "sanlucar",
+    "kind": "sand bar",
+    "evidence": "The sand bar at the river mouth made Sanlucar an outport for heavy cargo by 1500.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Guadalquivir"
+    ]
+   },
+   {
+    "name": "Mill weirs between Seville and Cordoba",
+    "tag": "cordoba",
+    "kind": "weirs",
+    "evidence": "Mill weirs damaged barges and hindered navigation.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Guadalquivir"
+    ]
+   },
+   {
+    "name": "Silting of the lower river (16th century)",
+    "tag": "sevilla",
+    "kind": "silting",
+    "evidence": "Silting grew worse in the 16th century and began to halt navigation.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Guadalquivir"
+    ]
+   }
+  ],
+  "period_note": "The Seville-Cordoba barge reach faded during the 16th century; sea traffic moved to Cadiz from 1717."
+ },
+ {
+  "river": "Tagus",
+  "include": true,
+  "reason": "The Tagus estuary and lower river fed Lisbon with Ribatejo grain, wine and wood; in 1552 about 1,490 riverboats served Lisbon.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Lisbon",
+   "tag": "lisbon",
+   "evidence": "Lisbon on the Tagus estuary was the imperial seaport.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tagus",
+    "https://en.wikipedia.org/wiki/Lisbon"
+   ]
+  },
+  "river_head": {
+   "place": "Tancos/Abrantes (nearest tag torres_novas; santarem is the next big river port downstream)",
+   "tag": "torres_novas",
+   "evidence": "In the 16th century Tancos was the most important Tagus river port, with boats reaching Abrantes.",
+   "sources": [
+    "https://getlisbon.com/getlisbon-invites/brief-history-tagus-estuary-boats/",
+    "https://en.wikipedia.org/wiki/Abrantes"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Philip II's 1580s scheme to open the Tagus to Toledo did not last; Spanish Tagus excluded."
+ },
+ {
+  "river": "Douro",
+  "include": true,
+  "reason": "Rabelo boats carried Alto Douro wine and goods down to Porto/Gaia for centuries (Gaia staple law 1254).",
+  "confidence": "low",
+  "sea_head": {
+   "place": "Porto",
+   "tag": "porto",
+   "evidence": "Porto and Vila Nova de Gaia at the mouth were the seaport and staple.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Douro",
+    "https://en.wikipedia.org/wiki/Staple_right"
+   ]
+  },
+  "river_head": {
+   "place": "Peso da Regua (nearest tag lamego)",
+   "tag": "lamego",
+   "evidence": "Rabelo boats carried port wine from the Douro valley around Regua to the Gaia cellars.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Rabelo_boat"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Rapids along the gorge (Cachao da Valeira above Regua cleared only in the 1790s)",
+    "tag": "lamego",
+    "kind": "rapids",
+    "evidence": "The rocky Douro gorge made every trip a hazardous downstream run.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Douro"
+    ]
+   }
+  ],
+  "period_note": "Heavy traffic belongs mostly to the port wine era (after c.1680); low confidence for 1300-1600."
+ },
+ {
+  "river": "Ebro",
+  "include": true,
+  "reason": "Royal privileges protected Zaragoza boatmen, and barges carried Aragonese grain to Tortosa (e.g. 1354).",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Tortosa",
+   "tag": "tortosa",
+   "evidence": "Tortosa was the sea-going port near the Ebro mouth.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tortosa",
+    "https://en.wikipedia.org/wiki/Ebro"
+   ]
+  },
+  "river_head": {
+   "place": "Zaragoza",
+   "tag": "zaragoza",
+   "evidence": "Barges carried grain from Zaragoza to Tortosa; a study covers Ebro navigation 1399-1602.",
+   "sources": [
+    "https://ifc.dpz.es/recursos/publicaciones/36/80/_ebook.pdf",
+    "https://www.academia.edu/20429807/El_Ebro_y_Zaragoza_Situaci%C3%B3n_del_r%C3%ADo_a_su_paso_por_la_ciudad_de_Zaragoza_y_su_problem%C3%A1tica_relaci%C3%B3n_entre_finales_del_siglo_XIV_y_mediados_del_siglo_XV"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Rocky narrows and mill weirs around Mequinenza and Flix",
+    "tag": "flix",
+    "kind": "rapids/weirs",
+    "evidence": "The gorge reaches between Mequinenza and Flix were the difficult part of the Zaragoza-Tortosa run.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Ebro"
+    ]
+   }
+  ],
+  "period_note": "Traffic mostly downstream and seasonal; declined after 1600 (Imperial Canal of Aragon later)."
+ },
+ {
+  "river": "Po",
+  "include": true,
+  "reason": "The Po carried Venetian salt and goods to Lombardy and grain back, linking Venice, Ferrara, Cremona, Piacenza and Pavia.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Po delta, Venetian entry via Chioggia/Brondolo (tag chioggia)",
+   "tag": "chioggia",
+   "evidence": "Venetian river traffic reached the Po through the lagoon at Chioggia/Brondolo; sea-going ships did not go up the Po.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Po_(river)",
+    "https://en.wikipedia.org/wiki/Economic_history_of_Venice"
+   ]
+  },
+  "river_head": {
+   "place": "Pavia",
+   "tag": "pavia",
+   "evidence": "The Po is navigable from its mouth to Pavia, where the Ticino and navigli lead to Milan.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Po_(river)",
+    "https://www.europeanwaterways.com/blog/po-river-italy-guide/"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Mincio",
+    "head": {
+     "place": "Mantua",
+     "tag": "mantova",
+     "evidence": "Mantua's lakes connected to the Po via the navigable Mincio.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Mincio"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "Delta mouths shifted (Porto Viro cut 1604); Ferrara/Venice tolls and wars (e.g. 1313 treaty) affected traffic."
+ },
+ {
+  "river": "Adige",
+  "include": true,
+  "reason": "Burchi boats hauled salt and goods from the Venetian lagoon up to Verona, the Adige being a trade road between the Alps and Venice.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Adige mouth at Brondolo near Chioggia (tag chioggia)",
+   "tag": "chioggia",
+   "evidence": "The Adige was navigable from Bronzolo down to Brondolo near Venice.",
+   "sources": [
+    "https://www.guideverona.net/en/adige-river-an-extraordinary-trade-route/"
+   ]
+  },
+  "river_head": {
+   "place": "Verona",
+   "tag": "verona",
+   "evidence": "Barges went up from the lagoon to Verona's river customs; above Verona mostly rafts came down from Trentino.",
+   "sources": [
+    "https://www.guideverona.net/en/adige-river-an-extraordinary-trade-route/",
+    "https://en.wikipedia.org/wiki/Adige"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Legnago on the reach; boat traffic above Verona (to Bronzolo) existed but was mixed with timber rafting, so it is left out."
+ },
+ {
+  "river": "Tiber",
+  "include": true,
+  "reason": "Rome's river ports received sea cargo at Ripa Grande and boats carrying wine, oil, wood and charcoal from Sabina and Umbria at Ripetta.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Rome",
+   "tag": "rome",
+   "evidence": "Coastal ships came up the Tiber from Fiumicino to Rome's Ripa Grande.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tiber",
+    "https://en.wikipedia.org/wiki/Porto_di_Ripetta"
+   ]
+  },
+  "river_head": {
+   "place": "Orte",
+   "tag": "orte",
+   "evidence": "Boats brought goods down to Rome's Ripetta port from northern Lazio and southern Umbria.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Porto_di_Ripetta",
+    "https://www.milestonerome.com/2015/07/porto-di-ripetta-the-vanished-harbor/"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Mostly downstream traffic; the Ripetta port building dates from 1704 but the trade is older."
+ },
+ {
+  "river": "Arno",
+  "include": true,
+  "reason": "Navicelli boats carried Florence's trade between Pisa/Porto Pisano (later Livorno) and the Porto di Signa.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Pisa",
+   "tag": "pisa",
+   "evidence": "Pisa was the Arno's sea port (Porto Pisano, later Livorno via the Navicelli canal).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Porto_Pisano",
+    "https://en.wikipedia.org/wiki/Navicelli_channel"
+   ]
+  },
+  "river_head": {
+   "place": "Porto di Signa (nearest tag florence)",
+   "tag": "florence",
+   "evidence": "Signa was Florence's river port; above it goods went on by mule because of the irregular flow.",
+   "sources": [
+    "https://it.wikipedia.org/wiki/Porto_di_Signa",
+    "https://en.wikipedia.org/wiki/Signa"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Flow irregular, so shallow-draught boats only; Pontedera and Empoli lie on the reach."
+ },
+ {
+  "river": "Weser",
+  "include": true,
+  "reason": "The Weser was a staple-controlled trade route from Bremen via Minden and Hameln to Munden.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Bremen",
+   "tag": "bremen",
+   "evidence": "Bremen was the Weser seaport (Vegesack outport built later because of silting).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Weser",
+    "https://en.wikipedia.org/wiki/Bremen"
+   ]
+  },
+  "river_head": {
+   "place": "Hann. Munden (nearest tag hofgeismar; Munden has no tag)",
+   "tag": "hofgeismar",
+   "evidence": "Munden's 1247 staple right on the Weser/Werra/Fulda made it the transshipment head of Weser shipping.",
+   "sources": [
+    "https://de.wikipedia.org/wiki/M%C3%BCndener_Stapelrecht",
+    "https://en.wikipedia.org/wiki/Hann._M%C3%BCnden"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Hameln weir ('Hamelner Loch')",
+    "tag": "hamelin",
+    "kind": "weir",
+    "evidence": "Ships had to pass a narrow, dangerous gap in the mill weir at Hameln, where the Munden shippers' monopoly ended.",
+    "sources": [
+     "https://de.wikipedia.org/wiki/M%C3%BCndener_Stapelrecht",
+     "https://en.wikipedia.org/wiki/Weser"
+    ]
+   }
+  ],
+  "period_note": "Minden (tag minden) also held a grain/timber staple."
+ },
+ {
+  "river": "Elbe",
+  "include": true,
+  "reason": "The Elbe carried salt, grain and goods between Hamburg, Magdeburg, Saxony and Bohemia.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Hamburg",
+   "tag": "hamburg",
+   "evidence": "Hamburg was the Elbe's seaport and maintained the lower channel buoys from 1450.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Elbe",
+    "https://en.wikipedia.org/wiki/Hamburg"
+   ]
+  },
+  "river_head": {
+   "place": "Dresden (Pirna, the staple for Bohemian goods, has no tag)",
+   "tag": "dresden",
+   "evidence": "Hamburg merchants traded upstream to Magdeburg and Dresden; Magdeburg's staple forced transshipment on the way.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Elbe",
+    "https://www.intoxicatingspaces.org/research/hamburg/"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Havel/Spree",
+    "head": {
+     "place": "Berlin",
+     "tag": "berlin",
+     "evidence": "Berlin-Colln traded with Hamburg by boat via the Spree, Havel and Elbe.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Havel",
+      "https://en.wikipedia.org/wiki/Spree"
+     ]
+    }
+   }
+  ],
+  "obstacles": [
+   {
+    "name": "Domfelsen rock at Magdeburg",
+    "tag": "magdeburg",
+    "kind": "rock reef",
+    "evidence": "The Domfelsen rock bar in the Elbe at Magdeburg is a long-standing navigation hazard at low water.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Domfelsen"
+    ]
+   }
+  ],
+  "period_note": "Minimal alternative: stop at Magdeburg (staple). Traffic also continued into Bohemia (Litomerice)."
+ },
+ {
+  "river": "Ems",
+  "include": false,
+  "reason": "Only Emden at the mouth mattered; the Ems above Leer carried small-craft local traffic only.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Emden",
+   "tag": "emden",
+   "evidence": "Emden was the Ems mouth port.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Ems_(river)",
+    "https://en.wikipedia.org/wiki/Emden"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Excluded."
+ }
+]

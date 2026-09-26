@@ -1,0 +1,402 @@
+[
+ {
+  "river": "Nile",
+  "include": true,
+  "reason": "Egypt's main cargo artery: grain, sugar and Red Sea goods moved by Nile boats between the Delta, Cairo (Bulaq/Fustat) and Upper Egypt throughout the period.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Rosetta (Rashid)",
+   "tag": "rashid",
+   "evidence": "Sea craft crossed the Rosetta bar only as far as Rosetta, where cargo for Cairo was shifted to river boats.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Rosetta",
+    "https://en.wikipedia.org/wiki/Nile"
+   ]
+  },
+  "river_head": {
+   "place": "Aswan (below the First Cataract)",
+   "tag": "aswan",
+   "evidence": "The First Cataract at Aswan was the normal end of Egyptian river traffic and the trans-shipment point for Nubia.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Aswan",
+    "https://en.wikipedia.org/wiki/Cataracts_of_the_Nile"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Nile (Damietta branch)",
+    "head": {
+     "place": "Damietta",
+     "tag": "damietta",
+     "evidence": "Damietta at the eastern mouth was the sea port for Levant trade, linked to Cairo by the Damietta branch.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Damietta",
+      "https://en.wikipedia.org/wiki/Nile_Delta"
+     ]
+    }
+   },
+   {
+    "river": "Alexandria canal (Khalij al-Iskandariyya, later Mahmudiyya canal)",
+    "head": {
+     "place": "Alexandria",
+     "tag": "alexandria",
+     "evidence": "A canal from the Rosetta branch near Fuwa carried Nile boats to Alexandria; re-dug in 1311 and rebuilt as the Mahmudiyya canal in 1820.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/El_Mahmoudiyah",
+      "https://en.wikipedia.org/wiki/Alexandria"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "Whole Egyptian Nile Rosetta/Damietta -> Cairo -> Qus/Qena -> Aswan. Qus (tag qus) was the main Upper Egyptian port for the Red Sea route in the 13th-14th c. Nubian reach above Aswan excluded: Second-Sixth Cataracts break it into short local stretches. Alexandria canal was flood-season only before 1820 (confidence medium for the canal)."
+ },
+ {
+  "river": "Shatt al-Arab",
+  "include": true,
+  "reason": "Tidal estuary that let Indian Ocean ships reach Basra, the Gulf port of Iraq.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Basra",
+   "tag": "basra",
+   "evidence": "Basra was the head of sea-going navigation on the Shatt al-Arab and Iraq's port for Gulf and Indian trade.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Shatt_al-Arab",
+    "https://en.wikipedia.org/wiki/Basra"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Mouth locations abadan / zuwayr. River traffic continues up the Tigris (see Tigris); confluence at al-Qurna (no tag; nearest river location al_madar or basra)."
+ },
+ {
+  "river": "Tigris",
+  "include": true,
+  "reason": "Boats regularly carried merchants and goods between Basra and Baghdad (e.g. Ralph Fitch 1583), the main river link of Iraq.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Basra (via the Shatt al-Arab)",
+   "tag": "basra",
+   "evidence": "Sea-going ships stopped at Basra; cargo continued up the Tigris by river boat.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Shatt_al-Arab",
+    "https://en.wikipedia.org/wiki/Basra"
+   ]
+  },
+  "river_head": {
+   "place": "Baghdad",
+   "tag": "baghdad",
+   "evidence": "Baghdad was the upstream terminus of regular boat traffic from Basra; above it the river was mostly run downstream by kelek rafts from Mosul.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tigris",
+    "https://en.wikipedia.org/wiki/Ralph_Fitch",
+    "https://en.wikipedia.org/wiki/Kelek"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Reach Basra -> Qurna -> Wasit/Kut -> Baghdad. Mosul-Baghdad kelek (raft) traffic excluded as downstream-only. Steamers ran Basra-Baghdad from the 1830s-60s (Lynch)."
+ },
+ {
+  "river": "Euphrates",
+  "include": false,
+  "reason": "Excluded: 16th-c. merchants floated down from Birecik to Falluja in boats that were sold at the end, so traffic was essentially downstream-only, and the lower river ran into the Bata'ih marshes.",
+  "confidence": "medium",
+  "sea_head": null,
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "If wanted as a borderline case: Birecik (birecik) -> Raqqa (raqqa) -> Anah (anah) -> Hit (hit) -> Falluja (al_anbar), documented by Federici, Rauwolf and Fitch; upstream the boats were towed only with great difficulty. Chesney's 1836 steamer expedition proved it navigable but no regular service followed."
+ },
+ {
+  "river": "Karun",
+  "include": false,
+  "reason": "Excluded: commercial navigation to Ahvaz opened only in 1888, and medieval Ahvaz trade had long declined by 1337.",
+  "confidence": "medium",
+  "sea_head": null,
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Would be Muhammerah (muhammerah) -> Ahvaz (ahvaz), rapids at Ahvaz, small boats above to Shushtar (shushtar)."
+ },
+ {
+  "river": "Amu Darya",
+  "include": false,
+  "reason": "Excluded: no well-attested regular cargo boat traffic in 1300-1600; the river was crossed by ferries and flows into the landlocked Aral Sea.",
+  "confidence": "medium",
+  "sea_head": null,
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Medieval geographers mention boats between Termez and Khwarazm and Russia ran an Aral flotilla from the 1850s, both outside the focus period."
+ },
+ {
+  "river": "Syr Darya",
+  "include": false,
+  "reason": "Excluded: no regular cargo navigation in the period; ends in the Aral Sea.",
+  "confidence": "high",
+  "sea_head": null,
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Kura",
+  "include": false,
+  "reason": "Excluded: lower Kura traffic was mainly fishery boats at Salyan; steamer navigation up to Mingachevir is 19th century.",
+  "confidence": "medium",
+  "sea_head": null,
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Niger (middle, inland delta)",
+  "include": true,
+  "reason": "Large canoes and barges carried grain, salt and gold between Djenne, Timbuktu's port Kabara and Gao, the core trade axis of Mali and Songhai.",
+  "confidence": "high",
+  "sea_head": null,
+  "river_head": {
+   "place": "Segou",
+   "tag": "segou",
+   "evidence": "Segou/Sansanding was the upstream trade port of the middle Niger canoe network (Mungo Park saw heavy traffic there in 1796).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Niger_River",
+    "https://en.wikipedia.org/wiki/Ségou"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Bani",
+    "head": {
+     "place": "Djenne",
+     "tag": "djenne",
+     "evidence": "Djenne on the Bani floodplain shipped goods by boat down to Timbuktu.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Djenné",
+      "https://en.wikipedia.org/wiki/Bani_River"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "lower_end: gao. Disconnected from the sea by the Ansongo-Labbezanga rapids below Gao and the Bussa rapids further down. Timbuktu itself (tag timbuktu, has_river False) is served by its port Kabara (tag kabara). High-water navigation also reaches Koulikoro (koulikoro); Sotuba rapids at Bamako above that."
+ },
+ {
+  "river": "Niger (lower)",
+  "include": true,
+  "reason": "Large trade canoes of Aboh, Onitsha and the Igala carried palm oil, yams, salt and slaves between the Delta and the Niger-Benue confluence.",
+  "confidence": "low",
+  "sea_head": {
+   "place": "Brass / Nembe (Niger Delta)",
+   "tag": "brass",
+   "evidence": "Sea-going ships traded at the Delta ports and did not ascend the river before Laird's steamers of 1832.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Niger_River",
+    "https://en.wikipedia.org/wiki/Brass,_Nigeria"
+   ]
+  },
+  "river_head": {
+   "place": "Lokoja (Niger-Benue confluence)",
+   "tag": "lokoja",
+   "evidence": "Canoe trade from the Delta through Onitsha and Idah reached the confluence; rapids near Jebba and Bussa end navigation above.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Niger_River",
+    "https://en.wikipedia.org/wiki/Lokoja"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Evidence is mostly 18th-19th c. (Lander 1830, Laird 1832); pre-1600 volume uncertain, hence low confidence. Intermediate: onitsha, idah. Benue excluded (flood-season only)."
+ },
+ {
+  "river": "Senegal",
+  "include": true,
+  "reason": "European barques and local boats sailed each high-water season from Saint-Louis to Galam carrying gum, grain and slaves (17th-19th c.).",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Saint-Louis (Ndar)",
+   "tag": "ndar",
+   "evidence": "Saint-Louis at the mouth was the head of sea-going traffic; ships had to cross a dangerous bar.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Saint-Louis,_Senegal",
+    "https://en.wikipedia.org/wiki/Senegal_River"
+   ]
+  },
+  "river_head": {
+   "place": "Bakel (Galam)",
+   "tag": "bakel",
+   "evidence": "The Galam trading posts near Bakel were the upriver terminus, reached only in the July-October flood.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Bakel",
+    "https://en.wikipedia.org/wiki/Senegal_River"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Seasonal but substantial; intermediate podor, matam. Felou falls above Kayes (tag kayes) mark the absolute limit; Medine 1855 extends the head to Kayes only in the late 19th c."
+ },
+ {
+  "river": "Gambia",
+  "include": true,
+  "reason": "Portuguese and English ships and sloops sailed far up the Gambia to trade at Kassan and the Wuli markets from the 15th century on.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Kassan / Kuntaur area",
+   "tag": "wassu",
+   "evidence": "Sea-going vessels regularly ascended to the Kassan-Kuntaur reach (no Kassan tag; wassu is the nearest river location).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Gambia_River",
+    "https://en.wikipedia.org/wiki/Wassu"
+   ]
+  },
+  "river_head": {
+   "place": "Sutuko / Fattatenda (Wuli)",
+   "tag": "sutuko",
+   "evidence": "Boats continued to the Wuli markets below Barrakunda Falls, the limit reached by Richard Jobson in 1620.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Barrakunda_Falls",
+    "https://en.wikipedia.org/wiki/Kingdom_of_Wuli"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Mouth location: tag gambia (Banjul/James Island area; juffure and albreda have has_river False). Barrakunda Falls lie just above the head."
+ },
+ {
+  "river": "Volta",
+  "include": false,
+  "reason": "Excluded: only canoe salt trade from Ada upriver, broken by the Senchi rapids.",
+  "confidence": "medium",
+  "sea_head": null,
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Benue",
+  "include": false,
+  "reason": "Excluded: navigable only in the flood season and used by steamers only from the 1850s.",
+  "confidence": "high",
+  "sea_head": null,
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Congo",
+  "include": false,
+  "reason": "Excluded: in 1300-1600 sea ships traded only at the mouth (Mpinda/Soyo), Livingstone Falls block the river below Pool Malebo, and the big Bobangi canoe trade above the Pool is 18th-19th c.",
+  "confidence": "medium",
+  "sea_head": null,
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "If wanted: estuary Soyo (soyo) up to Boma (no tag) below Livingstone Falls; the middle Congo above Pool Malebo is a disconnected system."
+ },
+ {
+  "river": "Kwanza",
+  "include": true,
+  "reason": "The Portuguese supply route from the coast to their forts at Muxima, Massangano and Cambambe ran by boat on the Kwanza (late 16th-17th c.).",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Kwanza mouth (bar)",
+   "tag": "calumbo",
+   "evidence": "Sea ships stayed at Luanda; small craft entered the Kwanza bar (Calumbo is the nearest tagged river location near the mouth).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Kwanza_River",
+    "https://en.wikipedia.org/wiki/Luanda"
+   ]
+  },
+  "river_head": {
+   "place": "Cambambe / Dondo",
+   "tag": "dondo",
+   "evidence": "The falls at Cambambe ended boat traffic; Massangano (1583) and Cambambe were the upriver Portuguese posts.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Cambambe",
+    "https://en.wikipedia.org/wiki/Massangano"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Intermediate muxima (Muxima 1599). The Massangano tag in the file is the Zambezi one (lower_mazowe_province), do not use it for the Kwanza."
+ },
+ {
+  "river": "Zambezi",
+  "include": true,
+  "reason": "Swahili and then Portuguese boats carried cloth, beads and gold/ivory between the coast and the inland markets of Sena and Tete from the 16th century.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Luabo / Cuama mouth",
+   "tag": "cuama",
+   "evidence": "Sea ships anchored at the Zambezi mouths (Cuama) and cargo went up in river boats.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Zambezi",
+    "https://en.wikipedia.org/wiki/Sena,_Mozambique"
+   ]
+  },
+  "river_head": {
+   "place": "Tete",
+   "tag": "tete",
+   "evidence": "Tete was the upstream trade post; the Cahora Bassa rapids just above stopped boats.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tete,_Mozambique",
+    "https://en.wikipedia.org/wiki/Cahora_Bassa"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Qua Qua (Rio dos Bons Sinais) to Quelimane",
+    "head": {
+     "place": "Quelimane",
+     "tag": "quelimane",
+     "evidence": "Quelimane at the mouth of the Qua Qua became the main sea port for the Zambezi, connected in flood season through the Mazaro channel.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Quelimane",
+      "https://en.wikipedia.org/wiki/Zambezi"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "Reach cuama/chindre -> chupanga -> sena -> Lupata gorge (navigable) -> tete. Shire excluded (Murchison cataracts, 19th-c. traffic only). Quelimane branch is seasonal (medium confidence)."
+ },
+ {
+  "river": "Shire",
+  "include": false,
+  "reason": "Excluded: navigation to Chiromo is 19th-century steamer traffic, blocked above by the Murchison cataracts.",
+  "confidence": "medium",
+  "sea_head": null,
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Limpopo",
+  "include": false,
+  "reason": "Excluded: shallow, sandbar-blocked, no regular cargo boats.",
+  "confidence": "high",
+  "sea_head": null,
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Juba",
+  "include": false,
+  "reason": "Excluded: only local craft; no sustained cargo navigation.",
+  "confidence": "medium",
+  "sea_head": null,
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ }
+]

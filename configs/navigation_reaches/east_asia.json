@@ -1,0 +1,487 @@
+[
+ {
+  "river": "Yangtze",
+  "include": true,
+  "reason": "China's backbone waterway for two millennia: ocean junks reached Nanjing and river junks carried bulk cargo through Wuchang/Hankou and Jiangling to Yichang and, through the Three Gorges, to Chongqing.",
+  "confidence": "high",
+  "kind": "river",
+  "sea_head": {
+   "place": "Nanjing (Longjiang shipyard); Zhenjiang (dantu) is the lower alternative",
+   "tag": "jiangning",
+   "evidence": "Zheng He's ocean-going treasure ships were built at the Longjiang yard by Nanjing and sailed down the Yangtze to Liujiagang, so sea-going hulls regularly used the river up to Nanjing.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Ming_treasure_voyages",
+    "https://en.wikipedia.org/wiki/Chinese_treasure_ship"
+   ]
+  },
+  "river_head": {
+   "place": "Chongqing",
+   "tag": "baxian",
+   "evidence": "Junks worked the upper river from Yichang through the gorges to Chongqing, the Sichuan entrepot; steamers only managed the same run in 1900.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Yangtze",
+    "https://www.britannica.com/place/Yangtze-River/Navigation"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Han River (Hubei)",
+    "head": {
+     "place": "Xiangyang / Fancheng (junks went on to Laohekou = guanghua)",
+     "tag": "fancheng",
+     "evidence": "Fancheng, across the river from Xiangyang, was the Han River trade and transshipment hub for junk traffic between the upper Han and Hankou.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Fancheng,_Xiangyang",
+      "https://www.britannica.com/place/Xiangfan"
+     ]
+    }
+   },
+   {
+    "river": "Dongting Lake and Xiang River (enter at Yuezhou = baling)",
+    "head": {
+     "place": "Xiangtan (Changsha = changsha is 40 km downstream)",
+     "tag": "xiangtan",
+     "evidence": "Xiangtan grew in the Ming and Qing into the Xiang River's main rice and medicine entrepot, a transfer point for goods to Canton and Hankou.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Xiangtan",
+      "https://en.wikipedia.org/wiki/Xiang_River"
+     ]
+    }
+   },
+   {
+    "river": "Poyang Lake and Gan River (enter at Hukou = hukou; Nanchang = nanchang, Ji'an = luling on the way)",
+    "head": {
+     "place": "Ganzhou",
+     "tag": "ganxian",
+     "evidence": "Boats used the Gan almost to Dayu at the Mei Pass, the main Yangtze-Canton route; Ganzhou was the head port before the portage.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Mei_Pass",
+      "https://www.britannica.com/place/Ganzhou"
+     ]
+    }
+   }
+  ],
+  "obstacles": [
+   {
+    "name": "Xiling Gorge",
+    "tag": "zigui",
+    "kind": "gorge with rapids",
+    "evidence": "The lowest of the Three Gorges runs from Zigui to Nanjin Pass above Yichang (yiling).",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Three_Gorges"
+    ]
+   },
+   {
+    "name": "Wu Gorge",
+    "tag": "wushan",
+    "kind": "gorge",
+    "evidence": "The middle gorge runs from Wushan to Guandukou in Badong (badong).",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Three_Gorges"
+    ]
+   },
+   {
+    "name": "Qutang Gorge",
+    "tag": "fengjie",
+    "kind": "gorge with rapids",
+    "evidence": "The upper gorge starts at Baidicheng by Fengjie (Kuizhou); boats needed trackers against whirlpools and cross-currents through the gorges.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Three_Gorges",
+     "https://en.wikipedia.org/wiki/Yangtze"
+    ]
+   },
+   {
+    "name": "Gan River rapids (Shiba Tan) above Ji'an",
+    "tag": "wanan",
+    "kind": "rapids (on the Gan branch)",
+    "evidence": "Above Ji'an the Gan is obstructed by rapids, and the Ji'an to Ganzhou run took junks about nine days.",
+    "sources": [
+     "https://www.britannica.com/place/Gan-River"
+    ]
+   }
+  ],
+  "stops": [],
+  "period_note": "Valid for the whole 1337-1837 span. Main river ports in order: dantu (Zhenjiang), jiangning (Nanjing), wuhu, huaining (Anqing), dehua_jiujiang (Jiujiang), wuchang/hanyang (Wuchang, Hankou), baling (Yuezhou), jiangling (Jingzhou/Shashi), yiling (Yichang), fengjie, baxian (Chongqing). Zhenjiang is where the Grand Canal crosses and is a safe alternative sea head."
+ },
+ {
+  "river": "Grand Canal",
+  "include": true,
+  "reason": "The Ming-Qing grain-tribute artery (over 11,000 state barges in the 1400s plus private trade) linking Hangzhou and the Yangtze delta to Beijing through many large cities.",
+  "confidence": "high",
+  "kind": "canal",
+  "sea_head": {
+   "place": "Hangzhou (southern terminus; no sea ships on the canal)",
+   "tag": "hangzhou",
+   "evidence": "Hangzhou was the canal's southern end and Beijing its northern end at the Ming peak of about 2,500 km.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Grand_Canal_(China)",
+    "https://www.britannica.com/topic/Grand-Canal-China"
+   ]
+  },
+  "river_head": {
+   "place": "Tongzhou (Beijing = dadu reached by land or the Tonghui River)",
+   "tag": "luxian",
+   "evidence": "Tongzhou became the canal's northern shipping terminus; cargo was unloaded there and taken to Beijing by land (later also by the Tonghui River).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Grand_Canal_(China)",
+    "http://www.chinaknowledge.de/History/Terms/caoyun.html"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Yangtze crossing between Guazhou (Yangzhou) and Zhenjiang",
+    "tag": "dantu",
+    "kind": "river crossing",
+    "evidence": "The southern section runs from Hangzhou to Zhenjiang, where it meets the Yangtze; boats crossed to Guazhou by Yangzhou.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Grand_Canal_(China)"
+    ]
+   },
+   {
+    "name": "Qingkou junction with the Yellow River / Huai River",
+    "tag": "qinghe_huaian",
+    "kind": "silting river junction",
+    "evidence": "Above Huai'an the canal used or crossed the silt-laden Yellow River course, the main maintenance headache run from Huai'an.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Grand_Canal_(China)"
+    ]
+   },
+   {
+    "name": "Shandong summit section (Nanwang)",
+    "tag": "wenshang",
+    "kind": "summit level with locks",
+    "evidence": "The canal's highest point (38.5 m) is at Nanwang, about 30 km north of Jining, crossed with locks.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Grand_Canal_(China)"
+    ]
+   }
+  ],
+  "stops": [
+   "hangzhou",
+   "jiaxing",
+   "wuxian",
+   "wuxi",
+   "wujin",
+   "dantu",
+   "jiangdu",
+   "gaoyou",
+   "baoying",
+   "shanyang_huaian",
+   "qinghe_huaian",
+   "suqian",
+   "xiapi",
+   "xuzhou",
+   "peixian",
+   "rencheng",
+   "liaocheng",
+   "linqing",
+   "ande",
+   "qingchi",
+   "zhigu",
+   "luxian",
+   "dadu"
+  ],
+  "period_note": "Ming Huitong canal reopened 1411-1415, used through 1837 (breakdown only after the 1855 Yellow River shift). Tags: wuxian = Suzhou, wujin = Changzhou, dantu = Zhenjiang, jiangdu = Yangzhou, shanyang_huaian = Huai'an, rencheng = Jining, ande = Dezhou (Ming Dezhou had no attached county; ande is its old seat, has_river False), qingchi = Cangzhou, zhigu = Tianjin, luxian = Tongzhou, dadu = Beijing. Before 1604 the Qingkou-Xuzhou leg ran on the Yellow River itself (suqian, xiapi). Many canal cities have has_river False because the map has no canal; jiangdu, gaoyou, baoying, wuxi, jiaxing, peixian, liaocheng, ande, luxian, dadu are canal-only."
+ },
+ {
+  "river": "Pearl River / Xi River",
+  "include": true,
+  "reason": "Western and Chinese sea ships reached the Whampoa anchorage of Guangzhou, and river junks carried Guangxi and Guangdong cargo up the Xi to Wuzhou and up the Bei towards the Mei Pass route.",
+  "confidence": "high",
+  "kind": "river",
+  "sea_head": {
+   "place": "Guangzhou (Whampoa anchorage, Panyu county; city tag guangzhou)",
+   "tag": "panyu",
+   "evidence": "Foreign ships anchored at Whampoa about 12 miles below Canton and lightered cargo to the city in junks.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Hoppo",
+    "https://hkupress.hku.hk/whampoa_and_the_canton_trade"
+   ]
+  },
+  "river_head": {
+   "place": "Wuzhou",
+   "tag": "cangwu",
+   "evidence": "Wuzhou at the Gui-Xi confluence commands the main route between Guangxi and the Guangzhou area and is the gateway to Xi River trade.",
+   "sources": [
+    "https://www.britannica.com/place/Wuzhou",
+    "https://www.britannica.com/place/Xi-River-system"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Bei River (North River)",
+    "head": {
+     "place": "Shaozhou (Shaoguan); small boats went on to Nanxiong at the Mei Pass",
+     "tag": "qujiang",
+     "evidence": "Goods crossing the Mei Pass came down from Nanxiong on the Bei River to Canton, the southern leg of the Gan route.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Mei_Pass",
+      "https://en.wikipedia.org/wiki/Bei_River"
+     ]
+    }
+   }
+  ],
+  "obstacles": [
+   {
+    "name": "Lingyang Gorge (Zhaoqing)",
+    "tag": "gaoyao",
+    "kind": "gorge (navigable)",
+    "evidence": "The Xi narrows through gorges below Zhaoqing, which junks passed without portage.",
+    "sources": [
+     "https://www.britannica.com/place/Xi-River-system"
+    ]
+   }
+  ],
+  "stops": [],
+  "period_note": "Whampoa-only anchorage is formalised in the 1757-1842 Canton system; in the Ming, tribute and foreign ships likewise came up to Guangzhou. The Gui River (Wuzhou to Guilin via the Lingqu canal to the Xiang) was used by small boats only and is left out."
+ },
+ {
+  "river": "Min River (Fujian)",
+  "include": true,
+  "reason": "Sea-going ships reached Fuzhou's Pagoda Anchorage and river boats carried timber, tea and grain between Fuzhou and Nanping (Yanping), the trunk route of inland Fujian.",
+  "confidence": "medium",
+  "kind": "river",
+  "sea_head": {
+   "place": "Fuzhou (Pagoda Anchorage at Mawei, Min county; city also houguan)",
+   "tag": "minxian",
+   "evidence": "Deep-sea ships could not reach Fuzhou city itself and anchored at Mawei (Pagoda Anchorage), the tea-race starting point.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Great_Tea_Race_of_1866",
+    "https://en.wikipedia.org/wiki/Min_River_(Fujian)"
+   ]
+  },
+  "river_head": {
+   "place": "Nanping (Yanping)",
+   "tag": "nanping",
+   "evidence": "Nanping at the junction of the upper tributaries traditionally shipped its lumber and goods downriver to Fuzhou.",
+   "sources": [
+    "https://www.britannica.com/place/Nanping",
+    "https://www.britannica.com/place/Min-River-Fujian-China"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Rapids between Shuikou and Nanping",
+    "tag": "gutian",
+    "kind": "rapids",
+    "evidence": "The middle Min above Shuikou runs through a gorge with rapids that slowed upstream boats.",
+    "sources": [
+     "https://www.britannica.com/place/Min-River-Fujian-China"
+    ]
+   }
+  ],
+  "stops": [],
+  "period_note": "Valid for the whole span; the Western tea trade (after 1842) is the best documented, but the river route to Yanping and north Fujian is much older. Fuzhou was also the Ryukyu tribute port in the Ming."
+ },
+ {
+  "river": "Qiantang River (Fuchun / Lan / Qu rivers)",
+  "include": true,
+  "reason": "The main boat route from Hangzhou into inland Zhejiang and on towards Jiangxi and Fujian, busy with junks through Tonglu and Yanzhou to Lanxi.",
+  "confidence": "medium",
+  "kind": "river",
+  "sea_head": {
+   "place": "Hangzhou",
+   "tag": "hangzhou",
+   "evidence": "The Qiantang estuary discharges at Hangzhou into Hangzhou Bay; the tidal bore and sandbanks kept large sea ships mostly at Ganpu and Ningbo, so the sea head is the mouth town.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Qiantang_River"
+   ]
+  },
+  "river_head": {
+   "place": "Lanxi (junks could go on to Jinhua and Changshan above Quzhou)",
+   "tag": "lanxi",
+   "evidence": "Junks worked the river to Lanxi, where it splits, and on up to Changshan and Jinhua; it was the main route inland from Hangzhou.",
+   "sources": [
+    "https://www.britannica.com/place/Fuchun-River",
+    "https://en.wikipedia.org/wiki/Qiantang_River"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "stops": [],
+  "period_note": "Stops: hangzhou, fuyang_hangzhou, tonglu, jiande (Yanzhou), lanxi; optional extension to xian_quzhou (Quzhou). The Changshan-Yushan portage to the Xin River and Poyang Lake linked it to the Gan route but is overland."
+ },
+ {
+  "river": "Han River (Korea)",
+  "include": true,
+  "reason": "Tax-grain and coastal ships came up the Han to the Mapo/Yongsan river ports of Seoul, and river boats linked Seoul with Yeoju and the Chungju grain depot upstream.",
+  "confidence": "medium",
+  "kind": "river",
+  "sea_head": {
+   "place": "Seoul / Hanyang river ports (Mapo, Yongsan)",
+   "tag": "namgyeong",
+   "evidence": "Ships carrying taxes and goods from across Joseon came up the Han to Seoul's Gyeonggang ports, of which Mapo was the busiest.",
+   "sources": [
+    "https://museum.seoul.go.kr/eng/board/NR_boardView.do?bbsCd=1042&seq=20181109094533159&q_exhCd=all",
+    "https://en.wikipedia.org/wiki/Han_River_(Korea)"
+   ]
+  },
+  "river_head": {
+   "place": "Chungju",
+   "tag": "chungju",
+   "evidence": "The Gyeonggang port-market network reached upstream towns such as Yeoju, Chungju and Chuncheon; Chungju held the upriver grain depot for Gyeongsang tax grain.",
+   "sources": [
+    "https://museum.seoul.go.kr/eng/board/NR_boardView.do?bbsCd=1042&seq=20181109094533159&q_exhCd=all"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "stops": [],
+  "period_note": "Joseon period (1392 on); before 1392 the Goryeo capital Kaesong (kaesong) was served via the Yeseong River estuary instead. namgyeong is the Goryeo name of Seoul. Both namgyeong and chungju have has_river True in the TSV. Heavy commercial traffic peaks in the 18th century; tax-grain shipping is continuous from the early Joseon."
+ },
+ {
+  "river": "Yodo River",
+  "include": true,
+  "reason": "Scheduled cargo and passenger boats ran between Osaka and Fushimi (Kyoto), the Kinai's main artery linking the capital to Osaka Bay and the Inland Sea.",
+  "confidence": "high",
+  "kind": "river",
+  "sea_head": {
+   "place": "Osaka",
+   "tag": "osaka",
+   "evidence": "Via Osaka Bay the Yodo connected Kyoto with the rest of Japan; Osaka at the mouth was where sea shipping transferred to river boats.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Yodo_River"
+   ]
+  },
+  "river_head": {
+   "place": "Kyoto (river port of Fushimi)",
+   "tag": "kyoto",
+   "evidence": "Thirty-koku boats ran regular services between Fushimi and Osaka, up to about 300 trips a day at the peak.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Yodo_River",
+    "https://samurai-archives.com/wiki/Yodogawa"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "stops": [],
+  "period_note": "Used throughout; the ports of Yodo and Yamazaki served Kyoto in the Muromachi period, Fushimi from Hideyoshi's time. Both osaka and kyoto have has_river False in the TSV, so the game map may lack this river line."
+ },
+ {
+  "river": "Tone River",
+  "include": false,
+  "reason": "Became a major Kanto cargo waterway (takasebune via Sekiyado and the Edo River to Edo) only after the 1594-1654 eastward diversion, outside the 1300-1600 focus; the strongest borderline candidate if the post-1600 era matters.",
+  "confidence": "low",
+  "kind": "river",
+  "sea_head": {
+   "place": "Choshi / Sawara (mouth, Katori district)",
+   "tag": "katori",
+   "evidence": "Since 1654 the Tone reaches the Pacific at Choshi, and ports such as Sawara, Sekiyado and Noda lined the river.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tone_River_Eastward_Diversion",
+    "https://www.britannica.com/place/Tone-River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "stops": [],
+  "period_note": "Edo period only (1654 onward); before that the Tone emptied into Edo Bay and was not a through route."
+ },
+ {
+  "river": "Taedong River",
+  "include": false,
+  "reason": "Sea-going ships could reach Pyongyang, but that is a single short reach with no sizeable river-craft trade beyond it.",
+  "confidence": "medium",
+  "kind": "river",
+  "sea_head": {
+   "place": "Pyongyang",
+   "tag": "seogyeong",
+   "evidence": "Pyongyang lies about 50 km up the estuary and was reached by sea ships (e.g. the 1866 General Sherman).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Taedong_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "stops": [],
+  "period_note": "seogyeong (Goryeo Western Capital = Pyongyang) has has_river True in the TSV; include only as a sea-ship reach if single-place estuary ports are wanted."
+ },
+ {
+  "river": "Yellow River",
+  "include": false,
+  "reason": "Heavy silt, shifting shoals, a barred mouth and strong seasonal swings kept it from carrying regular through traffic; only the Qingkou-Xuzhou reach served as part of the Grand Canal before 1604.",
+  "confidence": "high",
+  "kind": "river",
+  "sea_head": {
+   "place": "Mouth (south course via the old Huai mouth, 1194-1855)",
+   "tag": "andong_huaian",
+   "evidence": "A sandbar at the mouth blocks boats drawing more than about 1.2 m and the channel shifts as the bed silts up.",
+   "sources": [
+    "https://www.britannica.com/place/Yellow-River/The-lower-course",
+    "https://en.wikipedia.org/wiki/Yellow_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "stops": [],
+  "period_note": "In 1337-1855 the Yellow River ran to the sea through the old Huai course (andong_huaian area); the canal-used reach is covered by the Grand Canal entry."
+ },
+ {
+  "river": "Huai River",
+  "include": false,
+  "reason": "After the Yellow River captured its lower course (1194) the Huai mouth silted and it ends in Hongze Lake; upstream boat traffic (Shouzhou/Zhengyangguan) was regional and is not needed beyond the Grand Canal entry.",
+  "confidence": "medium",
+  "kind": "river",
+  "sea_head": {
+   "place": "Huai'an (junction with the Grand Canal)",
+   "tag": "shanyang_huaian",
+   "evidence": "Silt from the Yellow River blocked the Huai's mouth so its water pools in Hongze Lake instead of reaching the sea.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Huai_River",
+    "https://en.wikipedia.org/wiki/Hongze_Lake"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "stops": [],
+  "period_note": "If a Huai reach is wanted later, the traditional upstream terminus is Shouzhou (shouchun) via Xuyi (xuyi) and Fengyang (zhongli)."
+ },
+ {
+  "river": "Liao River",
+  "include": false,
+  "reason": "Junk traffic from Niuzhuang up the Liao for the soybean trade grew only after 1772 under the Qing; in 1300-1600 the river carried little regular cargo.",
+  "confidence": "low",
+  "kind": "river",
+  "sea_head": {
+   "place": "Niuzhuang / Yingkou (mouth, Haicheng area)",
+   "tag": "haizhou_liaoyang",
+   "evidence": "The Qing set up a customs office at Niuzhuang at the Liao mouth in 1707, and free grain and soybean exports began in 1772.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Liao_River",
+    "https://www.encyclopedia.com/places/asia/chinese-political-geography/manchuria"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "stops": [],
+  "period_note": "Late-Qing trade (18th-19th c.) went up to Tieling (tieling); in the Ming grain for Liaodong came by sea to the mouth. Borderline only if the late map era matters."
+ },
+ {
+  "river": "Amur / Sungari (Songhua)",
+  "include": false,
+  "reason": "Only state fleets used it (Ming Yishiha expeditions from Jilin to Nurgan, Qing military transports against Russia); the thinly settled basin had no regular cargo trade over several places.",
+  "confidence": "medium",
+  "kind": "river",
+  "sea_head": {
+   "place": "Nurgan (Amur estuary)",
+   "tag": "nurgan",
+   "evidence": "Yishiha's fleet of 25 ships sailed from Jilin down the Sungari and Amur to Nurgan in 1411 and later carried grain there.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Yishiha",
+    "https://en.wikipedia.org/wiki/Songhua_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "stops": [],
+  "period_note": "Jilin (girin_ula) shipyards 15th and late 17th c.; Qing transports reached Aigun (aigun) after 1683. Military and tributary, not commercial."
+ }
+]

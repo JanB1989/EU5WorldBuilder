@@ -66,6 +66,12 @@ def append_list(text, key, names):
     return text[:match.end()]+addition+text[match.end():]
 
 
+def export_levels(config, colors):
+    """Marker-aware river level per location colour from the river export (the level the capacity fit uses)."""
+    table = pd.read_csv(ROOT/config["river_export"]/"location_levels.csv", usecols=["location_tag", "marker_aware_predicted_level"])
+    return {colors[t]: int(v) for t, v in zip(table.location_tag, table.marker_aware_predicted_level) if t in colors and v}
+
+
 def export(config, evidence, river):
     raw = ROOT/config["raw_inputs"]; out = ROOT/config["output"]; mod = out/"mod"
     game = Path(tomllib.loads((ROOT/config["local_config"]).read_text())["paths"]["game_root"])/"game"
@@ -87,6 +93,13 @@ def export(config, evidence, river):
     land = {colors[r.location_tag] for r in inventory.itertuples() if r.is_ownable}
     seas = {colors[r.location_tag] for r in inventory.itertuples() if "sea_zones" in r.game_zone_class and "impassable" not in r.game_zone_class}
     lakes = {colors[r.location_tag] for r in inventory.itertuples() if r.game_zone_class == "lakes"}
+    # Researched reaches cross lakes (Ladoga, Tonle Sap, Poyang) and wasteland (Siberia, Amazonia, the Thal desert):
+    # a channel strip is cut through them too; lakes stay lakes, so their shores keep lake adjacency.
+    wastes = {colors[r.location_tag] for r in inventory.itertuples()
+              if not r.is_ownable and "sea_zones" not in r.game_zone_class and r.game_zone_class != "lakes"}
+    convertible = set(land)
+    if cfg.get("convert_lake_crossings"): convertible |= lakes
+    if cfg.get("convert_wasteland"): convertible |= wastes
     base_info = pd.read_parquet(raw/"inventory.parquet").set_index("location_tag")
     pixel_rows = evidence.set_index(evidence.y.astype(np.int64)*width+evidence.x.astype(np.int64))
     native_inputs={}
@@ -112,7 +125,7 @@ def export(config, evidence, river):
     # Native river lines are eight-connected; location adjacency is four-
     # connected. Fill only the corner of existing diagonal river neighbours,
     # never a gap between unrelated stretches or a retained native barrier.
-    selected_rows={int(p):r for p,r in pixel_rows.iterrows() if int(r.state)>0 and int(flat[p]) in land}
+    selected_rows={int(p):r for p,r in pixel_rows.iterrows() if int(r.state)>0 and int(flat[p]) in convertible}
     bridges={}
     for p,r in selected_rows.items():
         for delta in (width-1,width+1):
@@ -133,7 +146,7 @@ def export(config, evidence, river):
     groups = []; omitted = Counter()
     retained_land = {colors[n] for n in cfg.get('retain_native_locations', [])}
     selected=set(pixel_rows.index[pixel_rows.state>0])
-    selected={p for p in selected if int(flat[p]) in land and int(flat[p]) not in retained_land}
+    selected={p for p in selected if int(flat[p]) in convertible and int(flat[p]) not in retained_land}
     parts=partition(selected,width,height,max(1,cfg['target_tile_pixels']//width_px),max(1,cfg['minimum_tile_pixels']//width_px))
     for group in parts:
         rows=pixel_rows.loc[group]
@@ -146,11 +159,11 @@ def export(config, evidence, river):
         groups.append({'state':state,'center':group})
     all_centers = {p for g in groups for p in g["center"]}
     # Width is graphical only. Avoid painting another unconverted river or lake.
-    occupied = {}; candidates = []
+    occupied = {}; candidates = []; pending_small = []
     river_flat = river.ravel()
     for group in groups:
         cells = set(group["center"])
-        if any(int(flat[q]) in lakes for p in cells for q in neighbours(p,width,flat.size)):
+        if not cfg.get('allow_lake_contact') and any(int(flat[q]) in lakes for p in cells for q in neighbours(p,width,flat.size)):
             omitted['lake_contact_native_pixels'] += len(cells)
             continue
         for p in group["center"]:
@@ -159,7 +172,7 @@ def export(config, evidence, river):
             for offset in offsets:
                 q = p+offset
                 if not 0 <= q < flat.size or (abs(offset)==1 and p//width != q//width): continue
-                if int(flat[q]) not in land or int(flat[q]) in retained_land or (river_flat[q] < 16 and q not in cells): continue
+                if int(flat[q]) not in convertible or int(flat[q]) in retained_land or (river_flat[q] < 16 and q not in cells): continue
                 if q in occupied or q in all_centers: continue
                 if any((n in all_centers and n not in cells) or (n in occupied) for n in neighbours(q,width,flat.size)):continue
                 # Do not widen across a retained native river pixel; a short
@@ -167,20 +180,34 @@ def export(config, evidence, river):
                 if any(river_flat[n] < 16 and n not in all_centers for n in neighbours(q, width, flat.size)): continue
                 cells.add(q)
         cells -= occupied.keys()
-        if any(int(flat[q]) in lakes for p in cells for q in neighbours(p,width,flat.size)):
+        if not cfg.get('allow_lake_contact') and any(int(flat[q]) in lakes for p in cells for q in neighbours(p,width,flat.size)):
             omitted['lake_contact_native_pixels'] += len(cells)
             continue
         if len(cells) < cfg["minimum_tile_pixels"]:
+            if cfg.get('merge_undersized_pieces'):
+                pending_small.append(cells); continue
             omitted["undersized_state_piece"] += len(cells); continue
         i = len(candidates); occupied.update({p: i for p in cells})
         group["cells"] = cells; candidates.append(group)
+    # Small pieces (a river mouth, the stretch between two junctions) join a touching tile; otherwise a
+    # continuous researched reach would be cut there.
+    for _round in range(4):
+        rest = []
+        for cells in pending_small:
+            touching = Counter(occupied[q] for p in cells for q in neighbours(p, width, flat.size) if q in occupied)
+            if not touching: rest.append(cells); continue
+            dest = touching.most_common(1)[0][0]
+            candidates[dest]["cells"] |= cells; occupied.update({p: dest for p in cells})
+        if len(rest) == len(pending_small): break
+        pending_small = rest
+    omitted["undersized_state_piece"] += sum(len(c) for c in pending_small)
     print(f"Navigation raster: {len(candidates)} candidate tiles", flush=True)
     # Exclude whole tiles, not isolated bank pixels, when they would consume
     # too much land or divide an existing location. Native rivers then remain.
     unique_colors, counts = np.unique(flat, return_counts=True)
     owned_counts = dict(zip(map(int, unique_colors), map(int, counts)))
     removed = Counter(int(flat[p]) for p in occupied)
-    bad = {c for c, n in removed.items() if owned_counts[c]-n < cfg["minimum_remaining_land_pixels"] or n/owned_counts[c] > cfg["maximum_land_fraction_removed"]}
+    bad = {c for c, n in removed.items() if c in land and (owned_counts[c]-n < cfg["minimum_remaining_land_pixels"] or n/owned_counts[c] > cfg["maximum_land_fraction_removed"])}
     active = [g for g in candidates if not any(int(flat[p]) in bad for p in g["cells"])]
     omitted["land_area_guard_tiles"] = len(candidates)-len(active)
     # Converting an internal river can cut a location into two. Keep these
@@ -231,8 +258,12 @@ def export(config, evidence, river):
         tag = f"pp_nav_{i:05d}"
         af[list(g["cells"])] = color
         g.update(color=color, tag=tag); tile_by_color[color] = g
-        source_land = Counter(names[int(flat[p])] for p in g["cells"]).most_common(1)[0][0]
-        region = str(base_info.loc[source_land, "region"])
+        known = Counter(names[int(flat[p])] for p in g["cells"] if names.get(int(flat[p])) in base_info.index)
+        if not known:  # a strip through a lake or wasteland: name it after the land around it
+            known = Counter(names[int(flat[q])] for p in g["cells"] for q in neighbours(p, width, flat.size)
+                            if names.get(int(flat[q])) in base_info.index)
+        source_land = known.most_common(1)[0][0] if known else names[int(flat[next(iter(g["cells"]))])]
+        region = str(base_info.loc[source_land, "region"]) if source_land in base_info.index else "pp_navigation_other"
         rows = pixel_rows.loc[g["center"]]
         tile_meta.append({"location": tag, "state": STATE_NAMES[g["state"]], "pixels": len(g["cells"]),
                           "region": region, "near_location": source_land,
@@ -257,7 +288,9 @@ def export(config, evidence, river):
         for component in range(1,before_count+1):
             ids,sizes=np.unique(labels[(before_labels==component)&(labels>0)],return_counts=True)
             if not len(ids):
-                unsafe_banks.add(names[c]);continue
+                # a separate piece of the location turned into water; only unsafe if nothing of the location is left
+                if not cfg.get('allow_vanishing_pieces') or count==0:unsafe_banks.add(names[c])
+                continue
             for ident,size in zip(ids,sizes):
                 if ident==ids[sizes.argmax()]:continue
                 fragment=labels==ident;ring=ndimage.binary_dilation(fragment)&~fragment
@@ -338,7 +371,36 @@ def export(config, evidence, river):
             candidate=(a[3]+b[3],names[a[0]],names[b[0]],names[through],a[1],height-a[2],b[1],height-b[2])
             if pair not in crossings or candidate < crossings[pair]: crossings[pair]=candidate
     missing = lost-set(crossings)
-    if missing:
+    shared_crossings = 0
+    accepted_cuts = {tuple(sorted(pair)) for pair in cfg.get('accepted_cut_adjacencies', [])}
+    if missing and cfg.get('shared_tile_crossings'):
+        by_land = defaultdict(dict)
+        for (l, c), points in coast_pixels.items(): by_land[l][c] = points
+        for a, b in sorted(missing):
+            best = None
+            for through in set(by_land[a]) & set(by_land[b]):
+                if tile_by_color[through]['state'] == 3: continue
+                pa = np.array([(p % width, p//width) for p in by_land[a][through]])
+                pb = np.array([(p % width, p//width) for p in by_land[b][through]])
+                d = ((pa[:, None, :]-pb[None, :, :])**2).sum(-1)
+                i, j = np.unravel_index(int(np.argmin(d)), d.shape)
+                cand = (float(np.sqrt(d[i, j])), through, pa[i], pb[j])
+                if best is None or cand[0] < best[0]: best = cand
+            if best is None: continue
+            _d, through, (ax, ay), (bx, by) = best
+            def bank(x, y, c):
+                for nx, ny in ((x-1, y), (x+1, y), (x, y-1), (x, y+1)):
+                    if 0 <= nx < width and 0 <= ny < height and int(after[ny, nx]) == c: return nx, ny
+                return x, y
+            (ax, ay), (bx, by) = bank(int(ax), int(ay), a), bank(int(bx), int(by), b)
+            crossings[(a, b)] = (int(_d), names[a], names[b], names[through], ax, height-ay, bx, height-by)
+            shared_crossings += 1
+        missing = lost-set(crossings)
+    missing_named = {tuple(sorted((names[a], names[b]))) for a, b in missing}
+    if missing and not cfg.get('retain_native_on_lost_adjacency', True):
+        save_json(out/"failed_crossings.json", [[names[a],names[b]] for a,b in sorted(missing)])
+        print(f"{len(missing)} land adjacencies are cut by channels without a crossing; see failed_crossings.json", flush=True)
+    elif missing:
         save_json(out/"failed_crossings.json", [[names[a],names[b]] for a,b in sorted(missing)])
         if config.get('_crossing_retry',0)>=4:
             raise ValueError(f"{len(missing)} lost land adjacencies could not be restored; see failed_crossings.json")
@@ -434,7 +496,8 @@ def export(config, evidence, river):
     # rivers are the export's rivers.png, which differs from river only in line positions away from the navigation.
     palette_image=Image.open(ROOT/json.loads((ROOT/config['river_export']/'export_manifest.json').read_text())['output_png'])
     drawing=np.asarray(palette_image)
-    cleaned,preservation,original_level_map=preserve_levels(drawing,original,after,land,base_info.reset_index(),[o['box'] for o in config.get('native_geometry_overrides',[])])
+    cleaned,preservation,original_level_map=preserve_levels(drawing,original,after,land,base_info.reset_index(),[o['box'] for o in config.get('native_geometry_overrides',[])],
+                                                             int(cfg.get('clear_drawn_rivers_within_pixels',0)),export_levels(config,colors) if cfg.get('restore_export_levels') else None)
     cleaned_image=Image.fromarray(cleaned,mode='P');cleaned_image.putpalette(palette_image.getpalette())
     cleaned_image.save(mod/md/'rivers.png');written.append(md+'rivers.png')
     pd.DataFrame(preservation,columns=['location_tag','river_level','x','y','distance_pixels','added_source']).to_csv(out/'preserved_river_pixels.csv',index=False)
@@ -486,10 +549,10 @@ def export(config, evidence, river):
     pd.DataFrame(changed_effects).to_csv(out/'river_effect_changes.csv',index=False)
     report={'tiles':len(tile_meta),'tile_states':dict(Counter(r['state'] for r in tile_meta)), 'converted_pixels':int(len(changed)),
             'ocean_connected_passable_tiles':water_connected,'passable_components':len(components),'largest_passable_component':max(components,default=0),
-            'mouth_alignment_repairs':mouth_snaps, 'river_preservation':'native_bank_pixel', 'preserved_river_pixels':len(preservation), 'river_port_locations':sorted(names[c] for c in port_candidates), 'port_harbor_floor':config.get('port_harbor_floor',.25), 'crossings':len(crossings),'ports_changed':len(port_changes),'land_effect_rows_to_restore':len(bonus_rows),
+            'mouth_alignment_repairs':mouth_snaps, 'river_preservation':'native_bank_pixel', 'preserved_river_pixels':len(preservation), 'river_port_locations':sorted(names[c] for c in port_candidates), 'port_harbor_floor':config.get('port_harbor_floor',.25), 'crossings':len(crossings),'shared_tile_crossings':shared_crossings,'unrestored_adjacencies':len(missing),'ports_changed':len(port_changes),'land_effect_rows_to_restore':len(bonus_rows),
             'omissions':dict(omitted),'crossing_guard_locations':cfg.get('retain_native_locations',[]),'bank_fragment_repairs':repairs,'locators_moved':dict(moved),'edges':len(edges),'files':{rel:digest(mod/rel) for rel in written},
             'bisected_land_locations':bisected,
-            'checks':{'native_river_topology_valid':True,'river_port_coordinates_on_passable_shore':True,'native_river_levels_preserved':True,'no_native_rivers_on_converted_water':True,'minimum_tile_size':True,'connected_tiles':True,'land_area_guard':True,'land_identities_retained':True,'lost_land_adjacencies_restored':not missing},
+            'checks':{'native_river_topology_valid':True,'river_port_coordinates_on_passable_shore':True,'native_river_levels_preserved':True,'no_native_rivers_on_converted_water':True,'minimum_tile_size':True,'connected_tiles':True,'land_area_guard':True,'land_identities_retained':True,'lost_land_adjacencies_restored':not (missing_named-accepted_cuts)},
             'map_code_sha256':digest(Path(__file__)), 'cleanup_code_sha256':digest(Path(__file__).with_name('navigation_cleanup.py')), 'native_geometry_inputs':native_inputs,
             'engine_status':'Global output requires a fresh campaign; local Thames mechanism confirmed by user.'}
     # Lightweight inspectable world map, embedded raster plus clickable nodes.

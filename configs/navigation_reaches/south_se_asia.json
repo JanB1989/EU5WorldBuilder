@@ -1,0 +1,582 @@
+[
+ {
+  "river": "Indus",
+  "include": true,
+  "reason": "The Indus was Sindh's trade artery, carrying boat cargo from the delta port past Thatta, Sehwan and Bukkur to the Panjnad confluence and on to Multan and Lahore.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Lahari Bandar",
+   "tag": "laribandar",
+   "evidence": "Lahari Bandar was the main sea port of Sindh from the early 1300s to the late 1600s; sea cargo was transshipped there to river boats for Thatta.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Lahari_Bandar",
+    "https://en.wikipedia.org/wiki/Thatta"
+   ]
+  },
+  "river_head": {
+   "place": "Mithankot (Panjnad confluence)",
+   "tag": "mithankot",
+   "evidence": "Boat traffic ran up the Indus through Sindh to where the combined Punjab rivers join it near Mithankot; above that the upper Indus carried mainly local salt and timber rafts.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Indus_River",
+    "https://en.wikipedia.org/wiki/Mithankot"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Chenab and Ravi (Panjnad) to Lahore",
+    "head": {
+     "place": "Lahore",
+     "tag": "lahore",
+     "evidence": "Multan and Lahore were reached by river boats from the Indus via the Chenab and Ravi; Burnes took his 1831 mission by boat up this route to Lahore.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Alexander_Burnes",
+      "https://en.wikipedia.org/wiki/Multan",
+      "https://en.wikipedia.org/wiki/Lahore"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "Thatta (tag thatta) and Sehwan/Sukkur lie on the included reach; the delta shifted often and Lahari Bandar silted after c.1700 (Karachi replaced it in the 18th century). The Attock-Kalabagh gorge reach is left out."
+ },
+ {
+  "river": "Ganges",
+  "include": true,
+  "reason": "The Ganges was the busiest inland waterway of South Asia, with large cargo boats carrying grain, saltpetre, cloth and sugar between Bengal, Patna, Varanasi and Allahabad.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Satgaon (Saptagram), via the Hooghly",
+   "tag": "satgaon",
+   "evidence": "Satgaon was the chief port of southern Bengal on the Hooghly, reached by Portuguese and Asian ships (Porto Pequeno) until silting shifted trade to Hugli in the later 1500s.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Saptagram",
+    "https://en.wikipedia.org/wiki/Hooghly_River"
+   ]
+  },
+  "river_head": {
+   "place": "Allahabad (Prayag)",
+   "tag": "prayag",
+   "evidence": "Heavy river boats worked the Ganges from Bengal past Patna and Varanasi up to the Yamuna confluence at Allahabad, the natural terminus of the lower-river trade.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Ganges",
+    "https://en.wikipedia.org/wiki/Patna",
+    "https://en.wikipedia.org/wiki/Prayagraj"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Yamuna",
+    "head": {
+     "place": "Agra",
+     "tag": "agra",
+     "evidence": "Agra, the Mughal capital on the Yamuna, was linked to Bengal by boat traffic via Allahabad; above Agra to Delhi the river was usable only seasonally.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Yamuna",
+      "https://en.wikipedia.org/wiki/Agra"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "Hooghly and Yamuna are folded into this entry. The Bhagirathi-Hooghly link to the main Ganges was seasonal and declining after c.1500; the Padma carried the main flow east to the Meghna near Sonargaon. Varanasi, Ghazipur, Patna, Monghyr and Rajmahal lie on the reach; Kanpur/Kannauj (kanauj) above Allahabad are left out."
+ },
+ {
+  "river": "Hooghly",
+  "include": false,
+  "reason": "Included as the sea reach of the Ganges entry (sea_head satgaon), not a separate channel.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Satgaon (Saptagram)",
+   "tag": "satgaon",
+   "evidence": "Satgaon was the Hooghly port reached by sea-going ships until silting in the 16th century.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Saptagram"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "See Ganges."
+ },
+ {
+  "river": "Yamuna",
+  "include": false,
+  "reason": "Included as a Ganges branch with head Agra, not a separate channel.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Allahabad (confluence with the Ganges)",
+   "tag": "prayag",
+   "evidence": "The Yamuna joins the Ganges at Allahabad; it has no sea access of its own.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Yamuna"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "See Ganges branch; Delhi (river level 2 in game) was reachable only seasonally."
+ },
+ {
+  "river": "Brahmaputra/Meghna",
+  "include": true,
+  "reason": "The Meghna-Brahmaputra carried Bengal's eastern trade and the Mughal war fleets up to Guwahati, the gateway to Assam.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Sonargaon",
+   "tag": "sonargaon",
+   "evidence": "Sonargaon was the capital and river port of eastern Bengal on the Meghna estuary system, reached by sea-going traders in the Sultanate period.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Sonargaon",
+    "https://en.wikipedia.org/wiki/Meghna_River"
+   ]
+  },
+  "river_head": {
+   "place": "Guwahati",
+   "tag": "guwahati",
+   "evidence": "Mughal and Ahom fleets fought on the Brahmaputra at Guwahati in 1671, showing large-boat navigation up to this frontier trade town.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Battle_of_Saraighat",
+    "https://en.wikipedia.org/wiki/Brahmaputra_River"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Before the 1780s shift the Brahmaputra flowed via Mymensingh to the Meghna near Sonargaon; Dhaka replaced Sonargaon after 1610. Dhubri, Goalpara and Hajo lie on the reach; Surma to Sylhet is a possible extra branch."
+ },
+ {
+  "river": "Godavari",
+  "include": false,
+  "reason": "Boat traffic was local and cut by rapids (Dummagudem barriers); its delta trade was coastal, so there is no substantial multi-place river cargo route in the period.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Masulipatnam (delta coast)",
+   "tag": "masulipatnam",
+   "evidence": "Delta trade went through coastal ports such as Masulipatnam, not upriver.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Godavari_River",
+    "https://en.wikipedia.org/wiki/Machilipatnam"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Delta irrigation canals and steamer projects are 19th century."
+ },
+ {
+  "river": "Krishna",
+  "include": false,
+  "reason": "The Krishna is shallow and rocky with little historical boat cargo; trade used the coast and land routes.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Masulipatnam (nearest delta port)",
+   "tag": "masulipatnam",
+   "evidence": "The delta port served sea trade only.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Krishna_River",
+    "https://en.wikipedia.org/wiki/Machilipatnam"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Narmada/Tapti",
+  "include": false,
+  "reason": "Broach and Surat are estuary ports already coastal in game; upstream navigation was blocked by falls and shoals, so there is no multi-place river route.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Surat (Tapti) / Broach (Narmada)",
+   "tag": "surat",
+   "evidence": "Surat on the lower Tapti was the chief Mughal sea port; Broach (broach) lies on the Narmada estuary.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Surat",
+    "https://en.wikipedia.org/wiki/Bharuch",
+    "https://en.wikipedia.org/wiki/Narmada_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Irrawaddy",
+  "include": true,
+  "reason": "The Irrawaddy was Burma's main trade road, carrying rice, salt and goods from the delta past Prome, Pagan and Ava to Bhamo, the river terminus of the Yunnan caravan trade.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Dagon/Syriam (Yangon River)",
+   "tag": "dagon",
+   "evidence": "Sea-going ships called at Syriam and Dagon on the Yangon River, linked by delta creeks to the Irrawaddy; Syriam (thanlyin) has no river flag, so the nearest river location dagon is used.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Thanlyin",
+    "https://en.wikipedia.org/wiki/Yangon"
+   ]
+  },
+  "river_head": {
+   "place": "Bhamo (Man Maw)",
+   "tag": "manmaw",
+   "evidence": "Bhamo, historically Man Maw, is the highest regularly navigable point of the river and the transfer point for the China trade.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Bhamo",
+    "https://en.wikipedia.org/wiki/Irrawaddy_River"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Ava (on the pinya/sagaing locations), Pagan, Prome (pyay), Myanaung and Hinthada lie on the reach. The narrow defiles above Mandalay are navigable and not treated as obstacles. Bassein (pathein) was a second delta sea port on the western distributary."
+ },
+ {
+  "river": "Bago",
+  "include": false,
+  "reason": "Pegu itself is a coastal location in game (no river flag) and the Bago River is a short tidal creek, so it adds no multi-place route.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Pegu",
+   "tag": "pegu",
+   "evidence": "Pegu was reached by sea ships via the Bago estuary in the 15th-16th centuries before silting.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Bago,_Myanmar",
+    "https://en.wikipedia.org/wiki/Bago_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Sittaung",
+  "include": false,
+  "reason": "A dangerous tidal bore at the mouth and shoals limited it to local small-craft traffic.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Sittaung (mouth)",
+   "tag": "sittaung",
+   "evidence": "The Sittaung estuary is known for one of the world's strongest tidal bores.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tidal_bore",
+    "https://en.wikipedia.org/wiki/Sittaung_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Taungoo (taungoo) was reached overland or by small boats."
+ },
+ {
+  "river": "Chao Phraya",
+  "include": true,
+  "reason": "The Chao Phraya carried Siam's foreign trade to Ayutthaya and the rice and forest-goods traffic from the northern towns down to the capital.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Ayutthaya",
+   "tag": "ayodhya",
+   "evidence": "Foreign sea-going ships sailed up the Chao Phraya to Ayutthaya, whose river channel the kings shortened with canals from 1538.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Chao_Phraya_River",
+    "https://en.wikipedia.org/wiki/Ayutthaya_Kingdom"
+   ]
+  },
+  "river_head": {
+   "place": "Nakhon Sawan (Pak Nam Pho)",
+   "tag": "nakhon_sawan",
+   "evidence": "Nakhon Sawan sits where the Ping and Nan join to form the Chao Phraya and was the gateway of river traffic to the northern towns.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Nakhon_Sawan",
+    "https://en.wikipedia.org/wiki/Chao_Phraya_River"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Nan",
+    "head": {
+     "place": "Phitsanulok (Song Khwae)",
+     "tag": "song_khwae",
+     "evidence": "Phitsanulok on the Nan was Ayutthaya's northern royal seat and a river-boat town linked to the capital.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Phitsanulok",
+      "https://en.wikipedia.org/wiki/Nan_River"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "Bangkok/Thonburi (customs post) lies below Ayutthaya. The upper Ping to Chiang Mai had rapids and is left out."
+ },
+ {
+  "river": "Mekong",
+  "include": true,
+  "reason": "The lower Mekong carried Cambodia's trade: sea junks and European ships reached Phnom Penh/Lovek, and river craft went up to Kratie and Stung Treng below the Khone Falls.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Phnom Penh",
+   "tag": "phnom_penh",
+   "evidence": "Chinese junks and Dutch and Portuguese ships came up the Mekong to the Phnom Penh-Lovek capital area in the 16th-17th centuries.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Phnom_Penh",
+    "https://en.wikipedia.org/wiki/Mekong"
+   ]
+  },
+  "river_head": {
+   "place": "Stung Treng",
+   "tag": "stung_treng",
+   "evidence": "Boat traffic ran up to Stung Treng; the Khone Falls just above stopped through navigation, and goods for Laos were portaged around them.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Khone_Phapheng_Falls",
+    "https://en.wikipedia.org/wiki/Gerrit_van_Wuysthoff"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Tonle Sap (river and lake) to Angkor",
+    "head": {
+     "place": "Angkor",
+     "tag": "angkor",
+     "evidence": "Boats went from the Mekong at Phnom Penh up the Tonle Sap river and across the great lake to Angkor; Lovek (longvek) on the Tonle Sap river was the capital 1528-1594.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Tonle_Sap",
+      "https://en.wikipedia.org/wiki/Zhou_Daguan",
+      "https://en.wikipedia.org/wiki/Longvek"
+     ]
+    }
+   }
+  ],
+  "obstacles": [
+   {
+    "name": "Sambor/Preapatang rapids",
+    "tag": "kracheh",
+    "kind": "rapids",
+    "evidence": "Rapids between Kratie and Stung Treng were passable at high water only; kracheh is the nearest tagged location.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Mekong"
+    ]
+   },
+   {
+    "name": "Khone Falls (upstream limit)",
+    "tag": "stung_treng",
+    "kind": "falls",
+    "evidence": "The Khone Falls just above Stung Treng are the main reason the Mekong is not fully navigable; they bound the reach.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Khone_Phapheng_Falls"
+    ]
+   }
+  ],
+  "period_note": "Van Wuysthoff (1641) went from Lovek to Vientiane by boat with portages, so Laos was reachable but not by through navigation; Laos Mekong reaches are left out. Prey Nokor/Saigon is on a separate river."
+ },
+ {
+  "river": "Red River",
+  "include": true,
+  "reason": "The Red River linked Thang Long, the Dai Viet capital, with the sea and the delta; foreign merchants traded at Pho Hien and river craft carried their goods on to Ke Cho.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Pho Hien (Hung Yen)",
+   "tag": "khoai_chau",
+   "evidence": "Pho Hien was the river port where foreign ships stopped from the 16th century as the gateway to the capital's trade; khoai_chau is the tagged location at its coordinates.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/H%C6%B0ng_Y%C3%AAn_(city)",
+    "https://en.wikipedia.org/wiki/Red_River_(Asia)"
+   ]
+  },
+  "river_head": {
+   "place": "Thang Long (Hanoi)",
+   "tag": "thang_long",
+   "evidence": "Thang Long/Ke Cho, the capital and main market, was reached by river boats from Pho Hien; the VOC kept a factory there 1637-1700.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Hanoi",
+    "https://en.wikipedia.org/wiki/Red_River_(Asia)"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Traffic above Hanoi toward Yunnan grew mainly after 1600 and in the 19th century; left out."
+ },
+ {
+  "river": "Perfume River",
+  "include": false,
+  "reason": "Hue only became the capital in the late 1600s-1802 and the river is short, so it adds no period cargo route; no Hue tag was found.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Hue coast (no tag)",
+   "tag": "dien_ban",
+   "evidence": "No Hue location exists; dien_ban is the nearest coastal location, given only for completeness.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Perfume_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Musi",
+  "include": true,
+  "reason": "The Musi carried Palembang's trade: sea-going ships reached the city and river craft brought pepper and forest produce down from the uplands.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Palembang",
+   "tag": "palembang",
+   "evidence": "Palembang on the Musi, some distance inland, has been the river port of south Sumatra since Srivijaya and was reached by sea-going ships.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Palembang",
+    "https://en.wikipedia.org/wiki/Musi_River_(Indonesia)"
+   ]
+  },
+  "river_head": {
+   "place": "Upper Musi (Musi Rawas area)",
+   "tag": "musi",
+   "evidence": "Pepper and forest goods came down the Musi from the uluan uplands to Palembang by boat; the upper-Musi location is a sensible terminus, not a single historic town.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Musi_River_(Indonesia)",
+    "https://en.wikipedia.org/wiki/Palembang"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Head is low confidence; the Ogan, Komering and Lematang tributaries also fed Palembang but are left out."
+ },
+ {
+  "river": "Batang Hari",
+  "include": true,
+  "reason": "Jambi's pepper port was reached by sea ships (Portuguese, English and Dutch factories), and the Batang Hari carried upland Minangkabau gold and pepper down past Muara Tebo.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Jambi",
+   "tag": "jambi",
+   "evidence": "Jambi lies well inland on the Batang Hari and was the port for foreign pepper traders.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Jambi_(city)",
+    "https://en.wikipedia.org/wiki/Batang_Hari_River"
+   ]
+  },
+  "river_head": {
+   "place": "Dharmasraya",
+   "tag": "dharmasraya",
+   "evidence": "Dharmasraya on the upper Batang Hari was the Malayu capital in the 13th-14th centuries and the river link to the Minangkabau highlands.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Dharmasraya",
+    "https://en.wikipedia.org/wiki/Batang_Hari_River"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Pepper traffic peaked in the 1600s; river head chosen at the upper-river political centre (batang_tebo is the intermediate stop)."
+ },
+ {
+  "river": "Barito",
+  "include": true,
+  "reason": "The Barito carried Banjar trade: Banjarmasin was a pepper port for foreign ships, and the earlier kingdom Negara Daha traded through its river port Muara Bahan.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Banjarmasin",
+   "tag": "banjar",
+   "evidence": "Banjarmasin, near the Barito mouth, was the port reached by sea-going pepper traders from the 16th century.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Banjarmasin",
+    "https://en.wikipedia.org/wiki/Barito_River"
+   ]
+  },
+  "river_head": {
+   "place": "Muara Bahan (Marabahan)",
+   "tag": "muara_bahan",
+   "evidence": "Negara Daha (14th-16th century) kept its trading port at Muara Bahan on the Barito.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Negara_Daha",
+    "https://en.wikipedia.org/wiki/Barito_River"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Negara river",
+    "head": {
+     "place": "Negara (Negara Daha capital)",
+     "tag": "nagara_borneo",
+     "evidence": "The Negara Daha capital at Muhara Hulak, Negara, lay up the Negara tributary from Muara Bahan.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Negara_Daha"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "Low-medium confidence for the branch (in-game river level 2); upper Barito to Muara Teweh (teweh) was forest-produce traffic only."
+ },
+ {
+  "river": "Kapuas",
+  "include": false,
+  "reason": "Before Pontianak (1771) the Kapuas carried only modest forest-produce and gold traffic between small river sultanates (Sanggau, Sintang); weakest case for a minimal set.",
+  "confidence": "low",
+  "sea_head": {
+   "place": "Pontianak",
+   "tag": "pontianak",
+   "evidence": "Pontianak at the mouth was founded in 1771; the river is today the main waterway of West Kalimantan.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Kapuas_River",
+    "https://en.wikipedia.org/wiki/Pontianak"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "If a Borneo river is wanted later, Kapuas (sanggau, sintang) is a candidate for the 18th-19th century."
+ },
+ {
+  "river": "Mahakam",
+  "include": false,
+  "reason": "Kutai's trade on the Mahakam was mostly small-craft forest produce; its centres Kutai Lama and later Tenggarong (1782) were modest ports.",
+  "confidence": "low",
+  "sea_head": {
+   "place": "Kutai Lama",
+   "tag": "kutai_lama",
+   "evidence": "Kutai Lama at the delta was the Kutai Kartanegara seat before Tenggarong.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Mahakam_River",
+    "https://en.wikipedia.org/wiki/Kutai_Kartanegara_Sultanate"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Optional addition: Kutai Lama -> Tenggarong -> Muara Kaman (muarakaman)."
+ },
+ {
+  "river": "Pahang",
+  "include": false,
+  "reason": "The Pahang carried gold and tin by small boats to Pekan; volume and length of traffic were small.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Pekan (Pahang)",
+   "tag": "pahang",
+   "evidence": "The Pahang sultanate's seat at Pekan is at the river mouth.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Pahang_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Pasig",
+  "include": false,
+  "reason": "Only about 25 km long between Manila Bay and Laguna de Bay, and Manila/Tondo have no river flag in game.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Manila",
+   "tag": "maynila",
+   "evidence": "Manila sits at the Pasig mouth on Manila Bay.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Pasig_River"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ }
+]

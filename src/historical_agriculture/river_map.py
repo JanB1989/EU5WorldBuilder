@@ -681,21 +681,23 @@ def export(config):
     native_array = np.asarray(native)
     snapping = cfg.get("vanilla_snap", {}).get("enabled", False)
     flow_mask = None
-    if snapping:
-        guard = cfg["vanilla_snap"]["protect_navigation"]
+    guard = cfg.get("vanilla_snap", {}).get("protect_navigation")
+    if snapping and guard:
         flow_mask = (float(guard["minimum_mean_discharge_m3_s"]), np.zeros((height, width), bool))
     state = route_network(routing, project, width, height, blocked, water, cfg, flow_mask=flow_mask)
     if snapping:
         routed_ref = zone_levels(zones, state["sizes"], None, len(inv)+1)
         junctions = state["markers"] == 1
-        protected = navigation_protection(flow_mask[1], zones, inv, guard)
+        # Navigation built from researched reaches (configs/navigation_reaches) does not read these pixels, so
+        # nothing needs protecting; a physically screened navigation does.
+        protected = navigation_protection(flow_mask[1], zones, inv, guard) if guard else np.zeros((height, width), bool)
         del flow_mask
     # Vanilla completion: bank detours and vanilla fallback pieces where vanilla gives a location a river the
     # network drawing does not (see river_completion.py). Runs before the marker and topology gates.
     finish_network(state, native_array, zones, inv, blocked, cfg)
     snap_report = reference = None
     if snapping:
-        reference = state
+        reference = state if guard else None
         state, snap_report = snap_network(state, routed_ref, junctions, protected, routing, project, width, height,
                                           blocked, water, zones, inv, native_array, cfg)
         del routed_ref, junctions, protected

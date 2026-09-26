@@ -1,0 +1,689 @@
+[
+ {
+  "river": "Vistula",
+  "include": true,
+  "reason": "The Vistula was Poland-Lithuania's grain and timber artery, and boats and barges moved cargo between Kraków, Sandomierz, Kazimierz, Warsaw, Toruń and Gdańsk.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Gdańsk",
+   "tag": "gdansk",
+   "evidence": "Sea-going Hanseatic and Dutch ships loaded Vistula grain at Gdańsk; river craft unloaded there and did not continue to sea.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Gda%C5%84sk",
+    "https://en.wikipedia.org/wiki/Vistula"
+   ]
+  },
+  "river_head": {
+   "place": "Kraków",
+   "tag": "krakow",
+   "evidence": "Kraków was the upstream terminus of regular Vistula shipping, with salt, copper, lead and grain loaded there and at Sandomierz for the voyage to Gdańsk.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Vistula",
+    "https://en.wikipedia.org/wiki/Krak%C3%B3w"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Bug (via lower Narew)",
+    "head": {
+     "place": "Brest-Litovsk",
+     "tag": "brest_litowsk",
+     "evidence": "Grain and forest goods from Podlasie and Volhynia were shipped down the Bug through Drohiczyn to the Vistula; Brest was the upper loading point.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Bug_River",
+      "https://en.wikipedia.org/wiki/Brest,_Belarus"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "Peak traffic was the 16th- and 17th-century grain boom. Much downstream cargo went on rafts and flat boats (flis), but boats also went back upstream with salt and herring. The San (Jarosław/Przemyśl, tag przemysl) and the Narew above the Bug (Łomża, tag lomza) also carried grain, but less of it; they are left out to keep the set small."
+ },
+ {
+  "river": "Oder",
+  "include": true,
+  "reason": "The Oder carried Silesian and Brandenburg cargo between Breslau, Frankfurt (Oder) and the Baltic port of Stettin.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Stettin (Szczecin)",
+   "tag": "stettin",
+   "evidence": "Stettin was the Oder's Hanseatic sea port; sea ships came up through the Szczecin Lagoon and river craft took over from there.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Szczecin",
+    "https://en.wikipedia.org/wiki/Oder"
+   ]
+  },
+  "river_head": {
+   "place": "Breslau (Wrocław)",
+   "tag": "wroclaw",
+   "evidence": "Breslau was the upper trade terminus of Oder shipping, but traffic past Frankfurt was repeatedly choked by Frankfurt's staple right and by mill weirs.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Oder",
+    "https://en.wikipedia.org/wiki/Wroc%C5%82aw"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Frankfurt (Oder) (nearest tag lebus) held the staple and was the practical break point in 1300-1600. Through traffic to Breslau became regular only after the Prussian regulation of the river in the 18th century. The Warta to Poznań was only minor."
+ },
+ {
+  "river": "Neman",
+  "include": true,
+  "reason": "Lithuanian grain, wax, furs and timber went down the Neman from Kaunas's Hanseatic office to the Curonian Lagoon and on to Königsberg.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Neman mouth (Rusnė); sea ships stopped at Memel",
+   "tag": "tilsit",
+   "evidence": "Sea ships stopped at Memel on the lagoon outlet (tag memel has no river). Tilsit is the nearest tagged river location to the delta mouth, which has no tag of its own.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Neman",
+    "https://en.wikipedia.org/wiki/Klaip%C4%97da"
+   ]
+  },
+  "river_head": {
+   "place": "Kaunas",
+   "tag": "kaunas",
+   "evidence": "The Hanseatic kontor at Kaunas (1441-1532) collected Lithuanian goods, and river boats (vytinės) shipped them downstream.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Kaunas",
+    "https://en.wikipedia.org/wiki/Neman"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Cargo continued across the lagoon and up the Deima and Pregel to Königsberg. Neris shipping to Vilnius was minor and is left out. Above Kaunas, traffic toward Grodno was light."
+ },
+ {
+  "river": "Daugava (Western Dvina)",
+  "include": true,
+  "reason": "The Daugava linked Riga with Polotsk, Vitebsk and, by portage, Smolensk; it was the main route of the Riga-Polotsk trade from the 13th century on.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Riga",
+   "tag": "riga",
+   "evidence": "Riga was the Hanseatic sea port at the Daugava mouth, and sea ships did not go farther up.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Daugava",
+    "https://en.wikipedia.org/wiki/Riga"
+   ]
+  },
+  "river_head": {
+   "place": "Vitebsk",
+   "tag": "vitebsk",
+   "evidence": "Russian boats (strugi) from Polotsk and Vitebsk brought grain, flax, hemp and furs down to Riga; Vitebsk was also the portage point toward Smolensk and the Dnieper.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Daugava",
+    "https://en.wikipedia.org/wiki/Polotsk",
+    "https://en.wikipedia.org/wiki/Vitebsk"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Daugava rapids (Staburags / Pļaviņas stretch)",
+    "tag": "aizkraukle",
+    "kind": "rapids",
+    "evidence": "Between Koknese and Jēkabpils a rocky stretch of rapids made the river passable mainly at spring high water; Aizkraukle is the nearest tagged location.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Daugava"
+    ]
+   }
+  ],
+  "period_note": "Traffic was heavily downstream and seasonal (spring flood), and many strugi were sold at Riga. Upstream traffic existed but was light. Keep this river only if seasonal bulk trade counts; otherwise it is the first candidate to drop."
+ },
+ {
+  "river": "Neva - Lake Ladoga - Volkhov (route to Novgorod)",
+  "include": true,
+  "reason": "Novgorod's Hanseatic trade (the Peterhof kontor) ran by water: Gulf of Finland, Neva, Lake Ladoga, then up the Volkhov to Novgorod.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Staraya Ladoga (Volkhov mouth on Lake Ladoga)",
+   "tag": "staraya_ladoga",
+   "evidence": "Hanseatic sea ships crossed the Neva and Lake Ladoga to Ladoga at the Volkhov mouth, where cargo was moved to Russian river boats because of the Volkhov rapids.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Peterhof_(Novgorod)",
+    "https://en.wikipedia.org/wiki/Staraya_Ladoga"
+   ]
+  },
+  "river_head": {
+   "place": "Novgorod",
+   "tag": "novgorod",
+   "evidence": "Novgorod was the terminus with the Hanseatic Peterhof, which received 150-200 merchants each season who came by the Volkhov.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Peterhof_(Novgorod)",
+    "https://en.wikipedia.org/wiki/Volkhov_(river)"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Volkhov rapids",
+    "tag": "staraya_ladoga",
+    "kind": "rapids",
+    "evidence": "Rapids on the lower Volkhov a little above Staraya Ladoga forced cargo onto shallow river craft; Staraya Ladoga is the nearest tagged location.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Volkhov_(river)"
+    ]
+   }
+  ],
+  "period_note": "The route was strongest until Novgorod's fall (1478) and the Peterhof's closure (1494); it declined afterwards and revived with St Petersburg (1703) and the Vyshny Volochyok waterway to the Volga (1709, tag vyshny_volochyok). The Neva mouth tag is neva, and Oreshek (oreshek) guards the Neva source."
+ },
+ {
+  "river": "Svir",
+  "include": false,
+  "reason": "In 1300-1600 the Svir (Ladoga to Onega) carried only local traffic past its rapids; it became a trunk route only with the Mariinsky system in the 19th century.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Svir mouth on Lake Ladoga (nearest tag Lodeynoye Pole)",
+   "tag": "lodenoye_pole",
+   "evidence": "No sea shipping; Lodeynoye Pole is the nearest tagged river location to the mouth.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Svir"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Could be added after 1810 (Mariinsky Canal system)."
+ },
+ {
+  "river": "Narva",
+  "include": false,
+  "reason": "Sea ships went only as far as the town of Narva below the Narva falls, so it is a harbour mouth; Pskov's trade with Livonia went mostly by land through Dorpat.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Narva",
+   "tag": "narva",
+   "evidence": "Narva and Ivangorod face each other just below the falls, which blocked through navigation to Lake Peipus.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Narva_River",
+    "https://en.wikipedia.org/wiki/Narva"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Narva falls",
+    "tag": "narva",
+    "kind": "falls",
+    "evidence": "A waterfall at Narva town blocked through navigation.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Narva_River"
+    ]
+   }
+  ],
+  "period_note": ""
+ },
+ {
+  "river": "Pregel",
+  "include": false,
+  "reason": "Königsberg's harbour reach and a lagoon link to the Neman (via the Deima); there was little cargo traffic upstream of Königsberg.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Königsberg",
+   "tag": "konigsberg",
+   "evidence": "Ships came through the Vistula Lagoon to Königsberg (larger ones unloaded at Pillau).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Pregolya"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Königsberg is already a coastal location."
+ },
+ {
+  "river": "Northern Dvina with Sukhona (White Sea route)",
+  "include": true,
+  "reason": "After 1553 the English and Dutch White Sea trade went by river boat from Kholmogory/Arkhangelsk up the Dvina and Sukhona through Veliky Ustyug and Totma to Vologda, and overland from there to Moscow.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Arkhangelsk",
+   "tag": "arkhangelsk",
+   "evidence": "Sea ships of the Muscovy Company and Dutch traders anchored in the Dvina delta (St Nicholas, then Arkhangelsk from 1584). Kholmogory (tag kholmogory) was the main river harbour from the 14th century.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Northern_Dvina",
+    "https://en.wikipedia.org/wiki/Arkhangelsk",
+    "https://en.wikipedia.org/wiki/Muscovy_Company"
+   ]
+  },
+  "river_head": {
+   "place": "Vologda",
+   "tag": "vologda",
+   "evidence": "Vologda on the upper Sukhona was the river terminus where White Sea cargo switched to the overland road to Moscow.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Vologda",
+    "https://en.wikipedia.org/wiki/Sukhona"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Opoki rapids (Sukhona)",
+    "tag": "porog",
+    "kind": "rapids",
+    "evidence": "The Opoki rapids between Totma and Veliky Ustyug were the one hard stretch of the Sukhona; porog in Ustyug province is the nearest tagged location.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Sukhona"
+    ]
+   }
+  ],
+  "period_note": "Busiest 1553-1720, until Peter I diverted trade to St Petersburg. The Vychegda up to the Stroganov salt town Solvychegodsk (nearest tag koryazhma) could be a branch, but is left out to keep the set small."
+ },
+ {
+  "river": "Danube",
+  "include": true,
+  "reason": "The Danube was central Europe's main east-west waterway: salt, wine, grain and cattle moved Regensburg-Passau-Linz-Vienna-Pressburg-Buda, and the Ottomans supplied their armies on the middle and lower river.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Brăila",
+   "tag": "braila",
+   "evidence": "Genoese and Venetian and later Ottoman and Greek sea ships came up the delta to Brăila (and Galați), Wallachia's and Moldavia's river ports; Kilia (chilia) was the delta port.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Br%C4%83ila",
+    "https://en.wikipedia.org/wiki/Danube"
+   ]
+  },
+  "river_head": {
+   "place": "Regensburg",
+   "tag": "regensburg",
+   "evidence": "Regensburg was the leading medieval Danube trade city, with regular towed traffic downstream to Vienna and back; Ulm boats of the 16th century ran only downstream.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Regensburg",
+    "https://en.wikipedia.org/wiki/Danube"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Sava",
+    "head": {
+     "place": "Sisak",
+     "tag": "sisak",
+     "evidence": "Boats used the Sava from Sisak through Brod and Šabac to Belgrade, and Ottoman and Habsburg river flotillas operated on it.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Sava",
+      "https://en.wikipedia.org/wiki/Sisak"
+     ]
+    }
+   }
+  ],
+  "obstacles": [
+   {
+    "name": "Iron Gates (Kazan gorge and cataracts)",
+    "tag": "severin",
+    "kind": "cataracts",
+    "evidence": "Rocky cataracts from Golubac to below Orșova were passable only at good water levels, often after unloading; Severin, just downstream, is the nearest tagged location.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Iron_Gates"
+    ]
+   },
+   {
+    "name": "Strudengau whirlpools (Strudel and Wirbel near Grein)",
+    "tag": "perg",
+    "kind": "rapids",
+    "evidence": "Rocks and whirlpools near Grein in Upper Austria were a feared hazard but did not stop traffic; Perg is the nearest tagged location.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Strudengau"
+    ]
+   }
+  ],
+  "period_note": "Between the Ottoman-Hungarian frontier and the Habsburg-Ottoman wars (1366-1791) the middle Danube was more military than commercial. Treat Sava as a low-medium confidence branch. The Inn and upper Danube to Ulm are left to the western region."
+ },
+ {
+  "river": "Tisza",
+  "include": false,
+  "reason": "Tisza cargo was mostly Máramaros salt floated downstream on rafts and salt boats to the salt chambers at Szolnok and Szeged, with little upstream traffic.",
+  "confidence": "low",
+  "sea_head": {
+   "place": "Tisza mouth at Titel (no sea shipping)",
+   "tag": "titel",
+   "evidence": "The Tisza enters the Danube at Titel; this is the mouth, not a sea head.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Tisza"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Could be a Danube branch to Szolnok (szolnok) if downstream salt shipping should count."
+ },
+ {
+  "river": "Drava",
+  "include": false,
+  "reason": "Before 19th-century regulation the Drava carried only local and military craft below Osijek.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Drava mouth near Osijek (no sea shipping)",
+   "tag": "osijek",
+   "evidence": "Osijek sits close to the Drava's mouth on the Danube.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Drava"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Dniester",
+  "include": false,
+  "reason": "The Lwów-Akkerman 'Moldavian road' ran overland; the Dniester had rapids (at Yampil, near Soroca) and only local boat and raft traffic.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Cetatea Albă (Akkerman)",
+   "tag": "cetatea_alba",
+   "evidence": "Akkerman on the Dniester estuary was the sea port; sea ships did not go up the river.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Bilhorod-Dnistrovskyi",
+    "https://en.wikipedia.org/wiki/Dniester"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Dnieper",
+  "include": true,
+  "reason": "The Dnieper was the historic north-south trunk river through Kyiv, used by Lithuanian, Cossack and later Russian river traffic; the rapids split it into an upper and a lower reach.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Oleshky (Dnieper mouth; Kherson from 1778)",
+   "tag": "oleshia",
+   "evidence": "Sea craft came into the Dnieper estuary to Oleshky, the customs and trading post at the mouth, and later to Kherson. Ochakiv (tag dashev) guarded the estuary entrance.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Oleshky",
+    "https://en.wikipedia.org/wiki/Dnieper"
+   ]
+  },
+  "river_head": {
+   "place": "Kyiv",
+   "tag": "kyiv",
+   "evidence": "Kyiv was the trade terminus of the middle Dnieper, and boats ran between it and Cherkasy, Kremenchuk and the head of the rapids.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Dnieper",
+    "https://en.wikipedia.org/wiki/Kyiv"
+   ]
+  },
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Dnieper rapids (upper end, Kodak rapid)",
+    "tag": "kodak",
+    "kind": "rapids",
+    "evidence": "The rapids began at the Kodak rapid below modern Dnipro; boats had to be portaged or run through them at high water.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Dnieper_rapids"
+    ]
+   },
+   {
+    "name": "Dnieper rapids (lower end, Vilnyi rapid above Khortytsia)",
+    "tag": "kichkas",
+    "kind": "rapids",
+    "evidence": "The rapids ended above Khortytsia at the Kichkas crossing, downstream of Kodak.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Dnieper_rapids"
+    ]
+   }
+  ],
+  "period_note": "In 1300-1600 the Kyiv-Black Sea trade went mainly by land through the Tatar steppe, and the lower river was Cossack and Tatar frontier. River trade grew after Kherson (1778). Include only if the 18th- and 19th-century weight is wanted; otherwise downgrade to Kyiv-Kremenchuk only. The upper Dnieper (Smolensk, Orsha, Mogilev) and the Pripyat to Pinsk carried timber and grain, mostly downstream."
+ },
+ {
+  "river": "Southern Bug",
+  "include": false,
+  "reason": "Granite rapids start low on the river, and there was no historical cargo navigation beyond the estuary before Mykolaiv's shipyards (1789).",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Ochakiv (Dnieper-Bug estuary entrance)",
+   "tag": "dashev",
+   "evidence": "Ochakiv, the medieval Dashiv/Özi, controlled the shared estuary; Mykolaiv has no tag.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Southern_Bug",
+    "https://en.wikipedia.org/wiki/Ochakiv"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Don",
+  "include": true,
+  "reason": "The Don linked Muscovy with Azov and the Black Sea: Muscovite envoys and merchants went downriver by boat to Azov in the 15th-16th centuries, and Italian Tana at the mouth was a major emporium.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Azov / Tana",
+   "tag": "tana",
+   "evidence": "Venetian and Genoese sea ships traded at Tana at the Don mouth in the 14th-15th centuries, and later at Ottoman Azov.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Azov",
+    "https://en.wikipedia.org/wiki/Don_(river)"
+   ]
+  },
+  "river_head": {
+   "place": "Voronezh",
+   "tag": "voronezh",
+   "evidence": "Boats for the Don route were loaded on the upper Don near Voronezh (founded 1585), where Peter I later built the Azov flotilla.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Azov_Flotilla",
+    "https://en.wikipedia.org/wiki/Voronezh"
+   ]
+  },
+  "branches": [],
+  "obstacles": [],
+  "period_note": "Before 1585 the upper loading points were further up the Don (Donkov, Yelets area). The Volga-Don portage at Perevoloka (tag kalach) links it to the Volga. The Don was shallow in summer, so traffic was strongest in spring and early summer."
+ },
+ {
+  "river": "Volga",
+  "include": true,
+  "reason": "The Volga was Russia's great cargo river, running from Tver through Yaroslavl, Kostroma, Nizhny Novgorod and Kazan to Astrakhan and the Caspian.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Astrakhan",
+   "tag": "astrakhan",
+   "evidence": "Caspian sea craft from Persia and Shirvan traded at Astrakhan (Hajji Tarkhan) in the delta and went no farther upstream.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Astrakhan",
+    "https://en.wikipedia.org/wiki/Volga_trade_route"
+   ]
+  },
+  "river_head": {
+   "place": "Tver",
+   "tag": "tver",
+   "evidence": "Afanasy Nikitin's 1466 trading voyage began by boat at Tver and went down the Volga past Nizhny Novgorod and Kazan to Astrakhan.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Afanasy_Nikitin"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Oka",
+    "head": {
+     "place": "Kolomna (Oka-Moskva confluence)",
+     "tag": "kolomna",
+     "evidence": "The Oka carried traffic between Nizhny Novgorod, Murom, Ryazan and Kolomna.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Oka_(river)"
+     ]
+    }
+   },
+   {
+    "river": "Moskva",
+    "head": {
+     "place": "Moscow",
+     "tag": "moscow",
+     "evidence": "Boats reached Moscow by the Moskva from the Oka at Kolomna, Moscow's water link to the Volga.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Moskva_(river)"
+     ]
+    }
+   },
+   {
+    "river": "Kama",
+    "head": {
+     "place": "Solikamsk",
+     "tag": "solikamsk",
+     "evidence": "Salt from the Solikamsk and Stroganov works on the upper Kama was shipped down the Kama to the Volga; Solikamsk was also the start of the road to Siberia.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Solikamsk",
+      "https://en.wikipedia.org/wiki/Stroganov_family"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "Before the conquest of Kazan (1552) and Astrakhan (1556), long-distance Russian traffic below Nizhny Novgorod was risky but existed (Nikitin 1466). Tver connects to the Novgorod route through the Tvertsa and the Vyshny Volochyok portage."
+ },
+ {
+  "river": "Ural (Yaik)",
+  "include": false,
+  "reason": "There was no significant cargo navigation; the lower Yaik had only fishing and Cossack craft, and Saraychik at the mouth was a caravan town.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Saraychik",
+   "tag": "sarayjuk",
+   "evidence": "Saraychik near the Yaik mouth was a Golden Horde and Nogai caravan town, not a river port.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Ural_(river)",
+    "https://en.wikipedia.org/wiki/Saraychik"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ },
+ {
+  "river": "Ob with Irtysh",
+  "include": true,
+  "reason": "The Siberian river routes were the main transport of Russian Siberia before the 1730s, linking Tyumen, Tobolsk, Surgut, Narym, Tomsk, Berezovo and Obdorsk.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Obdorsk (Salekhard)",
+   "tag": "obdorsk",
+   "evidence": "Pomor sea-going kochi sailed into the Ob Gulf; Obdorsk (1595) near the mouth was the farthest regular point.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Salekhard",
+    "https://en.wikipedia.org/wiki/Mangazeya"
+   ]
+  },
+  "river_head": {
+   "place": "Narym (nearest tag Kolpashevo)",
+   "tag": "kolpashevo",
+   "evidence": "The route went up the Ob from the Irtysh junction to Narym (1594) and the Ket, then by portage to the Yenisei.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Siberian_River_Routes"
+   ]
+  },
+  "branches": [
+   {
+    "river": "Irtysh",
+    "head": {
+     "place": "Tobolsk",
+     "tag": "tobolsk",
+     "evidence": "Tobolsk (1587) on the Irtysh was the capital and main river hub of Siberia.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Tobolsk",
+      "https://en.wikipedia.org/wiki/Siberian_River_Routes"
+     ]
+    }
+   },
+   {
+    "river": "Tobol - Tura",
+    "head": {
+     "place": "Tyumen (Chimgi-Tura)",
+     "tag": "chimgi_tura",
+     "evidence": "Cargo from Verkhoturye went down the Tura through Tyumen and the Tobol to Tobolsk.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Siberian_River_Routes",
+      "https://en.wikipedia.org/wiki/Tyumen"
+     ]
+    }
+   },
+   {
+    "river": "Tom",
+    "head": {
+     "place": "Tomsk",
+     "tag": "tomsk",
+     "evidence": "Tomsk (1604) on the Tom was supplied by the river route from Tobolsk.",
+     "sources": [
+      "https://en.wikipedia.org/wiki/Tomsk",
+      "https://en.wikipedia.org/wiki/Siberian_River_Routes"
+     ]
+    }
+   }
+  ],
+  "obstacles": [],
+  "period_note": "Relevant only from the 1580s (Yermak's boats on the Tura and Irtysh, 1582) to the 1760s, when the overland Siberian Route took over; before that, only local traffic under the Khanate of Sibir (Qashliq, tag qashliq). Outside the 1300-1600 focus."
+ },
+ {
+  "river": "Yenisei",
+  "include": false,
+  "reason": "The Yenisei was a thin 17th-century transit route (Yeniseysk to Turukhansk and Mangazeya, then on to the Angara and Lena), not a reach with traffic through several places, and it lies outside the focus period.",
+  "confidence": "low",
+  "sea_head": {
+   "place": "Turukhansk",
+   "tag": "turukhansk",
+   "evidence": "Turukhansk (Novaya Mangazeya) on the lower Yenisei was the northern hub after Mangazeya was abandoned in 1672.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Mangazeya",
+    "https://en.wikipedia.org/wiki/Siberian_River_Routes"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": "If Siberia gets more river channels, Yeniseysk (yeniseysk) up to Krasnoyarsk (krasnoyarsk) would be the reach."
+ },
+ {
+  "river": "Göta älv",
+  "include": false,
+  "reason": "Sea ships only reached Lödöse about 40 km up; above it, the Lilla Edet and Trollhättan falls blocked traffic to Lake Vänern, so it is a single town's harbour reach.",
+  "confidence": "medium",
+  "sea_head": {
+   "place": "Lödöse",
+   "tag": "lodose",
+   "evidence": "Medieval Lödöse near the Göta älv mouth was western Sweden's trading port before Nya Lödöse and Gothenburg took over.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/L%C3%B6d%C3%B6se",
+    "https://en.wikipedia.org/wiki/G%C3%B6ta_%C3%A4lv"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [
+   {
+    "name": "Trollhättan falls",
+    "tag": "lodose",
+    "kind": "falls",
+    "evidence": "Falls above Lödöse blocked navigation until the 1800 canal; Lödöse is the nearest tagged location.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/G%C3%B6ta_%C3%A4lv"
+    ]
+   }
+  ],
+  "period_note": "Worth revisiting only after 1800 (Trollhätte Canal)."
+ },
+ {
+  "river": "Kemijoki",
+  "include": false,
+  "reason": "The Kemijoki carried only small boats (tar and fur transport) and log floating, with many rapids, and no cargo shipping through several places.",
+  "confidence": "high",
+  "sea_head": {
+   "place": "Kemi",
+   "tag": "kiemi",
+   "evidence": "Kemi at the mouth was a small coastal trading place.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Kemijoki"
+   ]
+  },
+  "river_head": null,
+  "branches": [],
+  "obstacles": [],
+  "period_note": ""
+ }
+]

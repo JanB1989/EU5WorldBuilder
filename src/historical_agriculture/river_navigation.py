@@ -47,7 +47,9 @@ def prepare(config):
     raw = ROOT/config["raw_inputs"]
     output = ROOT/config["output"]; output.mkdir(parents=True, exist_ok=True)
     river_manifest = json.loads((ROOT/config["river_export"]/"export_manifest.json").read_text())
-    river_path = ROOT/river_manifest["output_png"]
+    # With vanilla snapping the export also writes the unsnapped drawing; every navigation decision is taken from it,
+    # so the snap (visual) cannot move tiles, states, ports or crossings. The final rivers are drawn from output_png.
+    river_path = ROOT/(river_manifest.get("navigation_reference_png") or river_manifest["output_png"])
     Image.MAX_IMAGE_PIXELS = None
     river = np.asarray(Image.open(river_path))
     height, width = river.shape

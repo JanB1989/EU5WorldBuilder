@@ -430,8 +430,11 @@ def export(config, evidence, river):
         close=text.rfind('}',0,text.rfind('}'));assert len(seen)>1000
         write(rel,text[:close]+additions+'\n'+text[close:])
     from .navigation_cleanup import preserve_levels
-    cleaned,preservation,original_level_map=preserve_levels(river,original,after,land,base_info.reset_index(),[o['box'] for o in config.get('native_geometry_overrides',[])])
+    # Every decision above used river (with vanilla snapping the unsnapped reference of the export); the drawn
+    # rivers are the export's rivers.png, which differs from river only in line positions away from the navigation.
     palette_image=Image.open(ROOT/json.loads((ROOT/config['river_export']/'export_manifest.json').read_text())['output_png'])
+    drawing=np.asarray(palette_image)
+    cleaned,preservation,original_level_map=preserve_levels(drawing,original,after,land,base_info.reset_index(),[o['box'] for o in config.get('native_geometry_overrides',[])])
     cleaned_image=Image.fromarray(cleaned,mode='P');cleaned_image.putpalette(palette_image.getpalette())
     cleaned_image.save(mod/md/'rivers.png');written.append(md+'rivers.png')
     pd.DataFrame(preservation,columns=['location_tag','river_level','x','y','distance_pixels','added_source']).to_csv(out/'preserved_river_pixels.csv',index=False)

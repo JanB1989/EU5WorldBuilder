@@ -34,6 +34,56 @@
       "detour_reach": 8,
       "detour_max_length": 24
     },
+    "vanilla_snap": {
+      "enabled": true,
+      "max_distance_pixels": 5,
+      "minimum_stretch_pixels": 12,
+      "end_distance_pixels": 1,
+      "junction_clearance_pixels": 2,
+      "max_iterations": 8,
+      "note": "2026-09-26: visual only. Routed stretches that follow a vanilla river within 5 px are redrawn on vanilla pixels (river_snap.py); a stretch is kept only if every location keeps its river level and junction, and the export repeats until every location has the unsnapped export level.",
+      "protect_navigation": {
+        "minimum_mean_discharge_m3_s": 300,
+        "buffer_pixels": 16,
+        "locations": [
+          "london",
+          "barking",
+          "kingston",
+          "harrow",
+          "rochester",
+          "abingdon",
+          "oxford",
+          "henley",
+          "reading",
+          "windsor",
+          "wycombe",
+          "woking",
+          "hangzhou",
+          "chongde",
+          "jiaxing",
+          "wujiang",
+          "wuxian",
+          "wuxi",
+          "wujin",
+          "danyang",
+          "dantu",
+          "haining",
+          "haiyan",
+          "changshu"
+        ],
+        "boxes": [
+          [
+            7642,
+            1740,
+            7701,
+            1880
+          ]
+        ],
+        "note": "Navigation (configs/river_navigation.json) matches river pixels to source reaches within 8 px, smooths their gradient over the 7 nearest river pixels and cuts water tiles from reaches of at least 500 m3/s (tropical 2,000), plus the below-threshold override locations listed here (lower Thames, Jiangnan canals). Every pixel of a reach above the floor (drawn or not), a 16 px buffer, those locations and the lower-Thames native geometry box keep the unsnapped drawing, so tiles, tile states, ports, crossings and market access are unchanged. Keep in step with the navigation config."
+      }
+    },
+    "width_policy": "vanilla_within_level",
+    "width_policy_note": "2026-09-26: a river pixel takes vanilla width index where vanilla draws the same level at or within 5 px of it, otherwise the usual vanilla index of its level (4, 11, 15; 6 and 12 for levels 2 and 4, which vanilla never draws); the level is unchanged.",
     "waterways_note": "2026-09-21: named waterways drawn as their own trees (river_waterways.py) where real water is missing from both the RiverATLAS tree and vanilla's bitmap: the Grand Canal south of the Yangtze (Hangzhou-Chongde-Jiaxing-Wujiang-Suzhou(wuxian)-Wuxi-Changzhou(wujin)-Danyang-Zhenjiang(dantu)), the Shangtang canal along Hangzhou Bay, the Yuanhe canal Suzhou-Changshu, the Zhedong canal Xiaoshan-Ningbo(yinxian), and two rivers below the discharge cut (Xitiaoxi Anji-Huzhou(wuxing), Dongyang River Dongyang-Yiwu-Jinhua). The path stays inside the listed locations, keeps clearance from every other river and stops one pixel inside the last location; a location keeps a higher level it already has. Levels: 3 for the Grand Canal trunk, 2 for the rest.",
     "waterways": [
       {

@@ -371,12 +371,258 @@ def preview(sizes, water, markers, output):
     Image.fromarray(rgb).save(output/"junction_preview.png")
 
 
+def route_network(network, project, width, height, blocked, water, cfg, snapper=None, flow_mask=None):
+    """Route every selected branch downstream-first into fresh rasters; ``snapper`` redraws stretches on vanilla.
+
+    ``flow_mask`` (optional ``(minimum_q, bool raster)``) marks every drawn pixel whose source reach carries at least
+    ``minimum_q`` mean discharge."""
+    ids, q, ds, geometries, continents, reach_levels, children, main, roots = network
+    sizes = np.zeros((height, width), np.uint8)
+    owner = np.zeros((height, width), np.int32)
+    markers = np.full((height, width), 255, np.uint8)
+    heap = [(-float(q[r]), int(r), int(r)+1, True) for r in roots]
+    heapq.heapify(heap)
+    ledger = []
+    root_sources = []
+    root_outlets = []
+    counters = Counter()
+    visited = np.zeros(len(ids), bool)
+    reach_branch = np.zeros(len(ids), np.int64)
+    while heap:
+        _, first, basin, is_root = heapq.heappop(heap)
+        chain, coordinates, vertex_levels, vertex_q = [], [], [], []
+        i = first
+        while i >= 0:
+            chain.append(i); visited[i] = True
+            reach_branch[i] = ids[first]
+            xy = np.asarray(geometries[i].coords)[::-1]
+            coordinates.extend(xy)
+            vertex_levels.extend([int(reach_levels[i])] * len(xy))
+            vertex_q.extend([float(q[i])] * len(xy))
+            for child in children[i]:
+                if child != main[i]:
+                    heapq.heappush(heap, (-float(q[child]), child, basin, False))
+            i = int(main[i])
+        projected = project.project(np.asarray(coordinates))
+        # Rasterize each constant-class run separately, retaining mainstem class
+        # changes. Pixel levels are then sampled from projected source vertices.
+        from scipy.spatial import cKDTree
+        finite = np.isfinite(projected).all(axis=1)
+        tree = cKDTree(projected[finite]) if finite.any() else None
+        vertex_levels = np.asarray(vertex_levels, np.uint8)[finite]
+        vertex_q = np.asarray(vertex_q, np.float32)[finite]
+        added_total = visible = clipped_water = clipped_unownable = 0
+        reasons = Counter()
+        for path_number, path in enumerate(lattice_path(projected, width, height)):
+            clean = erase_raster_loops(path)
+            if flow_mask is not None and tree is not None and clean:
+                # the reach's own course counts too where it is not drawn (collisions, clipping): navigation matches
+                # river pixels to the source reach geometry, drawn or not
+                cxy = np.asarray(clean)
+                flow_mask[1][cxy[:, 1], cxy[:, 0]] |= vertex_q[tree.query(cxy)[1]] >= flow_mask[0]
+            if snapper is not None and tree is not None:
+                clean = snapper.snap(clean, (int(ids[first]), path_number),
+                    lambda pts: vertex_levels[tree.query(np.asarray(pts))[1]], sizes)
+            counters["self_touch_pixels_generalized"] += len(path)-len(clean)
+            # Clip excluded zones before routing, never erase an encoded PNG:
+            # each surviving fragment needs its own valid source/join structure.
+            runs = split_visible_runs(clean, blocked)
+            for x, y in clean:
+                clipped_water += int(water[y, x])
+                clipped_unownable += int(blocked[y, x] and not water[y, x])
+            for j, run in enumerate(runs):
+                visible += len(run)
+                root_allowed = is_root or j > 0 or run[0] != clean[0]
+                added, attached, reason, consumed, snapped = route_branch(run, sizes, owner, blocked, basin,
+                    root_allowed, cfg["minimum_visible_branch_pixels"], cfg["junction_snap_radius_pixels"])
+                counters["snapped_junctions"] += int(snapped)
+                if added:
+                    xy = np.asarray(added)
+                    _, nearest = tree.query(xy)
+                    sizes[xy[:, 1], xy[:, 0]] = vertex_levels[nearest]
+                    if flow_mask is not None:
+                        flow_mask[1][xy[:, 1], xy[:, 0]] |= vertex_q[nearest] >= flow_mask[0]
+                    if attached:
+                        mx, my = added[0]
+                        markers[my, mx] = 1
+                    if not attached:
+                        root_sources.append(added[-1]); root_outlets.append(added[0])
+                added_total += len(added)
+                reasons[reason] += 1
+                if reason == "collision": counters["collision_omitted_pixels"] += len(run)-len(added)
+        counters.update(reasons)
+        ledger.append({"branch_id": int(ids[first]), "basin_terminal_reach_id": int(ids[basin-1]),
+            "continent": str(continents[first]), "source_reaches": len(chain),
+            "source_mean_discharge_m3_s": float(q[first]), "source_is_terminal_branch": is_root,
+            "projected_land_pixels": visible, "drawn_pixels": added_total,
+            "projected_water_pixels": clipped_water, "projected_unownable_land_pixels": clipped_unownable, "outcome": "drawn" if added_total else "not_drawn",
+            "routing_notes": ";".join(sorted(reasons)) or "outside_projection"})
+        if len(ledger) % 5000 == 0:
+            print(f"  {len(ledger):,} branches routed", flush=True)
+    if not visited.all(): raise AssertionError("Selected reaches missing from the export ledger")
+    return {"sizes": sizes, "owner": owner, "markers": markers, "ledger": ledger, "counters": counters,
+            "root_sources": root_sources, "root_outlets": root_outlets, "reach_branch": reach_branch}
+
+
+def finish_network(state, native, zones, inv, blocked, cfg):
+    """Vanilla completion and named waterways, in place (see river_completion.py and river_waterways.py)."""
+    sizes, owner, markers = state["sizes"], state["owner"], state["markers"]
+    state["completion"] = state["waterways"] = None
+    if cfg.get("vanilla_completion", {}).get("enabled", False):
+        from .river_completion import complete
+        state["completion"] = complete(native, sizes, owner, markers, zones, inv, blocked, cfg["vanilla_completion"])
+        print(f"Vanilla completion: {state['completion']}", flush=True)
+    if cfg.get("waterways"):
+        from .river_waterways import draw
+        state["waterways"] = draw(sizes, owner, markers, zones, inv, blocked, cfg["waterways"])
+        print(f"Waterways: {state['waterways']['drawn']} of {state['waterways']['configured']} drawn", flush=True)
+
+
+def zone_levels(zones, sizes, markers, count):
+    """Highest river level per location; with ``markers`` a junction marker counts as level 5 (engine rule)."""
+    out = np.zeros(count, np.uint8)
+    for y in range(0, zones.shape[0], 128):
+        z, s = zones[y:y+128].ravel(), sizes[y:y+128].ravel()
+        if markers is not None:
+            s = np.where(markers[y:y+128].ravel() == 1, 5, s)
+        np.maximum.at(out, z, s)
+    return out
+
+
+def navigation_protection(flow, zones, inv, guard):
+    """Pixels the snap must leave exactly as routed. ``worldbuilder navigation`` reads this export and cuts its water
+    tiles, ports and crossings from the river pixels it matches to large reaches. Every pixel of a river above the
+    flow floor, a buffer around it (a small river's pixel within the navigation match distance of a large reach is
+    matched to that reach) and the locations of below-threshold navigation overrides therefore keep the reference
+    drawing, so the navigation and the gameplay that follows from it stay identical."""
+    from scipy.ndimage import maximum_filter
+    size = 2*int(guard["buffer_pixels"])+1
+    protected = maximum_filter(flow.view(np.uint8), size=size) > 0
+    tags = set(guard.get("locations", []))
+    ids = np.flatnonzero(inv.location_tag.isin(tags).to_numpy())+1
+    if len(ids) != len(tags): raise ValueError("Unknown protected navigation locations")
+    for y in range(0, zones.shape[0], 256):
+        protected[y:y+256] |= np.isin(zones[y:y+256], ids)
+    for x0, y0, x1, y1 in guard.get("boxes", []):
+        protected[y0:y1, x0:x1] = True
+    return protected
+
+
+def snap_network(reference, routed_ref, junctions, protected, network, project, width, height, blocked, water, zones,
+                 inv, native, cfg):
+    """Re-route with vanilla snapping until every location keeps the reference export's marker-aware level and every
+    protected (navigation) pixel is drawn exactly as in the reference."""
+    from scipy.ndimage import find_objects
+    from .river_snap import VanillaSnap
+    scfg = cfg["vanilla_snap"]
+    count = len(inv)+1
+    final_ref = zone_levels(zones, reference["sizes"], reference["markers"], count)
+    boxes = find_objects(zones)
+    deny, history = set(), []
+    for iteration in range(1, int(scfg.get("max_iterations", 8))+1):
+        snapper = VanillaSnap(native, blocked, zones, routed_ref, junctions, scfg, deny, protected)
+        print(f"Vanilla snap pass {iteration} ({len(deny)} stretches denied)", flush=True)
+        state = route_network(network, project, width, height, blocked, water, cfg, snapper)
+        finish_network(state, native, zones, inv, blocked, cfg)
+        found = zone_levels(zones, state["sizes"], state["markers"], count)
+        differing = np.flatnonzero(found != final_ref)
+        differing = differing[differing > 0]
+        moved = protected & ((state["sizes"] != reference["sizes"]) | (state["markers"] != reference["markers"]))
+        moved_pixels = int(moved.sum())
+        if moved_pixels:
+            differing = np.union1d(differing, np.unique(zones[moved]))
+            differing = differing[differing > 0]
+        del moved
+        by_zone = {}
+        for entry in snapper.log:
+            for z in entry["zones"]:
+                by_zone.setdefault(z, []).append(entry["key"])
+        culprits = set()
+        for z in differing:
+            # stretches inside the location first, otherwise ever wider around it: a stretch can also act at a
+            # distance by blocking a tributary that is routed later
+            hits = set(by_zone.get(int(z), [])) - deny
+            radius = 12
+            while not hits and boxes[z-1] is not None and radius <= 972:
+                sl = boxes[z-1]
+                y0, y1, x0, x1 = sl[0].start-radius, sl[0].stop+radius, sl[1].start-radius, sl[1].stop+radius
+                hits = {e["key"] for e in snapper.log
+                        if not (e["bbox"][2] < x0 or e["bbox"][0] > x1 or e["bbox"][3] < y0 or e["bbox"][1] > y1)} - deny
+                radius *= 3
+            culprits.update(hits)
+        history.append({"iteration": iteration, **{k: int(v) for k, v in snapper.counters.items()},
+                        "differing_locations": int(len(differing)), "moved_navigation_pixels": moved_pixels,
+                        "newly_denied": len(culprits - deny)})
+        print(f"  {history[-1]}", flush=True)
+        if not len(differing):
+            return state, {"passes": history, "denied_stretches": len(deny),
+                           "differing_locations": 0, "config": scfg}
+        if not culprits - deny:
+            tags = inv.location_tag.to_numpy()[differing[:10]-1].tolist()
+            raise ValueError(f"Vanilla snap changed {len(differing)} location levels no stretch explains: {tags}")
+        deny |= culprits
+    raise ValueError("Vanilla snap did not converge on the reference location levels")
+
+
+
+def encode_rivers(sizes, markers, root_sources, root_outlets, counters, water, blocked, palette_indices, native_array,
+                  cfg, width_policy):
+    """Place the green sources, run the native topology gates and encode the indexed bitmap (``markers`` is updated)."""
+    # Keep junction centres ordinary width pixels. Tributary endpoints were
+    # marked during routing, one pixel before each receiving mainstem.
+    degree = np.zeros_like(sizes)
+    degree[1:] += sizes[:-1] > 0; degree[:-1] += sizes[1:] > 0
+    degree[:, 1:] += sizes[:, :-1] > 0; degree[:, :-1] += sizes[:, 1:] > 0
+    junction = (sizes > 0) & (degree >= 3)
+    from scipy.ndimage import label
+    # Count components and confirm one green source per tree. Large temporary
+    # labels are released before encoding the bitmap.
+    labels, components = label(sizes > 0)
+    endpoint_y, endpoint_x = np.where((sizes > 0) & (degree == 1))
+    endpoint_components = labels[endpoint_y, endpoint_x]
+    # Snapping can extend a mainstem's former headwater pixel. Move its green
+    # marker to a remaining upstream leaf; never put a source at the outlet.
+    # Component outlets were recorded while drawing downstream-first.
+    for (x, y), outlet in zip(root_sources, root_outlets):
+        component = labels[y, x]
+        candidates = np.flatnonzero(endpoint_components == component)
+        candidates = [i for i in candidates if (endpoint_x[i], endpoint_y[i]) != outlet]
+        if not candidates: raise ValueError("River component has no non-outlet endpoint")
+        i = min(candidates, key=lambda i: (endpoint_x[i]-x)**2+(endpoint_y[i]-y)**2)
+        nx, ny = int(endpoint_x[i]), int(endpoint_y[i])
+        markers[ny, nx] = 0
+        counters["source_pixels_relocated_after_snapping"] += int((nx, ny) != (x, y))
+    green_counts = np.bincount(labels[markers == 0], minlength=components+1)[1:]
+    vertices = int((sizes > 0).sum())
+    edges = int(degree[sizes > 0].astype(np.int64).sum()//2)
+    forest_ok = edges == vertices-components
+    sources_ok = bool(np.all(green_counts == 1))
+    del labels, degree
+    if not forest_ok or not sources_ok:
+        raise ValueError(f"Native topology gate failed: forest={forest_ok}, one source/component={sources_ok}")
+    native_pixels = np.where(water, 254, 255).astype(np.uint8)
+    width_report = None
+    if width_policy == "vanilla_within_level":
+        from .river_snap import encode_widths
+        widths, width_report = encode_widths(sizes, native_array, cfg.get("vanilla_snap", {}).get("max_distance_pixels", 5))
+        native_pixels[sizes > 0] = widths[sizes > 0]
+        del widths
+    else:
+        for i, entry in enumerate(palette_indices, 1): native_pixels[sizes == i] = entry
+    native_pixels[markers == 0] = 0
+    native_pixels[markers == 1] = 1
+    excluded_river_pixels = int(np.count_nonzero((native_pixels < 16) & blocked))
+    if excluded_river_pixels: raise ValueError("River pixels escaped the routing eligibility mask")
+    native_checks = validate_native_rivers(native_pixels)
+    native_checks["excluded_zone_river_pixels"] = excluded_river_pixels
+    return native_pixels, native_checks, vertices, components, forest_ok, sources_ok, width_report
+
 def export(config):
     network, output, raw = Path(config["network"]), Path(config["output"]), Path(config["raw_map_inputs"])
     output.mkdir(parents=True, exist_ok=True)
     code_fingerprints = {str(p): digest(p) for p in [Path(__file__),
         Path(__file__).with_name("river_network.py"), Path(__file__).with_name("river_preview.py"), Path(__file__).with_name("river_completion.py"),
-        Path(__file__).with_name("river_waterways.py")]}
+        Path(__file__).with_name("river_waterways.py"), Path(__file__).with_name("river_snap.py")]}
     upstream = verify(network)
     cfg = config["export"]
     if cfg["junction_policy"] != "native_markers_with_promotion_audit":
@@ -423,9 +669,6 @@ def export(config):
     print(f"Projecting {len(ids):,} reaches into a {width} × {height} bitmap", flush=True)
     inv, zones, water = prepare_surface(raw, width, height)
     blocked = routing_mask(inv, zones, water, cfg.get("ownable_locations_only", False))
-    sizes = np.zeros((height, width), np.uint8)
-    owner = np.zeros((height, width), np.int32)
-    markers = np.full((height, width), 255, np.uint8)
     reach_levels = levels(q, cfg["level_lower_bounds_m3_s"])
     children = [[] for _ in ids]
     for i, d in enumerate(ds):
@@ -434,129 +677,36 @@ def export(config):
     for i, c in enumerate(children):
         if c: main[i] = max(c, key=lambda j: (q[j], -int(ids[j])))
     roots = np.flatnonzero(ds < 0)
-    heap = [(-float(q[r]), int(r), int(r)+1, True) for r in roots]
-    heapq.heapify(heap)
-    ledger = []
-    root_sources = []
-    root_outlets = []
-    counters = Counter()
-    visited = np.zeros(len(ids), bool)
-    reach_branch = np.zeros(len(ids), np.int64)
-    while heap:
-        _, first, basin, is_root = heapq.heappop(heap)
-        chain, coordinates, vertex_levels = [], [], []
-        i = first
-        while i >= 0:
-            chain.append(i); visited[i] = True
-            reach_branch[i] = ids[first]
-            xy = np.asarray(geometries[i].coords)[::-1]
-            coordinates.extend(xy)
-            vertex_levels.extend([int(reach_levels[i])] * len(xy))
-            for child in children[i]:
-                if child != main[i]:
-                    heapq.heappush(heap, (-float(q[child]), child, basin, False))
-            i = int(main[i])
-        projected = project.project(np.asarray(coordinates))
-        # Rasterize each constant-class run separately, retaining mainstem class
-        # changes. Pixel levels are then sampled from projected source vertices.
-        from scipy.spatial import cKDTree
-        finite = np.isfinite(projected).all(axis=1)
-        tree = cKDTree(projected[finite]) if finite.any() else None
-        vertex_levels = np.asarray(vertex_levels, np.uint8)[finite]
-        added_total = visible = clipped_water = clipped_unownable = 0
-        reasons = Counter()
-        for path in lattice_path(projected, width, height):
-            clean = erase_raster_loops(path)
-            counters["self_touch_pixels_generalized"] += len(path)-len(clean)
-            # Clip excluded zones before routing, never erase an encoded PNG:
-            # each surviving fragment needs its own valid source/join structure.
-            runs = split_visible_runs(clean, blocked)
-            for x, y in clean:
-                clipped_water += int(water[y, x])
-                clipped_unownable += int(blocked[y, x] and not water[y, x])
-            for j, run in enumerate(runs):
-                visible += len(run)
-                root_allowed = is_root or j > 0 or run[0] != clean[0]
-                added, attached, reason, consumed, snapped = route_branch(run, sizes, owner, blocked, basin,
-                    root_allowed, cfg["minimum_visible_branch_pixels"], cfg["junction_snap_radius_pixels"])
-                counters["snapped_junctions"] += int(snapped)
-                if added:
-                    xy = np.asarray(added)
-                    _, nearest = tree.query(xy)
-                    sizes[xy[:, 1], xy[:, 0]] = vertex_levels[nearest]
-                    if attached:
-                        mx, my = added[0]
-                        markers[my, mx] = 1
-                    if not attached:
-                        root_sources.append(added[-1]); root_outlets.append(added[0])
-                added_total += len(added)
-                reasons[reason] += 1
-                if reason == "collision": counters["collision_omitted_pixels"] += len(run)-len(added)
-        counters.update(reasons)
-        ledger.append({"branch_id": int(ids[first]), "basin_terminal_reach_id": int(ids[basin-1]),
-            "continent": str(continents[first]), "source_reaches": len(chain),
-            "source_mean_discharge_m3_s": float(q[first]), "source_is_terminal_branch": is_root,
-            "projected_land_pixels": visible, "drawn_pixels": added_total,
-            "projected_water_pixels": clipped_water, "projected_unownable_land_pixels": clipped_unownable, "outcome": "drawn" if added_total else "not_drawn",
-            "routing_notes": ";".join(sorted(reasons)) or "outside_projection"})
-        if len(ledger) % 5000 == 0:
-            print(f"  {len(ledger):,} branches routed", flush=True)
-    if not visited.all(): raise AssertionError("Selected reaches missing from the export ledger")
+    routing = (ids, q, ds, geometries, continents, reach_levels, children, main, roots)
+    native_array = np.asarray(native)
+    snapping = cfg.get("vanilla_snap", {}).get("enabled", False)
+    flow_mask = None
+    if snapping:
+        guard = cfg["vanilla_snap"]["protect_navigation"]
+        flow_mask = (float(guard["minimum_mean_discharge_m3_s"]), np.zeros((height, width), bool))
+    state = route_network(routing, project, width, height, blocked, water, cfg, flow_mask=flow_mask)
+    if snapping:
+        routed_ref = zone_levels(zones, state["sizes"], None, len(inv)+1)
+        junctions = state["markers"] == 1
+        protected = navigation_protection(flow_mask[1], zones, inv, guard)
+        del flow_mask
     # Vanilla completion: bank detours and vanilla fallback pieces where vanilla gives a location a river the
     # network drawing does not (see river_completion.py). Runs before the marker and topology gates.
-    completion = None
-    if cfg.get("vanilla_completion", {}).get("enabled", False):
-        from .river_completion import complete
-        completion_sources = []   # green sources of copied pieces are set by the completion itself
-        completion = complete(np.asarray(native), sizes, owner, markers, zones, inv, blocked, cfg["vanilla_completion"])
-        print(f"Vanilla completion: {completion}", flush=True)
-    # Named waterways (canals, rivers below the discharge cut) as their own trees, see river_waterways.py.
-    waterways = None
-    if cfg.get("waterways"):
-        from .river_waterways import draw
-        waterways = draw(sizes, owner, markers, zones, inv, blocked, cfg["waterways"])
-        print(f"Waterways: {waterways['drawn']} of {waterways['configured']} drawn", flush=True)
-    del owner
-    # Keep junction centres ordinary width pixels. Tributary endpoints were
-    # marked during routing, one pixel before each receiving mainstem.
-    degree = np.zeros_like(sizes)
-    degree[1:] += sizes[:-1] > 0; degree[:-1] += sizes[1:] > 0
-    degree[:, 1:] += sizes[:, :-1] > 0; degree[:, :-1] += sizes[:, 1:] > 0
-    junction = (sizes > 0) & (degree >= 3)
-    from scipy.ndimage import label
-    # Count components and confirm one green source per tree. Large temporary
-    # labels are released before encoding the bitmap.
-    labels, components = label(sizes > 0)
-    endpoint_y, endpoint_x = np.where((sizes > 0) & (degree == 1))
-    endpoint_components = labels[endpoint_y, endpoint_x]
-    # Snapping can extend a mainstem's former headwater pixel. Move its green
-    # marker to a remaining upstream leaf; never put a source at the outlet.
-    # Component outlets were recorded while drawing downstream-first.
-    for (x, y), outlet in zip(root_sources, root_outlets):
-        component = labels[y, x]
-        candidates = np.flatnonzero(endpoint_components == component)
-        candidates = [i for i in candidates if (endpoint_x[i], endpoint_y[i]) != outlet]
-        if not candidates: raise ValueError("River component has no non-outlet endpoint")
-        i = min(candidates, key=lambda i: (endpoint_x[i]-x)**2+(endpoint_y[i]-y)**2)
-        nx, ny = int(endpoint_x[i]), int(endpoint_y[i])
-        markers[ny, nx] = 0
-        counters["source_pixels_relocated_after_snapping"] += int((nx, ny) != (x, y))
-    green_counts = np.bincount(labels[markers == 0], minlength=components+1)[1:]
-    vertices = int((sizes > 0).sum())
-    edges = int(degree[sizes > 0].astype(np.int64).sum()//2)
-    forest_ok = edges == vertices-components
-    sources_ok = bool(np.all(green_counts == 1))
-    del labels, degree
-    if not forest_ok or not sources_ok:
-        raise ValueError(f"Native topology gate failed: forest={forest_ok}, one source/component={sources_ok}")
-    native_pixels = np.where(water, 254, 255).astype(np.uint8)
-    for i, entry in enumerate(palette_indices, 1): native_pixels[sizes == i] = entry
-    native_pixels[markers == 0] = 0
-    native_pixels[markers == 1] = 1
-    excluded_river_pixels = int(np.count_nonzero((native_pixels < 16) & blocked))
-    if excluded_river_pixels: raise ValueError("River pixels escaped the routing eligibility mask")
-    native_checks = validate_native_rivers(native_pixels)
-    native_checks["excluded_zone_river_pixels"] = excluded_river_pixels
+    finish_network(state, native_array, zones, inv, blocked, cfg)
+    snap_report = reference = None
+    if snapping:
+        reference = state
+        state, snap_report = snap_network(state, routed_ref, junctions, protected, routing, project, width, height,
+                                          blocked, water, zones, inv, native_array, cfg)
+        del routed_ref, junctions, protected
+    sizes, owner, markers = state["sizes"], state["owner"], state["markers"]
+    ledger, counters, reach_branch = state["ledger"], state["counters"], state["reach_branch"]
+    root_sources, root_outlets = state["root_sources"], state["root_outlets"]
+    completion, waterways = state["completion"], state["waterways"]
+    del owner, state
+    native_pixels, native_checks, vertices, components, forest_ok, sources_ok, width_report = encode_rivers(
+        sizes, markers, root_sources, root_outlets, counters, water, blocked, palette_indices, native_array, cfg,
+        cfg.get("width_policy", "level_palette"))
     image = Image.frombytes("P", (width, height), native_pixels.tobytes())
     image.putpalette(palette)
     target = output/"mod"/"EU5 World Builder - Rivers"/"in_game"/"map_data"
@@ -571,6 +721,17 @@ def export(config):
     if reopened.mode != "P" or reopened.getpalette() != palette or not np.array_equal(np.asarray(reopened), native_pixels):
         raise AssertionError("Indexed river PNG did not round-trip")
     del native_pixels
+    navigation_reference = None
+    if reference is not None:
+        # Navigation (worldbuilder navigation) takes its tiles, states, ports and crossings from the unsnapped drawing,
+        # encoded exactly as without snapping, and draws the final rivers from rivers.png: the snap stays visual.
+        ref_pixels = encode_rivers(reference["sizes"], reference["markers"], reference["root_sources"],
+            reference["root_outlets"], Counter(), water, blocked, palette_indices, native_array, cfg, "level_palette")[0]
+        ref_image = Image.frombytes("P", (width, height), ref_pixels.tobytes())
+        ref_image.putpalette(palette)
+        ref_image.save(output/"navigation_reference_rivers.png", optimize=False)
+        navigation_reference = str(output/"navigation_reference_rivers.png")
+        del ref_pixels, ref_image, reference
     loc = location_audit(inv, zones, sizes, markers, output)
     preview(sizes, water, markers, output)
     ledger = pd.DataFrame(ledger)
@@ -594,12 +755,15 @@ def export(config):
         "river_pixels": vertices, "components": int(components), "junction_pixels": int((markers == 1).sum()),
         "native_encoding_audit": native_checks,
         "routing": dict(counters), "location_audit": loc, "vanilla_completion": completion, "waterways": waterways,
-        "engineering_checks": {"every_selected_reach_accounted_for": bool(visited.all()),
+        "vanilla_snap": snap_report, "widths": width_report,
+        "engineering_checks": {"every_selected_reach_accounted_for": True,
             "acyclic_four_connected_raster": forest_ok, "one_source_per_component": sources_ok,
             "indexed_png_roundtrip": True, "native_tributary_encoding": True},
         "config": config, "input_sha256": inputs,
         "code_sha256": code_fingerprints,
         "output_png": str(target/"rivers.png"), "output_sha256": digest(target/"rivers.png"),
+        "navigation_reference_png": navigation_reference,
+        "navigation_reference_sha256": digest(Path(navigation_reference)) if navigation_reference else None,
         "status": "Global prototype exported; not yet verified by loading this new bitmap in EU5",
         "limits": ["No discharge classification has been calibrated as historical navigability",
             "Modern source hydrography is an approximation to 1300, especially for changing deltas and altered channels",

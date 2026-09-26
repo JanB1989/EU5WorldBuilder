@@ -102,7 +102,8 @@ def preserve_levels(river, original, after, land, inventory, geometry_boxes=()):
         c=int(original[y,x])
         if c in land:before_levels[c]=max(before_levels[c],int(LEVELS[river[y,x]]))
     # Replaced local alignments must not leave their old parallel channel.
-    for x0,y0,x1,y1 in geometry_boxes:cleaned[y0:y1,x0:x1]=255
+    for x0,y0,x1,y1 in geometry_boxes:
+        box=cleaned[y0:y1,x0:x1];box[box<16]=255
     converted=original!=after
     water=converted & ~np.isin(after,list(land))
     cleaned[water]=254

@@ -18,7 +18,7 @@
   "global_navigation": true,
   "river_ports": {
     "harbor_overrides": {
-      "frankfurt": 0.15
+      "frankfurt": 0.30
     }
   }
 }

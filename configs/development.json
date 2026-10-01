@@ -22,11 +22,11 @@
       "mediterranean": 0.3,
       "dry_summer_continental": 0.3,
       "savanna": 0.3,
-      "hot_steppe": 0.15,
-      "cold_steppe": 0.15,
+      "hot_semi_arid": 0.15,
+      "cold_semi_arid": 0.15,
       "arid": 0.15,
       "cold_arid": 0.15,
-      "subarctic": 0.15,
+      "subpolar": 0.15,
       "arctic": 0.15
     },
     "note": "How much a grazing hectare counts against a cultivated one when measuring land use. Humid climates: meadow, hay and dairy land, worked as intensively as fields (0.5). Mediterranean, dry-summer and savanna: seasonal and transhumant grazing (0.3). Steppe, desert and the far north: open range (0.15). Explicit assumptions by displayed climate class; the HYDE pasture/rangeland split is not used because it is population-density based."

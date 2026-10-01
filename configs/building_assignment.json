@@ -137,8 +137,8 @@
           "tropical_monsoon",
           "highland_monsoon",
           "savanna",
-          "hot_steppe",
-          "cold_steppe"
+          "hot_semi_arid",
+          "cold_semi_arid"
         ],
         "topography": [
           "flatland",
@@ -175,8 +175,8 @@
           "tropical_monsoon",
           "highland_monsoon",
           "savanna",
-          "hot_steppe",
-          "cold_steppe"
+          "hot_semi_arid",
+          "cold_semi_arid"
         ],
         "topography": [
           "flatland",
@@ -257,8 +257,8 @@
       },
       {
         "climate": [
-          "hot_steppe",
-          "cold_steppe"
+          "hot_semi_arid",
+          "cold_semi_arid"
         ],
         "vegetation": [
           "desert",
@@ -288,11 +288,11 @@
       },
       {
         "climate": [
-          "cold_steppe",
-          "hot_steppe",
+          "cold_semi_arid",
+          "hot_semi_arid",
           "arid",
           "cold_arid",
-          "subarctic",
+          "subpolar",
           "arctic"
         ]
       }
@@ -336,8 +336,8 @@
         },
         {
           "climate": [
-            "hot_steppe",
-            "cold_steppe"
+            "hot_semi_arid",
+            "cold_semi_arid"
           ],
           "vegetation": [
             "desert",
@@ -373,11 +373,11 @@
         },
         {
           "climate": [
-            "cold_steppe",
-            "hot_steppe",
+            "cold_semi_arid",
+            "hot_semi_arid",
             "arid",
             "cold_arid",
-            "subarctic",
+            "subpolar",
             "arctic"
           ]
         }

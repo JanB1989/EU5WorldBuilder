@@ -86,6 +86,15 @@ def emit_climate(output,game):
     if sha(game/'in_game/map_data/location_templates.txt')!=manifest['inputs']['data/raw/location_inputs/game_templates.txt']:raise ValueError('Game templates changed')
     source=game/'in_game/common/climates/00_default.txt';text=source.read_text(encoding='utf-8-sig')
     native=[];added=[];colors=['colors = {'];loc={};assets=ROOT/'assets/geography_test/climate'
+    # Native keys keep vanilla's definition; only a different winter level is injected (EU5 1.4: cold_semi_arid).
+    winter_overrides={}
+    for name,t in cfg['types'].items():
+        if not t['native']:continue
+        _,a,b=block_span(text,t['parent']);hit=re.search(r'\bwinter\s*=\s*(\w+)',text[a:b])
+        vanilla=hit[1] if hit else None
+        if vanilla!=t.get('vanilla_winter',t['winter']):
+            raise ValueError(f"Vanilla winter of {t['parent']} is {vanilla}; configs/climate.json records {t.get('vanilla_winter',t['winter'])}")
+        if vanilla!=t['winter']:winter_overrides[t['game_key']]={'vanilla':vanilla,'world_builder':t['winter']}
     for name,t in cfg['types'].items():
         (native if t['native'] else added).append(definition(text,t))
         colors.append(named_rgb('ha1300_color_'+t['game_key'],t['color']))
@@ -103,6 +112,6 @@ def emit_climate(output,game):
     write_text(output,'climate_assignments.csv',d.to_csv(index=False));write_text(output,'climate_source_manifest.json',json.dumps(manifest,indent=2))
     winter_map_sha=emit_maximum_winter_map(output,game,cfg)
     readme=(output/'README.md').read_text(encoding='utf-8-sig')
-    readme+='\n## Climate and winter\n\nUse Geography > Climate and the existing climate icon/blue Climate concept tooltip. Geography > Maximum Winter Severity displays those climate limits, replacing the original seasonal Winter display. Weather simulation and winter_power remain unchanged. Eighteen climate names, including all eight original values. Winter stays in the existing tooltip; no extra attribute, hidden climate variants or monthly events. All ownable locations assigned. New values use their documented native parent effects with representative winter levels; steppe permits precipitation.\n\nSource: Beck et al. (2023), doi:10.1038/s41597-023-02549-6, CC BY 4.0, 1 km 1901–1930 Koppen-Geiger map. This early modern-observation baseline is a proxy for 1300, not a medieval reconstruction. All thirty input class shares are retained per location. Eight small locations without overlap use flagged native fallbacks. Exact-key script compatibility and agricultural balance remain outside this isolated geography test.\n\nReproduce: `uv run ha1300 climate`, then `uv run ha1300 geography-test`.\n'
+    readme+='\n## Climate and winter\n\nUse Geography > Climate and the existing climate icon/blue Climate concept tooltip. Geography > Maximum Winter Severity displays those climate limits, replacing the original seasonal Winter display. Weather simulation and winter_power remain unchanged. Eighteen climate names, including all eleven EU5 1.4 values (Hot Semi-Arid, Cold Semi-Arid and Subpolar with vanilla definitions; Cold Semi-Arid carries a normal winter instead of vanilla mild). Winter stays in the existing tooltip; no extra attribute, hidden climate variants or monthly events. All ownable locations assigned. New values use their documented native parent effects with representative winter levels.\n\nSource: Beck et al. (2023), doi:10.1038/s41597-023-02549-6, CC BY 4.0, 1 km 1901–1930 Koppen-Geiger map. This early modern-observation baseline is a proxy for 1300, not a medieval reconstruction. All thirty input class shares are retained per location. Eight small locations without overlap use flagged native fallbacks. Exact-key script compatibility and agricultural balance remain outside this isolated geography test.\n\nReproduce: `uv run ha1300 climate`, then `uv run ha1300 geography-test`.\n'
     write_text(output,'README.md',readme)
-    return {'ownable_locations':int(d.is_ownable.sum()),'ownable_missing':0,'types':list(cfg['types']),'counts':manifest['ownable_distribution'],'source_csv_sha256':sha(folder/'locations.csv'),'native_climate_sha256':sha(source),'native_winter_map_source_sha256':winter_map_sha,'icon_manifest_sha256':sha(assets/'generation.json')}
+    return {'ownable_locations':int(d.is_ownable.sum()),'ownable_missing':0,'types':list(cfg['types']),'winter_overrides':winter_overrides,'counts':manifest['ownable_distribution'],'source_csv_sha256':sha(folder/'locations.csv'),'native_climate_sha256':sha(source),'native_winter_map_source_sha256':winter_map_sha,'icon_manifest_sha256':sha(assets/'generation.json')}

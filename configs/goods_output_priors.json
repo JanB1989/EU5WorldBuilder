@@ -98,15 +98,15 @@
           "oceanic",
           "mediterranean",
           "dry_summer_continental",
-          "cold_steppe",
+          "cold_semi_arid",
           "continental_monsoon"
         ],
         "marginal": [
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "subtropical",
           "subtropical_monsoon",
-          "hot_steppe",
+          "hot_semi_arid",
           "highland_monsoon",
           "arid",
           "cold_arid",
@@ -130,14 +130,14 @@
       "climate": {
         "core": [
           "savanna",
-          "hot_steppe",
+          "hot_semi_arid",
           "subtropical_monsoon",
           "continental_monsoon",
-          "cold_steppe"
+          "cold_semi_arid"
         ],
         "marginal": [
           "oceanic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "tropical",
           "arid",
@@ -166,14 +166,14 @@
         "marginal": [
           "oceanic",
           "mediterranean",
-          "hot_steppe",
+          "hot_semi_arid",
           "dry_summer_continental",
-          "cold_steppe",
+          "cold_semi_arid",
           "tropical",
           "arid"
         ],
         "unsuitable": [
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "cold_arid",
           "arctic"
@@ -198,7 +198,7 @@
         "marginal": [
           "continental_monsoon",
           "mediterranean",
-          "hot_steppe",
+          "hot_semi_arid",
           "arid",
           "highland_monsoon",
           "continental",
@@ -206,11 +206,11 @@
         ],
         "unsuitable": [
           "arctic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "oceanic",
           "cold_arid",
-          "cold_steppe"
+          "cold_semi_arid"
         ]
       },
       "rules": {
@@ -242,7 +242,7 @@
         ],
         "marginal": [
           "arid",
-          "hot_steppe"
+          "hot_semi_arid"
         ],
         "unsuitable": []
       },
@@ -267,7 +267,7 @@
           "continental_monsoon"
         ],
         "marginal": [
-          "subarctic",
+          "subpolar",
           "cold_arid",
           "arid",
           "tropical",
@@ -289,20 +289,20 @@
         "core": [
           "subtropical_monsoon",
           "savanna",
-          "hot_steppe",
+          "hot_semi_arid",
           "subtropical"
         ],
         "marginal": [
           "continental",
           "highland_monsoon",
           "cold_arid",
-          "cold_steppe",
+          "cold_semi_arid",
           "tropical",
           "dry_summer_continental"
         ],
         "unsuitable": [
           "arctic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "oceanic"
         ]
@@ -359,7 +359,7 @@
         ],
         "marginal": [
           "mediterranean",
-          "hot_steppe",
+          "hot_semi_arid",
           "arid",
           "highland_monsoon"
         ],
@@ -368,9 +368,9 @@
           "continental_monsoon",
           "dry_summer_continental",
           "oceanic",
-          "subarctic",
+          "subpolar",
           "arctic",
-          "cold_steppe",
+          "cold_semi_arid",
           "cold_arid",
           "subpolar_oceanic"
         ]
@@ -395,14 +395,14 @@
           "mediterranean"
         ],
         "marginal": [
-          "hot_steppe",
+          "hot_semi_arid",
           "oceanic",
           "arid",
-          "cold_steppe"
+          "cold_semi_arid"
         ],
         "unsuitable": [
           "arctic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "cold_arid"
         ]
@@ -415,7 +415,7 @@
       "climate": {
         "core": [
           "dry_summer_continental",
-          "cold_steppe",
+          "cold_semi_arid",
           "mediterranean"
         ],
         "marginal": [
@@ -424,11 +424,11 @@
           "subtropical",
           "oceanic",
           "arid",
-          "hot_steppe"
+          "hot_semi_arid"
         ],
         "unsuitable": [
           "arctic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "tropical",
           "tropical_monsoon"
@@ -457,13 +457,13 @@
           "continental",
           "continental_monsoon",
           "oceanic",
-          "cold_steppe",
+          "cold_semi_arid",
           "cold_arid",
           "arid",
           "arctic"
         ],
         "unsuitable": [
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic"
         ]
       },
@@ -485,8 +485,8 @@
         "marginal": [
           "arid",
           "cold_arid",
-          "cold_steppe",
-          "subarctic",
+          "cold_semi_arid",
+          "subpolar",
           "subpolar_oceanic"
         ],
         "unsuitable": [
@@ -505,7 +505,7 @@
       "climate": {
         "core": [],
         "marginal": [
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "arctic"
         ],
@@ -531,9 +531,9 @@
           "dry_summer_continental"
         ],
         "marginal": [
-          "subarctic",
+          "subpolar",
           "cold_arid",
-          "cold_steppe",
+          "cold_semi_arid",
           "arctic"
         ],
         "unsuitable": [
@@ -558,16 +558,16 @@
           "mediterranean"
         ],
         "marginal": [
-          "hot_steppe",
+          "hot_semi_arid",
           "subtropical",
           "dry_summer_continental",
-          "cold_steppe",
+          "cold_semi_arid",
           "arid",
           "oceanic"
         ],
         "unsuitable": [
           "arctic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "continental",
           "continental_monsoon",
@@ -599,8 +599,8 @@
           "dry_summer_continental"
         ],
         "marginal": [
-          "cold_steppe",
-          "hot_steppe",
+          "cold_semi_arid",
+          "hot_semi_arid",
           "continental_monsoon",
           "highland_monsoon",
           "arid",
@@ -608,7 +608,7 @@
         ],
         "unsuitable": [
           "arctic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "tropical",
           "tropical_monsoon",
@@ -645,12 +645,12 @@
         ],
         "unsuitable": [
           "arctic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "arid",
           "cold_arid",
-          "hot_steppe",
-          "cold_steppe",
+          "hot_semi_arid",
+          "cold_semi_arid",
           "mediterranean",
           "continental",
           "dry_summer_continental"
@@ -679,18 +679,18 @@
           "subtropical",
           "subtropical_monsoon",
           "arid",
-          "hot_steppe",
+          "hot_semi_arid",
           "mediterranean"
         ],
         "unsuitable": [
           "arctic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "oceanic",
           "continental",
           "continental_monsoon",
           "dry_summer_continental",
-          "cold_steppe",
+          "cold_semi_arid",
           "cold_arid"
         ]
       },
@@ -720,14 +720,14 @@
           "arctic",
           "arid",
           "cold_arid",
-          "cold_steppe",
+          "cold_semi_arid",
           "continental",
           "continental_monsoon",
           "dry_summer_continental",
-          "hot_steppe",
+          "hot_semi_arid",
           "mediterranean",
           "oceanic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic"
         ]
       },
@@ -755,14 +755,14 @@
           "arctic",
           "arid",
           "cold_arid",
-          "cold_steppe",
+          "cold_semi_arid",
           "continental",
           "continental_monsoon",
           "dry_summer_continental",
-          "hot_steppe",
+          "hot_semi_arid",
           "mediterranean",
           "oceanic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic"
         ]
       },
@@ -779,17 +779,17 @@
         ],
         "marginal": [
           "mediterranean",
-          "hot_steppe",
+          "hot_semi_arid",
           "arid",
           "dry_summer_continental"
         ],
         "unsuitable": [
           "arctic",
           "cold_arid",
-          "cold_steppe",
+          "cold_semi_arid",
           "continental",
           "oceanic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic"
         ]
       },
@@ -804,7 +804,7 @@
       "components": "frankincense, myrrh, mastic, storax, benzoin, agarwood, sandalwood, copal, dragon's blood",
       "climate": {
         "core": [
-          "hot_steppe",
+          "hot_semi_arid",
           "arid",
           "mediterranean",
           "tropical_monsoon",
@@ -814,12 +814,12 @@
           "continental",
           "continental_monsoon",
           "oceanic",
-          "cold_steppe",
+          "cold_semi_arid",
           "dry_summer_continental"
         ],
         "unsuitable": [
           "arctic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic",
           "cold_arid"
         ]
@@ -844,14 +844,14 @@
         "marginal": [
           "oceanic",
           "continental",
-          "hot_steppe",
+          "hot_semi_arid",
           "arid",
           "cold_arid",
-          "cold_steppe"
+          "cold_semi_arid"
         ],
         "unsuitable": [
           "arctic",
-          "subarctic",
+          "subpolar",
           "subpolar_oceanic"
         ]
       },
@@ -869,7 +869,7 @@
       "climate": {
         "core": [
           "continental",
-          "subarctic",
+          "subpolar",
           "oceanic",
           "tropical",
           "tropical_monsoon",
@@ -878,8 +878,8 @@
           "continental_monsoon"
         ],
         "marginal": [
-          "cold_steppe",
-          "hot_steppe",
+          "cold_semi_arid",
+          "hot_semi_arid",
           "dry_summer_continental"
         ],
         "unsuitable": [

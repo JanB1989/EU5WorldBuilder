@@ -86,12 +86,13 @@
       ],
       "description": "Dry desert conditions with a colder annual temperature regime. Winter cold varies substantially within this broad class."
     },
-    "hot_steppe": {
-      "label": "Hot Steppe",
-      "game_key": "ha1300_climate_hot_steppe",
-      "parent": "arid",
-      "native": false,
+    "hot_semi_arid": {
+      "label": "Hot Semi-Arid",
+      "game_key": "hot_semi_arid",
+      "parent": "hot_semi_arid",
+      "native": true,
       "winter": "none",
+      "vanilla_winter": "none",
       "color": [
         211,
         182,
@@ -102,12 +103,13 @@
       ],
       "description": "Warm semi-arid conditions with limited, variable rainfall."
     },
-    "cold_steppe": {
-      "label": "Cold Steppe",
-      "game_key": "ha1300_climate_cold_steppe",
-      "parent": "cold_arid",
-      "native": false,
+    "cold_semi_arid": {
+      "label": "Cold Semi-Arid",
+      "game_key": "cold_semi_arid",
+      "parent": "cold_semi_arid",
+      "native": true,
       "winter": "normal",
+      "vanilla_winter": "mild",
       "color": [
         174,
         170,
@@ -268,12 +270,13 @@
       ],
       "description": "Warm to hot summers, cold winters and no pronounced dry season."
     },
-    "subarctic": {
-      "label": "Subarctic",
-      "game_key": "ha1300_climate_subarctic",
-      "parent": "continental",
-      "native": false,
+    "subpolar": {
+      "label": "Subpolar",
+      "game_key": "subpolar",
+      "parent": "subpolar",
+      "native": true,
       "winter": "severe",
+      "vanilla_winter": "severe",
       "color": [
         99,
         118,
@@ -309,11 +312,12 @@
   },
   "assumptions": [
     "Early twentieth-century (1901-1930) climate is used as a spatial proxy for 1300. This is not a medieval climate reconstruction. No unsupported uniform cooling or rainfall correction is applied.",
-    "All 30 published Koppen-Geiger classes map to 18 readable climate values. Rare cool-summer Mediterranean/highland and subarctic precipitation variants are merged; original source fractions remain available.",
-    "Winter is the native fixed climate property, not a new attribute. The eight existing keys retain their native winter levels and effects; new types use documented representative levels. These four gameplay levels are not measured winter severity and cannot reproduce all local winter variability.",
+    "All 30 published Koppen-Geiger classes map to 18 readable climate values. Rare cool-summer Mediterranean/highland and subpolar precipitation variants are merged; original source fractions remain available.",
+    "Winter is the native fixed climate property, not a new attribute. The eleven EU5 1.4 keys retain their native effects and winter levels, except where vanilla_winter records a different native level (cold_semi_arid: ours normal, vanilla mild), which the export injects; new types use documented representative levels. These four gameplay levels are not measured winter severity and cannot reproduce all local winter variability.",
+    "EU5 1.4 (2026-10-01): the former World Builder types hot_steppe, cold_steppe and subarctic are renamed to the vanilla keys hot_semi_arid, cold_semi_arid and subpolar and use vanilla's definitions, icons and names. The Koppen assignment of which location gets which climate is unchanged (codes 6, 7 and 19/20/23/24/27/28).",
     "Climate and winter are coupled in the game. No hidden climate variants, duplicate legend labels, extra moisture attribute or monthly events are introduced.",
     "One-kilometre categorical pixels are counted into class fractions on the native 5-minute analysis grid before area-weighted EU5 overlap aggregation. Modal full climate classes are chosen only at the last step.",
     "Locations with no source land overlap retain their native climate, explicitly flagged as inferred. Non-ownable zones retain their native values.",
-    "Parent effects are prototype defaults, not agricultural calibration. New semi-arid values permit precipitation; subarctic is not always-winter. Exact-key game scripts require integration before production use."
+    "Parent effects are prototype defaults, not agricultural calibration. Semi-arid and subpolar values use the vanilla 1.4 definitions (precipitation, no always-winter). Exact-key game scripts require integration before production use."
   ]
 }

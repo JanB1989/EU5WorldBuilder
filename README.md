@@ -98,6 +98,29 @@ This is a complete inferred iteration, **not accepted historical balance**. Regi
 
 Existing work is preserved. The [previous research README](reports/archive/pre_location_contract_README.md) records superseded assumptions and older commands.
 
+## After a game update (EU5 1.4, 2026-10-01)
+
+The World Builder reads the game in two places: the imported map inputs (`data/raw/location_inputs`) and the
+vanilla start state (`data/raw/vanilla`). Refresh both, then rerun the pipeline:
+
+```bash
+uv run python scripts/import_location_inputs.py --game-only --game-map "<game>/game/in_game/map_data/locations.png"
+uv run --project ../ProsperOrPerishConstructor python scripts/import_vanilla_start.py --save <vanilla 1337.4.1 start save>
+uv run --project ../ProsperOrPerishConstructor python scripts/refresh_topography_game_audit.py
+uv run worldbuilder climate   # then soils, irrigation, fertility, vegetation, topography
+uv run worldbuilder rivers --stage export && uv run worldbuilder navigation
+uv run worldbuilder locations && uv run python scripts/validate_locations.py   # needs ~13.4 GB peak
+uv run worldbuilder development && uv run worldbuilder attribute-fit --config configs/attribute_fit_flat.json
+uv run worldbuilder goods-fit && uv run worldbuilder building-assignment
+uv run worldbuilder geography-test --build-only --export-only && uv run worldbuilder rgo-potential
+uv run worldbuilder recalibration-map && uv run worldbuilder handover
+```
+
+Start setup is read from the bookmark's `setup_folder` (`main_menu/setup/1337` since 1.4). The climates
+`hot_semi_arid`, `cold_semi_arid` and `subpolar` are vanilla 1.4 keys (formerly our `hot_steppe`, `cold_steppe`,
+`subarctic`). `worldbuilder rgo-potential` reports starting RGOs that break their good's vanilla
+`location_potential` under our geography (`artifacts/rgo_potential`).
+
 ## Build and validate
 
 ```bash

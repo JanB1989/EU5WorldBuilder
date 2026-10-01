@@ -78,6 +78,20 @@
       ]
     },
     "min_rgo_for_centre": 10,
-    "rgo_advantage": 0.05
+    "rgo_advantage": 0.05,
+    "proxy_targets": {
+      "camels": {
+        "kind": "koppen_share",
+        "source": "artifacts/climate/locations.csv",
+        "weights": {
+          "4": 1.0,
+          "5": 1.0,
+          "6": 0.6,
+          "7": 0.6
+        },
+        "minimum": 0.05,
+        "note": "EU5 1.4 camels has no GAEZ/StaticModifiersV2 efficiency table (like horses, livestock and wool, which have no rows). Its target is the dryland share of the location in the 1901-1930 Koppen-Geiger classes the climate stage keeps per location: hot and cold desert (BWh, BWk) count fully, hot and cold steppe (BSh, BSk) 0.6; under 5 % dryland is not viable. Dromedary country (Sahara, Arabia, Horn, Iran, Thar) and Bactrian country (Gobi, Taklamakan, Kazakh steppe) are deserts and dry steppes; the priors in goods_output_priors.json keep humid, tropical forest and boreal climates out. Added 2026-10-01."
+      }
+    }
   }
 }

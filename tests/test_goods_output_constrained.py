@@ -83,7 +83,7 @@ def test_the_priors_file_names_real_classes_and_lists_each_climate_once():
     priors = gc.load_priors(root / "configs/goods_output_priors.json")
     climates = set(json.loads((root / "configs/climate.json").read_text())["types"])
     codes = {"+", "-", "0", "free", "increasing"}
-    assert len(priors["goods"]) == 25
+    assert len(priors["goods"]) == 26   # 25 V2 goods + camels (EU5 1.4, proxy target)
     for good, spec in priors["goods"].items():
         listed = [c for k in ("core", "marginal", "unsuitable") for c in spec["climate"][k]]
         assert len(listed) == len(set(listed)), good
@@ -97,3 +97,16 @@ def test_the_priors_file_names_real_classes_and_lists_each_climate_once():
 def test_effective_score_lifts_towards_irrigated_only_by_the_weight():
     r = np.array([0.2, 0.0, 0.5]); i = np.array([0.8, 0.6, 0.5]); w = np.array([0.5, 0.0, 1.0])
     assert np.allclose(gc.effective_score(r, i, w), [0.5, 0.0, 0.5])
+
+
+def test_camels_proxy_target_weights_dryland_koppen_shares(tmp_path, monkeypatch):
+    monkeypatch.setattr(gc, "ROOT", tmp_path)
+    (tmp_path / "artifacts/climate").mkdir(parents=True)
+    t = pd.DataFrame({"location_tag": ["erg", "steppe", "wet", "mixed"],
+                      "kg_04_share": [1.0, 0.0, 0.0, 0.02], "kg_05_share": [0.0, 0.0, 0.0, 0.0],
+                      "kg_06_share": [0.0, 0.5, 0.0, 0.0], "kg_07_share": [0.0, 0.5, 0.0, 0.01]})
+    t.to_csv(tmp_path / "artifacts/climate/locations.csv", index=False)
+    cfg = {"proxy_targets": {"camels": {"kind": "koppen_share", "weights": {"4": 1.0, "5": 1.0, "6": 0.6, "7": 0.6}, "minimum": 0.05}}}
+    s = gc.proxy_score("camels", pd.Index(["erg", "steppe", "wet", "mixed", "absent"]), cfg)
+    assert np.allclose(s, [1.0, 0.6, 0.0, 0.0, 0.0])
+    assert gc.proxy_score("horses", pd.Index(["erg"]), cfg) is None

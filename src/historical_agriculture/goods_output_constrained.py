@@ -66,6 +66,24 @@ def load_scores(directory, good, index):
     return pd.to_numeric(t.score_0_1, errors="coerce").reindex(index).fillna(0.0).to_numpy()
 
 
+def proxy_score(good, index, cfg):
+    """Target for a good without a GAEZ/V2 efficiency table (EU5 1.4 camels): a weighted share of Koppen-Geiger
+    classes per location from the climate stage (kg_<code>_share), zeroed under ``minimum``. None when the good
+    has no proxy in ``cfg['proxy_targets']``."""
+    spec = (cfg.get("proxy_targets") or {}).get(good)
+    if not spec:
+        return None
+    if spec.get("kind") != "koppen_share":
+        raise ValueError(f"unknown proxy target kind for {good}: {spec.get('kind')}")
+    t = pd.read_csv(ROOT / spec.get("source", "artifacts/climate/locations.csv"), keep_default_na=False).set_index("location_tag")
+    s = np.zeros(len(index))
+    for code, w in spec["weights"].items():
+        s += float(w) * pd.to_numeric(t[f"kg_{int(code):02d}_share"], errors="coerce").reindex(index).fillna(0.0).to_numpy()
+    s = np.clip(s, 0.0, 1.0)
+    s[s < float(spec.get("minimum", 0.0))] = 0.0
+    return s
+
+
 def irrigation_weight(index, cfg):
     spec = cfg["irrigation_weight"]
     t = pd.read_csv(ROOT / spec["source"], keep_default_na=False).set_index("location_tag")
@@ -261,6 +279,10 @@ def build_good(d, good, priors, cfg, fit_cfg, folds, rgo, weight_irrigated):
     if irrigated is None:
         irrigated = load_scores(ROOT / cfg["tables_directory"], good, d.index)
     rainfed = load_scores(ROOT / cfg["rainfed_tables_directory"], good, d.index)
+    if irrigated is None and rainfed is None:
+        irrigated = proxy_score(good, d.index, cfg)
+        if irrigated is None:
+            raise ValueError(f"{good}: no efficiency table and no proxy_targets entry")
     s = effective_score(rainfed, irrigated, weight_irrigated)
     viable = s > 0
     is_rgo = (rgo == good).to_numpy()

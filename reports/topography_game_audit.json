@@ -1,6 +1,6 @@
 {
   "source": "/mnt/c/Games/steamapps/common/Europa Universalis V/game/in_game/common/topography/00_default.txt",
-  "sha256": "bc3321e5d9d56f3ab1d4f6a08653e1624de2787e1265a2eb4dcd8639be78bfa0",
+  "sha256": "a3fed5b9f2b297c27448c62eaaa6b286b1fdeba7665b83da5fb73f74152c2a36",
   "parser": "eu5gameparser.clausewitz.parser.parse_file",
   "types": {
     "flatland": {
@@ -18,7 +18,9 @@
     "mountains": {
       "color": "terrain_mountain",
       "movement_cost": 2,
-      "proximity": -0.5,
+      "proximity": {
+        "default": -0.5
+      },
       "defender": 2,
       "vegetation_density": 0.2,
       "blocked_in_winter": true,
@@ -31,7 +33,7 @@
         "local_road_building_time": 3.0,
         "local_population_capacity_modifier": -0.5,
         "local_monthly_development_modifier": -0.5,
-        "local_monthly_food_modifier": -0.2,
+        "local_monthly_food_modifier": "monthly_food_productivity_extreme_penalty",
         "blocks_vision_from_land": true,
         "blocks_vision_from_sea": true
       },
@@ -46,7 +48,9 @@
       "defender": 1,
       "vegetation_density": 0.6,
       "movement_cost": 1.5,
-      "proximity": -0.25,
+      "proximity": {
+        "default": -0.25
+      },
       "weather_front_strength_change_percent": 0,
       "weather_cyclone_strength_change_percent": 0,
       "weather_tornado_strength_change_percent": 0,
@@ -55,7 +59,7 @@
         "local_rgo_build_time": 0.25,
         "local_road_building_time": 1.0,
         "local_monthly_development_modifier": -0.25,
-        "local_monthly_food_modifier": -0.1,
+        "local_monthly_food_modifier": "monthly_food_productivity_mild_penalty",
         "blocks_vision_from_land": true,
         "blocks_vision_from_sea": true
       },
@@ -70,7 +74,13 @@
       "defender": 1,
       "vegetation_density": 0.8,
       "movement_cost": 1.25,
-      "proximity": -0.125,
+      "proximity": {
+        "default": -0.125,
+        "override": {
+          "to": "plateau",
+          "speed": 0
+        }
+      },
       "weather_front_strength_change_percent": 0,
       "weather_cyclone_strength_change_percent": 0,
       "weather_tornado_strength_change_percent": 0,
@@ -89,7 +99,9 @@
     "wetlands": {
       "color": "terrain_marsh",
       "movement_cost": 1.5,
-      "proximity": -0.25,
+      "proximity": {
+        "default": -0.25
+      },
       "defender": 1,
       "vegetation_density": 0.6,
       "weather_front_strength_change_percent": 0,
@@ -100,7 +112,7 @@
         "local_rgo_build_time": 0.25,
         "local_road_building_time": 1.0,
         "local_monthly_development_modifier": -0.3,
-        "local_monthly_food_modifier": -0.1
+        "local_monthly_food_modifier": "monthly_food_productivity_mild_penalty"
       },
       "colonial_migration_size_modifier": -0.1,
       "audio_tags": {

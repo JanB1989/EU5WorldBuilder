@@ -65,7 +65,14 @@ def main():
     a.add_argument("--config",type=Path,default=Path("configs/rivers.json"))
     a=sub.add_parser("navigation",help="Classify and export configurable navigable river water tiles")
     a.add_argument("--config",type=Path,default=Path("configs/river_navigation.json"))
+    a=sub.add_parser("rgo-potential",help="Report starting RGOs that break their good's vanilla location_potential under the World Builder geography")
+    a.add_argument("--output",type=Path)
     args=parser.parse_args()
+    if args.command=="rgo-potential":
+        from .rgo_potential import build
+        r=build(args.output)
+        print(json.dumps({k:v for k,v in r.items() if k in ("goods_with_rules","totals","unknown_keys_in_rules","introduced_by_failing_clause")},indent=2,default=int))
+        return
     if args.command=="navigation":
         from .river_navigation import build
         build(args.config)

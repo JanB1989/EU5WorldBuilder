@@ -66,6 +66,18 @@ def append_list(text, key, names):
     return text[:match.end()]+addition+text[match.end():]
 
 
+def locator_file(game, kind):
+    """The game's generated locator file for one kind. EU5 1.4 renamed the city (and vfx) locators to
+    generated_locators_<kind>.txt; dock, combat and unit_stack keep generated_map_object_locators_<kind>.txt.
+    Exactly one may exist, otherwise the mod would ship a second, stale copy beside vanilla's."""
+    folder = 'in_game/gfx/map/map_objects/'
+    names = [f'{folder}generated_locators_{kind}.txt', f'{folder}generated_map_object_locators_{kind}.txt']
+    present = [n for n in names if (Path(game)/n).is_file()]
+    if len(present) != 1:
+        raise ValueError(f'Expected one {kind} locator file in the game, found {present}')
+    return present[0]
+
+
 def export_levels(config, colors):
     """Marker-aware river level per location colour from the river export (the level the capacity fit uses)."""
     table = pd.read_csv(ROOT/config["river_export"]/"location_levels.csv", usecols=["location_tag", "marker_aware_predicted_level"])
@@ -473,7 +485,7 @@ def export(config, evidence, river):
         centers[g['tag']]=(float(xy[i,0])+.5,float(height-xy[i,1])-.5)
     moved=Counter()
     for kind in ['city','combat','unit_stack','dock']:
-        rel=f'in_game/gfx/map/map_objects/generated_map_object_locators_{kind}.txt';text=source(rel);seen=set()
+        rel=locator_file(game,kind);text=source(rel);seen=set()
         def fix(m):
             n=m.group(1);seen.add(n);pos=None
             if kind=='dock' and n in port_changes:

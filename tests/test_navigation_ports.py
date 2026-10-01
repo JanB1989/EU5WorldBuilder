@@ -76,6 +76,33 @@ def test_a_sea_zone_left_without_its_only_vanilla_port_gets_it_back(tmp_path):
     assert restore_lone_sea_ports(out, game) == []
 
 
+def test_a_port_whose_sea_no_longer_borders_the_land_is_reseated(tmp_path):
+    import numpy as np
+    from PIL import Image
+
+    from historical_agriculture.navigation_ports import reseat_detached_ports, strip_trailing_newlines
+
+    game = tmp_path/'game'; (game/'in_game/map_data/named_locations').mkdir(parents=True)
+    out = tmp_path/'out'; (out/'in_game/map_data/named_locations').mkdir(parents=True)
+    (game/'in_game/map_data/named_locations/00.txt').write_text('town = 0000ff\nbay = 00ff00\nother = 0000aa\nsound = 00aa00\n')
+    (out/'in_game/map_data/named_locations/pp.txt').write_text('pp_nav_1 = ff0000\n')
+    # 6x6 map: town in columns 0-1, the river tile in column 2 between it and the bay (columns 4-5) it used to touch
+    grid = np.full((6, 6, 3), 0, np.uint8); grid[:, :] = (0, 0, 0xaa)
+    grid[:, 0:2] = (0, 0, 0xff); grid[:, 2] = (0xff, 0, 0); grid[:, 4:] = (0, 0xff, 0)
+    Image.fromarray(grid).save(out/'in_game/map_data/locations.png')
+    (game/'in_game/map_data/ports.csv').write_text('LandProvince;SeaZone;x;y;\ntown;bay;4;4;x\n')
+    (out/'in_game/map_data/ports.csv').write_text('LandProvince;SeaZone;x;y;\ntown;bay;4;4;x\n')
+    (out/'in_game/map_data/adjacencies.csv').write_text('From;To\na;b\n')
+    pd.DataFrame({'location': ['pp_nav_1']}).to_csv(out/'tiles.csv', index=False)
+
+    assert reseat_detached_ports(out, game, out) == {'town': ('bay', 'pp_nav_1')}
+    assert (out/'in_game/map_data/ports.csv').read_text().splitlines()[1].startswith('town;pp_nav_1;2;')
+    assert reseat_detached_ports(out, game, out) == {}
+    strip_trailing_newlines(out)
+    for name in ('ports.csv', 'adjacencies.csv'):
+        assert not (out/'in_game/map_data'/name).read_text().endswith('\n')
+
+
 def test_portless_banks_of_passable_tiles_are_listed_for_a_zero_harbor(tmp_path):
     from historical_agriculture.navigation_ports import portless_banks
 

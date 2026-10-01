@@ -54,6 +54,9 @@ def emit(output,game,settings=None):
     port_stats=prune(Path(output),{**{b:0.0 for b in quiet},**ports},game,len(table))
     port_stats['restored_sea_ports']=restore_lone_sea_ports(Path(output),Path(game))
     port_stats['bank_ports']=assign_bank_ports(Path(output),Path(game),out)
+    from .navigation_ports import reseat_detached_ports,strip_trailing_newlines
+    port_stats['reseated_ports']=reseat_detached_ports(Path(output),Path(game),out)
+    strip_trailing_newlines(Path(output))
     # Names belong to the geography layer even in the standalone World Builder.
     import pandas as pd
     rows=pd.read_csv(out/'tiles.csv')

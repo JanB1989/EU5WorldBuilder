@@ -244,6 +244,68 @@ def _border_pixels(codes, land_colors, water_colors):
     return pairs
 
 
+def reseat_detached_ports(output, game, out):
+    """Re-seat ports whose sea no longer borders their land (the World Builder coast moved it away, e.g. vanilla
+    benauges -> gironde): the engine drops such a port ("Port for location is set to non-adjacent location") and then
+    logs the location as coastal without a port. The port moves to the water location the land shares most shore
+    pixels with, among the seas vanilla ports use and the navigation tiles. Returns {location: (old, new) sea}."""
+    import numpy as np
+    from PIL import Image
+
+    path = output/MAP_DATA/'ports.csv'
+    lines = path.read_text(encoding='utf-8-sig').splitlines()
+    rows = _rows('\n'.join(lines))
+    vanilla = _rows((game/MAP_DATA/'ports.csv').read_text(encoding='utf-8-sig'))
+    waters = {row[1] for row in vanilla.values()} | {row[1] for row in rows.values()} | set(pd.read_csv(out/'tiles.csv').location)
+    colors = _colors(output/MAP_DATA/'named_locations', game/MAP_DATA/'named_locations')
+    Image.MAX_IMAGE_PIXELS = None
+    image = np.asarray(Image.open(output/MAP_DATA/'locations.png').convert('RGB')).astype(np.uint32)
+    codes = (image[..., 0] << 16) | (image[..., 1] << 8) | image[..., 2]
+    del image
+    height = codes.shape[0]
+    lands = {colors[n] for n in rows if n in colors}
+    water_colors = {colors[w]: w for w in waters if w in colors}
+    border = _border_pixels(codes, lands, set(water_colors))
+    moved = {}
+    for name, row in rows.items():
+        if name not in colors or colors.get(row[1]) is None or border.get((colors[name], colors[row[1]])):
+            continue
+        shared = {water_colors[w]: pts for (land, w), pts in border.items() if land == colors[name]}
+        if not shared:
+            continue
+        sea = max(sorted(shared), key=lambda w: len(shared[w]))
+        xy = np.array(shared[sea])
+        x, y = map(int, xy[int(np.argmin(((xy - xy.mean(axis=0)) ** 2).sum(axis=1)))])
+        moved[name] = (row[1], sea, x, y)
+    if moved:
+        lines = [r for r in lines if r.split(';')[0] not in moved]
+        lines += [f'{n};{sea};{x};{height - y};x' for n, (_, sea, x, y) in sorted(moved.items())]
+        path.write_text('\n'.join(lines), encoding='utf-8')
+        dock = output/DOCK
+        if dock.is_file():
+            pattern = re.compile(r'\{\s*id\s*=\s*(\w+)\s+position\s*=\s*\{[^}]*\}\s*rotation\s*=\s*\{[^}]*\}\s*scale\s*=\s*\{[^}]*\}\s*\}')
+
+            def seat(m):
+                if m[1] not in moved:
+                    return m[0]
+                _, _, x, y = moved[m[1]]
+                return re.sub(r'position\s*=\s*\{\s*\S+\s+(\S+)\s+\S+\s*\}',
+                              lambda p: f'position={{ {x + .5:.6f} {p[1]} {height - y - .5:.6f} }}', m[0], count=1)
+            dock.write_text(pattern.sub(seat, dock.read_text(encoding='utf-8-sig')), encoding='utf-8-sig')
+    return {n: (old, sea) for n, (old, sea, _, _) in moved.items()}
+
+
+def strip_trailing_newlines(output):
+    """Vanilla's map csv files end without a newline; EU5 reads a trailing empty line as a row for location " "
+    ("Unknown reference to location! Key: ' '")."""
+    for name in ('ports.csv', 'adjacencies.csv'):
+        path = output/MAP_DATA/name
+        if path.is_file():
+            text = path.read_text(encoding='utf-8-sig')
+            if text != text.rstrip('\r\n'):
+                path.write_text(text.rstrip('\r\n'), encoding='utf-8')
+
+
 def assign_bank_ports(output, game, out):
     """Give every bank of a passable navigation tile a port, placed so that as many tiles as possible get one.
 

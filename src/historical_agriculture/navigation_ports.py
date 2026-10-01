@@ -24,6 +24,7 @@ import math
 import re
 
 import pandas as pd
+from .geography_test import start_setup
 
 DEFAULTS = {
     'max_share': 0.33,
@@ -41,12 +42,12 @@ DOCK = 'in_game/gfx/map/map_objects/generated_map_object_locators_dock.txt'
 
 
 def settlement_ranks(game):
-    text = (game/'main_menu/setup/start/07_cities_and_buildings.txt').read_text(encoding='utf-8-sig')
+    text = (start_setup(game)/'07_cities_and_buildings.txt').read_text(encoding='utf-8-sig')
     return {m[1]: m[2] for m in re.finditer(r'(?m)^\s*(\w+)\s*=\s*\{\s*rank\s*=\s*(\w+)', text)}
 
 
 def populations(game):
-    text = (game/'main_menu/setup/start/06_pops.txt').read_text(encoding='utf-8-sig')
+    text = (start_setup(game)/'06_pops.txt').read_text(encoding='utf-8-sig')
     sizes = defaultdict(float); current = None
     for line in text.splitlines():
         head = re.match(r'^(\w+)\s*=\s*\{\s*$', line)

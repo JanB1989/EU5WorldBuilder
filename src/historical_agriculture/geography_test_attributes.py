@@ -1,5 +1,5 @@
 """Four additional lightweight geography attributes for the UI/stacking trial."""
-from .geography_test import write_text
+from .geography_test import start_setup, write_text
 from .geography_test_ui import attribute_effect_rows
 
 def add_attribute_prototype(output, game, cfg):
@@ -71,7 +71,7 @@ def add_attribute_prototype(output, game, cfg):
         table.append(f"| {case['location']} | "+' | '.join(descriptions)+f" | {total:+.0%} |")
     setup+='}\n'
     # EU5 concatenates startup fragments; a BOM here becomes an unexpected token.
-    setup_path=output/'main_menu/setup/start/99_ha1300_attributes.txt'
+    setup_path=output/start_setup(game).relative_to(game)/'99_ha1300_attributes.txt'
     setup_path.parent.mkdir(parents=True,exist_ok=True)
     setup_path.write_text(setup,encoding='utf-8')
     p=output/'in_game/gui/location_window.gui';gui=p.read_text(encoding='utf-8-sig')

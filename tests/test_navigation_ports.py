@@ -113,3 +113,16 @@ def test_every_bank_gets_a_port_and_the_tiles_are_covered_as_far_as_possible(tmp
     assert sorted(rows) == ['a;t2;1;1;x', 'b;t1;2;1;x']   # a moves to t2 so both tiles get a port
     assert stats['tiles_without_port'] == 0 and stats['unplaced'] == []
     assert 'id=a position={ 1.5 0 0.5 }' in (output/DOCK).read_text(encoding='utf-8-sig')
+
+
+def test_start_setup_follows_the_1337_bookmark(tmp_path):
+    from historical_agriculture.geography_test import start_setup
+    from historical_agriculture.navigation_ports import settlement_ranks
+    game = tmp_path/"game"
+    assert start_setup(game) == game/"main_menu/setup/start"
+    bookmarks = game/"main_menu/common/bookmarks"; bookmarks.mkdir(parents=True)
+    (bookmarks/"00_bookmarks.txt").write_text("bookmark_1337 = {\n start_date = 1337.4.1\n setup_folder = \"setup/1337\"\n}\n#bookmark_1658 = {\n# start_date = 1658.1.1\n# setup_folder = \"setup/1658\"\n#}\n")
+    assert start_setup(game) == game/"main_menu/setup/1337"
+    (game/"main_menu/setup/1337").mkdir(parents=True)
+    (game/"main_menu/setup/1337/07_cities_and_buildings.txt").write_text("\tbigtown = { rank = city }\n")
+    assert settlement_ranks(game) == {"bigtown": "city"}

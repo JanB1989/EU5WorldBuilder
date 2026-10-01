@@ -4,15 +4,15 @@
   "sources": [
     {
       "path": "data/raw/location_inputs/game_default.map",
-      "sha256": "69530759cc2c511983109f144deeb31e6b1e583aa76488cd500fcc2e3c731499",
-      "bytes": 181443,
+      "sha256": "fdc0812dfb90c90744f8d09650b0a2945fc3b3abc1fe957ad03aff61b53e4d86",
+      "bytes": 181410,
       "origin": "/mnt/c/Games/steamapps/common/Europa Universalis V/game/in_game/map_data/default.map",
       "role": "Local game zone classification; no redistribution"
     },
     {
       "path": "data/raw/location_inputs/game_templates.txt",
-      "sha256": "cffefb6fd02eb8ff5ced9a8a9f1ce5dab5084d82de790c29acf7413e3354ab91",
-      "bytes": 3731059,
+      "sha256": "51d1d22cad681536a1f98f3cef4abc998bc84990c3056a4e3dcf2d71be2d466d",
+      "bytes": 3751391,
       "origin": "/mnt/c/Games/steamapps/common/Europa Universalis V/game/in_game/map_data/location_templates.txt",
       "role": "Local game template inventory; no redistribution"
     },
@@ -46,10 +46,10 @@
     },
     {
       "path": "data/raw/location_inputs/starting_population_source.csv",
-      "sha256": "a00edb8e751ce78f1baccddf74b0ebe2623d63880755d87c6f0cebb1c858d02a",
-      "bytes": 11756111,
-      "origin": "/home/jan/development/ProsperOrPerishConstructor/artifacts/data/population_capacity/current_capacity_map/starting_population_locations.csv",
-      "role": "Cached game starting population; contextual only"
+      "sha256": "91fcbae74788398b5c7dc30946cbeada8d6aa65c5145dfb1c6e92343e6438f66",
+      "bytes": 11754558,
+      "origin": "/mnt/c/Users/Anwender/Documents/Paradox Interactive/Europa Universalis V/save games/SP_Observer_1337_04_01_da189272-b6a0-4900-b013-a184fa9ec42b.eu5",
+      "role": "Vanilla game-start population and settlement rank from the start save (scripts/import_vanilla_start.py); contextual only. Other columns are kept diagnostics of the earlier constructor capacity map."
     },
     {
       "path": "data/raw/location_inputs/luh1300.npz",

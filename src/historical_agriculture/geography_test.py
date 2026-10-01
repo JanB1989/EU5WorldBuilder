@@ -20,6 +20,20 @@ ROOT = Path(__file__).resolve().parents[2]
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
+def start_setup(game):
+    """The 1337 start setup folder (main_menu/setup/1337 since EU5 1.4, setup/start before).
+
+    Read from the active bookmark setup_folder (bookmark_1337); falls back to the pre-1.4 folder when no
+    bookmark names one."""
+    game=Path(game)
+    for path in sorted((game/'main_menu/common/bookmarks').glob('*.txt')):
+        text=re.sub(r'#[^\n]*','',path.read_text(encoding='utf-8-sig'))
+        for body in re.findall(r'\bbookmark_\w+\s*=\s*\{([^{}]*)\}',text):
+            folder=re.search(r'setup_folder\s*=\s*"([^"]+)"',body)
+            if folder and re.search(r'start_date\s*=\s*1337\.',body):
+                return game/'main_menu'/folder[1]
+    return game/'main_menu/setup/start'
+
 def block_span(text, key):
     """Locate one top-level-style named block; ignore braces in comments/strings."""
     matches=list(re.finditer(r'(?m)^\s*'+re.escape(key)+r'\s*=\s*\{',text))

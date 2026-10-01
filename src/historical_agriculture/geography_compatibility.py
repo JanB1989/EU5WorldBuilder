@@ -4,7 +4,7 @@ import re
 from collections import defaultdict
 from pathlib import Path
 
-from .geography_test import ROOT, block_span, sha, write_text
+from .geography_test import ROOT, block_span, sha, start_setup, write_text
 
 
 def families():
@@ -57,7 +57,7 @@ def emit(output, game):
     lumber = set()
     for m in re.finditer(r'(?m)^([\w.-]+)\s*=\s*\{([^{}]*)\}', templates):
         if re.search(r'\braw_material\s*=\s*lumber\b', m[2]): lumber.add(m[1])
-    setup = game/'main_menu/setup/start/07_cities_and_buildings.txt'
+    setup = start_setup(game)/'07_cities_and_buildings.txt'
     startup = defaultdict(set)
     clean = re.sub(r'#[^\n]*', '', setup.read_text(encoding='utf-8-sig'))
     for m in re.finditer(r'\b(\w+)\s*=\s*\{([^{}]*)\}', clean):

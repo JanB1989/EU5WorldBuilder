@@ -3,13 +3,21 @@ import argparse, json, shutil
 from pathlib import Path
 from historical_agriculture.provenance import digest, write_json
 
+GAME_ITEMS=['game_default.map','game_templates.txt','game_named_locations.txt','locations.png']
+
+
 def main():
     a=argparse.ArgumentParser()
-    a.add_argument('--constructor-data',type=Path,required=True)
-    a.add_argument('--hyde',type=Path,required=True)
+    a.add_argument('--constructor-data',type=Path)
+    a.add_argument('--hyde',type=Path)
     a.add_argument('--game-map',type=Path,required=True)
+    a.add_argument('--game-only',action='store_true',help='Refresh only the four game map files (after a game update) and keep every other receipt')
     args=a.parse_args(); root=Path(__file__).resolve().parents[1]
+    if not args.game_only and (args.constructor_data is None or args.hyde is None):
+        a.error('--constructor-data and --hyde are required unless --game-only')
     dest=root/'data/raw/location_inputs';dest.mkdir(parents=True,exist_ok=True)
+    if args.game_only:
+        args.constructor_data=args.hyde=Path('/nonexistent')
     items=[
       (args.game_map.parent/'default.map','game_default.map','Local game zone classification; no redistribution'),
       (args.game_map.parent/'location_templates.txt','game_templates.txt','Local game template inventory; no redistribution'),
@@ -30,6 +38,11 @@ def main():
       (args.constructor_data/'hydrology_sources/hydrology/ETOPO_2022_v1_60s_N90W180_surface.tif','hydrology/ETOPO_2022_v1_60s_N90W180_surface.tif','NOAA ETOPO 2022, https://www.ncei.noaa.gov/products/etopo-global-relief-model; attribution'),
     ]
     receipts=[]
+    if args.game_only:
+        manifest=root/'evidence/location_input_manifest.json'
+        old=json.loads(manifest.read_text())
+        items=[i for i in items if i[1] in GAME_ITEMS]
+        receipts=[r for r in old['sources'] if Path(r['path']).name not in GAME_ITEMS]
     for src,name,role in items:
         dst=dest/name;dst.parent.mkdir(parents=True,exist_ok=True)
         sha=digest(src)
@@ -37,7 +50,11 @@ def main():
         if digest(dst)!=sha:raise ValueError('Import checksum mismatch: '+name)
         receipts.append({'path':str(dst.relative_to(root)),'sha256':sha,'bytes':dst.stat().st_size,'origin':str(src),'role':role})
         print('Imported '+name,flush=True)
+    if args.game_only:
+        order=[r['path'] for r in old['sources']]
+        receipts.sort(key=lambda r:order.index(r['path']) if r['path'] in order else len(order))
     write_json(root/'evidence/location_input_manifest.json',{'schema':1,'role':'Pinned imported source pack; no sibling runtime dependence. Source origins are provenance, not runtime paths.','sources':receipts})
+    if args.game_only:return
     cfg=json.loads((root/'configs/water.json').read_text())
     cfg['hyde_directory']='data/raw/location_inputs/hyde'
     cfg['hydrology_directory']='data/raw/location_inputs/hydrology'

@@ -19,6 +19,8 @@ def validated():
         raise ValueError('Navigation exporter changed: run worldbuilder navigation first')
     if manifest.get('cleanup_code_sha256')!=digest(Path(__file__).with_name('navigation_cleanup.py')):
         raise ValueError('Navigation cleanup changed: run worldbuilder navigation first')
+    if config.get('vanilla_look',{}).get('enabled') and manifest.get('look_code_sha256')!=digest(Path(__file__).with_name('river_vanilla_look.py')):
+        raise ValueError('River vanilla look changed: run worldbuilder navigation first')
     if not all(manifest['checks'].values()):raise ValueError('Navigation map checks did not pass')
     for rel,expected in manifest['files'].items():
         if digest(out/'mod'/rel)!=expected:raise ValueError('Navigation export changed: '+rel)

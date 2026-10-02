@@ -276,5 +276,20 @@
   "reaches": {
     "folder": "configs/navigation_reaches",
     "note": "2026-09-26: navigable rivers come from researched heads of navigation (one JSON per world region, sources inside), traced along vanilla river lines; selection, tropical and override screens below are unused in this mode, the hydrology only annotates discharge and relief."
+  },
+  "vanilla_look": {
+    "enabled": true,
+    "cover_pixels": 5,
+    "duplicate_pixels": 12,
+    "duplicate_share": 0.8,
+    "minimum_piece_pixels": 12,
+    "bridge_max_pixels": 9,
+    "channel_corridor_pixels": 3,
+    "channel_parallel_pixels": 8,
+    "channel_parallel_minimum_pixels": 12,
+    "channel_mouth_maximum_pixels": 4,
+    "widen_up_to_level": 2,
+    "invisible_tree_pixels": 5,
+    "note": "2026-10-03 (EU5 1.4 draws rivers in many map modes and animates their flow): visual only. The final rivers are redrawn on vanilla's own river lines and widths (river_vanilla_look.py); the drawing's own rivers stay only where vanilla draws none (farther than cover_pixels, not mostly within duplicate_pixels of a vanilla line) and join vanilla's network. Every ownable location keeps its river level: wider vanilla pixels are capped to the level, level 2 is drawn at width 6 (looks like vanilla's 5), and a location whose visible river is still below its level gets a two-pixel carrier inside the engine's source fade-in (not drawn)."
   }
 }

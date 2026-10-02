@@ -511,6 +511,20 @@ def export(config, evidence, river):
     cleaned,preservation,original_level_map=preserve_levels(drawing,original,after,land,base_info.reset_index(),[o['box'] for o in config.get('native_geometry_overrides',[])],
                                                              int(cfg.get('clear_drawn_rivers_within_pixels',0)),export_levels(config,colors) if cfg.get('restore_export_levels') else None,
                                                              int(cfg.get('clear_parallel_rivers_within_pixels',0)),int(cfg.get('parallel_river_minimum_pixels',12)))
+    look_report=None
+    if config.get('vanilla_look',{}).get('enabled'):
+        # Visual only: the final rivers are redrawn on vanilla's own network; every ownable location keeps the
+        # river level the cleaned drawing gives it (river_vanilla_look.py).
+        from .river_vanilla_look import redraw
+        lookup=np.zeros(1<<24,np.int32)
+        for i,c in enumerate(inventory.map_color_rgb):lookup[int(c,16)]=i+1
+        zone_ids=lookup[after]
+        ownable_zone=np.r_[False,inventory.is_ownable.to_numpy(bool)]
+        vanilla_rivers=np.asarray(Image.open(game/md/'rivers.png'))
+        native_inputs[str(game/md/'rivers.png')]=digest(game/md/'rivers.png')
+        print('Redrawing the rivers on vanilla lines',flush=True)
+        cleaned,look_report=redraw(cleaned,vanilla_rivers,zone_ids,ownable_zone,(zone_ids==0)&(cleaned==254),config['vanilla_look'])
+        del zone_ids,lookup,vanilla_rivers
     cleaned_image=Image.fromarray(cleaned,mode='P');cleaned_image.putpalette(palette_image.getpalette())
     cleaned_image.save(mod/md/'rivers.png');written.append(md+'rivers.png')
     pd.DataFrame(preservation,columns=['location_tag','river_level','x','y','distance_pixels','added_source']).to_csv(out/'preserved_river_pixels.csv',index=False)
@@ -567,6 +581,7 @@ def export(config, evidence, river):
             'bisected_land_locations':bisected,
             'checks':{'native_river_topology_valid':True,'river_port_coordinates_on_passable_shore':True,'native_river_levels_preserved':True,'no_native_rivers_on_converted_water':True,'minimum_tile_size':True,'connected_tiles':True,'land_area_guard':True,'land_identities_retained':True,'lost_land_adjacencies_restored':not (missing_named-accepted_cuts)},
             'map_code_sha256':digest(Path(__file__)), 'cleanup_code_sha256':digest(Path(__file__).with_name('navigation_cleanup.py')), 'native_geometry_inputs':native_inputs,
+            'look_code_sha256':digest(Path(__file__).with_name('river_vanilla_look.py')), 'vanilla_look':look_report,
             'engine_status':'Global output requires a fresh campaign; local Thames mechanism confirmed by user.'}
     # Lightweight inspectable world map, embedded raster plus clickable nodes.
     preview=Image.fromarray(rgb).resize((2048,1024),Image.Resampling.NEAREST);buf=io.BytesIO();preview.save(buf,format='PNG')

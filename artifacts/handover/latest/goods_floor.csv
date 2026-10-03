@@ -1,21 +1,4 @@
 location_tag,good,predicted,target,reason
-amud,camels,-0.56,-0.2254,predicted below floor -0.2
-atzhaksy,camels,-0.31,-0.4159,predicted below floor -0.2
-aveh,camels,-0.4,-0.4995,predicted below floor -0.2
-baytak,camels,-0.55,,not viable in the efficiency data
-ilek,camels,-0.55,,not viable in the efficiency data
-kariyan,camels,-0.39,-0.2283,predicted below floor -0.2
-kharturan,camels,-0.4,-0.2572,predicted below floor -0.2
-kiyl,camels,-0.55,-0.7836,predicted below floor -0.2
-koptam,camels,-0.31,-0.4192,predicted below floor -0.2
-kumak,camels,-0.55,,not viable in the efficiency data
-mahan,camels,-0.4,-0.3790,predicted below floor -0.2
-meshkan,camels,-0.49,-0.2562,predicted below floor -0.2
-narat,camels,-0.52,-0.4070,predicted below floor -0.2
-or_aktobe,camels,-0.55,,not viable in the efficiency data
-qubodijon,camels,-0.58,-0.2772,predicted below floor -0.2
-ryn,camels,-0.31,-0.3166,predicted below floor -0.2
-shikashin,camels,-0.55,,not viable in the efficiency data
 choco,chili,-0.21,,not viable in the efficiency data
 gochacalla,chili,-0.47,,not viable in the efficiency data
 himuris,chili,-0.26,-0.4317,predicted below floor -0.2

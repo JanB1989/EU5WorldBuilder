@@ -83,7 +83,7 @@ def test_the_priors_file_names_real_classes_and_lists_each_climate_once():
     priors = gc.load_priors(root / "configs/goods_output_priors.json")
     climates = set(json.loads((root / "configs/climate.json").read_text())["types"])
     codes = {"+", "-", "0", "free", "increasing"}
-    assert len(priors["goods"]) == 26   # 25 V2 goods + camels (EU5 1.4, proxy target)
+    assert len(priors["goods"]) == 25   # the 25 V2 goods; no herd goods (livestock, wool, horses, camels), no fish
     for good, spec in priors["goods"].items():
         listed = [c for k in ("core", "marginal", "unsuitable") for c in spec["climate"][k]]
         assert len(listed) == len(set(listed)), good
@@ -99,7 +99,7 @@ def test_effective_score_lifts_towards_irrigated_only_by_the_weight():
     assert np.allclose(gc.effective_score(r, i, w), [0.5, 0.0, 0.5])
 
 
-def test_camels_proxy_target_weights_dryland_koppen_shares(tmp_path, monkeypatch):
+def test_proxy_target_weights_koppen_shares(tmp_path, monkeypatch):
     monkeypatch.setattr(gc, "ROOT", tmp_path)
     (tmp_path / "artifacts/climate").mkdir(parents=True)
     t = pd.DataFrame({"location_tag": ["erg", "steppe", "wet", "mixed"],

@@ -86,20 +86,6 @@
         "topography.atoll": "free",
         "soil_type.peat": "free"
       }
-    },
-    "pastoral": {
-      "note": "Herd animals of open dry range (EU5 1.4 camels): closed forest, jungle and wet ground cost them, open desert, sparse and scrub range are data-led.",
-      "rules": {
-        "vegetation.forest": "-",
-        "vegetation.mixed_forest": "-",
-        "vegetation.coniferous_forest": "-",
-        "vegetation.woods": "-",
-        "vegetation.dry_forest": "-",
-        "vegetation.jungle": "-",
-        "vegetation.thicket": "-",
-        "vegetation.marsh": "-",
-        "vegetation.swamp": "-"
-      }
     }
   },
   "goods": {
@@ -907,42 +893,6 @@
         "is_adjacent_to_lake.True": "free"
       },
       "evidence": "Timber follows forest: the boreal and temperate forests, monsoon teak and tropical hardwoods, bamboo of southern China; deserts, steppes and tundra have little wood."
-    },
-    "camels": {
-      "group": "pastoral",
-      "components": "dromedary (Arabian) and Bactrian camels",
-      "climate": {
-        "core": [
-          "arid",
-          "hot_semi_arid",
-          "cold_arid"
-        ],
-        "marginal": [
-          "cold_semi_arid",
-          "savanna",
-          "mediterranean",
-          "dry_summer_continental"
-        ],
-        "unsuitable": [
-          "tropical",
-          "tropical_monsoon",
-          "subtropical_monsoon",
-          "highland_monsoon",
-          "continental_monsoon",
-          "oceanic",
-          "subpolar_oceanic",
-          "subpolar"
-        ]
-      },
-      "rules": {
-        "fertility": "0",
-        "vegetation.desert": "free",
-        "vegetation.sparse": "free",
-        "vegetation.scrubland": "free",
-        "vegetation.farmland": "free",
-        "soil_type.stony": "free"
-      },
-      "evidence": "EU5 1.4 good without a GAEZ table; target is the Koppen dryland share (configs/goods_output_fit.json proxy_targets). Dromedaries of the Sahara and Sahel, Arabia, the Horn, Iran and the Thar; Bactrians of the Gobi, Taklamakan, Kazakh steppe and the Mongolian and Tibetan plateaus (arctic is left to the data). Humid tropics (trypanosomes, wet hooves), monsoon lands and the boreal forest keep no camel herds; field fertility says nothing about pasture, so it has no row."
     }
   },
   "arctic_note": "The World Builder arctic class is mostly alpine: the Tibetan plateau (285 ownable locations) and the high Andes (189), plus the European far north (83). Highland crops (Tibetan barley, Andean potato, maize, pulses and quinoa-like grains, orchard fruit in sheltered valleys, Tibetan rhubarb) are therefore marginal there, not ruled out.",

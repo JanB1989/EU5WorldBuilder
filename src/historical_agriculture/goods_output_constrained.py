@@ -67,7 +67,7 @@ def load_scores(directory, good, index):
 
 
 def proxy_score(good, index, cfg):
-    """Target for a good without a GAEZ/V2 efficiency table (EU5 1.4 camels): a weighted share of Koppen-Geiger
+    """Target for a good without a GAEZ/V2 efficiency table (none configured since camels left 2026-10-03): a weighted share of Koppen-Geiger
     classes per location from the climate stage (kg_<code>_share), zeroed under ``minimum``. None when the good
     has no proxy in ``cfg['proxy_targets']``."""
     spec = (cfg.get("proxy_targets") or {}).get(good)

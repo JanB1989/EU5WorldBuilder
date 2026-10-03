@@ -153,10 +153,9 @@ def placement(name, entry, priority):
 def build(out, game, cfg):
     """Write the carve decals into out/mod; returns (report, written relative paths)."""
     mod = out/"mod"; prefix = cfg["decal_prefix"]
-    for old in (mod/TERRAIN/"decals").glob(prefix+"_*"):
-        shutil.rmtree(old)
-    for rel in (DEFINITIONS, PLACEMENTS):
-        (mod/rel).unlink(missing_ok=True)
+    # Everything under terrain2 in the navigation export is ours (vanilla decals are never copied): start clean so a
+    # renamed or dropped decal cannot survive.
+    shutil.rmtree(mod/TERRAIN, ignore_errors=True)
     if not cfg.get("enabled"):
         return {"enabled": False}, []
     vanilla_placements = (game/PLACEMENTS).read_text(encoding="utf-8-sig")

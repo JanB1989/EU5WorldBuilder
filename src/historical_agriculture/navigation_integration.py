@@ -21,6 +21,11 @@ def validated():
         raise ValueError('Navigation cleanup changed: run worldbuilder navigation first')
     if config.get('vanilla_look',{}).get('enabled') and manifest.get('look_code_sha256')!=digest(Path(__file__).with_name('river_vanilla_look.py')):
         raise ValueError('River vanilla look changed: run worldbuilder navigation first')
+    terrain=ROOT/'configs/navigation_terrain.json'
+    if terrain.is_file() and json.loads(terrain.read_text()).get('enabled'):
+        stamp=manifest.get('terrain') or {}
+        if stamp.get('config_sha256')!=digest(terrain) or stamp.get('code_sha256')!=digest(Path(__file__).with_name('navigation_terrain.py')):
+            raise ValueError('Navigation terrain changed: run worldbuilder navigation-terrain first')
     if not all(manifest['checks'].values()):raise ValueError('Navigation map checks did not pass')
     for rel,expected in manifest['files'].items():
         if digest(out/'mod'/rel)!=expected:raise ValueError('Navigation export changed: '+rel)
@@ -29,6 +34,8 @@ def validated():
 
 def emit(output,game,settings=None):
     out,manifest=validated()
+    from .navigation_terrain import check_vanilla
+    check_vanilla(manifest,game)
     from .navigation_ports import select,prune,restore_lone_sea_ports,portless_banks,assign_bank_ports
     ports,table=select(out,manifest,game,settings)
     table.to_csv(out/'port_selection.csv',index=False)

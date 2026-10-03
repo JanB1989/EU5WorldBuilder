@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "note": "3D terrain under the navigable channels (navigation_terrain.py). EU5 draws water as one plane at sea level and the terrain hides it wherever it is higher; the channels are sea tiles on a land heightmap, so they were invisible on the 3D terrain. One carve decal per vanilla heightmap tile that holds a channel, blend mode min: 1.0 (no effect) away from the channels, below the water level inside them. Heights are 0..1 of the world height (32 world units; water level = the game's NJominiMap water_level_percentage), distances in decal texels (half a location pixel) from the smoothed shore: inside the water falls by slope x d + curve x d^2 (centre of a 2-pixel channel ~0.6 world units deep, opaque), outside the bank rises gently (terrain at 0.15 meets it ~5 location pixels from the water). Chosen 2026-10-03 on tile 5 (Rhine, Meuse, Scheldt) against vanilla's terrain mips: steepness p95 0.75 -> ~0.45, channel water kept at every mip.",
+  "enabled": true,
+  "decal_prefix": "pp_navigation_channels",
+  "shore_smoothing": 1.5,
+  "inside": {"slope": 0.010, "curve": 0.002},
+  "outside": {"slope": 0.003, "curve": 0.0003},
+  "bed_level": 0.04,
+  "margin_location_pixels": 32,
+  "layer_id": "MyYS0FBvcbj"
+}

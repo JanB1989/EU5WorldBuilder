@@ -130,6 +130,13 @@ def reach_rows(config):
     return rows, drawing, fingerprint, report
 
 
+def terrain(result, config):
+    """Carve decals for the 3D terrain under the channels (navigation_terrain.py), recorded in the manifest."""
+    from .navigation_terrain import apply
+    game = Path(tomllib.loads((ROOT/config["local_config"]).read_text())["paths"]["game_root"])/"game"
+    apply(result, ROOT/config["output"], game)
+
+
 def build(config_path=None):
     config_path = Path(config_path or ROOT/"configs/river_navigation.json")
     config = json.loads(config_path.read_text())
@@ -185,6 +192,7 @@ def build(config_path=None):
                               "Improvable routes are costly but passable until works are completed.",
                               "Short or unsafe conversions remain native rivers; omissions are explicit.",
                               "Map source registration and historical barrier envelopes are approximate."]})
+    terrain(result, config)
     save_json(output/"manifest.json", result)
     print(json.dumps({k: v for k, v in result.items() if k not in ("config", "input_sha256")}, indent=2), flush=True)
     return result
@@ -217,6 +225,7 @@ def build_reaches(config, config_path):
                               "All fleet classes can use converted sea zones; barriers (falls, cataracts) are impassable.",
                               "Improvable routes are costly but passable until works are completed.",
                               "Rivers without a vanilla line follow the drawn export river; canals are straight between stops."]})
+    terrain(result, config)
     save_json(output/"manifest.json", result)
     print(json.dumps({k: v for k, v in result.items() if k not in ("config", "input_sha256")}, indent=2), flush=True)
     return result

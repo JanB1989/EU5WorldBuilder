@@ -116,6 +116,13 @@ uv run worldbuilder geography-test --build-only --export-only && uv run worldbui
 uv run worldbuilder recalibration-map && uv run worldbuilder handover
 ```
 
+`worldbuilder navigation` ends with the 3D terrain carve of the channels (`navigation_terrain.py`,
+`configs/navigation_terrain.json`): the channels are sea tiles, but EU5 draws water as one sea-level plane that the
+terrain hides, so each vanilla heightmap tile holding a channel gets a `min` decal that lowers the terrain under the
+channels (smoothed shore, gentle banks). It writes vanilla's `decal_definitions.txt` and `ingame_decals.json` plus our
+entries, so after a game update the geography export stops until `uv run worldbuilder navigation-terrain` (~1 min,
+no full navigation rerun) has rebuilt them. Decal pages are LZAV-compressed (`tools/lzav`, compiled on first use).
+
 Start setup is read from the bookmark's `setup_folder` (`main_menu/setup/1337` since 1.4). The climates
 `hot_semi_arid`, `cold_semi_arid` and `subpolar` are vanilla 1.4 keys (formerly our `hot_steppe`, `cold_steppe`,
 `subarctic`). `worldbuilder rgo-potential` reports starting RGOs that break their good's vanilla

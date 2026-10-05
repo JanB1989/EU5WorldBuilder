@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-10-03-c3e2dcc",
-  "worldbuilder_commit": "c3e2dcc",
-  "created": "2026-10-03T20:11:08",
+  "version": "2026-10-05-ef4b23a",
+  "worldbuilder_commit": "ef4b23a",
+  "created": "2026-10-05T10:52:00",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
@@ -87,34 +87,34 @@
   ],
   "building_fit": {
     "starting": {
-      "r2": 0.7886405960538433,
-      "median_absolute_percentage_error": 30.346975065464342,
-      "within_25_percent": 41.86091035274973,
-      "mean_bias": 4310.565653073288
+      "r2": 0.8108452564351576,
+      "median_absolute_percentage_error": 30.360103975857953,
+      "within_25_percent": 41.63595462595128,
+      "mean_bias": 5418.271583289149
     },
     "maximum": {
-      "r2": -0.739796397775766,
-      "median_absolute_percentage_error": 128.7643072111265,
-      "within_25_percent": 9.988991528263053,
-      "mean_bias": 107205.50693659515
+      "r2": -0.7414528862491254,
+      "median_absolute_percentage_error": 129.94951531366476,
+      "within_25_percent": 9.534293782606614,
+      "mean_bias": 107830.21856249856
     },
     "starting_improvements_only": {
-      "r2": 0.924030370934074,
-      "median_absolute_percentage_error": 20.46628125354126,
-      "within_25_percent": 52.39553917580051,
-      "mean_bias": -1625.2753360368297
+      "r2": 0.9956257738117941,
+      "median_absolute_percentage_error": 13.450459819091964,
+      "within_25_percent": 56.4686737184703,
+      "mean_bias": -517.5694058209683
     },
     "maximum_improvements_only": {
-      "r2": 0.44634133550885624,
-      "median_absolute_percentage_error": 40.716596375915024,
-      "within_25_percent": 34.48523428899632,
-      "mean_bias": 11457.898848456647
+      "r2": 0.46038190997366313,
+      "median_absolute_percentage_error": 39.1531602608809,
+      "within_25_percent": 36.39017852869382,
+      "mean_bias": 12082.61047436006
     },
     "maximum_at_reference_development": {
-      "r2": -2.3376115374896838,
-      "median_absolute_percentage_error": 176.45789162828208,
-      "within_25_percent": 5.126118795768917,
-      "mean_bias": 157645.66871326676
+      "r2": -1.947797442939362,
+      "median_absolute_percentage_error": 169.80610178630212,
+      "within_25_percent": 5.561671373187192,
+      "mean_bias": 146953.36985719056
     }
   },
   "goods_fit": {
@@ -140,42 +140,42 @@
   },
   "self_check": {
     "starting": {
-      "r2": 0.7886405960538433,
-      "median_absolute_percentage_error": 30.346975065464342,
-      "within_25_percent": 41.86091035274973,
-      "mean_bias": 4310.565653073288,
-      "total_model": 922572250.0,
+      "r2": 0.8108452564351576,
+      "median_absolute_percentage_error": 30.360103975857953,
+      "within_25_percent": 41.63595462595128,
+      "mean_bias": 5418.271583289149,
+      "total_model": 945715550.0,
       "total_target": 832511601.8103398
     },
     "maximum": {
-      "r2": 0.4901303732514778,
-      "median_absolute_percentage_error": 37.83212287497712,
-      "within_25_percent": 36.993251328196045,
-      "mean_bias": 17393.739837566765,
-      "total_model": 2659883450.0,
+      "r2": 0.4423972750262062,
+      "median_absolute_percentage_error": 42.61543148477464,
+      "within_25_percent": 33.68592351505289,
+      "mean_bias": 28271.885628022897,
+      "total_model": 2887160550.0,
       "total_target": 2296476043.5737176
     },
-    "starting_model_total": 922572250.0,
-    "maximum_model_total": 2659883450.0,
+    "starting_model_total": 945715550.0,
+    "maximum_model_total": 2887160550.0,
     "percent_per_point": 0.0,
     "people_per_point": 1000.0
   },
   "counts": {
     "attribute_rows": 59,
-    "building_types": 8,
-    "location_buildings": 114381,
+    "building_types": 9,
+    "location_buildings": 120525,
     "locations": 20893,
     "goods_floor": 1871,
     "location_attributes": 20893
   },
   "files": {
     "attribute_rows.csv": "68b5e960ced8126e6d863501be37d80686ea5983eb14eb5c887441945ec25c4c",
-    "building_types.csv": "39baac69ad657a13ff81d65474f89842fe09c1b7f94fb84e5d20713541ca9aa5",
+    "building_types.csv": "0fbfc6998a917dd5563e1f143f177ca1ed1732c38423d4806bad9ce210638d20",
     "goods_floor.csv": "1b2112cc3acd774897d1deaea71fcb5b2b1a455e96e9d8b6b728c254f61eb62a",
     "location_attributes.csv": "cb1c13a6ef002ad21b2f2695d29d7fbbb29a264fdd83e771457e692a1f658786",
-    "location_buildings.csv": "3d1cfbfd1c7078b12ed5371b0b0f39ecb75121aa7b79b6806b743f7734c6236b",
-    "location_targets.csv": "384b54da1b5f41b41ba59ab846ef83b1149691360bbd9fd6a6ab61251c97ba43",
-    "navigation/manifest.json": "1e035640404df8a712a4d1a67456b666d6e4f99ef9a0a81716b98974bd583f97",
+    "location_buildings.csv": "6d4ed69b050a29550d3daf1284004d8f5b10ca3915d0affe13d1ff5ddcfca311",
+    "location_targets.csv": "93696850c0e0fcb1a27130fe0ae082b5fcf84bec63fc190d09f153ff32808da0",
+    "navigation/manifest.json": "398815de18801bbd5e9c59aedc17d723afc8473723037f7f7458f6e77cf01f9c",
     "navigation/tiles.csv": "24d744f8872efd1a89665cce6aa7310214d050c65f40394f30c9e2e8c1465f4d",
     "navigation/edges.csv": "8e672e60240b86de270a09f6536c4e45959cd97c622f42d9b78edb7b38efe252",
     "navigation/shores.csv": "24c92898efc178e06cff857dd097b6f3c15070fbbc9bbc5bf02404235a879cac",

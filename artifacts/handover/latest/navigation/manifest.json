@@ -5867,7 +5867,53 @@
     "in_game/gfx/map/map_objects/generated_map_object_locators_combat.txt": "a645779827904e5894681bc656b7ec4cc534763d5990306241c85caf4c1927ee",
     "in_game/gfx/map/map_objects/generated_map_object_locators_unit_stack.txt": "af84ad44e078d010ca520ff1d7f1d9ce48124092ca5d9580083fa0bed7570615",
     "in_game/gfx/map/map_objects/generated_map_object_locators_dock.txt": "bfd5ccaa7909dbb8df18508f28638df8b28ab0350df13ae0470f461f09bd5718",
-    "in_game/map_data/rivers.png": "62feaad515d1506b9e5b7439f913bb4bfeb03ae8c2d56b0d8a8c1b706580c6ef"
+    "in_game/map_data/rivers.png": "62feaad515d1506b9e5b7439f913bb4bfeb03ae8c2d56b0d8a8c1b706580c6ef",
+    "in_game/gfx/terrain2/decals/pp_channels_2_16/pp_channels_2_16_height.info": "712b169836987349eb8b97435494aed518244cbc467c3d397472f780475b09cd",
+    "in_game/gfx/terrain2/decals/pp_channels_2_16/pp_channels_2_16_height.bin": "d5a17952ef76910ee0a67d6abd93144230195c29e594e5e177819a47e911680a",
+    "in_game/gfx/terrain2/decals/pp_channels_2_16/presets.json": "1249bd5578eb102cb616e2d173a26819f169b3fbd5c78605fd8df1b3885ca222",
+    "in_game/gfx/terrain2/decals/pp_channels_2_16/instances/JGUozMZHAMQ.json": "0e99bfc397fba30fba4bd58f303d97620a1f7b96f1206fda70c4d5db0cee2bdd",
+    "in_game/gfx/terrain2/decals/pp_channels_3_16/pp_channels_3_16_height.info": "7174e7890afc82ea6de01c53c184e1d25a09c983af5d86094ddab22c2d362fc4",
+    "in_game/gfx/terrain2/decals/pp_channels_3_16/pp_channels_3_16_height.bin": "25df64acfdd4910be3fc71a6d6ee9d7e3a17d84248340fc951d00c41c2801853",
+    "in_game/gfx/terrain2/decals/pp_channels_3_16/presets.json": "1249bd5578eb102cb616e2d173a26819f169b3fbd5c78605fd8df1b3885ca222",
+    "in_game/gfx/terrain2/decals/pp_channels_3_16/instances/R4e5IxkwT4M.json": "1618d216122a0cbdb15f4d2306a7b9cb8c231006913e6ce1d128872a67f36153",
+    "in_game/gfx/terrain2/decals/pp_channels_5_16/pp_channels_5_16_height.info": "4e83f0f7e8419fbb4388bd33a2981c090b6742beaacdd2e6734087eed6b8cd55",
+    "in_game/gfx/terrain2/decals/pp_channels_5_16/pp_channels_5_16_height.bin": "31f3ba05d87951fafb051397e17ed200a5684444c721b2300a257c2c307fce24",
+    "in_game/gfx/terrain2/decals/pp_channels_5_16/presets.json": "1249bd5578eb102cb616e2d173a26819f169b3fbd5c78605fd8df1b3885ca222",
+    "in_game/gfx/terrain2/decals/pp_channels_5_16/instances/fQSOCAgMpOK.json": "c2d692a061406e46f25a430eb004e86340591980ef0ffb2a97e42d5c617e31b9",
+    "in_game/gfx/terrain2/decals/pp_channels_6_16/pp_channels_6_16_height.info": "c741f318f61af4fa611581e6e8de3f91b20a48f9034edd68bfac8e144e697a9f",
+    "in_game/gfx/terrain2/decals/pp_channels_6_16/pp_channels_6_16_height.bin": "0a62ae2edbe3cbdfe452f69a1b05cb302251da6be99c0d1a7898fe61a5f01f41",
+    "in_game/gfx/terrain2/decals/pp_channels_6_16/presets.json": "1249bd5578eb102cb616e2d173a26819f169b3fbd5c78605fd8df1b3885ca222",
+    "in_game/gfx/terrain2/decals/pp_channels_6_16/instances/lrF7K2aVoOd.json": "b80510873e655b61ca3beb7e76364ef772480ef083c9b411490a008a445172ac",
+    "in_game/gfx/terrain2/decals/pp_channels_7_16/pp_channels_7_16_height.info": "98fb7e144c61c146044120d41087e2248b11b0d923cec663f1c0c65e7a0fcf41",
+    "in_game/gfx/terrain2/decals/pp_channels_7_16/pp_channels_7_16_height.bin": "84f966ecd9507e78a3e13f7e53ca711274c52f906222ee1c6ac784ed92024d33",
+    "in_game/gfx/terrain2/decals/pp_channels_7_16/presets.json": "1249bd5578eb102cb616e2d173a26819f169b3fbd5c78605fd8df1b3885ca222",
+    "in_game/gfx/terrain2/decals/pp_channels_7_16/instances/zARMl1vtRWM.json": "cc63319d78f626d62640eadd9f77490eaa2d4c01914145a1de7c5677359c5abf",
+    "in_game/gfx/terrain2/decals/pp_channels_8_16/pp_channels_8_16_height.info": "32c40c99d288ae6d473f79ca98564d1451dcdf00d5d4adaf26a84f738546c313",
+    "in_game/gfx/terrain2/decals/pp_channels_8_16/pp_channels_8_16_height.bin": "b8b107c1112ce4a530609a12bf03bf98ab6ceeec1ba73c0bf9bed02efc1bc7b0",
+    "in_game/gfx/terrain2/decals/pp_channels_8_16/presets.json": "1249bd5578eb102cb616e2d173a26819f169b3fbd5c78605fd8df1b3885ca222",
+    "in_game/gfx/terrain2/decals/pp_channels_8_16/instances/QFCYa0gUIrh.json": "8ea53390adcca34e061da1f0f7c6df376d3e9c7ad2d6394d62abda585c6aa2b8",
+    "in_game/gfx/terrain2/decals/pp_channels_9_16/pp_channels_9_16_height.info": "b322a658356ad9310e637182b67d761799f99af81ddcdc08d0a3552fe98915f8",
+    "in_game/gfx/terrain2/decals/pp_channels_9_16/pp_channels_9_16_height.bin": "4631fe93ed2ea054839dbab7370fe8f304e79681aecdf7baba66e2bb2203bafb",
+    "in_game/gfx/terrain2/decals/pp_channels_9_16/presets.json": "1249bd5578eb102cb616e2d173a26819f169b3fbd5c78605fd8df1b3885ca222",
+    "in_game/gfx/terrain2/decals/pp_channels_9_16/instances/GXbg1U062q8.json": "bd601acf8612d43787c4ff828efef6d89efa75a17b0408b49435da540145d6d8",
+    "in_game/gfx/terrain2/decals/pp_channels_10_16/pp_channels_10_16_height.info": "fc4be78eac6b760e6a7d48193ee43be22453601fff8431cf4a9fd10c2807043d",
+    "in_game/gfx/terrain2/decals/pp_channels_10_16/pp_channels_10_16_height.bin": "e0dde9d6a5a369a10c86785edac01454bbd9b8dc0affe2a20905de3e380f7be9",
+    "in_game/gfx/terrain2/decals/pp_channels_10_16/presets.json": "1249bd5578eb102cb616e2d173a26819f169b3fbd5c78605fd8df1b3885ca222",
+    "in_game/gfx/terrain2/decals/pp_channels_10_16/instances/aat5OLRjqKA.json": "a604e79df9bb78006c53af9aec7ff95e587db7b66da92ea5825614c77d1bfbb3",
+    "in_game/gfx/terrain2/decals/pp_channels_11_16/pp_channels_11_16_height.info": "152aebe7251a9691ab38232efab27724c8e281a2634f0b4b48dc21baf17e2e0a",
+    "in_game/gfx/terrain2/decals/pp_channels_11_16/pp_channels_11_16_height.bin": "196a9588d2acded39750dfc38a91ca77af6597b1612a78f89d9cc3478ba0dba3",
+    "in_game/gfx/terrain2/decals/pp_channels_11_16/presets.json": "1249bd5578eb102cb616e2d173a26819f169b3fbd5c78605fd8df1b3885ca222",
+    "in_game/gfx/terrain2/decals/pp_channels_11_16/instances/EkaCmTgBswR.json": "c209f63be562f393cae4d9d2d945e46134e228fbce611cabdd7dded5af810bd7",
+    "in_game/gfx/terrain2/decals/pp_channels_14_16/pp_channels_14_16_height.info": "8abb1b7210001811eefbcf91958b43c00c41c9c843dacf3d8c6314461121d08e",
+    "in_game/gfx/terrain2/decals/pp_channels_14_16/pp_channels_14_16_height.bin": "c0d100ba045caf2f584fab2e44caafe1b935c91fc2db38793ef52947526441c7",
+    "in_game/gfx/terrain2/decals/pp_channels_14_16/presets.json": "1249bd5578eb102cb616e2d173a26819f169b3fbd5c78605fd8df1b3885ca222",
+    "in_game/gfx/terrain2/decals/pp_channels_14_16/instances/RQGiuXenGZh.json": "65467da94b2c88ad75123acd631a01c613596b4c38557bb7c30878dfe96b82b6",
+    "in_game/gfx/terrain2/decals/pp_channels_15_16/pp_channels_15_16_height.info": "6e9ac7d0a23cb7eb4b7c45640d7523b0ff7a600102c8585a5af36f2586b8ff0c",
+    "in_game/gfx/terrain2/decals/pp_channels_15_16/pp_channels_15_16_height.bin": "c0011e641f712c614350d68155b9f0f239db1cdb92fdb2d23bb8f07dff0163dc",
+    "in_game/gfx/terrain2/decals/pp_channels_15_16/presets.json": "1249bd5578eb102cb616e2d173a26819f169b3fbd5c78605fd8df1b3885ca222",
+    "in_game/gfx/terrain2/decals/pp_channels_15_16/instances/IlcrtvttMRX.json": "caa50c093b0a7ba266cb502d3604ba5854412821fd17661100ce5abbe4065e91",
+    "in_game/gfx/terrain2/decals/decal_definitions.txt": "3e8ba9c912e4ea04680a1ad724b0111b6e450c0162594dc7c0dc5e5baccc3fe3",
+    "in_game/gfx/terrain2/terrain_cache/ingame_decals.json": "58618913f52fb801b78e9fe505bc5811e5ee6de0f676733c065d672275ab5910"
   },
   "bisected_land_locations": [
     {
@@ -8538,5 +8584,99 @@
     "All fleet classes can use converted sea zones; barriers (falls, cataracts) are impassable.",
     "Improvable routes are costly but passable until works are completed.",
     "Rivers without a vanilla line follow the drawn export river; canals are straight between stops."
-  ]
+  ],
+  "terrain": {
+    "enabled": true,
+    "water_level": 0.08340625,
+    "decals": {
+      "pp_channels_2_16": {
+        "channel_location_pixels": 4123,
+        "carved_texels": 395623,
+        "texels_below_water": 16049,
+        "bin_bytes": 650220,
+        "pages": 2731
+      },
+      "pp_channels_3_16": {
+        "channel_location_pixels": 63,
+        "carved_texels": 15262,
+        "texels_below_water": 237,
+        "bin_bytes": 92101,
+        "pages": 2731
+      },
+      "pp_channels_5_16": {
+        "channel_location_pixels": 3586,
+        "carved_texels": 392985,
+        "texels_below_water": 13739,
+        "bin_bytes": 654037,
+        "pages": 2731
+      },
+      "pp_channels_6_16": {
+        "channel_location_pixels": 5537,
+        "carved_texels": 687353,
+        "texels_below_water": 21360,
+        "bin_bytes": 1125738,
+        "pages": 2731
+      },
+      "pp_channels_7_16": {
+        "channel_location_pixels": 2638,
+        "carved_texels": 312709,
+        "texels_below_water": 10212,
+        "bin_bytes": 519781,
+        "pages": 2731
+      },
+      "pp_channels_8_16": {
+        "channel_location_pixels": 1733,
+        "carved_texels": 179874,
+        "texels_below_water": 6818,
+        "bin_bytes": 283479,
+        "pages": 2731
+      },
+      "pp_channels_9_16": {
+        "channel_location_pixels": 18752,
+        "carved_texels": 1858346,
+        "texels_below_water": 72454,
+        "bin_bytes": 2745804,
+        "pages": 2731
+      },
+      "pp_channels_10_16": {
+        "channel_location_pixels": 11121,
+        "carved_texels": 1151756,
+        "texels_below_water": 43106,
+        "bin_bytes": 1708180,
+        "pages": 2731
+      },
+      "pp_channels_11_16": {
+        "channel_location_pixels": 644,
+        "carved_texels": 96075,
+        "texels_below_water": 2375,
+        "bin_bytes": 233175,
+        "pages": 2731
+      },
+      "pp_channels_14_16": {
+        "channel_location_pixels": 5808,
+        "carved_texels": 620719,
+        "texels_below_water": 22245,
+        "bin_bytes": 939191,
+        "pages": 2731
+      },
+      "pp_channels_15_16": {
+        "channel_location_pixels": 1613,
+        "carved_texels": 177265,
+        "texels_below_water": 6257,
+        "bin_bytes": 325677,
+        "pages": 2731
+      }
+    },
+    "channel_location_pixels": 55618,
+    "covered_channel_location_pixels": 55618,
+    "bytes": 12127729,
+    "vanilla_inputs": {
+      "in_game/gfx/terrain2/decals/decal_definitions.txt": "281daa2365f3e5719b2ba2e8513315125c314d516c76ff26782386d9a692a275",
+      "in_game/gfx/terrain2/terrain_cache/ingame_decals.json": "192b469afdc13fad30d129df52e28a537001b6c228fe4279840c57685df8d28d",
+      "in_game/gfx/terrain2/terrain_properties.json": "dae3027e41d5c656c1d5699aaf1b34ab31d0eacb88f854fbfd40e7bfea2f8552"
+    },
+    "config_sha256": "4fa099faf4f975ddfe553d53869cedfe754177e2279d67745a64b4e4f4636e50",
+    "code_sha256": "fb620a1c2d9d70489f3b7e9d885d166d5c0bd5d4f0abf1a7783d089a47dae79f",
+    "codec_sha256": "32ccc73719de1d675d7eda7a89566e826db5d0f3fad2c1f2b28086ffd9c474d6"
+  }
 }

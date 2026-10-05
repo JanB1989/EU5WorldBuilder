@@ -2,7 +2,7 @@
   "attribute_fit_config": "configs/attribute_fit_flat.json",
   "attribute_fit_predictions": "artifacts/attribute_fit_flat/location_predictions.csv",
   "capacity_percent_per_point": 0.0,
-  "level_limit": 20,
+  "level_limit": 15,
   "envelope_quantile": 0.5,
   "unit_quantiles": [
     0.3,
@@ -311,7 +311,8 @@
     "2026-09-20: capacity_percent_per_point 0.01 = the EU5 engine's own development multiplier (1% per point, not scriptable away); development is the vanilla game-start value computed from the vanilla rules (data/raw/vanilla/start_development_1337.csv, range 0..~110).",
     "2026-09-20: development floors halved for the vanilla 0..110 range (management 0.03 levels per point = +3 levels at 100); maximum_reference_development 100.",
     "2026-09-20: engine development multiplier observed in game as 2.5% per point (Zhigu: development 36 -> Population Capacity +90%); capacity_percent_per_point 0.025. Not a scriptable value; no define found.",
-    "2026-09-20: the development percentage is scriptable after all (vanilla static modifier development, +2.5% per point, in main_menu/common/static_modifiers/location.txt); the constructor replaces it without the capacity line, so capacity_percent_per_point is 0 again."
+    "2026-09-20: the development percentage is scriptable after all (vanilla static modifier development, +2.5% per point, in main_menu/common/static_modifiers/location.txt); the constructor replaces it without the capacity line, so capacity_percent_per_point is 0 again.",
+    "2026-10-05 (Jan): one improvement unit = 5,000 people per level for every building (unit_people_per_level), level limit 15, so level counts and prices are comparable. paddy_control is split into paddy_fields + paddy_water_control (half of its ledger each, same gate) so rice land keeps its room under the limit; water_supply, oasis_irrigation, flood_bunds, field_drainage and polders form the cap group water_control (one cap equation fitted on their summed ledger; each member keeps its gate and its own starting levels). clamp_start_to_cap false: the 1337 works are kept in full where they exceed the cap (the engine keeps setup levels above max_levels); the maximum fit counts them as standing room."
   ],
   "allow_failed_development_checks": true,
   "allow_failed_development_checks_reason": "2026-09-20: development is the game starting value (configs/development.json source.kind game_start); its sanity suite is informational and never gates.",
@@ -393,7 +394,25 @@
     "clearing": 0.015,
     "water_supply": 0.015,
     "polders": 0.01,
-    "oasis_irrigation": 0.01
+    "oasis_irrigation": 0.01,
+    "water_control": 0.02
   },
-  "maximum_reference_development": 100
+  "maximum_reference_development": 100,
+  "unit_people_per_level": 5000,
+  "clamp_start_to_cap": false,
+  "split_kinds": {
+    "paddy_control": {
+      "paddy_fields": 0.5,
+      "paddy_water_control": 0.5
+    }
+  },
+  "cap_groups": {
+    "water_control": [
+      "water_supply",
+      "oasis_irrigation",
+      "flood_bunds",
+      "field_drainage",
+      "polders"
+    ]
+  }
 }

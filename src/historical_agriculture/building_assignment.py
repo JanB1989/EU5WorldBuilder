@@ -61,48 +61,113 @@ def assign(d,ledger,dev,cfg):
     # reference development (the highest game starting value by default); the development term is a design bonus.
     dref=float(cfg.get('maximum_reference_development',45));Xref=X.copy();Xref[:,idev]=dref
     ordinal=cfg.get('ordinal',{})
-    rows={};buildings=[];caps_out=[]
+    buildings=[];caps_out=[]
     out=pd.DataFrame(index=d.index)
     kinds=list(LEDGER_KINDS)+[k for k in EXTENSION_KINDS if f'starting_{k}_capacity' in led and led[f'maximum_{k}_capacity'].sum()>0]
+    led=led.copy();gates=dict(cfg['gates']);gmins=dict(cfg.get('development_levels_per_point_min') or {})
+    # A ledger kind may be split over several buildings: each gets its share of the people and the kind's gate.
+    for src,parts in (cfg.get('split_kinds') or {}).items():
+        if src not in kinds:continue
+        i=kinds.index(src);kinds[i:i+1]=list(parts)
+        for part,share in parts.items():
+            for stage in ('starting','maximum'):led[f'{stage}_{part}_capacity']=led[f'{stage}_{src}_capacity'].to_numpy(float)*float(share)
+            gates.setdefault(part,gates.get(src,[]));gmins.setdefault(part,gmins.get(src,0.))
+    # Cap groups: buildings with their own gate and ledger that share ONE cap equation, fitted on their summed ledger
+    # (the members' levels together never exceed it; each member is built only where its own gate holds).
+    groups_cfg={name:[k for k in members if k in kinds] for name,members in (cfg.get('cap_groups') or {}).items()}
+    member_of={k:name for name,members in groups_cfg.items() for k in members}
+    fits=[]
     for kind in kinds:
-        rules=cfg['gates'].get(kind,[]);g=gate(d,rules)
+        name=member_of.get(kind,kind)
+        if name not in [f[0] for f in fits]:fits.append((name,groups_cfg.get(name,[kind])))
+    limit=int(cfg['level_limit']);fixed_unit=cfg.get('unit_people_per_level')
+    # Starting levels are the works already standing in 1337; with clamp_start_to_cap false they are kept in full even
+    # where they exceed the cap (the engine keeps setup levels above max_levels; they just cannot be extended).
+    clamp_start=bool(cfg.get('clamp_start_to_cap',True))
+    c=float(cfg['capacity_percent_per_point']);dstart=d.development.to_numpy(float)
+    for name,members in fits:
+        mrules={m:gates.get(m,[]) for m in members}
+        rules=[] if any(not r for r in mrules.values()) else [r for m in members for r in mrules[m]]
+        g=gate(d,rules);gm={m:gate(d,mrules[m]) for m in members}
         # Ledger people -> flat units: the game multiplies flat values by (1 + c*D), D at start for existing
         # works and 100 for the maximum, so the buildings only need to supply the pre-development part.
-        c=float(cfg['capacity_percent_per_point']);dstart=d.development.to_numpy(float)
-        Ls=led[f'starting_{kind}_capacity'].to_numpy(float)/(1+c*dstart);Lm=led[f'maximum_{kind}_capacity'].to_numpy(float)/(1+c*100)
+        Ls_m={m:led[f'starting_{m}_capacity'].to_numpy(float)/(1+c*dstart) for m in members}
+        Lm_m={m:led[f'maximum_{m}_capacity'].to_numpy(float)/(1+c*100) for m in members}
+        Ls=sum(Ls_m.values());Lm=sum(Lm_m.values())
         ungated=float(Lm[~g].sum()/Lm.sum()) if Lm.sum()>0 else 0.
-        unit,quant=choose_unit(np.concatenate([Ls[g],Lm[g]]),cfg['level_limit'],cfg['unit_quantiles'],float(cfg.get('round_to',0) or 0))
+        if fixed_unit:
+            # One people-per-level for every improvement: comparable level counts and prices (2026-10-05, Jan).
+            v=np.concatenate([Ls[g],Lm[g]]);v=v[v>0];unit=float(fixed_unit) if len(v) else float('nan')
+            n=np.clip(np.round(v/float(fixed_unit)),0,limit);rep=n*float(fixed_unit);within=np.abs(rep-v)<=.25*v
+            quant={'locations':int(len(v)),'captured_within_25_share':float(rep[within].sum()/max(v.sum(),1)),'locations_within_25':float(within.mean()) if len(v) else 0.,
+                   'locations_at_level_limit':int((n>=limit).sum()),'median_levels':float(np.median(n)) if len(v) else 0.}
+        else:
+            unit,quant=choose_unit(np.concatenate([Ls[g],Lm[g]]),limit,cfg['unit_quantiles'],float(cfg.get('round_to',0) or 0))
         if not np.isfinite(unit):
-            out[f'{kind}_levels_start']=0;out[f'{kind}_cap']=0;out[f'{kind}_leftover_start']=Ls;out[f'{kind}_leftover_max']=Lm
-            buildings.append({'building':kind,'unit_people_per_level':None,'eligible_locations':int(g.sum()),'ungated_ledger_share':ungated,'note':'no ledger mass'});continue
-        need=np.clip(np.ceil(Lm/unit),0,cfg['level_limit'])
-        spans={f:(0.,float(cfg['level_limit'])) for f in features}
-        spans.update({f:(-float(cfg['level_limit']),float(cfg['level_limit'])) for f in cfg.get('signed_cap_features',[])})
+            for m in members:
+                out[f'{m}_levels_start']=0;out[f'{m}_cap']=0;out[f'{m}_leftover_start']=Ls_m[m];out[f'{m}_leftover_max']=Lm_m[m]
+                buildings.append({'building':m,'unit_people_per_level':None,'eligible_locations':int(gm[m].sum()),'ungated_ledger_share':ungated,'note':'no ledger mass','cap_group':name if len(members)>1 else ''})
+            continue
+        need=np.clip(np.ceil(Lm/unit),0,limit)
+        spans={f:(0.,float(limit)) for f in features}
+        spans.update({f:(-float(limit),float(limit)) for f in cfg.get('signed_cap_features',[])})
         # Development raises improvement caps by design: each building has a minimum levels-per-point (config),
         # so intensification arrives as extra levels even where the envelope alone would not need the term.
-        gmin=float((cfg.get('development_levels_per_point_min') or {}).get(kind,0.));gmax=float(cfg.get('max_levels_per_development_point',cfg['level_limit']/100))
+        gmin=float(gmins[name]) if name in gmins else max(float(gmins.get(m,0.)) for m in members)
+        gmax=float(cfg.get('max_levels_per_development_point',limit/100))
         spans['development']=(min(gmin,gmax),gmax)
         # Fit the cap envelope over every gated location, including those with no ledger mass, so that
         # classes where works are rare receive small caps instead of inheriting their neighbours' need.
         sub=g if cfg.get('envelope_fit_scope','with_ledger')=='gated' else g&(need>0)
-        beta,info=fit_quantile(X[sub],need[sub],names,groups,{'tau':cfg['envelope_quantile']},spans,(0.,float(cfg['level_limit'])),float(cfg['level_limit']),ordinal)
+        beta,info=fit_quantile(X[sub],need[sub],names,groups,{'tau':cfg['envelope_quantile']},spans,(0.,float(limit)),float(limit),ordinal)
         gamma=max(min(gmin,gmax),round(float(beta[idev]),2));beta=np.round(beta);beta[idev]=gamma;beta[0]=max(beta[0],0)
         # Levels are whole numbers in game: the cap is floored after the linear development term.
-        cap=np.clip(np.where(g,np.floor(X@beta+1e-9),0),0,cfg['level_limit'])
-        capref=np.clip(np.where(g,np.floor(Xref@beta+1e-9),0),0,cfg['level_limit'])
-        n_start=np.minimum(np.clip(np.round(Ls/unit),0,cfg['level_limit']),cap)
-        out[f'{kind}_levels_start']=n_start.astype(int);out[f'{kind}_cap']=cap.astype(int);out[f'{kind}_cap_at_reference']=capref.astype(int)
-        out[f'{kind}_leftover_start']=Ls-n_start*unit;out[f'{kind}_leftover_max']=Lm-cap*unit
+        cap=np.clip(np.where(g,np.floor(X@beta+1e-9),0),0,limit)
+        capref=np.clip(np.where(g,np.floor(Xref@beta+1e-9),0),0,limit)
+        n_total=np.clip(np.round(Ls/unit),0,None)
+        if clamp_start:n_total=np.minimum(np.minimum(n_total,limit),cap)
+        if len(members)==1:
+            n_m={members[0]:n_total}
+        else:
+            # The group's starting levels go to its members by their own ledger (largest remainders), only where they may stand.
+            exact={m:np.where(gm[m],Ls_m[m]/unit,0.) for m in members}
+            n_m={m:np.floor(exact[m]) for m in members}
+            left=n_total-sum(n_m.values())
+            for _ in members:
+                rem=np.column_stack([exact[m]-n_m[m] for m in members]);best=rem.argmax(axis=1);take=(left>0)&(rem.max(axis=1)>0)
+                for j,m in enumerate(members):n_m[m]=n_m[m]+np.where(take&(best==j),1,0)
+                left=left-take
         shortfall=g&(cap<need);excess=g&(cap>need)
-        buildings.append({'building':kind,'unit_people_per_level':unit,'eligible_locations':int(g.sum()),'users_at_start':int((n_start>0).sum()),'ungated_ledger_share':ungated,
-            **{f'quantisation_{k}':v for k,v in quant.items()},'cap_short_locations':int(shortfall.sum()),'cap_short_share_of_ledger':float(Lm[shortfall].sum()/max(Lm[g].sum(),1)),'cap_excess_locations':int(excess.sum()),'cap_excess_levels':float((cap-need)[excess].sum()),
-            'cap_intercept':float(beta[0]),'levels_per_development_point':gamma,'envelope_status':info['status'],'gate':json.dumps(rules)})
-        for i,(f,v) in enumerate(names):
-            if i==idev:caps_out.append({'building':kind,'attribute':'development','value':'per_point','levels':gamma})
-            elif i:caps_out.append({'building':kind,'attribute':f,'value':v,'levels':int(beta[i])})
-            else:caps_out.append({'building':kind,'attribute':'base','value':'reference','levels':int(beta[0])})
+        for m in members:
+            n_start=n_m[m];mcap=np.where(gm[m],cap,0);mref=np.where(gm[m],capref,0)
+            share=np.divide(Lm_m[m],Lm,out=np.zeros(len(Lm)),where=Lm>0)
+            out[f'{m}_levels_start']=n_start.astype(int);out[f'{m}_cap']=mcap.astype(int);out[f'{m}_cap_at_reference']=mref.astype(int)
+            out[f'{m}_leftover_start']=Ls_m[m]-n_start*unit;out[f'{m}_leftover_max']=Lm_m[m]-cap*unit*share
+            buildings.append({'building':m,'unit_people_per_level':unit,'eligible_locations':int(gm[m].sum()),'users_at_start':int((n_start>0).sum()),'ungated_ledger_share':ungated,
+                **{f'quantisation_{k}':v for k,v in quant.items()},'cap_short_locations':int(shortfall.sum()),'cap_short_share_of_ledger':float(Lm[shortfall].sum()/max(Lm[g].sum(),1)),'cap_excess_locations':int(excess.sum()),'cap_excess_levels':float((cap-need)[excess].sum()),
+                'cap_intercept':float(beta[0]),'levels_per_development_point':gamma,'envelope_status':info['status'],'gate':json.dumps(mrules[m]),'cap_group':name if len(members)>1 else '',
+                'start_levels_above_cap':int(np.maximum(n_start-mcap,0).sum())})
+            for i,(f,v) in enumerate(names):
+                if i==idev:caps_out.append({'building':m,'attribute':'development','value':'per_point','levels':gamma})
+                elif i:caps_out.append({'building':m,'attribute':f,'value':v,'levels':int(beta[i])})
+                else:caps_out.append({'building':m,'attribute':'base','value':'reference','levels':int(beta[0])})
     out['development']=d.development
     return out,pd.DataFrame(buildings),pd.DataFrame(caps_out)
+
+
+def cap_people(result,buildings,units,column):
+    """People the caps allow per location; the members of a cap group share one cap, so it counts once."""
+    group=dict(zip(buildings.building,buildings['cap_group'].fillna(''))) if 'cap_group' in buildings else {}
+    total=0.;done=set()
+    for k in units:
+        name=group.get(k) or k
+        if name in done:continue
+        done.add(name);members=[m for m in units if (group.get(m) or m)==name]
+        cap=np.max(np.column_stack([result[f'{m}_{column}'].to_numpy(float)*units[m] for m in members]),axis=1)
+        # starting levels above the cap stand anyway (the engine keeps them), so they bound the maximum from below
+        start=np.sum(np.column_stack([result[f'{m}_levels_start'].to_numpy(float)*units[m] for m in members]),axis=1)
+        total=total+np.maximum(cap,start)
+    return pd.Series(total,index=result.index)
 
 
 def metrics(y,p):
@@ -130,8 +195,8 @@ def build(config_path=None,output_path=None):
     result,buildings,caps=assign(d,ledger,dev,cfg)
     units={r.building:r.unit_people_per_level for r in buildings.itertuples() if r.unit_people_per_level}
     start_from_buildings=sum(result[f'{k}_levels_start']*units[k] for k in units)
-    max_from_buildings=sum(result[f'{k}_cap']*units[k] for k in units)
-    ref_from_buildings=sum(result[f'{k}_cap_at_reference']*units[k] for k in units)
+    max_from_buildings=cap_people(result,buildings,units,'cap')
+    ref_from_buildings=cap_people(result,buildings,units,'cap_at_reference')
     c=cfg['capacity_percent_per_point']
     from .development_target import capacity_people_per_point
     kdev=capacity_people_per_point();dref=float(cfg.get('maximum_reference_development',100))

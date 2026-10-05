@@ -8,7 +8,8 @@ One versioned directory with everything the mod needs from the World Builder, de
                          output modifiers (output_<good> columns, blank where no row)
 - building_types.csv     one row per improvement building: unit people per level, level limit, gate
                          rules (JSON), cap equation in levels (JSON: base, class terms, development
-                         per point), ledger totals
+                         per point), cap_group (buildings with the same non-empty group share one
+                         cap: their levels together never exceed it), ledger totals
 - location_buildings.csv one row per location and building: starting levels, caps, ledger people
 - location_targets.csv   one row per location: targets, attribute flat, development, model values
 - goods_floor.csv        RGO locations for the constructor floor carve-out
@@ -81,6 +82,7 @@ def building_types(buildings,caps,ledger):
             'levels_per_development_point':float(c[c.attribute=='development'].levels.iloc[0]) if (c.attribute=='development').any() else 0.,
             'class_terms':[{'attribute':x.attribute,'value':str(x.value),'levels':float(x.levels)} for x in c[~c.attribute.isin(['base','development'])].itertuples() if x.levels]}
         out.append({'building':r.building,'unit_people_per_level':float(r.unit_people_per_level),'level_limit':int(getattr(r,'level_limit',20) or 20),'gate_json':r.gate,'cap_equation_json':json.dumps(eq),
+            'cap_group':str(getattr(r,'cap_group','') or ''),
             'levels_per_development_point':eq['levels_per_development_point'],'eligible_locations':int(r.eligible_locations),'users_at_start':int(getattr(r,'users_at_start',0) or 0),
             'starting_ledger_people':float(ledger[f'starting_{r.building}_capacity'].sum()) if f'starting_{r.building}_capacity' in ledger else float('nan'),
             'maximum_ledger_people':float(ledger[f'maximum_{r.building}_capacity'].sum()) if f'maximum_{r.building}_capacity' in ledger else float('nan')})
@@ -106,7 +108,11 @@ def check(levels,units,targets,percent_per_point=0.0,people_per_point=0.0):
     lv=levels.copy();lv['unit']=lv.building.map(units).astype(float)
     if lv.unit.isna().any():raise ValueError('Missing unit for buildings: '+', '.join(sorted(lv[lv.unit.isna()].building.unique())))
     start=(lv.starting_levels*lv.unit).groupby(lv.location_tag).sum().reindex(targets.index).fillna(0.)
-    mx=(lv.cap_at_start*lv.unit).groupby(lv.location_tag).sum().reindex(targets.index).fillna(0.)
+    # members of a cap group share one cap: it counts once per location (optional cap_group column)
+    lv['_group']=lv.cap_group.where(lv.cap_group.astype(str)!='',lv.building) if 'cap_group' in lv else lv.building
+    lv['_cap']=lv.cap_at_start*lv.unit;lv['_start']=lv.starting_levels*lv.unit
+    grp=lv.groupby(['location_tag','_group']).agg(cap=('_cap','max'),start=('_start','sum'))
+    mx=grp[['cap','start']].max(axis=1).groupby(level=0).sum().reindex(targets.index).fillna(0.)
     flat=targets.attribute_flat_people.to_numpy(float)
     mult=1+float(percent_per_point)*(targets.development.to_numpy(float) if 'development' in targets else 0.)
     dev=targets.development.to_numpy(float) if 'development' in targets else 0.

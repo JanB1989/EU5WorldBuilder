@@ -415,7 +415,8 @@ def assign_bank_ports(output, game, out):
 
 
 def share_ports(rows, wanted, shores, vanilla, game):
-    """Tiles the matching left without a port take one from a bank whose water keeps another port.
+    """Tiles the matching left without a port take one from a bank whose water keeps another port, if need be
+    through a chain of moves along neighbouring tiles.
 
     A tile's maritime presence comes only from the ports on it (and ships inside), so a portless tile breaks
     presence and makes every proximity step through it cost the full sea rate. Ports already on a river tile move
@@ -428,17 +429,33 @@ def share_ports(rows, wanted, shores, vanilla, game):
         count[water] += 1
     by_tile = shores.groupby('water_location').location_tag.apply(sorted).to_dict()
     points = DEFAULTS['rank_points']
+    portless = [t for t in sorted(by_tile) if not count[t]]
+    if not portless:
+        return {}
+    ranks, pops = settlement_ranks(game), populations(game)
+
+    def order(n):
+        return (current[n] not in by_tile, n in vanilla, points.get(ranks.get(n), 0.0), pops.get(n, 0.0), n)
     moved = {}
-    for tile in sorted(by_tile):
-        if count[tile]:
+    for tile in portless:
+        # Shortest chain of moves: a bank's port comes to this tile; if that left its own tile without a port, another
+        # bank of that tile follows, until a port comes from water that keeps another. Sea zones end a chain only
+        # when they keep a port (their other banks are unknown here).
+        came = {tile: None}; queue = deque([tile]); end = None
+        while queue and end is None:
+            water = queue.popleft()
+            for name in sorted((n for n in by_tile.get(water, []) if n in current and current[n] not in came), key=order):
+                source = current[name]
+                came[source] = (name, water)
+                if count[source] > 1:
+                    end = source; break
+                if source in by_tile:
+                    queue.append(source)
+        if end is None:
             continue
-        donors = [n for n in by_tile[tile] if n in current and count[current[n]] > 1]
-        if not donors:
-            continue
-        if not moved:
-            ranks, pops = settlement_ranks(game), populations(game)
-        name = min(donors, key=lambda n: (current[n] not in by_tile, n in vanilla, points.get(ranks.get(n), 0.0), pops.get(n, 0.0), n))
-        count[current[name]] -= 1
-        count[tile] += 1
-        current[name] = moved[name] = tile
+        count[end] -= 1; count[tile] += 1
+        while came[end] is not None:
+            name, water = came[end]
+            current[name] = moved[name] = water
+            end = water
     return moved

@@ -33,3 +33,18 @@ def test_a_short_leftover_joins_a_touching_stretch_of_the_same_river():
     nb['t000'].add('sea')
     areas = river_provinces(rows, nb, {'sea'})
     assert [len(tags) for _, tags in areas['pp_nav_short_area']] == [9]
+
+
+def test_a_tile_no_bank_can_serve_joins_a_touching_tile_of_its_state():
+    import numpy as np
+    from historical_agriculture.navigation_map import merge_portless_tiles
+    # one row: bank 5 | tile a | tile b | bank 5 again | tile c (improvable) | bank 7
+    flat = np.array([5, 0, 0, 0, 0, 5, 0, 7], np.uint32)
+    tiles = [{"state": 1, "cells": {1, 2}, "center": [1, 2]}, {"state": 1, "cells": {3, 4}, "center": [3, 4]},
+             {"state": 2, "cells": {6}, "center": [6]}]
+    out, merged = merge_portless_tiles(tiles, flat, 8, {5, 7})
+    assert merged == 1   # a and b share the one bank location, so they become one tile; c has its own bank
+    assert sorted(sorted(g["cells"]) for g in out) == [[1, 2, 3, 4], [6]]
+    # a vanilla port its sea zone cannot spare is no bank: c then has none, but no same-state tile touches it
+    out, merged = merge_portless_tiles(tiles, flat, 8, {5})
+    assert merged == 1 and len(out) == 2

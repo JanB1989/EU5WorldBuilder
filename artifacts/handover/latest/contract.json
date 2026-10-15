@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-10-15-6da7294",
-  "worldbuilder_commit": "6da7294",
-  "created": "2026-10-15T13:24:41",
+  "version": "2026-10-15-87919fa",
+  "worldbuilder_commit": "87919fa",
+  "created": "2026-10-15T13:50:24",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
@@ -175,10 +175,10 @@
     "location_attributes.csv": "cb1c13a6ef002ad21b2f2695d29d7fbbb29a264fdd83e771457e692a1f658786",
     "location_buildings.csv": "6d4ed69b050a29550d3daf1284004d8f5b10ca3915d0affe13d1ff5ddcfca311",
     "location_targets.csv": "490428d32945ca31b51a2a9a7b3bccd5ae828593822f2a7d31ca777f39ea264b",
-    "navigation/manifest.json": "157e7bf99528cb27276c2f4d8b6e4f9c82b42047b5fd77af9fcdbf9f07f6a0dd",
-    "navigation/tiles.csv": "e37e4487ce2d30fbc5394a503ba0b109526896d678c350606aef3c9dcf2551ae",
-    "navigation/edges.csv": "8e672e60240b86de270a09f6536c4e45959cd97c622f42d9b78edb7b38efe252",
-    "navigation/shores.csv": "24c92898efc178e06cff857dd097b6f3c15070fbbc9bbc5bf02404235a879cac",
+    "navigation/manifest.json": "87ab290c1ecc8f72ea3af9f266a6d5c444347a733436187f1cc0b52c18720ebd",
+    "navigation/tiles.csv": "1ba7c603ead48068801f729a9cf3acf7404f3978d55441130d411722c11cc726",
+    "navigation/edges.csv": "6ae1a38e4f9af42ffee0cc46870861a3b5efdbdc379af0401f9406d647033cd7",
+    "navigation/shores.csv": "212b30ab3b01b299fd86aece9a42326e22492989fc211303acd7fb1e252be093",
     "navigation/lost_river_effects.csv": "56317cd6d6f4b7a78e2f749c3cb929ca485157acbcc0ec954d0b1d6e96f37abb",
     "navigation/river_effect_changes.csv": "86789593495a8cf8da2aec3462e0d6d56cea637784c3f6e032daa282b3ff19e7",
     "navigation/preserved_river_pixels.csv": "d8debd332f2b677a8d5556f0a3eb9d8e6ae45320942b7e459110a4a4cdcfdf7c"

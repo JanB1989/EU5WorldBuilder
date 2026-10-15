@@ -170,3 +170,13 @@ def test_a_portless_tile_takes_a_port_from_water_that_keeps_another(tmp_path):
     rows["delta"] = ["delta", "t1"]
     shores = pd.concat([shores, pd.DataFrame([{"location_tag": "delta", "water_location": "t1"}, {"location_tag": "delta", "water_location": "t2"}])])
     assert share_ports(rows, {"farm": "t1"}, shores, {"bigtown", "hamlet", "seaport", "delta"}, game) == {"delta": "t2"}
+
+
+def test_a_portless_tile_can_pull_a_port_through_a_chain(tmp_path):
+    from historical_agriculture.navigation_ports import share_ports
+    game = _game(tmp_path)
+    # t1 has no port; its only bank (farm) is the only port of t2; hamlet borders t2 and its bay keeps bigtown
+    rows = {"farm": ["farm", "t2"], "hamlet": ["hamlet", "bay"], "bigtown": ["bigtown", "bay"]}
+    shores = pd.DataFrame([{"location_tag": "farm", "water_location": "t1"}, {"location_tag": "farm", "water_location": "t2"},
+                           {"location_tag": "hamlet", "water_location": "t2"}])
+    assert share_ports(rows, {"farm": "t2"}, shores, {"hamlet", "bigtown"}, game) == {"farm": "t1", "hamlet": "t2"}

@@ -51,6 +51,46 @@ def partition(points, width, height, target, minimum):
     return groups
 
 
+def merge_portless_tiles(tiles, flat, width, port_land):
+    """Join every passable tile that no bank location can serve with a port into a touching tile of the same state.
+
+    EU5 holds one port per location, and a channel tile's maritime presence comes only from the ports on it (plus
+    ships inside), so a tile without a port has no presence and breaks proximity along the river. Where a river has
+    fewer bank locations than tiles (Ob, Mississippi, Niger), tiles are matched to the banks that can take a port
+    (`port_land`: land colours, without vanilla ports their sea zone cannot spare); each unmatched tile joins the
+    touching same-state tile it shares the longest border with, and the matching repeats. Returns (tiles, merged)."""
+    import sys
+    sys.setrecursionlimit(max(10000, sys.getrecursionlimit()))
+    tiles = list(tiles); merged = 0; size = flat.size
+    while True:
+        owner = {p: i for i, g in enumerate(tiles) for p in g['cells']}
+        banks = [{int(flat[q]) for p in g['cells'] for q in neighbours(p, width, size)
+                  if q not in owner and int(flat[q]) in port_land} for g in tiles]
+        tile_of = {}
+
+        def augment(i, seen):
+            for bank in sorted(banks[i]):
+                if bank in seen: continue
+                seen.add(bank)
+                if bank not in tile_of or augment(tile_of[bank], seen):
+                    tile_of[bank] = i; return True
+            return False
+        unmatched = [i for i, g in enumerate(tiles) if g['state'] != 3 and not augment(i, set())]
+        gone, grown = set(), set()
+        for i in unmatched:
+            if i in grown: continue
+            touching = Counter(owner[q] for p in tiles[i]['cells'] for q in neighbours(p, width, size)
+                               if q in owner and owner[q] != i and owner[q] not in gone and tiles[owner[q]]['state'] == tiles[i]['state'])
+            if not touching: continue
+            j = max(touching, key=lambda k: (touching[k], -k))
+            tiles[j]['cells'] = set(tiles[j]['cells']) | set(tiles[i]['cells'])
+            tiles[j]['center'] = list(tiles[j]['center']) + list(tiles[i]['center'])
+            gone.add(i); grown.add(j); merged += 1
+        if not gone:
+            return tiles, merged
+        tiles = [g for i, g in enumerate(tiles) if i not in gone]
+
+
 def pair_set(a):
     pairs = set()
     for x, y in [(a[:-1], a[1:]), (a[:, :-1], a[:, 1:])]:
@@ -349,6 +389,17 @@ def export(config, evidence, river):
         if not reject: break
         omitted["land_connectivity_guard_tiles"] += len(reject)
         active = [g for i, g in enumerate(active) if i not in reject]
+    from .navigation_ports import DEFAULTS as PORT_DEFAULTS, populations, settlement_ranks
+    ranks, pops = settlement_ranks(game), populations(game)
+    by_sea = defaultdict(list)
+    for r in source(md+"ports.csv").splitlines()[1:]:
+        if r.count(';') >= 2 and r.split(';')[0] in colors: by_sea[r.split(';')[1]].append(r.split(';')[0])
+    # a vanilla port can move onto a channel only while its sea zone keeps another; the biggest settlement stays
+    # (navigation_ports.share_ports moves the smallest first)
+    fixed_ports = {colors[max(names_, key=lambda n: (PORT_DEFAULTS['rank_points'].get(ranks.get(n), 0.0), pops.get(n, 0.0), n))]
+                   for names_ in by_sea.values()}
+    active, merged = merge_portless_tiles(active, flat, width, land - fixed_ports)
+    omitted["portless_tiles_merged"] = merged
     # Stable ordering and tags do not depend on hash/set iteration order.
     active.sort(key=lambda g: (min(g["center"]), g["state"]))
     next_color = 0x010001

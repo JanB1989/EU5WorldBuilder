@@ -17,7 +17,8 @@ Natural harbor suitability follows vanilla, where every port carries a value, mo
 and important river ports reach 0.25-0.5 (Bremen, Nantes, Seville): a tier by the largest adjacent
 discharge (``harbor_tiers``) plus a settlement bonus (``harbor_rank_bonus``), capped at ``harbor_max``.
 An existing higher value is kept.
-Vanilla ports, including those the raster relocated onto a river, are never removed.
+Vanilla ports, including those the raster relocated onto a river, are never removed; one moves onto a river tile
+only when that tile would otherwise have no port and its own water keeps another (`share_ports`).
 """
 from collections import defaultdict, deque
 import math
@@ -312,7 +313,8 @@ def assign_bank_ports(output, game, out):
     The engine treats land next to a passable (`narrows`) tile as coastal and logs every coastal location without
     a port and every tile without one. Each location can hold one port, so banks are matched to tiles
     (augmenting paths over the bank-tile graph, starting from the emitted port tiles); banks left over keep their
-    emitted tile. Vanilla ports stay where they are. Returns counts, including the tiles no bank can serve."""
+    emitted tile. Tiles still without a port then take one from water that keeps another (`share_ports`), vanilla
+    ports included. Returns counts, including the tiles no bank can serve."""
     import numpy as np
     from PIL import Image
 
@@ -361,6 +363,8 @@ def assign_bank_ports(output, game, out):
             tile = emitted if emitted in adjacent.get(bank, []) else max(
                 adjacent[bank], key=lambda w: int(shores[(shores.location_tag == bank) & (shores.water_location == w)].shore_pixels.sum()))
         wanted[bank] = tile
+    shared = share_ports(rows, wanted, shores, vanilla, game)
+    wanted.update(shared)
 
     # Coordinates: keep an emitted row that already sits on the wanted tile, else the border pixel nearest the
     # middle of the bank's shore on that tile.
@@ -406,4 +410,35 @@ def assign_bank_ports(output, game, out):
     served = {row[1] for row in final.values()}
     land_touching = set(shores.water_location)
     return {'bank_ports': len(banks), 'moved_or_added': len(placed), 'unplaced': sorted(set(need) - set(placed)),
+            'shared_from_other_water': {n: f'{rows[n][1]} -> {t}' for n, t in sorted(shared.items()) if n in placed},
             'tiles_without_port': len(land_touching - served)}
+
+
+def share_ports(rows, wanted, shores, vanilla, game):
+    """Tiles the matching left without a port take one from a bank whose water keeps another port.
+
+    A tile's maritime presence comes only from the ports on it (and ships inside), so a portless tile breaks
+    presence and makes every proximity step through it cost the full sea rate. Ports already on a river tile move
+    first (river ports before vanilla ones), then vanilla ports from their sea zone; the smallest settlement first.
+    No water loses its last port and no location gains or loses a port. Returns {location: new tile}."""
+    current = {name: row[1] for name, row in rows.items()}
+    current.update(wanted)
+    count = defaultdict(int)
+    for water in current.values():
+        count[water] += 1
+    by_tile = shores.groupby('water_location').location_tag.apply(sorted).to_dict()
+    points = DEFAULTS['rank_points']
+    moved = {}
+    for tile in sorted(by_tile):
+        if count[tile]:
+            continue
+        donors = [n for n in by_tile[tile] if n in current and count[current[n]] > 1]
+        if not donors:
+            continue
+        if not moved:
+            ranks, pops = settlement_ranks(game), populations(game)
+        name = min(donors, key=lambda n: (current[n] not in by_tile, n in vanilla, points.get(ranks.get(n), 0.0), pops.get(n, 0.0), n))
+        count[current[name]] -= 1
+        count[tile] += 1
+        current[name] = moved[name] = tile
+    return moved

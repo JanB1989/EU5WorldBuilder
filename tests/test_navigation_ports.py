@@ -153,3 +153,20 @@ def test_start_setup_follows_the_1337_bookmark(tmp_path):
     (game/"main_menu/setup/1337").mkdir(parents=True)
     (game/"main_menu/setup/1337/07_cities_and_buildings.txt").write_text("\tbigtown = { rank = city }\n")
     assert settlement_ranks(game) == {"bigtown": "city"}
+
+
+def test_a_portless_tile_takes_a_port_from_water_that_keeps_another(tmp_path):
+    from historical_agriculture.navigation_ports import share_ports
+    game = _game(tmp_path)   # bigtown is a city, hamlet the smaller settlement
+    rows = {name: [name, water] for name, water in [("bigtown", "bay"), ("hamlet", "bay"), ("seaport", "ocean"), ("farm", "t1")]}
+    shores = pd.DataFrame([
+        {"location_tag": "bigtown", "water_location": "t2"}, {"location_tag": "hamlet", "water_location": "t2"},
+        {"location_tag": "seaport", "water_location": "t3"},   # ocean has no other port: seaport stays
+        {"location_tag": "farm", "water_location": "t1"},
+    ])
+    moved = share_ports(rows, {"farm": "t1"}, shores, {"bigtown", "hamlet", "seaport"}, game)
+    assert moved == {"hamlet": "t2"}   # the smaller vanilla port moves, the bay keeps the city port
+    # a vanilla port the raster already put on a shared river tile moves before any sea port
+    rows["delta"] = ["delta", "t1"]
+    shores = pd.concat([shores, pd.DataFrame([{"location_tag": "delta", "water_location": "t1"}, {"location_tag": "delta", "water_location": "t2"}])])
+    assert share_ports(rows, {"farm": "t1"}, shores, {"bigtown", "hamlet", "seaport", "delta"}, game) == {"delta": "t2"}

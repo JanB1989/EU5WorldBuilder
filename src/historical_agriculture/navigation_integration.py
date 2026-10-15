@@ -71,10 +71,10 @@ def emit(output,game,settings=None):
     rows=pd.read_csv(out/'tiles.csv')
     loc=['l_english:', ' pp_navigation_waterways: "River Waterways"', ' pp_navigation_subcontinent: "River Waterways"', ' pp_navigation_region: "River Waterways"']
     for r in rows.itertuples():loc.append(f' {r.location}: "{r.near_location.replace("_"," ").title()} Waterway"')
-    for region,g in rows.groupby('region'):
-        label=region.replace('_',' ').title()
-        loc.append(f' pp_nav_{region}_area: "{label} Waterways"')
-        for i in range((len(g)+11)//12):loc.append(f' pp_nav_{region}_{i}_province: "{label} Waterways"')
+    # one area per river, named after it; its provinces after the main bank of each stretch
+    for area,g in rows.groupby('area'):
+        loc.append(f' {area}: "{re.sub(r" *[(].*?[)]","",str(g.river.iloc[0])).strip()}"')
+    for province,g in rows.groupby('province'):loc.append(f' {province}: "{g.province_name.iloc[0]}"')
     p=Path(output)/'main_menu/localization/english/pp_navigation_geography_l_english.yml';p.parent.mkdir(parents=True,exist_ok=True)
     p.write_text('\n'.join(loc)+'\n',encoding='utf-8-sig')
     return {'tiles':manifest['tiles'],'edges':manifest['edges'],'river_ports':port_stats}

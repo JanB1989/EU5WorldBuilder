@@ -59,6 +59,95 @@ def pair_set(a):
     return pairs
 
 
+PROVINCE_TILES = 8      # target channel tiles per province (the median vanilla sea province holds 8 sea zones)
+PROVINCE_MAX = 12
+
+
+def river_slug(name):
+    return re.sub(r'[^a-z0-9]+', '_', re.sub(r'\(.*?\)', '', name).lower()).strip('_')[:40] or 'river'
+
+
+def river_provinces(tile_meta, neighbours_of, sea_tags):
+    """Group the channel tiles into one area per river and provinces of connected stretches of that river.
+
+    A tile belongs to its main reach (the reach of most of its pixel rows). Each connected run of one river is cut
+    from its mouth (fewest channel steps to the open water) upstream into provinces of up to PROVINCE_TILES tiles that
+    touch each other; a stretch shorter than 3 tiles joins a touching one of the same river while that stays within
+    PROVINCE_MAX. Writes 'area', 'province' and 'province_name' into every row; returns {area: [(province, tags)]}."""
+    import heapq
+    river = {r['location']: r['river'] for r in tile_meta}
+    tiles = set(river)
+    nb = {t: {n for n in neighbours_of.get(t, ()) if n in tiles} for t in tiles}
+    hops = {t: 0 for t in tiles if neighbours_of.get(t, set()) & sea_tags}
+    queue = deque(hops)
+    while queue:
+        a = queue.popleft()
+        for b in nb[a]:
+            if b not in hops:
+                hops[b] = hops[a] + 1
+                queue.append(b)
+    far = 10**6
+    near = {r['location']: r['near_location'] for r in tile_meta}
+    slugs, groups = {}, defaultdict(list)
+    for name in sorted(set(river.values())):
+        slug = base = river_slug(name)
+        k = 2
+        while slug in slugs.values():
+            slug = f'{base}_{k}'; k += 1
+        slugs[name] = slug
+    for name in sorted(slugs):
+        members = {t for t in tiles if river[t] == name}
+        pending = set(members)
+        while pending:
+            # one connected run of this river
+            seed = min(pending, key=lambda x: (hops.get(x, far), x))
+            run, stack = {seed}, [seed]
+            while stack:
+                for b in nb[stack.pop()] & pending:
+                    if b not in run:
+                        run.add(b); stack.append(b)
+            pending -= run
+            free = set(run)
+            while free:
+                start = min(free, key=lambda x: (hops.get(x, far), x))
+                group, heap = [], [(hops.get(start, far), start)]
+                seen = {start}
+                while heap and len(group) < PROVINCE_TILES:
+                    _, x = heapq.heappop(heap)
+                    group.append(x)
+                    for b in sorted(nb[x] & free - seen):
+                        seen.add(b); heapq.heappush(heap, (hops.get(b, far), b))
+                free -= set(group)
+                groups[name].append(group)
+    # small stretches join a touching stretch of the same river
+    for name, gs in groups.items():
+        changed = True
+        while changed:
+            changed = False
+            for g in sorted(gs, key=len):
+                if len(g) >= 3:
+                    break
+                options = [h for h in gs if h is not g and len(h) + len(g) <= PROVINCE_MAX
+                           and any(nb[x] & set(h) for x in g)]
+                if options:
+                    min(options, key=len).extend(g); gs.remove(g); changed = True
+                    break
+    out = {}
+    row_of = {r['location']: r for r in tile_meta}
+    for name, gs in sorted(groups.items()):
+        area = f'pp_nav_{slugs[name]}_area'
+        gs.sort(key=lambda g: (min(hops.get(x, far) for x in g), min(g)))
+        out[area] = []
+        for i, g in enumerate(gs):
+            province = f'pp_nav_{slugs[name]}_{i}_province'
+            bank = Counter(near[x] for x in g).most_common(1)[0][0]
+            out[area].append((province, sorted(g)))
+            for x in g:
+                row_of[x].update(river=name, area=area, province=province,
+                                 province_name=bank.replace('_', ' ').title() + ' Reach')
+    return out
+
+
 def append_list(text, key, names):
     match = re.search(r"\b"+key+r"\s*=\s*\{", text)
     addition = "\n\t"+" ".join(names)+"\n"
@@ -277,7 +366,9 @@ def export(config, evidence, river):
         source_land = known.most_common(1)[0][0] if known else names[int(flat[next(iter(g["cells"]))])]
         region = str(base_info.loc[source_land, "region"]) if source_land in base_info.index else "pp_navigation_other"
         rows = pixel_rows.loc[g["center"]]
+        reaches = Counter(m for ev in rows.evidence for m in re.findall(r'reach:([^:;]+)', str(ev)))
         tile_meta.append({"location": tag, "state": STATE_NAMES[g["state"]], "pixels": len(g["cells"]),
+                          "river": reaches.most_common(1)[0][0] if reaches else source_land,
                           "region": region, "near_location": source_land,
                           "mean_discharge_m3_s": float(rows.q_mean_m3_s.median()),
                           "low_discharge_m3_s": float(rows.q_min_m3_s.median()),
@@ -445,14 +536,14 @@ def export(config, evidence, river):
     cross_rows=source(md+"adjacencies.csv").rstrip().splitlines()
     for _dist,a,b,through,x,y,bx,by in sorted(crossings.values()):cross_rows.append(f"{a};{b};sea;{through};{x};{y};{bx};{by};River navigation crossing")
     write(md+"adjacencies.csv",'\n'.join(cross_rows)+'\n')
-    # Separate water-only hierarchy, appended after every vanilla location.
-    areas=defaultdict(list)
-    for row in tile_meta: areas[row['region']].append(row['location'])
-    area_names={region:'pp_nav_'+region+'_area' for region in areas}
+    # Separate water-only hierarchy, appended after every vanilla location: one area per river, provinces of connected
+    # stretches of that river (river_provinces), so a fleet patrolling a province projects onto one stretch of one river.
+    neighbours_of={names[c]:{names[d] for d in ds if d in names} for c,ds in adjacent.items()}
+    areas=river_provinces(tile_meta,neighbours_of,{names[c] for c in seas})
     blocks=['\npp_navigation_waterways = { pp_navigation_subcontinent = { pp_navigation_region = {']
-    for region,tags in sorted(areas.items()):
-        blocks.append(area_names[region]+' = {')
-        for start in range(0,len(tags),12):blocks.append(f' pp_nav_{region}_{start//12}_province = {{ '+ ' '.join(tags[start:start+12])+' }')
+    for area,provinces in sorted(areas.items()):
+        blocks.append(area+' = {')
+        for province,tags in provinces:blocks.append(f' {province} = {{ '+' '.join(tags)+' }')
         blocks.append('}')
     blocks.append('} } }')
     write(md+'definitions.txt',source(md+'definitions.txt')+'\n'.join(blocks)+'\n')
@@ -471,8 +562,9 @@ def export(config, evidence, river):
         regions=set(base_info.index[base_info.index.isin([])])
         for field in ['region','area','province']:
             if field in base_info:regions.update(base_info.loc[base_info[field].isin(tokens),'region'])
-        add=[area_names[r] for r in sorted(regions & areas.keys())]
-        if add:write('main_menu/setup/templates/'+p.name,append_list(text,'discovered_areas',add))
+        # the river provinces with a tile in a known region (river_provinces: one stretch of one river each)
+        add=sorted({r['province'] for r in tile_meta if r['region'] in regions})
+        if add:write('main_menu/setup/templates/'+p.name,append_list(text,'discovered_provinces',add))
     rgb=np.stack(((after>>16)&255,(after>>8)&255,after&255),axis=-1).astype(np.uint8)
     path=mod/md/'locations.png';path.parent.mkdir(parents=True,exist_ok=True)
     Image.fromarray(rgb).save(path,compress_level=7);written.append(md+'locations.png')

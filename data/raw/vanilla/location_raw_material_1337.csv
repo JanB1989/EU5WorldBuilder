@@ -157,7 +157,7 @@ afsin,horses
 afso,horses
 aga,livestock
 agadem,alum
-agadez,livestock
+agadez,camels
 agadir,wheat
 agaes,legumes
 agai_ticutta,fur
@@ -551,7 +551,7 @@ alkalawa,rice
 alkhan_kala,livestock
 alkmaar,fish
 allagash,fur
-allakaket,fur
+allakaket,lumber
 allegheny,coal
 allegre,wool
 allingsas,millet
@@ -610,7 +610,7 @@ alvdal,lumber
 alvito,beeswax
 alvsby,wild_game
 alwar,wild_game
-alxa,livestock
+alxa,camels
 aly_kyuyel,wild_game
 alyanbulag,millet
 alymdya,wild_game
@@ -1226,7 +1226,7 @@ assens,wheat
 assereniet,maize
 assinie,pearls
 assisi,fruit
-assode,livestock
+assode,camels
 assonet,stone
 assorodus,legumes
 assosa,goods_gold
@@ -1518,7 +1518,7 @@ baganuur,wool
 bagayevskaya,wool
 bagdarin,fur
 bage,wheat
-bagh,livestock
+bagh,camels
 bagh_iran,fiber_crops
 bagh_malek,wheat
 baghai,wool
@@ -1878,7 +1878,7 @@ barskoon,tin
 barten,fur
 bartin,fish
 baru,millet
-baruga,fish
+baruga,lumber
 barulo,lumber
 barun_xiabaer,wild_game
 barundji,copper
@@ -1987,7 +1987,7 @@ bayanday,fish
 bayangol,wild_game
 bayankhot,millet
 bayannur,millet
-bayannurhong,livestock
+bayannurhong,camels
 bayantsagaan,livestock
 bayaquitiri,copper
 bayat,livestock
@@ -2173,7 +2173,7 @@ bergen,fish
 bergen_zoom,fish
 bergerac,wine
 bergheim,alum
-berlanga,horses
+berlanga,beeswax
 berleburg,stone
 berlin,fiber_crops
 bermuda,fish
@@ -2202,7 +2202,7 @@ besni,lumber
 besteiros,lumber
 bestyakh,fur
 betanzos,lumber
-beteta,livestock
+beteta,wild_game
 bethune,coal
 betroka,lumber
 betsiamites,wild_game
@@ -2339,7 +2339,7 @@ biram,rice
 birampur,wheat
 birao,wild_game
 birch_creek,wild_game
-birches,fur
+birches,lumber
 birecik,wheat
 birgi,olives
 biria,fiber_crops
@@ -2617,7 +2617,7 @@ boumalne_dades,stone
 bouna,goods_gold
 boundiali,millet
 bourbon,livestock
-bourem,livestock
+bourem,camels
 bourg_en_bresse,legumes
 bourganeuf,livestock
 bourges,wheat
@@ -2689,7 +2689,7 @@ brie_comte_robert,wine
 brienne,fruit
 brig,millet
 brignoles,fruit
-brihuega,legumes
+brihuega,livestock
 brilon,lead
 brin_navolok,lumber
 brindisi,fruit
@@ -2851,7 +2851,7 @@ bursol,salt
 burugardi,fiber_crops
 burunda,lumber
 burunge,livestock
-buruwai,fish
+buruwai,lumber
 bury,wheat
 buryeong,goods_gold
 buryn,millet
@@ -2961,7 +2961,7 @@ calamari,salt
 calang,fish
 calatanazor,livestock
 calatayud,lead
-calatrava,fruit
+calatrava,wheat
 calau,wild_game
 calbe,millet
 calcasieu,lumber
@@ -3183,7 +3183,7 @@ cayguani,salt
 cayubaba,wild_game
 cayuvava,lumber
 cazombo,wild_game
-cazorla,fruit
+cazorla,wild_game
 ccantumarcani,silver
 ce_eiinox,stone
 ce_vaq,fish
@@ -3807,7 +3807,7 @@ cirebon,clay
 cirencester,livestock
 cittacastello,dyes
 cittaducale,wool
-ciudad_real,wheat
+ciudad_real,fruit
 ciudad_rodrigo,wheat
 ciudadela_de_menorca,fish
 cividale,wine
@@ -4331,7 +4331,7 @@ deline,lumber
 delitzsch,beeswax
 delmenhorst,legumes
 deloraine,gems
-deloy_chet,fur
+deloy_chet,lumber
 deloy_ges,wild_game
 deltana,fur
 delyankir,silver
@@ -4349,7 +4349,7 @@ demon,millet
 demotica,horses
 demyanovo,livestock
 den_terek,millet
-denali,wild_game
+denali,stone
 denbigh,clay
 dengfeng,livestock
 denia,fiber_crops
@@ -4918,7 +4918,7 @@ el_buwit,sugar
 el_darad,fish
 el_dhere,wild_game
 el_eleila,cotton
-el_escorial,stone
+el_escorial,iron
 el_fahs,wheat
 el_gadarif,ivory
 el_golea,wheat
@@ -5080,7 +5080,7 @@ esna,sugar
 eso,stone
 espakeh,sand
 espe,wheat
-espiel,olives
+espiel,livestock
 espopolames,wild_game
 esquatak,fruit
 esquegua,lumber
@@ -5550,7 +5550,7 @@ gaur,wheat
 gavrilovskoye,wild_game
 gawakomitigweia,fiber_crops
 gawilgarh,cotton
-gaxun_gobi,livestock
+gaxun_gobi,camels
 gaya,lumber
 gaya_n,iron
 gayardilt,wild_game
@@ -5752,7 +5752,7 @@ gondokoro,wild_game
 gonen,wheat
 gonga_chode,wool
 gongan,clay
-gonganbao,livestock
+gonganbao,camels
 gongcheng,fur
 gongjiang_jurchen,medicaments
 gongju,pepper
@@ -5897,8 +5897,8 @@ guacata,lumber
 guacayakima,cotton
 guachichil,silver
 guachoyo,legumes
-guadalajara,livestock
-guadalupe,livestock
+guadalajara,legumes
+guadalupe,wild_game
 guadix,saffron
 guadual,lumber
 guaduas,cocoa
@@ -7247,7 +7247,7 @@ jabiyan,legumes
 jableh,wheat
 jaboticabal,lumber
 jaburrara,wild_game
-jaca,wool
+jaca,wild_game
 jacarei,lumber
 jachal,livestock
 jachymov,lumber
@@ -8545,7 +8545,7 @@ kharyyalakh,wild_game
 khash,wild_game
 khash_sistan,legumes
 khaspur,ivory
-khatanbulag,livestock
+khatanbulag,camels
 khatas,fish
 khategaon,millet
 khatgal,iron
@@ -8709,7 +8709,7 @@ kilemba,fruit
 kilenge,wheat
 kileqollo,maize
 kilis,wine
-kilivila,fish
+kilivila,lumber
 kilkenny,stone
 kilkis,clay
 killarney,wool
@@ -8886,7 +8886,7 @@ klondike,fur
 kluane,fur
 kluczbork,lumber
 kluskapewiktuk,fish
-klutina,fur
+klutina,lumber
 klyuchi,wild_game
 kmito,wild_game
 knin,fur
@@ -9009,7 +9009,7 @@ komshecheh,wool
 kon_klor,lumber
 kon_tengiz,wild_game
 kon_tum,lumber
-kona,legumes
+kona,stone
 konbudj,millet
 konch,wheat
 konchalyt,coal
@@ -9310,7 +9310,7 @@ kudymkar,fur
 kuelap,alum
 kuemgo,livestock
 kuenga,fur
-kuerchu,livestock
+kuerchu,camels
 kueshi,clay
 kufa,millet
 kufstein,wool
@@ -9754,7 +9754,7 @@ larissa,horses
 larnaca,silk
 larrakia,fish
 las_khorey,incense
-las_navas,lumber
+las_navas,wild_game
 lash_joveyn,fruit
 lashio,lumber
 lasjerd,fruit
@@ -9854,7 +9854,7 @@ lensk,wild_game
 lentekhi,lumber
 leo,livestock
 leoben,iron
-leon,wheat
+leon,beeswax
 leopoldina,lumber
 leping,rice
 leping_pingding,wool
@@ -10448,7 +10448,7 @@ madaun,wild_game
 madawaska,fur
 maddela,rice
 madembe,lumber
-maden,fish
+maden,lumber
 madgaon,fruit
 madhubani,elephants
 madi,ivory
@@ -10461,7 +10461,7 @@ madinat_far,legumes
 madjul,wool
 madoi,wild_game
 madras,pearls
-madrid,iron
+madrid,stone
 madugula,incense
 maduna,livestock
 madurai,silk
@@ -11000,7 +11000,7 @@ matanda_aChiwawa,goods_gold
 matandang_nayon,fish
 matane,lumber
 matano,millet
-matanuska,wild_game
+matanuska,stone
 matape,fiber_crops
 matapeake,fish
 matapedia,fish
@@ -11341,7 +11341,7 @@ meulaboh,goods_gold
 mevouillon,olives
 mewuk,fish
 mextiacan,wild_game
-meyah,fish
+meyah,lumber
 meyami,fruit
 meybod,wild_game
 meymand,fiber_crops
@@ -13150,7 +13150,7 @@ ohringen,wheat
 oiampi,lumber
 oimiakon,fur
 oitylo,olives
-oiyin_korken,livestock
+oiyin_korken,camels
 okaisipi,fur
 okak,fish
 okam,fish
@@ -13633,8 +13633,8 @@ palatka,fur
 palazzolo,fruit
 palekh,fur
 palembang,livestock
-palencia,wheat
-palenzuela,legumes
+palencia,legumes
+palenzuela,wheat
 palermo,sugar
 palestrina,wine
 palghat,pepper
@@ -13885,7 +13885,7 @@ pecunktuk,wild_game
 peddapalli,dyes
 pedersore,fish
 pedraza,horses
-pedroche,livestock
+pedroche,wild_game
 peedee,cotton
 peekin,goods_gold
 peerapper,fish
@@ -14188,7 +14188,7 @@ pivn_man_antu,marble
 pixian,tea
 pixipixi,beeswax
 placentia,wild_game
-plasencia,iron
+plasencia,horses
 plauen,pearls
 plavsk,lumber
 plenita,cotton
@@ -14608,7 +14608,7 @@ qiaoxian,medicaments
 qichun,rice
 qidaban,millet
 qidong,wheat
-qietai,livestock
+qietai,camels
 qihe,wheat
 qijiang,wild_game
 qikiqtagruk,wild_game
@@ -14847,7 +14847,7 @@ ramnagar_bihar,elephants
 ramnicu_sarat,millet
 ramnicu_valcea,salt
 rampa,livestock
-rampart,wild_game
+rampart,stone
 rampur_boalla,clay
 rampura,stone
 ramree,rice
@@ -15016,7 +15016,7 @@ rezoky,cotton
 rharhabe,livestock
 rheine,lumber
 rho,livestock
-riano,beeswax
+riano,wild_game
 riantana,legumes
 ribadavia,clay
 ribat_ushturan,wild_game
@@ -16033,7 +16033,7 @@ sharanga,lumber
 sharda,wool
 shardonem,lumber
 sharga_uul,wool
-shargyn_gobi,livestock
+shargyn_gobi,camels
 shari,millet
 sharjah,livestock
 sharka,livestock
@@ -16660,7 +16660,7 @@ sordavala,fiber_crops
 sorgono,fur
 sorgun,livestock
 sori,livestock
-soria,beeswax
+soria,horses
 sorin_nuur,wool
 sorkam,stone
 soroca,lumber
@@ -17006,7 +17006,7 @@ suruc,wine
 surui_paiter,fruit
 susa,marble
 susaco,fish
-susitna,fur
+susitna,lumber
 susoh,iron
 susong,fish
 susquehannock,fruit
@@ -17917,7 +17917,7 @@ timbira,lumber
 timbisha,wild_game
 timbo,millet
 timbu,livestock
-timbuktu,livestock
+timbuktu,camels
 timergara,livestock
 timimoun,fruit
 timisoara,livestock
@@ -18116,7 +18116,7 @@ tonameca,dyes
 tonami,saltpeter
 tonbridge,wool
 tonder,sand
-tondibi,livestock
+tondibi,camels
 tondikandia,livestock
 tondo,rice
 tondzaosha,wild_game
@@ -19045,7 +19045,7 @@ valmiera,legumes
 valparaiso,lumber
 valpei,lumber
 valuyki,wheat
-valverde,horses
+valverde,iron
 vamar,beeswax
 vamizi,fish
 van,wool
@@ -19605,7 +19605,7 @@ wawaskesiwisakahikan,fur
 wawassan,clay
 wawiyastan,lumber
 waxhaw,fruit
-waxxari,livestock
+waxxari,camels
 wayagamac,fur
 wayampi,clay
 wayanad,pepper
@@ -20628,7 +20628,7 @@ zaci,cocoa
 zadar,salt
 zadian,fruit
 zafra,wheat
-zag_suujiyn_gobi,livestock
+zag_suujiyn_gobi,camels
 zagan,wheat
 zagare,clay
 zaghouan,livestock
@@ -20758,12 +20758,12 @@ zharkol,lumber
 zharzhan,lumber
 zhatai,wild_game
 zhaushikumtobe,horses
-zhavklant_khairkhan,livestock
+zhavklant_khairkhan,camels
 zhebariki_khaya,lumber
 zhecheng,livestock
 zhehai,stone
 zhehong,lumber
-zhekdeliq,livestock
+zhekdeliq,camels
 zheledian,lumber
 zhelezin,livestock
 zhemgang,wool

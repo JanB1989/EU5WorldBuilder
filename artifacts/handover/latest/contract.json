@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-10-15-97a932e",
-  "worldbuilder_commit": "97a932e",
-  "created": "2026-10-15T12:03:34",
+  "version": "2026-10-15-73032d5",
+  "worldbuilder_commit": "73032d5",
+  "created": "2026-10-15T13:03:20",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
@@ -87,10 +87,10 @@
   ],
   "building_fit": {
     "starting": {
-      "r2": 0.8108452564351576,
-      "median_absolute_percentage_error": 30.360103975857953,
-      "within_25_percent": 41.63595462595128,
-      "mean_bias": 5418.271583289149
+      "r2": 0.8106563648790922,
+      "median_absolute_percentage_error": 30.458389673067753,
+      "within_25_percent": 41.583305413296316,
+      "mean_bias": 5455.84397595655
     },
     "maximum": {
       "r2": -0.7414528862491254,
@@ -125,11 +125,11 @@
     "rows_per_class_value_mean": 13.551020408163266,
     "rows_per_class_value_max": 24,
     "median_r2_viable_heldout": 0.4303404151127469,
-    "median_r2_rgo_heldout": 0.4163542040597189,
-    "mean_mae_rgo_heldout": 0.1522739495011361,
-    "rgo_below_floor_share": 0.19102307840415073,
-    "rgo_nonviable_share": 0.09667784466156894,
-    "floor_list": 1871,
+    "median_r2_rgo_heldout": 0.4161084904565199,
+    "mean_mae_rgo_heldout": 0.15218286274021048,
+    "rgo_below_floor_share": 0.19068709564869188,
+    "rgo_nonviable_share": 0.09670986624014485,
+    "floor_list": 1864,
     "priors_overruled": 79,
     "sign_table_violations": 0
   },
@@ -140,23 +140,23 @@
   },
   "self_check": {
     "starting": {
-      "r2": 0.8108452564351576,
-      "median_absolute_percentage_error": 30.360103975857953,
-      "within_25_percent": 41.63595462595128,
-      "mean_bias": 5418.271583289149,
-      "total_model": 945715550.0,
+      "r2": 0.8106563648790922,
+      "median_absolute_percentage_error": 30.458389673067753,
+      "within_25_percent": 41.583305413296316,
+      "mean_bias": 5455.84397595655,
+      "total_model": 946500550.0,
       "total_target": 832511601.8103398
     },
     "maximum": {
-      "r2": 0.4423972750262062,
-      "median_absolute_percentage_error": 42.61543148477464,
-      "within_25_percent": 33.68592351505289,
-      "mean_bias": 28271.885628022897,
-      "total_model": 2887160550.0,
+      "r2": 0.4421601006280321,
+      "median_absolute_percentage_error": 42.71078220694941,
+      "within_25_percent": 33.63806059445748,
+      "mean_bias": 28309.458020690297,
+      "total_model": 2887945550.0,
       "total_target": 2296476043.5737176
     },
-    "starting_model_total": 945715550.0,
-    "maximum_model_total": 2887160550.0,
+    "starting_model_total": 946500550.0,
+    "maximum_model_total": 2887945550.0,
     "percent_per_point": 0.0,
     "people_per_point": 1000.0
   },
@@ -165,17 +165,17 @@
     "building_types": 9,
     "location_buildings": 120525,
     "locations": 20893,
-    "goods_floor": 1871,
+    "goods_floor": 1864,
     "location_attributes": 20893
   },
   "files": {
-    "attribute_rows.csv": "68b5e960ced8126e6d863501be37d80686ea5983eb14eb5c887441945ec25c4c",
+    "attribute_rows.csv": "2073094e9f226ce14e6f3641b199a9b6d4caeb83ab8067674e67e5cf3d9be1a4",
     "building_types.csv": "0fbfc6998a917dd5563e1f143f177ca1ed1732c38423d4806bad9ce210638d20",
-    "goods_floor.csv": "1b2112cc3acd774897d1deaea71fcb5b2b1a455e96e9d8b6b728c254f61eb62a",
+    "goods_floor.csv": "670a51307832939af1fa42a30b29ae3562221e5673dc1c69e1cc1ebaaaccb628",
     "location_attributes.csv": "cb1c13a6ef002ad21b2f2695d29d7fbbb29a264fdd83e771457e692a1f658786",
     "location_buildings.csv": "6d4ed69b050a29550d3daf1284004d8f5b10ca3915d0affe13d1ff5ddcfca311",
-    "location_targets.csv": "93696850c0e0fcb1a27130fe0ae082b5fcf84bec63fc190d09f153ff32808da0",
-    "navigation/manifest.json": "ebe9001ea3cec412f2e7aa574a1ef7bf6cc023ebecf08e67cf3eab295a1b9d9e",
+    "location_targets.csv": "490428d32945ca31b51a2a9a7b3bccd5ae828593822f2a7d31ca777f39ea264b",
+    "navigation/manifest.json": "157e7bf99528cb27276c2f4d8b6e4f9c82b42047b5fd77af9fcdbf9f07f6a0dd",
     "navigation/tiles.csv": "e37e4487ce2d30fbc5394a503ba0b109526896d678c350606aef3c9dcf2551ae",
     "navigation/edges.csv": "8e672e60240b86de270a09f6536c4e45959cd97c622f42d9b78edb7b38efe252",
     "navigation/shores.csv": "24c92898efc178e06cff857dd097b6f3c15070fbbc9bbc5bf02404235a879cac",

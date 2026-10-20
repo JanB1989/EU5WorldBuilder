@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-10-15-87919fa",
-  "worldbuilder_commit": "87919fa",
-  "created": "2026-10-15T13:50:24",
+  "version": "2026-10-20-1c65a62",
+  "worldbuilder_commit": "1c65a62",
+  "created": "2026-10-20T18:49:24",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
@@ -35,68 +35,68 @@
     {
       "target": "natural_capacity",
       "evaluation": "full_fit",
-      "r2": 0.43244806358562826,
-      "mae": 7786.532479946982,
-      "rmse": 10955.983626490695,
+      "r2": 0.43244806276080217,
+      "mae": 7786.532473421355,
+      "rmse": 10955.983626429423,
       "median_absolute_percentage_error": 26.413462983654114,
       "p90_absolute_percentage_error": 91.90922166698603,
       "within_20_percent": 40.22399846838654,
       "within_50_percent": 77.37519743454746,
       "within_factor_two": 80.73996075240511,
-      "mean_bias": -4252.3919118614995
+      "mean_bias": -4252.391918387128
     },
     {
       "target": "natural_capacity",
       "evaluation": "region_heldout",
-      "r2": 0.3476749685393994,
-      "mae": 8577.071714622365,
-      "rmse": 11745.745635971576,
+      "r2": 0.3476749675987143,
+      "mae": 8577.071708096739,
+      "rmse": 11745.745635839787,
       "median_absolute_percentage_error": 29.815005657835876,
       "p90_absolute_percentage_error": 100.0,
       "within_20_percent": 35.064375628200835,
       "within_50_percent": 72.95266357153113,
       "within_factor_two": 76.60460441296128,
-      "mean_bias": -4605.026765640277
+      "mean_bias": -4605.026772165905
     },
     {
       "target": "maximum_capacity",
       "evaluation": "full_fit",
-      "r2": 0.2717359968718527,
-      "mae": 45738.08218182081,
-      "rmse": 82056.02853866814,
+      "r2": 0.2717359967609927,
+      "mae": 45738.08218722592,
+      "rmse": 82056.02853864947,
       "median_absolute_percentage_error": 34.920767707373486,
       "p90_absolute_percentage_error": 88.38716142648222,
       "within_20_percent": 31.623031637390515,
       "within_50_percent": 65.89288278370746,
       "within_factor_two": 70.26276743406883,
-      "mean_bias": -34975.142084608124
+      "mean_bias": -34975.142091133755
     },
     {
       "target": "maximum_capacity",
       "evaluation": "region_heldout",
-      "r2": 0.20914870677611264,
-      "mae": 48915.62766605319,
-      "rmse": 85509.32655957302,
+      "r2": 0.209148706663429,
+      "mae": 48915.62765952756,
+      "rmse": 85509.3265591371,
       "median_absolute_percentage_error": 39.3071496160819,
       "p90_absolute_percentage_error": 100.0,
       "within_20_percent": 28.03331259273441,
       "within_50_percent": 60.79069544823626,
       "within_factor_two": 65.5386971713014,
-      "mean_bias": -35779.583763639384
+      "mean_bias": -35779.58377016501
     }
   ],
   "building_fit": {
     "starting": {
-      "r2": 0.8106563648790922,
-      "median_absolute_percentage_error": 30.458389673067753,
-      "within_25_percent": 41.583305413296316,
-      "mean_bias": 5455.84397595655
+      "r2": 0.8102672535894229,
+      "median_absolute_percentage_error": 30.470613968326766,
+      "within_25_percent": 41.52586990858182,
+      "mean_bias": 5471.064378180265
     },
     "maximum": {
-      "r2": -0.7414528862491254,
+      "r2": -0.7415465898644853,
       "median_absolute_percentage_error": 129.94951531366476,
       "within_25_percent": 9.534293782606614,
-      "mean_bias": 107830.21856249856
+      "mean_bias": 107834.04758962058
     },
     "starting_improvements_only": {
       "r2": 0.9956257738117941,
@@ -105,16 +105,16 @@
       "mean_bias": -517.5694058209683
     },
     "maximum_improvements_only": {
-      "r2": 0.46038190997366313,
+      "r2": 0.4603609581338022,
       "median_absolute_percentage_error": 39.1531602608809,
-      "within_25_percent": 36.39017852869382,
-      "mean_bias": 12082.61047436006
+      "within_25_percent": 36.371033360455655,
+      "mean_bias": 12086.439508007694
     },
     "maximum_at_reference_development": {
-      "r2": -1.947797442939362,
+      "r2": -1.9477974431710896,
       "median_absolute_percentage_error": 169.80610178630212,
       "within_25_percent": 5.561671373187192,
-      "mean_bias": 146953.36985719056
+      "mean_bias": 146953.36985066495
     }
   },
   "goods_fit": {
@@ -140,23 +140,23 @@
   },
   "self_check": {
     "starting": {
-      "r2": 0.8106563648790922,
-      "median_absolute_percentage_error": 30.458389673067753,
-      "within_25_percent": 41.583305413296316,
-      "mean_bias": 5455.84397595655,
-      "total_model": 946500550.0,
-      "total_target": 832511601.8103398
+      "r2": 0.8102672535894229,
+      "median_absolute_percentage_error": 30.470613968326766,
+      "within_25_percent": 41.52586990858182,
+      "mean_bias": 5471.064378180265,
+      "total_model": 946818550.0,
+      "total_target": 832511601.9466797
     },
     "maximum": {
-      "r2": 0.4421601006280321,
-      "median_absolute_percentage_error": 42.71078220694941,
-      "within_25_percent": 33.63806059445748,
-      "mean_bias": 28309.458020690297,
-      "total_model": 2887945550.0,
-      "total_target": 2296476043.5737176
+      "r2": 0.4419889274781138,
+      "median_absolute_percentage_error": 42.71586035986147,
+      "within_25_percent": 33.604556550040684,
+      "mean_bias": 28328.50745656165,
+      "total_model": 2888343550.0,
+      "total_target": 2296476043.7100573
     },
-    "starting_model_total": 946500550.0,
-    "maximum_model_total": 2887945550.0,
+    "starting_model_total": 946818550.0,
+    "maximum_model_total": 2888343550.0,
     "percent_per_point": 0.0,
     "people_per_point": 1000.0
   },
@@ -173,9 +173,9 @@
     "building_types.csv": "0fbfc6998a917dd5563e1f143f177ca1ed1732c38423d4806bad9ce210638d20",
     "goods_floor.csv": "670a51307832939af1fa42a30b29ae3562221e5673dc1c69e1cc1ebaaaccb628",
     "location_attributes.csv": "cb1c13a6ef002ad21b2f2695d29d7fbbb29a264fdd83e771457e692a1f658786",
-    "location_buildings.csv": "6d4ed69b050a29550d3daf1284004d8f5b10ca3915d0affe13d1ff5ddcfca311",
-    "location_targets.csv": "490428d32945ca31b51a2a9a7b3bccd5ae828593822f2a7d31ca777f39ea264b",
-    "navigation/manifest.json": "87ab290c1ecc8f72ea3af9f266a6d5c444347a733436187f1cc0b52c18720ebd",
+    "location_buildings.csv": "e51fa74b11617eed843e4c95883928d40ad7d9a40ccc1c9b4226baf2f86ca450",
+    "location_targets.csv": "28d7a283711de3871c917c58392309c2665577563a2aa0f533b9f8d84a3ed313",
+    "navigation/manifest.json": "1af653c2ddd3838f435c13575caf67cfcdc0b172254c6702b608cc21cce5005f",
     "navigation/tiles.csv": "1ba7c603ead48068801f729a9cf3acf7404f3978d55441130d411722c11cc726",
     "navigation/edges.csv": "6ae1a38e4f9af42ffee0cc46870861a3b5efdbdc379af0401f9406d647033cd7",
     "navigation/shores.csv": "212b30ab3b01b299fd86aece9a42326e22492989fc211303acd7fb1e252be093",

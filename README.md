@@ -108,13 +108,19 @@ uv run python scripts/import_location_inputs.py --game-only --game-map "<game>/g
 uv run --project ../ProsperOrPerishConstructor python scripts/import_vanilla_start.py --save <vanilla 1337.4.1 start save>
 uv run --project ../ProsperOrPerishConstructor python scripts/refresh_topography_game_audit.py
 uv run worldbuilder climate   # then soils, irrigation, fertility, vegetation, topography
-uv run worldbuilder rivers --stage export && uv run worldbuilder navigation
+uv run worldbuilder rivers --stage export && uv run worldbuilder navigation   # rivers ~26 min, navigation ~12.7 GB peak
 uv run worldbuilder locations && uv run python scripts/validate_locations.py   # needs ~13.4 GB peak
 uv run worldbuilder development && uv run worldbuilder attribute-fit --config configs/attribute_fit_flat.json
 uv run worldbuilder goods-fit && uv run worldbuilder building-assignment
 uv run worldbuilder geography-test --build-only --export-only && uv run worldbuilder rgo-potential
 uv run worldbuilder recalibration-map && uv run worldbuilder handover
 ```
+
+`--game-only` keeps `inventory.parquet` (an extraction snapshot). When a patch changes `locations.png`, the climate
+stage stops with "Inventory/map pixel count mismatch": recount the changed locations' `pixel_count` (and
+`area_jacobian_km2` = `jacobian_pixel_area_km2` x `pixel_count`) from the imported map and record it in the
+inventory receipt of `evidence/location_input_manifest.json` (EU5 1.4.2: 4 map-edge pixels anakovik -> nuvuqaq).
+The vanilla start save is a vanilla observer start saved on 1 April 1337 (1.4.2: `pp_vanilla142_start.eu5`).
 
 `worldbuilder navigation` ends with the 3D terrain carve of the channels (`navigation_terrain.py`,
 `configs/navigation_terrain.json`): the channels are sea tiles, but EU5 draws water as one sea-level plane that the

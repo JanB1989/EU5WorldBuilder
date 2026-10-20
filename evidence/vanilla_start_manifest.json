@@ -1,15 +1,15 @@
 {
-  "save": "/mnt/c/Users/Anwender/Documents/Paradox Interactive/Europa Universalis V/save games/pp_vanilla141_start.eu5",
-  "save_bytes": 186751489,
+  "save": "/mnt/c/Users/Anwender/Documents/Paradox Interactive/Europa Universalis V/save games/pp_vanilla142_start.eu5",
+  "save_bytes": 186187393,
   "save_date": null,
   "game_templates": {
     "path": "data/raw/location_inputs/game_templates.txt",
-    "sha256": "80591c0a38ee15e697c26db8a26b824b4494bb8b53b223f0b92495b5cb4f6316"
+    "sha256": "1d04b8071089617a8034b3e2a3bc18ba1678985cf236d7f02f0d63de5600e582"
   },
   "outputs": {
     "data/raw/vanilla/location_raw_material_1337.csv": "5bec0ee8291b10700f4a99f80ef739b7c60b899f5b0ef9982398e557a53466cd",
-    "data/raw/vanilla/start_development_1337.csv": "0c63c4ba7d8d67f6e48345ac16ef90afded594bc152bb7655e103b25e4dad936",
-    "data/raw/location_inputs/starting_population_source.csv": "b3d298766b0eeaaf60c35856791e20efa36e3ecf5cc375287c42813926bfeb66"
+    "data/raw/vanilla/start_development_1337.csv": "969633ee12dd297707d484e2ef4fa78e579b006708d5d6716afafd3db690c51d",
+    "data/raw/location_inputs/starting_population_source.csv": "d908b8aa5031b42680730dc89983864c5c32d2f3ad5d580650af66c56cd28968"
   },
   "rgo_locations": 20929,
   "rgo_counts": {
@@ -70,19 +70,16 @@
   "rgo_save_differs_from_templates": [],
   "development": {
     "locations": 20929,
-    "missing_in_save_set_to_0": 7879,
-    "sum": 213647.75,
+    "missing_in_save_set_to_0": 7870,
+    "sum": 213965.75,
     "median_positive": 16.0,
     "max": 43.0
   },
   "population": {
-    "total_before": 394437375.99999994,
-    "total_after": 394437362.06000006,
+    "total_before": 394437352.0,
+    "total_after": 394437753.69,
     "locations_changed_over_1000": 0
   },
-  "rank_changes": {
-    "rural_or_unranked->town": 1,
-    "town->rural_or_unranked": 1
-  },
+  "rank_changes": {},
   "note": "Vanilla 1337.4.1 start: development, population and settlement rank from the save; RGOs from the game templates."
 }

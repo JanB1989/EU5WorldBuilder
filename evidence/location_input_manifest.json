@@ -11,8 +11,8 @@
     },
     {
       "path": "data/raw/location_inputs/game_templates.txt",
-      "sha256": "80591c0a38ee15e697c26db8a26b824b4494bb8b53b223f0b92495b5cb4f6316",
-      "bytes": 3753022,
+      "sha256": "1d04b8071089617a8034b3e2a3bc18ba1678985cf236d7f02f0d63de5600e582",
+      "bytes": 3754030,
       "origin": "/mnt/c/Games/steamapps/common/Europa Universalis V/game/in_game/map_data/location_templates.txt",
       "role": "Local game template inventory; no redistribution"
     },
@@ -25,17 +25,20 @@
     },
     {
       "path": "data/raw/location_inputs/locations.png",
-      "sha256": "bfbb8840343560367240f2b29e1e0621292aaa81616c06827c7fe566e2ec2b83",
-      "bytes": 8737202,
+      "sha256": "f531f53d5adbd87c53bc7a1f678789c04d40121917facf1a19b467247048cbb7",
+      "bytes": 8737188,
       "origin": "/mnt/c/Games/steamapps/common/Europa Universalis V/game/in_game/map_data/locations.png",
       "role": "EU5 local licensed installation; no redistribution"
     },
     {
       "path": "data/raw/location_inputs/inventory.parquet",
-      "sha256": "3a9bb68159e5cfcf5262ad48c795c06b6b9a4649977668d5c71415da1a8000a1",
-      "bytes": 2058866,
+      "sha256": "b0b0f2216f19aac3ba1aaf3ed868a4ceab34e6387497cdcdd3ca2c487c0007cb",
+      "bytes": 2978361,
       "origin": "/home/jan/development/ProsperOrPerishConstructor/artifacts/data/population_capacity/geometry_land_contract_candidate_v1/location_geometry_candidate.parquet",
-      "role": "Local game inventory; extraction snapshot, no capacity assignments imported"
+      "role": "Local game inventory; extraction snapshot, no capacity assignments imported",
+      "transformations": [
+        "2026-10-20 EU5 1.4.2: pixel_count and area_jacobian_km2 recounted from the imported locations.png for nuvuqaq 1940->1944, anakovik 5902->5898 (4 map-edge pixels); centroids, bboxes and coordinates unchanged"
+      ]
     },
     {
       "path": "data/raw/location_inputs/transform.json",
@@ -46,9 +49,9 @@
     },
     {
       "path": "data/raw/location_inputs/starting_population_source.csv",
-      "sha256": "b3d298766b0eeaaf60c35856791e20efa36e3ecf5cc375287c42813926bfeb66",
-      "bytes": 11754553,
-      "origin": "/mnt/c/Users/Anwender/Documents/Paradox Interactive/Europa Universalis V/save games/pp_vanilla141_start.eu5",
+      "sha256": "d908b8aa5031b42680730dc89983864c5c32d2f3ad5d580650af66c56cd28968",
+      "bytes": 11753772,
+      "origin": "/mnt/c/Users/Anwender/Documents/Paradox Interactive/Europa Universalis V/save games/pp_vanilla142_start.eu5",
       "role": "Vanilla game-start population and settlement rank from the start save (scripts/import_vanilla_start.py); contextual only. Other columns are kept diagnostics of the earlier constructor capacity map."
     },
     {

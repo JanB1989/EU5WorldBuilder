@@ -4,7 +4,7 @@
   "save_date": null,
   "game_templates": {
     "path": "data/raw/location_inputs/game_templates.txt",
-    "sha256": "1d04b8071089617a8034b3e2a3bc18ba1678985cf236d7f02f0d63de5600e582"
+    "sha256": "f2f3d80a2bb65b41b578a51cb06cc47a0f8d83b682eec8c2cce69f1add9cd59c"
   },
   "outputs": {
     "data/raw/vanilla/location_raw_material_1337.csv": "5bec0ee8291b10700f4a99f80ef739b7c60b899f5b0ef9982398e557a53466cd",
@@ -76,7 +76,7 @@
     "max": 43.0
   },
   "population": {
-    "total_before": 394437352.0,
+    "total_before": 394437745.3999999,
     "total_after": 394437753.69,
     "locations_changed_over_1000": 0
   },

@@ -11,8 +11,8 @@
     },
     {
       "path": "data/raw/location_inputs/game_templates.txt",
-      "sha256": "1d04b8071089617a8034b3e2a3bc18ba1678985cf236d7f02f0d63de5600e582",
-      "bytes": 3754030,
+      "sha256": "f2f3d80a2bb65b41b578a51cb06cc47a0f8d83b682eec8c2cce69f1add9cd59c",
+      "bytes": 3754033,
       "origin": "/mnt/c/Games/steamapps/common/Europa Universalis V/game/in_game/map_data/location_templates.txt",
       "role": "Local game template inventory; no redistribution"
     },

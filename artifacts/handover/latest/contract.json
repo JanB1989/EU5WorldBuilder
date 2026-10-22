@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-10-20-1c65a62",
-  "worldbuilder_commit": "1c65a62",
-  "created": "2026-10-20T18:49:24",
+  "version": "2026-10-22-ca37739",
+  "worldbuilder_commit": "ca37739",
+  "created": "2026-10-22T12:56:18",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
@@ -175,7 +175,7 @@
     "location_attributes.csv": "cb1c13a6ef002ad21b2f2695d29d7fbbb29a264fdd83e771457e692a1f658786",
     "location_buildings.csv": "e51fa74b11617eed843e4c95883928d40ad7d9a40ccc1c9b4226baf2f86ca450",
     "location_targets.csv": "28d7a283711de3871c917c58392309c2665577563a2aa0f533b9f8d84a3ed313",
-    "navigation/manifest.json": "1af653c2ddd3838f435c13575caf67cfcdc0b172254c6702b608cc21cce5005f",
+    "navigation/manifest.json": "84bdeada377c2b62a0788b32fe615872633c8d5162e11c915aa42ac42c1c5985",
     "navigation/tiles.csv": "1ba7c603ead48068801f729a9cf3acf7404f3978d55441130d411722c11cc726",
     "navigation/edges.csv": "6ae1a38e4f9af42ffee0cc46870861a3b5efdbdc379af0401f9406d647033cd7",
     "navigation/shores.csv": "212b30ab3b01b299fd86aece9a42326e22492989fc211303acd7fb1e252be093",

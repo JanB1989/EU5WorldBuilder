@@ -131,6 +131,9 @@ def assign(d,ledger,dev,cfg):
         else:
             # The group's starting levels go to its members by their own ledger (largest remainders), only where they may stand.
             exact={m:np.where(gm[m],Ls_m[m]/unit,0.) for m in members}
+            # a clamped group total is shared in the members' ledger proportions, so the members never exceed it
+            whole=sum(exact.values());scale=np.divide(n_total,whole,out=np.zeros(len(whole)),where=whole>0)
+            exact={m:exact[m]*np.minimum(scale,1.) for m in members} if clamp_start else exact
             n_m={m:np.floor(exact[m]) for m in members}
             left=n_total-sum(n_m.values())
             for _ in members:

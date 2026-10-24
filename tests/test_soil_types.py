@@ -70,7 +70,8 @@ def test_mod_uses_same_assignments_legend_and_no_recurring_or_economic_effects(t
     for name in CFG['types']:
         with Image.open(out/'main_menu/gfx/interface/soil_types'/(name+'.dds')) as image:
             assert image.size==(64,64) and image.getchannel('A').getextrema()==(0,255)
-    for phase in ['main_menu','in_game']:
-        with Image.open(out/phase/'gfx/interface/icons/map_modes/ha1300_soil_types.dds') as image:
-            assert image.size==(128,128)
+    # The map-mode picker icon lives in main_menu only.
+    with Image.open(out/'main_menu/gfx/interface/icons/map_modes/ha1300_soil_types.dds') as image:
+        assert image.size==(128,128)
+    assert not (out/'in_game/gfx/interface/icons/map_modes').exists()
     assert not (out/'in_game/map_data/location_templates.txt').exists()

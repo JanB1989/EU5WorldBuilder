@@ -176,7 +176,12 @@ def build(config_path=None,local_path=None,deploy=True,refresh_data=True):
             stale = (output/rel).resolve()
             if not stale.is_relative_to(output.resolve()):
                 raise ValueError('Unsafe old build manifest path')
-            if stale.is_file(): stale.unlink()
+            if stale.is_file():
+                stale.unlink()
+                # Drop folders the removal emptied (e.g. a retired icon folder).
+                for folder in stale.parents:
+                    if folder==output.resolve() or not folder.is_relative_to(output.resolve()) or any(folder.iterdir()):break
+                    folder.rmdir()
     assets={}
     write_text(output,'in_game/map_data/location_templates.txt',data['templates'])
     if cases:
@@ -245,7 +250,13 @@ def build(config_path=None,local_path=None,deploy=True,refresh_data=True):
           'main_menu/gfx/interface/icons/climate/'+CLIMATE+'_frame.dds':game/'main_menu/gfx/interface/icons/climate/continental_frame.dds',
           'in_game/gfx/interface/icons/buildings/'+BUILDING+'.dds':ROOT/'assets/geography_test/land_clearance.dds'}
         for rel,src in assets.items():
-            dst=output/rel;dst.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(src,dst)
+            dst=output/rel;dst.parent.mkdir(parents=True,exist_ok=True)
+            if src.is_relative_to(game):shutil.copy2(src,dst)  # vanilla art is already in game format
+            else:
+                # Own art (a 512px uncompressed master) -> 128px building icon, DXT5 with mips.
+                from PIL import Image
+                from .game_dds import GAME_ICON_SIZE, write_game_dds
+                with Image.open(src) as image:write_game_dds(image,dst,size=(GAME_ICON_SIZE,GAME_ICON_SIZE))
     metadata={'name':MOD_NAME,'id':MOD_ID,'version':'0.9.0','supported_game_version':cfg['supported_game_version'],
       'short_description':'Global climate, topography, vegetation, soil type and fertility. Enable alone and start a new 1337 game.',
       'tags':['Utilities'],'relationships':[],'game_custom_data':{}}

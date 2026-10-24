@@ -51,7 +51,9 @@ def test_sync_rejects_manifest_path_escape(tmp_path):
 def test_complete_fixture_build_and_default_sync(tmp_path,monkeypatch):
     monkeypatch.setattr(g,'ROOT',tmp_path)
     game=tmp_path/'install/game';assets=tmp_path/'assets/geography_test';assets.mkdir(parents=True)
-    (assets/'land_clearance.dds').write_bytes(b'DDS fixture')
+    # Own art is an uncompressed 512px master; the build writes a game-format icon.
+    from PIL import Image
+    Image.new('RGBA',(512,512),(120,90,40,255)).save(assets/'land_clearance.dds',format='DDS')
     files={
       'in_game/common/climates/00_default.txt':'continental = {\n winter = normal\n location_modifier = { local_population_capacity_modifier = 0.5 }\n}\n',
       'in_game/common/vegetation/00_default.txt':'forest = {\n movement_cost = 1.5\n location_modifier = { local_population_capacity = 25 }\n}\n',
@@ -81,6 +83,8 @@ def test_complete_fixture_build_and_default_sync(tmp_path,monkeypatch):
     assert result['sync']['byte_parity']
     output=Path(result['output'])
     assert (output/'in_game/common/goods_demand/ha1300_test.txt').is_file()
+    from historical_agriculture.game_dds import is_game_format
+    assert is_game_format(output/'in_game/gfx/interface/icons/buildings'/(g.BUILDING+'.dds'),size=(128,128))
     template=(output/'in_game/map_data/location_templates.txt').read_text(encoding='utf-8-sig')
     assert 'other = { topography = flatland vegetation = forest climate = continental }' in template
     building=(output/'in_game/common/building_types/ha1300_test.txt').read_text(encoding='utf-8-sig')

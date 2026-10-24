@@ -2,12 +2,11 @@
 from pathlib import Path
 import json
 import pandas as pd
-from .geography_test_global_soils import write_soil_texture
+from .geography_test_global_soils import write_soil_texture, write_map_mode_icon
 from .geography_test import ROOT,write_text,sha
 
 VAR='ha1300_fertility'
 MAP='ha1300_fertility'
-ICON='gfx/interface/icons/map_modes/ha1300_fertility.dds'
 
 
 def emit_fertility(output,game):
@@ -61,8 +60,7 @@ def emit_fertility(output,game):
     assets=ROOT/'assets/geography_test/fertility'
     for name in cfg['levels']:
         write_soil_texture(assets/(name+'.png'),output/'main_menu/gfx/interface/fertility'/(name+'.dds'),64)
-    for phase in ['main_menu','in_game']:
-        write_soil_texture(assets/'high.png',output/phase/ICON,128)
+    write_map_mode_icon(assets/'high.png',output,MAP)
     color.append('else = { value = rgb { 45 60 72 } }')
     tips.append('else_if = { limit = { is_land = no } value = HA1300_FERTILITY_WATER } else = { value = HA1300_FERTILITY_UNKNOWN }')
     # Share the native map rendering settings with the already working soil mode.

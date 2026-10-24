@@ -4,20 +4,29 @@ from pathlib import Path
 import pandas as pd
 from PIL import Image
 from .geography_test import ROOT, write_text, sha
+from .game_dds import encode_dds
 
 VAR = 'ha1300_soil_type'
 MAP = 'ha1300_soil_types'
 
 
 def write_soil_texture(source, destination, size):
-    # Match eu5_building_pipeline.generator.write_dds_icon: RGBA PNG -> DDS.
-    # Geography uses native 64px textures; map-mode buttons use 128px.
+    # RGBA PNG master -> game-format DDS (DXT5, full mip chain), like vanilla's
+    # interface textures. Geography uses native 64px textures; map-mode buttons 128px.
+    # Plain Lanczos (no sharpening): the same pixels the constructor's DDS pass
+    # would compress, so its copy of the export stays byte-identical.
     with Image.open(source) as image:
         image=image.convert('RGBA')
         if image.size!=(512,512) or image.getchannel('A').getextrema()!=(0,255):
             raise ValueError(f'Soil master must be 512px with real transparency: {source}')
         destination.parent.mkdir(parents=True,exist_ok=True)
-        image.resize((size,size),Image.Resampling.LANCZOS).save(destination,format='DDS')
+        destination.write_bytes(encode_dds(image.resize((size,size),Image.Resampling.LANCZOS),'DXT5'))
+
+
+def write_map_mode_icon(source, output, map_mode):
+    # Map-mode picker icons live ONLY in main_menu (the game concept's
+    # texture = "map_modes/<id>" resolves there); never a copy in in_game.
+    write_soil_texture(source,output/'main_menu/gfx/interface/icons/map_modes'/f'{map_mode}.dds',128)
 
 
 def emit_soils(output, game):
@@ -116,9 +125,7 @@ def emit_soils(output, game):
     assets=ROOT/'assets/geography_test/soil_types'
     for name in cfg['types']:
         write_soil_texture(assets/(name+'.png'),output/'main_menu/gfx/interface/soil_types'/(name+'.dds'),64)
-    for phase in ['main_menu','in_game']:
-        dst=output/phase/'gfx/interface/icons/map_modes'/f'{MAP}.dds'
-        write_soil_texture(assets/'loam.png',dst,128)
+    write_map_mode_icon(assets/'loam.png',output,MAP)
     # Export the exact consumed assignments with the test build for auditing.
     write_text(output,'soil_assignments.csv',d.to_csv(index=False))
     write_text(output,'soil_source_manifest.json',json.dumps(manifest,indent=2))

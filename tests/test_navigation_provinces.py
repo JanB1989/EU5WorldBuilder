@@ -35,6 +35,35 @@ def test_a_short_leftover_joins_a_touching_stretch_of_the_same_river():
     assert [len(tags) for _, tags in areas['pp_nav_short_area']] == [9]
 
 
+def test_a_navigable_lake_moves_from_the_lakes_to_the_sea_zones_and_into_its_rivers_area():
+    import numpy as np
+    import pandas as pd
+    import pytest
+    from historical_agriculture.navigation_map import (lake_provinces, navigable_lake_tags, remove_from_list,
+                                                       remove_token, river_slug, shore_counts)
+    text = 'sea_zones = {\n\tbaltic\n}\nlakes = {\n\tlake_ladoga lake_ladoga_small lake_onega\n}\n'
+    out = remove_from_list(text, 'lakes', ['lake_ladoga'])
+    assert 'lake_ladoga_small lake_onega' in out and ' lake_ladoga ' not in out.replace('\t', ' ')
+    with pytest.raises(ValueError):
+        remove_from_list(out, 'lakes', ['lake_ladoga'])
+    defs = 'korela_province = { korela salmi lake_ladoga }\nother = { lake_ladoga_small }\n'
+    assert remove_token(defs, 'lake_ladoga') == 'korela_province = { korela salmi  }\nother = { lake_ladoga_small }\n'
+    inv = pd.DataFrame({'location_tag': ['lake_ladoga', 'baltic'], 'game_zone_class': ['lakes', 'sea_zones']})
+    assert navigable_lake_tags({'navigable_lakes': ['lake_ladoga']}, inv) == ['lake_ladoga']
+    with pytest.raises(ValueError):
+        navigable_lake_tags({'navigable_lakes': ['baltic']}, inv)
+    # 4x5 map: lake 9 in the middle, banks 1 (left) and 2 (right), channel 7 below
+    after = np.array([[1, 9, 9, 2, 2], [1, 9, 9, 2, 2], [1, 7, 7, 2, 2], [1, 1, 1, 1, 1]], np.uint32)
+    assert shore_counts(after, 9, {9}) == {1: 2, 2: 2, 7: 2}
+    meta = [{'location': 'pp_nav_1', 'area': 'pp_nav_volkhov_area'}]
+    adjacent = {7: {9, 1}}
+    names = {7: 'pp_nav_1', 9: 'lake_ladoga'}
+    assert lake_provinces([('lake_ladoga', 9)], meta, adjacent, names, river_slug) == \
+        [('pp_nav_volkhov_area', 'pp_nav_lake_ladoga_province', 'lake_ladoga')]
+    assert lake_provinces([('lake_ladoga', 9)], meta, {}, names, river_slug) == \
+        [('pp_nav_lake_ladoga_area', 'pp_nav_lake_ladoga_province', 'lake_ladoga')]
+
+
 def test_a_tile_no_bank_can_serve_joins_a_touching_tile_of_its_state():
     import numpy as np
     from historical_agriculture.navigation_map import merge_portless_tiles

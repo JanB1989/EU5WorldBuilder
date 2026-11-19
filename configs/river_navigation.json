@@ -42,6 +42,10 @@
     "allow_vanishing_pieces": true,
     "merge_undersized_pieces": true,
     "convert_lake_crossings": true,
+    "navigable_lakes": [
+      "lake_ladoga"
+    ],
+    "navigable_lakes_note": "Vanilla lakes a researched reach crosses that ships sail as a whole (2026-11-19, Jan, after a player report: the channel strip through Lake Ladoga cut the lake and broke proximity across it). Each keeps its vanilla shape and template (topography lakes: its shores are waterways, not sea coast), moves from the lakes list to the sea zones, becomes a province of its own in its river's area and carries no channel strip; the reach's channels (Neva, Volkhov) end on its shores. Every shore location without a port gets one on the lake. The engine reads lake and sea from the default.map lists, so the shores lose is_adjacent_to_lake and become coastal.",
     "convert_wasteland": true,
     "accepted_cut_adjacencies": [
       [

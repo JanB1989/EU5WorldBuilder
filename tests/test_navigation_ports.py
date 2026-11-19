@@ -142,6 +142,43 @@ def test_every_bank_gets_a_port_and_the_tiles_are_covered_as_far_as_possible(tmp
     assert 'id=a position={ 1.5 0 0.5 }' in (output/DOCK).read_text(encoding='utf-8-sig')
 
 
+def test_every_shore_of_a_navigable_lake_gets_a_port(tmp_path):
+    import numpy as np
+    from PIL import Image
+
+    from historical_agriculture.navigation_ports import assign_lake_ports, lake_banks, DOCK
+
+    game = _game(tmp_path)
+    (game/'in_game/map_data/named_locations').mkdir(parents=True)
+    (game/'in_game/map_data/named_locations/00.txt').write_text('a = 0000a0\nb = 0000b0\nc = 0000c0\nlake = 00ff09\n')
+    output = tmp_path/'out'; (output/'in_game/map_data/named_locations').mkdir(parents=True)
+    (output/'in_game/map_data/named_locations/pp.txt').write_text('t1 = 00ff01\n')
+    # row 0: a lake lake b / row 1: a lake lake c / row 2: c t1 t1 c  -> c also borders the channel and has its port there
+    a, b, c, lake, t1 = (0, 0, 0xa0), (0, 0, 0xb0), (0, 0, 0xc0), (0, 0xff, 9), (0, 0xff, 1)
+    Image.fromarray(np.array([[a, lake, lake, b], [a, lake, lake, c], [c, t1, t1, c]], np.uint8)).save(output/'in_game/map_data/locations.png')
+    (output/'in_game/map_data/ports.csv').write_text('LandProvince;SeaZone;x;y;\nseaport;ocean;1;1;x\nc;t1;1;1;x\n')
+    (output/DOCK).parent.mkdir(parents=True)
+    (output/DOCK).write_text('game_object_locator={\n\tinstances={\n\t\t{ id=c position={ 1.5 0 0.5 } rotation={ 0 0 0 1 } scale={ 1 1 1 } }\n\t}\n}\n')
+    nav = tmp_path/'nav'; nav.mkdir()
+    pd.DataFrame([{'location_tag': 'a', 'water_location': 'lake', 'shore_pixels': 2},
+                  {'location_tag': 'b', 'water_location': 'lake', 'shore_pixels': 1},
+                  {'location_tag': 'c', 'water_location': 'lake', 'shore_pixels': 1}]).to_csv(nav/'lake_shores.csv', index=False)
+    assert lake_banks(nav, game, {'c': 0.0}) == {'a', 'b'}
+
+    stats = assign_lake_ports(output, game, nav)
+
+    rows = (output/'in_game/map_data/ports.csv').read_text().splitlines()[1:]
+    assert sorted(rows) == ['a;lake;1;3;x', 'b;lake;2;3;x', 'c;t1;1;1;x', 'seaport;ocean;1;1;x']
+    assert stats == {'lake_ports': 2, 'unplaced': [], 'lakes_without_port': []}
+    assert 'id=a position={ 1.5 0 2.5 }' in (output/DOCK).read_text(encoding='utf-8-sig')
+    # a lake whose shores all have ports elsewhere takes the port of a bank whose water keeps another
+    (output/'in_game/map_data/ports.csv').write_text('LandProvince;SeaZone;x;y;\na;t1;1;1;x\nb;t1;1;1;x\n')
+    pd.DataFrame([{'location_tag': 'a', 'water_location': 'lake', 'shore_pixels': 2},
+                  {'location_tag': 'b', 'water_location': 'lake', 'shore_pixels': 1}]).to_csv(nav/'lake_shores.csv', index=False)
+    stats = assign_lake_ports(output, game, nav)
+    assert stats['lakes_without_port'] == [] and stats['lake_ports'] == 1
+
+
 def test_start_setup_follows_the_1337_bookmark(tmp_path):
     from historical_agriculture.geography_test import start_setup
     from historical_agriculture.navigation_ports import settlement_ranks

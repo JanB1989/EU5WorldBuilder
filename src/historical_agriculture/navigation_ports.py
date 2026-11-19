@@ -414,6 +414,94 @@ def assign_bank_ports(output, game, out):
             'tiles_without_port': len(land_touching - served)}
 
 
+def lake_banks(out, game, ports):
+    """Shore locations of the navigable lakes (``lake_shores.csv``) without a vanilla or chosen river port: they get a
+    landing port with vanilla's small-port harbor 0.00 (on the lake, or on a channel they also border)."""
+    path = out/'lake_shores.csv'
+    if not path.is_file():
+        return set()
+    shores = pd.read_csv(path)
+    vanilla = port_names((game/MAP_DATA/'ports.csv').read_text(encoding='utf-8-sig'))
+    return set(shores.location_tag) - vanilla - set(ports)
+
+
+def assign_lake_ports(output, game, out):
+    """Every shore location of a navigable lake that still has no port (after the channel banks got theirs) gets one on
+    the lake, and every lake holds at least one port.
+
+    A navigable lake is a sea zone: its shores are coastal to the engine, which logs each coastal location without a
+    port, and the lake's maritime presence comes only from ports on it (a portless zone breaks presence and makes every
+    proximity step through it cost the full sea rate). A lake whose shores all have ports elsewhere takes the port of
+    its smallest shore settlement whose water keeps another. Returns counts."""
+    import numpy as np
+    from PIL import Image
+
+    path = out/'lake_shores.csv'
+    shores = pd.read_csv(path) if path.is_file() else pd.DataFrame(columns=['location_tag', 'water_location', 'shore_pixels'])
+    if shores.empty:
+        return {}
+    ports_path = output/MAP_DATA/'ports.csv'
+    lines = ports_path.read_text(encoding='utf-8-sig').splitlines()
+    rows = _rows('\n'.join(lines))
+    wanted = {}
+    for bank, g in shores.groupby('location_tag'):
+        if bank not in rows:
+            wanted[bank] = g.sort_values(['shore_pixels', 'water_location'], ascending=[False, True]).water_location.iloc[0]
+    count = defaultdict(int)
+    for row in rows.values():
+        count[row[1]] += 1
+    for water in wanted.values():
+        count[water] += 1
+    ranks, pops = settlement_ranks(game), populations(game)
+    for lake in sorted(set(shores.water_location)):
+        if count[lake]:
+            continue
+        options = [b for b in sorted(set(shores.location_tag[shores.water_location == lake])) if b in rows and count[rows[b][1]] > 1]
+        if options:
+            bank = min(options, key=lambda n: (DEFAULTS['rank_points'].get(ranks.get(n), 0.0), pops.get(n, 0.0), n))
+            count[rows[bank][1]] -= 1; count[lake] += 1
+            wanted[bank] = lake
+    Image.MAX_IMAGE_PIXELS = None
+    image = np.asarray(Image.open(output/MAP_DATA/'locations.png').convert('RGB')).astype(np.uint32)
+    codes = (image[..., 0] << 16) | (image[..., 1] << 8) | image[..., 2]
+    del image
+    height = codes.shape[0]
+    colors = _colors(output/MAP_DATA/'named_locations', game/MAP_DATA/'named_locations')
+    border = _border_pixels(codes, {colors[b] for b in wanted}, {colors[w] for w in wanted.values()}) if wanted else {}
+    placed = {}
+    for bank, lake in sorted(wanted.items()):
+        points = border.get((colors[bank], colors[lake]))
+        if not points:
+            continue
+        xy = np.array(points)
+        x, y = map(int, xy[int(np.argmin(((xy - xy.mean(axis=0)) ** 2).sum(axis=1)))])
+        placed[bank] = (lake, x, y)
+    lines = [r for r in lines if r.split(';')[0] not in placed]
+    lines += [f'{bank};{lake};{x};{height - y};x' for bank, (lake, x, y) in sorted(placed.items())]
+    ports_path.write_text('\n'.join(lines) + '\n', encoding='utf-8')
+    dock = output/DOCK
+    if dock.is_file() and placed:
+        text = dock.read_text(encoding='utf-8-sig')
+        pattern = re.compile(r'\{\s*id\s*=\s*(\w+)\s+position\s*=\s*\{[^}]*\}\s*rotation\s*=\s*\{[^}]*\}\s*scale\s*=\s*\{[^}]*\}\s*\}')
+        seen = set()
+
+        def seat(m):
+            if m[1] not in placed:
+                return m[0]
+            seen.add(m[1])
+            _, x, y = placed[m[1]]
+            return re.sub(r'position\s*=\s*\{[^}]*\}', f'position={{ {x + .5} 0 {height - y - .5} }}', m[0], count=1)
+        text = pattern.sub(seat, text)
+        added = ''.join(f'\n {{ id={n} position={{ {x + .5} 0 {height - y - .5} }} rotation={{ 0 0 0 1 }} scale={{ 1 1 1 }} }}'
+                        for n, (_, x, y) in sorted(placed.items()) if n not in seen)
+        close = text.rfind('}', 0, text.rfind('}'))
+        dock.write_text(text[:close] + added + '\n' + text[close:], encoding='utf-8-sig')
+    final = _rows('\n'.join(lines))
+    served = {row[1] for row in final.values()}
+    return {'lake_ports': len(placed), 'unplaced': sorted(set(wanted) - set(placed)),
+            'lakes_without_port': sorted(set(shores.water_location) - served)}
+
+
 def share_ports(rows, wanted, shores, vanilla, game):
     """Tiles the matching left without a port take one from a bank whose water keeps another port, if need be
     through a chain of moves along neighbouring tiles.

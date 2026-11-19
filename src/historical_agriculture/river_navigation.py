@@ -216,7 +216,7 @@ def build_reaches(config, config_path):
     pd.DataFrame(report).to_json(output/"reach_trace_report.json", orient="records", indent=1)
     from .navigation_map import export
     result = export(config, rows, river)
-    result["reach_connectivity"] = reach_connectivity(output, rows)
+    result["reach_connectivity"] = reach_connectivity(output, rows, raw)
     result.update({"baseline_year": config["baseline_year"], "config": config, "input_sha256": fingerprint,
                    "config_sha256": digest(config_path), "overrides": [], "selection_mode": "researched_reaches",
                    "reach_problems": {r["river"]: r["problems"] for r in report if r["problems"]},
@@ -231,18 +231,29 @@ def build_reaches(config, config_path):
     return result
 
 
-def reach_connectivity(output, rows):
+def reach_connectivity(output, rows, raw):
     """Per researched river: share of its traced pixels that became water, and share in sea-connected tiles."""
     tiles = pd.read_csv(output/"tiles.csv").set_index("location")
     names = {}
     for line in (output/"mod/in_game/map_data/named_locations/pp_navigation.txt").read_text().splitlines():
         tag, color = line.split("=")
         names[int(color.strip(), 16)] = tag.strip()
+    # a navigable lake (no channel strip) is water open to ships: its pixels count as converted, ocean-connected as
+    # the lake is
+    lakes = pd.read_csv(output/"lakes.csv").set_index("location") if (output/"lakes.csv").is_file() else pd.DataFrame()
+    if len(lakes):
+        from .location_inventory import read_zone_inventory
+        inv = read_zone_inventory(raw)
+        for tag, color in zip(inv.location_tag, inv.map_color_rgb):
+            if tag in lakes.index:
+                names[int(color, 16)] = tag
     image = np.asarray(Image.open(output/"mod/in_game/map_data/locations.png").convert("RGB"))
     px = image[rows.y.to_numpy(), rows.x.to_numpy()].astype(np.int64)
     tile = [names.get(int(v)) for v in (px[:, 0] << 16) | (px[:, 1] << 8) | px[:, 2]]
     frame = pd.DataFrame({"river": rows.river_name.to_numpy(), "tile": tile})
     frame["converted"] = frame.tile.notna()
-    frame["ocean"] = [bool(tiles.loc[t, "ocean_connected"]) if t in tiles.index else False for t in frame.tile]
+    ocean = {**{t: bool(v) for t, v in tiles.ocean_connected.items()},
+             **({t: bool(v) for t, v in lakes.ocean_connected.items()} if len(lakes) else {})}
+    frame["ocean"] = [ocean.get(t, False) for t in frame.tile]
     return {river: {"pixels": int(len(g)), "converted": round(float(g.converted.mean()), 4),
                     "ocean_connected": round(float(g.ocean.mean()), 4)} for river, g in frame.groupby("river")}

@@ -36,13 +36,13 @@ def emit(output,game,settings=None):
     out,manifest=validated()
     from .navigation_terrain import check_vanilla
     check_vanilla(manifest,game)
-    from .navigation_ports import select,prune,restore_lone_sea_ports,portless_banks,assign_bank_ports
+    from .navigation_ports import select,prune,restore_lone_sea_ports,portless_banks,assign_bank_ports,lake_banks,assign_lake_ports
     ports,table=select(out,manifest,game,settings)
     table.to_csv(out/'port_selection.csv',index=False)
     # Banks of passable tiles are coastal to the engine, which logs every coastal location without a port and
     # every tile without one. The curated ports keep their harbors; every other bank gets a landing port with
-    # vanilla's small-port harbor value 0.00.
-    quiet=portless_banks(out,game,ports)
+    # vanilla's small-port harbor value 0.00. The shores of a navigable lake (a sea zone) likewise.
+    quiet=portless_banks(out,game,ports)|lake_banks(out,game,ports)
     for rel in manifest['files']:
         target=Path(output)/rel;target.parent.mkdir(parents=True,exist_ok=True)
         if rel=='in_game/map_data/location_templates.txt':
@@ -63,6 +63,7 @@ def emit(output,game,settings=None):
     port_stats=prune(Path(output),{**{b:0.0 for b in quiet},**ports},game,len(table))
     port_stats['restored_sea_ports']=restore_lone_sea_ports(Path(output),Path(game))
     port_stats['bank_ports']=assign_bank_ports(Path(output),Path(game),out)
+    port_stats['lake_ports']=assign_lake_ports(Path(output),Path(game),out)
     from .navigation_ports import reseat_detached_ports,strip_trailing_newlines
     port_stats['reseated_ports']=reseat_detached_ports(Path(output),Path(game),out)
     strip_trailing_newlines(Path(output))
@@ -75,6 +76,12 @@ def emit(output,game,settings=None):
     for area,g in rows.groupby('area'):
         loc.append(f' {area}: "{re.sub(r" *[(].*?[)]","",str(g.river.iloc[0])).strip()}"')
     for province,g in rows.groupby('province'):loc.append(f' {province}: "{g.province_name.iloc[0]}"')
+    # a navigable lake is a province of its own (named after the lake), in its river's area or an area of its own
+    if (out/'lakes.csv').is_file():
+        lakes=pd.read_csv(out/'lakes.csv')
+        for r in lakes.itertuples():
+            if r.area not in set(rows.area):loc.append(f' {r.area}: "{r.province_name}"')
+            loc.append(f' {r.province}: "{r.province_name}"')
     p=Path(output)/'main_menu/localization/english/pp_navigation_geography_l_english.yml';p.parent.mkdir(parents=True,exist_ok=True)
     p.write_text('\n'.join(loc)+'\n',encoding='utf-8-sig')
     return {'tiles':manifest['tiles'],'edges':manifest['edges'],'river_ports':port_stats}
@@ -85,6 +92,6 @@ def handover(output):
     if not cfg.get('global_navigation'):return {}
     out,manifest=validated();target=Path(output)/'navigation';target.mkdir(parents=True,exist_ok=True)
     files={}
-    for name in ['manifest.json','tiles.csv','edges.csv','shores.csv','lost_river_effects.csv','river_effect_changes.csv','preserved_river_pixels.csv']:
+    for name in ['manifest.json','tiles.csv','edges.csv','shores.csv','lakes.csv','lost_river_effects.csv','river_effect_changes.csv','preserved_river_pixels.csv']:
         shutil.copy2(out/name,target/name);files['navigation/'+name]=digest(target/name)
     return files

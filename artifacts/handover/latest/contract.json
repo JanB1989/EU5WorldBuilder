@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-10-24-7f6b780",
-  "worldbuilder_commit": "7f6b780",
-  "created": "2026-10-24T00:21:13",
+  "version": "2026-11-19-e385266",
+  "worldbuilder_commit": "e385266",
+  "created": "2026-11-19T13:27:46",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
@@ -175,10 +175,11 @@
     "location_attributes.csv": "cb1c13a6ef002ad21b2f2695d29d7fbbb29a264fdd83e771457e692a1f658786",
     "location_buildings.csv": "cc87a7fa37d95b70f0d7bbeee816ac37e751e633109548c459557e6063fade6a",
     "location_targets.csv": "254ed26ee93651341d9eb67caf8f256c9e5ea0026489f97d5c0ab6ecb2f0b59c",
-    "navigation/manifest.json": "84bdeada377c2b62a0788b32fe615872633c8d5162e11c915aa42ac42c1c5985",
-    "navigation/tiles.csv": "1ba7c603ead48068801f729a9cf3acf7404f3978d55441130d411722c11cc726",
-    "navigation/edges.csv": "6ae1a38e4f9af42ffee0cc46870861a3b5efdbdc379af0401f9406d647033cd7",
-    "navigation/shores.csv": "212b30ab3b01b299fd86aece9a42326e22492989fc211303acd7fb1e252be093",
+    "navigation/manifest.json": "2441918cd3da81437edaa3d5805ccaf377395418eea63eae8a54eb30c2f326cb",
+    "navigation/tiles.csv": "3aa5afa9b274c5f7439a7c9767be59c9b48d45b2a52745ceafb07fd7826fcbb0",
+    "navigation/edges.csv": "a76a6f35c8ddc797f1cdc3a400094276332ebc77843d06e2e06bc14fe3648c0d",
+    "navigation/shores.csv": "0b7569a93a33d1b944c9dba9b4f94afdabef516c0a608068247643562ad23c0f",
+    "navigation/lakes.csv": "849a439be3410f3dd096f43a05838ff300f494846b92e42348e47143164d8230",
     "navigation/lost_river_effects.csv": "56317cd6d6f4b7a78e2f749c3cb929ca485157acbcc0ec954d0b1d6e96f37abb",
     "navigation/river_effect_changes.csv": "86789593495a8cf8da2aec3462e0d6d56cea637784c3f6e032daa282b3ff19e7",
     "navigation/preserved_river_pixels.csv": "d8debd332f2b677a8d5556f0a3eb9d8e6ae45320942b7e459110a4a4cdcfdf7c"

@@ -1,0 +1,2 @@
+location,area,province,province_name,river,region,near_location,pixels,ocean_connected
+lake_ladoga,pp_nav_neva_lake_ladoga_volkhov_area,pp_nav_lake_ladoga_province,Lake Ladoga,Neva - Lake Ladoga - Volkhov (route to Novgorod),scandinavian_region,sordavala,9743,True

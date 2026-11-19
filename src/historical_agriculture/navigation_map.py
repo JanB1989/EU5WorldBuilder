@@ -195,6 +195,60 @@ def append_list(text, key, names):
     return text[:match.end()]+addition+text[match.end():]
 
 
+def remove_from_list(text, key, names):
+    """``text`` with each of ``names`` taken out of the flat list block ``key = { ... }`` (each must be in it once)."""
+    match = re.search(r"\b"+key+r"\s*=\s*\{", text)
+    if not match: raise ValueError(f"no {key} list")
+    end = text.index("}", match.end())
+    body = text[match.end():end]
+    for name in names:
+        body, n = re.subn(r"(?<!\w)"+re.escape(name)+r"(?!\w)", "", body)
+        if n != 1: raise ValueError(f"{key}: expected {name} once, found {n}")
+    return text[:match.end()]+body+text[end:]
+
+
+def remove_token(text, name):
+    """``text`` (definitions.txt) without the location ``name`` (it must occur exactly once)."""
+    text, n = re.subn(r"(?<![\w:])"+re.escape(name)+r"(?!\w)", "", text)
+    if n != 1: raise ValueError(f"definitions: expected {name} once, found {n}")
+    return text
+
+
+def navigable_lake_tags(cfg, inventory):
+    """The configured navigable lakes (``raster.navigable_lakes``); each must be a vanilla lake (default.map ``lakes``)."""
+    tags = list(cfg.get("navigable_lakes", []))
+    kind = dict(zip(inventory.location_tag, inventory.game_zone_class))
+    wrong = [t for t in tags if kind.get(t) != "lakes"]
+    if wrong: raise ValueError("navigable_lakes must be vanilla lakes: "+", ".join(wrong))
+    return tags
+
+
+def shore_counts(after, color, exclude):
+    """Locations touching ``color`` (4-neighbour pixels) -> shared border pixels, without the colours in ``exclude``."""
+    ys, xs = np.nonzero(after == color)
+    h, w = after.shape
+    y0, y1, x0, x1 = max(int(ys.min())-1, 0), min(int(ys.max())+2, h), max(int(xs.min())-1, 0), min(int(xs.max())+2, w)
+    box = after[y0:y1, x0:x1]; mask = box == color
+    counts = Counter()
+    for a, b, ma in ((box[:, :-1], box[:, 1:], mask[:, :-1]), (box[:, 1:], box[:, :-1], mask[:, 1:]),
+                     (box[:-1, :], box[1:, :], mask[:-1, :]), (box[1:, :], box[:-1, :], mask[1:, :])):
+        other = b[ma & (b != color)]
+        counts.update(int(v) for v in other.tolist() if int(v) not in exclude)
+    return counts
+
+
+def lake_provinces(lakes, tile_meta, adjacent, names, slug_of):
+    """One province per navigable lake, in the area of the river whose channel tiles touch it most (its own area when
+    none does). Returns [(area, province, lake tag)]."""
+    area_of = {r['location']: r['area'] for r in tile_meta}
+    out = []
+    for tag, color in lakes:
+        touching = Counter(area_of[names[c]] for c, ds in adjacent.items() if color in ds and names.get(c) in area_of)
+        area = min(touching, key=lambda a: (-touching[a], a)) if touching else f'pp_nav_{slug_of(tag)}_area'
+        out.append((area, f'pp_nav_{tag}_province', tag))
+    return out
+
+
 def locator_file(game, kind):
     """The game's generated locator file for one kind. EU5 1.4 renamed the city (and vfx) locators to
     generated_locators_<kind>.txt; dock, combat and unit_stack keep generated_map_object_locators_<kind>.txt.
@@ -234,7 +288,16 @@ def export(config, evidence, river):
     land = {colors[r.location_tag] for r in inventory.itertuples() if r.is_ownable}
     seas = {colors[r.location_tag] for r in inventory.itertuples() if "sea_zones" in r.game_zone_class and "impassable" not in r.game_zone_class}
     lakes = {colors[r.location_tag] for r in inventory.itertuples() if r.game_zone_class == "lakes"}
-    # Researched reaches cross lakes (Ladoga, Tonle Sap, Poyang) and wasteland (Siberia, Amazonia, the Thal desert):
+    # Navigable lakes (raster.navigable_lakes; Lake Ladoga, 2026-11-19, Jan after a player report): vanilla lakes a
+    # researched reach crosses that ships sail as a whole. They keep their vanilla shape and template (topography lakes,
+    # so their shores are waterways, not sea coast), move from the lakes list to the sea zones and carry no channel
+    # strip: the reach's channels end on their shores. The engine reads lake and sea from those lists (map.cpp), so the
+    # shores lose is_adjacent_to_lake and become coastal.
+    navigable_lakes = navigable_lake_tags(cfg, inventory)
+    lake_colors = {colors[t] for t in navigable_lakes}
+    lakes -= lake_colors
+    water_seas = seas | lake_colors
+    # Researched reaches cross lakes (Tonle Sap, Poyang) and wasteland (Siberia, Amazonia, the Thal desert):
     # a channel strip is cut through them too; lakes stay lakes, so their shores keep lake adjacency.
     wastes = {colors[r.location_tag] for r in inventory.itertuples()
               if not r.is_ownable and "sea_zones" not in r.game_zone_class and r.game_zone_class != "lakes"}
@@ -262,7 +325,7 @@ def export(config, evidence, river):
         pixel_rows=pixel_rows.drop(index=[p for p in indices if p in pixel_rows.index])
         pixel_rows=pd.concat([pixel_rows,pd.DataFrame(additions,index=indices)])
     from .navigation_cleanup import snap_mouths
-    pixel_rows,mouth_snaps=snap_mouths(pixel_rows,original,land,seas,cfg.get('maximum_mouth_snap_pixels',6))
+    pixel_rows,mouth_snaps=snap_mouths(pixel_rows,original,land,water_seas,cfg.get('maximum_mouth_snap_pixels',6))
     # Native river lines are eight-connected; location adjacency is four-
     # connected. Fill only the corner of existing diagonal river neighbours,
     # never a gap between unrelated stretches or a retained native barrier.
@@ -590,15 +653,30 @@ def export(config, evidence, river):
     # Separate water-only hierarchy, appended after every vanilla location: one area per river, provinces of connected
     # stretches of that river (river_provinces), so a fleet patrolling a province projects onto one stretch of one river.
     neighbours_of={names[c]:{names[d] for d in ds if d in names} for c,ds in adjacent.items()}
-    areas=river_provinces(tile_meta,neighbours_of,{names[c] for c in seas})
+    areas=river_provinces(tile_meta,neighbours_of,{names[c] for c in water_seas})
+    # each navigable lake leaves its land province for a province of its own in the water hierarchy (vanilla keeps
+    # sea zones in sea provinces: Patos Lagoon), in the area of the river that runs through it
+    lake_meta=[]
+    for area,province,tag in lake_provinces([(t,colors[t]) for t in navigable_lakes],tile_meta,adjacent,names,river_slug):
+        areas.setdefault(area,[]).append((province,[tag]))
+        shores=Counter({c:n for c,n in shore_counts(after,colors[tag],{colors[tag]}).items() if c in land})
+        near=names[min(shores,key=lambda c:(-shores[c],names[c]))] if shores else tag
+        river_name=next((r['river'] for r in tile_meta if r['area']==area),tag)
+        lake_meta.append({'location':tag,'area':area,'province':province,'province_name':tag.replace('_',' ').title(),
+                          'river':river_name,'region':str(base_info.loc[near,'region']) if near in base_info.index else 'pp_navigation_other',
+                          'near_location':near,'pixels':int(owned_counts.get(colors[tag],0)),
+                          'shores':{names[c]:int(n) for c,n in sorted(shores.items())}})
     blocks=['\npp_navigation_waterways = { pp_navigation_subcontinent = { pp_navigation_region = {']
     for area,provinces in sorted(areas.items()):
         blocks.append(area+' = {')
         for province,tags in provinces:blocks.append(f' {province} = {{ '+' '.join(tags)+' }')
         blocks.append('}')
     blocks.append('} } }')
-    write(md+'definitions.txt',source(md+'definitions.txt')+'\n'.join(blocks)+'\n')
-    text=append_list(source(md+'default.map'),'sea_zones',[r['location'] for r in tile_meta])
+    definitions=source(md+'definitions.txt')
+    for tag in navigable_lakes:definitions=remove_token(definitions,tag)
+    write(md+'definitions.txt',definitions+'\n'.join(blocks)+'\n')
+    text=append_list(source(md+'default.map'),'sea_zones',[r['location'] for r in tile_meta]+navigable_lakes)
+    if navigable_lakes:text=remove_from_list(text,'lakes',navigable_lakes)
     text=append_list(text,'impassable_mountains',[r['location'] for r in tile_meta if r['state']=='barrier'])
     write(md+'default.map',text)
     write('loading_screen/common/defines/pp_navigation_map.txt',f'NLocation = {{ MIN_LOCATION_PIXELS = {cfg["minimum_tile_pixels"]} }}\n')
@@ -614,7 +692,7 @@ def export(config, evidence, river):
         for field in ['region','area','province']:
             if field in base_info:regions.update(base_info.loc[base_info[field].isin(tokens),'region'])
         # the river provinces with a tile in a known region (river_provinces: one stretch of one river each)
-        add=sorted({r['province'] for r in tile_meta if r['region'] in regions})
+        add=sorted({r['province'] for r in tile_meta+lake_meta if r['region'] in regions})
         if add:write('main_menu/setup/templates/'+p.name,append_list(text,'discovered_provinces',add))
     rgb=np.stack(((after>>16)&255,(after>>8)&255,after&255),axis=-1).astype(np.uint8)
     path=mod/md/'locations.png';path.parent.mkdir(parents=True,exist_ok=True)
@@ -677,7 +755,7 @@ def export(config, evidence, river):
     for c,targets in sorted(adjacent.items()):
         for d in sorted(targets):
             if d in tile_by_color and c>d:continue
-            if d in tile_by_color or d in seas or (config['shore_connections'] and d in land):
+            if d in tile_by_color or d in water_seas or (config['shore_connections'] and d in land):
                 state=max(tile_by_color[c]['state'],tile_by_color[d]['state'] if d in tile_by_color else 1)
                 rough=any(metadata[n].get('tropical') or metadata[n].get('seasonal') for n in [names[c],names[d]] if n in metadata)
                 profile='difficult' if state==1 and rough else STATE_NAMES[state]
@@ -692,7 +770,8 @@ def export(config, evidence, river):
     while queue:
         for node in graph[queue.popleft()]-visited:visited.add(node);queue.append(node)
     water_connected=len(passable & visited)
-    components=[];pending=set(passable)
+    # a navigable lake joins the channels that end on it into one network (it is no seed: open water only through them)
+    components=[];pending=set(passable)|set(navigable_lakes)
     while pending:
         seed=min(pending);component={seed};queue=deque([seed]);pending.remove(seed)
         while queue:
@@ -701,9 +780,14 @@ def export(config, evidence, river):
     shore=[]
     for (l,c),points in sorted(coast_pixels.items()):shore.append({'location_tag':names[l],'water_location':names[c],'state':STATE_NAMES[tile_by_color[c]['state']], 'shore_pixels':len(points)})
     for row in tile_meta:row['ocean_connected']=row['location'] in visited
+    for row in lake_meta:row['ocean_connected']=row['location'] in visited
     pd.DataFrame(tile_meta).to_csv(out/'tiles.csv',index=False)
     pd.DataFrame(edges).to_csv(out/'edges.csv',index=False)
     pd.DataFrame(shore).to_csv(out/'shores.csv',index=False)
+    lake_columns=['location','area','province','province_name','river','region','near_location','pixels','ocean_connected']
+    pd.DataFrame([{k:r[k] for k in lake_columns} for r in lake_meta],columns=lake_columns).to_csv(out/'lakes.csv',index=False)
+    pd.DataFrame([{'location_tag':l,'water_location':r['location'],'shore_pixels':n} for r in lake_meta for l,n in r['shores'].items()],
+                 columns=['location_tag','water_location','shore_pixels']).to_csv(out/'lake_shores.csv',index=False)
     # The native bitmap now preserves exactly one maximum level per original
     # land location. No gameplay compensation is needed or allowed to stack.
     original_effects={c:{n} for c,n in original_level_map.items() if n}
@@ -722,6 +806,8 @@ def export(config, evidence, river):
             'mouth_alignment_repairs':mouth_snaps, 'river_preservation':'native_bank_pixel', 'preserved_river_pixels':len(preservation), 'river_port_locations':sorted(names[c] for c in port_candidates), 'port_harbor_floor':config.get('port_harbor_floor',.25), 'crossings':len(crossings),'shared_tile_crossings':shared_crossings,'unrestored_adjacencies':len(missing),'ports_changed':len(port_changes),'land_effect_rows_to_restore':len(bonus_rows),
             'omissions':dict(omitted),'crossing_guard_locations':cfg.get('retain_native_locations',[]),'bank_fragment_repairs':repairs,'locators_moved':dict(moved),'edges':len(edges),'files':{rel:digest(mod/rel) for rel in written},
             'bisected_land_locations':bisected,
+            'navigable_lakes':{r['location']:{'area':r['area'],'province':r['province'],'shore_locations':len(r['shores']),
+                                              'ocean_connected':r['ocean_connected']} for r in lake_meta},
             'checks':{'native_river_topology_valid':True,'river_port_coordinates_on_passable_shore':True,'native_river_levels_preserved':True,'no_native_rivers_on_converted_water':True,'minimum_tile_size':True,'connected_tiles':True,'land_area_guard':True,'land_identities_retained':True,'lost_land_adjacencies_restored':not (missing_named-accepted_cuts)},
             'map_code_sha256':digest(Path(__file__)), 'cleanup_code_sha256':digest(Path(__file__).with_name('navigation_cleanup.py')), 'native_geometry_inputs':native_inputs,
             'look_code_sha256':digest(Path(__file__).with_name('river_vanilla_look.py')), 'vanilla_look':look_report,

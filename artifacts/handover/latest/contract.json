@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "version": "2026-11-19-e385266",
-  "worldbuilder_commit": "e385266",
-  "created": "2026-11-19T13:27:46",
+  "version": "2026-11-27-1a823a0",
+  "worldbuilder_commit": "1a823a0",
+  "created": "2026-11-27T15:50:19",
   "units": {
     "people_per_game_capacity_unit": 1000,
     "note": "All people values are physical people at the equal-area reference; the constructor divides by 1000 for local_population_capacity and may rescale levels (multiply levels, divide people per level) before rounding."
@@ -163,17 +163,17 @@
   "counts": {
     "attribute_rows": 59,
     "building_types": 9,
-    "location_buildings": 120193,
+    "location_buildings": 120744,
     "locations": 20893,
     "goods_floor": 1864,
     "location_attributes": 20893
   },
   "files": {
     "attribute_rows.csv": "2073094e9f226ce14e6f3641b199a9b6d4caeb83ab8067674e67e5cf3d9be1a4",
-    "building_types.csv": "7ea134dfe754951df093c01f53dcc86353c434ef1c08ca85783cea4b372b3422",
+    "building_types.csv": "e0b993d78b2f8d536a71aa3bd1b808266485dfbdc8d774768a247ae422aff2b9",
     "goods_floor.csv": "670a51307832939af1fa42a30b29ae3562221e5673dc1c69e1cc1ebaaaccb628",
     "location_attributes.csv": "cb1c13a6ef002ad21b2f2695d29d7fbbb29a264fdd83e771457e692a1f658786",
-    "location_buildings.csv": "cc87a7fa37d95b70f0d7bbeee816ac37e751e633109548c459557e6063fade6a",
+    "location_buildings.csv": "8096590f836aa350d7a94d76f77e8326eee18c51c5aaaac5efae0d1df7161427",
     "location_targets.csv": "254ed26ee93651341d9eb67caf8f256c9e5ea0026489f97d5c0ab6ecb2f0b59c",
     "navigation/manifest.json": "2441918cd3da81437edaa3d5805ccaf377395418eea63eae8a54eb30c2f326cb",
     "navigation/tiles.csv": "3aa5afa9b274c5f7439a7c9767be59c9b48d45b2a52745ceafb07fd7826fcbb0",

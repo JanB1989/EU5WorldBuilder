@@ -49,6 +49,25 @@ def choose_unit(values,level_limit,quantiles,round_to=0):
                  'locations_at_level_limit':int((n>=level_limit).sum()),'median_levels':float(np.median(n))}
 
 
+def split_ledger(led,cfg):
+    """Ledger columns of the split kinds (``split_kinds``): each part gets its share of the source kind's
+    starting and maximum people. The source columns stay; returns a copy."""
+    led=led.copy()
+    for src,parts in (cfg.get('split_kinds') or {}).items():
+        if f'starting_{src}_capacity' not in led:continue
+        for part,share in parts.items():
+            for stage in ('starting','maximum'):led[f'{stage}_{part}_capacity']=led[f'{stage}_{src}_capacity'].to_numpy(float)*float(share)
+    return led
+
+
+def building_ledger(d,ledger,cfg):
+    """The improvement ledger per building type, as the assignment sees it: extension kinds carved out
+    (``ledger_extensions.extend``) and split kinds shared out (``split_ledger``). Columns
+    ``{starting,maximum}_<building>_capacity``, one row per location of ``d``."""
+    led,_=extend(d,ledger,cfg)
+    return split_ledger(led.set_index('location_tag'),cfg).reset_index()
+
+
 def assign(d,ledger,dev,cfg):
     """Return per-location levels/caps and per-building summaries. d indexed by location_tag."""
     led=ledger.set_index('location_tag').loc[d.index]
@@ -64,14 +83,13 @@ def assign(d,ledger,dev,cfg):
     buildings=[];caps_out=[]
     out=pd.DataFrame(index=d.index)
     kinds=list(LEDGER_KINDS)+[k for k in EXTENSION_KINDS if f'starting_{k}_capacity' in led and led[f'maximum_{k}_capacity'].sum()>0]
-    led=led.copy();gates=dict(cfg['gates']);gmins=dict(cfg.get('development_levels_per_point_min') or {})
+    gates=dict(cfg['gates']);gmins=dict(cfg.get('development_levels_per_point_min') or {})
     # A ledger kind may be split over several buildings: each gets its share of the people and the kind's gate.
+    led=split_ledger(led,{'split_kinds':{s:p for s,p in (cfg.get('split_kinds') or {}).items() if s in kinds}})
     for src,parts in (cfg.get('split_kinds') or {}).items():
         if src not in kinds:continue
         i=kinds.index(src);kinds[i:i+1]=list(parts)
-        for part,share in parts.items():
-            for stage in ('starting','maximum'):led[f'{stage}_{part}_capacity']=led[f'{stage}_{src}_capacity'].to_numpy(float)*float(share)
-            gates.setdefault(part,gates.get(src,[]));gmins.setdefault(part,gmins.get(src,0.))
+        for part in parts:gates.setdefault(part,gates.get(src,[]));gmins.setdefault(part,gmins.get(src,0.))
     # Cap groups: buildings with their own gate and ledger that share ONE cap equation, fitted on their summed ledger
     # (the members' levels together never exceed it; each member is built only where its own gate holds).
     groups_cfg={name:[k for k in members if k in kinds] for name,members in (cfg.get('cap_groups') or {}).items()}

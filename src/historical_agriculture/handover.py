@@ -136,6 +136,11 @@ def build(version=None,output_root=None):
     ledger=pd.read_csv(ROOT/'artifacts/locations/improvement_ledger_equal_area.csv',keep_default_na=False)
     for c in ledger.columns:
         if c.endswith('_capacity'):ledger[c]=pd.to_numeric(ledger[c],errors='raise')
+    # The ledger per building type as the assignment saw it: the oasis carve-out and the paddy split
+    # (paddy_control -> paddy_fields + paddy_water_control) applied, so every building's ledger people are its own.
+    from .building_assignment import building_ledger
+    from .attribute_fit_flat import load_attributes
+    ledger=building_ledger(load_attributes(json.loads((ROOT/bcfg['attribute_fit_config']).read_text())),ledger,bcfg)
     targets=pd.read_csv(ROOT/'artifacts/locations/capacity_targets_equal_area.csv',keep_default_na=False).set_index('location_tag')
     dev=pd.read_csv(ROOT/'artifacts/development/locations.csv',keep_default_na=False).set_index('location_tag')
     goods_dir=ROOT/'artifacts/goods_output_fit'
